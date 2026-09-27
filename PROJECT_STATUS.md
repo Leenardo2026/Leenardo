@@ -1,6 +1,6 @@
 # 💎 Leenardo — Project Status & Memory Guide
 
-> **Son Güncelleme:** 27 Eylül 2026  
+> **Son Güncelleme:** 28 Eylül 2026  
 > **Canlı Adres:** [https://leenardo.com](https://leenardo.com)  
 > **GitHub Deposu:** [https://github.com/Leenardo2026/Leenardo](https://github.com/Leenardo2026/Leenardo)
 
@@ -22,6 +22,7 @@
   * Project Ref: `vkddnvpqnccstcjnqfyq`
   * Tablo: `public.saved_words` (RLS kurallarıyla korumalı; kullanıcı sadece kendi kelimelerini okuyabilir, ekleyebilir, silebilir).
 * **Frontend:** Vanilla HTML5, modern CSS3 (`auth.css`), saf JavaScript (`supabase-client.js`, `auth-ui.js`, `articles-data.js`). Hiçbir hantal framework bağımlılığı yoktur, ışık hızında çalışır.
+* **Tasarım Sistemi:** Editorial Magazine Minimalism (Sanzo Wada #263 Renk Paleti: Krem `#F5F2EC`, Mürekkep Lacivert `#1B3644`, Şeftali Vurgusu `#F2AD78`, Tuğla Kırmızısı `#A93400`, Nötr Gri `#8A8A8A`, 1px saç çizgisi ayraçlar `#E0DDD6`, `border-radius: 0`, gölgesiz düz yüzeyler, Fraunces serif ve Inter tipografi).
 
 ---
 
@@ -52,13 +53,14 @@
 * [x] Misafir kullanıcıların giriş yapmadan kaydettiği kelimelerin giriş anında hesaba otomatik aktarılması sağlandı.
 * [x] Platformun adı resmi olarak her yerde **"Leenardo"** olarak güncellendi ve canlıya alındı.
 * [x] Güvenlik yedekleme dalı (`v1.0-live-baseline`) ve etiketi (`v1.0-live`) oluşturuldu.
+* [x] **Arayüz Yenilemesi (Editorial Magazine Minimalism):** `index.html`, `article.html` ve `auth.css` dosyalarında Sanzo Wada #263 paleti, Fraunces serif başlıklar, düz saç çizgisi bölücüler ve sıfır border-radius tasarımı uygulandı; tüm emojiler temizlendi ve işlevsellik (dil, seviye, kelime kaydetme, auth, arama) eksiksiz korundu.
 
 ---
 
 ## 🎯 5. Sırada Bekleyen Geliştirme Başlıkları
 
-1. **Arayüz & Tasarım Yenilemesi:**
-   * Bubble'da beğenilen modern arayüz çizgilerinin (kartlar, renk paleti, tipografi, menüler) Leenardo'ya giydirilmesi.
+1. **Arayüz İncelemesi ve Canlı Dağıtım Onayı:**
+   * Yerel ortamda Editorial Magazine Minimalism tasarımının test edilmesi ve kullanıcı onayı sonrasında `main` dalına merge/push edilmesi.
 2. **Kelime Pekiştirme & Quiz Modülü:**
    * Kaydedilen kelimelerle aralıklı tekrar (spaced repetition / flashcard) ve çoktan seçmeli anlama testleri.
 3. **Otomasyon & Günlük İçerik Üretimi:**

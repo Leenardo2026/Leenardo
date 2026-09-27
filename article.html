@@ -3,49 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>💎 Leenardo — Graded Multilingual Reader</title>
+  <title>Leenardo — Graded Multilingual Reader</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="auth.css">
   <style>
+    /* ==========================================================================
+       Design System: Editorial Magazine Minimalism (Sanzo Wada #263)
+       ========================================================================== */
     :root {
-      --primary: #4f46e5;
-      --primary-dark: #3730a3;
-      --primary-light: #eef2ff;
-      --primary-glow: rgba(79, 70, 229, 0.12);
-      --accent: #f59e0b;
-      --accent-light: #fef3c7;
-      --slate-950: #020617;
-      --slate-900: #0f172a;
-      --slate-800: #1e293b;
-      --slate-700: #334155;
-      --slate-600: #475569;
-      --slate-500: #64748b;
-      --slate-400: #94a3b8;
-      --slate-300: #cbd5e1;
-      --slate-200: #e2e8f0;
-      --slate-100: #f1f5f9;
-      --slate-50: #f8fafc;
-      --emerald-600: #059669;
-      --emerald-50: #ecfdf5;
-      --rose-600: #e11d48;
-      --rose-50: #fff1f2;
-      --radius-xl: 20px;
-      --radius-lg: 16px;
-      --radius-md: 10px;
-      --radius-sm: 6px;
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-      --shadow-md: 0 4px 16px rgba(15, 23, 42, 0.08);
-      --shadow-lg: 0 12px 32px rgba(15, 23, 42, 0.12);
+      --bg-cream: #F5F2EC;
+      --bg-surface: #FAF8F5;
+      --bg-white: #FFFFFF;
+      --ink-navy: #1B3644;
+      --text-muted: #8A8A8A;
+      --peach-accent: #F2AD78;
+      --brick-red: #A93400;
+      --divider-hairline: #E0DDD6;
+      --font-serif: 'Fraunces', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+    }
 
     body {
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #f8fafc;
-      color: var(--slate-800);
+      font-family: var(--font-sans);
+      background-color: var(--bg-cream);
+      color: var(--ink-navy);
       line-height: 1.6;
       min-height: 100vh;
       display: flex;
@@ -53,71 +44,63 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Top Brand Bar */
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Masthead Header */
     .top-header {
-      background: #ffffff;
-      border-bottom: 1px solid var(--slate-200);
+      background: var(--bg-cream);
+      border-bottom: 1px solid var(--divider-hairline);
       position: sticky;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
     }
 
     .top-header-inner {
-      max-width: 1200px;
+      max-width: 1240px;
       margin: 0 auto;
-      padding: 0.75rem 1.5rem;
+      padding: 1.25rem 2rem;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 1rem;
+      gap: 1.5rem;
     }
 
     .brand-group {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 1.5rem;
     }
 
     .brand-title {
-      font-size: 1.25rem;
-      font-weight: 800;
-      letter-spacing: -0.025em;
-    }
-
-    .brand-title span {
-      background: linear-gradient(135deg, var(--primary) 0%, #7c3aed 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ink-navy);
+      line-height: 1;
     }
 
     .btn-back-home {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      padding: 0.35rem 0.85rem;
-      background: var(--slate-100);
-      border: 1px solid var(--slate-300);
-      border-radius: 9999px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--slate-700);
-      text-decoration: none;
-      transition: all 0.2s ease;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--ink-navy);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      cursor: pointer;
     }
 
     .btn-back-home:hover {
-      background: #ffffff;
-      border-color: var(--primary);
-      color: var(--primary);
-      transform: translateX(-2px);
+      color: var(--peach-accent);
     }
 
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 1.25rem;
       flex-wrap: wrap;
     }
 
@@ -125,103 +108,67 @@
       display: inline-flex;
       align-items: center;
       gap: 0.45rem;
-      padding: 0.35rem 0.85rem;
-      background: linear-gradient(135deg, #eff6ff 0%, #ede9fe 100%);
-      border: 1.5px solid #c7d2fe;
-      border-radius: 9999px;
+      padding: 0.35rem 0.65rem;
+      background: transparent;
+      border: 1px solid var(--divider-hairline);
       font-size: 0.8rem;
-      font-weight: 700;
-      color: #4338ca;
+      font-weight: 600;
+      color: var(--ink-navy);
       cursor: pointer;
-      transition: all 0.2s ease;
+      text-decoration: none;
     }
 
     .btn-header-vocab:hover {
-      background: linear-gradient(135deg, #e0e7ff 0%, #ddd6fe 100%);
-      border-color: var(--primary);
-      transform: translateY(-1px);
+      background: var(--bg-surface);
+      border-color: var(--ink-navy);
     }
 
     .vocab-counter-badge {
-      background: var(--primary);
-      color: #ffffff;
+      background: var(--peach-accent);
+      color: var(--ink-navy);
       font-size: 0.7rem;
-      font-weight: 800;
-      padding: 0.1rem 0.45rem;
-      border-radius: 9999px;
-      min-width: 18px;
-      text-align: center;
+      font-weight: 700;
+      padding: 0.1rem 0.4rem;
     }
 
     .lang-switcher-bar {
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
-      gap: 0.5rem;
-      background: var(--slate-100);
-      padding: 0.3rem 0.65rem;
-      border-radius: 9999px;
-      border: 1px solid var(--slate-200);
+      gap: 1rem;
+      border: 1px solid var(--divider-hairline);
+      padding: 0.35rem 0.75rem;
+      background: var(--bg-surface);
     }
 
     .lang-field {
       display: flex;
       align-items: center;
-      gap: 0.3rem;
+      gap: 0.4rem;
     }
 
     .lang-field label {
-      font-size: 0.74rem;
-      font-weight: 700;
-      color: var(--slate-600);
-      white-space: nowrap;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-muted);
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
     }
 
     .lang-select {
-      background: #ffffff;
-      border: 1px solid var(--slate-300);
-      border-radius: 9999px;
-      padding: 0.2rem 0.6rem;
+      background: transparent;
+      border: none;
       font-family: inherit;
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: var(--slate-800);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--ink-navy);
       cursor: pointer;
       outline: none;
-      transition: all 0.2s ease;
     }
 
-    .lang-select:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 2px var(--primary-light);
-    }
-
-    /* Notice Banner */
-    .notice-banner {
-      background: linear-gradient(90deg, #0f172a 0%, #1e1b4b 100%);
-      color: #cbd5e1;
-      font-size: 0.78rem;
-      padding: 0.4rem 1.5rem;
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .notice-banner a {
-      color: #93c5fd;
-      text-decoration: underline;
-      font-weight: 600;
-    }
-
-    /* Reading Container: Editorial, Focused, Centered */
+    /* Focused Editorial Reading Shell */
     .reading-shell {
       max-width: 820px;
-      margin: 2rem auto 4rem;
+      margin: 3.5rem auto 5rem;
       padding: 0 1.5rem;
       width: 100%;
       flex: 1;
@@ -233,63 +180,59 @@
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
       flex-wrap: wrap;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--divider-hairline);
     }
 
     .meta-badges-group {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 1rem;
     }
 
     .article-category-tag {
-      background: var(--primary-light);
-      color: var(--primary);
-      font-size: 0.74rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 0.25rem 0.75rem;
-      border-radius: 9999px;
-      border: 1px solid rgba(79, 70, 229, 0.2);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: capitalize;
     }
 
     .article-read-time {
-      font-size: 0.8rem;
-      color: var(--slate-500);
-      font-weight: 600;
+      font-size: 0.75rem;
+      color: var(--text-muted);
     }
 
     .article-topic-selector-link {
-      font-size: 0.8rem;
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--ink-navy);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      font-weight: 500;
     }
 
     .article-topic-selector-link:hover {
-      text-decoration: underline;
+      color: var(--peach-accent);
     }
 
     /* Primary Article Headlines */
     .article-title-block {
-      margin-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
     }
 
     .article-main-title {
-      font-family: 'Merriweather', Georgia, serif;
-      font-size: 2.35rem;
+      font-family: var(--font-serif);
+      font-size: 2.75rem;
       font-weight: 700;
-      color: var(--slate-900);
-      line-height: 1.25;
+      color: var(--ink-navy);
+      line-height: 1.15;
       letter-spacing: -0.02em;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.65rem;
     }
 
     .article-support-title {
-      font-size: 1.12rem;
-      color: var(--slate-500);
+      font-size: 1.05rem;
+      color: var(--text-muted);
       font-style: italic;
       line-height: 1.45;
       font-weight: 400;
@@ -297,43 +240,39 @@
 
     /* Featured Image */
     .featured-image-box {
-      margin-bottom: 2rem;
-      border-radius: var(--radius-lg);
+      margin-bottom: 2.5rem;
+      border: 1px solid var(--divider-hairline);
       overflow: hidden;
-      box-shadow: var(--shadow-sm);
-      background: var(--slate-100);
-      border: 1.5px solid var(--slate-200);
-      position: relative;
+      background: var(--bg-surface);
     }
 
     .featured-image {
       width: 100%;
       height: auto;
-      max-height: 440px;
+      max-height: 480px;
       object-fit: cover;
       display: block;
+      filter: saturate(0.95);
     }
 
     .featured-caption {
-      padding: 0.65rem 1.25rem;
-      background: #ffffff;
-      color: var(--slate-500);
-      font-size: 0.82rem;
+      padding: 0.65rem 1rem;
+      background: var(--bg-surface);
+      color: var(--text-muted);
+      font-size: 0.8rem;
       font-style: italic;
-      border-top: 1px solid var(--slate-100);
+      border-top: 1px solid var(--divider-hairline);
     }
 
-    /* SAME CONTENT / DIFFERENT LEVEL SWITCHER BAR */
+    /* SAME CONTENT / DIFFERENT DIFFICULTY TAB SELECTOR */
     .same-topic-switcher {
-      background: #ffffff;
-      border: 1.5px solid var(--slate-200);
-      border-radius: var(--radius-lg);
-      padding: 1rem 1.4rem;
-      margin-bottom: 2rem;
-      box-shadow: var(--shadow-sm);
+      background: var(--bg-surface);
+      border: 1px solid var(--divider-hairline);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2.5rem;
       display: flex;
       flex-direction: column;
-      gap: 0.85rem;
+      gap: 1rem;
     }
 
     .switcher-header-row {
@@ -346,73 +285,71 @@
 
     .switcher-label-group {
       display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .switcher-label-icon {
-      font-size: 1.15rem;
+      flex-direction: column;
+      gap: 0.15rem;
     }
 
     .switcher-title {
-      font-size: 0.92rem;
-      font-weight: 800;
-      color: var(--slate-800);
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ink-navy);
       letter-spacing: -0.01em;
     }
 
     .switcher-desc {
       font-size: 0.78rem;
-      color: var(--slate-500);
+      color: var(--text-muted);
     }
 
     .switcher-controls-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1rem;
+      gap: 1.25rem;
       flex-wrap: wrap;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--divider-hairline);
     }
 
+    /* Tab-style Level Selector */
     .level-pills-bar {
       display: flex;
-      gap: 0.45rem;
+      gap: 1rem;
       flex-wrap: wrap;
+      align-items: center;
     }
 
     .level-btn {
       display: inline-flex;
-      align-items: center;
+      align-items: baseline;
       gap: 0.35rem;
-      background: var(--slate-50);
-      border: 1.5px solid var(--slate-200);
-      color: var(--slate-700);
-      padding: 0.45rem 0.9rem;
-      border-radius: 9999px;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--text-muted);
+      padding: 0.3rem 0;
       font-family: inherit;
-      font-size: 0.82rem;
-      font-weight: 700;
+      font-size: 0.85rem;
+      font-weight: 500;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.15s ease;
     }
 
     .level-btn:hover {
-      background: var(--primary-light);
-      border-color: var(--primary);
-      color: var(--primary);
+      color: var(--ink-navy);
     }
 
     .level-btn.active {
-      background: linear-gradient(135deg, var(--primary) 0%, #4338ca 100%);
-      border-color: var(--primary);
-      color: #ffffff;
-      box-shadow: 0 2px 8px rgba(79, 70, 229, 0.35);
+      font-weight: 700;
+      color: var(--ink-navy);
+      border-bottom: 2px solid var(--peach-accent);
     }
 
     .level-btn .subtext {
-      font-size: 0.7rem;
-      font-weight: 500;
-      opacity: 0.85;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 400;
     }
 
     /* Audio Toolbar inside switcher */
@@ -423,170 +360,148 @@
     }
 
     .btn-audio {
-      background: #ffffff;
-      border: 1.5px solid var(--slate-300);
-      color: var(--slate-800);
-      padding: 0.45rem 1rem;
-      border-radius: 9999px;
+      background: transparent;
+      border: 1px solid var(--divider-hairline);
+      color: var(--ink-navy);
+      padding: 0.45rem 0.95rem;
       font-size: 0.82rem;
-      font-weight: 700;
+      font-weight: 600;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 0.45rem;
-      transition: all 0.2s ease;
+      transition: all 0.15s ease;
     }
 
     .btn-audio:hover {
-      border-color: var(--primary);
-      color: var(--primary);
-      background: var(--primary-light);
+      border-color: var(--ink-navy);
+      background: #FAF8F5;
     }
 
     .btn-audio.playing {
-      background: #fee2e2;
-      border-color: #ef4444;
-      color: #b91c1c;
+      background: #FAF0EB;
+      border-color: var(--brick-red);
+      color: var(--brick-red);
     }
 
     /* Reading Card */
     .article-card {
-      background: #ffffff;
-      border: 1.5px solid var(--slate-200);
-      border-radius: var(--radius-xl);
-      padding: 2.75rem 3rem;
-      box-shadow: var(--shadow-sm);
+      background: var(--bg-surface);
+      border: 1px solid var(--divider-hairline);
+      padding: 3.5rem 3rem;
       position: relative;
     }
 
     @media (max-width: 640px) {
       .article-card {
-        padding: 1.75rem 1.25rem;
+        padding: 2rem 1.25rem;
       }
       .article-main-title {
-        font-size: 1.75rem;
+        font-size: 2rem;
       }
     }
 
     /* Paragraph & Sentence Typography */
     .article-body {
-      font-size: 1.16rem;
-      line-height: 2.05;
-      color: #1e293b;
+      font-size: 1.18rem;
+      line-height: 2.1;
+      color: var(--ink-navy);
     }
 
     .article-paragraph {
-      margin-bottom: 1.85rem;
+      margin-bottom: 2rem;
     }
 
     .sentence-span {
       position: relative;
       cursor: pointer;
-      padding: 0.15rem 0.2rem;
-      border-radius: 4px;
+      padding: 0.1rem 0.15rem;
       transition: background-color 0.15s ease;
     }
 
     .sentence-span:hover {
-      background-color: #e0e7ff;
+      background-color: #EAE6DD;
     }
 
     .sentence-span.speaking-active {
-      background-color: #fef08a !important;
-      outline: 2px solid #eab308;
+      background-color: #FCEBD9 !important;
+      outline: 1px solid var(--peach-accent);
     }
 
     /* Clickable Word Spans */
     .word-span {
       cursor: pointer;
-      border-radius: 3px;
       transition: all 0.15s ease;
       display: inline;
     }
 
     .word-span:hover {
-      background-color: #c7d2fe;
-      color: #312e81;
       text-decoration: underline;
+      text-underline-offset: 3px;
     }
 
     .word-span.active-word {
-      background: #818cf8 !important;
-      color: #ffffff !important;
+      background: var(--peach-accent) !important;
+      color: var(--ink-navy) !important;
     }
 
     /* Sentence Tooltip Balloon (Support language on hover) */
     .tooltip-balloon {
       position: absolute;
-      bottom: calc(100% + 8px);
+      bottom: calc(100% + 6px);
       left: 50%;
       transform: translateX(-50%);
-      background: #0f172a;
-      color: #f8fafc;
-      padding: 0.55rem 0.95rem;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      font-weight: 500;
+      background: var(--ink-navy);
+      color: var(--bg-cream);
+      padding: 0.55rem 0.85rem;
+      font-size: 0.82rem;
+      font-weight: 400;
       line-height: 1.45;
       white-space: normal;
       width: max-content;
       max-width: 380px;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
       pointer-events: none;
       opacity: 0;
       visibility: hidden;
-      transition: opacity 0.2s ease, transform 0.2s ease;
+      transition: opacity 0.15s ease;
       z-index: 100;
-    }
-
-    .tooltip-balloon::after {
-      content: "";
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      border-width: 6px;
-      border-style: solid;
-      border-color: #0f172a transparent transparent transparent;
+      border: 1px solid var(--ink-navy);
     }
 
     .sentence-span:hover > .tooltip-balloon {
       opacity: 1;
       visibility: visible;
-      transform: translateX(-50%) translateY(-2px);
     }
 
     body.word-popover-active .tooltip-balloon {
       display: none !important;
     }
 
-    /* Word Popover */
+    /* Word Translation Tooltip - Quiet Footnote Feel */
     .word-popover {
       position: absolute;
       z-index: 250;
       width: 320px;
-      background: #ffffff;
-      border: 1.5px solid var(--primary);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-lg);
+      background: #FFFFFF;
+      border: 1px solid var(--divider-hairline);
       overflow: hidden;
-      transition: opacity 0.15s ease, transform 0.15s ease;
+      transition: opacity 0.15s ease;
     }
 
     .word-popover.hidden {
       opacity: 0;
       pointer-events: none;
-      transform: scale(0.95);
       display: none;
     }
 
     .popover-header {
-      background: linear-gradient(135deg, var(--slate-900) 0%, #1e1b4b 100%);
-      color: #ffffff;
-      padding: 0.65rem 0.9rem;
+      background: transparent;
+      color: var(--ink-navy);
+      padding: 0.65rem 0.85rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      border-bottom: 1px solid var(--divider-hairline);
     }
 
     .popover-word-box {
@@ -596,70 +511,67 @@
     }
 
     .popover-target-word {
+      font-family: var(--font-serif);
       font-size: 1.15rem;
-      font-weight: 800;
+      font-weight: 700;
       letter-spacing: -0.01em;
+      color: var(--ink-navy);
     }
 
     .popover-audio-btn {
-      background: rgba(255,255,255,0.18);
-      border: none;
-      color: #ffffff;
-      width: 26px;
-      height: 26px;
-      border-radius: 9999px;
+      background: transparent;
+      border: 1px solid var(--divider-hairline);
+      color: var(--ink-navy);
+      width: 24px;
+      height: 24px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.75rem;
-      transition: all 0.15s ease;
+      font-size: 0.7rem;
     }
 
     .popover-audio-btn:hover {
-      background: rgba(255,255,255,0.35);
-      transform: scale(1.1);
+      background: var(--bg-surface);
     }
 
     .popover-close-btn {
       background: none;
       border: none;
-      color: rgba(255,255,255,0.7);
+      color: var(--text-muted);
       font-size: 1.25rem;
       line-height: 1;
       cursor: pointer;
     }
 
     .popover-body {
-      padding: 0.9rem;
-      background: #ffffff;
+      padding: 0.85rem;
+      background: #FFFFFF;
     }
 
     .popover-badge {
       font-size: 0.68rem;
-      font-weight: 800;
+      font-weight: 600;
       text-transform: uppercase;
-      color: #4f46e5;
-      background: #eef2ff;
-      border: 1px solid #c7d2fe;
-      padding: 0.15rem 0.5rem;
-      border-radius: 9999px;
+      letter-spacing: 0.05em;
+      color: var(--ink-navy);
+      border-bottom: 1px solid var(--peach-accent);
       display: inline-block;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
     }
 
     .popover-translation {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--slate-900);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink-navy);
       margin-bottom: 0.35rem;
       line-height: 1.35;
     }
 
     .popover-root-row {
-      font-size: 0.82rem;
-      color: var(--slate-500);
-      margin-bottom: 0.75rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.65rem;
     }
 
     .popover-actions {
@@ -667,7 +579,7 @@
       gap: 0.5rem;
       margin-top: 0.75rem;
       padding-top: 0.75rem;
-      border-top: 1px solid var(--slate-100);
+      border-top: 1px solid var(--divider-hairline);
     }
 
     .pop-action-btn {
@@ -677,93 +589,39 @@
       justify-content: center;
       gap: 0.35rem;
       padding: 0.45rem 0.6rem;
-      border-radius: 6px;
       font-size: 0.78rem;
-      font-weight: 700;
+      font-weight: 600;
       cursor: pointer;
       transition: all 0.15s ease;
-      border: 1px solid var(--slate-300);
-      background: var(--slate-50);
-      color: var(--slate-700);
+      border: 1px solid var(--divider-hairline);
+      background: transparent;
+      color: var(--ink-navy);
+    }
+
+    .pop-action-btn:hover {
+      background: var(--bg-surface);
+      border-color: var(--ink-navy);
     }
 
     .pop-btn-save.saved {
-      background: #ecfdf5;
-      border-color: #10b981;
-      color: #047857;
+      background: var(--peach-accent);
+      border-color: var(--peach-accent);
+      color: var(--ink-navy);
+      font-weight: 700;
     }
 
-    .pop-btn-study {
-      background: #eef2ff;
-      border-color: #c7d2fe;
-      color: #4338ca;
-    }
-
-    .popover-examples-box {
-      margin-top: 0.75rem;
-      padding-top: 0.75rem;
-      border-top: 1px dashed var(--slate-200);
-    }
-
-    .popover-examples-title {
-      font-size: 0.75rem;
-      font-weight: 800;
-      color: var(--slate-500);
-      margin-bottom: 0.4rem;
-    }
-
-    .pop-example-item {
-      font-size: 0.82rem;
-      line-height: 1.4;
-      margin-bottom: 0.45rem;
-      padding: 0.35rem 0.5rem;
-      background: var(--slate-50);
-      border-radius: 4px;
-    }
-
-    .pop-example-item strong {
-      color: var(--primary);
-    }
-
-    .popover-context {
-      margin-top: 0.65rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.7rem;
-      color: var(--slate-400);
-    }
-
-    .popover-arrow {
-      position: absolute;
-      width: 12px;
-      height: 12px;
-      background: #ffffff;
-      transform: rotate(45deg);
-      border: 1.5px solid var(--primary);
-      z-index: -1;
-    }
-
-    .popover-arrow.top {
-      top: -6px;
-      border-bottom: none;
-      border-right: none;
-    }
-
-    .popover-arrow.bottom {
-      bottom: -6px;
-      border-top: none;
-      border-left: none;
+    .pop-arrow {
+      display: none;
     }
 
     /* Actions Bar */
     .reading-actions-bar {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
-      margin-top: 2.25rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--slate-200);
+      gap: 1rem;
+      margin-top: 2.5rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid var(--divider-hairline);
       align-items: center;
       justify-content: space-between;
     }
@@ -772,80 +630,70 @@
       display: inline-flex;
       align-items: center;
       gap: 0.45rem;
-      background: #ffffff;
-      border: 1.5px solid var(--slate-300);
-      border-radius: 9999px;
-      padding: 0.5rem 1.15rem;
+      background: transparent;
+      border: 1px solid var(--divider-hairline);
+      padding: 0.5rem 1rem;
       font-size: 0.84rem;
-      font-weight: 700;
-      color: var(--slate-700);
+      font-weight: 600;
+      color: var(--ink-navy);
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.15s ease;
     }
 
     .btn-secondary:hover {
-      border-color: var(--primary);
-      color: var(--primary);
-      background: var(--primary-light);
+      border-color: var(--ink-navy);
+      background: #FAF8F5;
     }
 
+    /* Single solid button style */
     .btn-primary-action {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: linear-gradient(135deg, var(--primary) 0%, #6366f1 100%);
+      background: var(--ink-navy);
       border: none;
-      border-radius: 9999px;
       padding: 0.55rem 1.25rem;
       font-size: 0.85rem;
-      font-weight: 700;
-      color: #ffffff;
+      font-weight: 600;
+      color: var(--bg-cream);
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
-      transition: all 0.2s ease;
+      transition: opacity 0.15s ease;
     }
 
     .btn-primary-action:hover {
-      opacity: 0.95;
-      transform: translateY(-1px);
+      opacity: 0.9;
     }
 
-    /* SECONDARY LEARNING TOOLS: Situated Below Reading */
+    /* Secondary Learning Tools: Below Reading */
     .learning-tools-section {
-      margin-top: 3rem;
+      margin-top: 4rem;
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
     }
 
     .tools-section-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--slate-200);
-      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--divider-hairline);
+      padding-bottom: 1rem;
     }
 
     .tools-section-title {
-      font-size: 1.2rem;
-      font-weight: 800;
-      color: var(--slate-900);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--ink-navy);
+      margin-bottom: 0.25rem;
     }
 
     .tools-section-subtitle {
       font-size: 0.82rem;
-      color: var(--slate-500);
+      color: var(--text-muted);
     }
 
     .tool-card {
-      background: #ffffff;
-      border: 1.5px solid var(--slate-200);
-      border-radius: var(--radius-lg);
+      background: var(--bg-surface);
+      border: 1px solid var(--divider-hairline);
       padding: 1.5rem;
-      box-shadow: var(--shadow-sm);
     }
 
     .tool-card-header {
@@ -858,17 +706,15 @@
     }
 
     .tool-card-title {
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: var(--slate-900);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--ink-navy);
     }
 
     .tool-toggle-icon {
-      font-size: 0.9rem;
-      color: var(--slate-400);
+      font-size: 0.8rem;
+      color: var(--text-muted);
       transition: transform 0.2s ease;
     }
 
@@ -880,189 +726,265 @@
       display: none;
     }
 
-    /* Grammar card body */
+    /* Grammar Section & Pull-Quote */
     .grammar-focus-box {
-      background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
-      border: 1px solid #c7d2fe;
-      border-radius: var(--radius-md);
-      padding: 1.15rem 1.4rem;
       font-size: 0.95rem;
-      color: var(--slate-800);
-      line-height: 1.65;
+      color: var(--ink-navy);
+      line-height: 1.7;
     }
 
-    /* Vocab grid */
+    .grammar-tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .grammar-tag {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      border: 1px solid var(--divider-hairline);
+      padding: 0.2rem 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Editorial Magazine Pull-Quote */
+    .grammar-example-quote {
+      margin: 2rem 0 1rem;
+      padding: 1.25rem 0 1.25rem 1.75rem;
+      background: transparent;
+      border: none;
+      border-left: 2px solid var(--peach-accent);
+    }
+
+    .grammar-quote-label {
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      font-style: normal;
+    }
+
+    .grammar-quote-text {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.35rem;
+      line-height: 1.5;
+      color: var(--ink-navy);
+    }
+
+    /* Vocab Grid */
     .vocab-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 0.75rem;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
     }
 
-    .vocab-pill {
-      background: var(--slate-50);
-      border: 1px solid var(--slate-200);
-      border-radius: var(--radius-md);
-      padding: 0.75rem 1rem;
+    .vocab-card {
+      background: #FFFFFF;
+      border: 1px solid var(--divider-hairline);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .vocab-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .vocab-card-word {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--ink-navy);
+    }
+
+    .vocab-card-trans {
+      font-size: 0.88rem;
+      color: var(--ink-navy);
+      line-height: 1.4;
+    }
+
+    .vocab-card-bottom {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 0.6rem;
-      cursor: pointer;
-      transition: all 0.15s ease;
+      margin-top: 0.25rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--divider-hairline);
     }
 
-    .vocab-pill:hover {
-      background: var(--primary-light);
-      border-color: var(--primary);
-      transform: translateY(-2px);
-    }
-
-    .vocab-word {
-      font-weight: 700;
-      font-size: 0.95rem;
-      color: var(--slate-900);
-    }
-
-    .vocab-trans {
-      font-size: 0.85rem;
-      color: var(--slate-600);
-      margin-top: 0.15rem;
-    }
-
-    .vocab-root-label {
+    .vocab-card-root {
       font-size: 0.74rem;
-      color: var(--slate-400);
-      margin-top: 0.2rem;
+      color: var(--text-muted);
     }
 
-    /* QA list */
-    .qa-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.85rem;
-    }
-
-    .qa-item {
-      background: var(--slate-50);
-      border: 1px solid var(--slate-200);
-      border-radius: var(--radius-md);
-      padding: 1rem 1.25rem;
-    }
-
-    .qa-question {
-      font-size: 0.92rem;
-      font-weight: 700;
-      color: var(--slate-800);
-      margin-bottom: 0.5rem;
-    }
-
-    .qa-reveal-btn {
-      background: none;
-      border: none;
-      color: var(--primary);
-      font-size: 0.82rem;
-      font-weight: 700;
+    .vocab-save-btn {
+      background: transparent;
+      border: 1px solid var(--divider-hairline);
+      padding: 0.25rem 0.55rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--ink-navy);
       cursor: pointer;
-      padding: 0;
     }
 
-    .qa-answer {
-      display: none;
-      margin-top: 0.6rem;
-      padding-top: 0.6rem;
-      border-top: 1px dashed var(--slate-300);
-      font-size: 0.88rem;
-      color: var(--slate-700);
-      line-height: 1.5;
+    .vocab-save-btn.saved {
+      background: var(--peach-accent);
+      border-color: var(--peach-accent);
+      color: var(--ink-navy);
     }
 
-    /* Quiz box */
+    /* Comprehension QA Accordion */
+    .qa-item {
+      border: 1px solid var(--divider-hairline);
+      margin-bottom: 0.75rem;
+      background: #FFFFFF;
+    }
+
+    .qa-question-bar {
+      padding: 0.9rem 1.15rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: var(--ink-navy);
+      background: transparent;
+    }
+
+    .qa-chevron {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      transition: transform 0.2s ease;
+    }
+
+    .qa-item.expanded .qa-chevron {
+      transform: rotate(180deg);
+    }
+
+    .qa-answer-box {
+      padding: 1rem 1.15rem;
+      border-top: 1px solid var(--divider-hairline);
+      background: var(--bg-surface);
+      font-size: 0.9rem;
+      color: var(--ink-navy);
+      line-height: 1.6;
+    }
+
+    .qa-answer-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.35rem;
+    }
+
+    /* Quiz Box */
     .quiz-question-box {
-      background: var(--slate-50);
-      border: 1px solid var(--slate-200);
-      border-radius: var(--radius-md);
-      padding: 1.25rem;
+      background: transparent;
     }
 
     .quiz-q-title {
-      font-size: 0.95rem;
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
       font-weight: 700;
-      color: var(--slate-900);
-      margin-bottom: 0.9rem;
+      color: var(--ink-navy);
+      margin-bottom: 1rem;
     }
 
     .quiz-options {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.6rem;
     }
 
     .quiz-opt-btn {
-      background: #ffffff;
-      border: 1px solid var(--slate-300);
-      border-radius: 8px;
-      padding: 0.65rem 0.95rem;
+      background: #FFFFFF;
+      border: 1px solid var(--divider-hairline);
+      padding: 0.75rem 1rem;
       font-size: 0.88rem;
       text-align: left;
       cursor: pointer;
-      transition: all 0.15s ease;
       font-family: inherit;
+      color: var(--ink-navy);
+      transition: border-color 0.15s ease;
     }
 
     .quiz-opt-btn:hover {
-      border-color: var(--primary);
-      background: var(--primary-light);
+      border-color: var(--ink-navy);
     }
 
-    .quiz-opt-btn.correct {
-      background: #ecfdf5 !important;
-      border-color: #10b981 !important;
-      color: #065f46 !important;
-      font-weight: 700;
+    .quiz-opt-btn.correct-choice {
+      background: #FAF8F5 !important;
+      border-color: var(--ink-navy) !important;
+      font-weight: 700 !important;
     }
 
-    .quiz-opt-btn.wrong {
-      background: #fff1f2 !important;
-      border-color: #f43f5e !important;
-      color: #9f1239 !important;
+    .quiz-opt-btn.incorrect-choice {
+      background: #FAF0EB !important;
+      border-color: var(--brick-red) !important;
+      color: var(--brick-red) !important;
     }
 
-    .quiz-feedback {
-      margin-top: 0.85rem;
-      font-size: 0.85rem;
-      font-weight: 600;
-      display: none;
+    .quiz-explanation-box {
+      margin-top: 1rem;
+      padding: 0.85rem 1rem;
+      border: 1px solid var(--divider-hairline);
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .quiz-explanation-box.correct {
+      background: var(--bg-surface);
+      color: var(--ink-navy);
+    }
+
+    .quiz-explanation-box.incorrect {
+      background: #FAF0EB;
+      color: var(--brick-red);
+      border-color: var(--brick-red);
     }
 
     /* Recommended Articles Section */
     .recommended-section {
-      margin-top: 3.5rem;
-      padding-top: 2rem;
-      border-top: 1.5px dashed var(--slate-200);
+      margin-top: 5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--divider-hairline);
     }
 
     .recommended-header {
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 0.5rem;
-      margin-bottom: 1.25rem;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
     }
 
     .recommended-title {
-      font-size: 1.2rem;
-      font-weight: 800;
-      color: var(--slate-900);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--ink-navy);
     }
 
     .recommended-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.25rem;
+      gap: 2rem;
     }
 
     @media (max-width: 768px) {
@@ -1072,39 +994,26 @@
     }
 
     .rec-card {
-      background: #ffffff;
-      border: 1.5px solid var(--slate-200);
-      border-radius: var(--radius-md);
+      background: var(--bg-surface);
+      border: 1px solid var(--divider-hairline);
       overflow: hidden;
       display: flex;
       flex-direction: column;
       cursor: pointer;
-      transition: all 0.2s ease;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .rec-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--primary);
-      box-shadow: 0 8px 20px rgba(79, 70, 229, 0.15);
     }
 
     .rec-img-wrapper {
       width: 100%;
-      height: 140px;
+      height: 150px;
       overflow: hidden;
-      background: var(--slate-100);
+      border-bottom: 1px solid var(--divider-hairline);
     }
 
     .rec-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-
-    .rec-card:hover .rec-img {
-      transform: scale(1.05);
+      filter: saturate(0.95);
     }
 
     .rec-placeholder-img {
@@ -1113,18 +1022,18 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2rem;
-      background: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 100%);
-      color: var(--primary);
+      font-size: 1.5rem;
+      background: var(--bg-cream);
+      color: var(--ink-navy);
     }
 
     .rec-card-body {
-      padding: 1rem;
+      padding: 1.25rem;
       display: flex;
       flex-direction: column;
       flex: 1;
       justify-content: space-between;
-      gap: 0.6rem;
+      gap: 0.75rem;
     }
 
     .rec-card-meta {
@@ -1132,55 +1041,33 @@
       align-items: center;
       justify-content: space-between;
       gap: 0.5rem;
-      margin-bottom: 0.35rem;
     }
 
     .rec-badge {
-      font-size: 0.7rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      padding: 0.2rem 0.55rem;
-      border-radius: 9999px;
-      background: #eff6ff;
-      color: #3b82f6;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: capitalize;
     }
 
     .rec-readtime {
       font-size: 0.72rem;
-      font-weight: 600;
-      color: var(--slate-400);
+      color: var(--text-muted);
     }
 
     .rec-card-title {
-      font-size: 0.95rem;
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
       font-weight: 700;
-      color: var(--slate-900);
-      line-height: 1.35;
-      margin: 0;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .rec-card-sub {
-      font-size: 0.8rem;
-      color: var(--slate-500);
+      color: var(--ink-navy);
       line-height: 1.3;
-      display: -webkit-box;
-      -webkit-line-clamp: 1;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
     }
 
     .rec-btn {
       font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--primary);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
+      font-weight: 600;
+      color: var(--ink-navy);
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
 
     /* Modals Backdrop */
@@ -1188,8 +1075,8 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(15, 23, 42, 0.7);
-      backdrop-filter: blur(4px);
+      background: rgba(27, 54, 68, 0.45);
+      backdrop-filter: blur(2px);
       z-index: 2000;
       align-items: center;
       justify-content: center;
@@ -1199,14 +1086,13 @@
     .modal-backdrop.show { display: flex; }
 
     .modal-content {
-      background: #ffffff;
-      border-radius: var(--radius-lg);
+      background: #FFFFFF;
+      border: 1px solid var(--divider-hairline);
       max-width: 900px;
       width: 100%;
       max-height: 85vh;
       overflow-y: auto;
-      padding: 2rem;
-      box-shadow: var(--shadow-lg);
+      padding: 2.5rem;
       position: relative;
     }
 
@@ -1214,31 +1100,32 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 1.5rem;
-      border-bottom: 1px solid var(--slate-200);
+      margin-bottom: 1.75rem;
+      border-bottom: 1px solid var(--divider-hairline);
       padding-bottom: 1rem;
     }
 
     .modal-header h2 {
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: var(--slate-900);
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--ink-navy);
     }
 
     .modal-close-btn {
       background: none;
       border: none;
       font-size: 1.5rem;
-      color: var(--slate-400);
+      color: var(--text-muted);
       cursor: pointer;
     }
 
     .comparison-cols {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      line-height: 1.8;
-      font-size: 0.98rem;
+      gap: 2rem;
+      line-height: 1.9;
+      font-size: 1rem;
     }
 
     @media (max-width: 768px) {
@@ -1248,8 +1135,8 @@
     /* Vocabulary Notebook Modal Tabs */
     .vn-tabs-bar {
       display: flex;
-      gap: 0.5rem;
-      border-bottom: 1px solid var(--slate-200);
+      gap: 1.5rem;
+      border-bottom: 1px solid var(--divider-hairline);
       margin-bottom: 1.5rem;
     }
 
@@ -1257,45 +1144,40 @@
       background: none;
       border: none;
       border-bottom: 2px solid transparent;
-      padding: 0.6rem 1.25rem;
+      padding: 0.6rem 0;
       font-family: inherit;
       font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--slate-500);
+      font-weight: 500;
+      color: var(--text-muted);
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.15s ease;
     }
 
     .vn-tab-btn:hover {
-      color: var(--primary);
+      color: var(--ink-navy);
     }
 
     .vn-tab-btn.active {
-      color: var(--primary);
-      border-bottom-color: var(--primary);
+      color: var(--ink-navy);
+      font-weight: 700;
+      border-bottom-color: var(--peach-accent);
     }
 
-    .vn-tab-panel {
-      display: none;
-    }
-
-    .vn-tab-panel.active {
-      display: block;
-    }
+    .vn-tab-panel { display: none; }
+    .vn-tab-panel.active { display: block; }
 
     .vn-words-list {
       display: flex;
       flex-direction: column;
-      gap: 0.65rem;
+      gap: 0.75rem;
       max-height: 480px;
       overflow-y: auto;
     }
 
     .vn-word-item {
-      background: var(--slate-50);
-      border: 1px solid var(--slate-200);
-      border-radius: var(--radius-md);
-      padding: 0.75rem 1rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--divider-hairline);
+      padding: 0.85rem 1rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -1303,40 +1185,40 @@
     }
 
     .vn-word-primary {
-      font-size: 0.95rem;
-      font-weight: 800;
-      color: var(--slate-900);
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ink-navy);
     }
 
     .vn-word-secondary {
       font-size: 0.85rem;
-      color: var(--slate-600);
+      color: var(--ink-navy);
     }
 
     .vn-word-root {
-      font-size: 0.75rem;
-      color: var(--slate-400);
+      font-size: 0.74rem;
+      color: var(--text-muted);
       margin-top: 0.15rem;
     }
 
     .vn-del-btn {
       background: none;
       border: none;
-      color: var(--slate-400);
+      color: var(--text-muted);
       cursor: pointer;
       font-size: 1.1rem;
       padding: 0.25rem;
-      transition: color 0.15s ease;
     }
 
     .vn-del-btn:hover {
-      color: var(--rose-600);
+      color: var(--brick-red);
     }
 
     /* Flashcards */
     .fc-stage {
       perspective: 1000px;
-      margin: 1.5rem auto;
+      margin: 2rem auto;
       max-width: 440px;
       height: 240px;
       cursor: pointer;
@@ -1347,9 +1229,7 @@
       height: 100%;
       position: relative;
       transform-style: preserve-3d;
-      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-md);
+      transition: transform 0.3s ease;
     }
 
     .fc-card.flipped {
@@ -1360,24 +1240,17 @@
       position: absolute;
       inset: 0;
       backface-visibility: hidden;
-      border-radius: var(--radius-lg);
-      padding: 1.75rem;
+      padding: 2rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      border: 1.5px solid var(--slate-200);
-    }
-
-    .fc-front {
-      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-      color: var(--slate-900);
+      border: 1px solid var(--divider-hairline);
+      background: #FFFFFF;
     }
 
     .fc-back {
-      background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
-      color: var(--slate-900);
+      background: var(--bg-surface);
       transform: rotateY(180deg);
-      border-color: #c7d2fe;
     }
 
     .fc-card-header {
@@ -1388,59 +1261,59 @@
 
     .fc-tag {
       font-size: 0.72rem;
-      font-weight: 800;
+      font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      color: var(--slate-400);
+      color: var(--text-muted);
     }
 
     .fc-front-word {
-      font-family: 'Merriweather', Georgia, serif;
-      font-size: 1.6rem;
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
       font-weight: 700;
-      color: var(--slate-900);
+      color: var(--ink-navy);
       text-align: center;
     }
 
     .fc-back-trans {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--primary-dark);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--ink-navy);
       text-align: center;
     }
 
     .fc-card-footer {
       text-align: center;
       font-size: 0.75rem;
-      color: var(--slate-400);
+      color: var(--text-muted);
     }
 
     .fc-controls-bar {
       display: flex;
       justify-content: center;
-      gap: 0.75rem;
-      margin-top: 1.25rem;
+      gap: 1rem;
+      margin-top: 1.5rem;
     }
 
     .fc-ctrl-btn {
       padding: 0.55rem 1.25rem;
-      border-radius: 9999px;
       font-size: 0.85rem;
-      font-weight: 700;
+      font-weight: 600;
       cursor: pointer;
-      transition: all 0.15s ease;
+      border: 1px solid var(--divider-hairline);
+      background: transparent;
+      color: var(--ink-navy);
     }
 
     .btn-repeat {
-      background: #fff1f2;
-      border: 1.5px solid #fecdd3;
-      color: #e11d48;
+      color: var(--brick-red);
+      border-color: var(--brick-red);
     }
 
     .btn-master {
-      background: #ecfdf5;
-      border: 1.5px solid #a7f3d0;
-      color: #059669;
+      background: var(--peach-accent);
+      border-color: var(--peach-accent);
+      color: var(--ink-navy);
     }
 
     /* Toast */
@@ -1448,21 +1321,17 @@
       position: fixed;
       bottom: 2rem;
       right: 2rem;
-      background: #0f172a;
-      color: #ffffff;
+      background: var(--ink-navy);
+      color: var(--bg-cream);
       padding: 0.75rem 1.25rem;
-      border-radius: 9999px;
-      box-shadow: var(--shadow-lg);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.88rem;
-      font-weight: 600;
+      font-size: 0.85rem;
+      font-weight: 500;
       z-index: 3000;
       opacity: 0;
       pointer-events: none;
       transform: translateY(10px);
-      transition: all 0.25s ease;
+      transition: all 0.2s ease;
+      border: 1px solid var(--ink-navy);
     }
 
     .toast.show {
@@ -1471,325 +1340,90 @@
       transform: translateY(0);
     }
 
-    /* Legal Footer */
-    .legal-footer {
-      background: var(--slate-900);
-      color: #94a3b8;
-      padding: 2.5rem 2rem;
+    /* Site Footer */
+    .site-footer {
+      background: var(--bg-cream);
+      border-top: 1px solid var(--divider-hairline);
+      padding: 3.5rem 2rem 4rem;
       margin-top: auto;
-      font-size: 0.85rem;
-      line-height: 1.6;
-      border-top: 1px solid var(--slate-800);
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      line-height: 1.7;
     }
 
-    .legal-footer-inner {
-      max-width: 1200px;
+    .site-footer-inner {
+      max-width: 1240px;
       margin: 0 auto;
-    }
-
-    .legal-footer h4 {
-      color: #ffffff;
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-    }
-
-    .legal-footer a {
-      color: #818cf8;
-      text-decoration: none;
-    }
-  
-    /* PHASE 4: REFINED SECONDARY LEARNING LAYERS */
-    .popover-secondary-details {
-      margin-top: 0.75rem;
-      border-top: 1px dashed var(--slate-200);
-      padding-top: 0.5rem;
-    }
-    .pop-details-summary {
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: var(--primary);
-      cursor: pointer;
-      user-select: none;
-      list-style: none;
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-    .pop-details-summary::-webkit-details-marker {
-      display: none;
-    }
-    .pop-details-summary::after {
-      content: " ▸";
-      font-size: 0.75rem;
-      transition: transform 0.2s ease;
-    }
-    .popover-secondary-details[open] .pop-details-summary::after {
-      transform: rotate(90deg);
-    }
-    .pop-details-content {
-      margin-top: 0.5rem;
-    }
-
-    /* Vocab Cards Grid */
-    .vocab-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 0.85rem;
-    }
-    .vocab-card {
-      background: #ffffff;
-      border: 1px solid var(--slate-200);
-      border-radius: var(--radius-md);
-      padding: 0.85rem 1rem;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .footer-brand {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--ink-navy);
+    }
+
+    .footer-disclaimers {
+      max-width: 820px;
+      display: flex;
+      flex-direction: column;
       gap: 0.5rem;
-      transition: all 0.2s ease;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
-    }
-    .vocab-card:hover {
-      border-color: var(--primary);
-      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.08);
-      transform: translateY(-2px);
-    }
-    .vocab-card-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 0.5rem;
-    }
-    .vocab-card-word-group {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-    .vocab-card-word {
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: var(--slate-900);
-    }
-    .vocab-card-trans {
-      font-size: 0.9rem;
-      color: var(--slate-700);
-      font-weight: 500;
-      line-height: 1.4;
-    }
-    .vocab-card-bottom {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 0.25rem;
-      padding-top: 0.5rem;
-      border-top: 1px solid var(--slate-100);
-    }
-    .vocab-card-root {
-      font-size: 0.75rem;
-      color: var(--slate-500);
-    }
-    .vocab-save-btn {
-      background: var(--slate-100);
-      border: 1px solid var(--slate-200);
-      border-radius: 6px;
-      padding: 0.3rem 0.6rem;
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--slate-700);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-      transition: all 0.15s ease;
-    }
-    .vocab-save-btn:hover {
-      background: var(--slate-200);
-      color: var(--slate-900);
-    }
-    .vocab-save-btn.saved {
-      background: #fef3c7;
-      border-color: #f59e0b;
-      color: #92400e;
     }
 
-    /* Grammar Section Refinements */
-    .grammar-tags-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 0.75rem;
+    .footer-disclaimers a {
+      color: var(--ink-navy);
+      text-decoration: underline;
     }
-    .grammar-tag {
-      background: #e0e7ff;
-      color: #3730a3;
-      padding: 0.25rem 0.6rem;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-    }
-    .grammar-example-quote {
-      margin-top: 0.85rem;
-      padding: 0.75rem 1rem;
-      background: #ffffff;
-      border-left: 3px solid var(--primary);
-      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-      font-size: 0.88rem;
-      color: var(--slate-700);
-      font-style: italic;
-    }
-    .grammar-quote-label {
-      font-size: 0.72rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--primary);
-      margin-bottom: 0.25rem;
-      font-style: normal;
-    }
-
-    /* Comprehension QA Accordion */
-    .qa-item {
-      background: #ffffff;
-      border: 1px solid var(--slate-200);
-      border-radius: var(--radius-md);
-      margin-bottom: 0.75rem;
-      overflow: hidden;
-      transition: border-color 0.15s ease;
-    }
-    .qa-item:hover {
-      border-color: var(--slate-300);
-    }
-    .qa-question-bar {
-      padding: 0.9rem 1.15rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      user-select: none;
-      font-weight: 700;
-      font-size: 0.95rem;
-      color: var(--slate-900);
-      background: var(--slate-50);
-      transition: background 0.15s ease;
-    }
-    .qa-question-bar:hover {
-      background: var(--slate-100);
-    }
-    .qa-chevron {
-      font-size: 0.8rem;
-      color: var(--slate-400);
-      transition: transform 0.2s ease;
-    }
-    .qa-item.expanded .qa-chevron {
-      transform: rotate(180deg);
-    }
-    .qa-answer-box {
-      padding: 1rem 1.15rem;
-      border-top: 1px solid var(--slate-200);
-      background: #ffffff;
-      font-size: 0.92rem;
-      color: var(--slate-800);
-      line-height: 1.6;
-    }
-    .qa-answer-label {
-      font-size: 0.72rem;
-      font-weight: 800;
-      color: #059669;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.35rem;
-    }
-
-    /* Quiz Option Feedback */
-    .quiz-opt-btn.correct-choice {
-      background: #ecfdf5 !important;
-      border-color: #10b981 !important;
-      color: #065f46 !important;
-      font-weight: 700 !important;
-    }
-    .quiz-opt-btn.incorrect-choice {
-      background: #fef2f2 !important;
-      border-color: #ef4444 !important;
-      color: #991b1b !important;
-    }
-    .quiz-opt-btn:disabled {
-      cursor: default;
-    }
-    .quiz-explanation-box {
-      margin-top: 1rem;
-      padding: 0.85rem 1rem;
-      border-radius: var(--radius-md);
-      font-size: 0.88rem;
-      line-height: 1.5;
-    }
-    .quiz-explanation-box.correct {
-      background: #ecfdf5;
-      border: 1px solid #a7f3d0;
-      color: #065f46;
-    }
-    .quiz-explanation-box.incorrect {
-      background: #fef2f2;
-      border: 1px solid #fecaca;
-      color: #991b1b;
-    }
-
   </style>
 </head>
 <body>
 
-  <!-- Top Header / Branding & Dual Language Switcher -->
+  <!-- Masthead Header -->
   <header class="top-header">
     <div class="top-header-inner">
       <div class="brand-group">
-        <div class="brand-title">
-          <span>💎 Leenardo</span>
-        </div>
+        <a href="index.html" class="brand-title">Leenardo</a>
         <a href="index.html" class="btn-back-home" id="btn-back-home" onclick="goToHome(event)">
-          ← 🏠 <span id="back-home-text">Library Home</span>
+          ← <span id="back-home-text">Library</span>
         </a>
       </div>
 
       <div class="header-actions">
         <div id="header-auth-container"></div>
         <button class="btn-header-vocab" onclick="openVocabNotebook('words')">
-          <span id="btn-my-words-text">📚 Vocabulary</span>
+          <span id="btn-my-words-text">Vocabulary</span>
           <span class="vocab-counter-badge" id="saved-words-count">0</span>
         </button>
 
         <div class="lang-switcher-bar">
           <div class="lang-field">
-            <label for="target-lang-select" id="lbl-target-lang">🎯 Target:</label>
+            <label for="target-lang-select" id="lbl-target-lang">Target:</label>
             <select id="target-lang-select" class="lang-select" onchange="onTargetLanguageChange(this.value)">
-              <option value="tr">🇹🇷 Türkçe</option>
-              <option value="en">🇬🇧 English</option>
-              <option value="es">🇪🇸 Español</option>
-              <option value="de">🇩🇪 Deutsch</option>
-              <option value="fr">🇫🇷 Français</option>
+              <option value="tr">Türkçe</option>
+              <option value="en">English</option>
+              <option value="es">Español</option>
+              <option value="de">Deutsch</option>
+              <option value="fr">Français</option>
             </select>
           </div>
 
           <div class="lang-field">
-            <label for="support-lang-select" id="lbl-support-lang">🌐 Support:</label>
+            <label for="support-lang-select" id="lbl-support-lang">Support:</label>
             <select id="support-lang-select" class="lang-select" onchange="onSupportLanguageChange(this.value)">
-              <option value="en">🇬🇧 English</option>
-              <option value="tr">🇹🇷 Türkçe</option>
-              <option value="es">🇪🇸 Español</option>
-              <option value="de">🇩🇪 Deutsch</option>
-              <option value="fr">🇫🇷 Français</option>
+              <option value="en">English</option>
+              <option value="tr">Türkçe</option>
+              <option value="es">Español</option>
+              <option value="de">Deutsch</option>
+              <option value="fr">Français</option>
             </select>
           </div>
         </div>
       </div>
     </div>
   </header>
-
-  <!-- Notice & Takedown Top Banner -->
-  <div class="notice-banner">
-    <span id="notice-banner-text">🛡️ <strong>Pedagogical Assurance:</strong> All materials are curated for language learning under CEFR standards.</span>
-    <span>•</span>
-    <span id="notice-contact-text">Inquiries: <a href="mailto:contact@leenardo.com">contact@leenardo.com</a> (24h response)</span>
-  </div>
 
   <!-- Focused Editorial Reading Shell -->
   <main class="reading-shell">
@@ -1798,10 +1432,10 @@
     <div class="article-top-meta">
       <div class="meta-badges-group">
         <span class="article-category-tag" id="article-category-badge">Category</span>
-        <span class="article-read-time" id="article-read-time">⏱️ 4 min read</span>
+        <span class="article-read-time" id="article-read-time">4 min read</span>
       </div>
       <a href="index.html" class="article-topic-selector-link" id="article-change-topic-link" onclick="goToHome(event)">
-        Browse all stories →
+        Browse all stories
       </a>
     </div>
 
@@ -1817,19 +1451,16 @@
       <div class="featured-caption" id="article-img-caption"></div>
     </div>
 
-    <!-- SAME TOPIC / DIFFERENT LEVEL SWITCHER (CENTRAL PRODUCT PILLAR) -->
+    <!-- SAME TOPIC / DIFFERENT DIFFICULTY TAB SELECTOR -->
     <section class="same-topic-switcher" id="same-topic-switcher">
       <div class="switcher-header-row">
         <div class="switcher-label-group">
-          <span class="switcher-label-icon">🔄</span>
-          <div>
-            <div class="switcher-title" id="switcher-title">Same Topic, Different Level</div>
-            <div class="switcher-desc" id="switcher-desc">Adjust the linguistic difficulty of this exact article</div>
-          </div>
+          <div class="switcher-title" id="switcher-title">Same Topic, Different Level</div>
+          <div class="switcher-desc" id="switcher-desc">Adjust the linguistic difficulty of this exact article</div>
         </div>
         <div class="audio-toolbar">
           <button class="btn-audio" id="btn-audio-play" onclick="toggleAudioSpeech()">
-            <span id="audio-icon">🔊</span> <span id="audio-text">Listen</span>
+            <span id="audio-text">Listen</span>
           </button>
         </div>
       </div>
@@ -1864,26 +1495,26 @@
       <!-- Action Bar -->
       <div class="reading-actions-bar">
         <button class="btn-secondary" id="btn-parallel" onclick="openParallelModal()">
-          <span>📑 Side-by-Side View</span>
+          <span>Side-by-Side View</span>
         </button>
         <button class="btn-primary-action" id="btn-notebook" onclick="openVocabNotebook('words')">
-          <span>📚 Vocabulary & Flashcards</span>
-          <span class="vocab-counter-badge" id="saved-words-count-bar" style="background:rgba(255,255,255,0.25); color:#fff;">0</span>
+          <span>Vocabulary & Flashcards</span>
+          <span class="vocab-counter-badge" id="saved-words-count-bar" style="background:var(--peach-accent); color:var(--ink-navy); margin-left:0.35rem;">0</span>
         </button>
         <button class="btn-secondary" id="btn-copy-worksheet" onclick="copyWorksheetToClipboard()">
-          <span>📋 Copy Worksheet</span>
+          <span>Copy Worksheet</span>
         </button>
       </div>
     </article>
 
-    <!-- Interactive Word Translation Popover -->
+    <!-- Interactive Word Translation Popover (Quiet Footnote) -->
     <div id="word-popover" class="word-popover hidden" role="dialog" aria-modal="false" aria-label="Word Quick Lookup">
       <div class="pop-arrow" id="pop-arrow"></div>
       <div class="popover-header">
         <div class="popover-word-box">
           <span class="popover-target-word" id="pop-word-target"></span>
           <button class="popover-audio-btn" id="pop-audio-btn" title="Pronounce / Listen" aria-label="Pronounce">🔊</button>
-          <span class="popover-badge" id="pop-vocab-badge" style="display:none;">✨ Key Word</span>
+          <span class="popover-badge" id="pop-vocab-badge" style="display:none;">Key Word</span>
         </div>
         <button class="popover-close-btn" id="pop-close-btn" title="Close (Esc)" aria-label="Close" onclick="closeWordPopover()">&times;</button>
       </div>
@@ -1893,34 +1524,34 @@
         </div>
         <div class="popover-actions">
           <button class="pop-action-btn pop-btn-save" id="pop-save-btn" onclick="toggleSaveCurrentWord(event)">
-            <span id="pop-save-icon">⭐</span> <span id="pop-save-text">Save</span>
+            <span id="pop-save-text">Save</span>
           </button>
           <button class="pop-action-btn pop-btn-study" id="pop-study-btn" onclick="studyCurrentWordFlashcard(event)">
-            <span id="pop-study-text">🎴 Flashcard</span>
+            <span id="pop-study-text">Flashcard</span>
           </button>
         </div>
         <details class="popover-secondary-details" id="pop-details-collapse">
           <summary class="pop-details-summary">Context & Details</summary>
           <div class="pop-details-content">
-            <div class="popover-root-row" id="pop-root-row" style="display:none; font-size:0.8rem; margin-bottom:0.4rem;">
-              <span id="pop-root-label" style="color:var(--slate-500);">Root:</span> <strong id="pop-root-word" style="color:var(--primary);"></strong> (<span id="pop-root-trans" style="color:var(--slate-600);"></span>)
+            <div class="popover-root-row" id="pop-root-row" style="display:none;">
+              <span id="pop-root-label" style="color:var(--text-muted);">Root:</span> <strong id="pop-root-word" style="color:var(--ink-navy);"></strong> (<span id="pop-root-trans" style="color:var(--text-muted);"></span>)
             </div>
             <div class="popover-examples-box" id="pop-examples-container" style="display:none;">
-              <div class="popover-examples-title" style="font-size:0.75rem; font-weight:700; color:var(--slate-500); margin-bottom:0.25rem;">Sentence Context:</div>
-              <div id="pop-examples-list" style="font-size:0.82rem; color:var(--slate-700);"></div>
+              <div class="popover-examples-title" style="font-size:0.75rem; font-weight:600; color:var(--text-muted); margin-bottom:0.25rem;">Sentence Context:</div>
+              <div id="pop-examples-list" style="font-size:0.82rem; color:var(--ink-navy);"></div>
             </div>
           </div>
         </details>
       </div>
     </div>
 
-    <!-- SECONDARY LEARNING TOOLS: Situated Below Reading -->
+    <!-- SECONDARY LEARNING TOOLS -->
     <section class="learning-tools-section" id="learning-tools-section">
       <div class="tools-section-header">
         <div>
-          <div class="tools-section-title" id="tools-section-title">
-            <span>🎓</span> Learning Lab & Practice
-          </div>
+          <h2 class="tools-section-title" id="tools-section-title">
+            Learning Lab & Practice
+          </h2>
           <div class="tools-section-subtitle" id="tools-section-subtitle">
             Deepen your comprehension and reinforce new vocabulary at this level
           </div>
@@ -1931,7 +1562,7 @@
       <div class="tool-card" id="tool-card-vocab">
         <div class="tool-card-header" onclick="toggleToolCard('tool-card-vocab')">
           <h3 class="tool-card-title">
-            <span>💎</span> <span id="tool-vocab-title">Key Vocabulary at this Level</span>
+            <span id="tool-vocab-title">Key Vocabulary at this Level</span>
           </h3>
           <span class="tool-toggle-icon">▼</span>
         </div>
@@ -1946,7 +1577,7 @@
       <div class="tool-card" id="tool-card-grammar">
         <div class="tool-card-header" onclick="toggleToolCard('tool-card-grammar')">
           <h3 class="tool-card-title">
-            <span>📐</span> <span id="tool-grammar-title">Grammar & Structural Progression</span>
+            <span id="tool-grammar-title">Grammar & Structural Progression</span>
           </h3>
           <span class="tool-toggle-icon">▼</span>
         </div>
@@ -1961,7 +1592,7 @@
       <div class="tool-card" id="tool-card-qa">
         <div class="tool-card-header" onclick="toggleToolCard('tool-card-qa')">
           <h3 class="tool-card-title">
-            <span>❓</span> <span id="tool-qa-title">Comprehension & Discussion</span>
+            <span id="tool-qa-title">Comprehension & Discussion</span>
           </h3>
           <span class="tool-toggle-icon">▼</span>
         </div>
@@ -1976,7 +1607,7 @@
       <div class="tool-card" id="tool-card-quiz">
         <div class="tool-card-header" onclick="toggleToolCard('tool-card-quiz')">
           <h3 class="tool-card-title">
-            <span>🎯</span> <span id="tool-quiz-title">Quick Comprehension Quiz</span>
+            <span id="tool-quiz-title">Quick Comprehension Quiz</span>
           </h3>
           <span class="tool-toggle-icon">▼</span>
         </div>
@@ -1991,11 +1622,11 @@
     <!-- Recommended Next Reads Section -->
     <section class="recommended-section" id="recommended-articles-box">
       <div class="recommended-header">
-        <h3 class="recommended-title" id="rec-section-title">✨ Recommended Next Reads</h3>
-        <span style="font-size:0.82rem; color:var(--slate-500); font-weight:500;" id="rec-section-subtitle">Explore more stories at this difficulty level</span>
+        <h3 class="recommended-title" id="rec-section-title">Recommended Next Reads</h3>
+        <span style="font-size:0.82rem; color:var(--text-muted); font-weight:500;" id="rec-section-subtitle">Explore more stories at this difficulty level</span>
       </div>
       <div class="recommended-grid" id="recommended-grid">
-        <!-- 3 Recommendation Cards injected dynamically -->
+        <!-- Recommendation Cards injected dynamically -->
       </div>
     </section>
 
@@ -2005,16 +1636,16 @@
   <div class="modal-backdrop" id="parallel-modal" onclick="closeParallelModal(event)">
     <div class="modal-content" onclick="event.stopPropagation()">
       <div class="modal-header">
-        <h2 id="modal-parallel-title">📑 Side-by-Side Parallel Reading</h2>
+        <h2 id="modal-parallel-title">Side-by-Side Parallel Reading</h2>
         <button class="modal-close-btn" onclick="closeParallelModal()">&times;</button>
       </div>
       <div class="comparison-cols">
         <div class="comp-col">
-          <h4 id="comp-target-title" style="margin-bottom:0.75rem; color:var(--primary); font-weight:800;">Target Language</h4>
+          <h4 id="comp-target-title" style="margin-bottom:0.75rem; color:var(--ink-navy); font-weight:700;">Target Language</h4>
           <div id="comp-target-body"></div>
         </div>
         <div class="comp-col">
-          <h4 id="comp-support-title" style="margin-bottom:0.75rem; color:var(--slate-700); font-weight:800;">Support Language</h4>
+          <h4 id="comp-support-title" style="margin-bottom:0.75rem; color:var(--ink-navy); font-weight:700;">Support Language</h4>
           <div id="comp-support-body"></div>
         </div>
       </div>
@@ -2025,23 +1656,23 @@
   <div class="modal-backdrop" id="vocab-notebook-modal" onclick="closeVocabNotebook(event)">
     <div class="modal-content" onclick="event.stopPropagation()">
       <div class="modal-header">
-        <h2 id="modal-notebook-title">📚 Vocabulary Notebook & Flashcard Station</h2>
+        <h2 id="modal-notebook-title">Vocabulary Notebook & Flashcards</h2>
         <button class="modal-close-btn" onclick="closeVocabNotebook()">&times;</button>
       </div>
 
       <div class="vn-tabs-bar">
         <button class="vn-tab-btn active" id="vn-tab-words" onclick="switchVocabTab('words')">
-          📖 Saved Words (<span id="vn-tab-count-saved">0</span>)
+          Saved Words (<span id="vn-tab-count-saved">0</span>)
         </button>
         <button class="vn-tab-btn" id="vn-tab-flashcards" onclick="switchVocabTab('flashcards')">
-          🎴 Study Flashcards (<span id="vn-tab-count-cards">0</span>)
+          Study Flashcards (<span id="vn-tab-count-cards">0</span>)
         </button>
       </div>
 
       <!-- Tab 1: Word List -->
       <div class="vn-tab-panel active" id="vn-panel-words">
         <div style="margin-bottom:1rem;">
-          <input type="text" id="vn-search-input" class="search-input" placeholder="Search saved vocabulary..." oninput="renderSavedWordsList(this.value)" style="width:100%; padding:0.65rem 1rem; border:1.5px solid var(--slate-300); border-radius:8px; font-family:inherit; font-size:0.9rem;">
+          <input type="text" id="vn-search-input" class="search-input" placeholder="Search saved vocabulary..." oninput="renderSavedWordsList(this.value)" style="width:100%; padding:0.65rem 0.85rem; border:1px solid var(--divider-hairline); background:var(--bg-surface); font-family:inherit; font-size:0.9rem; color:var(--ink-navy); outline:none;">
         </div>
         <div class="vn-words-list" id="vn-words-container"></div>
       </div>
@@ -2053,21 +1684,26 @@
     </div>
   </div>
 
-  <!-- Global Footer -->
-  <footer class="legal-footer">
-    <div class="legal-footer-inner">
-      <h4>💎 Leenardo</h4>
-      <p id="footer-disclaimer">
-        Bu metinler yalnızca dil öğretimi amacıyla yapay zeka ile üretilmiştir, gerçek bir haber kaynağını temsil etmez.
-      </p>
-      <p style="margin-top:0.75rem;font-size:0.8rem;">
-        Notice & Takedown İletişim: <a href="mailto:contact@leenardo.com">contact@leenardo.com</a> • Yanıt Süresi: Azami 24 Saat.
-      </p>
+  <!-- Site Footer (Houses Relocated Pedagogical Assurance & Legal Notices) -->
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <div class="footer-brand">Leenardo</div>
+      <div class="footer-disclaimers">
+        <p id="notice-banner-text">
+          Pedagogical Assurance: All materials are curated for language learning under CEFR standards.
+        </p>
+        <p id="footer-disclaimer">
+          These texts are generated with AI solely for language education purposes and do not represent a real news agency.
+        </p>
+        <p id="notice-contact-text">
+          Notice & Takedown Inquiries: <a href="mailto:contact@leenardo.com">contact@leenardo.com</a> (24h response time).
+        </p>
+      </div>
     </div>
   </footer>
 
   <!-- Toast Element -->
-  <div class="toast" id="toast-msg"><span>✨</span> <span id="toast-text">Copied!</span></div>
+  <div class="toast" id="toast-msg"><span id="toast-text">Copied to clipboard</span></div>
 
   <!-- External Data Source (CORS-free for file:// and HTTP) -->
   <script src="articles-data.js"></script>
@@ -2111,262 +1747,262 @@
     const uiTranslations = {
       tr: {
         backHome: "Kütüphane",
-        browseStories: "Tüm hikayeleri incele →",
+        browseStories: "Tüm hikayeleri incele",
         myWords: "Kelimelerim",
-        targetLangLabel: "🎯 Öğrenilen Dil:",
-        supportLangLabel: "🌐 Destek Dili:",
-        noticeBanner: "🛡️ <strong>Pedagojik Güvence:</strong> Tüm içerikler dil eğitimi ve CEFR standartlarına uygun olarak tasarlanmıştır.",
-        noticeContact: "Telif bildirimi: copyright@dailyturkishmia.com (24 saat içinde yanıtlanır)",
+        targetLangLabel: "Öğrenilen Dil:",
+        supportLangLabel: "Destek Dili:",
+        noticeBanner: "<strong>Pedagojik Güvence:</strong> Tüm içerikler dil eğitimi ve CEFR standartlarına uygun olarak tasarlanmıştır.",
+        noticeContact: "Telif bildirimi: <a href='mailto:contact@leenardo.com'>contact@leenardo.com</a> (24 saat içinde yanıtlanır)",
         switcherTitle: "Aynı Konu, Farklı Seviye",
         switcherDesc: "Bu metnin zorluk derecesini ve dil derinliğini seviyene göre hemen ayarla",
         listenText: "Dinle",
         stopListenText: "Durdur",
-        bilingualCompare: "📑 İki Dilli Karşılaştır",
-        studyFlashcards: "📚 Kelimelerim & Flashcard",
-        copyWorksheet: "📋 Ödevi Kopyala (Markdown)",
+        bilingualCompare: "İki Dilli Karşılaştır",
+        studyFlashcards: "Kelimelerim & Flashcard",
+        copyWorksheet: "Ödevi Kopyala (Markdown)",
         toolsTitle: "Öğrenme Laboratuvarı & Pratik",
         toolsSubtitle: "Bu seviyedeki anlama kabiliyetini pekiştir ve yeni yapılar keşfet",
         toolVocabTitle: "Bu Seviyenin Kilit Kelimeleri",
         toolGrammarTitle: "Gramer ve Cümle Yapısı",
         toolQaTitle: "Anlama ve Tartışma Soruları",
         toolQuizTitle: "Hızlı Kavrama Testi",
-        showAnswer: "Cevabı Göster 👁️",
-        hideAnswer: "Cevabı Gizle 🙈",
+        showAnswer: "Cevabı Göster",
+        hideAnswer: "Cevabı Gizle",
         quizCorrect: "Tebrikler, doğru cevap!",
         quizWrong: "Yanlış cevap, tekrar deneyin.",
         noQuiz: "Bu seviye için test hazırlanıyor.",
-        lessonWordBadge: "✨ Ders Kelimesi",
+        lessonWordBadge: "Ders Kelimesi",
         rootLabel: "kök:",
         translatingText: "Çevriliyor...",
         saveWord: "Kaydet",
         savedWord: "Kaydedildi",
-        studyWordCard: "🎴 Flashcard",
-        corpusExamplesTitle: "📖 Metinlerden 3 Örnek Cümle:",
+        studyWordCard: "Flashcard",
+        corpusExamplesTitle: "Metinlerden Örnek Cümleler:",
         wordAnalysisContext: "Kelime ve Cümle Analizi",
-        recTitle: "✨ Sonraki Önerilen Yazılar",
+        recTitle: "Sonraki Önerilen Yazılar",
         recSubtitle: "Aynı seviyede keyifle okuyabileceğin diğer hikayeler",
-        readNow: "Hemen Oku ➔",
-        modalParallelTitle: "📑 İki Dilli Paralel Okuma",
-        modalNotebookTitle: "📚 Kelime Defterim & Flashcard İstasyonu",
-        emptyNotebookTitle: "Kayıtlı kelime bulunamadı 📖",
-        emptyNotebookDesc: "Metinleri okurken öğrenmek istediğiniz herhangi bir kelimenin üzerine tıklayın ve '⭐ Kaydet' butonuna basın.",
-        congratsTitle: "Tebrikler! Deste Tamamlandı 🎉",
+        readNow: "Hemen Oku",
+        modalParallelTitle: "İki Dilli Paralel Okuma",
+        modalNotebookTitle: "Kelime Defterim & Flashcard",
+        emptyNotebookTitle: "Kayıtlı kelime bulunamadı",
+        emptyNotebookDesc: "Metinleri okurken öğrenmek istediğiniz herhangi bir kelimenin üzerine tıklayın ve 'Kaydet' butonuna basın.",
+        congratsTitle: "Tebrikler! Deste Tamamlandı",
         congratsDesc: "Bu oturumda kartları başarıyla tamamladınız.",
-        restartBtn: "🔁 Tekrar Başlat",
-        returnWordsBtn: "🗂️ Kelime Listeme Dön",
-        flipHintFront: "👆 Anlamını görmek için karta tıkla (Çevir)",
-        flipHintBack: "👆 Kartı geri çevirmek için dokun",
-        repeatBtnText: "🔴 Henüz Öğrenmedim",
-        masterBtnText: "🟢 Öğrendim",
-        shuffleBtnText: "🔀 Karıştır",
+        restartBtn: "Tekrar Başlat",
+        returnWordsBtn: "Kelime Listeme Dön",
+        flipHintFront: "Anlamını görmek için karta tıkla",
+        flipHintBack: "Kartı geri çevirmek için dokun",
+        repeatBtnText: "Henüz Öğrenmedim",
+        masterBtnText: "Öğrendim",
+        shuffleBtnText: "Karıştır",
         toastCopied: "Kopyalandı!"
       },
       en: {
         backHome: "Library",
-        browseStories: "Browse all stories →",
+        browseStories: "Browse all stories",
         myWords: "Vocabulary",
-        targetLangLabel: "🎯 Target Lang:",
-        supportLangLabel: "🌐 Support Lang:",
-        noticeBanner: "🛡️ <strong>Pedagogical Assurance:</strong> All materials are curated for language learning under CEFR standards.",
-        noticeContact: "Copyright inquiries: copyright@dailyturkishmia.com (24h response)",
+        targetLangLabel: "Target:",
+        supportLangLabel: "Support:",
+        noticeBanner: "<strong>Pedagogical Assurance:</strong> All materials are curated for language learning under CEFR standards.",
+        noticeContact: "Notice & Takedown Inquiries: <a href='mailto:contact@leenardo.com'>contact@leenardo.com</a> (24h response time).",
         switcherTitle: "Same Topic, Different Level",
         switcherDesc: "Adjust the linguistic complexity of this exact story to your level",
         listenText: "Listen",
         stopListenText: "Stop",
-        bilingualCompare: "📑 Side-by-Side View",
-        studyFlashcards: "📚 Vocabulary & Flashcards",
-        copyWorksheet: "📋 Copy Worksheet",
+        bilingualCompare: "Side-by-Side View",
+        studyFlashcards: "Vocabulary & Flashcards",
+        copyWorksheet: "Copy Worksheet",
         toolsTitle: "Learning Lab & Practice",
         toolsSubtitle: "Reinforce your comprehension and explore grammar at this level",
         toolVocabTitle: "Key Vocabulary at this Level",
         toolGrammarTitle: "Grammar & Structural Progression",
         toolQaTitle: "Comprehension & Discussion",
         toolQuizTitle: "Quick Comprehension Quiz",
-        showAnswer: "Show Answer 👁️",
-        hideAnswer: "Hide Answer 🙈",
+        showAnswer: "Show Answer",
+        hideAnswer: "Hide Answer",
         quizCorrect: "Correct answer! Well done!",
         quizWrong: "Incorrect, try again.",
         noQuiz: "Quiz in preparation for this level.",
-        lessonWordBadge: "✨ Key Word",
+        lessonWordBadge: "Key Word",
         rootLabel: "root:",
         translatingText: "Translating...",
-        saveWord: "Save Word",
+        saveWord: "Save",
         savedWord: "Saved",
-        studyWordCard: "🎴 Flashcard",
-        corpusExamplesTitle: "📖 3 Authentic Sentence Examples:",
+        studyWordCard: "Flashcard",
+        corpusExamplesTitle: "Authentic Sentence Examples:",
         wordAnalysisContext: "Contextual Analysis",
-        recTitle: "✨ Recommended Next Reads",
+        recTitle: "Recommended Next Reads",
         recSubtitle: "Explore more stories at this difficulty level",
-        readNow: "Read Now ➔",
-        modalParallelTitle: "📑 Side-by-Side Parallel Reading",
-        modalNotebookTitle: "📚 Vocabulary Notebook & Flashcard Station",
-        emptyNotebookTitle: "No saved words found 📖",
-        emptyNotebookDesc: "Click any word while reading an article and hit '⭐ Save' to study it here.",
-        congratsTitle: "Congratulations! Deck Completed 🎉",
+        readNow: "Read Now",
+        modalParallelTitle: "Side-by-Side Parallel Reading",
+        modalNotebookTitle: "Vocabulary Notebook & Flashcards",
+        emptyNotebookTitle: "No saved words found",
+        emptyNotebookDesc: "Click any word while reading an article and hit 'Save' to study it here.",
+        congratsTitle: "Congratulations! Deck Completed",
         congratsDesc: "You have reviewed all cards in this study session.",
-        restartBtn: "🔁 Review Again",
-        returnWordsBtn: "🗂️ Back to Word List",
-        flipHintFront: "👆 Click card to flip and reveal translation",
-        flipHintBack: "👆 Click to flip back",
-        repeatBtnText: "🔴 Still Learning",
-        masterBtnText: "🟢 Mastered",
-        shuffleBtnText: "🔀 Shuffle",
+        restartBtn: "Review Again",
+        returnWordsBtn: "Back to Word List",
+        flipHintFront: "Click card to flip and reveal translation",
+        flipHintBack: "Click to flip back",
+        repeatBtnText: "Still Learning",
+        masterBtnText: "Mastered",
+        shuffleBtnText: "Shuffle",
         toastCopied: "Copied to clipboard!"
       },
       es: {
         backHome: "Biblioteca",
-        browseStories: "Ver todas las historias →",
+        browseStories: "Ver todas las historias",
         myWords: "Vocabulario",
-        targetLangLabel: "🎯 Idioma Objetivo:",
-        supportLangLabel: "🌐 Idioma de Apoyo:",
-        noticeBanner: "🛡️ <strong>Garantía Pedagógica:</strong> Contenidos educativos diseñados bajo estándares CEFR.",
-        noticeContact: "Contacto por derechos: copyright@dailyturkishmia.com (respuesta en 24h)",
+        targetLangLabel: "Objetivo:",
+        supportLangLabel: "Apoyo:",
+        noticeBanner: "<strong>Garantía Pedagógica:</strong> Contenidos educativos diseñados bajo estándares CEFR.",
+        noticeContact: "Contacto por derechos: <a href='mailto:contact@leenardo.com'>contact@leenardo.com</a> (respuesta en 24h)",
         switcherTitle: "Mismo Tema, Diferente Nivel",
         switcherDesc: "Ajusta la complejidad lingüística de esta misma historia a tu nivel",
         listenText: "Escuchar",
         stopListenText: "Detener",
-        bilingualCompare: "📑 Vista Bilingüe",
-        studyFlashcards: "📚 Vocabulario y Tarjetas",
-        copyWorksheet: "📋 Copiar Ficha",
+        bilingualCompare: "Vista Bilingüe",
+        studyFlashcards: "Vocabulario y Tarjetas",
+        copyWorksheet: "Copiar Ficha",
         toolsTitle: "Laboratorio de Práctica",
         toolsSubtitle: "Refuerza tu comprensión y aprende nuevas estructuras",
         toolVocabTitle: "Vocabulario Clave de este Nivel",
         toolGrammarTitle: "Gramática y Progresión Estructural",
         toolQaTitle: "Comprensión y Preguntas",
         toolQuizTitle: "Test Rápido de Comprensión",
-        showAnswer: "Mostrar Respuesta 👁️",
-        hideAnswer: "Ocultar Respuesta 🙈",
+        showAnswer: "Mostrar Respuesta",
+        hideAnswer: "Ocultar Respuesta",
         quizCorrect: "¡Correcto! ¡Muy bien hecho!",
         quizWrong: "Incorrecto, inténtalo de nuevo.",
         noQuiz: "No hay test disponible para este nivel.",
-        lessonWordBadge: "✨ Palabra Clave",
+        lessonWordBadge: "Palabra Clave",
         rootLabel: "raíz:",
         translatingText: "Traduciendo...",
         saveWord: "Guardar",
         savedWord: "Guardado",
-        studyWordCard: "🎴 Tarjeta",
-        corpusExamplesTitle: "📖 3 Ejemplos en Oraciones Reales:",
+        studyWordCard: "Tarjeta",
+        corpusExamplesTitle: "Ejemplos en Oraciones Reales:",
         wordAnalysisContext: "Análisis Contextual",
-        recTitle: "✨ Lecturas Recomendadas",
+        recTitle: "Lecturas Recomendadas",
         recSubtitle: "Más historias para seguir leyendo a este nivel",
-        readNow: "Leer Ahora ➔",
-        modalParallelTitle: "📑 Lectura Paralela Bilingüe",
-        modalNotebookTitle: "📚 Cuaderno de Vocabulario y Tarjetas",
-        emptyNotebookTitle: "No hay palabras guardadas 📖",
-        emptyNotebookDesc: "Toca cualquier palabra mientras lees y pulsa '⭐ Guardar'.",
-        congratsTitle: "¡Felicidades! Mazo Completado 🎉",
+        readNow: "Leer Ahora",
+        modalParallelTitle: "Lectura Paralela Bilingüe",
+        modalNotebookTitle: "Cuaderno de Vocabulario y Tarjetas",
+        emptyNotebookTitle: "No hay palabras guardadas",
+        emptyNotebookDesc: "Toca cualquier palabra mientras lees y pulsa 'Guardar'.",
+        congratsTitle: "¡Felicidades! Mazo Completado",
         congratsDesc: "Has completado todas las tarjetas de esta sesión.",
-        restartBtn: "🔁 Repetir Mazo",
-        returnWordsBtn: "🗂️ Volver a la Lista",
-        flipHintFront: "👆 Toca la tarjeta para ver la traducción",
-        flipHintBack: "👆 Toca para volver a voltear",
-        repeatBtnText: "🔴 Por Aprender",
-        masterBtnText: "🟢 Aprendido",
-        shuffleBtnText: "🔀 Mezclar",
+        restartBtn: "Repetir Mazo",
+        returnWordsBtn: "Volver a la Lista",
+        flipHintFront: "Toca la tarjeta para ver la traducción",
+        flipHintBack: "Toca para volver a voltear",
+        repeatBtnText: "Por Aprender",
+        masterBtnText: "Aprendido",
+        shuffleBtnText: "Mezclar",
         toastCopied: "¡Copiado al portapapeles!"
       },
       de: {
         backHome: "Bibliothek",
-        browseStories: "Alle Artikel durchsuchen →",
+        browseStories: "Alle Artikel durchsuchen",
         myWords: "Wortschatz",
-        targetLangLabel: "🎯 Zielsprache:",
-        supportLangLabel: "🌐 Hilfssprache:",
-        noticeBanner: "🛡️ <strong>Pädagogische Qualität:</strong> Alle Texte folgen den CEFR-Stufenrichtlinien.",
-        noticeContact: "Urheberrechtsanfragen: copyright@dailyturkishmia.com (Antwort in 24 Std.)",
+        targetLangLabel: "Zielsprache:",
+        supportLangLabel: "Hilfssprache:",
+        noticeBanner: "<strong>Pädagogische Qualität:</strong> Alle Texte folgen den CEFR-Stufenrichtlinien.",
+        noticeContact: "Urheberrechtsanfragen: <a href='mailto:contact@leenardo.com'>contact@leenardo.com</a> (Antwort in 24 Std.)",
         switcherTitle: "Gleiches Thema, Anderes Sprachniveau",
         switcherDesc: "Passe die sprachliche Komplexität dieses Artikels an dein Niveau an",
         listenText: "Anhören",
         stopListenText: "Stopp",
-        bilingualCompare: "📑 Zweisprachige Ansicht",
-        studyFlashcards: "📚 Wortschatz & Karteikarten",
-        copyWorksheet: "📋 Arbeitsblatt Kopieren",
+        bilingualCompare: "Zweisprachige Ansicht",
+        studyFlashcards: "Wortschatz & Karteikarten",
+        copyWorksheet: "Arbeitsblatt Kopieren",
         toolsTitle: "Lernlabor & Übungen",
         toolsSubtitle: "Vertiefe dein Textverständnis und lerne neue Strukturen",
         toolVocabTitle: "Schlüsselvokabeln dieser Stufe",
         toolGrammarTitle: "Grammatik & Textstruktur",
         toolQaTitle: "Verständnisfragen",
         toolQuizTitle: "Schnelltest",
-        showAnswer: "Antwort Zeigen 👁️",
-        hideAnswer: "Antwort Verbergen 🙈",
+        showAnswer: "Antwort Zeigen",
+        hideAnswer: "Antwort Verbergen",
         quizCorrect: "Richtig! Ausgezeichnet!",
         quizWrong: "Leider falsch, versuche es noch einmal.",
         noQuiz: "Für dieses Niveau ist kein Quiz verfügbar.",
-        lessonWordBadge: "✨ Lektionsvokabel",
+        lessonWordBadge: "Lektionsvokabel",
         rootLabel: "Stamm:",
         translatingText: "Übersetzen...",
         saveWord: "Speichern",
         savedWord: "Gespeichert",
-        studyWordCard: "🎴 Karteikarte",
-        corpusExamplesTitle: "📖 3 Beispielsätze aus Texten:",
+        studyWordCard: "Karteikarte",
+        corpusExamplesTitle: "Beispielsätze aus Texten:",
         wordAnalysisContext: "Kontextanalyse",
-        recTitle: "✨ Empfohlene nächste Artikel",
+        recTitle: "Empfohlene nächste Artikel",
         recSubtitle: "Weitere Geschichten passend zu diesem Sprachniveau",
-        readNow: "Jetzt Lesen ➔",
-        modalParallelTitle: "📑 Zweisprachiges Parallellesebuch",
-        modalNotebookTitle: "📚 Vokabelheft & Karteikartenstation",
-        emptyNotebookTitle: "Keine gespeicherten Wörter 📖",
-        emptyNotebookDesc: "Klicke beim Lesen auf ein Wort und drücke '⭐ Speichern'.",
-        congratsTitle: "Herzlichen Glückwunsch! Stapel abgeschlossen 🎉",
+        readNow: "Jetzt Lesen",
+        modalParallelTitle: "Zweisprachiges Parallellesebuch",
+        modalNotebookTitle: "Vokabelheft & Karteikarten",
+        emptyNotebookTitle: "Keine gespeicherten Wörter",
+        emptyNotebookDesc: "Klicke beim Lesen auf ein Wort und drücke 'Speichern'.",
+        congratsTitle: "Herzlichen Glückwunsch! Stapel abgeschlossen",
         congratsDesc: "Du hast alle Karteikarten geübt.",
-        restartBtn: "🔁 Erneut Üben",
-        returnWordsBtn: "🗂️ Zurück zur Wortliste",
-        flipHintFront: "👆 Karte anklicken für Übersetzung",
-        flipHintBack: "👆 Erneut anklicken zum Umdrehen",
-        repeatBtnText: "🔴 Noch Lernen",
-        masterBtnText: "🟢 Gelernt",
-        shuffleBtnText: "🔀 Mischen",
+        restartBtn: "Erneut Üben",
+        returnWordsBtn: "Zurück zur Wortliste",
+        flipHintFront: "Karte anklicken für Übersetzung",
+        flipHintBack: "Erneut anklicken zum Umdrehen",
+        repeatBtnText: "Noch Lernen",
+        masterBtnText: "Gelernt",
+        shuffleBtnText: "Mischen",
         toastCopied: "In die Zwischenablage kopiert!"
       },
       fr: {
         backHome: "Bibliothèque",
-        browseStories: "Voir tous les articles →",
+        browseStories: "Voir tous les articles",
         myWords: "Vocabulaire",
-        targetLangLabel: "🎯 Langue Cible:",
-        supportLangLabel: "🌐 Langue de Soutien:",
-        noticeBanner: "🛡️ <strong>Garantie Pédagogique:</strong> Contenus pédagogiques conçus selon les critères CEFR.",
-        noticeContact: "Contact droits d'auteur: copyright@dailyturkishmia.com (réponse sous 24h)",
+        targetLangLabel: "Langue Cible:",
+        supportLangLabel: "Langue de Soutien:",
+        noticeBanner: "<strong>Garantie Pédagogique:</strong> Contenus pédagogiques conçus selon les critères CEFR.",
+        noticeContact: "Contact droits d'auteur: <a href='mailto:contact@leenardo.com'>contact@leenardo.com</a> (réponse sous 24h)",
         switcherTitle: "Même Sujet, Niveau Différent",
         switcherDesc: "Adaptez la complexité de cet article à votre niveau de compréhension",
         listenText: "Écouter",
         stopListenText: "Arrêter",
-        bilingualCompare: "📑 Vue Bilingue",
-        studyFlashcards: "📚 Vocabulaire & Cartes",
-        copyWorksheet: "📋 Copier la Fiche",
+        bilingualCompare: "Vue Bilingue",
+        studyFlashcards: "Vocabulaire & Cartes",
+        copyWorksheet: "Copier la Fiche",
         toolsTitle: "Laboratoire d'Apprentissage",
         toolsSubtitle: "Renforcez votre compréhension et explorez les structures grammaticales",
         toolVocabTitle: "Vocabulaire Clé de ce Niveau",
         toolGrammarTitle: "Grammaire et Progression Textuelle",
         toolQaTitle: "Questions de Compréhension",
         toolQuizTitle: "Quiz Rapide de Compréhension",
-        showAnswer: "Afficher la Réponse 👁️",
-        hideAnswer: "Masquer la Réponse 🙈",
+        showAnswer: "Afficher la Réponse",
+        hideAnswer: "Masquer la Réponse",
         quizCorrect: "Bonne réponse ! Bravo !",
         quizWrong: "Réponse incorrecte, réessayez.",
         noQuiz: "Quiz en préparation pour ce niveau.",
-        lessonWordBadge: "✨ Mot Clé",
+        lessonWordBadge: "Mot Clé",
         rootLabel: "racine :",
         translatingText: "Traduction...",
         saveWord: "Enregistrer",
         savedWord: "Enregistré",
-        studyWordCard: "🎴 Carte",
-        corpusExamplesTitle: "📖 3 Exemples en Contexte Réel:",
+        studyWordCard: "Carte",
+        corpusExamplesTitle: "Exemples en Contexte Réel:",
         wordAnalysisContext: "Analyse Contextuelle",
-        recTitle: "✨ Lectures Recommandées",
+        recTitle: "Lectures Recommandées",
         recSubtitle: "D'autres articles à explorer à ce niveau",
-        readNow: "Lire Maintenant ➔",
-        modalParallelTitle: "📑 Lecture Parallèle Bilingue",
-        modalNotebookTitle: "📚 Carnet de Vocabulaire & Cartes Mémoire",
-        emptyNotebookTitle: "Aucun mot enregistré 📖",
-        emptyNotebookDesc: "Cliquez sur n'importe quel mot pendant la lecture et cliquez sur '⭐ Enregistrer'.",
-        congratsTitle: "Félicitations ! Session terminée 🎉",
+        readNow: "Lire Maintenant",
+        modalParallelTitle: "Lecture Parallèle Bilingue",
+        modalNotebookTitle: "Carnet de Vocabulaire & Cartes",
+        emptyNotebookTitle: "Aucun mot enregistré",
+        emptyNotebookDesc: "Cliquez sur n'importe quel mot pendant la lecture et cliquez sur 'Enregistrer'.",
+        congratsTitle: "Félicitations ! Session terminée",
         congratsDesc: "Vous avez révisé toutes les cartes de cette session.",
-        restartBtn: "🔁 Recommencer",
-        returnWordsBtn: "🗂️ Retour à la Liste",
-        flipHintFront: "👆 Touchez la carte pour voir la traduction",
-        flipHintBack: "👆 Touchez pour retourner la carte",
-        repeatBtnText: "🔴 À Réviser",
-        masterBtnText: "🟢 Maîtrisé",
-        shuffleBtnText: "🔀 Mélanger",
+        restartBtn: "Recommencer",
+        returnWordsBtn: "Retour à la Liste",
+        flipHintFront: "Touchez la carte pour voir la traduction",
+        flipHintBack: "Touchez pour retourner la carte",
+        repeatBtnText: "À Réviser",
+        masterBtnText: "Maîtrisé",
+        shuffleBtnText: "Mélanger",
         toastCopied: "Copié dans le presse-papiers !"
       }
     };
@@ -2680,7 +2316,7 @@
 
       // Secondary tools headers
       const secTitle = document.getElementById("tools-section-title");
-      if (secTitle) secTitle.innerHTML = `<span>🎓</span> ${t.toolsTitle}`;
+      if (secTitle) secTitle.textContent = t.toolsTitle;
 
       const secSub = document.getElementById("tools-section-subtitle");
       if (secSub) secSub.textContent = t.toolsSubtitle;
@@ -2756,7 +2392,7 @@
       const catText = (article.categoryTranslations && article.categoryTranslations[supportLang]) || article.category;
       document.getElementById("article-category-badge").textContent = catText;
       const t = uiTranslations[supportLang] || uiTranslations.en;
-      document.getElementById("article-read-time").textContent = `⏱️ ${article.readTime || '4 min'} • ${currentLevel}`;
+      document.getElementById("article-read-time").textContent = `${article.readTime || '4 min'} • ${currentLevel}`;
 
       // 2. Headlines
       document.getElementById("article-main-title").textContent = targetData.title;
@@ -2897,7 +2533,7 @@
         card.setAttribute("tabindex", "0");
 
         const catLabel = (art.categoryTranslations && art.categoryTranslations[supportLang]) || art.category;
-        const readTime = `⏱️ ${art.readTime || '4 min'}`;
+        const readTime = `${art.readTime || '4 min'}`;
 
         const targetLevelData = (art.languages && art.languages[targetLang] && art.languages[targetLang][currentLevel])
                              || (art.languages && art.languages[targetLang] && art.languages[targetLang].A1);
@@ -2916,7 +2552,7 @@
         const imgUrl = (art.visual && art.visual.imageUrl) || art.featuredImage;
         let imgHtml = (imgUrl && imgUrl.trim() !== "")
           ? `<img src="${imgUrl}" alt="${primaryTitle}" class="rec-img" loading="lazy">`
-          : `<div class="rec-placeholder-img">💎</div>`;
+          : `<div class="rec-placeholder-img">Leenardo</div>`;
 
         card.innerHTML = `
           <div class="rec-img-wrapper">
@@ -2959,7 +2595,7 @@
       const vocabList = (targetData && Array.isArray(targetData.vocab)) ? targetData.vocab : [];
 
       if (titleElem) {
-        titleElem.innerHTML = `<span>📖</span> <span>${t.keyVocabTitle || "Key Vocabulary"}</span> <span style="font-size:0.8rem; font-weight:700; color:var(--primary); background:var(--primary-light); padding:0.15rem 0.5rem; border-radius:999px;">${vocabList.length}</span>`;
+        titleElem.innerHTML = `<span>${t.toolVocabTitle || "Key Vocabulary"}</span> <span style="font-size:0.75rem; font-weight:600; color:var(--text-muted); margin-left:0.4rem;">(${vocabList.length})</span>`;
       }
 
       if (vocabList.length > 0) {
@@ -2995,7 +2631,7 @@
             <div class="vocab-card-bottom">
               ${rootHtml}
               <button class="vocab-save-btn ${isSaved ? 'saved' : ''}" id="vsave-${wordStorageId}" onclick="event.stopPropagation(); toggleVocabCardSave('${escapeSingleQuotes(v.target)}', '${escapeSingleQuotes(trans)}', '${escapeSingleQuotes(v.root || '')}', this)">
-                ${isSaved ? '⭐ Saved' : '⭐ Save'}
+                ${isSaved ? (t.savedWord || 'Saved') : (t.saveWord || 'Save')}
               </button>
             </div>
           `;
@@ -3004,7 +2640,7 @@
         });
         vocabContainer.appendChild(grid);
       } else {
-        vocabContainer.innerHTML = `<p style="font-size:0.88rem; color:var(--slate-500); font-style:italic;">${t.noVocabAvailable || "No specific vocabulary highlights for this level."}</p>`;
+        vocabContainer.innerHTML = `<p style="font-size:0.88rem; color:var(--text-muted); font-style:italic;">${t.noVocabAvailable || "No specific vocabulary highlights for this level."}</p>`;
       }
     }
 
@@ -3014,7 +2650,7 @@
       if (isWordSaved(storageId)) {
         removeSavedWord(storageId);
         btnElem.classList.remove("saved");
-        btnElem.textContent = "⭐ Save";
+        btnElem.textContent = t.saveWord || "Save";
       } else {
         const item = {
           id: storageId,
@@ -3029,7 +2665,7 @@
         };
         saveWordItem(item);
         btnElem.classList.add("saved");
-        btnElem.textContent = "⭐ Saved";
+        btnElem.textContent = t.savedWord || "Saved";
       }
       updateSavedWordBadges();
       if (currentPopoverWordData && currentPopoverWordData.id === storageId) {
@@ -3046,13 +2682,13 @@
 
       if (titleElem) {
         if (currentLevel === "C1") {
-          titleElem.innerHTML = `<span>✒️</span> <span>Linguistic & Stylistic Features</span> <span style="font-size:0.8rem; font-weight:700; color:#3730a3; background:#e0e7ff; padding:0.15rem 0.5rem; border-radius:999px;">C1</span>`;
+          titleElem.innerHTML = `<span>Linguistic & Stylistic Features</span> <span style="font-size:0.75rem; font-weight:600; color:var(--text-muted); margin-left:0.5rem;">(${currentLevel})</span>`;
         } else if (currentLevel === "B2") {
-          titleElem.innerHTML = `<span>📐</span> <span>Syntax & Structural Nuance</span> <span style="font-size:0.8rem; font-weight:700; color:#3730a3; background:#e0e7ff; padding:0.15rem 0.5rem; border-radius:999px;">B2</span>`;
+          titleElem.innerHTML = `<span>Syntax & Structural Nuance</span> <span style="font-size:0.75rem; font-weight:600; color:var(--text-muted); margin-left:0.5rem;">(${currentLevel})</span>`;
         } else if (currentLevel === "B1") {
-          titleElem.innerHTML = `<span>📐</span> <span>Grammar & Discourse Progression</span> <span style="font-size:0.8rem; font-weight:700; color:#3730a3; background:#e0e7ff; padding:0.15rem 0.5rem; border-radius:999px;">B1</span>`;
+          titleElem.innerHTML = `<span>Grammar & Discourse Progression</span> <span style="font-size:0.75rem; font-weight:600; color:var(--text-muted); margin-left:0.5rem;">(${currentLevel})</span>`;
         } else {
-          titleElem.innerHTML = `<span>📐</span> <span>${t.grammarTitle || "Grammar & Core Structures"}</span> <span style="font-size:0.8rem; font-weight:700; color:#3730a3; background:#e0e7ff; padding:0.15rem 0.5rem; border-radius:999px;">${currentLevel}</span>`;
+          titleElem.innerHTML = `<span>${t.grammarTitle || "Grammar & Core Structures"}</span> <span style="font-size:0.75rem; font-weight:600; color:var(--text-muted); margin-left:0.5rem;">(${currentLevel})</span>`;
         }
       }
 
@@ -3097,16 +2733,16 @@
       if (authenticSentence) {
         quoteHtml = `
           <div class="grammar-example-quote">
-            <div class="grammar-quote-label">📖 Sentence from this article (${currentLevel}):</div>
+            <div class="grammar-quote-label">Sentence from this article (${currentLevel})</div>
             <div class="grammar-quote-text">"${authenticSentence}"</div>
-            ${authenticTranslation ? `<div style="font-size:0.8rem; color:var(--slate-500); margin-top:0.25rem; font-style:normal;">${authenticTranslation}</div>` : ""}
+            ${authenticTranslation ? `<div style="font-size:0.88rem; color:var(--text-muted); margin-top:0.4rem; font-style:normal;">${authenticTranslation}</div>` : ""}
           </div>
         `;
       }
 
       grammarBox.innerHTML = `
         ${tagsHtml}
-        <div style="font-size:0.95rem; color:var(--slate-800); line-height:1.6;">${desc}</div>
+        <div style="font-size:0.95rem; color:var(--ink-navy); line-height:1.6;">${desc}</div>
         ${quoteHtml}
       `;
     }
@@ -3121,7 +2757,7 @@
       const qaList = (targetData && Array.isArray(targetData.qa)) ? targetData.qa : [];
 
       if (titleElem) {
-        titleElem.innerHTML = `<span>💬</span> <span>${t.qaTitle || "Comprehension Check"}</span> <span style="font-size:0.8rem; font-weight:700; color:var(--primary); background:var(--primary-light); padding:0.15rem 0.5rem; border-radius:999px;">${qaList.length}</span>`;
+        titleElem.innerHTML = `<span>${t.toolQaTitle || "Comprehension & Discussion"}</span> <span style="font-size:0.75rem; font-weight:600; color:var(--text-muted); margin-left:0.4rem;">(${qaList.length})</span>`;
       }
 
       if (qaList.length > 0) {
@@ -3191,7 +2827,7 @@
       const quizList = (targetData && Array.isArray(targetData.quiz)) ? targetData.quiz : [];
 
       if (titleElem) {
-        titleElem.innerHTML = `<span>🎯</span> <span>${t.quizTitle || "Quick Quiz"}</span> <span style="font-size:0.8rem; font-weight:700; color:var(--primary); background:var(--primary-light); padding:0.15rem 0.5rem; border-radius:999px;">${currentLevel}</span>`;
+        titleElem.innerHTML = `<span>${t.toolQuizTitle || "Quick Comprehension Quiz"}</span> <span style="font-size:0.75rem; font-weight:600; color:var(--text-muted); margin-left:0.5rem;">(${currentLevel})</span>`;
       }
 
       if (quizList.length > 0) {
@@ -3342,12 +2978,12 @@
       const t = uiTranslations[supportLang] || uiTranslations.en;
       if (speaking) {
         btn.classList.add("playing");
-        icon.textContent = "⏹️";
-        txt.textContent = t.stopListenText;
+        if (icon) icon.textContent = "";
+        if (txt) txt.textContent = t.stopListenText;
       } else {
         btn.classList.remove("playing");
-        icon.textContent = "🔊";
-        txt.textContent = t.listenText;
+        if (icon) icon.textContent = "";
+        if (txt) txt.textContent = t.listenText;
       }
     }
 
@@ -3970,7 +3606,7 @@
         const pd = detectedUnit.data;
         displayTarget = pd.phrase;
         displayTrans = (pd.translations && pd.translations[toLang]) || pd.translations.en || Object.values(pd.translations)[0];
-        badgeText = "✨ " + (pd.type || "Idiomatic Phrase");
+        badgeText = pd.type || "Idiomatic Phrase";
         componentsText = pd.components || "";
         morphologicalNote = pd.note || "";
       } else if (detectedUnit && detectedUnit.type === "morphology") {
@@ -4000,7 +3636,7 @@
         });
         if (matchedVocab && matchedVocab.translations) {
           lessonTrans = matchedVocab.translations[toLang] || matchedVocab.translations.en || Object.values(matchedVocab.translations)[0];
-          badgeText = "✨ " + (t.lessonWordBadge || "Key Word");
+          badgeText = t.lessonWordBadge || "Key Word";
         }
       }
 
@@ -4055,7 +3691,7 @@
         if (examplesList) {
           let htmlSnippet = "";
           if (morphologicalNote) {
-            htmlSnippet += `<div style="font-size:0.8rem; color:#4338ca; background:#eef2ff; padding:0.35rem 0.5rem; border-radius:4px; margin-bottom:0.4rem;">💡 ${morphologicalNote}</div>`;
+            htmlSnippet += `<div style="font-size:0.8rem; color:var(--ink-navy); background:var(--bg-surface); border:1px solid var(--divider-hairline); padding:0.35rem 0.5rem; margin-bottom:0.4rem;">${morphologicalNote}</div>`;
           }
           if (contextSentence) {
             const highlighted = highlightWordInSentence(contextSentence, displayTarget);
@@ -4201,11 +3837,11 @@
       if (!btn) return;
       if (isSaved) {
         btn.classList.add("saved");
-        icon.textContent = "⭐";
+        if (icon) icon.textContent = "";
         text.textContent = t.savedWord;
       } else {
         btn.classList.remove("saved");
-        icon.textContent = "☆";
+        if (icon) icon.textContent = "";
         text.textContent = t.saveWord;
       }
     }
@@ -4221,7 +3857,8 @@
       } else {
         saveWordItem(currentPopoverWordData);
         updatePopSaveButtonUI(true);
-        showToast(`"${currentPopoverWordData.word}" ⭐`);
+        const t = uiTranslations[supportLang] || uiTranslations.en;
+        showToast(`"${currentPopoverWordData.word}" ${t.savedWord || 'saved'}`);
       }
     }
 
@@ -4307,7 +3944,7 @@
         html += `
           <div class="vn-word-item">
             <div>
-              <div class="vn-word-primary">${w.word} <span style="font-size:0.75rem;font-weight:600;color:var(--primary);margin-left:0.35rem;">[${fromName} ➔ ${toName}]</span></div>
+              <div class="vn-word-primary">${w.word} <span style="font-size:0.75rem;font-weight:600;color:var(--text-muted);margin-left:0.35rem;">[${fromName} / ${toName}]</span></div>
               <div class="vn-word-secondary">${w.translation}</div>
               ${w.root ? `<div class="vn-word-root">${t.rootLabel} ${w.root}${w.rootTranslation ? ' (' + w.rootTranslation + ')' : ''}</div>` : ''}
             </div>
@@ -4333,11 +3970,10 @@
           const artVocab = currentArticleData?.languages?.[targetLang]?.[currentLevel]?.vocab || [];
           if (artVocab.length > 0) {
             area.innerHTML = `
-              <div style="text-align:center; padding:2rem 1rem; color:var(--slate-600);">
-                <div style="font-size:2.5rem; margin-bottom:0.5rem;">🎴</div>
-                <h4 style="font-size:1.1rem; font-weight:800; color:var(--slate-900);">${t.emptyNotebookTitle || "No Saved Words for this Language Pair"}</h4>
+              <div style="text-align:center; padding:2rem 1rem; color:var(--text-muted);">
+                <h4 style="font-family:var(--font-serif); font-size:1.2rem; font-weight:700; color:var(--ink-navy);">${t.emptyNotebookTitle || "No Saved Words for this Language Pair"}</h4>
                 <p style="font-size:0.88rem; margin:0.5rem 0 1.25rem;">You can save words while reading, or study this article's key vocabulary right now (${artVocab.length} words).</p>
-                <button class="btn-primary" onclick="initFlashcards(null, true)" style="display:inline-flex; align-items:center; gap:0.4rem; padding:0.6rem 1.25rem; font-size:0.9rem; font-weight:700;">
+                <button class="btn-primary-action" onclick="initFlashcards(null, true)">
                   Practice Article Vocabulary (${artVocab.length} Cards)
                 </button>
               </div>
@@ -4345,9 +3981,8 @@
             return;
           } else {
             area.innerHTML = `
-              <div style="text-align:center; padding:2.5rem 1rem; color:var(--slate-500);">
-                <div style="font-size:2.5rem; margin-bottom:0.5rem;">🎴</div>
-                <h4>${t.emptyNotebookTitle || "No Saved Words Yet"}</h4>
+              <div style="text-align:center; padding:2.5rem 1rem; color:var(--text-muted);">
+                <h4 style="font-family:var(--font-serif); font-size:1.2rem; font-weight:700; color:var(--ink-navy);">${t.emptyNotebookTitle || "No Saved Words Yet"}</h4>
                 <p style="font-size:0.85rem; margin-top:0.35rem;">${t.emptyNotebookDesc || "Click on any word in the article to save it to your vocabulary list."}</p>
               </div>
             `;
@@ -4392,9 +4027,8 @@
       if (currentFlashcardIndex >= flashcardDeck.length) {
         area.innerHTML = `
           <div style="text-align:center; padding:2rem 1rem;">
-            <div style="font-size:2.5rem; margin-bottom:0.5rem;">🎉</div>
-            <h4>${t.congratsTitle}</h4>
-            <p style="color:var(--slate-600); margin:0.5rem 0 1.25rem;">${t.congratsDesc}</p>
+            <h4 style="font-family:var(--font-serif); font-size:1.3rem; font-weight:700; color:var(--ink-navy);">${t.congratsTitle}</h4>
+            <p style="color:var(--text-muted); margin:0.5rem 0 1.25rem;">${t.congratsDesc}</p>
             <div style="display:flex; justify-content:center; gap:0.75rem;">
               <button class="btn-secondary" onclick="initFlashcards()">${t.restartBtn}</button>
               <button class="btn-secondary" onclick="switchVocabTab('words')">${t.returnWordsBtn}</button>
@@ -4419,12 +4053,12 @@
             <!-- Front -->
             <div class="fc-face fc-front">
               <div class="fc-card-header">
-                <span class="fc-tag">🎯 ${fromName}</span>
+                <span class="fc-tag">${fromName}</span>
                 <button class="popover-audio-btn" onclick="speakSingleSentence('${escapeSingleQuotes(card.word)}', event)">🔊</button>
               </div>
               <div style="margin:auto;">
                 <div class="fc-front-word">${card.word}</div>
-                ${card.root ? `<div style="font-size:0.8rem;color:var(--slate-400);margin-top:0.35rem;">${t.rootLabel} ${card.root}</div>` : ''}
+                ${card.root ? `<div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.35rem;">${t.rootLabel} ${card.root}</div>` : ''}
               </div>
               <div class="fc-card-footer">${t.flipHintFront}</div>
             </div>
@@ -4432,12 +4066,12 @@
             <!-- Back -->
             <div class="fc-face fc-back">
               <div class="fc-card-header">
-                <span class="fc-tag">🌐 ${toName}</span>
+                <span class="fc-tag">${toName}</span>
                 <button class="popover-audio-btn" onclick="speakSingleSentence('${escapeSingleQuotes(card.word)}', event)">🔊</button>
               </div>
               <div style="margin:auto;">
                 <div class="fc-back-trans">${card.translation}</div>
-                ${(card.root && card.rootTranslation) ? `<div style="font-size:0.8rem;color:var(--slate-500);margin-top:0.35rem;">${t.rootLabel} ${card.root} (${card.rootTranslation})</div>` : ''}
+                ${(card.root && card.rootTranslation) ? `<div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.35rem;">${t.rootLabel} ${card.root} (${card.rootTranslation})</div>` : ''}
               </div>
               <div class="fc-card-footer">${t.flipHintBack}</div>
             </div>
@@ -4488,8 +4122,8 @@
       const targetData = article.languages && article.languages[targetLang] && article.languages[targetLang][currentLevel];
       const supportData = article.languages && article.languages[supportLang] && article.languages[supportLang][currentLevel];
 
-      document.getElementById("comp-target-title").textContent = `🎯 ${langNames[targetLang]} (${currentLevel})`;
-      document.getElementById("comp-support-title").textContent = `🌐 ${langNames[supportLang]} (${currentLevel})`;
+      document.getElementById("comp-target-title").textContent = `${langNames[targetLang]} (${currentLevel})`;
+      document.getElementById("comp-support-title").textContent = `${langNames[supportLang]} (${currentLevel})`;
 
       let tHtml = "";
       if (targetData && targetData.paragraphs) {
@@ -4525,11 +4159,11 @@
 
       const t = uiTranslations[supportLang] || uiTranslations.en;
 
-      let md = `# 💎 Leenardo - Graded Worksheet (${currentLevel})\n\n`;
+      let md = `# Leenardo - Graded Worksheet (${currentLevel})\n\n`;
       md += `**Title:** ${data.title}\n`;
       md += `**Category:** ${(article.categoryTranslations && article.categoryTranslations[supportLang]) || article.category}\n`;
       md += `**Target Language:** ${langNames[targetLang]} | **Support Language:** ${langNames[supportLang]}\n\n`;
-      md += `## 📖 Reading Text (${currentLevel})\n\n`;
+      md += `## Reading Text (${currentLevel})\n\n`;
 
       data.paragraphs.forEach(p => {
         const targetPara = p.map(s => s.target).join(" ");
@@ -4539,7 +4173,7 @@
       });
 
       if (data.vocab && data.vocab.length > 0) {
-        md += `## 💎 ${t.toolVocabTitle}\n\n`;
+        md += `## ${t.toolVocabTitle}\n\n`;
         data.vocab.forEach(v => {
           const trans = (v.translations && v.translations[supportLang]) || v.target;
           md += `- **${v.target}**: ${trans}\n`;
@@ -4548,7 +4182,7 @@
       }
 
       if (data.qa && data.qa.length > 0) {
-        md += `## ❓ ${t.toolQaTitle}\n\n`;
+        md += `## ${t.toolQaTitle}\n\n`;
         data.qa.forEach(q => {
           md += `- **Q:** ${q.q}\n`;
           md += `  - *A:* ${q.a}\n`;
