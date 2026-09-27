@@ -40,6 +40,10 @@
    * Her büyük özellik veya altyapı değişikliği tamamlandığında bu dosya (`PROJECT_STATUS.md`) güncellenir.
 5. **Prompt Dili Kuralı (MANDATORY):**
    * Yapay zekâya, görsel üretim araçlarına ve oturum geçişlerine verilen tüm promptlar her zaman **İngilizce (English)** yazılır.
+6. **Ticari Lisans, Telif ve Ücretli API Güvencesi Kuralı (MANDATORY & CRITICAL):**
+   * Yapılan her güncellemede, eklenen her kütüphane, görsel, yazı tipi, ses veya API entegrasyonunda ticari lisans ve borçlanma riski mutlaka denetlenir.
+   * Asla habersiz ücretli/kotalı üçüncü taraf API (ElevenLabs, OpenAI, Cloud TTS vb.) veya telif hakkı kısıtlı materyal (stok fotoğraf, basından ham metin vb.) sisteme eklenemez.
+   * Herhangi bir ticari lisans ihlali veya borçlanma tehlikesi tespit edilirse **İŞLEM DERHAL DURDURULUR** ve kullanıcıya haber verilir.
 
 ---
 
