@@ -156,7 +156,7 @@
         submitBtn.textContent = "Signing In...";
         await LeenardoAuth.signIn(email, password);
         closeModal();
-        showGlobalToast("Welcome back! ✨");
+        showGlobalToast("Welcome back!");
       } catch (err) {
         showAlert(err.message || "Failed to sign in. Check your email & password.", "error");
       } finally {
@@ -181,13 +181,13 @@
           showAlert("Account created! Please check your email to confirm your account.", "success");
         } else {
           closeModal();
-          showGlobalToast("Welcome to Leenardo! 🎉");
+          showGlobalToast("Welcome to Leenardo!");
         }
       } catch (err) {
         showAlert(err.message || "Could not complete registration.", "error");
       } finally {
         submitBtn.disabled = false;
-        submitBtn.innerHTML = "<span>Create Free Account</span> ✨";
+        submitBtn.innerHTML = "<span>Create Free Account</span> →";
       }
     };
 
@@ -206,7 +206,7 @@
         showAlert(err.message || "Could not send reset email.", "error");
       } finally {
         submitBtn.disabled = false;
-        submitBtn.innerHTML = "<span>Send Reset Link</span> 📧";
+        submitBtn.innerHTML = "<span>Send Reset Link</span> →";
       }
     };
   }
@@ -245,7 +245,7 @@
     if (!toast) {
       toast = document.createElement("div");
       toast.id = "leenardo-toast";
-      toast.style.cssText = "position:fixed;bottom:24px;right:24px;background:#1e293b;color:#fff;padding:12px 20px;border-radius:12px;font-size:0.9rem;font-weight:700;z-index:999999;box-shadow:0 10px 25px rgba(0,0,0,0.2);transition:opacity 0.3s ease;";
+      toast.style.cssText = "position:fixed;bottom:24px;right:24px;background:#1B3644;color:#F5F2EC;padding:10px 18px;border-radius:0;border:1px solid #E0DDD6;font-size:0.85rem;font-weight:600;z-index:999999;box-shadow:none;transition:opacity 0.3s ease;";
       document.body.appendChild(toast);
     }
     toast.textContent = msg;
@@ -262,7 +262,7 @@
       // Logged Out UI
       container.innerHTML = `
         <button class="btn-header-auth" id="btn-open-login" onclick="window.LeenardoUI.openAuthModal('signin')">
-          <span>👤 Sign In</span>
+          <span>Sign In</span>
         </button>
       `;
     } else {
@@ -274,8 +274,8 @@
         <div style="position:relative; display:inline-block;">
           <button class="btn-header-auth" id="btn-user-profile-menu">
             <span class="auth-user-avatar">${initial}</span>
-            <span style="max-width:110px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${name}</span>
-            <span style="font-size:0.65rem;">▼</span>
+            <span style="max-width:120px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${name}</span>
+            <span style="font-size:0.6rem; opacity:0.7;">▼</span>
           </button>
           <div class="auth-user-dropdown" id="auth-dropdown-menu">
             <div class="auth-dropdown-header">
@@ -283,10 +283,10 @@
               <div class="auth-dropdown-email">${currentAuthUser.email}</div>
             </div>
             <button class="auth-dropdown-item" id="auth-menu-words" onclick="window.LeenardoUI.handleMyWordsClick()">
-              <span>📚</span> My Saved Words
+              My Saved Words
             </button>
             <button class="auth-dropdown-item danger" id="auth-menu-logout" onclick="window.LeenardoUI.handleSignOut()">
-              <span>🚪</span> Sign Out
+              Sign Out
             </button>
           </div>
         </div>

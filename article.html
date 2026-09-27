@@ -1389,12 +1389,6 @@
       </div>
 
       <div class="header-actions">
-        <div id="header-auth-container"></div>
-        <button class="btn-header-vocab" onclick="openVocabNotebook('words')">
-          <span id="btn-my-words-text">Vocabulary</span>
-          <span class="vocab-counter-badge" id="saved-words-count">0</span>
-        </button>
-
         <div class="lang-switcher-bar">
           <div class="lang-field">
             <label for="target-lang-select" id="lbl-target-lang">Target:</label>
@@ -1418,6 +1412,13 @@
             </select>
           </div>
         </div>
+
+        <button class="btn-header-vocab" onclick="openVocabNotebook('words')">
+          <span id="btn-my-words-text">Vocabulary</span>
+          <span class="vocab-counter-badge" id="saved-words-count">0</span>
+        </button>
+
+        <div id="header-auth-container"></div>
       </div>
     </div>
   </header>
