@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Leenardo — Graded Multilingual Reader & Magazine</title>
+  <title>Leenardo — Graded Multilingual Reader</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -70,71 +70,102 @@
       text-decoration: none;
     }
 
-    /* Masthead Header */
-    .top-header {
-      background: var(--bg-cream);
+    /* ==========================================================================
+       ColorMag-Style Magazine Layout Styles
+       ========================================================================== */
+
+    /* 1. Top Utility Bar */
+    .top-utility-bar {
+      background: var(--bg-surface);
       border-bottom: 1px solid var(--divider-hairline);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+      font-size: 0.78rem;
     }
 
-    .top-header-inner {
+    .top-utility-inner {
       max-width: 1240px;
       margin: 0 auto;
-      padding: 1.25rem 2rem;
+      padding: 0.45rem 1.5rem;
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 1.5rem;
+      gap: 1rem;
+      flex-wrap: wrap;
     }
 
-    .brand-group {
+    .top-utility-left {
       display: flex;
-      flex-direction: column;
-      gap: 0.15rem;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
     }
 
-    .brand-title {
-      font-family: var(--font-serif);
-      font-size: 2rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--ink-navy);
-      line-height: 1;
-    }
-
-    .brand-subtitle {
-      font-size: 0.78rem;
+    .top-date-text {
       color: var(--text-muted);
+      font-weight: 500;
       letter-spacing: 0.02em;
     }
 
-    .header-actions {
+    .top-v-divider {
+      width: 1px;
+      height: 14px;
+      background: var(--divider-hairline);
+      display: inline-block;
+    }
+
+    .top-ticker-wrap {
       display: flex;
       align-items: center;
-      gap: 1.25rem;
-      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .top-ticker-label {
+      background: var(--peach-accent);
+      color: #122129;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.12rem 0.45rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .top-ticker-link {
+      color: var(--ink-navy);
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 380px;
+      transition: color 0.15s ease;
+    }
+
+    .top-ticker-link:hover {
+      color: var(--peach-accent);
+      text-decoration: underline;
+    }
+
+    .top-utility-right {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
     }
 
     .lang-switcher-bar {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.85rem;
       border: 1px solid var(--divider-hairline);
-      padding: 0.35rem 0.75rem;
-      background: var(--bg-surface);
+      padding: 0.25rem 0.6rem;
+      background: var(--bg-white);
     }
 
     .lang-field {
       display: flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.35rem;
     }
 
     .lang-field label {
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       font-weight: 600;
       color: var(--text-muted);
       text-transform: uppercase;
@@ -145,28 +176,12 @@
       background: transparent;
       border: none;
       font-family: inherit;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 600;
       color: var(--ink-navy);
       cursor: pointer;
       outline: none;
-      padding-right: 0.25rem;
-    }
-
-    .header-link {
-      font-size: 0.82rem;
-      font-weight: 500;
-      color: var(--ink-navy);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 0;
-    }
-
-    .header-link:hover {
-      color: var(--peach-accent);
+      padding-right: 0.2rem;
     }
 
     .btn-theme-toggle {
@@ -176,8 +191,8 @@
       background: transparent;
       border: 1px solid var(--divider-hairline);
       color: var(--ink-navy);
-      padding: 0.35rem 0.65rem;
-      font-size: 0.8rem;
+      padding: 0.3rem 0.65rem;
+      font-size: 0.78rem;
       font-weight: 600;
       cursor: pointer;
       letter-spacing: 0.02em;
@@ -189,203 +204,625 @@
       color: var(--peach-accent);
     }
 
-    /* Hero Section */
-    .hero-section {
+    /* 2. Main Masthead (Brand & Action Desk) */
+    .main-masthead {
+      background: var(--bg-cream);
+      border-bottom: 1px solid var(--divider-hairline);
+      padding: 1.75rem 0;
+    }
+
+    .main-masthead-inner {
       max-width: 1240px;
-      margin: 4.5rem auto 3.5rem;
-      padding: 0 2rem;
-      width: 100%;
-    }
-
-    .hero-kicker {
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      margin-bottom: 1.25rem;
-    }
-
-    .hero-title {
-      font-family: var(--font-serif);
-      font-size: 3.25rem;
-      font-weight: 700;
-      color: var(--ink-navy);
-      line-height: 1.15;
-      letter-spacing: -0.025em;
-      max-width: 900px;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero-desc {
-      font-size: 1.15rem;
-      color: var(--ink-navy);
-      line-height: 1.65;
-      max-width: 720px;
-      margin-bottom: 2rem;
-      font-weight: 400;
-    }
-
-    .hero-actions-row {
+      margin: 0 auto;
+      padding: 0 1.5rem;
       display: flex;
       align-items: center;
-      gap: 1.75rem;
+      justify-content: space-between;
+      gap: 2rem;
       flex-wrap: wrap;
     }
 
-    /* Exactly ONE primary solid button per page */
-    .btn-primary-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      background-color: var(--ink-navy);
-      color: var(--bg-cream);
-      padding: 0.85rem 1.6rem;
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      transition: opacity 0.15s ease;
+    .masthead-brand-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .masthead-logo {
+      font-family: var(--font-serif);
+      font-size: 2.85rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--ink-navy);
+      line-height: 1;
+    }
+
+    .masthead-tagline {
+      font-size: 0.82rem;
+      color: var(--text-muted);
       letter-spacing: 0.02em;
     }
 
-    .btn-primary-cta:hover {
-      opacity: 0.9;
+    .masthead-actions-deck {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      flex-wrap: wrap;
     }
 
-    .hero-secondary-link {
-      font-size: 0.9rem;
-      font-weight: 500;
+    .btn-masthead-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.55rem 0.95rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--divider-hairline);
       color: var(--ink-navy);
-      text-decoration: underline;
-      text-underline-offset: 4px;
       cursor: pointer;
-      background: none;
-      border: none;
+      transition: all 0.15s ease;
+      font-family: inherit;
+      text-decoration: none;
     }
 
-    .hero-secondary-link:hover {
+    .btn-masthead-box:hover {
+      border-color: var(--ink-navy);
+      background: var(--bg-white);
+    }
+
+    .btn-box-icon {
+      font-size: 1.15rem;
+      line-height: 1;
+    }
+
+    .btn-box-text {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+
+    .btn-box-text strong {
+      font-size: 0.82rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .btn-box-text small {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+    }
+
+    /* 3. Category Navigation Bar (Sticky, Dark Strip) */
+    .main-navbar {
+      background: var(--ink-navy);
+      color: var(--bg-cream);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 2px solid var(--peach-accent);
+    }
+
+    .main-navbar-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .nav-links-scroll {
+      display: flex;
+      align-items: center;
+      gap: 0.15rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .nav-links-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--bg-cream);
+      padding: 0.85rem 1.1rem;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s ease, color 0.15s ease;
+      border-bottom: 3px solid transparent;
+    }
+
+    .nav-tab-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
       color: var(--peach-accent);
     }
 
-    /* Asymmetric Featured Story Section */
-    .featured-section {
-      max-width: 1240px;
-      margin: 0 auto 5rem;
-      padding: 0 2rem;
-      width: 100%;
+    .nav-tab-btn.active {
+      background: rgba(255, 255, 255, 0.12);
+      border-bottom-color: var(--peach-accent);
+      color: var(--peach-accent);
     }
 
-    .featured-card {
-      border-top: 1px solid var(--divider-hairline);
-      border-bottom: 1px solid var(--divider-hairline);
-      padding: 3rem 0;
-      display: grid;
-      grid-template-columns: 1.25fr 1fr;
-      gap: 3.5rem;
+    .nav-search-wrap {
+      display: flex;
       align-items: center;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.25rem 0.6rem;
     }
 
-    .featured-image-link {
-      display: block;
+    .nav-search-input {
+      background: transparent;
+      border: none;
+      color: var(--bg-cream);
+      font-family: inherit;
+      font-size: 0.8rem;
+      outline: none;
+      width: 170px;
+      transition: width 0.2s ease;
+    }
+
+    .nav-search-input:focus {
+      width: 210px;
+    }
+
+    .nav-search-input::placeholder {
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    .nav-search-icon {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.8rem;
+      user-select: none;
+    }
+
+    /* 4. Magazine Hero Mosaic Section */
+    .magazine-hero-wrap {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--divider-hairline);
+      padding: 2rem 0 2.5rem;
+    }
+
+    .magazine-hero-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: grid;
+      grid-template-columns: 1.45fr 1fr;
+      gap: 1.25rem;
+      min-height: 460px;
+    }
+
+    /* Lead Story (Left Big Block) */
+    .hero-lead-box {
+      position: relative;
       overflow: hidden;
       border: 1px solid var(--divider-hairline);
-      background: var(--bg-surface);
-      aspect-ratio: 16 / 10;
+      background: var(--ink-navy);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-height: 450px;
     }
 
-    .featured-image {
+    .hero-lead-bg {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
       filter: saturate(0.95);
-      transition: opacity 0.2s ease;
+      transition: transform 0.4s ease;
     }
 
-    .featured-image:hover {
-      opacity: 0.95;
+    .hero-lead-box:hover .hero-lead-bg {
+      transform: scale(1.02);
     }
 
-    .featured-content {
+    .hero-lead-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(18, 33, 41, 0.95) 0%, rgba(18, 33, 41, 0.6) 50%, rgba(18, 33, 41, 0.1) 100%);
+      pointer-events: none;
+    }
+
+    .hero-lead-content {
+      position: relative;
+      z-index: 2;
+      padding: 2rem;
+      color: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .hero-badges-row {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-cat-tag {
+      background: var(--peach-accent);
+      color: #122129;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-read-tag {
+      background: rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+    }
+
+    .hero-lead-title {
+      font-family: var(--font-serif);
+      font-size: 2.15rem;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.015em;
+      color: #FFFFFF;
+      transition: color 0.15s ease;
+    }
+
+    .hero-lead-title:hover {
+      color: var(--peach-accent);
+    }
+
+    .hero-lead-excerpt {
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: rgba(255, 255, 255, 0.85);
+      max-width: 620px;
+    }
+
+    .hero-lead-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      padding-top: 0.85rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      margin-top: 0.35rem;
+    }
+
+    .hero-levels-group {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .hero-lvl-pill {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.15rem 0.45rem;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: #FFFFFF;
+      background: transparent;
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+
+    .hero-lvl-pill:hover,
+    .hero-lvl-pill.active {
+      background: var(--peach-accent);
+      border-color: var(--peach-accent);
+      color: #122129;
+    }
+
+    .hero-lead-link {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--peach-accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* Sub-Features Mosaic (Right Side - 1 Top Wide, 2 Bottom Split) */
+    .hero-mosaic-sub {
+      display: grid;
+      grid-template-rows: 1.1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .sub-item-split-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .mosaic-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--divider-hairline);
+      background: var(--ink-navy);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-height: 200px;
+    }
+
+    .mosaic-card-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.95);
+      transition: transform 0.4s ease;
+    }
+
+    .mosaic-card:hover .mosaic-card-bg {
+      transform: scale(1.03);
+    }
+
+    .mosaic-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(18, 33, 41, 0.92) 0%, rgba(18, 33, 41, 0.5) 55%, rgba(18, 33, 41, 0.1) 100%);
+      pointer-events: none;
+    }
+
+    .mosaic-card-content {
+      position: relative;
+      z-index: 2;
+      padding: 1rem 1.15rem;
+      color: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .mosaic-cat-pill {
+      font-size: 0.66rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--peach-accent);
+    }
+
+    .mosaic-title {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.25;
+      color: #FFFFFF;
+      transition: color 0.15s ease;
+    }
+
+    .mosaic-card:hover .mosaic-title {
+      color: var(--peach-accent);
+    }
+
+    .mosaic-meta {
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.75);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* 5. Multi-Column Magazine Layout Below Hero */
+    .magazine-body-wrap {
+      max-width: 1240px;
+      margin: 2.5rem auto 4.5rem;
+      padding: 0 1.5rem;
+      display: grid;
+      grid-template-columns: 290px 1fr 280px;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .section-block-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid var(--ink-navy);
+      padding-bottom: 0.45rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .section-block-title h3 {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--ink-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .section-block-title .title-accent {
+      height: 3px;
+      width: 40px;
+      background: var(--peach-accent);
+    }
+
+    /* Column 1: Trending Vertical List */
+    .trending-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.15rem;
+    }
+
+    .trending-item {
+      display: flex;
+      gap: 0.85rem;
+      padding-bottom: 1.15rem;
+      border-bottom: 1px solid var(--divider-hairline);
+    }
+
+    .trending-thumb-link {
+      width: 76px;
+      height: 76px;
+      flex-shrink: 0;
+      overflow: hidden;
+      border: 1px solid var(--divider-hairline);
+      background: var(--bg-surface);
+      display: block;
+    }
+
+    .trending-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.95);
+      transition: opacity 0.15s ease;
+    }
+
+    .trending-thumb:hover {
+      opacity: 0.9;
+    }
+
+    .trending-info {
       display: flex;
       flex-direction: column;
       justify-content: center;
+      gap: 0.25rem;
     }
 
-    .featured-eyebrow-row {
+    .trending-cat {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .trending-title {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--ink-navy);
+    }
+
+    .trending-title:hover {
+      color: var(--peach-accent);
+    }
+
+    .trending-meta {
+      font-size: 0.72rem;
+      color: var(--text-muted);
       display: flex;
       align-items: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
+      gap: 0.4rem;
     }
 
-    .featured-spotlight-tag {
+    /* Column 2: Main Feed / Library Grid */
+    .feed-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.75rem 1.25rem;
+    }
+
+    .feed-card {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--divider-hairline);
+      background: var(--bg-white);
+      overflow: hidden;
+    }
+
+    .feed-img-link {
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      border-bottom: 1px solid var(--divider-hairline);
+      display: block;
+      background: var(--bg-surface);
+    }
+
+    .feed-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.95);
+      transition: opacity 0.15s ease;
+    }
+
+    .feed-img:hover {
+      opacity: 0.92;
+    }
+
+    .feed-body {
+      padding: 1.15rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+      gap: 0.55rem;
+    }
+
+    .feed-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .feed-cat {
       font-size: 0.72rem;
       font-weight: 600;
-      color: var(--ink-navy);
-      border-bottom: 2px solid var(--peach-accent);
-      padding-bottom: 0.15rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .featured-category {
-      font-size: 0.75rem;
       color: var(--text-muted);
       text-transform: capitalize;
     }
 
-    .featured-title {
+    .feed-title {
       font-family: var(--font-serif);
-      font-size: 2.25rem;
+      font-size: 1.2rem;
       font-weight: 700;
+      line-height: 1.28;
       color: var(--ink-navy);
-      line-height: 1.2;
-      margin-bottom: 0.75rem;
-      letter-spacing: -0.015em;
     }
 
-    .featured-subtitle {
-      font-size: 1rem;
-      color: var(--text-muted);
-      font-style: italic;
-      margin-bottom: 1rem;
-      line-height: 1.45;
+    .feed-title:hover {
+      color: var(--peach-accent);
     }
 
-    .featured-excerpt {
-      font-size: 0.95rem;
+    .feed-desc {
+      font-size: 0.85rem;
       color: var(--ink-navy);
-      line-height: 1.6;
-      margin-bottom: 1.75rem;
-      opacity: 0.9;
+      line-height: 1.5;
+      opacity: 0.85;
+      flex: 1;
     }
 
-    .featured-footer-row {
+    .feed-levels-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      padding-top: 1.25rem;
+      padding-top: 0.65rem;
       border-top: 1px solid var(--divider-hairline);
+      margin-top: auto;
     }
 
-    /* Tab-style CEFR Level Selector */
     .level-tabs {
       display: inline-flex;
       align-items: center;
-      gap: 0.85rem;
+      gap: 0.5rem;
     }
 
     .level-tab {
       background: transparent;
       border: none;
       border-bottom: 2px solid transparent;
-      padding: 0.2rem 0;
+      padding: 0.15rem 0;
       font-family: inherit;
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       font-weight: 500;
       color: var(--text-muted);
       cursor: pointer;
@@ -403,195 +840,8 @@
       border-bottom: 2px solid var(--peach-accent);
     }
 
-    /* Library Header & Controls Row */
-    .library-section {
-      max-width: 1240px;
-      margin: 0 auto 5rem;
-      padding: 0 2rem;
-      width: 100%;
-    }
-
-    .library-header-row {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 2rem;
-      margin-bottom: 2.5rem;
-      border-bottom: 1px solid var(--divider-hairline);
-      padding-bottom: 1.25rem;
-      flex-wrap: wrap;
-    }
-
-    .library-title {
-      font-family: var(--font-serif);
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--ink-navy);
-      letter-spacing: -0.02em;
-    }
-
-    .library-controls {
-      display: flex;
-      align-items: center;
-      gap: 1.25rem;
-      flex-wrap: wrap;
-    }
-
-    .search-input-minimal {
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid var(--divider-hairline);
-      padding: 0.45rem 0.2rem;
-      font-family: inherit;
-      font-size: 0.88rem;
-      color: var(--ink-navy);
-      min-width: 240px;
-      outline: none;
-      transition: border-color 0.15s ease;
-    }
-
-    .search-input-minimal:focus {
-      border-color: var(--ink-navy);
-    }
-
-    .search-input-minimal::placeholder {
-      color: var(--text-muted);
-    }
-
-    .category-select-minimal {
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid var(--divider-hairline);
-      padding: 0.45rem 0.5rem 0.45rem 0.2rem;
-      font-family: inherit;
-      font-size: 0.88rem;
-      color: var(--ink-navy);
-      cursor: pointer;
-      outline: none;
-      transition: border-color 0.15s ease;
-    }
-
-    .category-select-minimal:focus {
-      border-color: var(--ink-navy);
-    }
-
-    /* Articles Grid - Flat Hairline Dividers */
-    .articles-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3rem 2.5rem;
-    }
-
-    .article-card {
-      display: flex;
-      flex-direction: column;
-      border-top: 1px solid var(--divider-hairline);
-      padding-top: 1.5rem;
-      background: transparent;
-    }
-
-    .card-image-link {
-      display: block;
-      aspect-ratio: 16 / 10;
-      overflow: hidden;
-      border: 1px solid var(--divider-hairline);
-      background: var(--bg-surface);
-      margin-bottom: 1.25rem;
-    }
-
-    .card-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      filter: saturate(0.95);
-      transition: opacity 0.2s ease;
-    }
-
-    .card-image:hover {
-      opacity: 0.92;
-    }
-
-    .card-meta-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      margin-bottom: 0.6rem;
-    }
-
-    .card-category-label {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      text-decoration: underline;
-      text-underline-offset: 2px;
-      cursor: pointer;
-    }
-
-    .card-read-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.25rem;
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: var(--ink-navy);
-      background: var(--peach-accent);
-      padding: 0.1rem 0.45rem;
-      letter-spacing: 0.02em;
-    }
-
-    .card-title {
-      font-family: var(--font-serif);
-      font-size: 1.45rem;
-      font-weight: 700;
-      color: var(--ink-navy);
-      line-height: 1.25;
-      margin-bottom: 0.45rem;
-      letter-spacing: -0.015em;
-    }
-
-    .card-title:hover {
-      color: var(--peach-accent);
-    }
-
-    .card-subtitle {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      font-style: italic;
-      margin-bottom: 0.75rem;
-      line-height: 1.4;
-    }
-
-    .card-desc {
-      font-size: 0.88rem;
-      color: var(--ink-navy);
-      line-height: 1.55;
-      margin-bottom: 1.25rem;
-      opacity: 0.85;
-      flex: 1;
-    }
-
-    .card-levels-row {
-      margin-bottom: 1.25rem;
-      padding-top: 0.5rem;
-    }
-
-    .card-bottom-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 0.85rem;
-      border-top: 1px solid var(--divider-hairline);
-      margin-top: auto;
-    }
-
-    .card-access-label {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-
     .card-read-link {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 600;
       color: var(--ink-navy);
       text-decoration: underline;
@@ -602,21 +852,122 @@
       color: var(--peach-accent);
     }
 
-    /* Empty state */
+    .card-read-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--ink-navy);
+      background: var(--peach-accent);
+      padding: 0.1rem 0.45rem;
+      letter-spacing: 0.02em;
+    }
+
+    /* Column 3: Sidebar Widgets */
+    .sidebar-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    .sidebar-widget {
+      background: var(--bg-surface);
+      border: 1px solid var(--divider-hairline);
+      padding: 1.25rem;
+    }
+
+    .widget-header {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--ink-navy);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--divider-hairline);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .level-pills-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .level-select-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.55rem 0.75rem;
+      border: 1px solid var(--divider-hairline);
+      background: var(--bg-white);
+      color: var(--ink-navy);
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-size: 0.82rem;
+    }
+
+    .level-select-btn:hover {
+      border-color: var(--ink-navy);
+      background: var(--bg-cream);
+    }
+
+    .level-select-btn.active {
+      border-color: var(--peach-accent);
+      background: var(--peach-accent);
+      color: #122129;
+      font-weight: 700;
+    }
+
+    .widget-notebook-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .widget-notebook-desc {
+      font-size: 0.84rem;
+      color: var(--ink-navy);
+      line-height: 1.5;
+    }
+
+    .btn-widget-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      background: var(--ink-navy);
+      color: var(--bg-cream);
+      padding: 0.65rem 1rem;
+      font-size: 0.84rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.15s ease;
+    }
+
+    .btn-widget-action:hover {
+      opacity: 0.9;
+    }
+
     .empty-state {
       text-align: center;
       padding: 4rem 2rem;
       color: var(--text-muted);
       font-size: 1rem;
       display: none;
-      border-top: 1px solid var(--divider-hairline);
+      grid-column: 1 / -1;
     }
 
     /* Bottom Editorial Note */
     .promo-section {
       max-width: 1240px;
-      margin: 2rem auto 5rem;
-      padding: 3rem 2rem;
+      margin: 2rem auto 4rem;
+      padding: 2.5rem 1.5rem;
       border-top: 1px solid var(--divider-hairline);
       border-bottom: 1px solid var(--divider-hairline);
       display: flex;
@@ -628,19 +979,19 @@
 
     .promo-title {
       font-family: var(--font-serif);
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       font-weight: 700;
       color: var(--ink-navy);
       margin-bottom: 0.35rem;
     }
 
     .promo-desc {
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       color: var(--text-muted);
     }
 
     .promo-link {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 600;
       color: var(--ink-navy);
       text-decoration: underline;
@@ -651,11 +1002,11 @@
       color: var(--peach-accent);
     }
 
-    /* Footer: Disclaimers & Pedagogical Assurance (Relocated Here) */
+    /* Footer */
     .site-footer {
       background: var(--bg-cream);
       border-top: 1px solid var(--divider-hairline);
-      padding: 3.5rem 2rem 4rem;
+      padding: 3rem 1.5rem 3.5rem;
       margin-top: auto;
       color: var(--text-muted);
       font-size: 0.8rem;
@@ -667,7 +1018,7 @@
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 1.25rem;
     }
 
     .footer-brand {
@@ -689,53 +1040,64 @@
       text-decoration: underline;
     }
 
-    @media (max-width: 960px) {
-      .articles-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .featured-card {
+    /* Responsive Breakpoints */
+    @media (max-width: 1100px) {
+      .magazine-hero-inner {
         grid-template-columns: 1fr;
-        gap: 2rem;
       }
-      .hero-title {
-        font-size: 2.5rem;
+      .magazine-body-wrap {
+        grid-template-columns: 1fr 280px;
+      }
+      .col-trending {
+        display: none;
       }
     }
 
-    @media (max-width: 640px) {
-      .articles-grid {
+    @media (max-width: 768px) {
+      .magazine-body-wrap {
         grid-template-columns: 1fr;
       }
-      .hero-title {
-        font-size: 2rem;
+      .col-trending {
+        display: flex;
       }
-      .top-header-inner {
-        padding: 1rem;
+      .feed-grid {
+        grid-template-columns: 1fr;
       }
-      .hero-section,
-      .featured-section,
-      .library-section,
-      .promo-section,
-      .site-footer {
-        padding-left: 1rem;
-        padding-right: 1rem;
+      .sub-item-split-row {
+        grid-template-columns: 1fr;
+      }
+      .masthead-logo {
+        font-size: 2.25rem;
+      }
+      .main-masthead-inner {
+        padding: 1.25rem 1rem;
+      }
+      .main-navbar-inner {
+        padding: 0 1rem;
+      }
+      .top-utility-inner {
+        padding: 0.5rem 1rem;
+      }
+      .top-ticker-wrap {
+        display: none;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Masthead Header -->
-  <header class="top-header">
-    <div class="top-header-inner">
-      <div class="brand-group">
-        <a href="index.html" class="brand-title">Leenardo</a>
-        <div class="brand-subtitle" id="brand-subtitle">
-          Anything you're curious about, in the language you want, at the level you can understand.
+  <!-- 1. Top Utility Bar (Date, Ticker, Language, Theme) -->
+  <div class="top-utility-bar">
+    <div class="top-utility-inner">
+      <div class="top-utility-left">
+        <span class="top-date-text" id="top-date-display">Monday, September 28, 2026</span>
+        <span class="top-v-divider"></span>
+        <div class="top-ticker-wrap">
+          <span class="top-ticker-label" id="top-ticker-label">LATEST</span>
+          <a href="#" id="top-ticker-link" class="top-ticker-link">Loading latest story...</a>
         </div>
       </div>
-
-      <div class="header-actions">
+      <div class="top-utility-right">
         <div class="lang-switcher-bar">
           <div class="lang-field">
             <label for="target-lang-select" id="lbl-target-lang">Target:</label>
@@ -760,16 +1122,38 @@
           </div>
         </div>
 
-        <a href="article.html#notebook" class="header-link" id="header-vocab-link">
-          Vocabulary
-        </a>
-
-        <button class="header-link" onclick="surpriseMe()" id="btn-surprise-mini" title="Random Story">
-          Surprise Me
-        </button>
-
         <button class="btn-theme-toggle" id="btn-theme-toggle" onclick="toggleTheme()" title="Switch Day/Night theme" aria-label="Switch Day/Night theme">
           <span id="theme-toggle-text">Night</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Main Masthead (Brand & Action Desk) -->
+  <header class="main-masthead">
+    <div class="main-masthead-inner">
+      <div class="masthead-brand-wrap">
+        <a href="index.html" class="masthead-logo">Leenardo</a>
+        <div class="masthead-tagline" id="brand-subtitle">
+          Anything you're curious about, in the language you want, at the level you can understand.
+        </div>
+      </div>
+
+      <div class="masthead-actions-deck">
+        <a href="article.html#notebook" class="btn-masthead-box" id="header-vocab-link" title="Open Vocabulary Notebook">
+          <span class="btn-box-icon">📖</span>
+          <span class="btn-box-text">
+            <strong id="btn-vocab-title">Vocabulary</strong>
+            <small id="btn-vocab-sub">Review saved words</small>
+          </span>
+        </a>
+
+        <button onclick="surpriseMe()" class="btn-masthead-box" id="btn-surprise-mini" title="Random Story">
+          <span class="btn-box-icon">🎲</span>
+          <span class="btn-box-text">
+            <strong id="btn-surprise-title">Surprise Me</strong>
+            <small id="btn-surprise-sub">Adaptive random read</small>
+          </span>
         </button>
 
         <div id="header-auth-container"></div>
@@ -777,50 +1161,99 @@
     </div>
   </header>
 
-  <!-- Editorial Hero Section -->
-  <section class="hero-section">
-    <div class="hero-kicker" id="hero-kicker">EVERY STORY, A STEP FORWARD</div>
-    <h1 class="hero-title" id="hero-title">Read what actually interests you — at exactly your level.</h1>
-    <p class="hero-desc" id="hero-desc">
-      Pick a topic, choose your language pair, and watch the same story adapt to how much you already know.
-    </p>
-    <div class="hero-actions-row">
-      <button class="btn-primary-cta" onclick="surpriseMe()" id="btn-hero-primary">
-        Start Reading →
-      </button>
-      <button class="hero-secondary-link" onclick="scrollToLibrary()" id="btn-hero-secondary">
-        Browse all stories
-      </button>
-    </div>
-  </section>
-
-  <!-- Asymmetric Featured Story Spotlight -->
-  <section class="featured-section" id="featured-story-section" style="display:none;">
-    <div class="featured-card" id="featured-story-card">
-      <!-- Injected via JavaScript -->
-    </div>
-  </section>
-
-  <!-- Library Section: Hairline Controls & Editorial Grid -->
-  <section class="library-section" id="library-section">
-    <div class="library-header-row">
-      <h2 class="library-title" id="library-title">Library</h2>
-      <div class="library-controls">
-        <input type="text" id="search-input" class="search-input-minimal" placeholder="Search topic or story..." oninput="filterArticles()">
-        <select id="category-select-dropdown" class="category-select-minimal" onchange="onCategoryDropdownChange(this.value)">
-          <!-- Categories injected dynamically -->
-        </select>
+  <!-- 3. Category Navigation Bar (Sticky Dark Strip) -->
+  <nav class="main-navbar">
+    <div class="main-navbar-inner">
+      <div class="nav-links-scroll" id="nav-categories-container">
+        <!-- Injected via JavaScript: All Stories + Category Tabs -->
+      </div>
+      <div class="nav-search-wrap">
+        <input type="text" id="search-input" class="nav-search-input" placeholder="Search stories..." oninput="filterArticles()">
+        <span class="nav-search-icon">🔍</span>
       </div>
     </div>
+  </nav>
 
-    <div class="articles-grid" id="articles-container">
-      <!-- Article cards injected dynamically -->
-    </div>
+  <!-- 4. Magazine Hero Mosaic Section (1 Large Lead + 3 Mosaic Sub-Features) -->
+  <section class="magazine-hero-wrap" id="magazine-hero-section">
+    <div class="magazine-hero-inner">
+      <!-- Left: Big Lead Card -->
+      <div class="hero-lead-box" id="hero-lead-box">
+        <!-- Injected dynamically -->
+      </div>
 
-    <div class="empty-state" id="empty-state">
-      No articles found matching your criteria.
+      <!-- Right: Sub-features (1 top wide + 2 split bottom) -->
+      <div class="hero-mosaic-sub" id="hero-mosaic-sub">
+        <!-- Injected dynamically -->
+      </div>
     </div>
   </section>
+
+  <!-- 5. Multi-Column Magazine Layout Below Hero -->
+  <main class="magazine-body-wrap">
+    <!-- Column 1: Trending Vertical List -->
+    <section class="col-trending" id="col-trending">
+      <div class="section-block-title">
+        <h3 id="heading-trending">Trending Stories</h3>
+        <span class="title-accent"></span>
+      </div>
+      <div class="trending-list" id="trending-list-container">
+        <!-- Injected dynamically -->
+      </div>
+    </section>
+
+    <!-- Column 2: Main Feed / Library Grid -->
+    <section class="col-main-feed" id="col-main-feed">
+      <div class="section-block-title">
+        <h3 id="heading-library">Library</h3>
+        <span class="title-accent"></span>
+      </div>
+      <div class="feed-grid" id="feed-articles-container">
+        <!-- Injected dynamically -->
+      </div>
+      <div class="empty-state" id="empty-state">
+        No articles found matching your criteria.
+      </div>
+    </section>
+
+    <!-- Column 3: Sidebar Widgets (Levels, Defter, Stats) -->
+    <aside class="sidebar-col" id="col-sidebar">
+      <!-- Widget: CEFR Level Selector -->
+      <div class="sidebar-widget">
+        <div class="widget-header">
+          <span id="widget-levels-title">CEFR Level</span>
+          <span style="font-size:0.7rem; font-weight:700; color:var(--peach-accent);" id="widget-active-level-label">A1</span>
+        </div>
+        <div class="level-pills-list" id="sidebar-level-pills">
+          <!-- Injected dynamically -->
+        </div>
+      </div>
+
+      <!-- Widget: Vocabulary Notebook Quick Deck -->
+      <div class="sidebar-widget widget-notebook-card">
+        <div class="widget-header">
+          <span id="widget-vocab-title">Vocabulary Notebook</span>
+          <span style="font-size:0.75rem; font-weight:700; background:var(--peach-accent); color:#122129; padding:0.1rem 0.45rem;" id="widget-saved-count">0</span>
+        </div>
+        <p class="widget-notebook-desc" id="widget-vocab-desc">
+          Review words saved during your reading with interactive flashcards.
+        </p>
+        <a href="article.html#notebook" class="btn-widget-action" id="widget-vocab-btn">
+          Open Notebook →
+        </a>
+      </div>
+
+      <!-- Widget: Pedagogical Assurance Card -->
+      <div class="sidebar-widget">
+        <div class="widget-header">
+          <span id="widget-assurance-title">Pedagogical Assurance</span>
+        </div>
+        <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.6;" id="widget-assurance-desc">
+          All texts are graded to CEFR standards with instant grammar explanations and vocabulary context.
+        </p>
+      </div>
+    </aside>
+  </main>
 
   <!-- Bottom Promo Note -->
   <section class="promo-section">
@@ -831,7 +1264,7 @@
     <a href="article.html#notebook" class="promo-link" id="promo-link">Explore vocabulary notebook</a>
   </section>
 
-  <!-- Site Footer (Houses Relocated Pedagogical Assurance & Legal Notices) -->
+  <!-- Site Footer -->
   <footer class="site-footer">
     <div class="site-footer-inner">
       <div class="footer-brand">Leenardo</div>
@@ -864,6 +1297,14 @@
       fr: "Français"
     };
 
+    const levelDescriptions = {
+      A1: { tr: "Başlangıç Seviyesi", en: "Beginner", es: "Principiante", de: "Anfänger", fr: "Débutant" },
+      A2: { tr: "Temel Seviye", en: "Elementary", es: "Elemental", de: "Grundlegend", fr: "Élémentaire" },
+      B1: { tr: "Orta Seviye", en: "Intermediate", es: "Intermedio", de: "Mittelstufe", fr: "Intermédiaire" },
+      B2: { tr: "İleri-Orta Seviye", en: "Upper-Intermediate", es: "Intermedio Alto", de: "Gute Mittelstufe", fr: "Intermédiaire Sup." },
+      C1: { tr: "Yetkin Seviye", en: "Advanced", es: "Avanzado", de: "Fortgeschritten", fr: "Avancé" }
+    };
+
     const uiTranslations = {
       tr: {
         brandSubtitleHome: "İstediğin konuyu, istediğin dilde, anladığın seviyede oku.",
@@ -872,25 +1313,36 @@
         targetLangLabel: "Öğrenilen:",
         supportLangLabel: "Destek:",
         surpriseMeBtn: "Rastgele Hikaye",
+        surpriseMeSub: "Seviyene uygun rastgele",
         startReadingCta: "Okumaya Başla →",
         browseStories: "Tüm hikayeleri incele",
         heroKicker: "HER HİKAYE, BİR ADIM İLERİ",
         heroTitle: "Tam olarak ilgini çeken konuyu, tam olarak kendi seviyende oku.",
         heroDesc: "Bir konu seç, dil çiftini belirle; aynı hikayenin seviyene göre nasıl uyarlandığını keşfet.",
         libraryTitle: "Kütüphane",
-        searchPlaceholder: "Konu veya hikaye ara...",
+        searchPlaceholder: "Hikaye veya konu ara...",
         allCategories: "Tüm kategoriler",
         freeReading: "Ücretsiz erişim",
-        readStory: "Hikayeyi oku",
+        readStory: "Hikayeyi oku →",
         readStatus: "Okundu",
         featuredSpotlight: "Öne Çıkan",
         promoTitle: "Öğrenme yolculuğun yanında.",
         promoDesc: "Hikayelerine ve kelime defterine telefonundan da ulaş.",
         promoLink: "Kelime defterini keşfet",
         vocabulary: "Kelime Defteri",
+        vocabularySub: "Kayıtlı kelimeleri çalış",
         emptySearch: "Aramanızla eşleşen bir yazı bulunamadı.",
         themeNight: "Gece",
-        themeDay: "Gündüz"
+        themeDay: "Gündüz",
+        topLatest: "GÜNCEL",
+        homeNav: "TÜMÜ",
+        trendingTitle: "Trend Okumalar",
+        levelsWidgetTitle: "CEFR Seviyeleri",
+        vocabWidgetTitle: "Kelime Defterim",
+        vocabWidgetDesc: "Okurken kaydettiğin kelimeleri flashcard ile tekrar et.",
+        vocabWidgetCta: "Defteri Aç →",
+        allStories: "TÜM HİKAYELER",
+        readMin: "dk okuma"
       },
       en: {
         brandSubtitleHome: "Anything you're curious about, in the language you want, at the level you can understand.",
@@ -899,25 +1351,36 @@
         targetLangLabel: "Target:",
         supportLangLabel: "Support:",
         surpriseMeBtn: "Surprise Me",
+        surpriseMeSub: "Adaptive random read",
         startReadingCta: "Start Reading →",
         browseStories: "Browse all stories",
         heroKicker: "EVERY STORY, A STEP FORWARD",
         heroTitle: "Read what actually interests you — at exactly your level.",
         heroDesc: "Pick a topic, choose your language pair, and watch the same story adapt to how much you already know.",
         libraryTitle: "Library",
-        searchPlaceholder: "Search topic or story...",
+        searchPlaceholder: "Search stories...",
         allCategories: "All categories",
         freeReading: "Free access",
-        readStory: "Read story",
+        readStory: "Read story →",
         readStatus: "Read",
         featuredSpotlight: "Featured Story",
         promoTitle: "With you on your learning journey.",
         promoDesc: "Access your stories and vocabulary notebook on your phone.",
         promoLink: "Explore vocabulary notebook",
         vocabulary: "Vocabulary",
+        vocabularySub: "Review saved words",
         emptySearch: "No articles found matching your criteria.",
         themeNight: "Night",
-        themeDay: "Day"
+        themeDay: "Day",
+        topLatest: "LATEST",
+        homeNav: "ALL",
+        trendingTitle: "Trending Stories",
+        levelsWidgetTitle: "CEFR Levels",
+        vocabWidgetTitle: "Vocabulary Notebook",
+        vocabWidgetDesc: "Review words saved during your reading with interactive flashcards.",
+        vocabWidgetCta: "Open Notebook →",
+        allStories: "ALL STORIES",
+        readMin: "min read"
       },
       es: {
         brandSubtitleHome: "Todo lo que te interesa, en el idioma que quieras y al nivel que comprendas.",
@@ -926,25 +1389,36 @@
         targetLangLabel: "Objetivo:",
         supportLangLabel: "Apoyo:",
         surpriseMeBtn: "Sorpréndeme",
+        surpriseMeSub: "Lectura adaptada",
         startReadingCta: "Comenzar a leer →",
         browseStories: "Explorar historias",
         heroKicker: "CADA HISTORIA ES UN PASO ADELANTE",
         heroTitle: "Lee lo que realmente te interesa, exactamente a tu nivel.",
         heroDesc: "Elige un tema, selecciona tus idiomas y observa cómo la historia se adapta a tus conocimientos.",
         libraryTitle: "Biblioteca",
-        searchPlaceholder: "Buscar tema o historia...",
+        searchPlaceholder: "Buscar historias...",
         allCategories: "Todas las categorías",
         freeReading: "Acceso libre",
-        readStory: "Leer historia",
+        readStory: "Leer historia →",
         readStatus: "Leído",
         featuredSpotlight: "Destacado",
         promoTitle: "A tu lado en tu aprendizaje.",
         promoDesc: "Accede a tus historias y cuaderno de vocabulario en tu móvil.",
         promoLink: "Descubrir cuaderno de vocabulario",
         vocabulary: "Vocabulario",
+        vocabularySub: "Repasar palabras",
         emptySearch: "No se encontraron artículos que coincidan con tu búsqueda.",
         themeNight: "Noche",
-        themeDay: "Día"
+        themeDay: "Día",
+        topLatest: "ÚLTIMO",
+        homeNav: "TODAS",
+        trendingTitle: "Historias en Tendencia",
+        levelsWidgetTitle: "Niveles CEFR",
+        vocabWidgetTitle: "Cuaderno de Vocabulario",
+        vocabWidgetDesc: "Repasa las palabras guardadas con tarjetas interactivas.",
+        vocabWidgetCta: "Abrir Cuaderno →",
+        allStories: "TODAS LAS HISTORIAS",
+        readMin: "min de lectura"
       },
       de: {
         brandSubtitleHome: "Alles, was dich interessiert, in deiner Wunschsprache und auf deinem Niveau.",
@@ -953,25 +1427,36 @@
         targetLangLabel: "Zielsprache:",
         supportLangLabel: "Hilfssprache:",
         surpriseMeBtn: "Überraschung",
+        surpriseMeSub: "Zufälliger Artikel",
         startReadingCta: "Jetzt lesen →",
         browseStories: "Alle Geschichten ansehen",
         heroKicker: "JEDE GESCHICHTE EIN SCHRITT VORAN",
         heroTitle: "Lies, was dich wirklich interessiert – genau auf deinem Niveau.",
         heroDesc: "Wähle ein Thema, bestimme deine Sprachen und sieh zu, wie sich der Text deinem Können anpasst.",
         libraryTitle: "Bibliothek",
-        searchPlaceholder: "Thema oder Geschichte suchen...",
+        searchPlaceholder: "Geschichten suchen...",
         allCategories: "Alle Kategorien",
         freeReading: "Freier Zugang",
-        readStory: "Geschichte lesen",
+        readStory: "Geschichte lesen →",
         readStatus: "Gelesen",
         featuredSpotlight: "Empfehlung",
         promoTitle: "Dein Begleiter beim Sprachenlernen.",
         promoDesc: "Greife jederzeit auf deinem Smartphone auf deine Geschichten und Vokabeln zu.",
         promoLink: "Vokabelheft entdecken",
         vocabulary: "Vokabeln",
+        vocabularySub: "Wörter wiederholen",
         emptySearch: "Keine passenden Artikel gefunden.",
         themeNight: "Nacht",
-        themeDay: "Tag"
+        themeDay: "Tag",
+        topLatest: "AKTUELL",
+        homeNav: "ALLE",
+        trendingTitle: "Im Trend",
+        levelsWidgetTitle: "CEFR-Stufen",
+        vocabWidgetTitle: "Vokabelheft",
+        vocabWidgetDesc: "Wiederhole gespeicherte Vokabeln mit interaktiven Karteikarten.",
+        vocabWidgetCta: "Heft Öffnen →",
+        allStories: "ALLE GESCHICHTEN",
+        readMin: "Min. Lesezeit"
       },
       fr: {
         brandSubtitleHome: "Tout ce qui vous intéresse, dans la langue choisie et à votre niveau.",
@@ -980,25 +1465,36 @@
         targetLangLabel: "Langue cible:",
         supportLangLabel: "Langue d'appui:",
         surpriseMeBtn: "Surprenez-moi",
+        surpriseMeSub: "Lecture aléatoire",
         startReadingCta: "Commencer la lecture →",
         browseStories: "Toutes les histoires",
         heroKicker: "CHAQUE HISTOIRE EST UN PAS EN AVANT",
         heroTitle: "Lisez ce qui vous passionne — exactement à votre niveau.",
         heroDesc: "Choisissez un sujet, vos langues, et observez la même histoire s'adapter à votre compréhension.",
         libraryTitle: "Bibliothèque",
-        searchPlaceholder: "Rechercher un sujet ou une histoire...",
+        searchPlaceholder: "Rechercher...",
         allCategories: "Toutes les catégories",
         freeReading: "Accès libre",
-        readStory: "Lire l'histoire",
+        readStory: "Lire l'histoire →",
         readStatus: "Lu",
         featuredSpotlight: "À la Une",
         promoTitle: "À vos côtés dans votre apprentissage.",
         promoDesc: "Accédez à vos histoires et carnet de vocabulaire sur votre téléphone.",
         promoLink: "Découvrir le carnet de vocabulaire",
         vocabulary: "Vocabulaire",
+        vocabularySub: "Réviser vos mots",
         emptySearch: "Aucun article trouvé correspondant à vos critères.",
         themeNight: "Nuit",
-        themeDay: "Jour"
+        themeDay: "Jour",
+        topLatest: "DERNIÈRE",
+        homeNav: "TOUS",
+        trendingTitle: "Tendances",
+        levelsWidgetTitle: "Niveaux CEFR",
+        vocabWidgetTitle: "Carnet de Vocabulaire",
+        vocabWidgetDesc: "Révisez vos mots enregistrés grâce aux cartes interactives.",
+        vocabWidgetCta: "Ouvrir le Carnet →",
+        allStories: "TOUS LES ARTICLES",
+        readMin: "min de lecture"
       }
     };
 
@@ -1012,6 +1508,32 @@
     let currentLevel = "A1";
     let selectedCategory = "all";
 
+    const LEENARDO_READ_KEY = "leenardo_read_articles";
+
+    function getReadArticleIds() {
+      try {
+        const raw = localStorage.getItem(LEENARDO_READ_KEY);
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function isArticleRead(articleId) {
+      if (!articleId) return false;
+      const list = getReadArticleIds();
+      return list.includes(articleId);
+    }
+
+    function getSavedWords() {
+      try {
+        const raw = localStorage.getItem("mia_saved_words_v1");
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
     async function loadArticlesData() {
       try {
         const resp = await fetch("articles.json");
@@ -1022,9 +1544,7 @@
             return;
           }
         }
-      } catch (e) {
-        // Fallback to window.ARTICLES_DATA
-      }
+      } catch (e) {}
       if (!articlesDatabase || articlesDatabase.length === 0) {
         const fallback = (typeof window !== "undefined") ? (window.ARTICLES_DATA || window.articlesDatabase) : null;
         if (Array.isArray(fallback) && fallback.length > 0) {
@@ -1073,9 +1593,13 @@
 
       updateUrlState();
       applyUiTranslations();
-      renderCategoryDropdown();
-      renderFeaturedStory();
-      renderArticles();
+      updateDateDisplay();
+      updateLatestTicker();
+      renderCategoryNav();
+      renderMagazineHero();
+      renderTrendingColumn();
+      renderMainFeed();
+      renderSidebarWidgets();
     }
 
     function updateUrlState() {
@@ -1106,9 +1630,12 @@
 
       updateUrlState();
       applyUiTranslations();
-      renderCategoryDropdown();
-      renderFeaturedStory();
-      renderArticles();
+      renderCategoryNav();
+      renderMagazineHero();
+      renderTrendingColumn();
+      renderMainFeed();
+      renderSidebarWidgets();
+      updateLatestTicker();
     }
 
     function onSupportLanguageChange(newSupport) {
@@ -1126,26 +1653,13 @@
 
       updateUrlState();
       applyUiTranslations();
-      renderCategoryDropdown();
-      renderFeaturedStory();
-      renderArticles();
-    }
-
-    const LEENARDO_READ_KEY = "leenardo_read_articles";
-
-    function getReadArticleIds() {
-      try {
-        const raw = localStorage.getItem(LEENARDO_READ_KEY);
-        return raw ? JSON.parse(raw) : [];
-      } catch (e) {
-        return [];
-      }
-    }
-
-    function isArticleRead(articleId) {
-      if (!articleId) return false;
-      const list = getReadArticleIds();
-      return list.includes(articleId);
+      updateDateDisplay();
+      renderCategoryNav();
+      renderMagazineHero();
+      renderTrendingColumn();
+      renderMainFeed();
+      renderSidebarWidgets();
+      updateLatestTicker();
     }
 
     function setLevel(newLevel) {
@@ -1153,8 +1667,9 @@
       currentLevel = newLevel;
       localStorage.setItem("mia_preferred_level", currentLevel);
       updateUrlState();
-      renderFeaturedStory();
-      renderArticles();
+      renderMagazineHero();
+      renderMainFeed();
+      renderSidebarWidgets();
     }
 
     function surpriseMe() {
@@ -1168,13 +1683,6 @@
       window.location.href = targetUrl;
     }
 
-    function scrollToLibrary() {
-      const lib = document.getElementById("library-section");
-      if (lib) {
-        lib.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-
     function getCurrentTheme() {
       return document.documentElement.getAttribute("data-theme") || "light";
     }
@@ -1184,7 +1692,6 @@
       const t = uiTranslations[supportLang] || uiTranslations.en;
       const toggleText = document.getElementById("theme-toggle-text");
       if (toggleText) {
-        // Button shows the action label to switch to (e.g. if dark, show "Day"/"Gündüz"; if light, show "Night"/"Gece")
         toggleText.textContent = currentTheme === "dark" ? (t.themeDay || "Day") : (t.themeNight || "Night");
       }
     }
@@ -1199,84 +1706,44 @@
       updateThemeButtonUI();
     }
 
-    function applyUiTranslations() {
-      const t = uiTranslations[supportLang] || uiTranslations.en;
-      
-      const subElem = document.getElementById("brand-subtitle");
-      if (subElem) subElem.textContent = t.brandSubtitleHome;
-
-      const lblTarget = document.getElementById("lbl-target-lang");
-      if (lblTarget) lblTarget.textContent = t.targetLangLabel;
-
-      const lblSupport = document.getElementById("lbl-support-lang");
-      if (lblSupport) lblSupport.textContent = t.supportLangLabel;
-
-      const btnSurpriseMini = document.getElementById("btn-surprise-mini");
-      if (btnSurpriseMini) btnSurpriseMini.textContent = t.surpriseMeBtn;
-
-      const nBanner = document.getElementById("notice-banner-text");
-      if (nBanner) nBanner.innerHTML = t.noticeBanner;
-
-      const nContact = document.getElementById("notice-contact-text");
-      if (nContact) nContact.innerHTML = t.noticeContact;
-
-      const heroKicker = document.getElementById("hero-kicker");
-      if (heroKicker) heroKicker.textContent = t.heroKicker;
-
-      const heroTitle = document.getElementById("hero-title");
-      if (heroTitle) heroTitle.textContent = t.heroTitle;
-
-      const heroDesc = document.getElementById("hero-desc");
-      if (heroDesc) heroDesc.textContent = t.heroDesc;
-
-      const btnPrimary = document.getElementById("btn-hero-primary");
-      if (btnPrimary) btnPrimary.textContent = t.startReadingCta;
-
-      const btnSecondary = document.getElementById("btn-hero-secondary");
-      if (btnSecondary) btnSecondary.textContent = t.browseStories;
-
-      const libTitle = document.getElementById("library-title");
-      if (libTitle) libTitle.textContent = t.libraryTitle;
-
-      const sInput = document.getElementById("search-input");
-      if (sInput) sInput.placeholder = t.searchPlaceholder;
-
-      const promoTitle = document.getElementById("promo-title");
-      if (promoTitle) promoTitle.textContent = t.promoTitle;
-
-      const promoDesc = document.getElementById("promo-desc");
-      if (promoDesc) promoDesc.textContent = t.promoDesc;
-
-      const promoLink = document.getElementById("promo-link");
-      if (promoLink) promoLink.textContent = t.promoLink;
-
-      const vocabLink = document.getElementById("header-vocab-link");
-      if (vocabLink) vocabLink.textContent = t.vocabulary;
-
-      const emptyEl = document.getElementById("empty-state");
-      if (emptyEl) emptyEl.textContent = t.emptySearch;
-
-      updateThemeButtonUI();
+    function updateDateDisplay() {
+      const dateElem = document.getElementById("top-date-display");
+      if (!dateElem) return;
+      const now = new Date();
+      const localeMap = { tr: "tr-TR", en: "en-US", es: "es-ES", de: "de-DE", fr: "fr-FR" };
+      const loc = localeMap[supportLang] || "en-US";
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      dateElem.textContent = now.toLocaleDateString(loc, options);
     }
 
-    function onCategoryDropdownChange(catKey) {
-      selectedCategory = catKey;
-      filterArticles();
+    function updateLatestTicker() {
+      const tickerLink = document.getElementById("top-ticker-link");
+      if (!tickerLink || !articlesDatabase || articlesDatabase.length === 0) return;
+      const latest = articlesDatabase[0];
+      const targetLevelData = (latest.languages && latest.languages[targetLang] && latest.languages[targetLang][currentLevel])
+                           || (latest.languages && latest.languages[targetLang] && latest.languages[targetLang].A1);
+      const title = (targetLevelData && targetLevelData.title)
+                 || (latest.titleTranslations && latest.titleTranslations[targetLang])
+                 || latest.topic;
+      tickerLink.textContent = title;
+      tickerLink.href = `article.html?id=${encodeURIComponent(latest.id)}&target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
     }
 
-    function renderCategoryDropdown() {
-      const selectElem = document.getElementById("category-select-dropdown");
-      if (!selectElem) return;
-      selectElem.innerHTML = "";
+    function renderCategoryNav() {
+      const container = document.getElementById("nav-categories-container");
+      if (!container) return;
+      container.innerHTML = "";
 
       const t = uiTranslations[supportLang] || uiTranslations.en;
 
-      const allOpt = document.createElement("option");
-      allOpt.value = "all";
-      allOpt.textContent = t.allCategories || "All categories";
-      if (selectedCategory === "all") allOpt.selected = true;
-      selectElem.appendChild(allOpt);
+      // Home / All Stories button
+      const allBtn = document.createElement("button");
+      allBtn.className = `nav-tab-btn ${selectedCategory === "all" ? "active" : ""}`;
+      allBtn.textContent = t.homeNav || "ALL";
+      allBtn.onclick = () => selectCategory("all", allBtn);
+      container.appendChild(allBtn);
 
+      // Collect categories
       const categoriesMap = new Map();
       articlesDatabase.forEach(art => {
         const catKey = art.category;
@@ -1287,113 +1754,186 @@
       });
 
       categoriesMap.forEach((label, catKey) => {
-        const opt = document.createElement("option");
-        opt.value = catKey;
-        opt.textContent = label;
-        if (selectedCategory === catKey) {
-          opt.selected = true;
-        }
-        selectElem.appendChild(opt);
+        const btn = document.createElement("button");
+        btn.className = `nav-tab-btn ${selectedCategory === catKey ? "active" : ""}`;
+        btn.textContent = label;
+        btn.onclick = () => selectCategory(catKey, btn);
+        container.appendChild(btn);
       });
+    }
+
+    function selectCategory(catKey, btnElem) {
+      selectedCategory = catKey;
+      document.querySelectorAll(".nav-tab-btn").forEach(b => b.classList.remove("active"));
+      if (btnElem) btnElem.classList.add("active");
+      renderMainFeed();
+      // Smooth scroll down to main feed if user clicked category tab
+      const feedSection = document.getElementById("col-main-feed");
+      if (feedSection && window.scrollY > 300) {
+        feedSection.scrollIntoView({ behavior: 'smooth' });
+      }
     }
 
     function filterArticles() {
       const q = document.getElementById("search-input").value.toLowerCase().trim();
-      renderArticles(q);
+      renderMainFeed(q);
     }
 
-    function renderFeaturedStory() {
-      const section = document.getElementById("featured-story-section");
-      const cardContainer = document.getElementById("featured-story-card");
-      if (!section || !cardContainer) return;
+    function renderMagazineHero() {
+      const leadContainer = document.getElementById("hero-lead-box");
+      const subContainer = document.getElementById("hero-mosaic-sub");
+      if (!leadContainer || !subContainer) return;
+      if (!articlesDatabase || articlesDatabase.length === 0) return;
 
-      if (!articlesDatabase || articlesDatabase.length === 0) {
-        section.style.display = "none";
-        return;
-      }
-
-      // First story serves as the featured lead story
-      const art = articlesDatabase[0];
       const t = uiTranslations[supportLang] || uiTranslations.en;
-      const catLabel = (art.categoryTranslations && art.categoryTranslations[supportLang]) || art.category;
 
-      const targetLevelData = (art.languages && art.languages[targetLang] && art.languages[targetLang][currentLevel])
-                           || (art.languages && art.languages[targetLang] && art.languages[targetLang].A1);
-      const cardTitle = (targetLevelData && targetLevelData.title)
-                     || (art.titleTranslations && art.titleTranslations[targetLang])
-                     || art.topic;
-
-      let subtitleHtml = "";
-      if (supportLang !== targetLang) {
-        const supportLevelData = (art.languages && art.languages[supportLang] && art.languages[supportLang][currentLevel])
-                              || (art.languages && art.languages[supportLang] && art.languages[supportLang].A1);
-        const subTitle = (supportLevelData && supportLevelData.title)
-                      || (art.titleTranslations && art.titleTranslations[supportLang])
-                      || "";
-        if (subTitle) {
-          subtitleHtml = `<div class="featured-subtitle">${subTitle}</div>`;
-        }
+      // 1. Lead Story (articlesDatabase[0])
+      const lead = articlesDatabase[0];
+      const leadCatLabel = (lead.categoryTranslations && lead.categoryTranslations[supportLang]) || lead.category;
+      const leadLevelData = (lead.languages && lead.languages[targetLang] && lead.languages[targetLang][currentLevel])
+                         || (lead.languages && lead.languages[targetLang] && lead.languages[targetLang].A1);
+      const leadTitle = (leadLevelData && leadLevelData.title)
+                     || (lead.titleTranslations && lead.titleTranslations[targetLang])
+                     || lead.topic;
+      let leadDesc = "";
+      if (leadLevelData && leadLevelData.grammarDesc) {
+        const gd = leadLevelData.grammarDesc;
+        leadDesc = (typeof gd === "object") ? (gd[supportLang] || gd.en || gd.tr || "") : gd;
       }
+      if (!leadDesc) leadDesc = leadTitle;
 
-      let desc = "";
-      if (targetLevelData && targetLevelData.grammarDesc) {
-        const gd = targetLevelData.grammarDesc;
-        desc = (typeof gd === "object") ? (gd[supportLang] || gd.en || gd.tr || "") : gd;
-      }
-      if (!desc) desc = cardTitle;
+      const leadUrl = `article.html?id=${encodeURIComponent(lead.id)}&target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
+      const leadImg = (lead.visual && lead.visual.imageUrl) ? lead.visual.imageUrl : 'images/cover_01.jpg';
+      const leadIsRead = isArticleRead(lead.id);
+      const leadReadTag = leadIsRead ? `<span class="hero-read-tag">✓ ${t.readStatus || 'Read'}</span>` : '';
 
-      const articleUrl = `article.html?id=${encodeURIComponent(art.id)}&target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
-
-      const levelTabsHtml = SUPPORTED_LEVELS.map(lvl => `
-        <a href="article.html?id=${encodeURIComponent(art.id)}&target=${targetLang}&support=${supportLang}&level=${lvl}" class="level-tab ${lvl === currentLevel ? 'active' : ''}">${lvl}</a>
+      const levelPillsHtml = SUPPORTED_LEVELS.map(lvl => `
+        <button class="hero-lvl-pill ${lvl === currentLevel ? 'active' : ''}" onclick="event.preventDefault(); setLevel('${lvl}')">${lvl}</button>
       `).join('');
 
-      const imageUrl = (art.visual && art.visual.imageUrl) ? art.visual.imageUrl : 'images/cover_01.jpg';
-      const isRead = isArticleRead(art.id);
-      const readBadgeHtml = isRead ? `<span class="card-read-badge">✓ ${t.readStatus || 'Read'}</span>` : '';
-
-      cardContainer.innerHTML = `
-        <a href="${articleUrl}" class="featured-image-link">
-          <img src="${imageUrl}" alt="${cardTitle}" class="featured-image" loading="eager">
-        </a>
-        <div class="featured-content">
-          <div class="featured-eyebrow-row">
-            <span class="featured-spotlight-tag">${t.featuredSpotlight || 'Featured Story'}</span>
-            <span class="featured-category">${catLabel}</span>
-            ${readBadgeHtml}
+      leadContainer.innerHTML = `
+        <img src="${leadImg}" alt="${leadTitle}" class="hero-lead-bg" loading="eager">
+        <div class="hero-lead-overlay"></div>
+        <div class="hero-lead-content">
+          <div class="hero-badges-row">
+            <span class="hero-cat-tag">${leadCatLabel}</span>
+            ${leadReadTag}
           </div>
-          <a href="${articleUrl}">
-            <h2 class="featured-title">${cardTitle}</h2>
+          <a href="${leadUrl}">
+            <h2 class="hero-lead-title">${leadTitle}</h2>
           </a>
-          ${subtitleHtml}
-          <p class="featured-excerpt">${desc}</p>
-          <div class="featured-footer-row">
-            <div class="level-tabs">
-              ${levelTabsHtml}
+          <p class="hero-lead-excerpt">${leadDesc}</p>
+          <div class="hero-lead-footer">
+            <div class="hero-levels-group">
+              ${levelPillsHtml}
             </div>
-            <a href="${articleUrl}" class="card-read-link">
-              ${t.readStory || 'Read story'}
-            </a>
+            <a href="${leadUrl}" class="hero-lead-link">${t.readStory || 'Read story →'}</a>
           </div>
         </div>
       `;
 
-      section.style.display = "block";
+      // 2. Sub-features (articlesDatabase[1], articlesDatabase[2], articlesDatabase[3])
+      const sub1 = articlesDatabase[1] || articlesDatabase[0];
+      const sub2 = articlesDatabase[2] || articlesDatabase[0];
+      const sub3 = articlesDatabase[3] || articlesDatabase[0];
+
+      function buildMosaicCardHtml(art, extraClass = "") {
+        const cat = (art.categoryTranslations && art.categoryTranslations[supportLang]) || art.category;
+        const lData = (art.languages && art.languages[targetLang] && art.languages[targetLang][currentLevel])
+                   || (art.languages && art.languages[targetLang] && art.languages[targetLang].A1);
+        const title = (lData && lData.title) || (art.titleTranslations && art.titleTranslations[targetLang]) || art.topic;
+        const img = (art.visual && art.visual.imageUrl) ? art.visual.imageUrl : 'images/cover_01.jpg';
+        const url = `article.html?id=${encodeURIComponent(art.id)}&target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
+        const isRead = isArticleRead(art.id);
+        const readBadge = isRead ? `<span>✓ ${t.readStatus || 'Read'}</span>` : '';
+        const timeStr = art.readTime || `4 ${t.readMin || 'min'}`;
+
+        return `
+          <div class="mosaic-card ${extraClass}">
+            <img src="${img}" alt="${title}" class="mosaic-card-bg" loading="lazy">
+            <div class="mosaic-card-overlay"></div>
+            <div class="mosaic-card-content">
+              <span class="mosaic-cat-pill">${cat}</span>
+              <a href="${url}">
+                <h3 class="mosaic-title">${title}</h3>
+              </a>
+              <div class="mosaic-meta">
+                <span>${currentLevel}</span>
+                <span>•</span>
+                <span>${timeStr}</span>
+                ${readBadge ? '<span>•</span> ' + readBadge : ''}
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      subContainer.innerHTML = `
+        <!-- Top Wide Sub Feature -->
+        ${buildMosaicCardHtml(sub1, "sub-item-top")}
+
+        <!-- Bottom Split 2 Sub Features -->
+        <div class="sub-item-split-row">
+          ${buildMosaicCardHtml(sub2)}
+          ${buildMosaicCardHtml(sub3)}
+        </div>
+      `;
     }
 
-    function renderArticles(searchQuery = "") {
-      const container = document.getElementById("articles-container");
+    function renderTrendingColumn() {
+      const container = document.getElementById("trending-list-container");
+      if (!container || !articlesDatabase) return;
+      container.innerHTML = "";
+
+      const t = uiTranslations[supportLang] || uiTranslations.en;
+
+      // Take stories 4 through 8 for trending column
+      const trendingSource = articlesDatabase.length > 4 ? articlesDatabase.slice(4, 9) : articlesDatabase.slice(0, 5);
+
+      trendingSource.forEach(art => {
+        const cat = (art.categoryTranslations && art.categoryTranslations[supportLang]) || art.category;
+        const lData = (art.languages && art.languages[targetLang] && art.languages[targetLang][currentLevel])
+                   || (art.languages && art.languages[targetLang] && art.languages[targetLang].A1);
+        const title = (lData && lData.title) || (art.titleTranslations && art.titleTranslations[targetLang]) || art.topic;
+        const img = (art.visual && art.visual.imageUrl) ? art.visual.imageUrl : 'images/cover_01.jpg';
+        const url = `article.html?id=${encodeURIComponent(art.id)}&target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
+        const isRead = isArticleRead(art.id);
+        const readBadge = isRead ? `<span class="card-read-badge">✓</span>` : '';
+        const timeStr = art.readTime || `4 ${t.readMin || 'min'}`;
+
+        const item = document.createElement("div");
+        item.className = "trending-item";
+        item.innerHTML = `
+          <a href="${url}" class="trending-thumb-link">
+            <img src="${img}" alt="${title}" class="trending-thumb" loading="lazy">
+          </a>
+          <div class="trending-info">
+            <span class="trending-cat">${cat}</span>
+            <a href="${url}">
+              <h4 class="trending-title">${title}</h4>
+            </a>
+            <div class="trending-meta">
+              <span>${currentLevel}</span>
+              <span>•</span>
+              <span>${timeStr}</span>
+              ${readBadge}
+            </div>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function renderMainFeed(searchQuery = "") {
+      const container = document.getElementById("feed-articles-container");
       const emptyState = document.getElementById("empty-state");
       if (!container) return;
       container.innerHTML = "";
 
       const t = uiTranslations[supportLang] || uiTranslations.en;
 
-      // When no search or category filter is active, skip the first article because it is already prominently featured
-      const isFiltered = searchQuery.length > 0 || selectedCategory !== "all";
-      const sourceArticles = isFiltered ? articlesDatabase : articlesDatabase.slice(1);
-
-      const filtered = sourceArticles.filter(art => {
+      // Filter articles based on active category and search
+      const filtered = articlesDatabase.filter(art => {
         if (selectedCategory !== "all" && art.category !== selectedCategory) {
           return false;
         }
@@ -1430,27 +1970,14 @@
 
       filtered.forEach(art => {
         const card = document.createElement("article");
-        card.className = "article-card";
+        card.className = "feed-card";
 
         const catLabel = (art.categoryTranslations && art.categoryTranslations[supportLang]) || art.category;
-
         const targetLevelData = (art.languages && art.languages[targetLang] && art.languages[targetLang][currentLevel])
                              || (art.languages && art.languages[targetLang] && art.languages[targetLang].A1);
         const cardTitle = (targetLevelData && targetLevelData.title)
                        || (art.titleTranslations && art.titleTranslations[targetLang])
                        || art.topic;
-
-        let subtitleHtml = "";
-        if (supportLang !== targetLang) {
-          const supportLevelData = (art.languages && art.languages[supportLang] && art.languages[supportLang][currentLevel])
-                                || (art.languages && art.languages[supportLang] && art.languages[supportLang].A1);
-          const subTitle = (supportLevelData && supportLevelData.title)
-                        || (art.titleTranslations && art.titleTranslations[supportLang])
-                        || "";
-          if (subTitle) {
-            subtitleHtml = `<div class="card-subtitle">${subTitle}</div>`;
-          }
-        }
 
         let desc = "";
         if (targetLevelData && targetLevelData.grammarDesc) {
@@ -1469,33 +1996,124 @@
         `).join('');
 
         card.innerHTML = `
-          <a href="${articleBaseUrl}&level=${currentLevel}" class="card-image-link">
-            <img src="${imageUrl}" alt="${cardTitle}" class="card-image" loading="lazy">
+          <a href="${articleBaseUrl}&level=${currentLevel}" class="feed-img-link">
+            <img src="${imageUrl}" alt="${cardTitle}" class="feed-img" loading="lazy">
           </a>
-          <div class="card-meta-row">
-            <span class="card-category-label" onclick="onCategoryDropdownChange('${art.category}')">${catLabel}</span>
-            ${readBadgeHtml}
-          </div>
-          <a href="${articleBaseUrl}&level=${currentLevel}">
-            <h3 class="card-title">${cardTitle}</h3>
-          </a>
-          ${subtitleHtml}
-          <p class="card-desc">${desc}</p>
-          <div class="card-levels-row">
-            <div class="level-tabs">
-              ${levelTabsHtml}
+          <div class="feed-body">
+            <div class="feed-meta-row">
+              <span class="feed-cat">${catLabel}</span>
+              ${readBadgeHtml}
+            </div>
+            <a href="${articleBaseUrl}&level=${currentLevel}">
+              <h3 class="feed-title">${cardTitle}</h3>
+            </a>
+            <p class="feed-desc">${desc}</p>
+            <div class="feed-levels-row">
+              <div class="level-tabs">
+                ${levelTabsHtml}
+              </div>
+              <a href="${articleBaseUrl}&level=${currentLevel}" class="card-read-link">
+                ${t.readStory || 'Read story →'}
+              </a>
             </div>
           </div>
-          <div class="card-bottom-row">
-            <span class="card-access-label">${t.freeReading || 'Free access'}</span>
-            <a href="${articleBaseUrl}&level=${currentLevel}" class="card-read-link">
-              ${t.readStory || 'Read story'}
-            </a>
-          </div>
         `;
-
         container.appendChild(card);
       });
+    }
+
+    function renderSidebarWidgets() {
+      const t = uiTranslations[supportLang] || uiTranslations.en;
+
+      // 1. Level Selector Widget
+      const levelContainer = document.getElementById("sidebar-level-pills");
+      const activeLevelBadge = document.getElementById("widget-active-level-label");
+      if (activeLevelBadge) activeLevelBadge.textContent = currentLevel;
+
+      if (levelContainer) {
+        levelContainer.innerHTML = "";
+        SUPPORTED_LEVELS.forEach(lvl => {
+          const descMap = levelDescriptions[lvl] || {};
+          const desc = descMap[supportLang] || descMap.en || "";
+          const btn = document.createElement("button");
+          btn.className = `level-select-btn ${lvl === currentLevel ? "active" : ""}`;
+          btn.innerHTML = `<strong>${lvl}</strong> <span>${desc}</span>`;
+          btn.onclick = () => setLevel(lvl);
+          levelContainer.appendChild(btn);
+        });
+      }
+
+      // 2. Vocabulary Widget Counter
+      const savedWords = getSavedWords();
+      const countBadge = document.getElementById("widget-saved-count");
+      if (countBadge) countBadge.textContent = savedWords.length;
+    }
+
+    function applyUiTranslations() {
+      const t = uiTranslations[supportLang] || uiTranslations.en;
+
+      const subElem = document.getElementById("brand-subtitle");
+      if (subElem) subElem.textContent = t.brandSubtitleHome;
+
+      const lblTarget = document.getElementById("lbl-target-lang");
+      if (lblTarget) lblTarget.textContent = t.targetLangLabel;
+
+      const lblSupport = document.getElementById("lbl-support-lang");
+      if (lblSupport) lblSupport.textContent = t.supportLangLabel;
+
+      const btnSurpriseTitle = document.getElementById("btn-surprise-title");
+      if (btnSurpriseTitle) btnSurpriseTitle.textContent = t.surpriseMeBtn;
+      const btnSurpriseSub = document.getElementById("btn-surprise-sub");
+      if (btnSurpriseSub) btnSurpriseSub.textContent = t.surpriseMeSub || "Adaptive random read";
+
+      const btnVocabTitle = document.getElementById("btn-vocab-title");
+      if (btnVocabTitle) btnVocabTitle.textContent = t.vocabulary;
+      const btnVocabSub = document.getElementById("btn-vocab-sub");
+      if (btnVocabSub) btnVocabSub.textContent = t.vocabularySub || "Review saved words";
+
+      const tickerLabel = document.getElementById("top-ticker-label");
+      if (tickerLabel) tickerLabel.textContent = t.topLatest || "LATEST";
+
+      const headingTrending = document.getElementById("heading-trending");
+      if (headingTrending) headingTrending.textContent = t.trendingTitle || "Trending Stories";
+
+      const headingLibrary = document.getElementById("heading-library");
+      if (headingLibrary) headingLibrary.textContent = t.libraryTitle || "Library";
+
+      const sInput = document.getElementById("search-input");
+      if (sInput) sInput.placeholder = t.searchPlaceholder || "Search stories...";
+
+      const widgetLevelsTitle = document.getElementById("widget-levels-title");
+      if (widgetLevelsTitle) widgetLevelsTitle.textContent = t.levelsWidgetTitle || "CEFR Level";
+
+      const widgetVocabTitle = document.getElementById("widget-vocab-title");
+      if (widgetVocabTitle) widgetVocabTitle.textContent = t.vocabWidgetTitle || "Vocabulary Notebook";
+
+      const widgetVocabDesc = document.getElementById("widget-vocab-desc");
+      if (widgetVocabDesc) widgetVocabDesc.textContent = t.vocabWidgetDesc || "Review words saved during your reading.";
+
+      const widgetVocabBtn = document.getElementById("widget-vocab-btn");
+      if (widgetVocabBtn) widgetVocabBtn.textContent = t.vocabWidgetCta || "Open Notebook →";
+
+      const promoTitle = document.getElementById("promo-title");
+      if (promoTitle) promoTitle.textContent = t.promoTitle;
+
+      const promoDesc = document.getElementById("promo-desc");
+      if (promoDesc) promoDesc.textContent = t.promoDesc;
+
+      const promoLink = document.getElementById("promo-link");
+      if (promoLink) promoLink.textContent = t.promoLink;
+
+      const nBanner = document.getElementById("notice-banner-text");
+      if (nBanner) nBanner.innerHTML = t.noticeBanner;
+
+      const nContact = document.getElementById("notice-contact-text");
+      if (nContact) nContact.innerHTML = t.noticeContact;
+
+      const emptyEl = document.getElementById("empty-state");
+      if (emptyEl) emptyEl.textContent = t.emptySearch;
+
+      updateThemeButtonUI();
     }
 
     async function start() {
