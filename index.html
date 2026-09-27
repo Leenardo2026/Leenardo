@@ -8,6 +8,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="auth.css">
+  <script>
+    (function() {
+      try {
+        const saved = localStorage.getItem("leenardo_theme");
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = saved || (prefersDark ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (e) {}
+    })();
+  </script>
   <style>
     /* ==========================================================================
        Design System: Editorial Magazine Minimalism (Sanzo Wada #263)
@@ -23,6 +33,17 @@
       --divider-hairline: #E0DDD6;
       --font-serif: 'Fraunces', Georgia, serif;
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    [data-theme="dark"] {
+      --bg-cream: #122129;
+      --bg-surface: #192C37;
+      --bg-white: #1F3441;
+      --ink-navy: #F0ECE1;
+      --text-muted: #889DA8;
+      --peach-accent: #F2AD78;
+      --brick-red: #C44D23;
+      --divider-hairline: #243B48;
     }
 
     * {
@@ -145,6 +166,26 @@
     }
 
     .header-link:hover {
+      color: var(--peach-accent);
+    }
+
+    .btn-theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: transparent;
+      border: 1px solid var(--divider-hairline);
+      color: var(--ink-navy);
+      padding: 0.35rem 0.65rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      transition: all 0.15s ease;
+    }
+
+    .btn-theme-toggle:hover {
+      border-color: var(--ink-navy);
       color: var(--peach-accent);
     }
 
@@ -727,6 +768,10 @@
           Surprise Me
         </button>
 
+        <button class="btn-theme-toggle" id="btn-theme-toggle" onclick="toggleTheme()" title="Switch Day/Night theme" aria-label="Switch Day/Night theme">
+          <span id="theme-toggle-text">Night</span>
+        </button>
+
         <div id="header-auth-container"></div>
       </div>
     </div>
@@ -843,7 +888,9 @@
         promoDesc: "Hikayelerine ve kelime defterine telefonundan da ulaş.",
         promoLink: "Kelime defterini keşfet",
         vocabulary: "Kelime Defteri",
-        emptySearch: "Aramanızla eşleşen bir yazı bulunamadı."
+        emptySearch: "Aramanızla eşleşen bir yazı bulunamadı.",
+        themeNight: "Gece",
+        themeDay: "Gündüz"
       },
       en: {
         brandSubtitleHome: "Anything you're curious about, in the language you want, at the level you can understand.",
@@ -868,7 +915,9 @@
         promoDesc: "Access your stories and vocabulary notebook on your phone.",
         promoLink: "Explore vocabulary notebook",
         vocabulary: "Vocabulary",
-        emptySearch: "No articles found matching your criteria."
+        emptySearch: "No articles found matching your criteria.",
+        themeNight: "Night",
+        themeDay: "Day"
       },
       es: {
         brandSubtitleHome: "Todo lo que te interesa, en el idioma que quieras y al nivel que comprendas.",
@@ -893,7 +942,9 @@
         promoDesc: "Accede a tus historias y cuaderno de vocabulario en tu móvil.",
         promoLink: "Descubrir cuaderno de vocabulario",
         vocabulary: "Vocabulario",
-        emptySearch: "No se encontraron artículos que coincidan con tu búsqueda."
+        emptySearch: "No se encontraron artículos que coincidan con tu búsqueda.",
+        themeNight: "Noche",
+        themeDay: "Día"
       },
       de: {
         brandSubtitleHome: "Alles, was dich interessiert, in deiner Wunschsprache und auf deinem Niveau.",
@@ -918,7 +969,9 @@
         promoDesc: "Greife jederzeit auf deinem Smartphone auf deine Geschichten und Vokabeln zu.",
         promoLink: "Vokabelheft entdecken",
         vocabulary: "Vokabeln",
-        emptySearch: "Keine passenden Artikel gefunden."
+        emptySearch: "Keine passenden Artikel gefunden.",
+        themeNight: "Nacht",
+        themeDay: "Tag"
       },
       fr: {
         brandSubtitleHome: "Tout ce qui vous intéresse, dans la langue choisie et à votre niveau.",
@@ -943,7 +996,9 @@
         promoDesc: "Accédez à vos histoires et carnet de vocabulaire sur votre téléphone.",
         promoLink: "Découvrir le carnet de vocabulaire",
         vocabulary: "Vocabulaire",
-        emptySearch: "Aucun article trouvé correspondant à vos critères."
+        emptySearch: "Aucun article trouvé correspondant à vos critères.",
+        themeNight: "Nuit",
+        themeDay: "Jour"
       }
     };
 
@@ -1120,6 +1175,30 @@
       }
     }
 
+    function getCurrentTheme() {
+      return document.documentElement.getAttribute("data-theme") || "light";
+    }
+
+    function updateThemeButtonUI() {
+      const currentTheme = getCurrentTheme();
+      const t = uiTranslations[supportLang] || uiTranslations.en;
+      const toggleText = document.getElementById("theme-toggle-text");
+      if (toggleText) {
+        // Button shows the action label to switch to (e.g. if dark, show "Day"/"Gündüz"; if light, show "Night"/"Gece")
+        toggleText.textContent = currentTheme === "dark" ? (t.themeDay || "Day") : (t.themeNight || "Night");
+      }
+    }
+
+    function toggleTheme() {
+      const currentTheme = getCurrentTheme();
+      const nextTheme = currentTheme === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", nextTheme);
+      try {
+        localStorage.setItem("leenardo_theme", nextTheme);
+      } catch (e) {}
+      updateThemeButtonUI();
+    }
+
     function applyUiTranslations() {
       const t = uiTranslations[supportLang] || uiTranslations.en;
       
@@ -1176,6 +1255,8 @@
 
       const emptyEl = document.getElementById("empty-state");
       if (emptyEl) emptyEl.textContent = t.emptySearch;
+
+      updateThemeButtonUI();
     }
 
     function onCategoryDropdownChange(catKey) {

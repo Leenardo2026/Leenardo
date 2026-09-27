@@ -8,6 +8,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="auth.css">
+  <script>
+    (function() {
+      try {
+        const saved = localStorage.getItem("leenardo_theme");
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = saved || (prefersDark ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (e) {}
+    })();
+  </script>
   <style>
     /* ==========================================================================
        Design System: Editorial Magazine Minimalism (Sanzo Wada #263)
@@ -21,8 +31,23 @@
       --peach-accent: #F2AD78;
       --brick-red: #A93400;
       --divider-hairline: #E0DDD6;
+      --highlight-hover: #EAE6DD;
+      --highlight-speaking: #FCEBD9;
       --font-serif: 'Fraunces', Georgia, serif;
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    [data-theme="dark"] {
+      --bg-cream: #122129;
+      --bg-surface: #192C37;
+      --bg-white: #1F3441;
+      --ink-navy: #F0ECE1;
+      --text-muted: #889DA8;
+      --peach-accent: #F2AD78;
+      --brick-red: #C44D23;
+      --divider-hairline: #243B48;
+      --highlight-hover: #1F3847;
+      --highlight-speaking: #2A4456;
     }
 
     * {
@@ -163,6 +188,26 @@
       color: var(--ink-navy);
       cursor: pointer;
       outline: none;
+    }
+
+    .btn-theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: transparent;
+      border: 1px solid var(--divider-hairline);
+      color: var(--ink-navy);
+      padding: 0.35rem 0.65rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      transition: all 0.15s ease;
+    }
+
+    .btn-theme-toggle:hover {
+      border-color: var(--ink-navy);
+      color: var(--peach-accent);
     }
 
     /* Focused Editorial Reading Shell */
@@ -420,11 +465,11 @@
     }
 
     .sentence-span:hover {
-      background-color: #EAE6DD;
+      background-color: var(--highlight-hover);
     }
 
     .sentence-span.speaking-active {
-      background-color: #FCEBD9 !important;
+      background-color: var(--highlight-speaking) !important;
       outline: 1px solid var(--peach-accent);
     }
 
@@ -482,7 +527,7 @@
       position: absolute;
       z-index: 250;
       width: 320px;
-      background: #FFFFFF;
+      background: var(--bg-white);
       border: 1px solid var(--divider-hairline);
       overflow: hidden;
       transition: opacity 0.15s ease;
@@ -546,7 +591,7 @@
 
     .popover-body {
       padding: 0.85rem;
-      background: #FFFFFF;
+      background: var(--bg-white);
     }
 
     .popover-badge {
@@ -642,7 +687,7 @@
 
     .btn-secondary:hover {
       border-color: var(--ink-navy);
-      background: #FAF8F5;
+      background: var(--bg-surface);
     }
 
     .btn-secondary.is-read {
@@ -829,7 +874,7 @@
     }
 
     .vocab-card {
-      background: #FFFFFF;
+      background: var(--bg-white);
       border: 1px solid var(--divider-hairline);
       padding: 1rem;
       display: flex;
@@ -892,7 +937,7 @@
     .qa-item {
       border: 1px solid var(--divider-hairline);
       margin-bottom: 0.75rem;
-      background: #FFFFFF;
+      background: var(--bg-white);
     }
 
     .qa-question-bar {
@@ -956,7 +1001,7 @@
     }
 
     .quiz-opt-btn {
-      background: #FFFFFF;
+      background: var(--bg-white);
       border: 1px solid var(--divider-hairline);
       padding: 0.75rem 1rem;
       font-size: 0.88rem;
@@ -972,13 +1017,13 @@
     }
 
     .quiz-opt-btn.correct-choice {
-      background: #FAF8F5 !important;
+      background: var(--bg-surface) !important;
       border-color: var(--ink-navy) !important;
       font-weight: 700 !important;
     }
 
     .quiz-opt-btn.incorrect-choice {
-      background: #FAF0EB !important;
+      background: var(--bg-surface) !important;
       border-color: var(--brick-red) !important;
       color: var(--brick-red) !important;
     }
@@ -997,7 +1042,7 @@
     }
 
     .quiz-explanation-box.incorrect {
-      background: #FAF0EB;
+      background: var(--bg-surface);
       color: var(--brick-red);
       border-color: var(--brick-red);
     }
@@ -1119,7 +1164,7 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(27, 54, 68, 0.45);
+      background: rgba(18, 33, 41, 0.65);
       backdrop-filter: blur(2px);
       z-index: 2000;
       align-items: center;
@@ -1130,7 +1175,7 @@
     .modal-backdrop.show { display: flex; }
 
     .modal-content {
-      background: #FFFFFF;
+      background: var(--bg-surface);
       border: 1px solid var(--divider-hairline);
       max-width: 900px;
       width: 100%;
@@ -1289,7 +1334,7 @@
       flex-direction: column;
       justify-content: space-between;
       border: 1px solid var(--divider-hairline);
-      background: #FFFFFF;
+      background: var(--bg-white);
     }
 
     .fc-back {
@@ -1460,6 +1505,10 @@
         <button class="btn-header-vocab" onclick="openVocabNotebook('words')">
           <span id="btn-my-words-text">Vocabulary</span>
           <span class="vocab-counter-badge" id="saved-words-count">0</span>
+        </button>
+
+        <button class="btn-theme-toggle" id="btn-theme-toggle" onclick="toggleTheme()" title="Switch Day/Night theme" aria-label="Switch Day/Night theme">
+          <span id="theme-toggle-text">Night</span>
         </button>
 
         <div id="header-auth-container"></div>
@@ -1853,7 +1902,9 @@
         shareBtn: "Paylaş",
         shareCopied: "Hikaye bağlantısı panoya kopyalandı!",
         markedReadToast: "Okundu olarak işaretlendi! 'Rastgele Hikaye' diğer hikayeleri önceliklendirecek.",
-        unmarkedReadToast: "Okundu işareti kaldırıldı."
+        unmarkedReadToast: "Okundu işareti kaldırıldı.",
+        themeNight: "Gece",
+        themeDay: "Gündüz"
       },
       en: {
         backHome: "Library",
@@ -1911,7 +1962,9 @@
         shareBtn: "Share",
         shareCopied: "Story link copied to clipboard!",
         markedReadToast: "Marked as read! 'Surprise Me' will prioritize other stories.",
-        unmarkedReadToast: "Marked as unread."
+        unmarkedReadToast: "Marked as unread.",
+        themeNight: "Night",
+        themeDay: "Day"
       },
       es: {
         backHome: "Biblioteca",
@@ -1969,7 +2022,9 @@
         shareBtn: "Compartir",
         shareCopied: "¡Enlace copiado al portapapeles!",
         markedReadToast: "¡Marcado como leído! 'Sorpréndeme' priorizará otras historias.",
-        unmarkedReadToast: "Marcado como no leído."
+        unmarkedReadToast: "Marcado como no leído.",
+        themeNight: "Noche",
+        themeDay: "Día"
       },
       de: {
         backHome: "Bibliothek",
@@ -2027,7 +2082,9 @@
         shareBtn: "Teilen",
         shareCopied: "Link in die Zwischenablage kopiert!",
         markedReadToast: "Als gelesen markiert! 'Überraschung' priorisiert andere Geschichten.",
-        unmarkedReadToast: "Als ungelesen markiert."
+        unmarkedReadToast: "Als ungelesen markiert.",
+        themeNight: "Nacht",
+        themeDay: "Tag"
       },
       fr: {
         backHome: "Bibliothèque",
@@ -2085,7 +2142,9 @@
         shareBtn: "Partager",
         shareCopied: "Lien copié dans le presse-papiers !",
         markedReadToast: "Marqué comme lu ! 'Surprenez-moi' priorisera d'autres histoires.",
-        unmarkedReadToast: "Marqué comme non lu."
+        unmarkedReadToast: "Marqué comme non lu.",
+        themeNight: "Nuit",
+        themeDay: "Jour"
       }
     };
 
@@ -2450,6 +2509,29 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    function getCurrentTheme() {
+      return document.documentElement.getAttribute("data-theme") || "light";
+    }
+
+    function updateThemeButtonUI() {
+      const currentTheme = getCurrentTheme();
+      const t = uiTranslations[supportLang] || uiTranslations.en;
+      const toggleText = document.getElementById("theme-toggle-text");
+      if (toggleText) {
+        toggleText.textContent = currentTheme === "dark" ? (t.themeDay || "Day") : (t.themeNight || "Night");
+      }
+    }
+
+    function toggleTheme() {
+      const currentTheme = getCurrentTheme();
+      const nextTheme = currentTheme === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", nextTheme);
+      try {
+        localStorage.setItem("leenardo_theme", nextTheme);
+      } catch (e) {}
+      updateThemeButtonUI();
+    }
+
     function applyUiTranslations() {
       const t = uiTranslations[supportLang] || uiTranslations.en;
 
@@ -2560,6 +2642,7 @@
       if (btnParallelText) btnParallelText.textContent = t.bilingualCompare;
 
       updateReadStatusUI();
+      updateThemeButtonUI();
     }
 
     function toggleToolCard(cardId) {

@@ -22,7 +22,7 @@
   * Project Ref: `vkddnvpqnccstcjnqfyq`
   * Tablo: `public.saved_words` (RLS kurallarıyla korumalı; kullanıcı sadece kendi kelimelerini okuyabilir, ekleyebilir, silebilir).
 * **Frontend:** Vanilla HTML5, modern CSS3 (`auth.css`), saf JavaScript (`supabase-client.js`, `auth-ui.js`, `articles-data.js`). Hiçbir hantal framework bağımlılığı yoktur, ışık hızında çalışır.
-* **Tasarım Sistemi:** Editorial Magazine Minimalism (Sanzo Wada #263 Renk Paleti: Krem `#F5F2EC`, Mürekkep Lacivert `#1B3644`, Şeftali Vurgusu `#F2AD78`, Tuğla Kırmızısı `#A93400`, Nötr Gri `#8A8A8A`, 1px saç çizgisi ayraçlar `#E0DDD6`, `border-radius: 0`, gölgesiz düz yüzeyler, Fraunces serif ve Inter tipografi).
+* **Tasarım Sistemi:** Editorial Magazine Minimalism (Sanzo Wada Renk Paleti: Gündüz için #263 paleti — Krem `#F5F2EC`, Mürekkep Lacivert `#1B3644`, Şeftali Vurgusu `#F2AD78`, Tuğla Kırmızısı `#A93400`, Nötr Gri `#8A8A8A`, 1px saç çizgisi ayraçlar `#E0DDD6`; Gece modu için Sanzo Wada gece paleti — Gece İndigo `#122129`, Yüzey `#192C37`, Kart `#1F3441`, Fildişi/Ekru `#F0ECE1`, Sis Grisi `#889DA8`, Sıcak Şeftali `#F2AD78`, Benitobi Kırmızısı `#C44D23`, Saç çizgisi `#243B48`. `border-radius: 0`, gölgesiz düz editoryal yüzeyler, Fraunces serif ve Inter tipografi).
 
 ---
 
@@ -60,6 +60,7 @@
 * [x] **Arayüz Yenilemesi (Editorial Magazine Minimalism):** `index.html`, `article.html` ve `auth.css` dosyalarında Sanzo Wada #263 paleti, Fraunces serif başlıklar, düz saç çizgisi bölücüler ve sıfır border-radius tasarımı uygulandı; tüm emojiler temizlendi ve işlevsellik (dil, seviye, kelime kaydetme, auth, arama) eksiksiz korundu.
 * [x] **Okundu Takibi & Akıllı "Surprise Me":** Makaleleri okundu olarak işaretleme (`Mark as Read`), ana sayfa ve tavsiye kartlarında zarif `✓ Okundu` rozeti gösterimi ve `Surprise Me` butonunun okunmamış hikayeleri önceliklendirmesi sağlandı.
 * [x] **Makale Paylaşım Özelliği:** Makale üstü ve altında yer alan editoryal paylaş butonuyla mobilde yerel sistem paylaşımı (`Web Share API`), masaüstünde ise tek tıkla panoya kopyalama ve anlık toast bildirimi eklendi.
+* [x] **Sanzo Wada Gece Modu (Dark Mode):** Sanzo Wada geleneksel renk paletlerinden ilham alan (Kuro-Aizome gece indigosu, fildişi ekru tipografi, yumuşak şeftali vurgusu) editoryal gece modu eklendi. FOUC önleyici satır içi komut dosyası, `localStorage` ve sistem tema tercihi (`prefers-color-scheme`) algılama, 5 dilde (TR/EN/ES/DE/FR) yerelleştirilmiş zarif tipografik buton tasarımı sağlandı.
 
 ---
 
