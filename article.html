@@ -1550,17 +1550,10 @@
           <button class="btn-secondary" id="btn-share-bottom" onclick="shareCurrentStory()">
             <span id="btn-share-bottom-text">Share</span>
           </button>
-          <button class="btn-secondary" id="btn-copy-worksheet" onclick="copyWorksheetToClipboard()">
-            <span id="btn-copy-worksheet-text">Copy Worksheet</span>
-          </button>
         </div>
         <div class="reading-actions-right">
           <button class="btn-secondary" id="btn-parallel" onclick="openParallelModal()">
             <span id="btn-parallel-text">Side-by-Side View</span>
-          </button>
-          <button class="btn-primary-action" id="btn-notebook" onclick="openVocabNotebook('words')">
-            <span id="btn-my-words-text-bar">Vocabulary & Flashcards</span>
-            <span class="vocab-counter-badge" id="saved-words-count-bar" style="background:var(--peach-accent); color:var(--ink-navy); margin-left:0.35rem;">0</span>
           </button>
         </div>
       </div>
@@ -2563,14 +2556,8 @@
       const btnBottomShare = document.getElementById("btn-share-bottom-text");
       if (btnBottomShare) btnBottomShare.textContent = t.shareBtn;
 
-      const btnCopyWorksheet = document.getElementById("btn-copy-worksheet-text");
-      if (btnCopyWorksheet) btnCopyWorksheet.textContent = t.copyWorksheet;
-
       const btnParallelText = document.getElementById("btn-parallel-text");
       if (btnParallelText) btnParallelText.textContent = t.bilingualCompare;
-
-      const btnMyWordsBar = document.getElementById("btn-my-words-text-bar");
-      if (btnMyWordsBar) btnMyWordsBar.textContent = t.studyFlashcards;
 
       updateReadStatusUI();
     }
