@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>💎 Daily Turkish with Mia — Graded Multilingual Reader & Magazine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="auth.css">
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-dark: #3730a3;
+      --primary-light: #eef2ff;
+      --primary-glow: rgba(79, 70, 229, 0.15);
+      --accent: #f59e0b;
+      --accent-light: #fef3c7;
+      --slate-950: #020617;
+      --slate-900: #0f172a;
+      --slate-800: #1e293b;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748b;
+      --slate-400: #94a3b8;
+      --slate-300: #cbd5e1;
+      --slate-200: #e2e8f0;
+      --slate-100: #f1f5f9;
+      --slate-50: #f8fafc;
+      --emerald-600: #059669;
+      --emerald-50: #ecfdf5;
+      --amber-600: #d97706;
+      --amber-50: #fffbeb;
+      --radius-xl: 20px;
+      --radius-lg: 16px;
+      --radius-md: 10px;
+      --radius-sm: 6px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 16px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 12px 32px rgba(15, 23, 42, 0.12);
+      --shadow-hover: 0 20px 40px -10px rgba(79, 70, 229, 0.22);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f8fafc;
+      color: var(--slate-800);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Top Brand Bar */
+    .top-header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--slate-200);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .top-header-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .brand-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .brand-title span {
+      background: linear-gradient(135deg, var(--primary) 0%, #7c3aed 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-subtitle {
+      font-size: 0.8rem;
+      color: var(--slate-500);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    /* Language Switcher Control */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .lang-switcher-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--slate-100);
+      padding: 0.35rem 0.75rem;
+      border-radius: 9999px;
+      border: 1px solid var(--slate-200);
+    }
+
+    .lang-field {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .lang-field label {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--slate-600);
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .lang-select {
+      background: #ffffff;
+      border: 1px solid var(--slate-300);
+      border-radius: 9999px;
+      padding: 0.25rem 0.65rem;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--slate-800);
+      cursor: pointer;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .lang-select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-light);
+    }
+
+    .btn-surprise-mini {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #ffffff;
+      border: 1px solid var(--slate-300);
+      color: var(--slate-700);
+      padding: 0.4rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-surprise-mini:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--primary-light);
+      transform: translateY(-1px);
+    }
+
+    /* Notice Banner */
+    .notice-banner {
+      background: linear-gradient(90deg, #0f172a 0%, #1e1b4b 100%);
+      color: #cbd5e1;
+      font-size: 0.78rem;
+      padding: 0.45rem 1.5rem;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .notice-banner a {
+      color: #93c5fd;
+      text-decoration: underline;
+      font-weight: 600;
+    }
+
+    /* Hero Section - Editorial Masthead */
+    .hero-section {
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+      border-bottom: 1px solid var(--slate-200);
+      padding: 3.25rem 1.5rem 2.75rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid rgba(79, 70, 229, 0.25);
+      padding: 0.35rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-title {
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: var(--slate-900);
+      line-height: 1.2;
+      margin-bottom: 0.95rem;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-desc {
+      font-size: 1.12rem;
+      color: var(--slate-600);
+      line-height: 1.65;
+      margin-bottom: 1.75rem;
+      max-width: 740px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-quick-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-hero-surprise {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--primary) 0%, #6366f1 100%);
+      color: #ffffff;
+      font-size: 0.92rem;
+      font-weight: 700;
+      padding: 0.75rem 1.4rem;
+      border-radius: 9999px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+      transition: all 0.2s ease;
+    }
+
+    .btn-hero-surprise:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(79, 70, 229, 0.45);
+    }
+
+    /* Featured Story Spotlight */
+    .spotlight-wrapper {
+      max-width: 1280px;
+      margin: -1.5rem auto 2.5rem;
+      padding: 0 1.5rem;
+      width: 100%;
+    }
+
+    .spotlight-card {
+      background: #ffffff;
+      border: 1.5px solid var(--slate-200);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .spotlight-card:hover {
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(79, 70, 229, 0.3);
+    }
+
+    .spotlight-visual-link {
+      display: block;
+      overflow: hidden;
+      position: relative;
+      min-height: 280px;
+    }
+
+    .spotlight-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .spotlight-card:hover .spotlight-img {
+      transform: scale(1.03);
+    }
+
+    .spotlight-content {
+      padding: 2.5rem 2.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .spotlight-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .spotlight-badge {
+      background: #fef3c7;
+      color: #b45309;
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.3rem 0.75rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .spotlight-category {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.3rem 0.75rem;
+      border-radius: 9999px;
+    }
+
+    .spotlight-time {
+      font-size: 0.8rem;
+      color: var(--slate-500);
+      font-weight: 600;
+      margin-left: auto;
+    }
+
+    .spotlight-title {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--slate-900);
+      line-height: 1.35;
+      margin-bottom: 0.5rem;
+      transition: color 0.15s ease;
+    }
+
+    .spotlight-card:hover .spotlight-title {
+      color: var(--primary);
+    }
+
+    .spotlight-subtitle {
+      font-size: 0.95rem;
+      color: var(--slate-500);
+      font-style: italic;
+      margin-bottom: 1rem;
+      line-height: 1.45;
+    }
+
+    .spotlight-excerpt {
+      font-size: 0.95rem;
+      color: var(--slate-600);
+      line-height: 1.6;
+      margin-bottom: 1.75rem;
+    }
+
+    .spotlight-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--slate-100);
+      padding-top: 1.25rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      .spotlight-card {
+        grid-template-columns: 1fr;
+      }
+      .spotlight-visual-link {
+        height: 220px;
+        min-height: auto;
+      }
+      .spotlight-content {
+        padding: 1.75rem 1.5rem;
+      }
+      .spotlight-title {
+        font-size: 1.4rem;
+      }
+    }
+
+    /* Global Level Selector Bar */
+    .level-selector-section {
+      max-width: 1280px;
+      margin: 0 auto 1.5rem;
+      padding: 0 1.5rem;
+      width: 100%;
+    }
+
+    .level-selector-card {
+      background: #ffffff;
+      border: 1.5px solid var(--slate-200);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      flex-wrap: wrap;
+    }
+
+    .level-selector-label-group {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .level-icon {
+      font-size: 1.25rem;
+    }
+
+    .level-selector-title {
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--slate-800);
+    }
+
+    .level-selector-desc {
+      font-size: 0.78rem;
+      color: var(--slate-500);
+    }
+
+    .level-selector-pills {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .level-selector-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      border: 1.5px solid var(--slate-200);
+      background: var(--slate-50);
+      color: var(--slate-700);
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .level-selector-btn:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .level-selector-btn.active {
+      background: linear-gradient(135deg, var(--primary) 0%, #4338ca 100%);
+      border-color: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(79, 70, 229, 0.35);
+    }
+
+    .level-selector-btn .subtext {
+      font-size: 0.72rem;
+      opacity: 0.85;
+      font-weight: 500;
+    }
+
+    /* Controls: Search & Category Filter */
+    .controls-wrapper {
+      max-width: 1280px;
+      margin: 0 auto 2rem;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+    }
+
+    .controls-row-top {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 260px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      background: #ffffff;
+      border: 1.5px solid var(--slate-200);
+      border-radius: var(--radius-md);
+      padding: 0.8rem 1.25rem 0.8rem 2.65rem;
+      font-family: inherit;
+      font-size: 0.92rem;
+      color: var(--slate-800);
+      box-shadow: var(--shadow-sm);
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-light);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.95rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1rem;
+      color: var(--slate-400);
+      pointer-events: none;
+    }
+
+    .category-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .category-pill {
+      background: #ffffff;
+      border: 1.5px solid var(--slate-200);
+      color: var(--slate-700);
+      padding: 0.45rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .category-pill:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .category-pill.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+      box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
+    }
+
+    /* Article Cards Grid */
+    .articles-grid-wrapper {
+      max-width: 1280px;
+      margin: 0 auto 3.5rem;
+      padding: 0 1.5rem;
+      flex: 1;
+      width: 100%;
+    }
+
+    .articles-count-bar {
+      margin-bottom: 1.25rem;
+      font-size: 0.86rem;
+      color: var(--slate-500);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 1.75rem;
+    }
+
+    @media (max-width: 768px) {
+      .articles-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-title {
+        font-size: 2rem;
+      }
+    }
+
+    .article-card {
+      background: #ffffff;
+      border: 1.5px solid var(--slate-200);
+      border-radius: var(--radius-lg);
+      padding: 1.65rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .article-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(79, 70, 229, 0.3);
+    }
+
+    .card-img-link {
+      display: block;
+      margin: -1.65rem -1.65rem 1.25rem -1.65rem;
+      overflow: hidden;
+      border-top-left-radius: 14px;
+      border-top-right-radius: 14px;
+      position: relative;
+      background: var(--slate-100);
+      height: 185px;
+    }
+
+    .card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s ease;
+    }
+
+    .article-card:hover .card-img {
+      transform: scale(1.04);
+    }
+
+    .card-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.85rem;
+    }
+
+    .card-category {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.25rem 0.7rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(79, 70, 229, 0.2);
+    }
+
+    .card-readtime {
+      font-size: 0.78rem;
+      color: var(--slate-500);
+      font-weight: 600;
+    }
+
+    .card-title {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--slate-900);
+      line-height: 1.4;
+      margin-bottom: 0.35rem;
+      transition: color 0.15s ease;
+    }
+
+    .article-card:hover .card-title {
+      color: var(--primary);
+    }
+
+    .card-subtitle {
+      font-size: 0.85rem;
+      color: var(--slate-500);
+      font-style: italic;
+      line-height: 1.35;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: var(--slate-600);
+      line-height: 1.55;
+      margin-bottom: 1.25rem;
+      flex: 1;
+    }
+
+    .card-levels-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--slate-100);
+      padding-top: 1rem;
+      margin-top: auto;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .level-pills-list {
+      display: flex;
+      gap: 0.3rem;
+    }
+
+    .level-pill-mini {
+      display: inline-block;
+      background: var(--slate-100);
+      border: 1px solid var(--slate-200);
+      color: var(--slate-600);
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 0.22rem 0.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+
+    .level-pill-mini:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .level-pill-mini.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+      box-shadow: 0 1px 4px rgba(79, 70, 229, 0.3);
+    }
+
+    .btn-read {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--primary);
+      color: #ffffff;
+      text-decoration: none;
+      padding: 0.5rem 1.15rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-read:hover {
+      background: var(--primary-dark);
+      box-shadow: 0 3px 12px rgba(79, 70, 229, 0.4);
+      transform: translateY(-1px);
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: #ffffff;
+      border: 1.5px dashed var(--slate-300);
+      border-radius: var(--radius-lg);
+      color: var(--slate-500);
+      font-size: 1.05rem;
+      display: none;
+    }
+
+    /* Legal Footer */
+    .legal-footer {
+      background: var(--slate-900);
+      color: #94a3b8;
+      padding: 2.5rem 2rem;
+      margin-top: auto;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      border-top: 1px solid var(--slate-800);
+    }
+
+    .legal-footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .legal-footer h4 {
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .legal-footer a {
+      color: #818cf8;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header / Branding & Dual Language Switcher -->
+  <header class="top-header">
+    <div class="top-header-inner">
+      <div class="brand-group">
+        <div class="brand-title">
+          <span>💎 Daily Turkish with Mia</span>
+        </div>
+        <div class="brand-subtitle" id="brand-subtitle">
+          Anything you're curious about, in the language you want, at the level you can understand.
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div id="header-auth-container"></div>
+        <a href="article.html#notebook" class="btn-header-vocab" style="text-decoration:none;">
+          <span>📚 Vocabulary</span>
+        </a>
+        <div class="lang-switcher-bar">
+          <div class="lang-field">
+            <label for="target-lang-select" id="lbl-target-lang">🎯 Target:</label>
+            <select id="target-lang-select" class="lang-select" onchange="onTargetLanguageChange(this.value)">
+              <option value="tr">🇹🇷 Türkçe</option>
+              <option value="en">🇬🇧 English</option>
+              <option value="es">🇪🇸 Español</option>
+              <option value="de">🇩🇪 Deutsch</option>
+              <option value="fr">🇫🇷 Français</option>
+            </select>
+          </div>
+
+          <div class="lang-field">
+            <label for="support-lang-select" id="lbl-support-lang">🌐 Support:</label>
+            <select id="support-lang-select" class="lang-select" onchange="onSupportLanguageChange(this.value)">
+              <option value="en">🇬🇧 English</option>
+              <option value="tr">🇹🇷 Türkçe</option>
+              <option value="es">🇪🇸 Español</option>
+              <option value="de">🇩🇪 Deutsch</option>
+              <option value="fr">🇫🇷 Français</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="btn-surprise-mini" onclick="surpriseMe()" id="btn-surprise-mini" title="Random Story">
+          <span>🎲</span>
+          <span id="btn-surprise-mini-text">Surprise Me</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Notice & Takedown Top Banner -->
+  <div class="notice-banner">
+    <span id="notice-banner-text">🛡️ <strong>Pedagogical Assurance:</strong> All materials are curated for language learning under CEFR standards.</span>
+    <span>•</span>
+    <span id="notice-contact-text">Inquiries: <a href="mailto:copyright@dailyturkishmia.com">copyright@dailyturkishmia.com</a> (24h response)</span>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <span id="hero-badge">📖 Curated Graded Magazine</span>
+      </div>
+      <h1 class="hero-title" id="hero-title">Read Anything You're Curious About, at Your Level</h1>
+      <p class="hero-desc" id="hero-desc">
+        Explore history, science, art, and daily life from beginner (A1) to advanced (C1) across 5 interchangeable languages.
+      </p>
+      <div class="hero-quick-actions">
+        <button class="btn-hero-surprise" onclick="surpriseMe()" id="btn-hero-surprise">
+          <span>🎲</span>
+          <span id="btn-hero-surprise-text">Surprise Me with a Story</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Editorial Spotlight (Featured Story) -->
+  <section class="spotlight-wrapper" id="spotlight-wrapper">
+    <!-- Spotlight rendered dynamically based on active language and level -->
+  </section>
+
+  <!-- Global Level Selector Bar -->
+  <section class="level-selector-section">
+    <div class="level-selector-card">
+      <div class="level-selector-label-group">
+        <span class="level-icon">📊</span>
+        <div>
+          <div class="level-selector-title" id="level-selector-title">Reading Difficulty / Level</div>
+          <div class="level-selector-desc" id="level-selector-desc">Preview stories calibrated to your current proficiency</div>
+        </div>
+      </div>
+      <div class="level-selector-pills" id="level-selector-pills">
+        <button class="level-selector-btn" data-level="A1" onclick="setLevel('A1')">
+          <strong>A1</strong> <span class="subtext" id="lvl-sub-a1">Beginner</span>
+        </button>
+        <button class="level-selector-btn" data-level="A2" onclick="setLevel('A2')">
+          <strong>A2</strong> <span class="subtext" id="lvl-sub-a2">Elementary</span>
+        </button>
+        <button class="level-selector-btn" data-level="B1" onclick="setLevel('B1')">
+          <strong>B1</strong> <span class="subtext" id="lvl-sub-b1">Intermediate</span>
+        </button>
+        <button class="level-selector-btn" data-level="B2" onclick="setLevel('B2')">
+          <strong>B2</strong> <span class="subtext" id="lvl-sub-b2">Upper-Int.</span>
+        </button>
+        <button class="level-selector-btn" data-level="C1" onclick="setLevel('C1')">
+          <strong>C1</strong> <span class="subtext" id="lvl-sub-c1">Advanced</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Controls: Search & Category Filter -->
+  <section class="controls-wrapper">
+    <div class="controls-row-top">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="search-input" class="search-input" placeholder="Search topics, titles, or concepts..." oninput="filterArticles()">
+      </div>
+    </div>
+
+    <div class="category-pills" id="category-pills-container">
+      <!-- Injected dynamically based on actual dataset -->
+    </div>
+  </section>
+
+  <!-- Articles Grid -->
+  <main class="articles-grid-wrapper">
+    <div class="articles-count-bar">
+      <span id="articles-count-text">Showing stories</span>
+    </div>
+    <div class="articles-grid" id="articles-container">
+      <!-- Cards injected dynamically -->
+    </div>
+    <div class="empty-state" id="empty-state">
+      No articles found matching your criteria.
+    </div>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="legal-footer">
+    <div class="legal-footer-inner">
+      <h4>💎 Daily Turkish with Mia</h4>
+      <p id="footer-disclaimer">
+        Bu metinler yalnızca dil öğretimi amacıyla yapay zeka ile üretilmiştir, gerçek bir haber kaynağını temsil etmez.
+      </p>
+      <p style="margin-top:0.75rem;font-size:0.8rem;">
+        Notice & Takedown İletişim: <a href="mailto:copyright@dailyturkishmia.com">copyright@dailyturkishmia.com</a> • Yanıt Süresi: Azami 24 Saat.
+      </p>
+    </div>
+  </footer>
+
+  <!-- External Data Source (CORS-free for file:// and HTTP) -->
+  <script src="articles-data.js"></script>
+
+  <script>
+    const SUPPORTED_LANGUAGES = ['tr', 'en', 'es', 'de', 'fr'];
+    const SUPPORTED_LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1'];
+
+    const langNames = {
+      tr: "Türkçe",
+      en: "English",
+      es: "Español",
+      de: "Deutsch",
+      fr: "Français"
+    };
+
+    const uiTranslations = {
+      tr: {
+        brandSubtitleHome: "İstediğin konuyu, istediğin dilde, anladığın seviyede oku.",
+        noticeBanner: "🛡️ <strong>Pedagojik Güvence:</strong> Tüm içerikler dil eğitimi ve CEFR standartlarına uygun olarak tasarlanmıştır.",
+        noticeContact: "Telif bildirimi: copyright@dailyturkishmia.com (24 saat içinde yanıtlanır)",
+        targetLangLabel: "🎯 Öğrenilen Dil:",
+        supportLangLabel: "🌐 Destek Dili:",
+        surpriseMeBtn: "Rastgele Bir Hikaye",
+        surpriseMeHero: "Beni Bir Hikayeyle Şaşırt",
+        heroBadge: "📖 Seviyelendirilmiş Dergi & Okuma Kütüphanesi",
+        heroTitle: "Merak Ettiğin Her Şeyi, İstediğin Dilde ve Seviyede Oku",
+        heroDesc: "Tarihten bilime, sanattan günlük hayata büyüleyici hikayeler. Başlangıçtan (A1) ileri seviyeye (C1), 5 farklı dilde dilediğince keşfet.",
+        levelSelectorTitle: "Okuma Zorluğu / Seviye",
+        levelSelectorDesc: "Hikayelerin zorluk ve dil yapısını seviyene göre hemen ayarla",
+        lvlA1: "Başlangıç",
+        lvlA2: "Temel",
+        lvlB1: "Orta",
+        lvlB2: "İleri-Orta",
+        lvlC1: "İleri",
+        searchPlaceholder: "Konu, başlık veya kelime ara...",
+        allCat: "Tümü",
+        readTimeSuffix: "okuma",
+        startReading: "Okumaya Başla →",
+        emptySearch: "Aramanızla eşleşen bir yazı bulunamadı. Lütfen farklı bir arama yapınız.",
+        featuredBadge: "✨ Editörün Seçimi",
+        readFeatured: "Öne Çıkan Hikayeyi Oku →",
+        showingCount: (count, lvl) => `${count} hikaye listeleniyor (${lvl} seviyesinde)`
+      },
+      en: {
+        brandSubtitleHome: "Anything you're curious about, in the language you want, at the level you can understand.",
+        noticeBanner: "🛡️ <strong>Pedagogical Assurance:</strong> All materials are curated for language learning under CEFR standards.",
+        noticeContact: "Copyright inquiries: copyright@dailyturkishmia.com (24h response)",
+        targetLangLabel: "🎯 Target Lang:",
+        supportLangLabel: "🌐 Support Lang:",
+        surpriseMeBtn: "Surprise Me",
+        surpriseMeHero: "Surprise Me with a Story",
+        heroBadge: "📖 Graded Magazine & Reading Library",
+        heroTitle: "Read Anything You're Curious About, at Your Level",
+        heroDesc: "Fascinating stories across art, science, history, and life. Calibrated from beginner (A1) to advanced (C1) across 5 interchangeable languages.",
+        levelSelectorTitle: "Reading Difficulty / Level",
+        levelSelectorDesc: "Preview stories dynamically calibrated to your comprehension level",
+        lvlA1: "Beginner",
+        lvlA2: "Elementary",
+        lvlB1: "Intermediate",
+        lvlB2: "Upper-Int.",
+        lvlC1: "Advanced",
+        searchPlaceholder: "Search topics, titles, or concepts...",
+        allCat: "All",
+        readTimeSuffix: "read",
+        startReading: "Start Reading →",
+        emptySearch: "No articles found matching your criteria. Please try another search.",
+        featuredBadge: "✨ Featured Spotlight",
+        readFeatured: "Read Featured Story →",
+        showingCount: (count, lvl) => `Showing ${count} stories (at ${lvl} level)`
+      },
+      es: {
+        brandSubtitleHome: "Todo lo que te interesa, en el idioma que quieras y al nivel que comprendas.",
+        noticeBanner: "🛡️ <strong>Garantía Pedagógica:</strong> Contenidos educativos diseñados bajo estándares CEFR.",
+        noticeContact: "Contacto por derechos: copyright@dailyturkishmia.com (respuesta en 24h)",
+        targetLangLabel: "🎯 Idioma Objetivo:",
+        supportLangLabel: "🌐 Idioma de Apoyo:",
+        surpriseMeBtn: "Sorpréndeme",
+        surpriseMeHero: "Sorpréndeme con una Historia",
+        heroBadge: "📖 Revista Graduada y Biblioteca de Lectura",
+        heroTitle: "Lee Cualquier Tema a Tu Nivel y en Tu Idioma",
+        heroDesc: "Historia, ciencia, arte y vida cotidiana desde principiante (A1) hasta avanzado (C1) en 5 idiomas intercambiables.",
+        levelSelectorTitle: "Dificultad de Lectura / Nivel",
+        levelSelectorDesc: "Ajusta dinámicamente las historias según tu nivel de comprensión",
+        lvlA1: "Principiante",
+        lvlA2: "Elemental",
+        lvlB1: "Intermedio",
+        lvlB2: "Intermedio-Alto",
+        lvlC1: "Avanzado",
+        searchPlaceholder: "Buscar por tema, título o palabra...",
+        allCat: "Todos",
+        readTimeSuffix: "de lectura",
+        startReading: "Empezar a Leer →",
+        emptySearch: "No se encontraron artículos que coincidan con tu búsqueda.",
+        featuredBadge: "✨ Destacado del Editor",
+        readFeatured: "Leer Historia Destacada →",
+        showingCount: (count, lvl) => `Mostrando ${count} historias (en nivel ${lvl})`
+      },
+      de: {
+        brandSubtitleHome: "Alles, was dich interessiert, in deiner Wunschsprache und auf deinem Niveau.",
+        noticeBanner: "🛡️ <strong>Pädagogische Qualität:</strong> Alle Texte folgen den CEFR-Stufenrichtlinien.",
+        noticeContact: "Urheberrechtsanfragen: copyright@dailyturkishmia.com (Antwort in 24 Std.)",
+        targetLangLabel: "🎯 Zielsprache:",
+        supportLangLabel: "🌐 Hilfssprache:",
+        surpriseMeBtn: "Zufälliger Artikel",
+        surpriseMeHero: "Überrasche mich mit einer Geschichte",
+        heroBadge: "📖 Stufenlese-Magazin & Bibliothek",
+        heroTitle: "Lies spannende Themen auf deinem Sprachniveau",
+        heroDesc: "Entdecke Geschichte, Wissenschaft, Kultur und Alltag von A1 bis C1 in 5 austauschbaren Sprachen.",
+        levelSelectorTitle: "Leseschwierigkeit / Niveau",
+        levelSelectorDesc: "Passe Artikel dynamisch an dein persönliches Sprachniveau an",
+        lvlA1: "Anfänger",
+        lvlA2: "Grundstufe",
+        lvlB1: "Mittelstufe",
+        lvlB2: "Gute Mittelstufe",
+        lvlC1: "Fortgeschritten",
+        searchPlaceholder: "Nach Thema, Titel oder Begriff suchen...",
+        allCat: "Alle",
+        readTimeSuffix: "Lesezeit",
+        startReading: "Jetzt Lesen →",
+        emptySearch: "Keine passenden Artikel gefunden. Bitte versuche eine andere Suche.",
+        featuredBadge: "✨ Empfehlung der Redaktion",
+        readFeatured: "Empfohlene Geschichte Lesen →",
+        showingCount: (count, lvl) => `${count} Geschichten angezeigt (Niveau ${lvl})`
+      },
+      fr: {
+        brandSubtitleHome: "Tout ce qui vous intéresse, dans la langue choisie et à votre niveau.",
+        noticeBanner: "🛡️ <strong>Garantie Pédagogique:</strong> Contenus pédagogiques conçus selon les critères CEFR.",
+        noticeContact: "Contact droits d'auteur: copyright@dailyturkishmia.com (réponse sous 24h)",
+        targetLangLabel: "🎯 Langue Cible:",
+        supportLangLabel: "🌐 Langue de Soutien:",
+        surpriseMeBtn: "Surprenez-moi",
+        surpriseMeHero: "Surprenez-moi avec une Histoire",
+        heroBadge: "📖 Magazine & Bibliothèque Graduée",
+        heroTitle: "Lisez ce qui vous passionne à votre niveau",
+        heroDesc: "Histoire, sciences, art et société du niveau débutant (A1) à avancé (C1) en 5 langues interchangeables.",
+        levelSelectorTitle: "Difficulté de Lecture / Niveau",
+        levelSelectorDesc: "Adaptez instantanément les histoires à votre niveau de compréhension",
+        lvlA1: "Débutant",
+        lvlA2: "Élémentaire",
+        lvlB1: "Intermédiaire",
+        lvlB2: "Intermédiaire Sup.",
+        lvlC1: "Avancé",
+        searchPlaceholder: "Rechercher par sujet, titre ou mot...",
+        allCat: "Tous",
+        readTimeSuffix: "de lecture",
+        startReading: "Commencer la Lecture →",
+        emptySearch: "Aucun article trouvé correspondant à vos critères.",
+        featuredBadge: "✨ À la Une de la Rédaction",
+        readFeatured: "Lire l'Article à la Une →",
+        showingCount: (count, lvl) => `${count} histoires affichées (au niveau ${lvl})`
+      }
+    };
+
+    // Global Dataset State
+    const initialRawData = (typeof window !== "undefined") ? (window.ARTICLES_DATA || window.articlesDatabase) : null;
+    let articlesDatabase = Array.isArray(initialRawData) ? initialRawData : [];
+
+    // Language & Level State
+    let targetLang = "tr";
+    let supportLang = "en";
+    let currentLevel = "A1";
+    let selectedCategory = "all";
+
+    async function loadArticlesData() {
+      try {
+        const resp = await fetch("articles.json");
+        if (resp.ok) {
+          const freshData = await resp.json();
+          if (Array.isArray(freshData) && freshData.length > 0) {
+            articlesDatabase = freshData;
+            return;
+          }
+        }
+      } catch (e) {
+        // Fallback to window.ARTICLES_DATA or window.articlesDatabase
+      }
+      if (!articlesDatabase || articlesDatabase.length === 0) {
+        const fallback = (typeof window !== "undefined") ? (window.ARTICLES_DATA || window.articlesDatabase) : null;
+        if (Array.isArray(fallback) && fallback.length > 0) {
+          articlesDatabase = fallback;
+        }
+      }
+    }
+
+    function initHome() {
+      // 1. Resolve State from URL first, then LocalStorage
+      const urlParams = new URLSearchParams(window.location.search);
+      const paramTarget = urlParams.get("target") || urlParams.get("lang");
+      const paramSupport = urlParams.get("support");
+      const paramLevel = urlParams.get("level");
+
+      if (paramTarget && SUPPORTED_LANGUAGES.includes(paramTarget)) {
+        targetLang = paramTarget;
+      } else {
+        targetLang = localStorage.getItem("mia_target_lang") || "tr";
+      }
+
+      if (paramSupport && SUPPORTED_LANGUAGES.includes(paramSupport)) {
+        supportLang = paramSupport;
+      } else {
+        supportLang = localStorage.getItem("mia_support_lang") || (targetLang === "en" ? "tr" : "en");
+      }
+
+      // Enforce targetLang !== supportLang
+      if (targetLang === supportLang) {
+        supportLang = targetLang === "en" ? "tr" : "en";
+      }
+
+      if (paramLevel && SUPPORTED_LEVELS.includes(paramLevel)) {
+        currentLevel = paramLevel;
+      } else {
+        currentLevel = localStorage.getItem("mia_preferred_level") || "A1";
+        if (!SUPPORTED_LEVELS.includes(currentLevel)) currentLevel = "A1";
+      }
+
+      // Persist Clean State
+      localStorage.setItem("mia_target_lang", targetLang);
+      localStorage.setItem("mia_support_lang", supportLang);
+      localStorage.setItem("mia_preferred_level", currentLevel);
+
+      // Sync Selectors
+      const tarSelect = document.getElementById("target-lang-select");
+      const supSelect = document.getElementById("support-lang-select");
+      if (tarSelect) tarSelect.value = targetLang;
+      if (supSelect) supSelect.value = supportLang;
+
+      updateUrlState();
+      applyUiTranslations();
+      updateLevelSelectorUI();
+      renderSpotlight();
+      renderCategoryPills();
+      renderArticles();
+    }
+
+    function updateUrlState() {
+      try {
+        if (window.history && window.history.replaceState) {
+          const url = new URL(window.location.href);
+          url.searchParams.set("target", targetLang);
+          url.searchParams.set("support", supportLang);
+          url.searchParams.set("level", currentLevel);
+          url.searchParams.delete("lang");
+          window.history.replaceState({ target: targetLang, support: supportLang, level: currentLevel }, "", url.toString());
+        }
+      } catch (e) {
+        // file:// origin null fallback
+      }
+    }
+
+    function onTargetLanguageChange(newTarget) {
+      if (!SUPPORTED_LANGUAGES.includes(newTarget)) return;
+      const prevTarget = targetLang;
+      targetLang = newTarget;
+      localStorage.setItem("mia_target_lang", targetLang);
+
+      // Strict enforcement: targetLanguage !== supportLanguage
+      if (targetLang === supportLang) {
+        supportLang = prevTarget !== targetLang ? prevTarget : SUPPORTED_LANGUAGES.find(l => l !== targetLang);
+        localStorage.setItem("mia_support_lang", supportLang);
+        const supElem = document.getElementById("support-lang-select");
+        if (supElem) supElem.value = supportLang;
+      }
+
+      updateUrlState();
+      applyUiTranslations();
+      renderSpotlight();
+      renderCategoryPills();
+      renderArticles();
+    }
+
+    function onSupportLanguageChange(newSupport) {
+      if (!SUPPORTED_LANGUAGES.includes(newSupport)) return;
+      const prevSupport = supportLang;
+      supportLang = newSupport;
+      localStorage.setItem("mia_support_lang", supportLang);
+
+      // Strict enforcement: targetLanguage !== supportLanguage
+      if (supportLang === targetLang) {
+        targetLang = prevSupport !== supportLang ? prevSupport : SUPPORTED_LANGUAGES.find(l => l !== supportLang);
+        localStorage.setItem("mia_target_lang", targetLang);
+        const tarElem = document.getElementById("target-lang-select");
+        if (tarElem) tarElem.value = targetLang;
+      }
+
+      updateUrlState();
+      applyUiTranslations();
+      renderSpotlight();
+      renderCategoryPills();
+      renderArticles();
+    }
+
+    function setLevel(newLevel) {
+      if (!SUPPORTED_LEVELS.includes(newLevel)) return;
+      currentLevel = newLevel;
+      localStorage.setItem("mia_preferred_level", currentLevel);
+      updateUrlState();
+      updateLevelSelectorUI();
+      renderSpotlight();
+      renderArticles();
+    }
+
+    function updateLevelSelectorUI() {
+      const btns = document.querySelectorAll(".level-selector-btn");
+      btns.forEach(btn => {
+        const lvl = btn.getAttribute("data-level");
+        if (lvl === currentLevel) {
+          btn.classList.add("active");
+        } else {
+          btn.classList.remove("active");
+        }
+      });
+    }
+
+    function surpriseMe() {
+      if (!articlesDatabase || articlesDatabase.length === 0) return;
+      const randomIndex = Math.floor(Math.random() * articlesDatabase.length);
+      const article = articlesDatabase[randomIndex];
+      const targetUrl = `article.html?id=${encodeURIComponent(article.id)}&target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
+      window.location.href = targetUrl;
+    }
+
+    function applyUiTranslations() {
+      const t = uiTranslations[supportLang] || uiTranslations.en;
+      
+      const subElem = document.getElementById("brand-subtitle");
+      if (subElem) subElem.textContent = t.brandSubtitleHome;
+
+      const lblTarget = document.getElementById("lbl-target-lang");
+      if (lblTarget) lblTarget.textContent = t.targetLangLabel;
+
+      const lblSupport = document.getElementById("lbl-support-lang");
+      if (lblSupport) lblSupport.textContent = t.supportLangLabel;
+
+      const btnSurpriseMiniText = document.getElementById("btn-surprise-mini-text");
+      if (btnSurpriseMiniText) btnSurpriseMiniText.textContent = t.surpriseMeBtn;
+
+      const btnHeroSurpriseText = document.getElementById("btn-hero-surprise-text");
+      if (btnHeroSurpriseText) btnHeroSurpriseText.textContent = t.surpriseMeHero;
+
+      const nBanner = document.getElementById("notice-banner-text");
+      if (nBanner) nBanner.innerHTML = t.noticeBanner;
+
+      const hBadge = document.getElementById("hero-badge");
+      if (hBadge) hBadge.textContent = t.heroBadge;
+
+      const hTitle = document.getElementById("hero-title");
+      if (hTitle) hTitle.textContent = t.heroTitle;
+
+      const hDesc = document.getElementById("hero-desc");
+      if (hDesc) hDesc.textContent = t.heroDesc;
+
+      const lvlTitle = document.getElementById("level-selector-title");
+      if (lvlTitle) lvlTitle.textContent = t.levelSelectorTitle;
+
+      const lvlDesc = document.getElementById("level-selector-desc");
+      if (lvlDesc) lvlDesc.textContent = t.levelSelectorDesc;
+
+      const subA1 = document.getElementById("lvl-sub-a1");
+      if (subA1) subA1.textContent = t.lvlA1;
+      const subA2 = document.getElementById("lvl-sub-a2");
+      if (subA2) subA2.textContent = t.lvlA2;
+      const subB1 = document.getElementById("lvl-sub-b1");
+      if (subB1) subB1.textContent = t.lvlB1;
+      const subB2 = document.getElementById("lvl-sub-b2");
+      if (subB2) subB2.textContent = t.lvlB2;
+      const subC1 = document.getElementById("lvl-sub-c1");
+      if (subC1) subC1.textContent = t.lvlC1;
+
+      const sInput = document.getElementById("search-input");
+      if (sInput) sInput.placeholder = t.searchPlaceholder;
+
+      const emptyEl = document.getElementById("empty-state");
+      if (emptyEl) emptyEl.textContent = t.emptySearch;
+    }
+
+    function renderSpotlight() {
+      const wrapper = document.getElementById("spotlight-wrapper");
+      if (!wrapper || !articlesDatabase || articlesDatabase.length === 0) return;
+
+      const t = uiTranslations[supportLang] || uiTranslations.en;
+
+      // Select featured article: first article or art with id 'art_01_kahve'
+      const featured = articlesDatabase.find(a => a.id === "kultur-turk-kahvesi-ve-fincan") || articlesDatabase.find(a => a.visual && a.visual.imageUrl) || articlesDatabase[0];
+      if (!featured) {
+        wrapper.innerHTML = "";
+        return;
+      }
+
+      const catLabel = (featured.categoryTranslations && featured.categoryTranslations[supportLang]) || featured.category;
+      const readTime = `⏱️ ${featured.readTime || '4 min'}`;
+
+      const targetLevelData = (featured.languages && featured.languages[targetLang] && featured.languages[targetLang][currentLevel])
+                           || (featured.languages && featured.languages[targetLang] && featured.languages[targetLang].A1);
+      const title = (targetLevelData && targetLevelData.title)
+                 || (featured.titleTranslations && featured.titleTranslations[targetLang])
+                 || featured.topic;
+
+      let subtitleHtml = "";
+      if (supportLang !== targetLang) {
+        const supportLevelData = (featured.languages && featured.languages[supportLang] && featured.languages[supportLang][currentLevel])
+                              || (featured.languages && featured.languages[supportLang] && featured.languages[supportLang].A1);
+        const subTitle = (supportLevelData && supportLevelData.title)
+                      || (featured.titleTranslations && featured.titleTranslations[supportLang])
+                      || "";
+        if (subTitle) {
+          subtitleHtml = `<div class="spotlight-subtitle">${subTitle}</div>`;
+        }
+      }
+
+      let desc = "";
+      if (targetLevelData && targetLevelData.grammarDesc) {
+        const gd = targetLevelData.grammarDesc;
+        desc = (typeof gd === "object") ? (gd[supportLang] || gd.en || gd.tr || "") : gd;
+      }
+      if (!desc) {
+        desc = `${title} — A rich exploration of cultural history and everyday life.`;
+      }
+
+      const articleUrl = `article.html?id=${encodeURIComponent(featured.id)}&target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
+      let visualHtml = '';
+      if (featured.visual && featured.visual.imageUrl) {
+        visualHtml = `<a href="${articleUrl}" class="spotlight-visual-link"><img src="${featured.visual.imageUrl}" alt="${title}" class="spotlight-img"></a>`;
+      } else {
+        visualHtml = `<a href="${articleUrl}" class="spotlight-visual-link" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1e1b4b 0%,#4338ca 100%);color:#fff;font-size:3.5rem;"><span>☕</span></a>`;
+      }
+
+      wrapper.innerHTML = `
+        <div class="spotlight-card">
+          ${visualHtml}
+          <div class="spotlight-content">
+            <div>
+              <div class="spotlight-eyebrow">
+                <span class="spotlight-badge">${t.featuredBadge}</span>
+                <span class="spotlight-category">${catLabel}</span>
+                <span class="spotlight-time">${readTime}</span>
+              </div>
+              <a href="${articleUrl}" style="text-decoration:none;">
+                <h2 class="spotlight-title">${title}</h2>
+              </a>
+              ${subtitleHtml}
+              <p class="spotlight-excerpt">${desc}</p>
+            </div>
+            <div class="spotlight-footer">
+              <div class="level-pills-list">
+                ${SUPPORTED_LEVELS.map(lvl => `
+                  <a href="article.html?id=${encodeURIComponent(featured.id)}&target=${targetLang}&support=${supportLang}&level=${lvl}" 
+                     class="level-pill-mini ${lvl === currentLevel ? 'active' : ''}">${lvl}</a>
+                `).join('')}
+              </div>
+              <a href="${articleUrl}" class="btn-read">${t.readFeatured}</a>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderCategoryPills() {
+      const pillsContainer = document.getElementById("category-pills-container");
+      if (!pillsContainer) return;
+      pillsContainer.innerHTML = "";
+
+      const t = uiTranslations[supportLang] || uiTranslations.en;
+
+      // All button with dynamic count
+      const allBtn = document.createElement("button");
+      allBtn.className = `category-pill ${selectedCategory === 'all' ? 'active' : ''}`;
+      allBtn.textContent = `${t.allCat} (${articlesDatabase.length})`;
+      allBtn.onclick = () => selectCategory("all");
+      pillsContainer.appendChild(allBtn);
+
+      // Unique categories map
+      const categoriesMap = new Map();
+      articlesDatabase.forEach(art => {
+        const catKey = art.category;
+        const catLabel = (art.categoryTranslations && art.categoryTranslations[supportLang]) || art.category;
+        if (!categoriesMap.has(catKey)) {
+          categoriesMap.set(catKey, { label: catLabel, count: 0 });
+        }
+        categoriesMap.get(catKey).count++;
+      });
+
+      categoriesMap.forEach((info, catKey) => {
+        const btn = document.createElement("button");
+        btn.className = `category-pill ${selectedCategory === catKey ? 'active' : ''}`;
+        btn.textContent = `${info.label} (${info.count})`;
+        btn.onclick = () => selectCategory(catKey);
+        pillsContainer.appendChild(btn);
+      });
+    }
+
+    function selectCategory(catKey) {
+      selectedCategory = catKey;
+      renderCategoryPills();
+      filterArticles();
+    }
+
+    function filterArticles() {
+      const q = document.getElementById("search-input").value.toLowerCase().trim();
+      renderArticles(q);
+    }
+
+    function renderArticles(searchQuery = "") {
+      const container = document.getElementById("articles-container");
+      const emptyState = document.getElementById("empty-state");
+      const countBar = document.getElementById("articles-count-text");
+      if (!container) return;
+      container.innerHTML = "";
+
+      const t = uiTranslations[supportLang] || uiTranslations.en;
+
+      const filtered = articlesDatabase.filter(art => {
+        if (selectedCategory !== "all" && art.category !== selectedCategory) {
+          return false;
+        }
+
+        if (searchQuery) {
+          const q = searchQuery.toLowerCase().trim();
+          const targetData = (art.languages && art.languages[targetLang]) || (art.languages && art.languages.tr);
+          const targetTitle = (targetData && targetData[currentLevel] && targetData[currentLevel].title)
+                           || (targetData && targetData.A1 && targetData.A1.title)
+                           || (art.titleTranslations && art.titleTranslations[targetLang])
+                           || art.topic || "";
+
+          const supportData = (art.languages && art.languages[supportLang]);
+          const supportTitle = (supportData && supportData[currentLevel] && supportData[currentLevel].title)
+                            || (art.titleTranslations && art.titleTranslations[supportLang]) || "";
+
+          const catLabel = (art.categoryTranslations && art.categoryTranslations[supportLang]) || art.category || "";
+          const topicStr = art.topic || "";
+
+          const match = targetTitle.toLowerCase().includes(q)
+                     || supportTitle.toLowerCase().includes(q)
+                     || catLabel.toLowerCase().includes(q)
+                     || topicStr.toLowerCase().includes(q);
+          if (!match) return false;
+        }
+        return true;
+      });
+
+      if (countBar) {
+        countBar.textContent = t.showingCount ? t.showingCount(filtered.length, currentLevel) : `${filtered.length} stories`;
+      }
+
+      if (filtered.length === 0) {
+        if (emptyState) emptyState.style.display = "block";
+      } else {
+        if (emptyState) emptyState.style.display = "none";
+      }
+
+      filtered.forEach(art => {
+        const card = document.createElement("div");
+        card.className = "article-card";
+
+        const catLabel = (art.categoryTranslations && art.categoryTranslations[supportLang]) || art.category;
+        const readTime = `⏱️ ${art.readTime || '4 min'}`;
+
+        // Primary title in target language
+        const targetLevelData = (art.languages && art.languages[targetLang] && art.languages[targetLang][currentLevel])
+                             || (art.languages && art.languages[targetLang] && art.languages[targetLang].A1);
+        const cardTitle = (targetLevelData && targetLevelData.title)
+                       || (art.titleTranslations && art.titleTranslations[targetLang])
+                       || art.topic;
+
+        // Subtitle in support language (if different from target)
+        let subtitleHtml = "";
+        if (supportLang !== targetLang) {
+          const supportLevelData = (art.languages && art.languages[supportLang] && art.languages[supportLang][currentLevel])
+                                || (art.languages && art.languages[supportLang] && art.languages[supportLang].A1);
+          const subTitle = (supportLevelData && supportLevelData.title)
+                        || (art.titleTranslations && art.titleTranslations[supportLang])
+                        || "";
+          if (subTitle) {
+            subtitleHtml = `<div class="card-subtitle">${subTitle}</div>`;
+          }
+        }
+
+        // Pedagogical description
+        let desc = "";
+        if (targetLevelData && targetLevelData.grammarDesc) {
+          const gd = targetLevelData.grammarDesc;
+          desc = (typeof gd === "object") ? (gd[supportLang] || gd.en || gd.tr || "") : gd;
+        }
+        if (!desc) {
+          desc = `${cardTitle}`;
+        }
+
+        // Article Target URL preserving full state
+        const articleBaseUrl = `article.html?id=${encodeURIComponent(art.id)}&target=${targetLang}&support=${supportLang}`;
+
+        let imageHtml = "";
+        if (art.visual && art.visual.imageUrl) {
+          imageHtml = `
+            <a href="${articleBaseUrl}&level=${currentLevel}" class="card-img-link">
+              <img src="${art.visual.imageUrl}" alt="${cardTitle}" class="card-img" loading="lazy">
+            </a>
+          `;
+        } else {
+          imageHtml = `
+            <a href="${articleBaseUrl}&level=${currentLevel}" class="card-img-link" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1e1b4b 0%,#4338ca 100%);color:#fff;font-size:2.5rem;">
+              <span>🎨</span>
+            </a>
+          `;
+        }
+
+        const levelPillsHtml = SUPPORTED_LEVELS.map(lvl => `
+          <a href="${articleBaseUrl}&level=${lvl}" class="level-pill-mini ${lvl === currentLevel ? 'active' : ''}">${lvl}</a>
+        `).join('');
+
+        card.innerHTML = `
+          ${imageHtml}
+          <div>
+            <div class="card-top-row">
+              <span class="card-category">${catLabel}</span>
+              <span class="card-readtime">${readTime}</span>
+            </div>
+            <a href="${articleBaseUrl}&level=${currentLevel}" style="text-decoration:none;">
+              <h2 class="card-title">${cardTitle}</h2>
+            </a>
+            ${subtitleHtml}
+            <p class="card-desc">${desc}</p>
+          </div>
+
+          <div class="card-levels-row">
+            <div class="level-pills-list">
+              ${levelPillsHtml}
+            </div>
+            <a href="${articleBaseUrl}&level=${currentLevel}" class="btn-read">${t.startReading}</a>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    async function start() {
+      await loadArticlesData();
+      initHome();
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", start);
+    } else {
+      start();
+    }
+  </script>
+  <!-- Supabase & Leenardo Auth Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-client.js"></script>
+  <script src="auth-ui.js"></script>
+</body>
+</html>
