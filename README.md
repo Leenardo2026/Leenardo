@@ -1,4 +1,4 @@
-# 💎 Daily Turkish with Mia - Graded Turkish News Platform
+# 💎 Leenardo - Graded Language Learning Platform
 
 Bu klasör, seviyelendirilmiş Türkçe haberler web sitesinin tüm dosyalarını içerir.
 
