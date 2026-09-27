@@ -54,6 +54,8 @@
 * [x] Platformun adı resmi olarak her yerde **"Leenardo"** olarak güncellendi ve canlıya alındı.
 * [x] Güvenlik yedekleme dalı (`v1.0-live-baseline`) ve etiketi (`v1.0-live`) oluşturuldu.
 * [x] **Arayüz Yenilemesi (Editorial Magazine Minimalism):** `index.html`, `article.html` ve `auth.css` dosyalarında Sanzo Wada #263 paleti, Fraunces serif başlıklar, düz saç çizgisi bölücüler ve sıfır border-radius tasarımı uygulandı; tüm emojiler temizlendi ve işlevsellik (dil, seviye, kelime kaydetme, auth, arama) eksiksiz korundu.
+* [x] **Okundu Takibi & Akıllı "Surprise Me":** Makaleleri okundu olarak işaretleme (`Mark as Read`), ana sayfa ve tavsiye kartlarında zarif `✓ Okundu` rozeti gösterimi ve `Surprise Me` butonunun okunmamış hikayeleri önceliklendirmesi sağlandı.
+* [x] **Makale Paylaşım Özelliği:** Makale üstü ve altında yer alan editoryal paylaş butonuyla mobilde yerel sistem paylaşımı (`Web Share API`), masaüstünde ise tek tıkla panoya kopyalama ve anlık toast bildirimi eklendi.
 
 ---
 

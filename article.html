@@ -645,6 +645,50 @@
       background: #FAF8F5;
     }
 
+    .btn-secondary.is-read {
+      background: var(--peach-accent);
+      border-color: var(--peach-accent);
+      color: var(--ink-navy);
+      font-weight: 700;
+    }
+
+    .reading-actions-left,
+    .reading-actions-right {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-meta-share {
+      background: transparent;
+      border: none;
+      font-size: 0.82rem;
+      color: var(--ink-navy);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      cursor: pointer;
+      font-weight: 500;
+      padding: 0;
+      transition: color 0.15s ease;
+    }
+
+    .btn-meta-share:hover {
+      color: var(--peach-accent);
+    }
+
+    .article-read-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--ink-navy);
+      background: var(--peach-accent);
+      padding: 0.15rem 0.5rem;
+      letter-spacing: 0.02em;
+    }
+
     /* Single solid button style */
     .btn-primary-action {
       display: inline-flex;
@@ -1431,10 +1475,16 @@
       <div class="meta-badges-group">
         <span class="article-category-tag" id="article-category-badge">Category</span>
         <span class="article-read-time" id="article-read-time">4 min read</span>
+        <span class="article-read-badge" id="article-read-badge" style="display:none;">✓ Read</span>
       </div>
-      <a href="index.html" class="article-topic-selector-link" id="article-change-topic-link" onclick="goToHome(event)">
-        Browse all stories
-      </a>
+      <div style="display:flex; align-items:center; gap:1.25rem;">
+        <button class="btn-meta-share" id="btn-top-share" onclick="shareCurrentStory()">
+          Share
+        </button>
+        <a href="index.html" class="article-topic-selector-link" id="article-change-topic-link" onclick="goToHome(event)">
+          Browse all stories
+        </a>
+      </div>
     </div>
 
     <!-- Article Headings Block -->
@@ -1492,16 +1542,27 @@
 
       <!-- Action Bar -->
       <div class="reading-actions-bar">
-        <button class="btn-secondary" id="btn-parallel" onclick="openParallelModal()">
-          <span>Side-by-Side View</span>
-        </button>
-        <button class="btn-primary-action" id="btn-notebook" onclick="openVocabNotebook('words')">
-          <span>Vocabulary & Flashcards</span>
-          <span class="vocab-counter-badge" id="saved-words-count-bar" style="background:var(--peach-accent); color:var(--ink-navy); margin-left:0.35rem;">0</span>
-        </button>
-        <button class="btn-secondary" id="btn-copy-worksheet" onclick="copyWorksheetToClipboard()">
-          <span>Copy Worksheet</span>
-        </button>
+        <div class="reading-actions-left">
+          <button class="btn-secondary" id="btn-toggle-read" onclick="toggleCurrentArticleRead()">
+            <span id="btn-read-check">✓</span>
+            <span id="btn-read-text">Mark as Read</span>
+          </button>
+          <button class="btn-secondary" id="btn-share-bottom" onclick="shareCurrentStory()">
+            <span id="btn-share-bottom-text">Share</span>
+          </button>
+          <button class="btn-secondary" id="btn-copy-worksheet" onclick="copyWorksheetToClipboard()">
+            <span id="btn-copy-worksheet-text">Copy Worksheet</span>
+          </button>
+        </div>
+        <div class="reading-actions-right">
+          <button class="btn-secondary" id="btn-parallel" onclick="openParallelModal()">
+            <span id="btn-parallel-text">Side-by-Side View</span>
+          </button>
+          <button class="btn-primary-action" id="btn-notebook" onclick="openVocabNotebook('words')">
+            <span id="btn-my-words-text-bar">Vocabulary & Flashcards</span>
+            <span class="vocab-counter-badge" id="saved-words-count-bar" style="background:var(--peach-accent); color:var(--ink-navy); margin-left:0.35rem;">0</span>
+          </button>
+        </div>
       </div>
     </article>
 
@@ -1793,7 +1854,13 @@
         repeatBtnText: "Henüz Öğrenmedim",
         masterBtnText: "Öğrendim",
         shuffleBtnText: "Karıştır",
-        toastCopied: "Kopyalandı!"
+        toastCopied: "Kopyalandı!",
+        markAsRead: "Okudum Olarak İşaretle",
+        readStatus: "Okundu",
+        shareBtn: "Paylaş",
+        shareCopied: "Hikaye bağlantısı panoya kopyalandı!",
+        markedReadToast: "Okundu olarak işaretlendi! 'Rastgele Hikaye' diğer hikayeleri önceliklendirecek.",
+        unmarkedReadToast: "Okundu işareti kaldırıldı."
       },
       en: {
         backHome: "Library",
@@ -1845,7 +1912,13 @@
         repeatBtnText: "Still Learning",
         masterBtnText: "Mastered",
         shuffleBtnText: "Shuffle",
-        toastCopied: "Copied to clipboard!"
+        toastCopied: "Copied to clipboard!",
+        markAsRead: "Mark as Read",
+        readStatus: "Read",
+        shareBtn: "Share",
+        shareCopied: "Story link copied to clipboard!",
+        markedReadToast: "Marked as read! 'Surprise Me' will prioritize other stories.",
+        unmarkedReadToast: "Marked as unread."
       },
       es: {
         backHome: "Biblioteca",
@@ -1897,7 +1970,13 @@
         repeatBtnText: "Por Aprender",
         masterBtnText: "Aprendido",
         shuffleBtnText: "Mezclar",
-        toastCopied: "¡Copiado al portapapeles!"
+        toastCopied: "¡Copiado al portapapeles!",
+        markAsRead: "Marcar como leído",
+        readStatus: "Leído",
+        shareBtn: "Compartir",
+        shareCopied: "¡Enlace copiado al portapapeles!",
+        markedReadToast: "¡Marcado como leído! 'Sorpréndeme' priorizará otras historias.",
+        unmarkedReadToast: "Marcado como no leído."
       },
       de: {
         backHome: "Bibliothek",
@@ -1949,7 +2028,13 @@
         repeatBtnText: "Noch Lernen",
         masterBtnText: "Gelernt",
         shuffleBtnText: "Mischen",
-        toastCopied: "In die Zwischenablage kopiert!"
+        toastCopied: "In die Zwischenablage kopiert!",
+        markAsRead: "Als gelesen markieren",
+        readStatus: "Gelesen",
+        shareBtn: "Teilen",
+        shareCopied: "Link in die Zwischenablage kopiert!",
+        markedReadToast: "Als gelesen markiert! 'Überraschung' priorisiert andere Geschichten.",
+        unmarkedReadToast: "Als ungelesen markiert."
       },
       fr: {
         backHome: "Bibliothèque",
@@ -2001,7 +2086,13 @@
         repeatBtnText: "À Réviser",
         masterBtnText: "Maîtrisé",
         shuffleBtnText: "Mélanger",
-        toastCopied: "Copié dans le presse-papiers !"
+        toastCopied: "Copié dans le presse-papiers !",
+        markAsRead: "Marquer comme lu",
+        readStatus: "Lu",
+        shareBtn: "Partager",
+        shareCopied: "Lien copié dans le presse-papiers !",
+        markedReadToast: "Marqué comme lu ! 'Surprenez-moi' priorisera d'autres histoires.",
+        unmarkedReadToast: "Marqué comme non lu."
       }
     };
 
@@ -2018,6 +2109,116 @@
     let isSpeaking = false;
 
     const SAVED_WORDS_STORAGE_KEY = "mia_saved_words_v1";
+    const LEENARDO_READ_KEY = "leenardo_read_articles";
+
+    function getReadArticleIds() {
+      try {
+        const raw = localStorage.getItem(LEENARDO_READ_KEY);
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function isArticleRead(articleId) {
+      if (!articleId) return false;
+      const list = getReadArticleIds();
+      return list.includes(articleId);
+    }
+
+    function toggleArticleRead(articleId) {
+      if (!articleId) return false;
+      let list = getReadArticleIds();
+      const index = list.indexOf(articleId);
+      let nowRead = false;
+      if (index >= 0) {
+        list.splice(index, 1);
+        nowRead = false;
+      } else {
+        list.push(articleId);
+        nowRead = true;
+      }
+      try {
+        localStorage.setItem(LEENARDO_READ_KEY, JSON.stringify(list));
+      } catch (e) {}
+      return nowRead;
+    }
+
+    function updateReadStatusUI() {
+      const isRead = isArticleRead(currentArticleId);
+      const btn = document.getElementById("btn-toggle-read");
+      const textSpan = document.getElementById("btn-read-text");
+      const badge = document.getElementById("article-read-badge");
+      const t = uiTranslations[supportLang] || uiTranslations.en;
+
+      if (badge) {
+        badge.style.display = isRead ? "inline-flex" : "none";
+        badge.textContent = `✓ ${t.readStatus || "Read"}`;
+      }
+
+      if (btn) {
+        if (isRead) {
+          btn.classList.add("is-read");
+          if (textSpan) textSpan.textContent = t.readStatus || "Read";
+        } else {
+          btn.classList.remove("is-read");
+          if (textSpan) textSpan.textContent = t.markAsRead || "Mark as Read";
+        }
+      }
+    }
+
+    function toggleCurrentArticleRead() {
+      const nowRead = toggleArticleRead(currentArticleId);
+      const t = uiTranslations[supportLang] || uiTranslations.en;
+      updateReadStatusUI();
+      if (nowRead) {
+        showToast(t.markedReadToast || "Marked as read! 'Surprise Me' will prioritize other stories.");
+      } else {
+        showToast(t.unmarkedReadToast || "Marked as unread.");
+      }
+    }
+
+    async function shareCurrentStory() {
+      const t = uiTranslations[supportLang] || uiTranslations.en;
+      const currentTitle = document.getElementById("article-main-title")?.textContent || "Leenardo Story";
+      const shareUrl = window.location.href;
+      const shareData = {
+        title: `${currentTitle} | Leenardo`,
+        text: `Read "${currentTitle}" on Leenardo (${currentLevel} CEFR level):`,
+        url: shareUrl
+      };
+
+      if (navigator.share && /mobile|android|iphone|ipad/i.test(navigator.userAgent)) {
+        try {
+          await navigator.share(shareData);
+          return;
+        } catch(err) {
+          if (err.name === 'AbortError') return;
+        }
+      }
+
+      // Clipboard fallback
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(shareUrl);
+          showToast(t.shareCopied || "Story link copied to clipboard!");
+          return;
+        }
+      } catch(e) {}
+
+      // Legacy fallback
+      try {
+        const temp = document.createElement("input");
+        temp.value = shareUrl;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand("copy");
+        document.body.removeChild(temp);
+        showToast(t.shareCopied || "Story link copied to clipboard!");
+      } catch(e) {
+        showToast("Link: " + shareUrl);
+      }
+    }
 
     let currentPopoverWordData = null;
     let flashcardDeck = [];
@@ -2354,6 +2555,24 @@
       if (modPar) modPar.textContent = t.modalParallelTitle;
       const modNb = document.getElementById("modal-notebook-title");
       if (modNb) modNb.textContent = t.modalNotebookTitle;
+
+      // Share and Action Bar buttons
+      const btnTopShare = document.getElementById("btn-top-share");
+      if (btnTopShare) btnTopShare.textContent = t.shareBtn;
+
+      const btnBottomShare = document.getElementById("btn-share-bottom-text");
+      if (btnBottomShare) btnBottomShare.textContent = t.shareBtn;
+
+      const btnCopyWorksheet = document.getElementById("btn-copy-worksheet-text");
+      if (btnCopyWorksheet) btnCopyWorksheet.textContent = t.copyWorksheet;
+
+      const btnParallelText = document.getElementById("btn-parallel-text");
+      if (btnParallelText) btnParallelText.textContent = t.bilingualCompare;
+
+      const btnMyWordsBar = document.getElementById("btn-my-words-text-bar");
+      if (btnMyWordsBar) btnMyWordsBar.textContent = t.studyFlashcards;
+
+      updateReadStatusUI();
     }
 
     function toggleToolCard(cardId) {
@@ -2487,6 +2706,9 @@
 
       // 6. Render Recommendations at the bottom
       renderRecommendations();
+
+      // 7. Sync Read Status UI
+      updateReadStatusUI();
     }
 
     function getRecommendedArticles(currentId, count = 3) {
@@ -2552,6 +2774,9 @@
           ? `<img src="${imgUrl}" alt="${primaryTitle}" class="rec-img" loading="lazy">`
           : `<div class="rec-placeholder-img">Leenardo</div>`;
 
+        const isRecRead = isArticleRead(art.id);
+        const recReadBadge = isRecRead ? `<span class="article-read-badge" style="font-size:0.68rem; padding:0.1rem 0.35rem; margin-left:auto;">✓ ${t.readStatus || 'Read'}</span>` : '';
+
         card.innerHTML = `
           <div class="rec-img-wrapper">
             ${imgHtml}
@@ -2561,6 +2786,7 @@
               <div class="rec-card-meta">
                 <span class="rec-badge">${catLabel}</span>
                 <span class="rec-readtime">${readTime}</span>
+                ${recReadBadge}
               </div>
               <h4 class="rec-card-title">${primaryTitle}</h4>
               ${subTitle ? `<div class="rec-card-sub">${subTitle}</div>` : ""}

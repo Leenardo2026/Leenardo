@@ -487,6 +487,18 @@
       cursor: pointer;
     }
 
+    .card-read-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--ink-navy);
+      background: var(--peach-accent);
+      padding: 0.1rem 0.45rem;
+      letter-spacing: 0.02em;
+    }
+
     .card-title {
       font-family: var(--font-serif);
       font-size: 1.45rem;
@@ -825,6 +837,7 @@
         allCategories: "Tüm kategoriler",
         freeReading: "Ücretsiz erişim",
         readStory: "Hikayeyi oku",
+        readStatus: "Okundu",
         featuredSpotlight: "Öne Çıkan",
         promoTitle: "Öğrenme yolculuğun yanında.",
         promoDesc: "Hikayelerine ve kelime defterine telefonundan da ulaş.",
@@ -849,6 +862,7 @@
         allCategories: "All categories",
         freeReading: "Free access",
         readStory: "Read story",
+        readStatus: "Read",
         featuredSpotlight: "Featured Story",
         promoTitle: "With you on your learning journey.",
         promoDesc: "Access your stories and vocabulary notebook on your phone.",
@@ -873,6 +887,7 @@
         allCategories: "Todas las categorías",
         freeReading: "Acceso libre",
         readStory: "Leer historia",
+        readStatus: "Leído",
         featuredSpotlight: "Destacado",
         promoTitle: "A tu lado en tu aprendizaje.",
         promoDesc: "Accede a tus historias y cuaderno de vocabulario en tu móvil.",
@@ -897,6 +912,7 @@
         allCategories: "Alle Kategorien",
         freeReading: "Freier Zugang",
         readStory: "Geschichte lesen",
+        readStatus: "Gelesen",
         featuredSpotlight: "Empfehlung",
         promoTitle: "Dein Begleiter beim Sprachenlernen.",
         promoDesc: "Greife jederzeit auf deinem Smartphone auf deine Geschichten und Vokabeln zu.",
@@ -921,6 +937,7 @@
         allCategories: "Toutes les catégories",
         freeReading: "Accès libre",
         readStory: "Lire l'histoire",
+        readStatus: "Lu",
         featuredSpotlight: "À la Une",
         promoTitle: "À vos côtés dans votre apprentissage.",
         promoDesc: "Accédez à vos histoires et carnet de vocabulaire sur votre téléphone.",
@@ -1059,6 +1076,23 @@
       renderArticles();
     }
 
+    const LEENARDO_READ_KEY = "leenardo_read_articles";
+
+    function getReadArticleIds() {
+      try {
+        const raw = localStorage.getItem(LEENARDO_READ_KEY);
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function isArticleRead(articleId) {
+      if (!articleId) return false;
+      const list = getReadArticleIds();
+      return list.includes(articleId);
+    }
+
     function setLevel(newLevel) {
       if (!SUPPORTED_LEVELS.includes(newLevel)) return;
       currentLevel = newLevel;
@@ -1070,8 +1104,11 @@
 
     function surpriseMe() {
       if (!articlesDatabase || articlesDatabase.length === 0) return;
-      const randomIndex = Math.floor(Math.random() * articlesDatabase.length);
-      const article = articlesDatabase[randomIndex];
+      const readList = getReadArticleIds();
+      const unreadList = articlesDatabase.filter(a => !readList.includes(a.id));
+      const pool = unreadList.length > 0 ? unreadList : articlesDatabase;
+      const randomIndex = Math.floor(Math.random() * pool.length);
+      const article = pool[randomIndex];
       const targetUrl = `article.html?id=${encodeURIComponent(article.id)}&target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
       window.location.href = targetUrl;
     }
@@ -1231,6 +1268,8 @@
       `).join('');
 
       const imageUrl = (art.visual && art.visual.imageUrl) ? art.visual.imageUrl : 'images/cover_01.jpg';
+      const isRead = isArticleRead(art.id);
+      const readBadgeHtml = isRead ? `<span class="card-read-badge">✓ ${t.readStatus || 'Read'}</span>` : '';
 
       cardContainer.innerHTML = `
         <a href="${articleUrl}" class="featured-image-link">
@@ -1240,6 +1279,7 @@
           <div class="featured-eyebrow-row">
             <span class="featured-spotlight-tag">${t.featuredSpotlight || 'Featured Story'}</span>
             <span class="featured-category">${catLabel}</span>
+            ${readBadgeHtml}
           </div>
           <a href="${articleUrl}">
             <h2 class="featured-title">${cardTitle}</h2>
@@ -1340,6 +1380,8 @@
 
         const articleBaseUrl = `article.html?id=${encodeURIComponent(art.id)}&target=${targetLang}&support=${supportLang}`;
         const imageUrl = (art.visual && art.visual.imageUrl) ? art.visual.imageUrl : 'images/cover_01.jpg';
+        const isRead = isArticleRead(art.id);
+        const readBadgeHtml = isRead ? `<span class="card-read-badge">✓ ${t.readStatus || 'Read'}</span>` : '';
 
         const levelTabsHtml = SUPPORTED_LEVELS.map(lvl => `
           <a href="${articleBaseUrl}&level=${lvl}" class="level-tab ${lvl === currentLevel ? 'active' : ''}">${lvl}</a>
@@ -1351,6 +1393,7 @@
           </a>
           <div class="card-meta-row">
             <span class="card-category-label" onclick="onCategoryDropdownChange('${art.category}')">${catLabel}</span>
+            ${readBadgeHtml}
           </div>
           <a href="${articleBaseUrl}&level=${currentLevel}">
             <h3 class="card-title">${cardTitle}</h3>
