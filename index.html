@@ -10,12 +10,15 @@
   <link rel="stylesheet" href="auth.css">
   <style>
     :root {
-      --primary: #4f46e5;
-      --primary-dark: #3730a3;
-      --primary-light: #eef2ff;
-      --primary-glow: rgba(79, 70, 229, 0.15);
+      --primary: #0f766e;
+      --primary-dark: #115e59;
+      --primary-light: #f0fdfa;
+      --primary-glow: rgba(15, 118, 110, 0.15);
       --accent: #f59e0b;
       --accent-light: #fef3c7;
+      --mint-bg: #f0f7f5;
+      --mint-border: #d1fae5;
+      --heading-dark: #0e2a28;
       --slate-950: #020617;
       --slate-900: #0f172a;
       --slate-800: #1e293b;
@@ -27,18 +30,14 @@
       --slate-200: #e2e8f0;
       --slate-100: #f1f5f9;
       --slate-50: #f8fafc;
-      --emerald-600: #059669;
-      --emerald-50: #ecfdf5;
-      --amber-600: #d97706;
-      --amber-50: #fffbeb;
       --radius-xl: 20px;
       --radius-lg: 16px;
       --radius-md: 10px;
       --radius-sm: 6px;
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-      --shadow-md: 0 4px 16px rgba(15, 23, 42, 0.08);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 20px -2px rgba(15, 118, 110, 0.08);
       --shadow-lg: 0 12px 32px rgba(15, 23, 42, 0.12);
-      --shadow-hover: 0 20px 40px -10px rgba(79, 70, 229, 0.22);
+      --shadow-hover: 0 16px 32px -8px rgba(15, 118, 110, 0.16);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -91,7 +90,7 @@
     }
 
     .brand-title span {
-      background: linear-gradient(135deg, var(--primary) 0%, #7c3aed 100%);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--heading-dark) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -199,82 +198,45 @@
     }
 
     /* Hero Section - Editorial Masthead */
+    /* Hero Section - Bubble Aesthetic Soft Mint Card */
     .hero-section {
-      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-      border-bottom: 1px solid var(--slate-200);
-      padding: 3.25rem 1.5rem 2.75rem;
-      position: relative;
-      overflow: hidden;
+      background: #ffffff;
+      padding: 2.25rem 1.5rem 1rem;
     }
 
-    .hero-inner {
-      max-width: 900px;
+    .hero-box {
+      max-width: 1240px;
       margin: 0 auto;
-      text-align: center;
+      background: var(--mint-bg);
+      border: 1px solid var(--mint-border);
+      border-radius: var(--radius-xl);
+      padding: 3rem 2.75rem;
+      text-align: left;
     }
 
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      background: var(--primary-light);
-      color: var(--primary);
-      border: 1px solid rgba(79, 70, 229, 0.25);
-      padding: 0.35rem 1rem;
-      border-radius: 9999px;
-      font-size: 0.8rem;
+    .hero-kicker {
+      font-size: 0.82rem;
       font-weight: 800;
+      color: var(--primary);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 1.25rem;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.85rem;
     }
 
     .hero-title {
-      font-size: 2.6rem;
+      font-size: 2.65rem;
       font-weight: 800;
-      color: var(--slate-900);
+      color: var(--heading-dark);
       line-height: 1.2;
-      margin-bottom: 0.95rem;
-      letter-spacing: -0.03em;
+      margin-bottom: 0.85rem;
+      letter-spacing: -0.025em;
     }
 
     .hero-desc {
-      font-size: 1.12rem;
-      color: var(--slate-600);
-      line-height: 1.65;
-      margin-bottom: 1.75rem;
-      max-width: 740px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .hero-quick-actions {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .btn-hero-surprise {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: linear-gradient(135deg, var(--primary) 0%, #6366f1 100%);
-      color: #ffffff;
-      font-size: 0.92rem;
-      font-weight: 700;
-      padding: 0.75rem 1.4rem;
-      border-radius: 9999px;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
-      transition: all 0.2s ease;
-    }
-
-    .btn-hero-surprise:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(79, 70, 229, 0.45);
+      font-size: 1.05rem;
+      color: var(--slate-700);
+      line-height: 1.6;
+      max-width: 820px;
     }
 
     /* Featured Story Spotlight */
@@ -589,28 +551,88 @@
       box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
     }
 
+    /* Library Header & Controls Row (Bubble Style) */
+    .library-header-row {
+      max-width: 1240px;
+      margin: 2.5rem auto 1.25rem;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .library-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--heading-dark);
+      letter-spacing: -0.025em;
+    }
+
+    .library-controls-group {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .search-box-bubble {
+      position: relative;
+      min-width: 260px;
+    }
+
+    .search-input-bubble {
+      width: 100%;
+      padding: 0.55rem 1rem 0.55rem 2.25rem;
+      border: 1.5px solid var(--slate-200);
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 0.88rem;
+      outline: none;
+      transition: all 0.2s ease;
+      background: #ffffff;
+      color: var(--slate-800);
+    }
+
+    .search-input-bubble:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+    }
+
+    .category-dropdown-bubble {
+      padding: 0.55rem 2.2rem 0.55rem 1rem;
+      border: 1.5px solid var(--slate-200);
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--slate-700);
+      background: #ffffff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat calc(100% - 12px) center;
+      -webkit-appearance: none;
+      appearance: none;
+      cursor: pointer;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .category-dropdown-bubble:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+    }
+
     /* Article Cards Grid */
     .articles-grid-wrapper {
-      max-width: 1280px;
-      margin: 0 auto 3.5rem;
+      max-width: 1240px;
+      margin: 0 auto 3rem;
       padding: 0 1.5rem;
       flex: 1;
       width: 100%;
     }
 
-    .articles-count-bar {
-      margin-bottom: 1.25rem;
-      font-size: 0.86rem;
-      color: var(--slate-500);
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
     .articles-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
       gap: 1.75rem;
     }
 
@@ -619,39 +641,42 @@
         grid-template-columns: 1fr;
       }
       .hero-title {
-        font-size: 2rem;
+        font-size: 2.1rem;
+      }
+      .library-header-row {
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
 
     .article-card {
       background: #ffffff;
       border: 1.5px solid var(--slate-200);
-      border-radius: var(--radius-lg);
-      padding: 1.65rem;
+      border-radius: 18px;
+      padding: 1.35rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       box-shadow: var(--shadow-sm);
       transition: all 0.25s ease;
       position: relative;
-      overflow: hidden;
     }
 
     .article-card:hover {
       transform: translateY(-4px);
       box-shadow: var(--shadow-hover);
-      border-color: rgba(79, 70, 229, 0.3);
+      border-color: #99f6e4;
     }
 
     .card-img-link {
       display: block;
-      margin: -1.65rem -1.65rem 1.25rem -1.65rem;
+      margin: -1.35rem -1.35rem 1.25rem -1.35rem;
       overflow: hidden;
-      border-top-left-radius: 14px;
-      border-top-right-radius: 14px;
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
       position: relative;
       background: var(--slate-100);
-      height: 185px;
+      height: 195px;
     }
 
     .card-img {
@@ -663,41 +688,26 @@
     }
 
     .article-card:hover .card-img {
-      transform: scale(1.04);
+      transform: scale(1.03);
     }
 
-    .card-top-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 0.85rem;
-    }
-
-    .card-category {
-      background: var(--primary-light);
-      color: var(--primary);
-      font-size: 0.72rem;
+    .card-cat-bubble {
+      font-size: 0.76rem;
       font-weight: 800;
+      color: var(--primary);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 0.25rem 0.7rem;
-      border-radius: 9999px;
-      border: 1px solid rgba(79, 70, 229, 0.2);
-    }
-
-    .card-readtime {
-      font-size: 0.78rem;
-      color: var(--slate-500);
-      font-weight: 600;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.45rem;
     }
 
     .card-title {
-      font-family: 'Merriweather', Georgia, serif;
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--slate-900);
-      line-height: 1.4;
-      margin-bottom: 0.35rem;
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--heading-dark);
+      line-height: 1.3;
+      margin-bottom: 0.45rem;
+      letter-spacing: -0.02em;
       transition: color 0.15s ease;
     }
 
@@ -705,47 +715,31 @@
       color: var(--primary);
     }
 
-    .card-subtitle {
-      font-size: 0.85rem;
-      color: var(--slate-500);
-      font-style: italic;
-      line-height: 1.35;
-      margin-bottom: 0.75rem;
-    }
-
     .card-desc {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: var(--slate-600);
       line-height: 1.55;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.1rem;
       flex: 1;
     }
 
     .card-levels-row {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      border-top: 1px solid var(--slate-100);
-      padding-top: 1rem;
-      margin-top: auto;
-      gap: 0.5rem;
+      gap: 0.35rem;
+      margin-bottom: 1rem;
       flex-wrap: wrap;
-    }
-
-    .level-pills-list {
-      display: flex;
-      gap: 0.3rem;
     }
 
     .level-pill-mini {
       display: inline-block;
-      background: var(--slate-100);
+      background: var(--slate-50);
       border: 1px solid var(--slate-200);
       color: var(--slate-600);
       font-size: 0.72rem;
       font-weight: 800;
-      padding: 0.22rem 0.5rem;
-      border-radius: 4px;
+      padding: 0.22rem 0.55rem;
+      border-radius: 6px;
       text-decoration: none;
       transition: all 0.15s ease;
     }
@@ -760,28 +754,84 @@
       background: var(--primary);
       color: #ffffff;
       border-color: var(--primary);
-      box-shadow: 0 1px 4px rgba(79, 70, 229, 0.3);
+      box-shadow: 0 1px 4px var(--primary-glow);
     }
 
-    .btn-read {
+    .card-bottom-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--slate-100);
+      padding-top: 0.85rem;
+      margin-top: auto;
+    }
+
+    .card-access-badge {
+      font-size: 0.82rem;
+      color: var(--slate-500);
+      font-weight: 500;
+    }
+
+    .card-read-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-decoration: none;
+      transition: transform 0.15s ease;
+    }
+
+    .card-read-action:hover {
+      transform: translateX(3px);
+    }
+
+    /* Promo Bottom Banner (Bubble Screenshot 2) */
+    .promo-banner-wrapper {
+      max-width: 1240px;
+      margin: 1.5rem auto 4rem;
+      padding: 0 1.5rem;
+      width: 100%;
+    }
+
+    .promo-banner-box {
+      background: var(--mint-bg);
+      border: 1px solid var(--mint-border);
+      border-radius: var(--radius-xl);
+      padding: 2.75rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .promo-title {
+      font-size: 1.65rem;
+      font-weight: 800;
+      color: var(--heading-dark);
+      letter-spacing: -0.02em;
+    }
+
+    .promo-desc {
+      font-size: 1rem;
+      color: var(--slate-700);
+      margin-bottom: 0.5rem;
+    }
+
+    .promo-link {
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      background: var(--primary);
-      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--primary);
       text-decoration: none;
-      padding: 0.5rem 1.15rem;
-      border-radius: 9999px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      transition: all 0.2s ease;
-      white-space: nowrap;
+      transition: transform 0.2s ease;
+      align-self: flex-start;
     }
 
-    .btn-read:hover {
-      background: var(--primary-dark);
-      box-shadow: 0 3px 12px rgba(79, 70, 229, 0.4);
-      transform: translateY(-1px);
+    .promo-link:hover {
+      transform: translateX(4px);
     }
 
     /* Empty state */
@@ -883,86 +933,49 @@
     <span id="notice-contact-text">Inquiries: <a href="mailto:contact@leenardo.com">contact@leenardo.com</a> (24h response)</span>
   </div>
 
-  <!-- Hero Section -->
+  <!-- Hero Section (Bubble Aesthetic) -->
   <section class="hero-section">
-    <div class="hero-inner">
-      <div class="hero-badge">
-        <span id="hero-badge">📖 Curated Graded Magazine</span>
-      </div>
-      <h1 class="hero-title" id="hero-title">Read Anything You're Curious About, at Your Level</h1>
+    <div class="hero-box">
+      <div class="hero-kicker" id="hero-kicker">HER HİKAYE BİR ADIM İLERİ</div>
+      <h1 class="hero-title" id="hero-title">Bugün hangi dünyayı keşfedeceksin?</h1>
       <p class="hero-desc" id="hero-desc">
-        Explore history, science, art, and daily life from beginner (A1) to advanced (C1) across 5 interchangeable languages.
+        Bir hikaye seç; dilini ve seviyeni değiştir. Okudukça öğren, öğrendikçe keşfet.
       </p>
-      <div class="hero-quick-actions">
-        <button class="btn-hero-surprise" onclick="surpriseMe()" id="btn-hero-surprise">
-          <span>🎲</span>
-          <span id="btn-hero-surprise-text">Surprise Me with a Story</span>
-        </button>
-      </div>
     </div>
   </section>
 
-  <!-- Editorial Spotlight (Featured Story) -->
-  <section class="spotlight-wrapper" id="spotlight-wrapper">
-    <!-- Spotlight rendered dynamically based on active language and level -->
-  </section>
-
-  <!-- Global Level Selector Bar -->
-  <section class="level-selector-section">
-    <div class="level-selector-card">
-      <div class="level-selector-label-group">
-        <span class="level-icon">📊</span>
-        <div>
-          <div class="level-selector-title" id="level-selector-title">Reading Difficulty / Level</div>
-          <div class="level-selector-desc" id="level-selector-desc">Preview stories calibrated to your current proficiency</div>
-        </div>
+  <!-- Library Header & Controls Row (Bubble Aesthetic) -->
+  <section class="library-header-row">
+    <h2 class="library-title" id="library-title">Hikaye kütüphanesi</h2>
+    <div class="library-controls-group">
+      <div class="search-box-bubble">
+        <span class="search-icon" style="position:absolute;left:0.75rem;top:50%;transform:translateY(-50%);color:#94a3b8;font-size:0.85rem;pointer-events:none;">🔍</span>
+        <input type="text" id="search-input" class="search-input-bubble" placeholder="Konu veya hikaye ara..." oninput="filterArticles()">
       </div>
-      <div class="level-selector-pills" id="level-selector-pills">
-        <button class="level-selector-btn" data-level="A1" onclick="setLevel('A1')">
-          <strong>A1</strong> <span class="subtext" id="lvl-sub-a1">Beginner</span>
-        </button>
-        <button class="level-selector-btn" data-level="A2" onclick="setLevel('A2')">
-          <strong>A2</strong> <span class="subtext" id="lvl-sub-a2">Elementary</span>
-        </button>
-        <button class="level-selector-btn" data-level="B1" onclick="setLevel('B1')">
-          <strong>B1</strong> <span class="subtext" id="lvl-sub-b1">Intermediate</span>
-        </button>
-        <button class="level-selector-btn" data-level="B2" onclick="setLevel('B2')">
-          <strong>B2</strong> <span class="subtext" id="lvl-sub-b2">Upper-Int.</span>
-        </button>
-        <button class="level-selector-btn" data-level="C1" onclick="setLevel('C1')">
-          <strong>C1</strong> <span class="subtext" id="lvl-sub-c1">Advanced</span>
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Controls: Search & Category Filter -->
-  <section class="controls-wrapper">
-    <div class="controls-row-top">
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="search-input" class="search-input" placeholder="Search topics, titles, or concepts..." oninput="filterArticles()">
-      </div>
-    </div>
-
-    <div class="category-pills" id="category-pills-container">
-      <!-- Injected dynamically based on actual dataset -->
+      <select id="category-select-dropdown" class="category-dropdown-bubble" onchange="onCategoryDropdownChange(this.value)">
+        <!-- Categories injected dynamically -->
+      </select>
     </div>
   </section>
 
   <!-- Articles Grid -->
   <main class="articles-grid-wrapper">
-    <div class="articles-count-bar">
-      <span id="articles-count-text">Showing stories</span>
-    </div>
     <div class="articles-grid" id="articles-container">
       <!-- Cards injected dynamically -->
     </div>
     <div class="empty-state" id="empty-state">
-      No articles found matching your criteria.
+      Aramanızla eşleşen bir yazı bulunamadı.
     </div>
   </main>
+
+  <!-- Promo Bottom Banner (Bubble Aesthetic) -->
+  <section class="promo-banner-wrapper">
+    <div class="promo-banner-box">
+      <h3 class="promo-title" id="promo-title">Öğrenme yolculuğun yanında.</h3>
+      <p class="promo-desc" id="promo-desc">Hikayelerine ve kelime defterine telefonundan da ulaş.</p>
+      <a href="article.html#notebook" class="promo-link" id="promo-link">Kelime defterini keşfet →</a>
+    </div>
+  </section>
 
   <!-- Global Footer -->
   <footer class="legal-footer">
@@ -996,25 +1009,31 @@
       tr: {
         brandSubtitleHome: "İstediğin konuyu, istediğin dilde, anladığın seviyede oku.",
         noticeBanner: "🛡️ <strong>Pedagojik Güvence:</strong> Tüm içerikler dil eğitimi ve CEFR standartlarına uygun olarak tasarlanmıştır.",
-        noticeContact: "Telif bildirimi: copyright@dailyturkishmia.com (24 saat içinde yanıtlanır)",
+        noticeContact: "Telif bildirimi: contact@leenardo.com (24 saat içinde yanıtlanır)",
         targetLangLabel: "🎯 Öğrenilen Dil:",
         supportLangLabel: "🌐 Destek Dili:",
         surpriseMeBtn: "Rastgele Bir Hikaye",
         surpriseMeHero: "Beni Bir Hikayeyle Şaşırt",
-        heroBadge: "📖 Seviyelendirilmiş Dergi & Okuma Kütüphanesi",
-        heroTitle: "Merak Ettiğin Her Şeyi, İstediğin Dilde ve Seviyede Oku",
-        heroDesc: "Tarihten bilime, sanattan günlük hayata büyüleyici hikayeler. Başlangıçtan (A1) ileri seviyeye (C1), 5 farklı dilde dilediğince keşfet.",
-        levelSelectorTitle: "Okuma Zorluğu / Seviye",
-        levelSelectorDesc: "Hikayelerin zorluk ve dil yapısını seviyene göre hemen ayarla",
+        heroKicker: "HER HİKAYE BİR ADIM İLERİ",
+        heroTitle: "Bugün hangi dünyayı keşfedeceksin?",
+        heroDesc: "Bir hikaye seç; dilini ve seviyeni değiştir. Okudukça öğren, öğrendikçe keşfet.",
+        libraryTitle: "Hikaye kütüphanesi",
+        searchPlaceholderBubble: "Konu veya hikaye ara...",
+        allCategories: "Tüm kategoriler",
+        freeReading: "Ücretsiz okuma",
+        readStory: "Hikayeyi oku",
+        promoTitle: "Öğrenme yolculuğun yanında.",
+        promoDesc: "Hikayelerine ve kelime defterine telefonundan da ulaş.",
+        promoLink: "Kelime defterini keşfet →",
         lvlA1: "Başlangıç",
         lvlA2: "Temel",
         lvlB1: "Orta",
         lvlB2: "İleri-Orta",
         lvlC1: "İleri",
-        searchPlaceholder: "Konu, başlık veya kelime ara...",
-        allCat: "Tümü",
+        searchPlaceholder: "Konu veya hikaye ara...",
+        allCat: "Tüm kategoriler",
         readTimeSuffix: "okuma",
-        startReading: "Okumaya Başla →",
+        startReading: "Hikayeyi Oku →",
         emptySearch: "Aramanızla eşleşen bir yazı bulunamadı. Lütfen farklı bir arama yapınız.",
         featuredBadge: "✨ Editörün Seçimi",
         readFeatured: "Öne Çıkan Hikayeyi Oku →",
@@ -1023,25 +1042,31 @@
       en: {
         brandSubtitleHome: "Anything you're curious about, in the language you want, at the level you can understand.",
         noticeBanner: "🛡️ <strong>Pedagogical Assurance:</strong> All materials are curated for language learning under CEFR standards.",
-        noticeContact: "Copyright inquiries: copyright@dailyturkishmia.com (24h response)",
+        noticeContact: "Copyright inquiries: contact@leenardo.com (24h response)",
         targetLangLabel: "🎯 Target Lang:",
         supportLangLabel: "🌐 Support Lang:",
         surpriseMeBtn: "Surprise Me",
         surpriseMeHero: "Surprise Me with a Story",
-        heroBadge: "📖 Graded Magazine & Reading Library",
-        heroTitle: "Read Anything You're Curious About, at Your Level",
-        heroDesc: "Fascinating stories across art, science, history, and life. Calibrated from beginner (A1) to advanced (C1) across 5 interchangeable languages.",
-        levelSelectorTitle: "Reading Difficulty / Level",
-        levelSelectorDesc: "Preview stories dynamically calibrated to your comprehension level",
+        heroKicker: "EVERY STORY A STEP FORWARD",
+        heroTitle: "Which world will you explore today?",
+        heroDesc: "Choose a story; change the language and your level. Learn as you read, discover as you learn.",
+        libraryTitle: "Story Library",
+        searchPlaceholderBubble: "Search topic or story...",
+        allCategories: "All categories",
+        freeReading: "Free reading",
+        readStory: "Read story",
+        promoTitle: "With you on your learning journey.",
+        promoDesc: "Access your stories and vocabulary notebook on your phone.",
+        promoLink: "Explore vocabulary notebook →",
         lvlA1: "Beginner",
         lvlA2: "Elementary",
         lvlB1: "Intermediate",
         lvlB2: "Upper-Int.",
         lvlC1: "Advanced",
-        searchPlaceholder: "Search topics, titles, or concepts...",
-        allCat: "All",
+        searchPlaceholder: "Search topic or story...",
+        allCat: "All categories",
         readTimeSuffix: "read",
-        startReading: "Start Reading →",
+        startReading: "Read Story →",
         emptySearch: "No articles found matching your criteria. Please try another search.",
         featuredBadge: "✨ Featured Spotlight",
         readFeatured: "Read Featured Story →",
@@ -1050,25 +1075,31 @@
       es: {
         brandSubtitleHome: "Todo lo que te interesa, en el idioma que quieras y al nivel que comprendas.",
         noticeBanner: "🛡️ <strong>Garantía Pedagógica:</strong> Contenidos educativos diseñados bajo estándares CEFR.",
-        noticeContact: "Contacto por derechos: copyright@dailyturkishmia.com (respuesta en 24h)",
+        noticeContact: "Contacto por derechos: contact@leenardo.com (respuesta en 24h)",
         targetLangLabel: "🎯 Idioma Objetivo:",
         supportLangLabel: "🌐 Idioma de Apoyo:",
         surpriseMeBtn: "Sorpréndeme",
         surpriseMeHero: "Sorpréndeme con una Historia",
-        heroBadge: "📖 Revista Graduada y Biblioteca de Lectura",
-        heroTitle: "Lee Cualquier Tema a Tu Nivel y en Tu Idioma",
-        heroDesc: "Historia, ciencia, arte y vida cotidiana desde principiante (A1) hasta avanzado (C1) en 5 idiomas intercambiables.",
-        levelSelectorTitle: "Dificultad de Lectura / Nivel",
-        levelSelectorDesc: "Ajusta dinámicamente las historias según tu nivel de comprensión",
+        heroKicker: "CADA HISTORIA ES UN PASO ADELANTE",
+        heroTitle: "¿Qué mundo explorarás hoy?",
+        heroDesc: "Elige una historia; cambia de idioma y nivel. Aprende leyendo, descubre aprendiendo.",
+        libraryTitle: "Biblioteca de historias",
+        searchPlaceholderBubble: "Buscar tema o historia...",
+        allCategories: "Todas las categorías",
+        freeReading: "Lectura gratuita",
+        readStory: "Leer historia",
+        promoTitle: "A tu lado en tu aprendizaje.",
+        promoDesc: "Accede a tus historias y cuaderno de vocabulario en tu móvil.",
+        promoLink: "Descubrir cuaderno de vocabulario →",
         lvlA1: "Principiante",
         lvlA2: "Elemental",
         lvlB1: "Intermedio",
         lvlB2: "Intermedio-Alto",
         lvlC1: "Avanzado",
-        searchPlaceholder: "Buscar por tema, título o palabra...",
-        allCat: "Todos",
+        searchPlaceholder: "Buscar tema o historia...",
+        allCat: "Todas las categorías",
         readTimeSuffix: "de lectura",
-        startReading: "Empezar a Leer →",
+        startReading: "Leer Historia →",
         emptySearch: "No se encontraron artículos que coincidan con tu búsqueda.",
         featuredBadge: "✨ Destacado del Editor",
         readFeatured: "Leer Historia Destacada →",
@@ -1077,25 +1108,31 @@
       de: {
         brandSubtitleHome: "Alles, was dich interessiert, in deiner Wunschsprache und auf deinem Niveau.",
         noticeBanner: "🛡️ <strong>Pädagogische Qualität:</strong> Alle Texte folgen den CEFR-Stufenrichtlinien.",
-        noticeContact: "Urheberrechtsanfragen: copyright@dailyturkishmia.com (Antwort in 24 Std.)",
+        noticeContact: "Urheberrechtsanfragen: contact@leenardo.com (Antwort in 24 Std.)",
         targetLangLabel: "🎯 Zielsprache:",
         supportLangLabel: "🌐 Hilfssprache:",
         surpriseMeBtn: "Zufälliger Artikel",
         surpriseMeHero: "Überrasche mich mit einer Geschichte",
-        heroBadge: "📖 Stufenlese-Magazin & Bibliothek",
-        heroTitle: "Lies spannende Themen auf deinem Sprachniveau",
-        heroDesc: "Entdecke Geschichte, Wissenschaft, Kultur und Alltag von A1 bis C1 in 5 austauschbaren Sprachen.",
-        levelSelectorTitle: "Leseschwierigkeit / Niveau",
-        levelSelectorDesc: "Passe Artikel dynamisch an dein persönliches Sprachniveau an",
+        heroKicker: "JEDE GESCHICHTE EIN SCHRITT VORAN",
+        heroTitle: "Welche Welt möchtest du heute entdecken?",
+        heroDesc: "Wähle eine Geschichte; passe Sprache und Niveau an. Lerne beim Lesen, entdecke beim Lernen.",
+        libraryTitle: "Geschichten-Bibliothek",
+        searchPlaceholderBubble: "Thema oder Geschichte suchen...",
+        allCategories: "Alle Kategorien",
+        freeReading: "Kostenlos lesen",
+        readStory: "Geschichte lesen",
+        promoTitle: "Dein Begleiter beim Sprachenlernen.",
+        promoDesc: "Greife jederzeit auf deinem Smartphone auf deine Geschichten und Vokabeln zu.",
+        promoLink: "Vokabelheft entdecken →",
         lvlA1: "Anfänger",
         lvlA2: "Grundstufe",
         lvlB1: "Mittelstufe",
         lvlB2: "Gute Mittelstufe",
         lvlC1: "Fortgeschritten",
-        searchPlaceholder: "Nach Thema, Titel oder Begriff suchen...",
-        allCat: "Alle",
+        searchPlaceholder: "Thema oder Geschichte suchen...",
+        allCat: "Alle Kategorien",
         readTimeSuffix: "Lesezeit",
-        startReading: "Jetzt Lesen →",
+        startReading: "Geschichte Lesen →",
         emptySearch: "Keine passenden Artikel gefunden. Bitte versuche eine andere Suche.",
         featuredBadge: "✨ Empfehlung der Redaktion",
         readFeatured: "Empfohlene Geschichte Lesen →",
@@ -1103,26 +1140,32 @@
       },
       fr: {
         brandSubtitleHome: "Tout ce qui vous intéresse, dans la langue choisie et à votre niveau.",
-        noticeBanner: "🛡️ <strong>Garantie Pédagogique:</strong> Contenus pédagogiques conçus selon les critères CEFR.",
-        noticeContact: "Contact droits d'auteur: copyright@dailyturkishmia.com (réponse sous 24h)",
+        noticeBanner: "🛡️ <strong>Garantie Pédagogique:</strong> Contenidos pédagogiques conçus selon les critères CEFR.",
+        noticeContact: "Contact droits d'auteur: contact@leenardo.com (réponse sous 24h)",
         targetLangLabel: "🎯 Langue Cible:",
         supportLangLabel: "🌐 Langue de Soutien:",
         surpriseMeBtn: "Surprenez-moi",
         surpriseMeHero: "Surprenez-moi avec une Histoire",
-        heroBadge: "📖 Magazine & Bibliothèque Graduée",
-        heroTitle: "Lisez ce qui vous passionne à votre niveau",
-        heroDesc: "Histoire, sciences, art et société du niveau débutant (A1) à avancé (C1) en 5 langues interchangeables.",
-        levelSelectorTitle: "Difficulté de Lecture / Niveau",
-        levelSelectorDesc: "Adaptez instantanément les histoires à votre niveau de compréhension",
+        heroKicker: "CHAQUE HISTOIRE EST UN PAS EN AVANT",
+        heroTitle: "Quel monde allez-vous explorer aujourd'hui ?",
+        heroDesc: "Choisissez une histoire ; changez la langue et le niveau. Apprenez en lisant, découvrez en apprenant.",
+        libraryTitle: "Bibliothèque d'histoires",
+        searchPlaceholderBubble: "Rechercher un sujet ou une histoire...",
+        allCategories: "Toutes les catégories",
+        freeReading: "Lecture gratuite",
+        readStory: "Lire l'histoire",
+        promoTitle: "À vos côtés dans votre apprentissage.",
+        promoDesc: "Accédez à vos histoires et carnet de vocabulaire sur votre téléphone.",
+        promoLink: "Découvrir le carnet de vocabulaire →",
         lvlA1: "Débutant",
         lvlA2: "Élémentaire",
         lvlB1: "Intermédiaire",
         lvlB2: "Intermédiaire Sup.",
         lvlC1: "Avancé",
-        searchPlaceholder: "Rechercher par sujet, titre ou mot...",
-        allCat: "Tous",
+        searchPlaceholder: "Rechercher un sujet ou une histoire...",
+        allCat: "Toutes les catégories",
         readTimeSuffix: "de lecture",
-        startReading: "Commencer la Lecture →",
+        startReading: "Lire l'Histoire →",
         emptySearch: "Aucun article trouvé correspondant à vos critères.",
         featuredBadge: "✨ À la Une de la Rédaction",
         readFeatured: "Lire l'Article à la Une →",
@@ -1205,9 +1248,7 @@
 
       updateUrlState();
       applyUiTranslations();
-      updateLevelSelectorUI();
-      renderSpotlight();
-      renderCategoryPills();
+      renderCategoryDropdown();
       renderArticles();
     }
 
@@ -1242,8 +1283,7 @@
 
       updateUrlState();
       applyUiTranslations();
-      renderSpotlight();
-      renderCategoryPills();
+      renderCategoryDropdown();
       renderArticles();
     }
 
@@ -1263,8 +1303,7 @@
 
       updateUrlState();
       applyUiTranslations();
-      renderSpotlight();
-      renderCategoryPills();
+      renderCategoryDropdown();
       renderArticles();
     }
 
@@ -1273,21 +1312,7 @@
       currentLevel = newLevel;
       localStorage.setItem("mia_preferred_level", currentLevel);
       updateUrlState();
-      updateLevelSelectorUI();
-      renderSpotlight();
       renderArticles();
-    }
-
-    function updateLevelSelectorUI() {
-      const btns = document.querySelectorAll(".level-selector-btn");
-      btns.forEach(btn => {
-        const lvl = btn.getAttribute("data-level");
-        if (lvl === currentLevel) {
-          btn.classList.add("active");
-        } else {
-          btn.classList.remove("active");
-        }
-      });
     }
 
     function surpriseMe() {
@@ -1313,164 +1338,73 @@
       const btnSurpriseMiniText = document.getElementById("btn-surprise-mini-text");
       if (btnSurpriseMiniText) btnSurpriseMiniText.textContent = t.surpriseMeBtn;
 
-      const btnHeroSurpriseText = document.getElementById("btn-hero-surprise-text");
-      if (btnHeroSurpriseText) btnHeroSurpriseText.textContent = t.surpriseMeHero;
-
       const nBanner = document.getElementById("notice-banner-text");
       if (nBanner) nBanner.innerHTML = t.noticeBanner;
 
-      const hBadge = document.getElementById("hero-badge");
-      if (hBadge) hBadge.textContent = t.heroBadge;
+      const heroKicker = document.getElementById("hero-kicker");
+      if (heroKicker) heroKicker.textContent = t.heroKicker;
 
-      const hTitle = document.getElementById("hero-title");
-      if (hTitle) hTitle.textContent = t.heroTitle;
+      const heroTitle = document.getElementById("hero-title");
+      if (heroTitle) heroTitle.textContent = t.heroTitle;
 
-      const hDesc = document.getElementById("hero-desc");
-      if (hDesc) hDesc.textContent = t.heroDesc;
+      const heroDesc = document.getElementById("hero-desc");
+      if (heroDesc) heroDesc.textContent = t.heroDesc;
 
-      const lvlTitle = document.getElementById("level-selector-title");
-      if (lvlTitle) lvlTitle.textContent = t.levelSelectorTitle;
-
-      const lvlDesc = document.getElementById("level-selector-desc");
-      if (lvlDesc) lvlDesc.textContent = t.levelSelectorDesc;
-
-      const subA1 = document.getElementById("lvl-sub-a1");
-      if (subA1) subA1.textContent = t.lvlA1;
-      const subA2 = document.getElementById("lvl-sub-a2");
-      if (subA2) subA2.textContent = t.lvlA2;
-      const subB1 = document.getElementById("lvl-sub-b1");
-      if (subB1) subB1.textContent = t.lvlB1;
-      const subB2 = document.getElementById("lvl-sub-b2");
-      if (subB2) subB2.textContent = t.lvlB2;
-      const subC1 = document.getElementById("lvl-sub-c1");
-      if (subC1) subC1.textContent = t.lvlC1;
+      const libTitle = document.getElementById("library-title");
+      if (libTitle) libTitle.textContent = t.libraryTitle;
 
       const sInput = document.getElementById("search-input");
-      if (sInput) sInput.placeholder = t.searchPlaceholder;
+      if (sInput) sInput.placeholder = t.searchPlaceholderBubble || t.searchPlaceholder;
+
+      const promoTitle = document.getElementById("promo-title");
+      if (promoTitle) promoTitle.textContent = t.promoTitle;
+
+      const promoDesc = document.getElementById("promo-desc");
+      if (promoDesc) promoDesc.textContent = t.promoDesc;
+
+      const promoLink = document.getElementById("promo-link");
+      if (promoLink) promoLink.textContent = t.promoLink;
 
       const emptyEl = document.getElementById("empty-state");
       if (emptyEl) emptyEl.textContent = t.emptySearch;
     }
 
-    function renderSpotlight() {
-      const wrapper = document.getElementById("spotlight-wrapper");
-      if (!wrapper || !articlesDatabase || articlesDatabase.length === 0) return;
-
-      const t = uiTranslations[supportLang] || uiTranslations.en;
-
-      // Select featured article: first article or art with id 'art_01_kahve'
-      const featured = articlesDatabase.find(a => a.id === "kultur-turk-kahvesi-ve-fincan") || articlesDatabase.find(a => a.visual && a.visual.imageUrl) || articlesDatabase[0];
-      if (!featured) {
-        wrapper.innerHTML = "";
-        return;
-      }
-
-      const catLabel = (featured.categoryTranslations && featured.categoryTranslations[supportLang]) || featured.category;
-      const readTime = `⏱️ ${featured.readTime || '4 min'}`;
-
-      const targetLevelData = (featured.languages && featured.languages[targetLang] && featured.languages[targetLang][currentLevel])
-                           || (featured.languages && featured.languages[targetLang] && featured.languages[targetLang].A1);
-      const title = (targetLevelData && targetLevelData.title)
-                 || (featured.titleTranslations && featured.titleTranslations[targetLang])
-                 || featured.topic;
-
-      let subtitleHtml = "";
-      if (supportLang !== targetLang) {
-        const supportLevelData = (featured.languages && featured.languages[supportLang] && featured.languages[supportLang][currentLevel])
-                              || (featured.languages && featured.languages[supportLang] && featured.languages[supportLang].A1);
-        const subTitle = (supportLevelData && supportLevelData.title)
-                      || (featured.titleTranslations && featured.titleTranslations[supportLang])
-                      || "";
-        if (subTitle) {
-          subtitleHtml = `<div class="spotlight-subtitle">${subTitle}</div>`;
-        }
-      }
-
-      let desc = "";
-      if (targetLevelData && targetLevelData.grammarDesc) {
-        const gd = targetLevelData.grammarDesc;
-        desc = (typeof gd === "object") ? (gd[supportLang] || gd.en || gd.tr || "") : gd;
-      }
-      if (!desc) {
-        desc = `${title} — A rich exploration of cultural history and everyday life.`;
-      }
-
-      const articleUrl = `article.html?id=${encodeURIComponent(featured.id)}&target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
-      let visualHtml = '';
-      if (featured.visual && featured.visual.imageUrl) {
-        visualHtml = `<a href="${articleUrl}" class="spotlight-visual-link"><img src="${featured.visual.imageUrl}" alt="${title}" class="spotlight-img"></a>`;
-      } else {
-        visualHtml = `<a href="${articleUrl}" class="spotlight-visual-link" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1e1b4b 0%,#4338ca 100%);color:#fff;font-size:3.5rem;"><span>☕</span></a>`;
-      }
-
-      wrapper.innerHTML = `
-        <div class="spotlight-card">
-          ${visualHtml}
-          <div class="spotlight-content">
-            <div>
-              <div class="spotlight-eyebrow">
-                <span class="spotlight-badge">${t.featuredBadge}</span>
-                <span class="spotlight-category">${catLabel}</span>
-                <span class="spotlight-time">${readTime}</span>
-              </div>
-              <a href="${articleUrl}" style="text-decoration:none;">
-                <h2 class="spotlight-title">${title}</h2>
-              </a>
-              ${subtitleHtml}
-              <p class="spotlight-excerpt">${desc}</p>
-            </div>
-            <div class="spotlight-footer">
-              <div class="level-pills-list">
-                ${SUPPORTED_LEVELS.map(lvl => `
-                  <a href="article.html?id=${encodeURIComponent(featured.id)}&target=${targetLang}&support=${supportLang}&level=${lvl}" 
-                     class="level-pill-mini ${lvl === currentLevel ? 'active' : ''}">${lvl}</a>
-                `).join('')}
-              </div>
-              <a href="${articleUrl}" class="btn-read">${t.readFeatured}</a>
-            </div>
-          </div>
-        </div>
-      `;
+    function onCategoryDropdownChange(catKey) {
+      selectedCategory = catKey;
+      filterArticles();
     }
 
-    function renderCategoryPills() {
-      const pillsContainer = document.getElementById("category-pills-container");
-      if (!pillsContainer) return;
-      pillsContainer.innerHTML = "";
+    function renderCategoryDropdown() {
+      const selectElem = document.getElementById("category-select-dropdown");
+      if (!selectElem) return;
+      selectElem.innerHTML = "";
 
       const t = uiTranslations[supportLang] || uiTranslations.en;
 
-      // All button with dynamic count
-      const allBtn = document.createElement("button");
-      allBtn.className = `category-pill ${selectedCategory === 'all' ? 'active' : ''}`;
-      allBtn.textContent = `${t.allCat} (${articlesDatabase.length})`;
-      allBtn.onclick = () => selectCategory("all");
-      pillsContainer.appendChild(allBtn);
+      const allOpt = document.createElement("option");
+      allOpt.value = "all";
+      allOpt.textContent = t.allCategories || "Tüm kategoriler";
+      if (selectedCategory === "all") allOpt.selected = true;
+      selectElem.appendChild(allOpt);
 
-      // Unique categories map
       const categoriesMap = new Map();
       articlesDatabase.forEach(art => {
         const catKey = art.category;
         const catLabel = (art.categoryTranslations && art.categoryTranslations[supportLang]) || art.category;
         if (!categoriesMap.has(catKey)) {
-          categoriesMap.set(catKey, { label: catLabel, count: 0 });
+          categoriesMap.set(catKey, catLabel);
         }
-        categoriesMap.get(catKey).count++;
       });
 
-      categoriesMap.forEach((info, catKey) => {
-        const btn = document.createElement("button");
-        btn.className = `category-pill ${selectedCategory === catKey ? 'active' : ''}`;
-        btn.textContent = `${info.label} (${info.count})`;
-        btn.onclick = () => selectCategory(catKey);
-        pillsContainer.appendChild(btn);
+      categoriesMap.forEach((label, catKey) => {
+        const opt = document.createElement("option");
+        opt.value = catKey;
+        opt.textContent = label;
+        if (selectedCategory === catKey) {
+          opt.selected = true;
+        }
+        selectElem.appendChild(opt);
       });
-    }
-
-    function selectCategory(catKey) {
-      selectedCategory = catKey;
-      renderCategoryPills();
-      filterArticles();
     }
 
     function filterArticles() {
@@ -1481,7 +1415,6 @@
     function renderArticles(searchQuery = "") {
       const container = document.getElementById("articles-container");
       const emptyState = document.getElementById("empty-state");
-      const countBar = document.getElementById("articles-count-text");
       if (!container) return;
       container.innerHTML = "";
 
@@ -1516,10 +1449,6 @@
         return true;
       });
 
-      if (countBar) {
-        countBar.textContent = t.showingCount ? t.showingCount(filtered.length, currentLevel) : `${filtered.length} stories`;
-      }
-
       if (filtered.length === 0) {
         if (emptyState) emptyState.style.display = "block";
       } else {
@@ -1531,7 +1460,6 @@
         card.className = "article-card";
 
         const catLabel = (art.categoryTranslations && art.categoryTranslations[supportLang]) || art.category;
-        const readTime = `⏱️ ${art.readTime || '4 min'}`;
 
         // Primary title in target language
         const targetLevelData = (art.languages && art.languages[targetLang] && art.languages[targetLang][currentLevel])
@@ -1549,7 +1477,7 @@
                         || (art.titleTranslations && art.titleTranslations[supportLang])
                         || "";
           if (subTitle) {
-            subtitleHtml = `<div class="card-subtitle">${subTitle}</div>`;
+            subtitleHtml = `<div class="card-subtitle" style="font-size:0.85rem;color:var(--slate-500);font-style:italic;margin-bottom:0.5rem;line-height:1.35;">${subTitle}</div>`;
           }
         }
 
@@ -1575,8 +1503,8 @@
           `;
         } else {
           imageHtml = `
-            <a href="${articleBaseUrl}&level=${currentLevel}" class="card-img-link" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1e1b4b 0%,#4338ca 100%);color:#fff;font-size:2.5rem;">
-              <span>🎨</span>
+            <a href="${articleBaseUrl}&level=${currentLevel}" class="card-img-link" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f766e 0%,#115e59 100%);color:#fff;font-size:2.5rem;">
+              <span>📖</span>
             </a>
           `;
         }
@@ -1588,10 +1516,7 @@
         card.innerHTML = `
           ${imageHtml}
           <div>
-            <div class="card-top-row">
-              <span class="card-category">${catLabel}</span>
-              <span class="card-readtime">${readTime}</span>
-            </div>
+            <div class="card-cat-bubble">${catLabel}</div>
             <a href="${articleBaseUrl}&level=${currentLevel}" style="text-decoration:none;">
               <h2 class="card-title">${cardTitle}</h2>
             </a>
@@ -1600,10 +1525,15 @@
           </div>
 
           <div class="card-levels-row">
-            <div class="level-pills-list">
-              ${levelPillsHtml}
-            </div>
-            <a href="${articleBaseUrl}&level=${currentLevel}" class="btn-read">${t.startReading}</a>
+            ${levelPillsHtml}
+          </div>
+
+          <div class="card-bottom-row">
+            <span class="card-access-badge">${t.freeReading || 'Ücretsiz okuma'}</span>
+            <a href="${articleBaseUrl}&level=${currentLevel}" class="card-read-action">
+              <span>${t.readStory || 'Hikayeyi oku'}</span>
+              <span>→</span>
+            </a>
           </div>
         `;
 
