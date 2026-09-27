@@ -37,6 +37,8 @@
    * İki ortak uzaktan çalışırken güne başlarken `git pull` yapılır.
 4. **Bu Dosyayı Güncel Tut:**
    * Her büyük özellik veya altyapı değişikliği tamamlandığında bu dosya (`PROJECT_STATUS.md`) güncellenir.
+5. **Prompt Dili Kuralı (MANDATORY):**
+   * Yapay zekâya, görsel üretim araçlarına ve oturum geçişlerine verilen tüm promptlar her zaman **İngilizce (English)** yazılır.
 
 ---
 
