@@ -58,13 +58,21 @@ def generate_sitemap(json_path="articles.json", output_path="sitemap.xml"):
             continue
         article_count += 1
 
+        # Clean canonical article route
+        canonical_url = ET.SubElement(urlset, "url")
+        ET.SubElement(canonical_url, "loc").text = f"{BASE_URL}/articles/{art_id}.html"
+        ET.SubElement(canonical_url, "lastmod").text = now_date
+        ET.SubElement(canonical_url, "changefreq").text = "weekly"
+        ET.SubElement(canonical_url, "priority").text = "0.9"
+        url_count += 1
+
         for target in SUPPORTED_LANGUAGES:
             for support in SUPPORTED_LANGUAGES:
                 if target == support:
                     continue
                 for level in SUPPORTED_LEVELS:
                     art_url = ET.SubElement(urlset, "url")
-                    loc = f"{BASE_URL}/article.html?id={art_id}&target={target}&support={support}&level={level}"
+                    loc = f"{BASE_URL}/articles/{art_id}.html?target={target}&support={support}&level={level}"
                     ET.SubElement(art_url, "loc").text = loc
                     ET.SubElement(art_url, "lastmod").text = now_date
                     ET.SubElement(art_url, "changefreq").text = "weekly"
