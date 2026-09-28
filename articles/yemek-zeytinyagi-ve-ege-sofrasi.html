@@ -3307,7 +3307,8 @@
 
     function goToHome(e) {
       if (e) e.preventDefault();
-      window.location.href = `/index.html?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
+      const homePath = window.location.protocol === "file:" ? "../index.html" : "/index.html";
+      window.location.href = `${homePath}?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
     }
 
     function onTargetLanguageChange(newTarget) {

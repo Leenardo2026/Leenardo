@@ -1988,7 +1988,7 @@
       const pool = unreadList.length > 0 ? unreadList : articlesDatabase;
       const randomIndex = Math.floor(Math.random() * pool.length);
       const article = pool[randomIndex];
-      const targetUrl = `/articles/${encodeURIComponent(article.id)}.html?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
+      const targetUrl = `articles/${encodeURIComponent(article.id)}.html?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
       window.location.href = targetUrl;
     }
 
@@ -2035,7 +2035,7 @@
                  || (latest.titleTranslations && latest.titleTranslations[targetLang])
                  || latest.topic;
       tickerLink.textContent = title;
-      tickerLink.href = `/articles/${encodeURIComponent(latest.id)}.html?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
+      tickerLink.href = `articles/${encodeURIComponent(latest.id)}.html?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
     }
 
     function formatCategoryLabel(label) {
@@ -2136,7 +2136,7 @@
       }
       const leadExcerptHtml = leadTeaser ? `<p class="hero-lead-excerpt">${leadTeaser}</p>` : "";
 
-      const leadUrl = `/articles/${encodeURIComponent(lead.id)}.html?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
+      const leadUrl = `articles/${encodeURIComponent(lead.id)}.html?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
       const leadImg = (lead.visual && lead.visual.imageUrl) ? lead.visual.imageUrl : 'images/cover_01.jpg';
       const leadIsRead = isArticleRead(lead.id);
       const leadReadTag = leadIsRead ? `<span class="hero-read-tag">✓ ${t.readStatus || 'Read'}</span>` : '';
@@ -2182,7 +2182,7 @@
         const subSupportTitle = getSupportTitle(art);
         const subSupportTitleHtml = subSupportTitle ? `<span class="feed-title-support">${subSupportTitle}</span>` : "";
         const img = (art.visual && art.visual.imageUrl) ? art.visual.imageUrl : 'images/cover_01.jpg';
-        const url = `/articles/${encodeURIComponent(art.id)}.html?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
+        const url = `articles/${encodeURIComponent(art.id)}.html?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
         const isRead = isArticleRead(art.id);
         const readBadge = isRead ? `<span>✓ ${t.readStatus || 'Read'}</span>` : '';
         return `
@@ -2230,7 +2230,7 @@
         const trendSupportTitle = getSupportTitle(art);
         const trendSupportTitleHtml = trendSupportTitle ? `<span class="feed-title-support">${trendSupportTitle}</span>` : "";
         const img = (art.visual && art.visual.imageUrl) ? art.visual.imageUrl : 'images/cover_01.jpg';
-        const url = `/articles/${encodeURIComponent(art.id)}.html?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
+        const url = `articles/${encodeURIComponent(art.id)}.html?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
         const isRead = isArticleRead(art.id);
         const readBadge = isRead ? `<span class="card-read-badge">✓</span>` : '';
         const item = document.createElement("div");
@@ -2278,7 +2278,7 @@
       }
       const teaserHtml = teaser ? `<p class="feed-desc">${teaser}</p>` : "";
 
-      const articleBaseUrl = `/articles/${encodeURIComponent(art.id)}.html?target=${targetLang}&support=${supportLang}`;
+      const articleBaseUrl = `articles/${encodeURIComponent(art.id)}.html?target=${targetLang}&support=${supportLang}`;
       const imageUrl = (art.visual && art.visual.imageUrl) ? art.visual.imageUrl : 'images/cover_01.jpg';
       const isRead = isArticleRead(art.id);
       const readBadgeHtml = isRead ? `<span class="card-read-badge">✓ ${t.readStatus || 'Read'}</span>` : '';
