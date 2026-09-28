@@ -61,6 +61,7 @@
 * [x] **Okundu Takibi & Akıllı "Surprise Me":** Makaleleri okundu olarak işaretleme (`Mark as Read`), ana sayfa ve tavsiye kartlarında zarif `✓ Okundu` rozeti gösterimi ve `Surprise Me` butonunun okunmamış hikayeleri önceliklendirmesi sağlandı.
 * [x] **Makale Paylaşım Özelliği:** Makale üstü ve altında yer alan editoryal paylaş butonuyla mobilde yerel sistem paylaşımı (`Web Share API`), masaüstünde ise tek tıkla panoya kopyalama ve anlık toast bildirimi eklendi.
 * [x] **Sanzo Wada Gece Modu (Dark Mode):** Sanzo Wada geleneksel renk paletlerinden ilham alan (Kuro-Aizome gece indigosu, fildişi ekru tipografi, yumuşak şeftali vurgusu) editoryal gece modu eklendi. FOUC önleyici satır içi komut dosyası, `localStorage` ve sistem tema tercihi (`prefers-color-scheme`) algılama, 5 dilde (TR/EN/ES/DE/FR) yerelleştirilmiş zarif tipografik buton tasarımı sağlandı.
+* [x] **Modern Bubble UI & Monogram Yenilemesi:** `index.html` ve `article.html` sayfalarında modern bubble arayüzü, 2×2 mozaik öne çıkanlar ızgarası, 3 sütunlu kelime kartları düzeni, SVG hoparlör ve hap (pill) butonlar, sekmede belirgin ve orantılı L ayraç favicon'u ve koyu/açık mod uyumu eksiksiz tamamlandı.
 
 ---
 
