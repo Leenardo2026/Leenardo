@@ -1400,6 +1400,145 @@
       cursor: pointer;
     }
 
+    /* Social Share Modal Styles */
+    .modal-share-box {
+      max-width: 460px;
+      width: 90vw;
+      padding: 1.75rem 2rem;
+    }
+
+    .share-story-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--ink-navy);
+      margin-top: -0.5rem;
+      margin-bottom: 1.25rem;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      opacity: 0.85;
+    }
+
+    .share-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .share-action-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      border-radius: 14px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #ffffff;
+      text-decoration: none;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    .share-action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.14);
+      color: #ffffff;
+    }
+
+    .share-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    .share-whatsapp {
+      background: #25D366;
+    }
+    .share-whatsapp:hover {
+      background: #1eb957;
+    }
+
+    .share-telegram {
+      background: #229ED9;
+    }
+    .share-telegram:hover {
+      background: #1e8dc2;
+    }
+
+    .share-twitter {
+      background: #0f1419;
+    }
+    [data-theme="dark"] .share-twitter {
+      background: #272c30;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .share-twitter:hover {
+      background: #000000;
+    }
+
+    .share-facebook {
+      background: #1877F2;
+    }
+    .share-facebook:hover {
+      background: #1464cc;
+    }
+
+    .share-linkedin {
+      background: #0A66C2;
+      grid-column: 1 / span 2;
+      justify-content: center;
+    }
+    .share-linkedin:hover {
+      background: #08539e;
+    }
+
+    .share-copy-box {
+      display: flex;
+      gap: 0.5rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--divider-hairline);
+      border-radius: 12px;
+      padding: 4px;
+    }
+
+    .share-link-input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.84rem;
+      color: var(--ink-navy);
+      font-family: var(--font-sans);
+      outline: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .share-copy-btn {
+      padding: 0.5rem 1.15rem;
+      border-radius: 8px;
+      background: var(--brand-purple);
+      color: #ffffff;
+      border: none;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .share-copy-btn:hover {
+      background: var(--brand-coral);
+    }
+
+    .share-copy-btn.copied {
+      background: #10b981;
+    }
+
     /* Side-by-Side Parallel Reading Modal Styles */
     #parallel-modal .modal-content-wide {
       max-width: 1080px;
@@ -2034,6 +2173,55 @@
     </div>
   </div>
 
+  <!-- Social Share Modal -->
+  <div class="modal-backdrop" id="share-modal" onclick="closeShareModal(event)">
+    <div class="modal-content modal-share-box" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="modal-share-title">Share this Story</h3>
+        <button class="modal-close-btn" onclick="closeShareModal()">&times;</button>
+      </div>
+      <p class="share-story-title" id="share-modal-story-title">Leenardo Story</p>
+      <div class="share-grid">
+        <a href="#" id="share-btn-whatsapp" target="_blank" rel="noopener noreferrer" class="share-action-btn share-whatsapp">
+          <svg class="share-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.159.57 4.186 1.564 5.938l-1.564 5.707 5.867-1.539c1.706.932 3.666 1.468 5.753 1.468 6.627 0 12-5.373 12-12s-5.373-12-12-12zm0 22c-1.89 0-3.66-.525-5.178-1.436l-.371-.222-3.486.914.93-3.398-.243-.387c-1.002-1.597-1.534-3.46-1.534-5.398 0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/>
+          </svg>
+          <span>WhatsApp</span>
+        </a>
+        <a href="#" id="share-btn-telegram" target="_blank" rel="noopener noreferrer" class="share-action-btn share-telegram">
+          <svg class="share-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.197 1.006.128.832.942z"/>
+          </svg>
+          <span>Telegram</span>
+        </a>
+        <a href="#" id="share-btn-twitter" target="_blank" rel="noopener noreferrer" class="share-action-btn share-twitter">
+          <svg class="share-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+          <span>X (Twitter)</span>
+        </a>
+        <a href="#" id="share-btn-facebook" target="_blank" rel="noopener noreferrer" class="share-action-btn share-facebook">
+          <svg class="share-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.5 5H18V0h-3.808C10.595 0 9 1.583 9 4.615V8z"/>
+          </svg>
+          <span>Facebook</span>
+        </a>
+        <a href="#" id="share-btn-linkedin" target="_blank" rel="noopener noreferrer" class="share-action-btn share-linkedin">
+          <svg class="share-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+          </svg>
+          <span>LinkedIn</span>
+        </a>
+      </div>
+      <div class="share-copy-box">
+        <input type="text" id="share-link-input" readonly class="share-link-input" value="">
+        <button id="share-copy-btn" class="share-copy-btn" onclick="copyShareLink()">
+          <span id="share-copy-text">Copy Link</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Vocabulary Notebook & Flashcard Modal -->
   <div class="modal-backdrop" id="vocab-notebook-modal" onclick="closeVocabNotebook(event)">
     <div class="modal-content" onclick="event.stopPropagation()">
@@ -2187,6 +2375,9 @@
         readStatus: "Okundu",
         shareBtn: "Paylaş",
         shareCopied: "Hikaye bağlantısı panoya kopyalandı!",
+        modalShareTitle: "Bu Hikâyeyi Paylaş",
+        copyLinkBtn: "Bağlantıyı Kopyala",
+        linkCopied: "Kopyalandı! ✓",
         markedReadToast: "Okundu olarak işaretlendi! 'Rastgele Hikaye' diğer hikayeleri önceliklendirecek.",
         unmarkedReadToast: "Okundu işareti kaldırıldı.",
         themeNight: "Gece",
@@ -2252,6 +2443,9 @@
         readStatus: "Read",
         shareBtn: "Share",
         shareCopied: "Story link copied to clipboard!",
+        modalShareTitle: "Share this Story",
+        copyLinkBtn: "Copy Link",
+        linkCopied: "Copied! ✓",
         markedReadToast: "Marked as read! 'Surprise Me' will prioritize other stories.",
         unmarkedReadToast: "Marked as unread.",
         themeNight: "Night",
@@ -2317,6 +2511,9 @@
         readStatus: "Leído",
         shareBtn: "Compartir",
         shareCopied: "¡Enlace copiado al portapapeles!",
+        modalShareTitle: "Compartir esta historia",
+        copyLinkBtn: "Copiar enlace",
+        linkCopied: "¡Copiado! ✓",
         markedReadToast: "¡Marcado como leído! 'Sorpréndeme' priorizará otras historias.",
         unmarkedReadToast: "Marcado como no leído.",
         themeNight: "Noche",
@@ -2382,6 +2579,9 @@
         readStatus: "Gelesen",
         shareBtn: "Teilen",
         shareCopied: "Link in die Zwischenablage kopiert!",
+        modalShareTitle: "Diese Geschichte teilen",
+        copyLinkBtn: "Link kopieren",
+        linkCopied: "Kopiert! ✓",
         markedReadToast: "Als gelesen markiert! 'Überraschung' priorisiert andere Geschichten.",
         unmarkedReadToast: "Als ungelesen markiert.",
         themeNight: "Nacht",
@@ -2447,6 +2647,9 @@
         readStatus: "Lu",
         shareBtn: "Partager",
         shareCopied: "Lien copié dans le presse-papiers !",
+        modalShareTitle: "Partager cette histoire",
+        copyLinkBtn: "Copier le lien",
+        linkCopied: "Copié ! ✓",
         markedReadToast: "Marqué comme lu ! 'Surprenez-moi' priorisera d'autres histoires.",
         unmarkedReadToast: "Marqué comme non lu.",
         themeNight: "Nuit",
@@ -2651,46 +2854,110 @@
       }
     }
 
-    async function shareCurrentStory() {
-      const t = uiTranslations[supportLang] || uiTranslations.en;
-      const currentTitle = document.getElementById("article-main-title")?.textContent || "Leenardo Story";
+    function shareCurrentStory() {
+      const article = articlesDatabase.find(a => a.id === currentArticleId);
+      const targetData = article && article.languages && article.languages[targetLang] && article.languages[targetLang][currentLevel];
+      const supportData = article && article.languages && article.languages[supportLang] && article.languages[supportLang][currentLevel];
+      const currentTitle = (targetData && targetData.title) || document.getElementById("article-main-title")?.textContent || "Leenardo Story";
+      const supportTitle = (supportLang !== targetLang && supportData && supportData.title) 
+        ? supportData.title 
+        : ((article && article.titleTranslations && article.titleTranslations[supportLang]) || "");
+      
       const shareUrl = window.location.href;
-      const shareData = {
-        title: `${currentTitle} | Leenardo`,
-        text: `Read "${currentTitle}" on Leenardo (${currentLevel} CEFR level):`,
-        url: shareUrl
-      };
+      const shareText = supportTitle 
+        ? `${currentTitle} (${supportTitle}) — Leenardo [${currentLevel}]`
+        : `${currentTitle} — Leenardo [${currentLevel}]`;
 
-      if (navigator.share && /mobile|android|iphone|ipad/i.test(navigator.userAgent)) {
-        try {
-          await navigator.share(shareData);
-          return;
-        } catch(err) {
-          if (err.name === 'AbortError') return;
-        }
+      // Set titles in modal
+      const titleElem = document.getElementById("share-modal-story-title");
+      if (titleElem) {
+        titleElem.textContent = supportTitle ? `${currentTitle} (${supportTitle})` : currentTitle;
       }
 
-      // Clipboard fallback
+      // Populate input
+      const linkInput = document.getElementById("share-link-input");
+      if (linkInput) {
+        linkInput.value = shareUrl;
+      }
+
+      // Populate WhatsApp link
+      const waBtn = document.getElementById("share-btn-whatsapp");
+      if (waBtn) {
+        waBtn.href = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + "\n" + shareUrl)}`;
+      }
+
+      // Populate Telegram link
+      const tgBtn = document.getElementById("share-btn-telegram");
+      if (tgBtn) {
+        tgBtn.href = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`;
+      }
+
+      // Populate X / Twitter link
+      const twBtn = document.getElementById("share-btn-twitter");
+      if (twBtn) {
+        twBtn.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+      }
+
+      // Populate Facebook link
+      const fbBtn = document.getElementById("share-btn-facebook");
+      if (fbBtn) {
+        fbBtn.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+      }
+
+      // Populate LinkedIn link
+      const liBtn = document.getElementById("share-btn-linkedin");
+      if (liBtn) {
+        liBtn.href = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
+      }
+
+      // Reset copy button state
+      const copyBtn = document.getElementById("share-copy-btn");
+      const copyText = document.getElementById("share-copy-text");
+      if (copyBtn) copyBtn.classList.remove("copied");
+      if (copyText) {
+        const t = uiTranslations[supportLang] || uiTranslations.en;
+        copyText.textContent = t.copyLinkBtn || "Copy Link";
+      }
+
+      // Open Modal
+      const modal = document.getElementById("share-modal");
+      if (modal) modal.classList.add("show");
+    }
+
+    function closeShareModal() {
+      const modal = document.getElementById("share-modal");
+      if (modal) modal.classList.remove("show");
+    }
+
+    async function copyShareLink() {
+      const linkInput = document.getElementById("share-link-input");
+      const copyBtn = document.getElementById("share-copy-btn");
+      const copyText = document.getElementById("share-copy-text");
+      const t = uiTranslations[supportLang] || uiTranslations.en;
+      const shareUrl = linkInput ? linkInput.value : window.location.href;
+
       try {
         if (navigator.clipboard && navigator.clipboard.writeText) {
           await navigator.clipboard.writeText(shareUrl);
-          showToast(t.shareCopied || "Story link copied to clipboard!");
-          return;
+        } else if (linkInput) {
+          linkInput.select();
+          document.execCommand("copy");
         }
-      } catch(e) {}
-
-      // Legacy fallback
-      try {
-        const temp = document.createElement("input");
-        temp.value = shareUrl;
-        document.body.appendChild(temp);
-        temp.select();
-        document.execCommand("copy");
-        document.body.removeChild(temp);
-        showToast(t.shareCopied || "Story link copied to clipboard!");
-      } catch(e) {
-        showToast("Link: " + shareUrl);
+      } catch (e) {
+        if (linkInput) {
+          linkInput.select();
+          document.execCommand("copy");
+        }
       }
+
+      if (copyBtn) copyBtn.classList.add("copied");
+      if (copyText) copyText.textContent = t.linkCopied || "Copied! ✓";
+      showToast(t.shareCopied || "Story link copied to clipboard!");
+
+      setTimeout(() => {
+        if (copyBtn) copyBtn.classList.remove("copied");
+        if (copyText) copyText.textContent = t.copyLinkBtn || "Copy Link";
+      }, 2500);
     }
 
     let currentPopoverWordData = null;
@@ -2793,6 +3060,7 @@
           closeWordPopover();
           closeVocabNotebook();
           closeParallelModal();
+          closeShareModal();
         }
         const modal = document.getElementById("vocab-notebook-modal");
         if (modal && modal.classList.contains("active")) {
@@ -3052,6 +3320,12 @@
       if (modPar) modPar.textContent = t.modalParallelTitle;
       const modNb = document.getElementById("modal-notebook-title");
       if (modNb) modNb.textContent = t.modalNotebookTitle;
+      const modShare = document.getElementById("modal-share-title");
+      if (modShare) modShare.textContent = t.modalShareTitle || "Share this Story";
+      const shareCopyText = document.getElementById("share-copy-text");
+      if (shareCopyText && !document.getElementById("share-copy-btn")?.classList.contains("copied")) {
+        shareCopyText.textContent = t.copyLinkBtn || "Copy Link";
+      }
 
       // Share and Action Bar buttons
       const btnTopShare = document.getElementById("btn-top-share");
