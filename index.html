@@ -38,7 +38,7 @@
       --bg-pill: rgba(40, 25, 94, 0.05);
       --bg-nav: rgba(255, 255, 255, 0.88);
 
-      /* Borders & Soft Modern Shadows */
+      /* Borders & Soft Modern Elevation */
       --border-card: rgba(40, 25, 94, 0.08);
       --border-subtle: rgba(40, 25, 94, 0.06);
       --shadow-card: 0 10px 30px -10px rgba(40, 25, 94, 0.07);
@@ -52,13 +52,12 @@
       --font-serif: 'Fraunces', Georgia, serif;
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-      /* CEFR Level Color Accents */
+      /* CEFR Level Accents */
       --lvl-a1: #10b981;
       --lvl-a2: #06b6d4;
       --lvl-b1: #3b82f6;
       --lvl-b2: #8b5cf6;
       --lvl-c1: #ff6253;
-      --lvl-c2: #d946ef;
     }
 
     [data-theme="dark"] {
@@ -113,7 +112,6 @@
       font-family: inherit;
     }
 
-    /* Container */
     .container {
       max-width: 1280px;
       margin: 0 auto;
@@ -190,7 +188,7 @@
       border: 1px solid var(--border-card);
       box-shadow: var(--shadow-card);
       border-radius: 999px;
-      padding: 4px 6px;
+      padding: 4px 8px;
       gap: 4px;
     }
 
@@ -265,21 +263,6 @@
       box-shadow: var(--shadow-hover);
       border-color: var(--brand-coral);
       color: var(--brand-coral);
-    }
-
-    .btn-bubble-coral {
-      background: var(--brand-coral);
-      border-color: var(--brand-coral);
-      color: #ffffff;
-      box-shadow: 0 6px 20px -4px var(--brand-coral-glow);
-    }
-
-    .btn-bubble-coral:hover {
-      background: var(--brand-coral-dark);
-      border-color: var(--brand-coral-dark);
-      color: #ffffff;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 24px -4px var(--brand-coral-glow);
     }
 
     .vocab-count-badge {
@@ -420,7 +403,7 @@
 
     /* Search & Level Filter Bar */
     .hero-controls-card {
-      max-width: 840px;
+      max-width: 860px;
       margin: 0 auto;
       background: var(--bg-card);
       border: 1px solid var(--border-card);
@@ -547,195 +530,10 @@
     }
 
     /* ==========================================================================
-       3. FEATURED STORY SPOTLIGHT (HERO CARD)
-       ========================================================================== */
-    .spotlight-section {
-      margin: 2rem 0 3rem;
-    }
-
-    .spotlight-card {
-      background: var(--bg-card);
-      border-radius: 26px;
-      border: 1px solid var(--border-card);
-      box-shadow: var(--shadow-card);
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: 1.15fr 1fr;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .spotlight-card:hover {
-      box-shadow: var(--shadow-hover);
-      transform: translateY(-4px);
-    }
-
-    .spotlight-media-wrap {
-      position: relative;
-      min-height: 340px;
-      overflow: hidden;
-      background: var(--bg-surface-subtle);
-    }
-
-    .spotlight-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s ease;
-    }
-
-    .spotlight-card:hover .spotlight-img {
-      transform: scale(1.03);
-    }
-
-    .spotlight-badges-float {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      display: flex;
-      gap: 0.5rem;
-      align-items: center;
-      z-index: 2;
-    }
-
-    .pill-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      padding: 5px 12px;
-      border-radius: 999px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-
-    .badge-spotlight {
-      background: rgba(255, 98, 83, 0.9);
-      color: #ffffff;
-      box-shadow: 0 4px 12px rgba(255, 98, 83, 0.35);
-    }
-
-    .badge-read {
-      background: rgba(16, 185, 129, 0.9);
-      color: #ffffff;
-    }
-
-    .spotlight-content {
-      padding: 2.25rem 2.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .spotlight-header-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .spotlight-cat-tag {
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--brand-coral);
-    }
-
-    .spotlight-read-time {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    .spotlight-title {
-      font-family: var(--font-serif);
-      font-size: clamp(1.6rem, 2.5vw, 2.1rem);
-      font-weight: 700;
-      color: var(--text-heading);
-      line-height: 1.25;
-      margin-bottom: 0.85rem;
-      letter-spacing: -0.01em;
-    }
-
-    .spotlight-title:hover {
-      color: var(--brand-coral);
-    }
-
-    .spotlight-desc {
-      font-size: 0.98rem;
-      color: var(--text-body);
-      line-height: 1.6;
-      margin-bottom: 1.75rem;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .spotlight-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding-top: 1.25rem;
-      border-top: 1px solid var(--border-subtle);
-    }
-
-    .card-level-chips {
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-
-    .card-level-chip {
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 3px 8px;
-      border-radius: 6px;
-      background: var(--bg-surface-subtle);
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: all 0.15s ease;
-    }
-
-    .card-level-chip:hover {
-      background: var(--brand-coral-light);
-      color: var(--brand-coral);
-    }
-
-    .card-level-chip.active {
-      background: var(--brand-purple);
-      color: #ffffff;
-    }
-
-    .btn-read-story {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 8px 18px;
-      border-radius: 999px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      background: var(--brand-coral);
-      color: #ffffff;
-      box-shadow: 0 4px 14px var(--brand-coral-glow);
-      transition: all 0.2s ease;
-    }
-
-    .btn-read-story:hover {
-      background: var(--brand-coral-dark);
-      transform: translateX(2px);
-    }
-
-    /* ==========================================================================
-       4. MODERN STORY LIBRARY GRID (3 to 4 Columns)
+       3. MODERN STORY LIBRARY GRID (3 to 4 Columns)
        ========================================================================== */
     .library-section {
-      padding: 1rem 0 4rem;
+      padding: 2rem 0 4.5rem;
     }
 
     .library-header {
@@ -802,6 +600,7 @@
       border-radius: 16px;
       overflow: hidden;
       background: var(--bg-surface-subtle);
+      display: block;
     }
 
     .story-card-img {
@@ -809,6 +608,7 @@
       height: 100%;
       object-fit: cover;
       transition: transform 0.35s ease;
+      display: block;
     }
 
     .story-card:hover .story-card-img {
@@ -912,6 +712,33 @@
       margin-top: auto;
     }
 
+    .card-level-chips {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .card-level-chip {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 7px;
+      border-radius: 6px;
+      background: var(--bg-surface-subtle);
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+
+    .card-level-chip:hover {
+      background: var(--brand-coral-light);
+      color: var(--brand-coral);
+    }
+
+    .card-level-chip.active {
+      background: var(--brand-purple);
+      color: #ffffff;
+    }
+
     .card-footer-action {
       font-size: 0.8rem;
       font-weight: 700;
@@ -952,7 +779,7 @@
     }
 
     /* ==========================================================================
-       5. PEDAGOGICAL ASSURANCE & PROMO CALLOUT
+       4. PEDAGOGICAL ASSURANCE & PROMO CALLOUT
        ========================================================================== */
     .pedagogy-promo-section {
       margin: 2rem 0 4rem;
@@ -998,7 +825,7 @@
     }
 
     /* ==========================================================================
-       6. SITE FOOTER
+       5. SITE FOOTER
        ========================================================================== */
     .site-footer {
       margin-top: auto;
@@ -1052,16 +879,8 @@
       text-decoration: underline;
     }
 
-    /* ==========================================================================
-       RESPONSIVE BREAKPOINTS
-       ========================================================================== */
+    /* Responsive Breakpoints */
     @media (max-width: 960px) {
-      .spotlight-card {
-        grid-template-columns: 1fr;
-      }
-      .spotlight-media-wrap {
-        min-height: 240px;
-      }
       .pedagogy-promo-card {
         grid-template-columns: 1fr;
         gap: 1.5rem;
@@ -1076,11 +895,6 @@
         align-items: stretch;
         gap: 0.75rem;
       }
-      .nav-top-row {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
       .lang-pair-bubble {
         justify-content: center;
       }
@@ -1089,9 +903,6 @@
       }
       .hero-controls-card {
         padding: 1rem;
-      }
-      .spotlight-content {
-        padding: 1.5rem;
       }
       .footer-inner {
         flex-direction: column;
@@ -1156,11 +967,9 @@
 
         <!-- Theme Toggle Button -->
         <button class="btn-theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" id="btn-theme">
-          <!-- Sun Icon (shown in dark mode) -->
           <svg class="theme-icon-sun" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
           </svg>
-          <!-- Moon Icon (shown in light mode) -->
           <svg class="theme-icon-moon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
           </svg>
@@ -1216,16 +1025,7 @@
     </div>
   </section>
 
-  <!-- 3. FEATURED STORY SPOTLIGHT (HERO CARD) -->
-  <section class="spotlight-section" id="spotlight-section">
-    <div class="container">
-      <div class="spotlight-card" id="spotlight-card">
-        <!-- Injected dynamically -->
-      </div>
-    </div>
-  </section>
-
-  <!-- 4. MODERN STORY LIBRARY GRID -->
+  <!-- 3. MODERN STORY LIBRARY GRID -->
   <section class="library-section">
     <div class="container">
       <div class="library-header">
@@ -1248,7 +1048,7 @@
     </div>
   </section>
 
-  <!-- 5. PEDAGOGICAL PROMO & LEARNING HIGHLIGHTS -->
+  <!-- 4. PEDAGOGICAL PROMO & LEARNING HIGHLIGHTS -->
   <section class="pedagogy-promo-section">
     <div class="container">
       <div class="pedagogy-promo-card">
@@ -1273,7 +1073,7 @@
     </div>
   </section>
 
-  <!-- 6. SITE FOOTER -->
+  <!-- 5. SITE FOOTER -->
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-brand-deck">
@@ -1296,11 +1096,17 @@
   </footer>
 
   <!-- ==========================================================================
+       CRUCIAL OFFLINE & LOCAL DATA FALLBACK (Ensures stories load on file://)
+       ========================================================================== -->
+  <script src="articles-data.js"></script>
+
+  <!-- ==========================================================================
        JAVASCRIPT APPLICATION LOGIC
        ========================================================================== -->
   <script>
-    // State variables
-    let articlesDatabase = [];
+    // Global Data State: initialize immediately from window.ARTICLES_DATA if available
+    const initialRawData = (typeof window !== "undefined") ? (window.ARTICLES_DATA || window.articlesDatabase) : null;
+    let articlesDatabase = Array.isArray(initialRawData) ? initialRawData : [];
     let currentLevel = "A1";
     let targetLang = "tr";
     let supportLang = "en";
@@ -1321,7 +1127,6 @@
         searchPlaceholder: "Hikaye, konu veya anahtar kelime ara...",
         allCategories: "Tümü",
         exploreStories: "Hikayeleri Keşfet",
-        featuredStory: "Öne Çıkan Hikaye",
         readStory: "Hikayeyi Oku →",
         readStatus: "Okundu",
         vocabulary: "Kelime Defteri",
@@ -1348,7 +1153,6 @@
         searchPlaceholder: "Search by title, topic, or keyword...",
         allCategories: "All Topics",
         exploreStories: "Explore Stories",
-        featuredStory: "Featured Story",
         readStory: "Read Story →",
         readStatus: "Read",
         vocabulary: "Vocabulary",
@@ -1375,7 +1179,6 @@
         searchPlaceholder: "Buscar por título, tema o palabra clave...",
         allCategories: "Todos",
         exploreStories: "Explorar Historias",
-        featuredStory: "Historia Destacada",
         readStory: "Leer Historia →",
         readStatus: "Leído",
         vocabulary: "Vocabulario",
@@ -1402,7 +1205,6 @@
         searchPlaceholder: "Nach Titel, Thema oder Begriff suchen...",
         allCategories: "Alle",
         exploreStories: "Geschichten entdecken",
-        featuredStory: "Hervorgehobene Geschichte",
         readStory: "Geschichte lesen →",
         readStatus: "Gelesen",
         vocabulary: "Vokabelheft",
@@ -1429,7 +1231,6 @@
         searchPlaceholder: "Rechercher par titre, sujet ou mot-clé...",
         allCategories: "Tous",
         exploreStories: "Explorer les Histoires",
-        featuredStory: "Histoire à la Une",
         readStory: "Lire l'histoire →",
         readStatus: "Lu",
         vocabulary: "Vocabulaire",
@@ -1448,14 +1249,28 @@
       }
     };
 
-    // Load articles.json
+    // Load articles.json with robust fallback to articles-data.js
     async function loadArticlesData() {
+      // 1. Try fetching fresh articles.json
       try {
         const response = await fetch("articles.json");
-        if (!response.ok) throw new Error("articles.json could not be loaded");
-        articlesDatabase = await response.json();
+        if (response.ok) {
+          const freshData = await response.json();
+          if (Array.isArray(freshData) && freshData.length > 0) {
+            articlesDatabase = freshData;
+            return;
+          }
+        }
       } catch (err) {
-        console.error("Error loading articles:", err);
+        // Ignored under file:// where fetch fails
+      }
+
+      // 2. Fallback to inline window.ARTICLES_DATA or window.articlesDatabase
+      if (!articlesDatabase || articlesDatabase.length === 0) {
+        const fallback = (typeof window !== "undefined") ? (window.ARTICLES_DATA || window.articlesDatabase) : null;
+        if (Array.isArray(fallback) && fallback.length > 0) {
+          articlesDatabase = fallback;
+        }
       }
     }
 
@@ -1473,10 +1288,10 @@
       return getReadArticleIds().includes(articleId);
     }
 
-    // Vocabulary words count
+    // Vocabulary count from localStorage
     function getSavedWordsCount() {
       try {
-        const raw = localStorage.getItem("leenardo_vocab_notebook");
+        const raw = localStorage.getItem("leenardo_vocab_notebook") || localStorage.getItem("mia_saved_words_v1");
         if (!raw) return 0;
         const parsed = JSON.parse(raw);
         return Array.isArray(parsed) ? parsed.length : 0;
@@ -1541,7 +1356,6 @@
       updateUrlState();
       applyUiTranslations();
       renderCategoryChips();
-      renderSpotlight();
       renderLibraryGrid();
       updateVocabBadge();
     }
@@ -1575,7 +1389,6 @@
       updateUrlState();
       applyUiTranslations();
       renderCategoryChips();
-      renderSpotlight();
       renderLibraryGrid();
     }
 
@@ -1595,7 +1408,6 @@
       updateUrlState();
       applyUiTranslations();
       renderCategoryChips();
-      renderSpotlight();
       renderLibraryGrid();
     }
 
@@ -1608,7 +1420,6 @@
       if (btnElem) btnElem.classList.add("active");
 
       updateUrlState();
-      renderSpotlight();
       renderLibraryGrid();
     }
 
@@ -1670,12 +1481,10 @@
       selectedCategory = catKey;
       document.querySelectorAll(".cat-chip-btn").forEach(b => b.classList.remove("active"));
       if (btnElem) btnElem.classList.add("active");
-      renderSpotlight();
       renderLibraryGrid();
     }
 
     function filterArticles() {
-      renderSpotlight();
       renderLibraryGrid();
     }
 
@@ -1708,77 +1517,6 @@
         }
         return true;
       });
-    }
-
-    // Render Spotlight Hero Card
-    function renderSpotlight() {
-      const section = document.getElementById("spotlight-section");
-      const cardContainer = document.getElementById("spotlight-card");
-      if (!section || !cardContainer) return;
-
-      const q = document.getElementById("search-input") ? document.getElementById("search-input").value.trim() : "";
-
-      // Hide spotlight if a specific search or category is active to focus on grid results
-      if (q !== "" || selectedCategory !== "all" || articlesDatabase.length === 0) {
-        section.style.display = "none";
-        return;
-      }
-
-      section.style.display = "block";
-      const lead = articlesDatabase[0];
-      const t = uiTranslations[supportLang] || uiTranslations.en;
-
-      const catLabel = (lead.categoryTranslations && lead.categoryTranslations[supportLang]) || lead.category;
-      const targetLevelData = (lead.languages && lead.languages[targetLang] && lead.languages[targetLang][currentLevel])
-                           || (lead.languages && lead.languages[targetLang] && lead.languages[targetLang].A1);
-      const title = (targetLevelData && targetLevelData.title)
-                 || (lead.titleTranslations && lead.titleTranslations[targetLang])
-                 || lead.topic;
-
-      let desc = "";
-      if (targetLevelData && targetLevelData.grammarDesc) {
-        const gd = targetLevelData.grammarDesc;
-        desc = (typeof gd === "object") ? (gd[supportLang] || gd.en || gd.tr || "") : gd;
-      }
-      if (!desc) desc = title;
-
-      const articleBaseUrl = `article.html?id=${encodeURIComponent(lead.id)}&target=${targetLang}&support=${supportLang}`;
-      const imageUrl = (lead.visual && lead.visual.imageUrl) ? lead.visual.imageUrl : 'images/tarih-truva-ve-tahta-at.jpg';
-      const isRead = isArticleRead(lead.id);
-
-      const levelChipsHtml = SUPPORTED_LEVELS.map(lvl => `
-        <a href="${articleBaseUrl}&level=${lvl}" class="card-level-chip ${lvl === currentLevel ? 'active' : ''}">${lvl}</a>
-      `).join('');
-
-      cardContainer.innerHTML = `
-        <a href="${articleBaseUrl}&level=${currentLevel}" class="spotlight-media-wrap">
-          <img src="${imageUrl}" alt="${title}" class="spotlight-img" loading="lazy">
-          <div class="spotlight-badges-float">
-            <span class="pill-badge badge-spotlight">★ ${t.featuredStory || 'Featured'}</span>
-            ${isRead ? `<span class="pill-badge badge-read">✓ ${t.readStatus || 'Read'}</span>` : ''}
-          </div>
-        </a>
-        <div class="spotlight-content">
-          <div>
-            <div class="spotlight-header-meta">
-              <span class="spotlight-cat-tag">${catLabel}</span>
-              <span class="spotlight-read-time">⏱️ ${lead.readTime || '4'} ${t.readMin || 'min'}</span>
-            </div>
-            <a href="${articleBaseUrl}&level=${currentLevel}">
-              <h2 class="spotlight-title">${title}</h2>
-            </a>
-            <p class="spotlight-desc">${desc}</p>
-          </div>
-          <div class="spotlight-footer">
-            <div class="card-level-chips">
-              ${levelChipsHtml}
-            </div>
-            <a href="${articleBaseUrl}&level=${currentLevel}" class="btn-read-story">
-              ${t.readStory || 'Read Story →'}
-            </a>
-          </div>
-        </div>
-      `;
     }
 
     // Render Story Card for Grid
@@ -1858,11 +1596,7 @@
         if (emptyState) emptyState.style.display = "none";
       }
 
-      // If spotlight is visible (default view), skip article 0 in grid so it is not duplicated
-      const q = document.getElementById("search-input") ? document.getElementById("search-input").value.trim() : "";
-      const displayArticles = (q === "" && selectedCategory === "all") ? filtered.slice(1) : filtered;
-
-      displayArticles.forEach(art => {
+      filtered.forEach(art => {
         container.appendChild(createModernStoryCard(art, t));
       });
     }
@@ -1928,11 +1662,16 @@
 
     // App Startup
     async function start() {
+      // 1. Immediately sync articlesDatabase from window.ARTICLES_DATA if loaded
+      if (typeof window !== "undefined" && Array.isArray(window.ARTICLES_DATA) && window.ARTICLES_DATA.length > 0) {
+        articlesDatabase = window.ARTICLES_DATA;
+      }
+      await loadArticlesData();
+
       // Restore theme
       const savedTheme = localStorage.getItem("leenardo_theme") || "light";
       document.documentElement.setAttribute("data-theme", savedTheme);
 
-      await loadArticlesData();
       initHome();
     }
 
