@@ -266,42 +266,33 @@
       align-items: center;
     }
 
-    .masthead-logo {
+    .masthead-logo-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+    }
+
+    .brand-logo-icon {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      filter: drop-shadow(0 3px 8px rgba(40, 25, 94, 0.18));
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .masthead-logo-link:hover .brand-logo-icon {
+      transform: scale(1.08) rotate(-2deg);
+    }
+
+    .masthead-logo-text {
       font-family: var(--font-serif);
       font-size: 2.35rem;
       font-weight: 700;
-      letter-spacing: -0.025em;
+      letter-spacing: -0.02em;
       line-height: 1;
       color: var(--brand-purple);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: baseline;
       transition: color 0.2s ease;
-    }
-
-    .brand-glyph-l {
-      display: inline-block;
-      line-height: 0;
-      position: relative;
-      top: 0.24em;
-      margin-right: -0.02em;
-    }
-
-    .brand-glyph-l svg {
-      height: 1.14em;
-      width: auto;
-      display: block;
-      filter: drop-shadow(0 2px 4px rgba(40, 25, 94, 0.12));
-      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .masthead-logo:hover .brand-glyph-l svg {
-      transform: translateY(-2px) scale(1.03);
-    }
-
-    .brand-text-rest {
-      display: inline-block;
-      letter-spacing: -0.02em;
     }
 
     .masthead-tagline {
@@ -496,16 +487,6 @@
       border: var(--border-card);
     }
 
-    .hero-lead-card {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 2.25rem 2rem;
-      color: #ffffff;
-    }
-
     .hero-lead-bg {
       position: absolute;
       inset: 0;
@@ -523,12 +504,29 @@
     .hero-lead-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(40, 25, 94, 0.15) 0%, rgba(40, 25, 94, 0.75) 55%, rgba(15, 10, 36, 0.95) 100%);
+      background: linear-gradient(
+        180deg,
+        rgba(15, 10, 36, 0.85) 0%,
+        rgba(25, 15, 60, 0.45) 45%,
+        rgba(15, 10, 36, 0.75) 80%,
+        rgba(10, 6, 25, 0.95) 100%
+      );
     }
 
     .hero-lead-content {
-      position: relative;
+      position: absolute;
+      inset: 0;
       z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 2.25rem 2rem 2rem;
+      box-sizing: border-box;
+    }
+
+    .hero-lead-top {
+      display: flex;
+      flex-direction: column;
     }
 
     .hero-badges-row {
@@ -546,7 +544,7 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      padding: 3px 10px;
+      padding: 4px 12px;
       border-radius: 999px;
       box-shadow: 0 4px 10px rgba(255, 98, 83, 0.35);
     }
@@ -556,7 +554,7 @@
       color: #ffffff;
       font-size: 0.68rem;
       font-weight: 700;
-      padding: 3px 9px;
+      padding: 4px 10px;
       border-radius: 999px;
     }
 
@@ -568,18 +566,28 @@
       color: #ffffff;
       margin-bottom: 0.65rem;
       letter-spacing: -0.01em;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-lead-top a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .hero-lead-top a:hover .hero-lead-title {
+      color: #ffd2cc;
     }
 
     .hero-lead-excerpt {
       font-size: 0.92rem;
       color: rgba(255, 255, 255, 0.9);
       line-height: 1.5;
-      margin-bottom: 1.25rem;
       display: -webkit-box;
-      -webkit-line-clamp: 2;
+      -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
       overflow: hidden;
       max-width: 90%;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
     }
 
     .hero-lead-footer {
@@ -587,49 +595,72 @@
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      padding-top: 1rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      flex-wrap: wrap;
     }
 
     .hero-levels-group {
       display: flex;
       align-items: center;
       gap: 0.35rem;
+      background: rgba(15, 10, 36, 0.55);
+      padding: 4px 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
 
     .hero-lvl-pill {
+      font-family: var(--font-sans);
       font-size: 0.72rem;
       font-weight: 700;
-      padding: 3px 8px;
-      border-radius: 6px;
-      background: rgba(255, 255, 255, 0.15);
-      color: #ffffff;
-      backdrop-filter: blur(4px);
-      transition: all 0.15s ease;
+      letter-spacing: 0.02em;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.85);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .hero-lvl-pill:hover {
-      background: var(--brand-coral);
+      background: rgba(255, 255, 255, 0.18);
+      color: #ffffff;
+      transform: translateY(-1px);
     }
 
     .hero-lvl-pill.active {
-      background: #ffffff;
-      color: var(--brand-purple);
+      background: var(--brand-coral);
+      color: #ffffff;
+      border-color: var(--brand-coral);
+      box-shadow: 0 3px 10px rgba(255, 98, 83, 0.45);
+      transform: scale(1.05);
     }
 
     .hero-lead-link {
       background: #ffffff;
       color: var(--brand-purple);
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       font-weight: 700;
-      padding: 6px 16px;
+      padding: 8px 18px;
       border-radius: 999px;
-      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .hero-lead-link:hover {
       background: var(--brand-coral);
       color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(255, 98, 83, 0.45);
     }
 
     /* Mosaic Sub Cards (1 Top Wide + 2 Bottom Split) */
@@ -1294,17 +1325,9 @@
     <div class="main-masthead-inner">
       <div class="masthead-brand-wrap">
         <div class="masthead-logo-row">
-          <a href="index.html" class="masthead-logo" aria-label="Leenardo">
-            <span class="brand-glyph-l" aria-hidden="true">
-              <svg viewBox="290 210 445 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g fill="currentColor">
-                  <path d="M 296 340 C 296 262, 348 217, 424 217 C 440 217, 449 226, 449 242 L 449 495 C 448 518, 420 560, 357 628 L 459 557 L 459 673 L 374 673 C 328 673, 296 641, 296 595 Z" />
-                  <path d="M 552 511 C 580 503, 620 502, 660 506 C 695 510, 718 522, 727 538 L 727 645 C 727 662, 718 673, 706 673 L 552 673 Z" />
-                </g>
-                <path d="M 459 557 C 485 540, 520 521, 551 511 L 551 804 L 505 762 L 459 804 Z" fill="var(--brand-coral)" />
-                <path d="M 459 557 C 485 540, 520 521, 551 511 L 551 526 C 525 536, 485 558, 459 582 Z" fill="var(--brand-coral-dark)" />
-              </svg>
-            </span><span class="brand-text-rest">eenardo</span>
+          <a href="index.html" class="masthead-logo-link" aria-label="Leenardo">
+            <img src="logo.svg" alt="Leenardo Logo" class="brand-logo-icon">
+            <span class="masthead-logo-text">Leenardo</span>
           </a>
         </div>
         <div class="masthead-tagline" id="brand-subtitle">
@@ -2008,14 +2031,16 @@
         <img src="${leadImg}" alt="${leadTitle}" class="hero-lead-bg" loading="eager">
         <div class="hero-lead-overlay"></div>
         <div class="hero-lead-content">
-          <div class="hero-badges-row">
-            <span class="hero-cat-tag">${leadCatLabel}</span>
-            ${leadReadTag}
+          <div class="hero-lead-top">
+            <div class="hero-badges-row">
+              <span class="hero-cat-tag">${leadCatLabel}</span>
+              ${leadReadTag}
+            </div>
+            <a href="${leadUrl}">
+              <h2 class="hero-lead-title">${leadTitle}</h2>
+            </a>
+            <p class="hero-lead-excerpt">${leadDesc}</p>
           </div>
-          <a href="${leadUrl}">
-            <h2 class="hero-lead-title">${leadTitle}</h2>
-          </a>
-          <p class="hero-lead-excerpt">${leadDesc}</p>
           <div class="hero-lead-footer">
             <div class="hero-levels-group">
               ${levelPillsHtml}

@@ -135,38 +135,26 @@
       font-family: var(--font-serif);
       font-size: 1.6rem;
       font-weight: 700;
-      letter-spacing: -0.025em;
+      letter-spacing: -0.02em;
       color: var(--brand-purple);
       text-decoration: none;
       display: inline-flex;
-      align-items: baseline;
+      align-items: center;
+      gap: 0.9rem;
       line-height: 1;
       transition: color 0.2s ease;
     }
 
-    .brand-title .brand-glyph-l {
-      display: inline-block;
-      line-height: 0;
-      position: relative;
-      top: 0.24em;
-      margin-right: -0.02em;
+    .brand-logo-img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 6px rgba(40, 25, 94, 0.18));
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    .brand-title .brand-glyph-l svg {
-      height: 1.14em;
-      width: auto;
-      display: block;
-      filter: drop-shadow(0 2px 4px rgba(40, 25, 94, 0.12));
-      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .brand-title:hover .brand-glyph-l svg {
-      transform: translateY(-2px) scale(1.03);
-    }
-
-    .brand-title .brand-text-rest {
-      display: inline-block;
-      letter-spacing: -0.02em;
+    .brand-title:hover .brand-logo-img {
+      transform: scale(1.08) rotate(-2deg);
     }
 
     .header-actions {
@@ -1172,16 +1160,8 @@
     <div class="top-header-inner">
       <div class="brand-group">
         <a href="index.html" class="brand-title" onclick="goToHome(event)" aria-label="Leenardo">
-          <span class="brand-glyph-l" aria-hidden="true">
-            <svg viewBox="290 210 445 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g fill="currentColor">
-                <path d="M 296 340 C 296 262, 348 217, 424 217 C 440 217, 449 226, 449 242 L 449 495 C 448 518, 420 560, 357 628 L 459 557 L 459 673 L 374 673 C 328 673, 296 641, 296 595 Z" />
-                <path d="M 552 511 C 580 503, 620 502, 660 506 C 695 510, 718 522, 727 538 L 727 645 C 727 662, 718 673, 706 673 L 552 673 Z" />
-              </g>
-              <path d="M 459 557 C 485 540, 520 521, 551 511 L 551 804 L 505 762 L 459 804 Z" fill="var(--brand-coral)" />
-              <path d="M 459 557 C 485 540, 520 521, 551 511 L 551 526 C 525 536, 485 558, 459 582 Z" fill="var(--brand-coral-dark)" />
-            </svg>
-          </span><span class="brand-text-rest">eenardo</span>
+          <img src="logo.svg" alt="Leenardo Logo" class="brand-logo-img">
+          <span>Leenardo</span>
         </a>
       </div>
 
