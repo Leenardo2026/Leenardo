@@ -16,8 +16,7 @@
     (function() {
       try {
         const saved = localStorage.getItem("leenardo_theme");
-        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const theme = saved || (prefersDark ? "dark" : "light");
+        const theme = saved || "light";
         document.documentElement.setAttribute("data-theme", theme);
       } catch (e) {}
     })();
@@ -34,7 +33,8 @@
       --brand-purple-glow: rgba(40, 25, 94, 0.12);
 
       --brand-coral: #ff6253;
-      --brand-coral-dark: #d43f38;
+      --brand-coral-dark: #ce382a;
+      --brand-coral-contrast: #d43828;
       --brand-coral-light: rgba(255, 98, 83, 0.12);
       --brand-coral-glow: rgba(255, 98, 83, 0.25);
 
@@ -717,64 +717,208 @@
       border: var(--border-card);
       border-radius: 20px;
       box-shadow: var(--shadow-card);
-      padding: 1.75rem;
+      padding: 1.5rem 1.75rem;
       margin-bottom: 1.75rem;
+      transition: all 0.2s ease;
+    }
+
+    .tool-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+      width: 100%;
     }
 
     .tool-card-title {
       font-family: var(--font-serif);
-      font-size: 1.15rem;
+      font-size: 1.18rem;
       font-weight: 700;
       color: var(--ink-navy);
-      margin-bottom: 0.85rem;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
-    /* Grammar Section & Pull-Quote */
+    .tool-toggle-icon {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--bg-cream);
+      flex-shrink: 0;
+    }
+
+    .tool-card.collapsed .tool-toggle-icon {
+      transform: rotate(-90deg);
+    }
+
+    .tool-card.collapsed .tool-card-body {
+      display: none;
+    }
+
+    .tool-card-body {
+      margin-top: 1.25rem;
+    }
+
+    /* Grammar Section, Tags & Pull-Quote */
     .grammar-note {
       font-size: 0.95rem;
       line-height: 1.6;
       color: var(--ink-navy);
     }
 
-    .editorial-pull-quote {
-      font-family: var(--font-serif);
-      font-size: 1.25rem;
-      font-style: italic;
-      line-height: 1.5;
-      color: var(--brand-purple);
-      padding: 1rem 1.5rem;
-      border-left: 4px solid var(--brand-coral);
-      background: var(--bg-cream);
-      border-radius: 0 16px 16px 0;
-      margin: 1.25rem 0;
+    .grammar-tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.1rem;
     }
 
-    /* Vocab Grid */
-    .vocab-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 0.85rem;
-    }
-
-    .vocab-item {
+    .grammar-tag {
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 999px;
       background: var(--bg-cream);
       border: 1px solid var(--divider-hairline);
-      border-radius: 14px;
-      padding: 0.75rem 1rem;
+      color: var(--brand-purple);
+      display: inline-flex;
+      align-items: center;
+      transition: all 0.2s ease;
+    }
+
+    .grammar-tag:hover {
+      background: var(--brand-purple-light);
+      border-color: rgba(40, 25, 94, 0.2);
+    }
+
+    .grammar-example-quote {
+      margin: 1.5rem 0 0.5rem;
+      padding: 1.1rem 1.35rem;
+      background: var(--brand-purple-light);
+      border-left: 4px solid var(--brand-coral);
+      border-radius: 0 14px 14px 0;
+    }
+
+    .grammar-quote-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--brand-coral-contrast);
+      margin-bottom: 0.4rem;
+    }
+
+    .grammar-quote-text {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--brand-purple);
+      line-height: 1.55;
+    }
+
+    /* Vocab Grid & Card Styling */
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+
+    .vocab-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--divider-hairline);
+      border-radius: 16px;
+      padding: 1.1rem;
       display: flex;
       flex-direction: column;
-      gap: 0.2rem;
+      justify-content: space-between;
+      gap: 0.6rem;
+      box-shadow: 0 4px 12px rgba(40, 25, 94, 0.04);
+      transition: all 0.2s ease;
     }
 
-    .vocab-word {
+    .vocab-card:hover {
+      box-shadow: 0 6px 16px rgba(40, 25, 94, 0.08);
+      border-color: rgba(40, 25, 94, 0.16);
+    }
+
+    .vocab-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .vocab-card-word-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .vocab-card-word {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
       font-weight: 700;
       color: var(--brand-purple);
-      font-size: 0.92rem;
+      line-height: 1.2;
     }
 
-    .vocab-def {
-      font-size: 0.82rem;
+    .vocab-card-trans {
+      font-size: 0.9rem;
       color: var(--text-muted);
+      line-height: 1.4;
+      margin-top: 0.2rem;
+    }
+
+    .vocab-card-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.35rem;
+      padding-top: 0.5rem;
+      border-top: 1px dashed var(--divider-hairline);
+    }
+
+    .vocab-card-root {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .vocab-save-btn {
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--divider-hairline);
+      background: var(--bg-cream);
+      color: var(--ink-navy);
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+    }
+
+    .vocab-save-btn:hover {
+      background: var(--brand-coral-light);
+      border-color: var(--brand-coral-contrast);
+      color: var(--brand-coral-contrast);
+    }
+
+    .vocab-save-btn.saved {
+      background: var(--brand-coral-contrast);
+      border-color: var(--brand-coral-contrast);
+      color: #ffffff;
+      font-weight: 700;
     }
 
     /* Quiz Box */
@@ -1585,6 +1729,11 @@
         toolsSubtitle: "Bu seviyedeki anlama kabiliyetini pekiştir ve yeni yapılar keşfet",
         toolVocabTitle: "Bu Seviyenin Kilit Kelimeleri",
         toolGrammarTitle: "Gramer ve Cümle Yapısı",
+        grammarTitle: "Gramer ve Temel Yapılar",
+        grammarTitleC1: "Dilbilimsel ve Üslup Özellikleri",
+        grammarTitleB2: "Sözdizimi ve Yapısal Nüanslar",
+        grammarTitleB1: "Gramer ve Metin İlerlemesi",
+        sentenceFromArticle: "Bu metinden örnek cümle",
         toolQaTitle: "Anlama ve Tartışma Soruları",
         toolQuizTitle: "Hızlı Kavrama Testi",
         showAnswer: "Cevabı Göster",
@@ -1645,6 +1794,11 @@
         toolsSubtitle: "Reinforce your comprehension and explore grammar at this level",
         toolVocabTitle: "Key Vocabulary at this Level",
         toolGrammarTitle: "Grammar & Structural Progression",
+        grammarTitle: "Grammar & Core Structures",
+        grammarTitleC1: "Linguistic & Stylistic Features",
+        grammarTitleB2: "Syntax & Structural Nuance",
+        grammarTitleB1: "Grammar & Discourse Progression",
+        sentenceFromArticle: "Sentence from this article",
         toolQaTitle: "Comprehension & Discussion",
         toolQuizTitle: "Quick Comprehension Quiz",
         showAnswer: "Show Answer",
@@ -1705,6 +1859,11 @@
         toolsSubtitle: "Refuerza tu comprensión y aprende nuevas estructuras",
         toolVocabTitle: "Vocabulario Clave de este Nivel",
         toolGrammarTitle: "Gramática y Progresión Estructural",
+        grammarTitle: "Gramática y Estructuras Básicas",
+        grammarTitleC1: "Características Lingüísticas y de Estilo",
+        grammarTitleB2: "Sintaxis y Matices Estructurales",
+        grammarTitleB1: "Gramática y Progresión Discursiva",
+        sentenceFromArticle: "Oración de este artículo",
         toolQaTitle: "Comprensión y Preguntas",
         toolQuizTitle: "Test Rápido de Comprensión",
         showAnswer: "Mostrar Respuesta",
@@ -1765,6 +1924,11 @@
         toolsSubtitle: "Vertiefe dein Textverständnis und lerne neue Strukturen",
         toolVocabTitle: "Schlüsselvokabeln dieser Stufe",
         toolGrammarTitle: "Grammatik & Textstruktur",
+        grammarTitle: "Grammatik & Grundstrukturen",
+        grammarTitleC1: "Linguistische & stilistische Merkmale",
+        grammarTitleB2: "Syntax & strukturelle Nuancen",
+        grammarTitleB1: "Grammatik & Textprogression",
+        sentenceFromArticle: "Satz aus diesem Artikel",
         toolQaTitle: "Verständnisfragen",
         toolQuizTitle: "Schnelltest",
         showAnswer: "Antwort Zeigen",
@@ -1825,6 +1989,11 @@
         toolsSubtitle: "Renforcez votre compréhension et explorez les structures grammaticales",
         toolVocabTitle: "Vocabulaire Clé de ce Niveau",
         toolGrammarTitle: "Grammaire et Progression Textuelle",
+        grammarTitle: "Grammaire et Structures Fondamentales",
+        grammarTitleC1: "Caractéristiques Linguistiques et Stylistiques",
+        grammarTitleB2: "Syntaxe et Nuances Structurales",
+        grammarTitleB1: "Grammaire et Progression Discursive",
+        sentenceFromArticle: "Phrase extraite de cet article",
         toolQaTitle: "Questions de Compréhension",
         toolQuizTitle: "Quiz Rapide de Compréhension",
         showAnswer: "Afficher la Réponse",
@@ -1867,6 +2036,121 @@
         themeDay: "Jour"
       }
     };
+
+    const grammarTagDictionary = {
+      // 1. Present Simple
+      "present simple": { tr: "Geniş / Şimdiki Zaman", en: "Present Simple", es: "Presente Simple", de: "Präsens", fr: "Présent Simple" },
+      "geniş / şimdiki zaman": { tr: "Geniş / Şimdiki Zaman", en: "Present Simple", es: "Presente Simple", de: "Präsens", fr: "Présent Simple" },
+      "presente simple": { tr: "Geniş / Şimdiki Zaman", en: "Present Simple", es: "Presente Simple", de: "Präsens", fr: "Présent Simple" },
+      "präsens": { tr: "Geniş / Şimdiki Zaman", en: "Present Simple", es: "Presente Simple", de: "Präsens", fr: "Présent Simple" },
+      "présent simple": { tr: "Geniş / Şimdiki Zaman", en: "Present Simple", es: "Presente Simple", de: "Präsens", fr: "Présent Simple" },
+
+      // 2. Nominal Predicates
+      "nominal predicates": { tr: "İsim Cümleleri", en: "Nominal Predicates", es: "Oraciones Copulativas", de: "Nominalsätze", fr: "Phrases Nominales" },
+      "isim cümleleri": { tr: "İsim Cümleleri", en: "Nominal Predicates", es: "Oraciones Copulativas", de: "Nominalsätze", fr: "Phrases Nominales" },
+      "oraciones copulativas": { tr: "İsim Cümleleri", en: "Nominal Predicates", es: "Oraciones Copulativas", de: "Nominalsätze", fr: "Phrases Nominales" },
+      "nominalsätze": { tr: "İsim Cümleleri", en: "Nominal Predicates", es: "Oraciones Copulativas", de: "Nominalsätze", fr: "Phrases Nominales" },
+      "phrases nominales": { tr: "İsim Cümleleri", en: "Nominal Predicates", es: "Oraciones Copulativas", de: "Nominalsätze", fr: "Phrases Nominales" },
+
+      // 3. Core Thematic Vocabulary
+      "core thematic vocabulary": { tr: "Temel Sözcük Dağarcığı", en: "Core Thematic Vocabulary", es: "Vocabulario Básico", de: "Grundwortschatz", fr: "Vocabulaire de Base" },
+      "temel sözcük dağarcığı": { tr: "Temel Sözcük Dağarcığı", en: "Core Thematic Vocabulary", es: "Vocabulario Básico", de: "Grundwortschatz", fr: "Vocabulaire de Base" },
+      "vocabulario básico": { tr: "Temel Sözcük Dağarcığı", en: "Core Thematic Vocabulary", es: "Vocabulario Básico", de: "Grundwortschatz", fr: "Vocabulaire de Base" },
+      "grundwortschatz": { tr: "Temel Sözcük Dağarcığı", en: "Core Thematic Vocabulary", es: "Vocabulario Básico", de: "Grundwortschatz", fr: "Vocabulaire de Base" },
+      "vocabulaire de base": { tr: "Temel Sözcük Dağarcığı", en: "Core Thematic Vocabulary", es: "Vocabulario Básico", de: "Grundwortschatz", fr: "Vocabulaire de Base" },
+
+      // 4. Past Simple (-di)
+      "past simple (-di)": { tr: "Görülen Geçmiş Zaman (-di)", en: "Past Simple (-di)", es: "Pasado Simple (-di)", de: "Vergangenheit (-di)", fr: "Passé Simple (-di)" },
+      "görülen geçmiş zaman (-di)": { tr: "Görülen Geçmiş Zaman (-di)", en: "Past Simple (-di)", es: "Pasado Simple (-di)", de: "Vergangenheit (-di)", fr: "Passé Simple (-di)" },
+      "pasado simple (-di)": { tr: "Görülen Geçmiş Zaman (-di)", en: "Past Simple (-di)", es: "Pasado Simple (-di)", de: "Vergangenheit (-di)", fr: "Passé Simple (-di)" },
+      "vergangenheit (-di)": { tr: "Görülen Geçmiş Zaman (-di)", en: "Past Simple (-di)", es: "Pasado Simple (-di)", de: "Vergangenheit (-di)", fr: "Passé Simple (-di)" },
+      "passé simple (-di)": { tr: "Görülen Geçmiş Zaman (-di)", en: "Past Simple (-di)", es: "Pasado Simple (-di)", de: "Vergangenheit (-di)", fr: "Passé Simple (-di)" },
+
+      // 5. Associative Suffix (-ile)
+      "associative suffix (-ile)": { tr: "Birliktelik Eki (-ile)", en: "Associative Suffix (-ile)", es: "Estructuras Asociativas (-ile)", de: "Assoziative Fügungen (-ile)", fr: "Tournures Associatives (-ile)" },
+      "birliktelik eki (-ile)": { tr: "Birliktelik Eki (-ile)", en: "Associative Suffix (-ile)", es: "Estructuras Asociativas (-ile)", de: "Assoziative Fügungen (-ile)", fr: "Tournures Associatives (-ile)" },
+      "estructuras asociativas (-ile)": { tr: "Birliktelik Eki (-ile)", en: "Associative Suffix (-ile)", es: "Estructuras Asociativas (-ile)", de: "Assoziative Fügungen (-ile)", fr: "Tournures Associatives (-ile)" },
+      "assoziative fügungen (-ile)": { tr: "Birliktelik Eki (-ile)", en: "Associative Suffix (-ile)", es: "Estructuras Asociativas (-ile)", de: "Assoziative Fügungen (-ile)", fr: "Tournures Associatives (-ile)" },
+      "tournures associatives (-ile)": { tr: "Birliktelik Eki (-ile)", en: "Associative Suffix (-ile)", es: "Estructuras Asociativas (-ile)", de: "Assoziative Fügungen (-ile)", fr: "Tournures Associatives (-ile)" },
+
+      // 6. Complex Sentences
+      "complex sentences": { tr: "Birleşik Cümleler", en: "Complex Sentences", es: "Oraciones Compuestas", de: "Komplexe Satzgefüge", fr: "Phrases Complexes" },
+      "birleşik cümleler": { tr: "Birleşik Cümleler", en: "Complex Sentences", es: "Oraciones Compuestas", de: "Komplexe Satzgefüge", fr: "Phrases Complexes" },
+      "oraciones compuestas": { tr: "Birleşik Cümleler", en: "Complex Sentences", es: "Oraciones Compuestas", de: "Komplexe Satzgefüge", fr: "Phrases Complexes" },
+      "komplexe satzgefüge": { tr: "Birleşik Cümleler", en: "Complex Sentences", es: "Oraciones Compuestas", de: "Komplexe Satzgefüge", fr: "Phrases Complexes" },
+      "phrases complexes": { tr: "Birleşik Cümleler", en: "Complex Sentences", es: "Oraciones Compuestas", de: "Komplexe Satzgefüge", fr: "Phrases Complexes" },
+
+      // 7. Relative Participles (-en, -dik)
+      "relative participles (-en, -dik)": { tr: "Sıfat-Fiiller (-en, -dik)", en: "Relative Participles (-en, -dik)", es: "Participios Relativos (-en, -dik)", de: "Relativpartizipien (-en, -dik)", fr: "Participes Relatifs (-en, -dik)" },
+      "sıfat-fiiller (-en, -dik)": { tr: "Sıfat-Fiiller (-en, -dik)", en: "Relative Participles (-en, -dik)", es: "Participios Relativos (-en, -dik)", de: "Relativpartizipien (-en, -dik)", fr: "Participes Relatifs (-en, -dik)" },
+      "participios relativos (-en, -dik)": { tr: "Sıfat-Fiiller (-en, -dik)", en: "Relative Participles (-en, -dik)", es: "Participios Relativos (-en, -dik)", de: "Relativpartizipien (-en, -dik)", fr: "Participes Relatifs (-en, -dik)" },
+      "relativpartizipien (-en, -dik)": { tr: "Sıfat-Fiiller (-en, -dik)", en: "Relative Participles (-en, -dik)", es: "Participios Relativos (-en, -dik)", de: "Relativpartizipien (-en, -dik)", fr: "Participes Relatifs (-en, -dik)" },
+      "participes relatifs (-en, -dik)": { tr: "Sıfat-Fiiller (-en, -dik)", en: "Relative Participles (-en, -dik)", es: "Participios Relativos (-en, -dik)", de: "Relativpartizipien (-en, -dik)", fr: "Participes Relatifs (-en, -dik)" },
+
+      // 8. Adverbial Clauses
+      "adverbial clauses": { tr: "Zarf-Fiil Yapıları", en: "Adverbial Clauses", es: "Cláusulas Adverbiales", de: "Adverbiale Satzverknüpfungen", fr: "Propositions Adverbiales" },
+      "zarf-fiil yapıları": { tr: "Zarf-Fiil Yapıları", en: "Adverbial Clauses", es: "Cláusulas Adverbiales", de: "Adverbiale Satzverknüpfungen", fr: "Propositions Adverbiales" },
+      "cláusulas adverbiales": { tr: "Zarf-Fiil Yapıları", en: "Adverbial Clauses", es: "Cláusulas Adverbiales", de: "Adverbiale Satzverknüpfungen", fr: "Propositions Adverbiales" },
+      "adverbiale satzverknüpfungen": { tr: "Zarf-Fiil Yapıları", en: "Adverbial Clauses", es: "Cláusulas Adverbiales", de: "Adverbiale Satzverknüpfungen", fr: "Propositions Adverbiales" },
+      "propositions adverbiales": { tr: "Zarf-Fiil Yapıları", en: "Adverbial Clauses", es: "Cláusulas Adverbiales", de: "Adverbiale Satzverknüpfungen", fr: "Propositions Adverbiales" },
+
+      // 9. Descriptive Clauses
+      "descriptive clauses": { tr: "Açıklayıcı Yan Tümceler", en: "Descriptive Clauses", es: "Cláusulas Descriptivas", de: "Erklärende Satzgefüge", fr: "Propositions Descriptives" },
+      "açıklayıcı yan tümceler": { tr: "Açıklayıcı Yan Tümceler", en: "Descriptive Clauses", es: "Cláusulas Descriptivas", de: "Erklärende Satzgefüge", fr: "Propositions Descriptives" },
+      "cláusulas descriptivas": { tr: "Açıklayıcı Yan Tümceler", en: "Descriptive Clauses", es: "Cláusulas Descriptivas", de: "Erklärende Satzgefüge", fr: "Propositions Descriptives" },
+      "erklärende satzgefüge": { tr: "Açıklayıcı Yan Tümceler", en: "Descriptive Clauses", es: "Cláusulas Descriptivas", de: "Erklärende Satzgefüge", fr: "Propositions Descriptives" },
+      "propositions descriptives": { tr: "Açıklayıcı Yan Tümceler", en: "Descriptive Clauses", es: "Cláusulas Descriptivas", de: "Erklärende Satzgefüge", fr: "Propositions Descriptives" },
+
+      // 10. Expository Discourse
+      "expository discourse": { tr: "Açıklayıcı Anlatım", en: "Expository Discourse", es: "Discurso Expositivo", de: "Essayistischer Diskurs", fr: "Discours Expositif" },
+      "açıklayıcı anlatım": { tr: "Açıklayıcı Anlatım", en: "Expository Discourse", es: "Discurso Expositivo", de: "Essayistischer Diskurs", fr: "Discours Expositif" },
+      "discurso expositivo": { tr: "Açıklayıcı Anlatım", en: "Expository Discourse", es: "Discurso Expositivo", de: "Essayistischer Diskurs", fr: "Discours Expositif" },
+      "essayistischer diskurs": { tr: "Açıklayıcı Anlatım", en: "Expository Discourse", es: "Discurso Expositivo", de: "Essayistischer Diskurs", fr: "Discours Expositif" },
+      "discours expositif": { tr: "Açıklayıcı Anlatım", en: "Expository Discourse", es: "Discurso Expositivo", de: "Essayistischer Diskurs", fr: "Discours Expositif" },
+
+      // 11. Natural Cause & Effect
+      "natural cause & effect": { tr: "Doğal Sebep-Sonuç İlişkileri", en: "Natural Cause & Effect", es: "Relaciones Naturales de Causa y Efecto", de: "Natürliche Ursache-Wirkungs-Gefüge", fr: "Relations Naturelles de Cause à Effet" },
+      "doğal sebep-sonuç ilişkileri": { tr: "Doğal Sebep-Sonuç İlişkileri", en: "Natural Cause & Effect", es: "Relaciones Naturales de Causa y Efecto", de: "Natürliche Ursache-Wirkungs-Gefüge", fr: "Relations Naturelles de Cause à Effet" },
+      "relaciones naturales de causa y efecto": { tr: "Doğal Sebep-Sonuç İlişkileri", en: "Natural Cause & Effect", es: "Relaciones Naturales de Causa y Efecto", de: "Natürliche Ursache-Wirkungs-Gefüge", fr: "Relations Naturelles de Cause à Effet" },
+      "natürliche ursache-wirkungs-gefüge": { tr: "Doğal Sebep-Sonuç İlişkileri", en: "Natural Cause & Effect", es: "Relaciones Naturales de Causa y Efecto", de: "Natürliche Ursache-Wirkungs-Gefüge", fr: "Relations Naturelles de Cause à Effet" },
+      "relations naturelles de cause à effet": { tr: "Doğal Sebep-Sonuç İlişkileri", en: "Natural Cause & Effect", es: "Relaciones Naturales de Causa y Efecto", de: "Natürliche Ursache-Wirkungs-Gefüge", fr: "Relations Naturelles de Cause à Effet" },
+
+      // 12. Advanced Syntactic Patterns
+      "advanced syntactic patterns": { tr: "İleri Düzey Sentaks", en: "Advanced Syntactic Patterns", es: "Sintaxis Avanzada", de: "Fortgeschrittene Syntax", fr: "Syntaxe Avancée" },
+      "ileri düzey sentaks": { tr: "İleri Düzey Sentaks", en: "Advanced Syntactic Patterns", es: "Sintaxis Avanzada", de: "Fortgeschrittene Syntax", fr: "Syntaxe Avancée" },
+      "sintaxis avanzada": { tr: "İleri Düzey Sentaks", en: "Advanced Syntactic Patterns", es: "Sintaxis Avanzada", de: "Fortgeschrittene Syntax", fr: "Syntaxe Avancée" },
+      "fortgeschrittene syntax": { tr: "İleri Düzey Sentaks", en: "Advanced Syntactic Patterns", es: "Sintaxis Avanzada", de: "Fortgeschrittene Syntax", fr: "Syntaxe Avancée" },
+      "syntaxe avancée": { tr: "İleri Düzey Sentaks", en: "Advanced Syntactic Patterns", es: "Sintaxis Avanzada", de: "Fortgeschrittene Syntax", fr: "Syntaxe Avancée" },
+
+      // 13. Literary & Fluent Essay Style
+      "literary & fluent essay style": { tr: "Edebi ve Akıcı Dergi Üslubu", en: "Literary & Fluent Essay Style", es: "Estilo Ensayístico y Fluido", de: "Literarischer & fließender Essay-Stil", fr: "Style d'Essai Littéraire et Fluide" },
+      "edebi ve akıcı dergi üslubu": { tr: "Edebi ve Akıcı Dergi Üslubu", en: "Literary & Fluent Essay Style", es: "Estilo Ensayístico y Fluido", de: "Literarischer & fließender Essay-Stil", fr: "Style d'Essai Littéraire et Fluide" },
+      "estilo ensayístico y fluido": { tr: "Edebi ve Akıcı Dergi Üslubu", en: "Literary & Fluent Essay Style", es: "Estilo Ensayístico y Fluido", de: "Literarischer & fließender Essay-Stil", fr: "Style d'Essai Littéraire et Fluide" },
+      "literarischer & fließender essay-stil": { tr: "Edebi ve Akıcı Dergi Üslubu", en: "Literary & Fluent Essay Style", es: "Estilo Ensayístico y Fluido", de: "Literarischer & fließender Essay-Stil", fr: "Style d'Essai Littéraire et Fluide" },
+      "style d'essai littéraire et fluide": { tr: "Edebi ve Akıcı Dergi Üslubu", en: "Literary & Fluent Essay Style", es: "Estilo Ensayístico y Fluido", de: "Literarischer & fließender Essay-Stil", fr: "Style d'Essai Littéraire et Fluide" },
+
+      // 14. Rich Adverbials & Connectors
+      "rich adverbials & connectors": { tr: "Zengin Zarf ve Bağlaç Kullanımı", en: "Rich Adverbials & Connectors", es: "Rico Uso de Adverbios y Conectores", de: "Vielfältige Adverbien & Konjunktionen", fr: "Richesse des Adverbes et Conjonctions" },
+      "zengin zarf ve bağlaç kullanımı": { tr: "Zengin Zarf ve Bağlaç Kullanımı", en: "Rich Adverbials & Connectors", es: "Rico Uso de Adverbios y Conectores", de: "Vielfältige Adverbien & Konjunktionen", fr: "Richesse des Adverbes et Conjonctions" },
+      "rico uso de adverbios y conectores": { tr: "Zengin Zarf ve Bağlaç Kullanımı", en: "Rich Adverbials & Connectors", es: "Rico Uso de Adverbios y Conectores", de: "Vielfältige Adverbien & Konjunktionen", fr: "Richesse des Adverbes et Conjonctions" },
+      "vielfältige adverbien & konjunktionen": { tr: "Zengin Zarf ve Bağlaç Kullanımı", en: "Rich Adverbials & Connectors", es: "Rico Uso de Adverbios y Conectores", de: "Vielfältige Adverbien & Konjunktionen", fr: "Richesse des Adverbes et Conjonctions" },
+      "richesse des adverbes et conjonctions": { tr: "Zengin Zarf ve Bağlaç Kullanımı", en: "Rich Adverbials & Connectors", es: "Rico Uso de Adverbios y Conectores", de: "Vielfältige Adverbien & Konjunktionen", fr: "Richesse des Adverbes et Conjonctions" },
+
+      // 15. Thematic Cultural Lexicon
+      "thematic cultural lexicon": { tr: "Kültürel Terimler", en: "Thematic Cultural Lexicon", es: "Léxico Cultural Temático", de: "Kultureller Fachwortschatz", fr: "Lexique Culturel Thématique" },
+      "kültürel terimler": { tr: "Kültürel Terimler", en: "Thematic Cultural Lexicon", es: "Léxico Cultural Temático", de: "Kultureller Fachwortschatz", fr: "Lexique Culturel Thématique" },
+      "léxico cultural temático": { tr: "Kültürel Terimler", en: "Thematic Cultural Lexicon", es: "Léxico Cultural Temático", de: "Kultureller Fachwortschatz", fr: "Lexique Culturel Thématique" },
+      "kultureller fachwortschatz": { tr: "Kültürel Terimler", en: "Thematic Cultural Lexicon", es: "Léxico Cultural Temático", de: "Kultureller Fachwortschatz", fr: "Lexique Culturel Thématique" },
+      "lexique culturel thématique": { tr: "Kültürel Terimler", en: "Thematic Cultural Lexicon", es: "Léxico Cultural Temático", de: "Kultureller Fachwortschatz", fr: "Lexique Culturel Thématique" }
+    };
+
+    function localizeGrammarTag(tag, support) {
+      if (!tag) return "";
+      const lower = tag.trim().toLowerCase();
+      const entry = grammarTagDictionary[lower];
+      if (entry && entry[support]) return entry[support];
+      return tag;
+    }
 
     // Global State
     const initialRawData = (typeof window !== "undefined") ? (window.ARTICLES_DATA || window.articlesDatabase) : null;
@@ -2620,11 +2904,15 @@
           const isSaved = isWordSaved(wordStorageId);
 
           let rootHtml = "";
-          if (v.root && v.root.trim() !== "") {
-            const rTrans = (v.rootTranslations && v.rootTranslations[supportLang]) || (v.rootTranslations && v.rootTranslations.en) || "";
-            rootHtml = `<span class="vocab-card-root">${t.rootLabel || "root:"} <strong>${v.root}</strong>${rTrans ? ' (' + rTrans + ')' : ''}</span>`;
-          } else {
-            rootHtml = `<span></span>`;
+          // Show root only if target language is Turkish ('tr') and root differs from the target word
+          if (targetLang === "tr" && v.root && typeof v.root === "string") {
+            const cleanWord = (v.target || "").toLowerCase().replace(/[^\p{L}\p{M}\p{N}]/gu, '').trim();
+            const cleanRoot = (v.root || "").toLowerCase().replace(/[^\p{L}\p{M}\p{N}]/gu, '').trim();
+            if (cleanRoot && cleanRoot !== cleanWord) {
+              const rTrans = (v.rootTranslations && (v.rootTranslations[supportLang] || v.rootTranslations.en)) || "";
+              const label = t.rootLabel || "kök:";
+              rootHtml = `<div class="vocab-card-bottom"><span class="vocab-card-root">${label} <strong>${v.root}</strong>${rTrans ? ' (' + rTrans + ')' : ''}</span></div>`;
+            }
           }
 
           card.innerHTML = `
@@ -2634,15 +2922,13 @@
                   <span class="vocab-card-word">${v.target}</span>
                   <button class="popover-audio-btn" title="Pronounce" aria-label="Pronounce" onclick="event.stopPropagation(); speakSingleSentence('${escapeSingleQuotes(v.target)}', null)">🔊</button>
                 </div>
+                <button class="vocab-save-btn ${isSaved ? 'saved' : ''}" id="vsave-${wordStorageId}" onclick="event.stopPropagation(); toggleVocabCardSave('${escapeSingleQuotes(v.target)}', '${escapeSingleQuotes(trans)}', '${escapeSingleQuotes(v.root || '')}', this)">
+                  ${isSaved ? (t.savedWord || 'Saved') : (t.saveWord || 'Save')}
+                </button>
               </div>
               <div class="vocab-card-trans">${trans}</div>
             </div>
-            <div class="vocab-card-bottom">
-              ${rootHtml}
-              <button class="vocab-save-btn ${isSaved ? 'saved' : ''}" id="vsave-${wordStorageId}" onclick="event.stopPropagation(); toggleVocabCardSave('${escapeSingleQuotes(v.target)}', '${escapeSingleQuotes(trans)}', '${escapeSingleQuotes(v.root || '')}', this)">
-                ${isSaved ? (t.savedWord || 'Saved') : (t.saveWord || 'Save')}
-              </button>
-            </div>
+            ${rootHtml}
           `;
 
           grid.appendChild(card);
@@ -2690,15 +2976,12 @@
       const t = uiTranslations[supportLang] || uiTranslations.en;
 
       if (titleElem) {
-        if (currentLevel === "C1") {
-          titleElem.innerHTML = `<span>Linguistic & Stylistic Features</span> <span style="font-size:0.75rem; font-weight:600; color:var(--text-muted); margin-left:0.5rem;">(${currentLevel})</span>`;
-        } else if (currentLevel === "B2") {
-          titleElem.innerHTML = `<span>Syntax & Structural Nuance</span> <span style="font-size:0.75rem; font-weight:600; color:var(--text-muted); margin-left:0.5rem;">(${currentLevel})</span>`;
-        } else if (currentLevel === "B1") {
-          titleElem.innerHTML = `<span>Grammar & Discourse Progression</span> <span style="font-size:0.75rem; font-weight:600; color:var(--text-muted); margin-left:0.5rem;">(${currentLevel})</span>`;
-        } else {
-          titleElem.innerHTML = `<span>${t.grammarTitle || "Grammar & Core Structures"}</span> <span style="font-size:0.75rem; font-weight:600; color:var(--text-muted); margin-left:0.5rem;">(${currentLevel})</span>`;
-        }
+        let levelTitle = t.grammarTitle || "Grammar & Core Structures";
+        if (currentLevel === "C1") levelTitle = t.grammarTitleC1 || "Linguistic & Stylistic Features";
+        else if (currentLevel === "B2") levelTitle = t.grammarTitleB2 || "Syntax & Structural Nuance";
+        else if (currentLevel === "B1") levelTitle = t.grammarTitleB1 || "Grammar & Discourse Progression";
+
+        titleElem.innerHTML = `<span>${levelTitle}</span> <span style="font-size:0.75rem; font-weight:600; color:var(--text-muted); margin-left:0.5rem;">(${currentLevel})</span>`;
       }
 
       let desc = "";
@@ -2713,7 +2996,7 @@
       let tagsHtml = "";
       if (targetData.grammarTags && Array.isArray(targetData.grammarTags) && targetData.grammarTags.length > 0) {
         tagsHtml = `<div class="grammar-tags-container">` +
-          targetData.grammarTags.map(tag => `<span class="grammar-tag">${tag}</span>`).join(" ") +
+          targetData.grammarTags.map(tag => `<span class="grammar-tag">${localizeGrammarTag(tag, supportLang)}</span>`).join(" ") +
           `</div>`;
       }
 
@@ -2742,7 +3025,7 @@
       if (authenticSentence) {
         quoteHtml = `
           <div class="grammar-example-quote">
-            <div class="grammar-quote-label">Sentence from this article (${currentLevel})</div>
+            <div class="grammar-quote-label">${t.sentenceFromArticle || "Sentence from this article"} (${currentLevel})</div>
             <div class="grammar-quote-text">"${authenticSentence}"</div>
             ${authenticTranslation ? `<div style="font-size:0.88rem; color:var(--text-muted); margin-top:0.4rem; font-style:normal;">${authenticTranslation}</div>` : ""}
           </div>

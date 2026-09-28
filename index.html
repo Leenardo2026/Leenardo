@@ -16,8 +16,7 @@
     (function() {
       try {
         const saved = localStorage.getItem("leenardo_theme");
-        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const theme = saved || (prefersDark ? "dark" : "light");
+        const theme = saved || "light";
         document.documentElement.setAttribute("data-theme", theme);
       } catch (e) {}
     })();
@@ -34,7 +33,8 @@
       --brand-purple-glow: rgba(40, 25, 94, 0.12);
 
       --brand-coral: #ff6253;
-      --brand-coral-dark: #d43f38;
+      --brand-coral-dark: #ce382a;
+      --brand-coral-contrast: #d43828;
       --brand-coral-light: rgba(255, 98, 83, 0.12);
       --brand-coral-glow: rgba(255, 98, 83, 0.25);
 
@@ -380,13 +380,55 @@
     }
 
     .btn-masthead-badge {
-      background: var(--brand-coral);
+      background: var(--brand-coral-contrast);
       color: #ffffff;
       font-size: 0.68rem;
       font-weight: 700;
       padding: 2px 7px;
       border-radius: 999px;
       margin-left: 0.2rem;
+    }
+
+    .header-search-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: var(--bg-cream);
+      border: 1px solid var(--divider-hairline);
+      border-radius: 999px;
+      padding: 0.45rem 0.95rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(40, 25, 94, 0.03);
+    }
+
+    .header-search-wrap:focus-within {
+      border-color: var(--brand-coral-contrast);
+      box-shadow: 0 0 0 3px var(--brand-coral-light);
+      background: var(--bg-surface);
+    }
+
+    .header-search-input {
+      background: transparent;
+      border: none;
+      color: var(--ink-navy);
+      font-size: 0.84rem;
+      outline: none;
+      width: 140px;
+      transition: width 0.25s ease;
+    }
+
+    .header-search-input:focus {
+      width: 180px;
+    }
+
+    .header-search-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .header-search-icon {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      cursor: pointer;
     }
 
     /* 3. Category Navigation Bar */
@@ -405,18 +447,23 @@
       padding: 0 1.5rem;
       display: flex;
       align-items: center;
-      justify-content: space-between;
       height: 52px;
+      overflow: hidden;
     }
 
     .nav-links-scroll {
       display: flex;
       align-items: center;
-      gap: 0.35rem;
+      gap: 0.45rem;
       overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
       scrollbar-width: none;
       -ms-overflow-style: none;
+      width: 100%;
       height: 100%;
+      padding: 4px 0;
+      -webkit-overflow-scrolling: touch;
     }
 
     .nav-links-scroll::-webkit-scrollbar {
@@ -426,15 +473,14 @@
     .nav-tab-btn {
       background: transparent;
       border: none;
-      color: rgba(255, 255, 255, 0.82);
-      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.85rem;
       font-weight: 600;
       padding: 6px 14px;
       border-radius: 999px;
       cursor: pointer;
       white-space: nowrap;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.01em;
       transition: all 0.2s ease;
     }
 
@@ -444,37 +490,9 @@
     }
 
     .nav-tab-btn.active {
-      background: var(--brand-coral);
+      background: var(--brand-coral-contrast);
       color: #ffffff;
-      box-shadow: 0 4px 12px rgba(255, 98, 83, 0.35);
-    }
-
-    .nav-search-wrap {
-      display: flex;
-      align-items: center;
-      background: rgba(255, 255, 255, 0.12);
-      border-radius: 999px;
-      padding: 5px 12px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .nav-search-input {
-      background: transparent;
-      border: none;
-      color: #ffffff;
-      font-size: 0.82rem;
-      outline: none;
-      width: 170px;
-    }
-
-    .nav-search-input::placeholder {
-      color: rgba(255, 255, 255, 0.65);
-    }
-
-    .nav-search-icon {
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 0.8rem;
-      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(212, 56, 40, 0.35);
     }
 
     /* 4. Magazine Hero Mosaic Section */
@@ -551,15 +569,14 @@
     }
 
     .hero-cat-tag {
-      background: var(--brand-coral);
+      background: var(--brand-coral-contrast);
       color: #ffffff;
-      font-size: 0.68rem;
+      font-size: 0.72rem;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.02em;
       padding: 4px 12px;
       border-radius: 999px;
-      box-shadow: 0 4px 10px rgba(255, 98, 83, 0.35);
+      box-shadow: 0 4px 10px rgba(212, 56, 40, 0.35);
     }
 
     .hero-read-tag {
@@ -647,10 +664,10 @@
     }
 
     .hero-lvl-pill.active {
-      background: var(--brand-coral);
+      background: var(--brand-coral-contrast);
       color: #ffffff;
-      border-color: var(--brand-coral);
-      box-shadow: 0 3px 10px rgba(255, 98, 83, 0.45);
+      border-color: var(--brand-coral-contrast);
+      box-shadow: 0 3px 10px rgba(212, 56, 40, 0.45);
       transform: scale(1.05);
     }
 
@@ -670,18 +687,19 @@
     }
 
     .hero-lead-link:hover {
-      background: var(--brand-coral);
+      background: var(--brand-coral-contrast);
       color: #ffffff;
       transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(255, 98, 83, 0.45);
+      box-shadow: 0 6px 18px rgba(212, 56, 40, 0.45);
     }
 
-    /* Mosaic Sub Cards (1 Top Wide + 2 Bottom Split) */
+    /* Mosaic Sub Cards (1 Top Wide + 2 Bottom Split: equal width, grid-aligned, no empty gaps) */
     .hero-mosaic-sub {
       display: grid;
-      grid-template-rows: 1fr 1fr;
       grid-template-columns: 1fr 1fr;
-      gap: 1rem;
+      grid-template-rows: 1fr 1fr;
+      gap: 1.25rem;
+      height: 100%;
     }
 
     .hero-mosaic-sub .mosaic-card:first-child {
@@ -695,7 +713,9 @@
       background: var(--brand-purple);
       box-shadow: var(--shadow-card);
       border: var(--border-card);
-      min-height: 180px;
+      min-height: 200px;
+      height: 100%;
+      box-sizing: border-box;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -730,13 +750,12 @@
 
     .mosaic-cat-pill {
       display: inline-block;
-      background: var(--brand-coral);
+      background: var(--brand-coral-contrast);
       color: #ffffff;
-      font-size: 0.62rem;
+      font-size: 0.68rem;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 2px 7px;
+      letter-spacing: 0.02em;
+      padding: 3px 9px;
       border-radius: 999px;
       margin-bottom: 0.35rem;
     }
@@ -930,8 +949,7 @@
     .feed-cat {
       font-size: 0.72rem;
       font-weight: 700;
-      color: var(--brand-coral);
-      text-transform: capitalize;
+      color: var(--brand-coral-contrast);
     }
 
     .card-read-badge {
@@ -1002,7 +1020,7 @@
     }
 
     .level-tab:hover {
-      background: var(--brand-coral);
+      background: var(--brand-coral-contrast);
       color: #ffffff;
     }
 
@@ -1061,36 +1079,38 @@
       justify-content: space-between;
     }
 
-    .widget-levels-grid {
+    .level-pills-list {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 0.35rem;
     }
 
-    .widget-level-pill {
+    .level-chip {
       background: var(--bg-cream);
       border: 1px solid var(--divider-hairline);
       border-radius: 999px;
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       font-weight: 700;
       color: var(--ink-navy);
       text-align: center;
-      padding: 6px 0;
+      padding: 7px 0;
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .widget-level-pill:hover {
-      background: var(--brand-coral);
-      color: #ffffff;
-      border-color: var(--brand-coral);
+    .level-chip:hover {
+      background: var(--brand-coral-light);
+      border-color: var(--brand-coral-contrast);
+      color: var(--brand-coral-contrast);
+      transform: translateY(-1px);
     }
 
-    .widget-level-pill.active {
-      background: var(--brand-coral);
+    .level-chip.active {
+      background: var(--brand-coral-contrast);
+      border-color: var(--brand-coral-contrast);
       color: #ffffff;
-      border-color: var(--brand-coral);
-      box-shadow: 0 4px 10px rgba(255, 98, 83, 0.3);
+      box-shadow: 0 4px 10px rgba(212, 56, 40, 0.35);
+      transform: scale(1.04);
     }
 
     .widget-vocab-card {
@@ -1367,6 +1387,11 @@
       </div>
 
       <div class="masthead-actions-deck">
+        <div class="header-search-wrap">
+          <input type="text" id="search-input" class="header-search-input" placeholder="Search stories..." oninput="filterArticles()">
+          <span class="header-search-icon">🔍</span>
+        </div>
+
         <a href="article.html#notebook" class="btn-masthead-box" id="header-vocab-link" title="Open Vocabulary Notebook">
           <span class="btn-box-icon">📖</span>
           <span class="btn-box-text">
@@ -1393,10 +1418,6 @@
     <div class="main-navbar-inner">
       <div class="nav-links-scroll" id="nav-categories-container">
         <!-- Injected via JavaScript: All Stories + Category Tabs -->
-      </div>
-      <div class="nav-search-wrap">
-        <input type="text" id="search-input" class="nav-search-input" placeholder="Search stories..." oninput="filterArticles()">
-        <span class="nav-search-icon">🔍</span>
       </div>
     </div>
   </nav>
@@ -1468,16 +1489,6 @@
         <a href="article.html#notebook" class="btn-widget-action" id="widget-vocab-btn">
           Open Notebook →
         </a>
-      </div>
-
-      <!-- Widget: Pedagogical Assurance Card -->
-      <div class="sidebar-widget">
-        <div class="widget-header">
-          <span id="widget-assurance-title">Pedagogical Assurance</span>
-        </div>
-        <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.6;" id="widget-assurance-desc">
-          All texts are graded to CEFR standards with instant grammar explanations and vocabulary context.
-        </p>
       </div>
     </aside>
   </main>
@@ -1976,6 +1987,15 @@
       tickerLink.href = `article.html?id=${encodeURIComponent(latest.id)}&target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
     }
 
+    function formatCategoryLabel(label) {
+      if (!label) return "";
+      return label
+        .replace(/\bVe\b/g, "ve")
+        .replace(/\bY\b/g, "y")
+        .replace(/\bUnd\b/g, "und")
+        .replace(/\bEt\b/g, "et");
+    }
+
     function renderCategoryNav() {
       const container = document.getElementById("nav-categories-container");
       if (!container) return;
@@ -1994,7 +2014,8 @@
       const categoriesMap = new Map();
       articlesDatabase.forEach(art => {
         const catKey = art.category;
-        const catLabel = (art.categoryTranslations && art.categoryTranslations[supportLang]) || art.category;
+        const rawLabel = (art.categoryTranslations && art.categoryTranslations[supportLang]) || art.category;
+        const catLabel = formatCategoryLabel(rawLabel);
         if (!categoriesMap.has(catKey)) {
           categoriesMap.set(catKey, catLabel);
         }
@@ -2036,18 +2057,21 @@
 
       // 1. Lead Story (articlesDatabase[0])
       const lead = articlesDatabase[0];
-      const leadCatLabel = (lead.categoryTranslations && lead.categoryTranslations[supportLang]) || lead.category;
+      const leadCatLabel = formatCategoryLabel((lead.categoryTranslations && lead.categoryTranslations[supportLang]) || lead.category);
       const leadLevelData = (lead.languages && lead.languages[targetLang] && lead.languages[targetLang][currentLevel])
                          || (lead.languages && lead.languages[targetLang] && lead.languages[targetLang].A1);
       const leadTitle = (leadLevelData && leadLevelData.title)
                      || (lead.titleTranslations && lead.titleTranslations[targetLang])
                      || lead.topic;
-      let leadDesc = "";
-      if (leadLevelData && leadLevelData.grammarDesc) {
-        const gd = leadLevelData.grammarDesc;
-        leadDesc = (typeof gd === "object") ? (gd[supportLang] || gd.en || gd.tr || "") : gd;
+      
+      // Card excerpt: use teaser field; omit if missing
+      let leadTeaser = "";
+      if (lead.teaserTranslations && lead.teaserTranslations[supportLang]) {
+        leadTeaser = lead.teaserTranslations[supportLang];
+      } else if (lead.teaser) {
+        leadTeaser = typeof lead.teaser === "object" ? (lead.teaser[supportLang] || lead.teaser.en || "") : lead.teaser;
       }
-      if (!leadDesc) leadDesc = leadTitle;
+      const leadExcerptHtml = leadTeaser ? `<p class="hero-lead-excerpt">${leadTeaser}</p>` : "";
 
       const leadUrl = `article.html?id=${encodeURIComponent(lead.id)}&target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
       const leadImg = (lead.visual && lead.visual.imageUrl) ? lead.visual.imageUrl : 'images/cover_01.jpg';
@@ -2070,7 +2094,7 @@
             <a href="${leadUrl}">
               <h2 class="hero-lead-title">${leadTitle}</h2>
             </a>
-            <p class="hero-lead-excerpt">${leadDesc}</p>
+            ${leadExcerptHtml}
           </div>
           <div class="hero-lead-footer">
             <div class="hero-levels-group">
@@ -2087,7 +2111,7 @@
       const sub3 = articlesDatabase[3] || articlesDatabase[0];
 
       function buildMosaicCardHtml(art, extraClass = "") {
-        const cat = (art.categoryTranslations && art.categoryTranslations[supportLang]) || art.category;
+        const cat = formatCategoryLabel((art.categoryTranslations && art.categoryTranslations[supportLang]) || art.category);
         const lData = (art.languages && art.languages[targetLang] && art.languages[targetLang][currentLevel])
                    || (art.languages && art.languages[targetLang] && art.languages[targetLang].A1);
         const title = (lData && lData.title) || (art.titleTranslations && art.titleTranslations[targetLang]) || art.topic;
@@ -2113,15 +2137,11 @@
         `;
       }
 
+      // 3 direct children in 2x2 grid: top wide (spans 2 cols) + bottom 2 split cards (equal width, grid-aligned, no gaps)
       subContainer.innerHTML = `
-        <!-- Top Wide Sub Feature -->
         ${buildMosaicCardHtml(sub1, "sub-item-top")}
-
-        <!-- Bottom Split 2 Sub Features -->
-        <div class="sub-item-split-row">
-          ${buildMosaicCardHtml(sub2)}
-          ${buildMosaicCardHtml(sub3)}
-        </div>
+        ${buildMosaicCardHtml(sub2, "sub-item-bottom")}
+        ${buildMosaicCardHtml(sub3, "sub-item-bottom")}
       `;
     }
 
@@ -2136,7 +2156,7 @@
       const trendingSource = articlesDatabase.length > 4 ? articlesDatabase.slice(4, 9) : articlesDatabase.slice(0, 5);
 
       trendingSource.forEach(art => {
-        const cat = (art.categoryTranslations && art.categoryTranslations[supportLang]) || art.category;
+        const cat = formatCategoryLabel((art.categoryTranslations && art.categoryTranslations[supportLang]) || art.category);
         const lData = (art.languages && art.languages[targetLang] && art.languages[targetLang][currentLevel])
                    || (art.languages && art.languages[targetLang] && art.languages[targetLang].A1);
         const title = (lData && lData.title) || (art.titleTranslations && art.titleTranslations[targetLang]) || art.topic;
@@ -2169,19 +2189,21 @@
       const card = document.createElement("article");
       card.className = "feed-card";
 
-      const catLabel = (art.categoryTranslations && art.categoryTranslations[supportLang]) || art.category;
+      const catLabel = formatCategoryLabel((art.categoryTranslations && art.categoryTranslations[supportLang]) || art.category);
       const targetLevelData = (art.languages && art.languages[targetLang] && art.languages[targetLang][currentLevel])
                            || (art.languages && art.languages[targetLang] && art.languages[targetLang].A1);
       const cardTitle = (targetLevelData && targetLevelData.title)
                      || (art.titleTranslations && art.titleTranslations[targetLang])
                      || art.topic;
 
-      let desc = "";
-      if (targetLevelData && targetLevelData.grammarDesc) {
-        const gd = targetLevelData.grammarDesc;
-        desc = (typeof gd === "object") ? (gd[supportLang] || gd.en || gd.tr || "") : gd;
+      // Card excerpt: use teaser field; omit if missing
+      let teaser = "";
+      if (art.teaserTranslations && art.teaserTranslations[supportLang]) {
+        teaser = art.teaserTranslations[supportLang];
+      } else if (art.teaser) {
+        teaser = typeof art.teaser === "object" ? (art.teaser[supportLang] || art.teaser.en || "") : art.teaser;
       }
-      if (!desc) desc = cardTitle;
+      const teaserHtml = teaser ? `<p class="feed-desc">${teaser}</p>` : "";
 
       const articleBaseUrl = `article.html?id=${encodeURIComponent(art.id)}&target=${targetLang}&support=${supportLang}`;
       const imageUrl = (art.visual && art.visual.imageUrl) ? art.visual.imageUrl : 'images/cover_01.jpg';
@@ -2204,7 +2226,7 @@
           <a href="${articleBaseUrl}&level=${currentLevel}">
             <h3 class="feed-title">${cardTitle}</h3>
           </a>
-          <p class="feed-desc">${desc}</p>
+          ${teaserHtml}
           <div class="feed-levels-row">
             <div class="level-tabs">
               ${levelTabsHtml}
@@ -2298,11 +2320,9 @@
       if (levelContainer) {
         levelContainer.innerHTML = "";
         SUPPORTED_LEVELS.forEach(lvl => {
-          const descMap = levelDescriptions[lvl] || {};
-          const desc = descMap[supportLang] || descMap.en || "";
           const btn = document.createElement("button");
-          btn.className = `level-select-btn ${lvl === currentLevel ? "active" : ""}`;
-          btn.innerHTML = `<strong>${lvl}</strong> <span>${desc}</span>`;
+          btn.className = `level-chip ${lvl === currentLevel ? "active" : ""}`;
+          btn.textContent = lvl;
           btn.onclick = () => setLevel(lvl);
           levelContainer.appendChild(btn);
         });
