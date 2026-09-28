@@ -169,6 +169,21 @@ def generate_pages(articles_json="articles.json", template_html="article.html", 
             flags=re.IGNORECASE
         )
 
+        # Ensure asset paths are relative to the /articles/ subfolder (../)
+        # This guarantees 100% offline file:// compatibility and standard HTTP relative resolution
+        for asset in [
+            'href="favicon.svg"',
+            'href="favicon-32.png"',
+            'href="favicon-64.png"',
+            'href="logo-192.png"',
+            'href="auth.css"',
+            'href="index.html"',
+            'src="articles-data.js"',
+            'src="supabase-client.js"',
+            'src="auth-ui.js"',
+        ]:
+            page_content = page_content.replace(asset, asset.replace('="', '="../'))
+
         out_file = os.path.join(output_dir, f"{art_id}.html")
         with open(out_file, "w", encoding="utf-8") as out:
             out.write(page_content)

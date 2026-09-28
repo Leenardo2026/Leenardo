@@ -1,201 +1,252 @@
-﻿ID,KATEGORİ,MAKALE BAŞLIĞI,ALT BAŞLIK / ODAK
-1,1. Günlük Yaşam,Erken Uyanan İnsanların Sabah Rutini,Güne sakin ve huzurlu bir başlangıç.
-2,1. Günlük Yaşam,Bir Pazar Sabahı Evde Neler Yapılır?,"Aile kahvaltısı, temizlik ve dinlenme saatleri."
-3,1. Günlük Yaşam,Küçük Bir Dairede Düzen Kurmak,Az eşya ile ferah bir yaşam alanı oluşturma yolları.
-4,1. Günlük Yaşam,Haftalık Alışveriş Listesi Nasıl Hazırlanır?,Markette bütçeyi korumanın ve planlı olmanın yolları.
-5,1. Günlük Yaşam,Akşam Yemeğinden Sonraki Sakin Saatler,Günün yorgunluğunu kitapla ve sessizlikle atmak.
-6,1. Günlük Yaşam,Ev Bitkilerine Bakma Rehberi,"Salon bitkilerini sulamak, güneşlendirmek ve yaşatmak."
-7,1. Günlük Yaşam,Büyük Bir Ailede Yaşam,"Paylaşılan odalar, ortak sofralar ve tatlı sorumluluklar."
-8,1. Günlük Yaşam,Komşuluk İlişkileri,Bir fincan kahve istemek ve komşuya selam vermenin önemi.
-9,1. Günlük Yaşam,Mevsim Temizliği,Kışlık kıyafetleri kaldırmak ve evi bahara hazırlamak.
-10,1. Günlük Yaşam,Evcil Hayvanla Bir Gün,Sabah yürüyüşünden akşam oyun saatine bir köpeğin günlük rutini.
-11,2. Sağlık & Zindelik,Doktora Şikâyetimizi Anlatmak,"Boğaz ağrısı, hafif ateş ve halsizlik muayenesi."
-12,2. Sağlık & Zindelik,Eczaneden İlaç Alırken Nelere Dikkat Edilir?,Reçete okuma ve doğru kullanım saatleri.
-13,2. Sağlık & Zindelik,Günde İki Litre Su İçmenin Faydaları,Vücudumuz su kaybettiğinde bize ne söyler?
-14,2. Sağlık & Zindelik,Düzenli Yürüyüş Yapmak Bedenimizi Nasıl Değiştirir?,Günde 30 dakikalık tempolu adımlar.
-15,2. Sağlık & Zindelik,Diş Hekimi Koltuğunda Bir Randevu,Yıllık diş kontrolü ve doğru diş fırçalama adımları.
-16,2. Sağlık & Zindelik,Masa Başında Çalışanlar İçin Duruş Egzersizleri,Sırt ve boyun ağrılarını önleme yolları.
-17,2. Sağlık & Zindelik,Daha Kaliteli Bir Uyku İçin Yatak Odası Kuralları,"Karanlık, serinlik ve telefonsuz bir gece."
-18,2. Sağlık & Zindelik,Göz Yorgunluğu ve Korunma Yolları,Uzun süre ekrana baktıktan sonra uzağa odaklanmak.
-19,2. Sağlık & Zindelik,Mevsim Geçişlerinde Bağışıklığı Güçlendirmek,"Taze meyveler, ıhlamur ve dinlenmenin gücü."
-20,2. Sağlık & Zindelik,Spor Salonuna İlk Adım,Yeni başlayan birinin antrenörle ilk konuşması.
-21,3. Bilim & Doğa,Geceleri Gökyüzü Neden Karanlıktır?,Yıldızların ışığı ve uzayın büyüleyici derinliği.
-22,3. Bilim & Doğa,Kuşlar Kış Gelince Nereye Uçar?,"Göç yolları, yön bulma yeteneği ve sıcak diyarlar."
-23,3. Bilim & Doğa,Ağaçlar Kökleriyle Nasıl İletişim Kurar?,Ormanın altındaki gizli doğal dayanışma.
-24,3. Bilim & Doğa,Gökkuşağı Nasıl Oluşur?,Yağmur damlalarının içinden geçen güneş ışığının renkleri.
-25,3. Bilim & Doğa,Deniz Neden Tuzludur?,Milyonlarca yılda kayalardan okyanuslara taşınan mineraller.
-26,3. Bilim & Doğa,Bal Arılarının Kusursuz Dünyası,Kovan içindeki görev dağılımı ve altıgen petekler.
-27,3. Bilim & Doğa,Fosil Nedir ve Bize Geçmişi Nasıl Anlatır?,Milyon yıllık yaprak ve kemik izleri.
-28,3. Bilim & Doğa,Rüzgâr Nasıl Doğar?,Sıcak ve soğuk hava dalgalarının yeryüzündeki hareketi.
-29,3. Bilim & Doğa,Yanardağlar Nasıl Püskürür?,Yerin altındaki sıcak lavların yüzeye çıkış hikâyesi.
-30,3. Bilim & Doğa,Çöl Bitkileri Susuz Nasıl Yaşar?,Kaktüslerin gövdesinde su saklama mucizesi.
-31,4. Tarih & Uygarlık,Tarihin En Eski Taş Tapınakları,Avcı-toplayıcı insanların ilk anıtsal yapıları.
-32,4. Tarih & Uygarlık,İlk Şehirlerin Doğuşu,İnsanlar neden köyler kurup tarım yapmaya başladı?
-33,4. Tarih & Uygarlık,Tekerleğin İcadı Dünyayı Nasıl Değiştirdi?,Yük taşımaktan uzak coğrafyaları birbirine bağlamaya.
-34,4. Tarih & Uygarlık,Yazının Bulunuşu,Kil tabletler üzerine çizilen ilk semboller ve ticaret kayıtları.
-35,4. Tarih & Uygarlık,Antik Su Kemerleri ve Şehir Mimarisi,Dağlardan şehirlere kilometrelerce su taşıyan taş kemerler.
-36,4. Tarih & Uygarlık,Tarihi Baharat ve İpek Yolları,Develerle kıtalar arası yolculuk yapan tüccarlar.
-37,4. Tarih & Uygarlık,Mağara Duvarlarındaki İlk Resimler,Binlerce yıl önce avlanan hayvanların kırmızı toprakla çizimi.
-38,4. Tarih & Uygarlık,Antik Çağ Kütüphaneleri,Papirüs rulolarından parşömen tomarlarına bilginin korunması.
-39,4. Tarih & Uygarlık,Deniz Fenerlerinin Doğuşu,Eski çağlarda gemilere yol gösteren dev ateş kuleleri.
-40,4. Tarih & Uygarlık,Paranın İcadı ve Takasın Sonu,Deniz kabuklarından altın ve gümüş sikkelerin basımına.
-41,5. Sanat & Edebiyat,Bir Ressamın Atölyesinde Bir Gün,"Boş beyaz bir tuval, palet, fırçalar ve boya kokusu."
-42,5. Sanat & Edebiyat,Yazarlar Neden Günlük Tutar?,Duyguları kâğıda dökmenin ve hikâye yaratmanın başlangıcı.
-43,5. Sanat & Edebiyat,Müzede Sessizce Bir Tabloyu İncelemek,"Renklerin, gölgelerin ve detayların bize hissettirdikleri."
-44,5. Sanat & Edebiyat,Klasik Enstrümanların Doğuşu,Tahtadan çıkan keman sesi ve tellerin büyüsü.
-45,5. Sanat & Edebiyat,Heykeltıraşın Sabrı,Sert bir mermer bloğunun içinden zarif bir şekil çıkarmak.
-46,5. Sanat & Edebiyat,Sokak Müzisyenlerinin Şehre Kattığı Ruh,Meydanlarda ve vapur iskelelerinde yankılanan ezgiler.
-47,5. Sanat & Edebiyat,Şiir Okumanın İnceliği,Az kelimeyle derin duyguları ifade etme sanatı.
-48,5. Sanat & Edebiyat,Eski Kitap Kokusu ve Sahaf Dükkânları,İkinci el kitapların sararmış sayfalarında zaman yolculuğu.
-49,5. Sanat & Edebiyat,Portre Çizmek,İnsan yüzündeki bakışları ve duyguları kâğıda aktarabilmek.
-50,5. Sanat & Edebiyat,Tiyatroda Sahne Arkası,"Işıklar sönmeden önce kostümler, provalar ve heyecan."
-51,6. Kültür & Gelenekler,Bayram Sabahlarının Sevinci,"Temiz kıyafetler, büyükleri ziyaret ve el öpme geleneği."
-52,6. Kültür & Gelenekler,Misafire İkram Kültürü,"Kapıyı çalan misafire sunulan kolonya, çikolata ve sıcak karşılama."
-53,6. Kültür & Gelenekler,Pazar Yeri Alışverişi,Tezgâhlardaki taze mevsim sebzeleri ve esnafın samimi sesleri.
-54,6. Kültür & Gelenekler,Geleneksel Çay Saati,İnce belli bardakta demli çay ve yanında sıcak bir sohbet.
-55,6. Kültür & Gelenekler,Düğün Hazırlıkları ve Törenler,"Gelin alma, davul-zurna sesleri ve ortak mutluluk."
-56,6. Kültür & Gelenekler,Kahve Yanında Sohbet Adabı,Küçük fincanda bol köpüklü kahve ve dostluk hatırı.
-57,6. Kültür & Gelenekler,Komşuya Tabak Götürmek,Pişen sıcak yemekten komşunun payını ayırma geleneği.
-58,6. Kültür & Gelenekler,Halk Danslarının Ritmi,Ele ele tutuşup davul ritmiyle oynanan coşkulu oyunlar.
-59,6. Kültür & Gelenekler,Yeni Eve Taşınma Ziyareti,Komşuların getirdiği ilk hediyeler ve 'hayırlı olsun' dileği.
-60,6. Kültür & Gelenekler,Yaz Akşamları Kapı Önü Sohbetleri,Balkonlarda ve sokak aralarında serin rüzgâr eşliğinde sohbet.
-61,7. Teknoloji & Toplum,Akıllı Telefonlar Hayatımızı Nasıl Değiştirdi?,Cebimizdeki küçük cihazla dünyayla iletişim kurmak.
-62,7. Teknoloji & Toplum,Yapay Zekâ ile Geleceğin Meslekleri,Bilgisayarlar öğrenirken insanların yeni rolleri.
-63,7. Teknoloji & Toplum,Ekran Süresini Azaltmak Mümkün mü?,Gün boyu bildirimlere bakmaktan biraz uzaklaşma denemesi.
-64,7. Teknoloji & Toplum,Kâğıt Paradan Dijital Cüzdana,Cüzdansız alışveriş ve temassız kartların pratikliği.
-65,7. Teknoloji & Toplum,Uzaktan Çalışmanın Avantajları ve Zorlukları,Evdeki çalışma masası ile ofis arasındaki farklar.
-66,7. Teknoloji & Toplum,Sosyal Medyada Beğeni Arzusu,İnsanların neden anlarını paylaşmak istediğinin genel analizi.
-67,7. Teknoloji & Toplum,Geleceğin Akıllı Evleri,"Işıkların sesle açıldığı, perdelerin kendi kapandığı sistemler."
-68,7. Teknoloji & Toplum,İnternetten Alışveriş Yapmanın Kolaylığı,Sipariş verilen bir paketin kapımıza kadar gelen yolu.
-69,7. Teknoloji & Toplum,Fotoğrafların Dijitalleşmesi,Albümlerden bulut depolamaya fotoğraf saklama alışkanlığı.
-70,7. Teknoloji & Toplum,Çevrim İçi Öğrenme,İstediğimiz her bilgiyi evden öğrenmenin getirdiği yeni fırsatlar.
-71,8. Seyahat & Coğrafya,Sahil Kasabasına İlk Yolculuk,Mavi suların kenarında sakin ve huzurlu bir yürüyüş.
-72,8. Seyahat & Coğrafya,Dağlar Arasında Tren Yolculuğu,Rayların sesiyle karlı dağları ve köyleri pencerenden izlemek.
-73,8. Seyahat & Coğrafya,Tarihi Taş Otelde Bir Gece,Tarihi ahşap pencereler ve sabah kuş sesleri.
-74,8. Seyahat & Coğrafya,Yayla Tatili ve Doğa,Sisli yeşil tepelerde serin hava ve kaynak suyuyla çay keyfi.
-75,8. Seyahat & Coğrafya,Balıkçı Köyü Keşfi,Sabah erken saatte tekneleri karşılamak ve taze balık kokusu.
-76,8. Seyahat & Coğrafya,Tarihi Kapalı Çarşı Turu,"Dar sokaklarda baharat, deri ve bakır eşya dükkânları arasında gezinti."
-77,8. Seyahat & Coğrafya,Doğa Kampı Deneyimi,"Çadır kurmak, ormanda kamp ateşi yakmak ve gökyüzünü izlemek."
-78,8. Seyahat & Coğrafya,Vapurla Adalar Gezisi,Martılara simit atmak ve faytonsuz sessiz adalarda yürümek.
-79,8. Seyahat & Coğrafya,Zirveye Dağ Tırmanışı,Zirveye ulaştığında vadinin eşsiz manzarasına bakmak.
-80,8. Seyahat & Coğrafya,İlk Kez Yurt Dışına Çıkış Deneyimi,"Havalimanı heyecanı, pasaport kontrolü ve yabancı bir dili denemek."
-81,9. Yemek & Mutfak Kültürü,Geleneksel Mercimek Çorbası Tarifi,Soğuk kış günlerinde tencerede kaynayan sıcacık lezzet.
-82,9. Yemek & Mutfak Kültürü,Taze Ekmek Pişirmenin Sırrı,"Un, su, maya ve fırından yükselen mis kokulu kabuk."
-83,9. Yemek & Mutfak Kültürü,Zeytinyağlı Sebze Yemekleri,"Akdeniz mutfağının hafif, sağlıklı ve soğuk servis edilen tabağı."
-84,9. Yemek & Mutfak Kültürü,Piknikte Mangal Keyfi,"Parkta toplanan dostlar, köfte kokusu ve serin ayran."
-85,9. Yemek & Mutfak Kültürü,Evde Yoğurt Mayalama,Sütü doğru sıcaklıkta mayalayıp battaniyeyle sarma sanatı.
-86,9. Yemek & Mutfak Kültürü,Peynir Çeşitleri ve Kahvaltı,"Beyaz peynir, kaşar ve tulum peynirinin sofradaki yeri."
-87,9. Yemek & Mutfak Kültürü,Kışlık Salça ve Konserve Hazırlığı,Yazın son domateslerini rendeleyip güneşte kurutmak.
-88,9. Yemek & Mutfak Kültürü,Sıcak Bir Simit ve Çay İkilisi,Çıtır susamlı simidin yanına konan bir parça beyaz peynir.
-89,9. Yemek & Mutfak Kültürü,Pilavın Tane Tane Olma Sırrı,"Pirinci yıkamak, kavurmak ve demlenmeye bırakmak."
-90,9. Yemek & Mutfak Kültürü,Mevsim Meyveleriyle Komposto Yapımı,"Elma, tarçın ve karanfille kaynatılan serinletici içecek."
-91,10. Kişisel Gelişim & Psikoloji,İşleri Erteleme Alışkanlığı Nasıl Bırakılır?,Büyük görevleri küçük adımlara bölerek başlamanın kolay yolu.
-92,10. Kişisel Gelişim & Psikoloji,Sabah Erken Uyanmanın Sırrı,Alarmı ertelemeden güne enerjik ve planlı başlama yöntemleri.
-93,10. Kişisel Gelişim & Psikoloji,Gerektiğinde 'Hayır' Diyebilmek,Kendi kişisel sınırlarını korumanın ve huzurlu hissetmenin önemi.
-94,10. Kişisel Gelişim & Psikoloji,Yeni Bir Alışkanlık Kazanmak Ne Kadar Sürer?,Her gün yapılan küçük tekrarların büyük gücü.
-95,10. Kişisel Gelişim & Psikoloji,Hata Yapmaktan Korkmamak,Öğrenme sürecinde yapılan yanlışların insanı nasıl geliştirdiği.
-96,10. Kişisel Gelişim & Psikoloji,Stresli Anlarda Sakin Kalma Yolları,Derin nefes egzersizleri ve zihni ana odaklama teknikleri.
-97,10. Kişisel Gelişim & Psikoloji,Sade Yaşam ve Zihinsel Rahatlama,Hayatımızdaki fazla eşyaları azaltarak odaklanmayı artırmak.
-98,10. Kişisel Gelişim & Psikoloji,Her Gün Düzenli Kitap Okuma Alışkanlığı,Günde sadece 10 sayfa okuyarak yılda onlarca kitap bitirmek.
-99,10. Kişisel Gelişim & Psikoloji,Olumsuz Düşüncelerle Başa Çıkmak,Karamsar anlarda odağı çözüme ve güçlü yönlere çevirmek.
-100,10. Kişisel Gelişim & Psikoloji,Günün İyi Anlarını Fark Etmek,Her akşam gün içindeki güzel ve olumlu şeyleri hatırlama pratiği.
-101,1. Günlük Yaşam (Global),Kuzey Ülkelerinde 'Hygge' Felsefesi,"Soğuk kış günlerinde evde sıcak, sade ve samimi bir atmosfer yaratmak."
-102,1. Günlük Yaşam (Global),İtalyanların Akşam Yürüyüşü (La Passeggiata),Akşam yemeğinden önce kasaba meydanında sakin adımlarla sosyalleşmek.
-103,1. Günlük Yaşam (Global),Japonya’da Minimalist Ev Yaşamı,"Az eşya, yer yatakları ve ferah odaların getirdiği zihinsel huzur."
-104,1. Günlük Yaşam (Global),İspanya'da 'Siesta' Kültürü,Gün ortasında kısa bir uyku molası ve enerjiyi tazeleme alışkanlığı.
-105,1. Günlük Yaşam (Global),Latin Amerika'da Pazar Günü Aile Sofraları,Hafta sonu bir araya gelen üç nesil ve paylaşılan uzun sohbetler.
-106,1. Günlük Yaşam (Global),Paris’te Sabah Kahve ve Kruvasan Ritüeli,Küçük sokak kafelerinde güne yavaş ve keyifli bir başlangıç.
-107,1. Günlük Yaşam (Global),Balkonda Şehir Bahçeciliği,"Apartman dairesinde saksılarda taze nane, fesleğen ve çilek yetiştirmek."
-108,1. Günlük Yaşam (Global),İsveç’in Meşhur 'Fika' Saati,Yoğun çalışma gününün ortasında kahve ve tarçınlı çörek ile zorunlu mola.
-109,1. Günlük Yaşam (Global),İkinci El Bit Pazarlarında Bir Pazar Sabahı,"Eski fincanlar, plaklar ve sararmış fotoğraflar arasında hazine aramak."
-110,1. Günlük Yaşam (Global),Paylaşımlı Öğrenci Evinde Yaşam,Farklı ülkelerden ev arkadaşlarıyla ortak mutfak ve kültür alışverişi.
-111,2. Sağlık & Zindelik (Global),Orman Banyosu (Shinrin-yoku),"Japonya’dan dünyaya yayılan, ağaçlar arasında yürüyerek stres azaltma sanatı."
-112,2. Sağlık & Zindelik (Global),Akdeniz Tipi Beslenmenin Sırrı,"Zeytinyağı, taze sebzeler ve kalp sağlığını koruyan hafif tabaklar."
-113,2. Sağlık & Zindelik (Global),Yurt Dışında Eczaneden İlaç İstemek,"Belirtileri anlatma, vitamin sorma ve doğru doz kullanımı diyaloğu."
-114,2. Sağlık & Zindelik (Global),Günde 10.000 Adım Efsanesi,"Yürüyüş yapmanın kalp, kaslar ve beyin fonksiyonları üzerindeki gerçek etkisi."
-115,2. Sağlık & Zindelik (Global),Yabancı Bir Ülkede Doktora Gitmek,"Baş ağrısı, hafif ateş ve halsizlik şikâyetini doktora aktarma rehberi."
-116,2. Sağlık & Zindelik (Global),Sabahları Soğuk Su Duşu,Güne uyanırken alınan kısa bir soğuk duşun bağışıklığa ve kan dolaşımına faydaları.
-117,2. Sağlık & Zindelik (Global),Ekranların Mavi Işığı ve Uyku,Akşam saatlerinde telefonu bırakmanın melatonin hormonuna etkisi.
-118,2. Sağlık & Zindelik (Global),Masa Başında Çalışanlar İçin 5 Esneme Hareketi,"Omuz, boyun ve sırt kaslarını rahatlatan basit ofis egzersizleri."
-119,2. Sağlık & Zindelik (Global),Yeşil Çayın Sakinleştirici Gücü,Asya geleneklerinden günümüze antioksidan dolu sıcak bir içecek molası.
-120,2. Sağlık & Zindelik (Global),Günde 10 Dakika Nefes Egzersizi,Yavaş ve derin nefes alarak kalp atışını sakinleştirme pratiği.
-121,3. Bilim & Doğa (Global),Kuzey Işıkları (Aurora Borealis) Nasıl Oluşur?,Güneş parçacıklarının kutup gökyüzünde yeşil ve mor dansı.
-122,3. Bilim & Doğa (Global),Okyanusların En Derin Noktası,Mariana Çukuru’nda güneş ışığı olmadan yaşayan gizemli deniz canlıları.
-123,3. Bilim & Doğa (Global),Amazon Yağmur Ormanları Neden Önemli?,Dünyanın akciğerleri sayılan dev ağaçlar ve zengin biyoçeşitlilik.
-124,3. Bilim & Doğa (Global),Göçmen Kuşların Görünmez Pusulası,Kuşlar binlerce kilometrelik rotalarını kaybolmadan nasıl bulur?
-125,3. Bilim & Doğa (Global),Ateşböcekleri Karanlıkta Neden Işık Saçar?,Doğanın kendi enerjisiyle parlayan zararsız kimyasal mucizesi.
-126,3. Bilim & Doğa (Global),Çöllere Yağmur Yağdığında Ne Olur?,Yıllarca kumun altında uyuyan tohumların aniden çiçek bahçesine dönüşmesi.
-127,3. Bilim & Doğa (Global),Balinaların Okyanus Şarkıları,Su altında kilometrelerce öteden duyulan derin ve melankolik sesler.
-128,3. Bilim & Doğa (Global),Gezegenimiz Uzaydan Neden Mavi Görünür?,Atmosferin ve okyanusların güneş ışığıyla oluşturduğu eşsiz renk.
-129,3. Bilim & Doğa (Global),Bukalemunlar Nasıl Renk Değiştirir?,Tehlike anında ve sıcaklığa göre derideki özel hücrelerin değişimi.
-130,3. Bilim & Doğa (Global),Ay ve Okyanusların Dansı,Gelgit olayının sahil kıyılarındaki suları yükseltip çekme mekanizması.
-131,4. Tarih & Uygarlık (Global),Mısır Piramitlerinin Mühendislik Gizemi,Binlerce yıl önce devasa taş bloklar nasıl üst üste dizildi?
-132,4. Tarih & Uygarlık (Global),Çin Seddi Boyunca Tarihi Bir Yürüyüş,Dağların ve vadilerin üzerinden geçen binlerce kilometrelik taş hat.
-133,4. Tarih & Uygarlık (Global),Roma Kolezyumu’nda Bir Gün,Antik dünyanın dev amfitiyatrosunda seyirciler ve mimari düzen.
-134,4. Tarih & Uygarlık (Global),Bulutların Üzerindeki Şehir: Machu Picchu,Peru dağlarının zirvesine kurulan İnka taş kenti.
-135,4. Tarih & Uygarlık (Global),Mezopotamya’da İlk Çiftçiler ve Yazı,Nehir kıyılarında başlayan ilk tarım ve kil tabletlere kazınan semboller.
-136,4. Tarih & Uygarlık (Global),Antik Yunan’da İlk Olimpiyat Oyunları,"Savaşların durduğu, barış adına yapılan spor yarışmaları ve zeytin dalı tacı."
-137,4. Tarih & Uygarlık (Global),Küller Altında Donup Kalan Şehir: Pompeii,Vezüv Yanardağı’nın patlamasıyla günümüze kadar korunan antik Roma yaşamı.
-138,4. Tarih & Uygarlık (Global),Tarihi İpek Yolu Kervanları,"Çin’den Akdeniz’e ipek, baharat ve fikir taşıyan kervansaraylar."
-139,4. Tarih & Uygarlık (Global),Vikinglerin Ahşap Gemileri,Açık denizleri pusulasız aşarak yeni kıtalar arayan denizciler.
-140,4. Tarih & Uygarlık (Global),Stonehenge’in Gizemli Taş Çemberi,İngiltere kırlarında güneşin hareketlerini takip eden dev anıt taşlar.
-141,5. Sanat & Edebiyat (Global),Vincent van Gogh ve 'Yıldızlı Gece',Dönen gece gökyüzü fırça darbeleri ve yalnız bir sanatçının ilhamı.
-142,5. Sanat & Edebiyat (Global),Leonardo da Vinci’nin Gizli Defterleri,"Aynadan okunan ters yazılar, uçan makine tasarımları ve merak duygusu."
-143,5. Sanat & Edebiyat (Global),Frida Kahlo’nun Renkli Dünyası,Zorlukları ve acıyı cesur renklere ve tablolara dönüştürme gücü.
-144,5. Sanat & Edebiyat (Global),Claude Monet ve Nilüfer Havuzu,Günün farklı ışıklarında su üzerindeki nilüferleri resmetmek (Empresyonizm).
-145,5. Sanat & Edebiyat (Global),Klasik Müziğin Dehası: Beethoven,Hiç ses duymadan hafızasındaki notalarla bestelenen 9. Senfoni.
-146,5. Sanat & Edebiyat (Global),Bir Masalın Derinliği: Küçük Prens,Bir çocuğun masum gözleriyle yetişkinlerin tuhaf dünyasına bakış.
-147,5. Sanat & Edebiyat (Global),Caz Müziğin Doğuşu,New Orleans sokaklarında trompet sesleri ve özgür doğaçlama ritimler.
-148,5. Sanat & Edebiyat (Global),Fırtınalı Bir Gecede Yazılan Roman: Frankenstein,Mary Shelley’nin Cenevre Gölü kenarında düşlediği ilk bilim kurgu hikâyesi.
-149,5. Sanat & Edebiyat (Global),Mermere Can Veren Heykeltıraşlar,Sert beyaz bir taşın içinden zarif bir insan figürü çıkarma sabrı.
-150,5. Sanat & Edebiyat (Global),Sessiz Sinemanın Büyüsü,Charlie Chaplin’in hiç konuşmadan tüm dünyayı güldürme ve düşündürme sanatı.
-151,6. Kültür & Gelenekler (Global),Japonya’da Kiraz Çiçeği Mevsimi (Hanami),Parklarda pembe çiçeklerin altında piknik yaparak baharı kutlamak.
-152,6. Kültür & Gelenekler (Global),Meksika’da Ölüler Günü (Día de los Muertos),"Kaybedilen sevdikleri hüzünle değil, müzik, çiçekler ve neşeyle anmak."
-153,6. Kültür & Gelenekler (Global),Hindistan’da Renkler Festivali (Holi),Baharın gelişini gökyüzüne atılan rengarenk tozlarla neşe içinde karşılamak.
-154,6. Kültür & Gelenekler (Global),Venedik Maskeli Karnavalı,Tarihi kanalların kenarında gösterişli kostümler ve gizemli maskelerle zamanda yolculuk.
-155,6. Kültür & Gelenekler (Global),Yeni Zelanda’da Maori Selamı (Hongi),İki insanın burunlarını birbirine dokundurarak hayat nefesini paylaşması.
-156,6. Kültür & Gelenekler (Global),Tayland’da Su Festivali (Songkran),Yeni yılın gelişini sokaklarda birbirine su serperek arınma sevinciyle kutlamak.
-157,6. Kültür & Gelenekler (Global),İspanya’da Domates Festivali (La Tomatina),Küçük bir kasabada tonlarca olgun domatesle yapılan eğlenceli sokak oyunu.
-158,6. Kültür & Gelenekler (Global),İrlanda’nın Yeşil Festivali: Aziz Patrick Günü,Şehirlerin baştan başa yeşile büründüğü neşeli sokak yürüyüşleri.
-159,6. Kültür & Gelenekler (Global),Çin Yeni Yılı ve Kırmızı Fenerler,"Kötü şansı kovmak için asılan fenerler, ejderha dansları ve aile sofraları."
-160,6. Kültür & Gelenekler (Global),Afrika’da 'Ubuntu' Felsefesi,"'Ben, biz olduğumuz için varım' diyen derin toplumsal dayanışma anlayışı."
-161,7. Teknoloji & Toplum (Global),Akıllı Şehirler Nasıl Çalışır?,Trafik lambalarından sokak aydınlatmalarına sensörlerle enerji tasarrufu yapan kentler.
-162,7. Teknoloji & Toplum (Global),Robotlar Günlük Yaşamda,Fabrika hatlarından ev temizliğine ve hastanelere uzanan mekanik yardımcılar.
-163,7. Teknoloji & Toplum (Global),Güneş Enerjisiyle Yaşayan Köyler,Evlerin çatılarındaki panellerle doğaya zarar vermeden elektrik üretmek.
-164,7. Teknoloji & Toplum (Global),Dijital Göçebelik (Digital Nomad),Sadece bir dizüstü bilgisayarla dünyayı gezerek uzaktan çalışma trendi.
-165,7. Teknoloji & Toplum (Global),Sanal Gerçeklik ile Dünyayı Gezmek,Oturduğumuz odadan kalkmadan uzak müzeleri ve tarihi şehirleri adımlamak.
-166,7. Teknoloji & Toplum (Global),İki Günlük Ekransız Hafta Sonu Deneyi,Bildirimleri ve interneti kapatınca insanın zaman algısı nasıl değişir?
-167,7. Teknoloji & Toplum (Global),3 Boyutlu Yazıcılar ile Ev Yapımı,Özel harç püskürten dev yazıcılarla bir günde güvenli evler inşa etmek.
-168,7. Teknoloji & Toplum (Global),Elektrikli Araçların Sessizliği,Büyük şehirlerde motor gürültüsünün ve hava kirliliğinin azalması.
-169,7. Teknoloji & Toplum (Global),Sesli Asistanlar ile Yaşam,Sabah hava durumunu sormaktan müzik açmaya yapay zekâlı seslerle iletişim.
-170,7. Teknoloji & Toplum (Global),Geleceğin Çevreci Uçakları,Havacılıkta karbon salınımını sıfırlamak için geliştirilen elektrikli motorlar.
-171,8. Seyahat & Coğrafya (Global),Trans-Sibirya Demiryolu,Moskova’dan Pasifik Okyanusu’na karlı ormanlar arasından geçen bir haftalık tren macerası.
-172,8. Seyahat & Coğrafya (Global),Norveç Fiyortlarında Sessiz Bir Gemi Turu,Dik yeşil dağların arasından süzülen masmavi derin sularda yolculuk.
-173,8. Seyahat & Coğrafya (Global),Sahra Çölü’nde Yıldızların Altında,Kızıl kum tepelerinde deve kervanı ve gece gökyüzünde sonsuz samanyolu.
-174,8. Seyahat & Coğrafya (Global),İsviçre Alplerinde Bir Dağ Köyü,"Karlı zirveler, çan sesleri çıkaran inekler ve ahşap çatılı dağ kulübeleri."
-175,8. Seyahat & Coğrafya (Global),Ateş ve Buz Ülkesi: İzlanda,Yanardağların hemen yanında fışkıran sıcak su kaynakları ve dev buzullar.
-176,8. Seyahat & Coğrafya (Global),Bali’nin Basamaklı Pirinç Tarlaları,Tropik yamaçlarda yeşilin her tonunu barındıran asırlık su kanalları.
-177,8. Seyahat & Coğrafya (Global),Büyük Set Resifi’nde Su Altı Dünyası,Okyanusun altında parlayan rengarenk mercanlar ve tropik balık sürüleri.
-178,8. Seyahat & Coğrafya (Global),İskoçya Dağlarında Sisli Kaleler,Efsanelerle dolu göllerin kıyısında yükselen asırlık taş şatolar.
-179,8. Seyahat & Coğrafya (Global),Kosta Rika Yağmur Ormanlarında Asma Köprüler,Ağaç tepelerinde tembel hayvanları ve renkli tukan kuşlarını izlemek.
-180,8. Seyahat & Coğrafya (Global),Fas’ın Mavi Şehri Şafşavan,Dağ eteğindeki daracık sokaklarda baştan başa gökyüzü mavisine boyalı taş evler.
-181,9. Yemek & Mutfak Kültürü (Global),İtalya’da Gerçek Pizza Sanatı,"İncecik dinlenmiş mayalı hamur, taze fesleğen yaprakları ve odun fırınının ateşi."
-182,9. Yemek & Mutfak Kültürü (Global),Japon Suşisinin Dengesi,"Pirincin doğru sıcaklığı, özel pirinç sirkesi ve taze deniz ürünlerinin uyumu."
-183,9. Yemek & Mutfak Kültürü (Global),Fransız Fırınlarında Çıtır Baget,"Altın sarısı çıtır kabuk, yumuşak gözenekli iç doku ve asırlık ekmekçilik kuralları."
-184,9. Yemek & Mutfak Kültürü (Global),Meksika’da Sokak Lezzeti: Taco,"Sıcak mısır tortillası, lime suyu, taze kişniş ve renkli baharatlar."
-185,9. Yemek & Mutfak Kültürü (Global),Hindistan’ın Aromatik Körileri,"Zerdeçal, kimyon ve taze zencefille ağır ateşte pişen baharatlı soslar."
-186,9. Yemek & Mutfak Kültürü (Global),Orta Doğu Sofralarının Tacı: Humus,"Haşlanmış nohut, susam tahini, sızma zeytinyağı ve sarımsağın ipeksi kıvamı."
-187,9. Yemek & Mutfak Kültürü (Global),Uzak Doğu’da Çubuklarla (Chopsticks) Yemek,Yemek çubuklarını doğru tutmanın püf noktaları ve masa nezaketi.
-188,9. Yemek & Mutfak Kültürü (Global),İspanyol Paellası,Deniz kıyısında dev tavalarda safranlı sarı pirinç ve taze sebzelerle pişen lezzet şöleni.
-189,9. Yemek & Mutfak Kültürü (Global),Kakao Çekirdeğinden Sıcak Çikolataya,Mayaların kutsal içeceğinden bugünkü tatlı çikolata kalıplarına uzanan yolculuk.
-190,9. Yemek & Mutfak Kültürü (Global),Gürcistan’ın Meşhur Peynirli Ekmeği: Haçapuri,"Fırından yeni çıkmış tekne şeklinde sıcak hamur, eriyen peynir ve tereyağı."
-191,10. Kişisel Gelişim & Psikoloji (Global),Pomodoro Tekniği ile Odaklanmak,25 dakika kesintisiz çalışma ve 5 dakika mola döngüsünün zihinsel verimi.
-192,10. Kişisel Gelişim & Psikoloji (Global),Beynimiz Yeni Bir Alışkanlığı Nasıl Kazanır?,Nöron yollarının güçlenmesi ve her gün yapılan küçük tekrarların kalıcı etkisi.
-193,10. Kişisel Gelişim & Psikoloji (Global),Stoacı Düşünce ve İç Huzur,Sadece değiştirebileceğimiz şeylere odaklanıp kontrolümüz dışındakileri kabullenmek.
-194,10. Kişisel Gelişim & Psikoloji (Global),Mavi Bölgelerin Yaşam Sırrı (Blue Zones),Dünyada 100 yaşını aşan insanların ortak günlük 4 beslenme ve hareket alışkanlığı.
-195,10. Kişisel Gelişim & Psikoloji (Global),Hatalara Yeni Bir Bakış Açısı,"Bir şeyi yanlış yapmayı bir başarısızlık değil, değerli bir öğrenme verisi olarak görmek."
-196,10. Kişisel Gelişim & Psikoloji (Global),Gerçekten Dinlemek ve Empati Kurmak,"Karşımızdaki insanı sadece yanıt vermek için değil, ne hissettiğini anlamak için dinlemek."
-197,10. Kişisel Gelişim & Psikoloji (Global),Zihinsel Dağınıklığı Azaltmanın Yolu,Günlük yapılacaklar listesini sadece en önemli 3 önceliğe indirmek.
-198,10. Kişisel Gelişim & Psikoloji (Global),Minnettarlık Notları Tutmak,Her akşam gün içinde iyi giden üç küçük şeyi hatırlamanın beyin kimyasına katkısı.
-199,10. Kişisel Gelişim & Psikoloji (Global),Karar Yorgunluğu (Decision Fatigue) Nedir?,Gün boyu çok fazla önemsiz seçim yapmanın iradeyi ve enerjiyi tüketmesi.
-200,10. Kişisel Gelişim & Psikoloji (Global),İkigai: Sabah Yataktan Neşeyle Kalkma Nedeni,"Tutkuları, yetenekleri ve dünyanın ihtiyaçlarını tek bir yaşam amacında buluşturmak."
+﻿DURUM,ID,KATEGORİ,MAKALE BAŞLIĞI,ALT BAŞLIK / ODAK,EŞLEŞEN WEB SİTESİ MAKALESİ
+🟡 TASLAK (Worksheet Hazır),1,1. Günlük Yaşam,🟡 [TASLAK] Erken Uyanan İnsanların Sabah Rutini,Güne sakin ve huzurlu bir başlangıç.,worksheet_gunluk-yasam-sabah-rutini | Ayşe'nin Sabah Rutini ve Erken Uyanmanın Dinginliği
+⚪ KULLANILABİLİR,2,1. Günlük Yaşam,Pazar Sabahı Rutini ve Aile Kahvaltısı,"Aile kahvaltısı, temizlik ve dinlenme saatleri.",-
+⚪ KULLANILABİLİR,3,1. Günlük Yaşam,Küçük Bir Evde Fazlalıklardan Kurtulmak,Az eşya ile ferah bir yaşam alanı oluşturma yolları.,-
+⚪ KULLANILABİLİR,4,1. Günlük Yaşam,Açken Neden Markete Gitmemeliyiz?,Markette bütçeyi korumanın ve planlı olmanın yolları.,-
+⚪ KULLANILABİLİR,5,1. Günlük Yaşam,Akşamları Kitap Okuma Alışkanlığı,Günün yorgunluğunu kitapla ve sessizlikle atmak.,-
+⚪ KULLANILABİLİR,6,1. Günlük Yaşam,Salon Bitkilerine Nasıl Bakılır?,"Salon bitkilerini sulamak, güneşlendirmek ve yaşatmak.",-
+⚪ KULLANILABİLİR,7,1. Günlük Yaşam,Kalabalık Bir Aileyle Yaşamak,"Paylaşılan odalar, ortak sofralar ve tatlı sorumluluklar.",-
+⚪ KULLANILABİLİR,8,1. Günlük Yaşam,Komşuluk Neden Hâlâ Önemli?,Bir fincan kahve istemek ve komşuya selam vermenin önemi.,-
+⚪ KULLANILABİLİR,9,1. Günlük Yaşam,Bahar Temizliği Neden İyi Gelir?,Kışlık kıyafetleri kaldırmak ve evi bahara hazırlamak.,-
+⚪ KULLANILABİLİR,10,1. Günlük Yaşam,Bir Köpeğin Günlük Rutini,Sabah yürüyüşünden akşam oyun saatine bir köpeğin günlük rutini.,-
+⚪ KULLANILABİLİR,11,2. Sağlık & Zindelik,Doktora Şikâyetimizi Nasıl Anlatırız?,"Boğaz ağrısı, hafif ateş ve halsizlik muayenesi.",-
+⚪ KULLANILABİLİR,12,2. Sağlık & Zindelik,İlaç Kutularındaki Bilgileri Doğru Okumak,Reçete okuma ve doğru kullanım saatleri.,-
+⚪ KULLANILABİLİR,13,2. Sağlık & Zindelik,Günde İki Litre Su İçmek Gerçekten Gerekli mi?,Vücudumuz su kaybettiğinde bize ne söyler?,-
+⚪ KULLANILABİLİR,14,2. Sağlık & Zindelik,Günde 30 Dakika Yürümek Beynimizi Nasıl Etkiler?,Günde 30 dakikalık tempolu adımlar.,-
+🟡 TASLAK (Worksheet Hazır),15,2. Sağlık & Zindelik,🟡 [TASLAK] Diş Hekimi Koltuğunda Bir Randevu,Yıllık diş kontrolü ve doğru diş fırçalama adımları.,worksheet_bruxism-saglik | Yetişkinlerde Artan Diş Sıkma (Bruksizm) Vakaları
+⚪ KULLANILABİLİR,16,2. Sağlık & Zindelik,Masa Başında Sırt ve Boyun Ağrısını Önleme Yolları,Sırt ve boyun ağrılarını önleme yolları.,-
+🟢 YAYINLANDI (KULLANILDI),17,2. Sağlık & Zindelik,🟢 [YAYINLANDI] Daha Kaliteli Bir Uyku İçin Yatak Odası Kuralları,"Karanlık, serinlik ve telefonsuz bir gece.",zihin-ruyalar-rem-uykusu | Rüyalar ve REM Uykusu: Zihnin Gece Yolculuğu
+⚪ KULLANILABİLİR,18,2. Sağlık & Zindelik,Ekrana Bakarken Gözleri Koruyan 20-20-20 Kuralı,Uzun süre ekrana baktıktan sonra uzağa odaklanmak.,-
+⚪ KULLANILABİLİR,19,2. Sağlık & Zindelik,Mevsim Geçişlerinde Bağışıklığı Güçlendirmek,"Taze meyveler, ıhlamur ve dinlenmenin gücü.",-
+⚪ KULLANILABİLİR,20,2. Sağlık & Zindelik,Spor Salonuna Yeni Başlayanlar İçin İpuçları,Yeni başlayan birinin antrenörle ilk konuşması.,-
+🟡 TASLAK (Worksheet Hazır),21,3. Bilim & Doğa,🟡 [TASLAK] Geceleri Gökyüzü Neden Karanlıktır?,Yıldızların ışığı ve uzayın büyüleyici derinliği.,worksheet_bilim-gokyuzu-yildizlar | Ali ile Ahmet Dede'nin Tepede Yıldızları ve Gezegenleri Gözlemi
+⚪ KULLANILABİLİR,22,3. Bilim & Doğa,Göçmen Kuşlar Yönlerini Nasıl Bulur?,"Göç yolları, yön bulma yeteneği ve sıcak diyarlar.",-
+🟢 YAYINLANDI (KULLANILDI),23,3. Bilim & Doğa,🟢 [YAYINLANDI] Ağaçlar Kökleriyle Nasıl İletişim Kurar?,Ormanın altındaki gizli doğal dayanışma.,doga-agaclarin-iletisimi-wood-wide-web | Ağaçların Gizli İletişimi: Ormanın Yeraltı Ağı
+⚪ KULLANILABİLİR,24,3. Bilim & Doğa,Gökkuşağı Nasıl Oluşur?,Yağmur damlalarının içinden geçen güneş ışığının renkleri.,-
+⚪ KULLANILABİLİR,25,3. Bilim & Doğa,Deniz Suyu Neden Tuzludur?,Milyonlarca yılda kayalardan okyanuslara taşınan mineraller.,-
+🟢 YAYINLANDI (KULLANILDI),26,3. Bilim & Doğa,🟢 [YAYINLANDI] Bal Arılarının Kusursuz Dünyası,Kovan içindeki görev dağılımı ve altıgen petekler.,doga-arilar-yok-olursa-ne-olur | Arılar Yok Olursa Ne Olur?
+⚪ KULLANILABİLİR,27,3. Bilim & Doğa,Fosiller Bize Geçmiş Hakkında Ne Söyler?,Milyon yıllık yaprak ve kemik izleri.,-
+⚪ KULLANILABİLİR,28,3. Bilim & Doğa,Rüzgâr Nasıl Oluşur?,Sıcak ve soğuk hava dalgalarının yeryüzündeki hareketi.,-
+⚪ KULLANILABİLİR,29,3. Bilim & Doğa,Yanardağlar Neden Patlar?,Yerin altındaki sıcak lavların yüzeye çıkış hikâyesi.,-
+⚪ KULLANILABİLİR,30,3. Bilim & Doğa,Kaktüsler Çölde Susuz Nasıl Yaşar?,Kaktüslerin gövdesinde su saklama mucizesi.,-
+🟡 TASLAK (Worksheet Hazır),31,4. Tarih & Uygarlık,🟡 [TASLAK] Tarihin En Eski Taş Tapınakları,Avcı-toplayıcı insanların ilk anıtsal yapıları.,worksheet_gobeklitepe-arkeoloji | Taş Tepeler Projesi: Göbeklitepe ve Karahantepe Kazıları
+⚪ KULLANILABİLİR,32,4. Tarih & Uygarlık,İnsanlar İlk Şehirleri Nasıl Kurdu?,İnsanlar neden köyler kurup tarım yapmaya başladı?,-
+⚪ KULLANILABİLİR,33,4. Tarih & Uygarlık,Tekerleğin İcadı Dünyayı Nasıl Değiştirdi?,Yük taşımaktan uzak coğrafyaları birbirine bağlamaya.,-
+⚪ KULLANILABİLİR,34,4. Tarih & Uygarlık,İnsanlar Yazıyı Neden ve Nasıl İcat Etti?,Kil tabletler üzerine çizilen ilk semboller ve ticaret kayıtları.,-
+🟢 YAYINLANDI (KULLANILDI),35,4. Tarih & Uygarlık,🟢 [YAYINLANDI] Antik Su Kemerleri ve Şehir Mimarisi,Dağlardan şehirlere kilometrelerce su taşıyan taş kemerler.,tarih-truva-ve-tahta-at | Truva Antik Kenti ve Tahta At Efsanesi
+⚪ KULLANILABİLİR,36,4. Tarih & Uygarlık,Baharat Yolu Tarihi Neden Değiştirdi?,Develerle kıtalar arası yolculuk yapan tüccarlar.,-
+⚪ KULLANILABİLİR,37,4. Tarih & Uygarlık,İlk İnsanlar Mağara Duvarlarına Neden Resim Yaptı?,Binlerce yıl önce avlanan hayvanların kırmızı toprakla çizimi.,-
+🟡 TASLAK (Worksheet Hazır),38,4. Tarih & Uygarlık,🟡 [TASLAK] Antik Çağ Kütüphaneleri,Papirüs rulolarından parşömen tomarlarına bilginin korunması.,worksheet_sanat-mahalle-kutuphanesi | Elif'in Tarihi Kütüphanede Hikâyeler Yazma Tutkusu
+⚪ KULLANILABİLİR,39,4. Tarih & Uygarlık,Deniz Fenerlerinin İlginç Tarihi,Eski çağlarda gemilere yol gösteren dev ateş kuleleri.,-
+⚪ KULLANILABİLİR,40,4. Tarih & Uygarlık,Paranın İcadı: Deniz Kabuklarından Madeni Paralara,Deniz kabuklarından altın ve gümüş sikkelerin basımına.,-
+🟢 YAYINLANDI (KULLANILDI),41,5. Sanat & Edebiyat,🟢 [YAYINLANDI] Bir Ressamın Atölyesinde Bir Gün,"Boş beyaz bir tuval, palet, fırçalar ve boya kokusu.",sanat-bedri-rahmi-mavi-yolculuk | Bedri Rahmi Eyüboğlu ve Mavi Yolculuk Kültürü
+🟢 YAYINLANDI (KULLANILDI),42,5. Sanat & Edebiyat,🟢 [YAYINLANDI] Yazarlar Neden Günlük Tutar?,Duyguları kâğıda dökmenin ve hikâye yaratmanın başlangıcı.,edebiyat-evliya-celebi-seyahatname | Evliya Çelebi ve Seyahatnâme: Bir Seyyahın Dünyası
+⚪ KULLANILABİLİR,43,5. Sanat & Edebiyat,Bir Sanat Tablosuna Nasıl Bakılır?,"Renklerin, gölgelerin ve detayların bize hissettirdikleri.",-
+🟢 YAYINLANDI (KULLANILDI),44,5. Sanat & Edebiyat,🟢 [YAYINLANDI] Klasik Enstrümanların Doğuşu,Tahtadan çıkan keman sesi ve tellerin büyüsü.,muzik-baglama-ve-ney-iki-kadim-ses | Bağlama ve Ney: İki Kadim Ses
+⚪ KULLANILABİLİR,45,5. Sanat & Edebiyat,Heykeltıraşlar Mermerden Nasıl Sanat Üretir?,Sert bir mermer bloğunun içinden zarif bir şekil çıkarmak.,-
+🟢 YAYINLANDI (KULLANILDI),46,5. Sanat & Edebiyat,🟢 [YAYINLANDI] Sokak Müzisyenlerinin Şehre Kattığı Ruh,Meydanlarda ve vapur iskelelerinde yankılanan ezgiler.,"muzik-asik-veysel-uzun-ince-bir-yol | Âşık Veysel: ""Uzun İnce Bir Yoldayım"""
+🟢 YAYINLANDI (KULLANILDI),47,5. Sanat & Edebiyat,🟢 [YAYINLANDI] Şiir Okumanın İnceliği,Az kelimeyle derin duyguları ifade etme sanatı.,edebiyat-orhan-veli-ve-garip-akimi | Orhan Veli Kanık ve Garip Akımı
+🟢 YAYINLANDI (KULLANILDI),48,5. Sanat & Edebiyat,🟢 [YAYINLANDI] Eski Kitap Kokusu ve Sahaf Dükkânları,İkinci el kitapların sararmış sayfalarında zaman yolculuğu.,bilim-proust-etkisi-koku-ve-bellek | Proust Etkisi: Kokular ve Çocukluk Hatıraları
+🟢 YAYINLANDI (KULLANILDI),49,5. Sanat & Edebiyat,🟢 [YAYINLANDI] Portre Çizmek,İnsan yüzündeki bakışları ve duyguları kâğıda aktarabilmek.,sanat-ebru-sanati-su-ustunde-renkler | Türk Ebru Sanatı: Su Üstünde Dans Eden Renkler
+🟢 YAYINLANDI (KULLANILDI),50,5. Sanat & Edebiyat,🟢 [YAYINLANDI] Tiyatroda Sahne Arkası,"Işıklar sönmeden önce kostümler, provalar ve heyecan.",gelenek-karagoz-hacivat-golge-oyunu | Karagöz ve Hacivat: Geleneksel Türk Gölge Oyunu
+⚪ KULLANILABİLİR,51,6. Kültür & Gelenekler,Bayram Sabahlarının Tatlı Telaşı,"Temiz kıyafetler, büyükleri ziyaret ve el öpme geleneği.",-
+⚪ KULLANILABİLİR,52,6. Kültür & Gelenekler,Türk Kültüründe Misafir Ağırlama ve İkram,"Kapıyı çalan misafire sunulan kolonya, çikolata ve sıcak karşılama.",-
+⚪ KULLANILABİLİR,53,6. Kültür & Gelenekler,Mahalle Pazarında Alışveriş Kültürü,Tezgâhlardaki taze mevsim sebzeleri ve esnafın samimi sesleri.,-
+🟢 YAYINLANDI (KULLANILDI),54,6. Kültür & Gelenekler,🟢 [YAYINLANDI] Geleneksel Çay Saati,İnce belli bardakta demli çay ve yanında sıcak bir sohbet.,kultur-turk-cayi-ince-belli-bardak | Türk Çayı ve İnce Belli Bardak Kültürü
+⚪ KULLANILABİLİR,55,6. Kültür & Gelenekler,Geleneksel Düğünler ve Halay Kültürü,"Gelin alma, davul-zurna sesleri ve ortak mutluluk.",-
+🟢 YAYINLANDI (KULLANILDI),56,6. Kültür & Gelenekler,🟢 [YAYINLANDI] Kahve Yanında Sohbet Adabı,Küçük fincanda bol köpüklü kahve ve dostluk hatırı.,kultur-turk-kahvesi-ve-fincan | Türk Kahvesi Kültürü: Bir Fincanın Kırk Yıl Hatırı
+⚪ KULLANILABİLİR,57,6. Kültür & Gelenekler,Komşuya Tabak Götürme Geleneği,Pişen sıcak yemekten komşunun payını ayırma geleneği.,-
+⚪ KULLANILABİLİR,58,6. Kültür & Gelenekler,Anadolu Halk Danslarının Anlamı,Ele ele tutuşup davul ritmiyle oynanan coşkulu oyunlar.,-
+⚪ KULLANILABİLİR,59,6. Kültür & Gelenekler,Yeni Eve Taşınan Komşuya Hayırlı Olsun Ziyareti,Komşuların getirdiği ilk hediyeler ve 'hayırlı olsun' dileği.,-
+⚪ KULLANILABİLİR,60,6. Kültür & Gelenekler,Yaz Akşamları Balkon ve Kapı Önü Sohbetleri,Balkonlarda ve sokak aralarında serin rüzgâr eşliğinde sohbet.,-
+⚪ KULLANILABİLİR,61,7. Teknoloji & Toplum,Akıllı Telefonlar Dikkatimizi Nasıl Etkiliyor?,Cebimizdeki küçük cihazla dünyayla iletişim kurmak.,-
+⚪ KULLANILABİLİR,62,7. Teknoloji & Toplum,Yapay Zekâ Çağında Geleceğin Meslekleri,Bilgisayarlar öğrenirken insanların yeni rolleri.,-
+🟡 TASLAK (Worksheet Hazır),63,7. Teknoloji & Toplum,🟡 [TASLAK] Ekran Süresini Azaltmak Mümkün mü?,Gün boyu bildirimlere bakmaktan biraz uzaklaşma denemesi.,worksheet_teknoloji-dijital-mola | Deniz'in Hafta Sonu Dijital Molası ve Kitap Huzuru
+⚪ KULLANILABİLİR,64,7. Teknoloji & Toplum,Nakit Paradan Dijital Cüzdanlara Geçiş,Cüzdansız alışveriş ve temassız kartların pratikliği.,-
+🟡 TASLAK (Worksheet Hazır),65,7. Teknoloji & Toplum,🟡 [TASLAK] Uzaktan Çalışmanın Avantajları ve Zorlukları,Evdeki çalışma masası ile ofis arasındaki farklar.,worksheet_is-hayati-yeni-ofis | Can'ın Mimarlık Ofisindeki İlk Haftası ve Selin'in Mentörlüğü
+⚪ KULLANILABİLİR,66,7. Teknoloji & Toplum,Sosyal Medyadaki Beğeniler Bizi Neden Mutlu Eder?,İnsanların neden anlarını paylaşmak istediğinin genel analizi.,-
+⚪ KULLANILABİLİR,67,7. Teknoloji & Toplum,Akıllı Ev Teknolojileri Hayatımızı Nasıl Değiştiriyor?,"Işıkların sesle açıldığı, perdelerin kendi kapandığı sistemler.",-
+⚪ KULLANILABİLİR,68,7. Teknoloji & Toplum,İnternetten Alışveriş ve Kargo Heyecanı,Sipariş verilen bir paketin kapımıza kadar gelen yolu.,-
+⚪ KULLANILABİLİR,69,7. Teknoloji & Toplum,Eski Fotoğraf Albümlerinden Bulut Depolamaya,Albümlerden bulut depolamaya fotoğraf saklama alışkanlığı.,-
+⚪ KULLANILABİLİR,70,7. Teknoloji & Toplum,İnternet Sayesinde Evden Yeni Bir Şey Öğrenmek,İstediğimiz her bilgiyi evden öğrenmenin getirdiği yeni fırsatlar.,-
+⚪ KULLANILABİLİR,71,8. Seyahat & Coğrafya,Sakin Bir Sahil Kasabasında Bir Gün,Mavi suların kenarında sakin ve huzurlu bir yürüyüş.,-
+⚪ KULLANILABİLİR,72,8. Seyahat & Coğrafya,Karlı Dağlar Arasında Tren Yolculuğu,Rayların sesiyle karlı dağları ve köyleri pencerenden izlemek.,-
+🟢 YAYINLANDI (KULLANILDI),73,8. Seyahat & Coğrafya,🟢 [YAYINLANDI] Tarihi Taş Otelde Bir Gece,Tarihi ahşap pencereler ve sabah kuş sesleri.,tarih-kapadokya-yeralti-sehirleri | Kapadokya'nın Yeraltı Şehirleri: Derinkuyu ve Kaymaklı
+⚪ KULLANILABİLİR,74,8. Seyahat & Coğrafya,Karadeniz Yaylalarında Bir Gün,Sisli yeşil tepelerde serin hava ve kaynak suyuyla çay keyfi.,-
+⚪ KULLANILABİLİR,75,8. Seyahat & Coğrafya,Küçük Bir Balıkçı Köyünde Sabah Hayatı,Sabah erken saatte tekneleri karşılamak ve taze balık kokusu.,-
+⚪ KULLANILABİLİR,76,8. Seyahat & Coğrafya,Tarihi Kapalıçarşı'da Bir Gün,"Dar sokaklarda baharat, deri ve bakır eşya dükkânları arasında gezinti.",-
+⚪ KULLANILABİLİR,77,8. Seyahat & Coğrafya,Ormanda Kamp Yapmanın İpuçları,"Çadır kurmak, ormanda kamp ateşi yakmak ve gökyüzünü izlemek.",-
+⚪ KULLANILABİLİR,78,8. Seyahat & Coğrafya,İstanbul'da Vapurla Adalara Yolculuk,Martılara simit atmak ve faytonsuz sessiz adalarda yürümek.,-
+⚪ KULLANILABİLİR,79,8. Seyahat & Coğrafya,Bir Dağın Zirvesine Tırmanmak,Zirveye ulaştığında vadinin eşsiz manzarasına bakmak.,-
+⚪ KULLANILABİLİR,80,8. Seyahat & Coğrafya,İlk Yurt Dışı Seyahati ve Dil Pratiği,"Havalimanı heyecanı, pasaport kontrolü ve yabancı bir dili denemek.",-
+⚪ KULLANILABİLİR,81,9. Yemek & Mutfak Kültürü,Mercimek Çorbası Neden Bu Kadar Çok Sevilir?,Soğuk kış günlerinde tencerede kaynayan sıcacık lezzet.,-
+⚪ KULLANILABİLİR,82,9. Yemek & Mutfak Kültürü,Ekmeğin Mayalanma Hikâyesi,"Un, su, maya ve fırından yükselen mis kokulu kabuk.",-
+🟢 YAYINLANDI (KULLANILDI),83,9. Yemek & Mutfak Kültürü,🟢 [YAYINLANDI] Zeytinyağlı Sebze Yemekleri,"Akdeniz mutfağının hafif, sağlıklı ve soğuk servis edilen tabağı.",yemek-zeytinyagi-ve-ege-sofrasi | Zeytinyağı ve Ege Sofrası: Zeytinyağlı Yemek Kültürü
+⚪ KULLANILABİLİR,84,9. Yemek & Mutfak Kültürü,Pazar Günleri Ailece Piknik Yapmak,"Parkta toplanan dostlar, köfte kokusu ve serin ayran.",-
+🟢 YAYINLANDI (KULLANILDI),85,9. Yemek & Mutfak Kültürü,🟢 [YAYINLANDI] Evde Yoğurt Mayalama,Sütü doğru sıcaklıkta mayalayıp battaniyeyle sarma sanatı.,yemek-yogurdun-bin-yillik-tarihi | Yoğurdun Bin Yıllık Tarihi: Bozkırdan Sofralara
+⚪ KULLANILABİLİR,86,9. Yemek & Mutfak Kültürü,Anadolu'nun Zengin Peynir Kültürü,"Beyaz peynir, kaşar ve tulum peynirinin sofradaki yeri.",-
+🟡 TASLAK (Worksheet Hazır),87,9. Yemek & Mutfak Kültürü,🟡 [TASLAK] Kışlık Salça ve Konserve Hazırlığı,Yazın son domateslerini rendeleyip güneşte kurutmak.,worksheet_yemek-mevsim-sebzeleri | Zeynep Hanım'ın Pazar Alışverişi ve Zeytinyağlı Taze Fasulye
+⚪ KULLANILABİLİR,88,9. Yemek & Mutfak Kültürü,Çıtır Simit ve Çay İkilisi,Çıtır susamlı simidin yanına konan bir parça beyaz peynir.,-
+⚪ KULLANILABİLİR,89,9. Yemek & Mutfak Kültürü,Tane Tane Pilav Yapmanın Sırrı,"Pirinci yıkamak, kavurmak ve demlenmeye bırakmak.",-
+⚪ KULLANILABİLİR,90,9. Yemek & Mutfak Kültürü,Geleneksel Komposto ve Hoşaf Tarifleri,"Elma, tarçın ve karanfille kaynatılan serinletici içecek.",-
+⚪ KULLANILABİLİR,91,10. Kişisel Gelişim & Psikoloji,Erteleme Alışkanlığını Nasıl Yeneriz?,Büyük görevleri küçük adımlara bölerek başlamanın kolay yolu.,-
+⚪ KULLANILABİLİR,92,10. Kişisel Gelişim & Psikoloji,Sabahları Daha Kolay Uyanmanın Yolları,Alarmı ertelemeden güne enerjik ve planlı başlama yöntemleri.,-
+⚪ KULLANILABİLİR,93,10. Kişisel Gelişim & Psikoloji,Neden 'Hayır' Demeyi Öğrenmeliyiz?,Kendi kişisel sınırlarını korumanın ve huzurlu hissetmenin önemi.,-
+⚪ KULLANILABİLİR,94,10. Kişisel Gelişim & Psikoloji,Günde 20 Dakikayla Yeni Bir Alışkanlık Kazanmak,Her gün yapılan küçük tekrarların büyük gücü.,-
+⚪ KULLANILABİLİR,95,10. Kişisel Gelişim & Psikoloji,Hatalardan Ders Çıkarmak Bizi Nasıl Geliştirir?,Öğrenme sürecinde yapılan yanlışların insanı nasıl geliştirdiği.,-
+⚪ KULLANILABİLİR,96,10. Kişisel Gelişim & Psikoloji,Stresli Anlarda Nefes Egzersiziyle Sakinleşmek,Derin nefes egzersizleri ve zihni ana odaklama teknikleri.,-
+⚪ KULLANILABİLİR,97,10. Kişisel Gelişim & Psikoloji,Sade Yaşamın Zihnimize Faydaları,Hayatımızdaki fazla eşyaları azaltarak odaklanmayı artırmak.,-
+⚪ KULLANILABİLİR,98,10. Kişisel Gelişim & Psikoloji,Günde Sadece 10 Sayfa Kitap Okumanın Gücü,Günde sadece 10 sayfa okuyarak yılda onlarca kitap bitirmek.,-
+⚪ KULLANILABİLİR,99,10. Kişisel Gelişim & Psikoloji,Olumsuz Düşüncelerle Başa Çıkma Yolları,Karamsar anlarda odağı çözüme ve güçlü yönlere çevirmek.,-
+⚪ KULLANILABİLİR,100,10. Kişisel Gelişim & Psikoloji,Günün Sonunda İyi Şeyleri Hatırlamak: Şükran Duygusu,Her akşam gün içindeki güzel ve olumlu şeyleri hatırlama pratiği.,-
+⚪ KULLANILABİLİR,101,1. Günlük Yaşam (Global),Danimarkalıların Ev Huzuru: Hygge Felsefesi,"Soğuk kış günlerinde evde sıcak, sade ve samimi bir atmosfer yaratmak.",-
+⚪ KULLANILABİLİR,102,1. Günlük Yaşam (Global),İtalyanların Akşam Yürüyüşü Geleneği: La Passeggiata,Akşam yemeğinden önce kasaba meydanında sakin adımlarla sosyalleşmek.,-
+⚪ KULLANILABİLİR,103,1. Günlük Yaşam (Global),Geleneksel Japon Evlerindeki Minimalizm,"Az eşya, yer yatakları ve ferah odaların getirdiği zihinsel huzur.",-
+⚪ KULLANILABİLİR,104,1. Günlük Yaşam (Global),İspanyollar Neden Siesta Yapar?,Gün ortasında kısa bir uyku molası ve enerjiyi tazeleme alışkanlığı.,-
+⚪ KULLANILABİLİR,105,1. Günlük Yaşam (Global),Latin Amerika'da Pazar Aile Yemekleri,Hafta sonu bir araya gelen üç nesil ve paylaşılan uzun sohbetler.,-
+⚪ KULLANILABİLİR,106,1. Günlük Yaşam (Global),Paris Kafelerinde Kahve ve Kruvasan Keyfi,Küçük sokak kafelerinde güne yavaş ve keyifli bir başlangıç.,-
+⚪ KULLANILABİLİR,107,1. Günlük Yaşam (Global),Balkonda Sebze ve Yeşillik Yetiştirmek,"Apartman dairesinde saksılarda taze nane, fesleğen ve çilek yetiştirmek.",-
+⚪ KULLANILABİLİR,108,1. Günlük Yaşam (Global),İsveç'in Meşhur Kahve Molası: Fika,Yoğun çalışma gününün ortasında kahve ve tarçınlı çörek ile zorunlu mola.,-
+⚪ KULLANILABİLİR,109,1. Günlük Yaşam (Global),Bit Pazarlarında Eski Eşyaların Hikâyesi,"Eski fincanlar, plaklar ve sararmış fotoğraflar arasında hazine aramak.",-
+⚪ KULLANILABİLİR,110,1. Günlük Yaşam (Global),Yabancı Ev Arkadaşlarıyla Yaşamak,Farklı ülkelerden ev arkadaşlarıyla ortak mutfak ve kültür alışverişi.,-
+⚪ KULLANILABİLİR,111,2. Sağlık & Zindelik (Global),Ağaçlar Arasında Stres Atmak: Orman Banyosu,"Japonya’dan dünyaya yayılan, ağaçlar arasında yürüyerek stres azaltma sanatı.",-
+⚪ KULLANILABİLİR,112,2. Sağlık & Zindelik (Global),Akdeniz Tipi Beslenme Neden Çok Sağlıklı?,"Zeytinyağı, taze sebzeler ve kalp sağlığını koruyan hafif tabaklar.",-
+⚪ KULLANILABİLİR,113,2. Sağlık & Zindelik (Global),Yurt Dışında Eczaneden İlaç İstemek,"Belirtileri anlatma, vitamin sorma ve doğru doz kullanımı diyaloğu.",-
+⚪ KULLANILABİLİR,114,2. Sağlık & Zindelik (Global),Günde 10.000 Adım Kuralı Nereden Çıktı?,"Yürüyüş yapmanın kalp, kaslar ve beyin fonksiyonları üzerindeki gerçek etkisi.",-
+⚪ KULLANILABİLİR,115,2. Sağlık & Zindelik (Global),Yabancı Bir Ülkede Doktora Şikâyetini Anlatmak,"Baş ağrısı, hafif ateş ve halsizlik şikâyetini doktora aktarma rehberi.",-
+⚪ KULLANILABİLİR,116,2. Sağlık & Zindelik (Global),Sabahları Soğuk Duş Almak Gerçekten Faydalı mı?,Güne uyanırken alınan kısa bir soğuk duşun bağışıklığa ve kan dolaşımına faydaları.,-
+⚪ KULLANILABİLİR,117,2. Sağlık & Zindelik (Global),Telefon Ekranı Uykumuzu Neden Kaçırır?,Akşam saatlerinde telefonu bırakmanın melatonin hormonuna etkisi.,-
+⚪ KULLANILABİLİR,118,2. Sağlık & Zindelik (Global),Masa Başında Bedeni Rahatlatan 5 Basit Egzersiz,"Omuz, boyun ve sırt kaslarını rahatlatan basit ofis egzersizleri.",-
+⚪ KULLANILABİLİR,119,2. Sağlık & Zindelik (Global),Yeşil Çayın Zihne ve Bedene Faydaları,Asya geleneklerinden günümüze antioksidan dolu sıcak bir içecek molası.,-
+⚪ KULLANILABİLİR,120,2. Sağlık & Zindelik (Global),Günde 10 Dakika Derin Nefes Almanın Gücü,Yavaş ve derin nefes alarak kalp atışını sakinleştirme pratiği.,-
+⚪ KULLANILABİLİR,121,3. Bilim & Doğa (Global),Kuzey Işıkları (Aurora) Nasıl Oluşur?,Güneş parçacıklarının kutup gökyüzünde yeşil ve mor dansı.,-
+⚪ KULLANILABİLİR,122,3. Bilim & Doğa (Global),Mariana Çukuru'nun Derinliklerinde Ne Var?,Mariana Çukuru’nda güneş ışığı olmadan yaşayan gizemli deniz canlıları.,-
+⚪ KULLANILABİLİR,123,3. Bilim & Doğa (Global),Amazon Yağmur Ormanları Neden Dünyanın Akciğeridir?,Dünyanın akciğerleri sayılan dev ağaçlar ve zengin biyoçeşitlilik.,-
+⚪ KULLANILABİLİR,124,3. Bilim & Doğa (Global),Göçmen Kuşların Yön Bulma Yeteneği,Kuşlar binlerce kilometrelik rotalarını kaybolmadan nasıl bulur?,-
+⚪ KULLANILABİLİR,125,3. Bilim & Doğa (Global),Ateşböcekleri Neden Işık Saçar?,Doğanın kendi enerjisiyle parlayan zararsız kimyasal mucizesi.,-
+⚪ KULLANILABİLİR,126,3. Bilim & Doğa (Global),Çölde Yıllarca Uyuyan Tohumlar Nasıl Çiçek Açar?,Yıllarca kumun altında uyuyan tohumların aniden çiçek bahçesine dönüşmesi.,-
+⚪ KULLANILABİLİR,127,3. Bilim & Doğa (Global),Balinalar Birbiriyle Nasıl Konuşur?,Su altında kilometrelerce öteden duyulan derin ve melankolik sesler.,-
+⚪ KULLANILABİLİR,128,3. Bilim & Doğa (Global),Dünyamız Uzaydan Neden Mavi Görünür?,Atmosferin ve okyanusların güneş ışığıyla oluşturduğu eşsiz renk.,-
+⚪ KULLANILABİLİR,129,3. Bilim & Doğa (Global),Bukalemunlar Neden Renk Değiştirir?,Tehlike anında ve sıcaklığa göre derideki özel hücrelerin değişimi.,-
+⚪ KULLANILABİLİR,130,3. Bilim & Doğa (Global),Gelgit Olayı Nasıl Gerçekleşir?,Gelgit olayının sahil kıyılarındaki suları yükseltip çekme mekanizması.,-
+⚪ KULLANILABİLİR,131,4. Tarih & Uygarlık (Global),Mısır Piramitleri Nasıl İnşa Edildi?,Binlerce yıl önce devasa taş bloklar nasıl üst üste dizildi?,-
+⚪ KULLANILABİLİR,132,4. Tarih & Uygarlık (Global),Çin Seddi Neden İnşa Edildi?,Dağların ve vadilerin üzerinden geçen binlerce kilometrelik taş hat.,-
+⚪ KULLANILABİLİR,133,4. Tarih & Uygarlık (Global),Antik Roma'da Kolezyum ve Gladyatörler,Antik dünyanın dev amfitiyatrosunda seyirciler ve mimari düzen.,-
+⚪ KULLANILABİLİR,134,4. Tarih & Uygarlık (Global),Machu Picchu: İnkaların Zirvedeki Şehri,Peru dağlarının zirvesine kurulan İnka taş kenti.,-
+⚪ KULLANILABİLİR,135,4. Tarih & Uygarlık (Global),Mezopotamya: İlk Tarım ve İlk Yazı,Nehir kıyılarında başlayan ilk tarım ve kil tabletlere kazınan semboller.,-
+⚪ KULLANILABİLİR,136,4. Tarih & Uygarlık (Global),Antik Dünyada İlk Olimpiyat Oyunları Nasıl Başladı?,"Savaşların durduğu, barış adına yapılan spor yarışmaları ve zeytin dalı tacı.",-
+⚪ KULLANILABİLİR,137,4. Tarih & Uygarlık (Global),Pompeii: Küllerin Altında Donup Kalan Şehir,Vezüv Yanardağı’nın patlamasıyla günümüze kadar korunan antik Roma yaşamı.,-
+⚪ KULLANILABİLİR,138,4. Tarih & Uygarlık (Global),İpek Yolu Kervansaraylarında Yaşam,"Çin’den Akdeniz’e ipek, baharat ve fikir taşıyan kervansaraylar.",-
+⚪ KULLANILABİLİR,139,4. Tarih & Uygarlık (Global),Vikinglerin Ahşap Gemileri ve Deniz Seferleri,Açık denizleri pusulasız aşarak yeni kıtalar arayan denizciler.,-
+⚪ KULLANILABİLİR,140,4. Tarih & Uygarlık (Global),Stonehenge Neden İnşa Edildi?,İngiltere kırlarında güneşin hareketlerini takip eden dev anıt taşlar.,-
+⚪ KULLANILABİLİR,141,5. Sanat & Edebiyat (Global),Van Gogh ve Yıldızlı Gece Tablosunun Hikâyesi,Dönen gece gökyüzü fırça darbeleri ve yalnız bir sanatçının ilhamı.,-
+⚪ KULLANILABİLİR,142,5. Sanat & Edebiyat (Global),Leonardo da Vinci'nin Gizli Not Defterleri,"Aynadan okunan ters yazılar, uçan makine tasarımları ve merak duygusu.",-
+⚪ KULLANILABİLİR,143,5. Sanat & Edebiyat (Global),Frida Kahlo'nun İlham Veren Sanat Hayatı,Zorlukları ve acıyı cesur renklere ve tablolara dönüştürme gücü.,-
+⚪ KULLANILABİLİR,144,5. Sanat & Edebiyat (Global),Monet Neden Sürekli Nilüferleri Resmetti?,Günün farklı ışıklarında su üzerindeki nilüferleri resmetmek (Empresyonizm).,-
+⚪ KULLANILABİLİR,145,5. Sanat & Edebiyat (Global),Beethoven 9. Senfoniyi Sağırken Nasıl Besteledi?,Hiç ses duymadan hafızasındaki notalarla bestelenen 9. Senfoni.,-
+⚪ KULLANILABİLİR,146,5. Sanat & Edebiyat (Global),Küçük Prens Kitabından Hayat Dersleri,Bir çocuğun masum gözleriyle yetişkinlerin tuhaf dünyasına bakış.,-
+⚪ KULLANILABİLİR,147,5. Sanat & Edebiyat (Global),New Orleans Sokaklarında Caz Müziğin Doğuşu,New Orleans sokaklarında trompet sesleri ve özgür doğaçlama ritimler.,-
+⚪ KULLANILABİLİR,148,5. Sanat & Edebiyat (Global),Mary Shelley Frankenstein Romanını Nasıl Yazdı?,Mary Shelley’nin Cenevre Gölü kenarında düşlediği ilk bilim kurgu hikâyesi.,-
+⚪ KULLANILABİLİR,149,5. Sanat & Edebiyat (Global),Rönesans Heykelleri Nasıl Yapılırdı?,Sert beyaz bir taşın içinden zarif bir insan figürü çıkarma sabrı.,-
+⚪ KULLANILABİLİR,150,5. Sanat & Edebiyat (Global),Charlie Chaplin ve Sessiz Sinemanın Gücü,Charlie Chaplin’in hiç konuşmadan tüm dünyayı güldürme ve düşündürme sanatı.,-
+⚪ KULLANILABİLİR,151,6. Kültür & Gelenekler (Global),Japonya'da Kiraz Çiçeği Mevsimi: Hanami,Parklarda pembe çiçeklerin altında piknik yaparak baharı kutlamak.,-
+⚪ KULLANILABİLİR,152,6. Kültür & Gelenekler (Global),Meksika'nın Ölüler Günü Geleneği,"Kaybedilen sevdikleri hüzünle değil, müzik, çiçekler ve neşeyle anmak.",-
+⚪ KULLANILABİLİR,153,6. Kültür & Gelenekler (Global),Hindistan'ın Renk Festivali: Holi,Baharın gelişini gökyüzüne atılan rengarenk tozlarla neşe içinde karşılamak.,-
+⚪ KULLANILABİLİR,154,6. Kültür & Gelenekler (Global),Venedik Karnavalı ve Tarihi Maskeler,Tarihi kanalların kenarında gösterişli kostümler ve gizemli maskelerle zamanda yolculuk.,-
+⚪ KULLANILABİLİR,155,6. Kültür & Gelenekler (Global),Yeni Zelanda'da Maorilerin Selamlaşma Geleneği: Hongi,İki insanın burunlarını birbirine dokundurarak hayat nefesini paylaşması.,-
+⚪ KULLANILABİLİR,156,6. Kültür & Gelenekler (Global),Tayland'ın Su Festivali: Songkran,Yeni yılın gelişini sokaklarda birbirine su serperek arınma sevinciyle kutlamak.,-
+⚪ KULLANILABİLİR,157,6. Kültür & Gelenekler (Global),İspanya'nın Domates Savaşı: La Tomatina,Küçük bir kasabada tonlarca olgun domatesle yapılan eğlenceli sokak oyunu.,-
+⚪ KULLANILABİLİR,158,6. Kültür & Gelenekler (Global),İrlanda'nın Aziz Patrick Günü Kutlamaları,Şehirlerin baştan başa yeşile büründüğü neşeli sokak yürüyüşleri.,-
+⚪ KULLANILABİLİR,159,6. Kültür & Gelenekler (Global),Çin Yeni Yılı ve Ejderha Dansı Geleneği,"Kötü şansı kovmak için asılan fenerler, ejderha dansları ve aile sofraları.",-
+⚪ KULLANILABİLİR,160,6. Kültür & Gelenekler (Global),Afrika'nın Birlik Felsefesi: Ubuntu,"'Ben, biz olduğumuz için varım' diyen derin toplumsal dayanışma anlayışı.",-
+⚪ KULLANILABİLİR,161,7. Teknoloji & Toplum (Global),Geleceğin Akıllı Şehirleri Nasıl Olacak?,Trafik lambalarından sokak aydınlatmalarına sensörlerle enerji tasarrufu yapan kentler.,-
+⚪ KULLANILABİLİR,162,7. Teknoloji & Toplum (Global),Gelecekte Robotlarla Birlikte Yaşamak,Fabrika hatlarından ev temizliğine ve hastanelere uzanan mekanik yardımcılar.,-
+⚪ KULLANILABİLİR,163,7. Teknoloji & Toplum (Global),Güneş Enerjisiyle Kendi Elektriğini Üreten Evler,Evlerin çatılarındaki panellerle doğaya zarar vermeden elektrik üretmek.,-
+⚪ KULLANILABİLİR,164,7. Teknoloji & Toplum (Global),Gezerek Çalışmak: Dijital Göçebelik,Sadece bir dizüstü bilgisayarla dünyayı gezerek uzaktan çalışma trendi.,-
+⚪ KULLANILABİLİR,165,7. Teknoloji & Toplum (Global),Evden Çıkmadan Müzeleri Gezmek: Sanal Turlar,Oturduğumuz odadan kalkmadan uzak müzeleri ve tarihi şehirleri adımlamak.,-
+⚪ KULLANILABİLİR,166,7. Teknoloji & Toplum (Global),Telefon Bildirimlerini Kapatınca Beynimize Ne Olur?,Bildirimleri ve interneti kapatınca insanın zaman algısı nasıl değişir?,-
+⚪ KULLANILABİLİR,167,7. Teknoloji & Toplum (Global),3 Boyutlu Yazıcılarla Bir Günde Ev Yapmak,Özel harç püskürten dev yazıcılarla bir günde güvenli evler inşa etmek.,-
+⚪ KULLANILABİLİR,168,7. Teknoloji & Toplum (Global),Elektrikli Araçlar Şehirleri Nasıl Değiştirecek?,Büyük şehirlerde motor gürültüsünün ve hava kirliliğinin azalması.,-
+⚪ KULLANILABİLİR,169,7. Teknoloji & Toplum (Global),Sesli Asistanlar Hayatımıza Nasıl Girdi?,Sabah hava durumunu sormaktan müzik açmaya yapay zekâlı seslerle iletişim.,-
+⚪ KULLANILABİLİR,170,7. Teknoloji & Toplum (Global),Geleceğin Çevre Dostu Elektrikli Uçakları,Havacılıkta karbon salınımını sıfırlamak için geliştirilen elektrikli motorlar.,-
+⚪ KULLANILABİLİR,171,8. Seyahat & Coğrafya (Global),Trans-Sibirya Demiryolu ile 9 Bin Kilometre,Moskova’dan Pasifik Okyanusu’na karlı ormanlar arasından geçen bir haftalık tren macerası.,-
+⚪ KULLANILABİLİR,172,8. Seyahat & Coğrafya (Global),Norveç Fiyortlarında Sessiz Bir Yolculuk,Dik yeşil dağların arasından süzülen masmavi derin sularda yolculuk.,-
+⚪ KULLANILABİLİR,173,8. Seyahat & Coğrafya (Global),Sahra Çölü'nde Bir Gece Geçirmek,Kızıl kum tepelerinde deve kervanı ve gece gökyüzünde sonsuz samanyolu.,-
+⚪ KULLANILABİLİR,174,8. Seyahat & Coğrafya (Global),İsviçre Alplerinde Bir Dağ Köyü,"Karlı zirveler, çan sesleri çıkaran inekler ve ahşap çatılı dağ kulübeleri.",-
+⚪ KULLANILABİLİR,175,8. Seyahat & Coğrafya (Global),İzlanda Neden Ateş ve Buz Ülkesi Olarak Bilinir?,Yanardağların hemen yanında fışkıran sıcak su kaynakları ve dev buzullar.,-
+⚪ KULLANILABİLİR,176,8. Seyahat & Coğrafya (Global),Bali'nin Basamaklı Pirinç Tarlaları,Tropik yamaçlarda yeşilin her tonunu barındıran asırlık su kanalları.,-
+⚪ KULLANILABİLİR,177,8. Seyahat & Coğrafya (Global),Büyük Set Resifi'nin Renkli Su Altı Dünyası,Okyanusun altında parlayan rengarenk mercanlar ve tropik balık sürüleri.,-
+⚪ KULLANILABİLİR,178,8. Seyahat & Coğrafya (Global),İskoçya'nın Sisli Kaleleri ve Efsaneleri,Efsanelerle dolu göllerin kıyısında yükselen asırlık taş şatolar.,-
+⚪ KULLANILABİLİR,179,8. Seyahat & Coğrafya (Global),Kosta Rika Yağmur Ormanlarında Asma Köprüler,Ağaç tepelerinde tembel hayvanları ve renkli tukan kuşlarını izlemek.,-
+⚪ KULLANILABİLİR,180,8. Seyahat & Coğrafya (Global),Fas'ın Mavi Şehri: Şafşavan,Dağ eteğindeki daracık sokaklarda baştan başa gökyüzü mavisine boyalı taş evler.,-
+⚪ KULLANILABİLİR,181,9. Yemek & Mutfak Kültürü (Global),Gerçek Napoli Pizzasının Sırrı Nedir?,"İncecik dinlenmiş mayalı hamur, taze fesleğen yaprakları ve odun fırınının ateşi.",-
+⚪ KULLANILABİLİR,182,9. Yemek & Mutfak Kültürü (Global),Japon Suşisi Neden Bir Sanat Sayılır?,"Pirincin doğru sıcaklığı, özel pirinç sirkesi ve taze deniz ürünlerinin uyumu.",-
+⚪ KULLANILABİLİR,183,9. Yemek & Mutfak Kültürü (Global),Fransızlar Neden Her Gün Taze Baget Alır?,"Altın sarısı çıtır kabuk, yumuşak gözenekli iç doku ve asırlık ekmekçilik kuralları.",-
+⚪ KULLANILABİLİR,184,9. Yemek & Mutfak Kültürü (Global),Meksika'nın Sokak Lezzeti: Orijinal Taco,"Sıcak mısır tortillası, lime suyu, taze kişniş ve renkli baharatlar.",-
+⚪ KULLANILABİLİR,185,9. Yemek & Mutfak Kültürü (Global),Hindistan Körisinin Baharat Sırrı,"Zerdeçal, kimyon ve taze zencefille ağır ateşte pişen baharatlı soslar.",-
+⚪ KULLANILABİLİR,186,9. Yemek & Mutfak Kültürü (Global),Humus Neden Binlerce Yıldır Sofralarda?,"Haşlanmış nohut, susam tahini, sızma zeytinyağı ve sarımsağın ipeksi kıvamı.",-
+⚪ KULLANILABİLİR,187,9. Yemek & Mutfak Kültürü (Global),Yemek Çubukları (Chopsticks) Nasıl Doğru Tutulur?,Yemek çubuklarını doğru tutmanın püf noktaları ve masa nezaketi.,-
+⚪ KULLANILABİLİR,188,9. Yemek & Mutfak Kültürü (Global),Valencia'nın Meşhur Tavası: Paella,Deniz kıyısında dev tavalarda safranlı sarı pirinç ve taze sebzelerle pişen lezzet şöleni.,-
+⚪ KULLANILABİLİR,189,9. Yemek & Mutfak Kültürü (Global),Çikolatanın Mayalardan Günümüze Yolculuğu,Mayaların kutsal içeceğinden bugünkü tatlı çikolata kalıplarına uzanan yolculuk.,-
+⚪ KULLANILABİLİR,190,9. Yemek & Mutfak Kültürü (Global),Gürcistan'ın Peynirli Ekmeği: Haçapuri,"Fırından yeni çıkmış tekne şeklinde sıcak hamur, eriyen peynir ve tereyağı.",-
+⚪ KULLANILABİLİR,191,10. Kişisel Gelişim & Psikoloji (Global),Pomodoro Tekniğiyle Odaklanmak,25 dakika kesintisiz çalışma ve 5 dakika mola döngüsünün zihinsel verimi.,-
+⚪ KULLANILABİLİR,192,10. Kişisel Gelişim & Psikoloji (Global),Beynimiz Yeni Bir Alışkanlığı Kaç Günde Kazanır?,Nöron yollarının güçlenmesi ve her gün yapılan küçük tekrarların kalıcı etkisi.,-
+🟢 YAYINLANDI (KULLANILDI),193,10. Kişisel Gelişim & Psikoloji (Global),🟢 [YAYINLANDI] Stoacı Düşünce ve İç Huzur,Sadece değiştirebileceğimiz şeylere odaklanıp kontrolümüz dışındakileri kabullenmek.,zihin-stoacilik-ve-gunluk-sakinlik | Stoacılık ve Günlük Sakinlik
+🟢 YAYINLANDI (KULLANILDI),194,10. Kişisel Gelişim & Psikoloji (Global),🟢 [YAYINLANDI] Mavi Bölgelerin Yaşam Sırrı (Blue Zones),Dünyada 100 yaşını aşan insanların ortak günlük 4 beslenme ve hareket alışkanlığı.,bilim-mavi-bolgeler-uzun-omrun-sirri | Mavi Bölgeler: 100 Yaşını Aşan İnsanların Sırrı
+⚪ KULLANILABİLİR,195,10. Kişisel Gelişim & Psikoloji (Global),Hatalardan Ders Çıkarmak Neden Önemlidir?,"Bir şeyi yanlış yapmayı bir başarısızlık değil, değerli bir öğrenme verisi olarak görmek.",-
+⚪ KULLANILABİLİR,196,10. Kişisel Gelişim & Psikoloji (Global),İyi Bir Dinleyici Olmanın Yolları,"Karşımızdaki insanı sadece yanıt vermek için değil, ne hissettiğini anlamak için dinlemek.",-
+⚪ KULLANILABİLİR,197,10. Kişisel Gelişim & Psikoloji (Global),Günlük İşlerde 3 Öncelik Kuralı,Günlük yapılacaklar listesini sadece en önemli 3 önceliğe indirmek.,-
+⚪ KULLANILABİLİR,198,10. Kişisel Gelişim & Psikoloji (Global),Günün Sonunda Şükran Notu Tutmanın Faydaları,Her akşam gün içinde iyi giden üç küçük şeyi hatırlamanın beyin kimyasına katkısı.,-
+🟢 YAYINLANDI (KULLANILDI),199,10. Kişisel Gelişim & Psikoloji (Global),Steve Jobs Neden Hep Aynı Kazağı Giyerdi?,Gün boyu çok fazla önemsiz seçim yapmanın iradeyi ve enerjiyi tüketmesi.,zihin-steve-jobs-ayni-kazak-karar-yorgunlugu
+⚪ KULLANILABİLİR,200,10. Kişisel Gelişim & Psikoloji (Global),Japonların Sabah Uyanma Sebebi: İkigai,"Tutkuları, yetenekleri ve dünyanın ihtiyaçlarını tek bir yaşam amacında buluşturmak.",-
+🟢 YAYINLANDI (KULLANILDI),201,6. Kültür & Gelenekler (Anadolu),🟢 [YAYINLANDI] Şahmaran Efsanesi: Yılanların Kraliçesi,"Mardin ve Tarsus yörelerinde şifa, bilgelik ve sadakat timsali kadim Anadolu efsanesi.",efsane-sahmaran-yilanlarin-kralicesi | Şahmaran Efsanesi: Yılanların Kraliçesi
+⚪ KULLANILABİLİR,202,8. Seyahat & Coğrafya (Global),İspanya'da 800 Kilometrelik Yürüyüş: Camino de Santiago,Ortaçağdan günümüze Pireneler'den okyanusa uzanan asırlık yürüyüş rotası.,-
+⚪ KULLANILABİLİR,203,9. Yemek & Mutfak Kültürü (Global),Kolombiya'da Kahve Hasadı Nasıl Yapılır?,Geleneksel çiftliklerde elle toplanan dünyanın en kaliteli kahve çekirdeklerinin öyküsü.,-
+⚪ KULLANILABİLİR,204,5. Sanat & Edebiyat (Global),Buenos Aires Sokaklarında Tango Kültürü,Göçmen limanlarından salonlara uzanan hüzünlü ve tutkulu dansın tarihi.,-
+⚪ KULLANILABİLİR,205,3. Bilim & Doğa (Global),Dünyanın En Kurak Çölünde Gökyüzünü İzlemek: Atacama,Yağmurun hiç yağmadığı platoda evrenin en derin sırlarını kaydeden gözlemevleri.,-
+⚪ KULLANILABİLİR,206,6. Kültür & Gelenekler (Global),Guatemala'da Yaşayan Maya Dokuma Geleneği,Nesilden nesile aktarılan el tezgahlarında doğanın ve mitolojinin kumaşa dökülüşü.,-
+⚪ KULLANILABİLİR,207,4. Tarih & Uygarlık (Global),Gelgitlerle Adaya Dönüşen Kale: Mont Saint-Michel,Günde iki kez suların yükselip çekildiği tekinsiz kumların üzerindeki ortaçağ manastırı.,-
+⚪ KULLANILABİLİR,208,3. Bilim & Doğa (Global),Provence'ın Meşhur Lavanta Tarlaları,Güneşin kavurduğu taş köylerde arıların vızıltısıyla hasat edilen lavanta geleneği.,-
+⚪ KULLANILABİLİR,209,5. Sanat & Edebiyat (Global),Paris'in Asırlık Nehir Kıyısı Sahafları: Bouquinistes,Üç yüz yıldır nehir korkuluklarına asılan ahşap kutularda eski kitap ve gravür arama tutkusu.,-
+⚪ KULLANILABİLİR,210,9. Yemek & Mutfak Kültürü (Global),Belçika Çikolatasının Sırrı Nedir?,Brüksel'in taş sokaklarında eriyen tereyağlı dolguların ve usta çikolatacıların hikâyesi.,-
+⚪ KULLANILABİLİR,211,6. Kültür & Gelenekler (Global),Kuzey Afrika'da Nane Çayı Seremonisi,Köpürtülerek yüksekten dökülen sıcak nane çayının çölden şehre uzanan dostluk simgesi.,-
+⚪ KULLANILABİLİR,212,6. Kültür & Gelenekler (Global),Almanya'nın Guguklu Saat Ustaları,Almanya'nın Schwarzwald ormanlarında kış aylarında sabırla oyulan mekanik zaman makineleri.,-
+⚪ KULLANILABİLİR,213,6. Kültür & Gelenekler (Global),Viyana'nın Meşhur Kahvehane Kültürü,"Gazeteler, mermer masalar ve sessiz garsonlar eşliğinde edebi ve felsefi bir sığınak.",-
+⚪ KULLANILABİLİR,214,5. Sanat & Edebiyat (Global),İsviçre Alplerinde Yodelleme Geleneği,Sözcüksüz göğüs ve kafa sesleriyle vadiler arasında yankılanan kadim çoban iletişimi.,-
+⚪ KULLANILABİLİR,215,4. Tarih & Uygarlık (Global),Bauhaus Tasarım Akımı Dünyayı Nasıl Değiştirdi?,Weimar'da başlayan ve bugünkü modern tasarımın temelini atan radikal sanat devrimi.,-
+⚪ KULLANILABİLİR,216,4. Tarih & Uygarlık (Global),Bavyera'nın Masal Şatosu: Neuschwanstein,Besteci Wagner hayranı II. Ludwig'in gerçeklikten kaçıp inşa ettirdiği romantik kale.,-
+⚪ KULLANILABİLİR,217,4. Tarih & Uygarlık (Global),Dünya Saati Neden Greenwich'ten Başlar?,Denizcilerin boylam hesaplarından modern atom saatlerine zamanın sıfır noktası.,-
+⚪ KULLANILABİLİR,218,6. Kültür & Gelenekler (Global),İskoç Gaydası ve Ekose Kilt Geleneği,Her klanın kendine ait renk deseniyle savaştan festivale gururla taşınan İskoç kimliği.,-
+⚪ KULLANILABİLİR,219,6. Kültür & Gelenekler (Global),Oxford ve Cambridge'in İki Asırlık Kürek Yarışı,Thames Nehri kıyısında toplanan yüzbinlerce insanın izlediği prestijli üniversite geleneği.,-
+⚪ KULLANILABİLİR,220,1. Günlük Yaşam (Global),New York'ta 24 Saat Kesintisiz Yaşam,Metrolardan sokak köşesindeki sıcak simit arabalarına metropolün tükenmez enerjisi.,-
+⚪ KULLANILABİLİR,221,4. Tarih & Uygarlık (Global),Avustralya Aborjinlerinin 40 Bin Yıllık Kaya Sanatı,Kıtanın ilk yerlilerinin şarkılar ve toprak boyalarıyla evrenin yaratılışını aktarma biçimi.,-
+⚪ KULLANILABİLİR,222,4. Tarih & Uygarlık (Global),Vezüv Patladığında Pompeii'de Sıradan Bir Gün,"Küllerin altında iki bin yıl donup kalan gündelik eşyalar, grafitiler ve Roma evleri.",-
+⚪ KULLANILABİLİR,223,5. Sanat & Edebiyat (Global),Floransa Uffizi Galerisi'ndeki Gizli Semboller,Botticelli ve Da Vinci'nin fırça darbelerinde saklanan mitolojik ve siyasi şifreler.,-
+⚪ KULLANILABİLİR,224,6. Kültür & Gelenekler (Global),Sicilya'nın Kukla Tiyatrosu: Opera dei Pupi,Zırhlı ahşap kuklalarla halk meydanlarında canlandırılan kahramanlık destanları.,-
+⚪ KULLANILABİLİR,225,9. Yemek & Mutfak Kültürü (Global),Amalfi Kıyılarının Meşhur Limon Bahçeleri,Denize bakan teraslarda güneşle olgunlaşan aromatik narenciyelerin mutfak mirası.,-
+⚪ KULLANILABİLİR,226,4. Tarih & Uygarlık (Global),Meteora: Kayalıkların Tepesindeki Manastırlar,Bulutların üzerindeki kayalıkların tepesinde inzivaya çekilen rahiplerin sessiz dünyası.,-
+🟢 YAYINLANDI (KULLANILDI),227,6. Kültür & Gelenekler (Global),Japonlar Kırılan Eşyaları Neden Altınla Tamir Eder? (Kintsugi),Kırılan bir fincanı atmayıp altın tozuyla birleştirerek yaşanmışlığa değer verme sanatı.,kultur-kintsugi-kiriklari-altinla-onarmak
+⚪ KULLANILABİLİR,228,1. Günlük Yaşam (Global),Kore'nin Oksijensiz Dalan Yaşlı Kadınları: Haenyeo,Jeju Adası'nda dondurucu sularda deniz kabukluları toplayan asırlık kadın topluluğu.,-
+⚪ KULLANILABİLİR,229,6. Kültür & Gelenekler (Global),Çin'in Geleneksel Çay Seremonisi: Gongfu Cha,Suyun sıcaklığından fincanın tutuluşuna kadar zihni ana odaklayan huzur ritüeli.,-
+⚪ KULLANILABİLİR,230,1. Günlük Yaşam (Global),Japonya'nın Doğal Sıcak Su Kaplıcaları: Onsen,Karlı dağların yamacındaki sıcak kaplıcalarda bedeni ve ruhu dinlendirmenin adabı.,-
+⚪ KULLANILABİLİR,231,1. Günlük Yaşam (Global),Tayland Kanallarında Yüzen Pazarlar,Kanal kenarındaki ahşap evlere taze tropik meyve ve sıcak çorba taşıyan yüzen satıcılar.,-
+⚪ KULLANILABİLİR,232,3. Bilim & Doğa (Global),Kyoto'nun Sesleriyle Ünlü Bambu Ormanı,Yüksek yeşil gövdelerin birbirine çarparken çıkardığı sesin Japonya'nın korunan tınısı olması.,-
+⚪ KULLANILABİLİR,233,8. Seyahat & Coğrafya (Global),Petra: Kızıl Kayalara Oyulmuş Antik Şehir,Dar bir kanyondan geçilerek ulaşılan sütunlu tapınakların ve su kanallarının mühendisliği.,-
+⚪ KULLANILABİLİR,234,4. Tarih & Uygarlık (Global),Umman'ın Çölü Yeşerten Su Kanalları: Falaj,Yerçekimiyle köylere ve palmiye bahçelerine su taşıyan kadim paylaşım mühendisliği.,-
+⚪ KULLANILABİLİR,235,4. Tarih & Uygarlık (Global),Beyrut'un Tarihi Taş Konakları ve Balkonları,Doğu ile Akdeniz mimarisinin kesiştiği asırlık konakların hikâyesi.,-
+⚪ KULLANILABİLİR,236,6. Kültür & Gelenekler (Global),Fas'ın Bin Yıllık Doğal Tabakhaneleri,"Güvercin gübresi, safran ve kına ile derileri asırlardır aynı yöntemle işleyen zanaatkârlar.",-
+⚪ KULLANILABİLİR,237,8. Seyahat & Coğrafya (Global),Nil Nehri'nde Geleneksel Yelkenliyle Yolculuk,Motor sesi olmadan binlerce yıllık nehir kıyısı tapınaklarının yanından akıp giden yaşam.,-
+⚪ KULLANILABİLİR,238,1. Günlük Yaşam (Global),Finlandiya'da Neden Nüfustan Çok Sauna Var?,Üç milyon saunaya sahip ülkede bedensel arınmanın ve toplumsal eşitliğin sembolü.,-
+⚪ KULLANILABİLİR,239,3. Bilim & Doğa (Global),Kuzey Kutup Dairesi'nde Gece Yarısı Güneşi,Gecenin ortasında altın bir ışıkla aydınlanan fiyortlarda canlıların zaman algısı.,-
+⚪ KULLANILABİLİR,240,6. Kültür & Gelenekler (Global),İzlanda'da Gizli Halk İnancı: Huldufólk,Doğaya duyulan derin saygının bir ifadesi olarak kayaların ve perilerin korunması geleneği.,-
+⚪ KULLANILABİLİR,241,1. Günlük Yaşam (Global),İsveç'te Doğada Özgürce Gezme Hakkı: Allemansrätten,"Yasal güvenceyle korunan, doğaya zarar vermeden her ormanda meyve toplama özgürlüğü.",-
+⚪ KULLANILABİLİR,242,3. Bilim & Doğa (Global),Madagaskar'ın Ters Ağaçları: Baobab Yolu,Gövdesinde binlerce litre su depolayan devasa ağaçların gün batımındaki silueti.,-
+⚪ KULLANILABİLİR,243,6. Kültür & Gelenekler (Global),Masai Savaşçılarının Zıplama Dansı: Adumu,Toprağa basıp ritimle göğe doğru sıçrayarak güç ve dayanıklılığı kutlama seremonisi.,-
+⚪ KULLANILABİLİR,244,3. Bilim & Doğa (Global),Sundarbans: Tuzlu Suda Yaşayan Mangrov Ormanları,Tuzlu deniz suyunda nefes alan kökler ve Bengal kaplanlarının gizlendiği bataklıklar.,-
+⚪ KULLANILABİLİR,245,8. Seyahat & Coğrafya (Global),Moğolistan'da Kartallarla Avlanan Kazaklar,Karlı Altay Dağları'nda at üstünde eğitilen kaya kartallarıyla kurulan güven bağı.,-
+⚪ KULLANILABİLİR,246,3. Bilim & Doğa (Global),Kuzey Kutbu'ndaki Kıyamet Tohum Deposu (Svalbard),Gezegenin geleceğini garanti altına almak için ebedi buzullarda saklanan milyonlarca tohum.,-
+⚪ KULLANILABİLİR,247,3. Bilim & Doğa (Global),Geceleri Deniz Neden Mavi Parlar? (Biyolüminesans),Dokunulduğunda parlayan mikroskobik planktonların okyanus kıyısında yarattığı peri masalı.,-
+⚪ KULLANILABİLİR,248,3. Bilim & Doğa (Global),Çernobil Nasıl Yabani Hayvan Cennetine Dönüştü?,"Nükleer felaketten sonra terk edilen bölgede kurtların, ayıların ve yaban atlarının yükselişi.",-
+⚪ KULLANILABİLİR,249,4. Tarih & Uygarlık (Global),Paskalya Adası'ndaki Dev Taş Heykeller Nasıl Taşındı?,İzole bir volkanik adada yüzlerce tonluk dev heykelleri inşa edenlerin kaybolan medeniyeti.,-
+⚪ KULLANILABİLİR,250,9. Yemek & Mutfak Kültürü (Global),Hong Kong'un Buharda Mantı Geleneği: Dim Sum,Pazar sabahları ailelerin bir araya gelerek paylaştığı asırlık buharda mantı geleneği.,-
+⚪ KULLANILABİLİR,251,6. Kültür & Gelenekler (Global),Rusya'da Dondurucu Buz Banyosu Geleneği: Epifani,Eksi yirmi derecede haç şeklinde kesilen buz deliklerine girerek arınma cesareti.,-

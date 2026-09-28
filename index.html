@@ -535,6 +535,25 @@
       background: var(--brand-purple);
       box-shadow: var(--shadow-card);
       border: var(--border-card);
+      min-height: 440px;
+    }
+
+    .hero-slider-track {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      min-height: 440px;
+      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .hero-slide {
+      position: relative;
+      flex: 0 0 100%;
+      width: 100%;
+      min-height: 440px;
+      height: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
     }
 
     .hero-lead-bg {
@@ -547,7 +566,7 @@
       transition: transform 0.4s ease;
     }
 
-    .hero-lead-box:hover .hero-lead-bg {
+    .hero-slide:hover .hero-lead-bg {
       transform: scale(1.03);
     }
 
@@ -570,8 +589,108 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 2.25rem 2rem 2rem;
+      padding: 2.25rem 2rem 2.2rem;
       box-sizing: border-box;
+    }
+
+    /* Slider Navigation Controls */
+    .hero-slider-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(15, 10, 36, 0.68);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+      opacity: 0.82;
+      padding: 0;
+    }
+
+    .hero-slider-arrow:hover {
+      opacity: 1;
+      background: var(--brand-coral);
+      border-color: var(--brand-coral);
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 6px 20px rgba(212, 56, 40, 0.45);
+    }
+
+    .hero-slider-arrow:focus-visible {
+      outline: 2px solid #ffffff;
+      outline-offset: 2px;
+    }
+
+    .hero-slider-prev {
+      left: 14px;
+    }
+
+    .hero-slider-next {
+      right: 14px;
+    }
+
+    .hero-slider-dots {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(15, 10, 36, 0.55);
+      padding: 4px 10px;
+      border-radius: 999px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .hero-slider-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.45);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .hero-slider-dot:hover {
+      background: rgba(255, 255, 255, 0.85);
+    }
+
+    .hero-slider-dot.active {
+      width: 22px;
+      background: var(--brand-coral);
+      border-radius: 999px;
+      box-shadow: 0 0 8px rgba(212, 56, 40, 0.6);
+    }
+
+    @media (max-width: 768px) {
+      .hero-slider-arrow {
+        width: 34px;
+        height: 34px;
+      }
+      .hero-slider-prev {
+        left: 8px;
+      }
+      .hero-slider-next {
+        right: 8px;
+      }
+      .hero-slider-dots {
+        bottom: 8px;
+      }
     }
 
     .hero-lead-top {
@@ -1806,9 +1925,9 @@
       return Boolean(art && art.visual && art.visual.imageUrl && art.visual.imageUrl.trim() !== "" && !art.hidden);
     }
 
-    // Global Dataset State
+    // Global Dataset State (Ordered newest-first so latest published articles lead the editorial flow)
     const initialRawData = (typeof window !== "undefined") ? (window.ARTICLES_DATA || window.articlesDatabase) : null;
-    let articlesDatabase = Array.isArray(initialRawData) ? initialRawData.filter(hasValidVisual) : [];
+    let articlesDatabase = Array.isArray(initialRawData) ? initialRawData.filter(hasValidVisual).reverse() : [];
 
     // Language & Level State
     let targetLang = "tr";
@@ -1848,7 +1967,7 @@
         if (resp.ok) {
           const freshData = await resp.json();
           if (Array.isArray(freshData) && freshData.length > 0) {
-            articlesDatabase = freshData.filter(hasValidVisual);
+            articlesDatabase = freshData.filter(hasValidVisual).reverse();
             return;
           }
         }
@@ -1856,7 +1975,7 @@
       if (!articlesDatabase || articlesDatabase.length === 0) {
         const fallback = (typeof window !== "undefined") ? (window.ARTICLES_DATA || window.articlesDatabase) : null;
         if (Array.isArray(fallback) && fallback.length > 0) {
-          articlesDatabase = fallback.filter(hasValidVisual);
+          articlesDatabase = fallback.filter(hasValidVisual).reverse();
         }
       }
     }
@@ -2107,6 +2226,103 @@
       return typeof supTitle === "string" ? supTitle.trim() : "";
     }
 
+    let currentHeroSlideIndex = 0;
+    let heroSliderTimer = null;
+    let heroSlidesCount = 0;
+
+    function initHeroSlider(count) {
+      heroSlidesCount = count;
+      updateHeroSliderPosition();
+      startHeroSliderAutoplay();
+
+      const box = document.getElementById("hero-lead-box");
+      if (box && !box.dataset.sliderInit) {
+        box.dataset.sliderInit = "true";
+        box.addEventListener("mouseenter", stopHeroSliderAutoplay);
+        box.addEventListener("mouseleave", startHeroSliderAutoplay);
+
+        // Touch swipe support
+        let startX = 0;
+        let diffX = 0;
+        box.addEventListener("touchstart", (e) => {
+          if (e.touches && e.touches[0]) {
+            startX = e.touches[0].clientX;
+            diffX = 0;
+          }
+          stopHeroSliderAutoplay();
+        }, { passive: true });
+
+        box.addEventListener("touchmove", (e) => {
+          if (e.touches && e.touches[0]) {
+            diffX = e.touches[0].clientX - startX;
+          }
+        }, { passive: true });
+
+        box.addEventListener("touchend", () => {
+          if (diffX > 40) {
+            prevHeroSlide();
+          } else if (diffX < -40) {
+            nextHeroSlide();
+          }
+          startHeroSliderAutoplay();
+        });
+      }
+    }
+
+    function startHeroSliderAutoplay() {
+      stopHeroSliderAutoplay();
+      if (heroSlidesCount <= 1) return;
+      heroSliderTimer = setInterval(() => {
+        nextHeroSlide();
+      }, 5500);
+    }
+
+    function stopHeroSliderAutoplay() {
+      if (heroSliderTimer) {
+        clearInterval(heroSliderTimer);
+        heroSliderTimer = null;
+      }
+    }
+
+    function goToHeroSlide(index) {
+      if (heroSlidesCount <= 0) return;
+      if (index < 0) index = heroSlidesCount - 1;
+      if (index >= heroSlidesCount) index = 0;
+      currentHeroSlideIndex = index;
+      updateHeroSliderPosition();
+    }
+
+    function nextHeroSlide(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      goToHeroSlide(currentHeroSlideIndex + 1);
+    }
+
+    function prevHeroSlide(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      goToHeroSlide(currentHeroSlideIndex - 1);
+    }
+
+    function updateHeroSliderPosition() {
+      const track = document.getElementById("hero-slider-track");
+      if (track) {
+        track.style.transform = `translateX(-${currentHeroSlideIndex * 100}%)`;
+      }
+      const dots = document.querySelectorAll(".hero-slider-dot");
+      dots.forEach((dot, idx) => {
+        if (idx === currentHeroSlideIndex) {
+          dot.classList.add("active");
+        } else {
+          dot.classList.remove("active");
+        }
+      });
+    }
+
     function renderMagazineHero() {
       const leadContainer = document.getElementById("hero-lead-box");
       const subContainer = document.getElementById("hero-mosaic-sub");
@@ -2115,64 +2331,100 @@
 
       const t = uiTranslations[supportLang] || uiTranslations.en;
 
-      // 1. Lead Story (articlesDatabase[0])
-      const lead = articlesDatabase[0];
-      const leadCatLabel = formatCategoryLabel((lead.categoryTranslations && lead.categoryTranslations[supportLang]) || lead.category);
-      const leadLevelData = (lead.languages && lead.languages[targetLang] && lead.languages[targetLang][currentLevel])
-                         || (lead.languages && lead.languages[targetLang] && lead.languages[targetLang].A1);
-      const leadTitle = (leadLevelData && leadLevelData.title)
-                     || (lead.titleTranslations && lead.titleTranslations[targetLang])
-                     || lead.topic;
-      
-      const leadSupportTitle = getSupportTitle(lead);
-      const leadSupportTitleHtml = leadSupportTitle ? `<span class="feed-title-support">${leadSupportTitle}</span>` : "";
-
-      // Card excerpt: use teaser field; omit if missing
-      let leadTeaser = "";
-      if (lead.teaserTranslations && lead.teaserTranslations[supportLang]) {
-        leadTeaser = lead.teaserTranslations[supportLang];
-      } else if (lead.teaser) {
-        leadTeaser = typeof lead.teaser === "object" ? (lead.teaser[supportLang] || lead.teaser.en || "") : lead.teaser;
+      // 1. Lead Carousel (Take latest 5 stories)
+      const leadStories = articlesDatabase.slice(0, 5);
+      if (currentHeroSlideIndex >= leadStories.length) {
+        currentHeroSlideIndex = 0;
       }
-      const leadExcerptHtml = leadTeaser ? `<p class="hero-lead-excerpt">${leadTeaser}</p>` : "";
 
-      const leadUrl = `articles/${encodeURIComponent(lead.id)}.html?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
-      const leadImg = (lead.visual && lead.visual.imageUrl) ? lead.visual.imageUrl : 'images/cover_01.jpg';
-      const leadIsRead = isArticleRead(lead.id);
-      const leadReadTag = leadIsRead ? `<span class="hero-read-tag">✓ ${t.readStatus || 'Read'}</span>` : '';
+      const slidesHtml = leadStories.map((lead, idx) => {
+        const leadCatLabel = formatCategoryLabel((lead.categoryTranslations && lead.categoryTranslations[supportLang]) || lead.category);
+        const leadLevelData = (lead.languages && lead.languages[targetLang] && lead.languages[targetLang][currentLevel])
+                           || (lead.languages && lead.languages[targetLang] && lead.languages[targetLang].A1);
+        const leadTitle = (leadLevelData && leadLevelData.title)
+                       || (lead.titleTranslations && lead.titleTranslations[targetLang])
+                       || lead.topic;
+        
+        const leadSupportTitle = getSupportTitle(lead);
+        const leadSupportTitleHtml = leadSupportTitle ? `<span class="feed-title-support">${leadSupportTitle}</span>` : "";
 
-      const levelPillsHtml = SUPPORTED_LEVELS.map(lvl => `
-        <button class="hero-lvl-pill ${lvl === currentLevel ? 'active' : ''}" onclick="event.preventDefault(); setLevel('${lvl}')">${lvl}</button>
+        // Card excerpt: use teaser field; omit if missing
+        let leadTeaser = "";
+        if (lead.teaserTranslations && lead.teaserTranslations[supportLang]) {
+          leadTeaser = lead.teaserTranslations[supportLang];
+        } else if (lead.teaser) {
+          leadTeaser = typeof lead.teaser === "object" ? (lead.teaser[supportLang] || lead.teaser.en || "") : lead.teaser;
+        }
+        const leadExcerptHtml = leadTeaser ? `<p class="hero-lead-excerpt">${leadTeaser}</p>` : "";
+
+        const leadUrl = `articles/${encodeURIComponent(lead.id)}.html?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
+        const leadImg = (lead.visual && lead.visual.imageUrl) ? lead.visual.imageUrl : 'images/cover_01.jpg';
+        const leadIsRead = isArticleRead(lead.id);
+        const leadReadTag = leadIsRead ? `<span class="hero-read-tag">✓ ${t.readStatus || 'Read'}</span>` : '';
+
+        const levelPillsHtml = SUPPORTED_LEVELS.map(lvl => `
+          <button class="hero-lvl-pill ${lvl === currentLevel ? 'active' : ''}" onclick="event.preventDefault(); event.stopPropagation(); setLevel('${lvl}')">${lvl}</button>
+        `).join('');
+
+        return `
+          <div class="hero-slide" data-index="${idx}">
+            <img src="${leadImg}" alt="${leadTitle}" class="hero-lead-bg" loading="${idx === 0 ? 'eager' : 'lazy'}">
+            <div class="hero-lead-overlay"></div>
+            <div class="hero-lead-content">
+              <div class="hero-lead-top">
+                <div class="hero-badges-row">
+                  <span class="hero-cat-tag">${leadCatLabel}</span>
+                  ${leadReadTag}
+                </div>
+                <a href="${leadUrl}">
+                  <h2 class="hero-lead-title">${leadTitle}</h2>
+                  ${leadSupportTitleHtml}
+                </a>
+                ${leadExcerptHtml}
+              </div>
+              <div class="hero-lead-footer">
+                <div class="hero-levels-group">
+                  ${levelPillsHtml}
+                </div>
+                <a href="${leadUrl}" class="hero-lead-link">${t.readStory || 'Read story →'}</a>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      const dotsHtml = leadStories.map((_, idx) => `
+        <button class="hero-slider-dot ${idx === currentHeroSlideIndex ? 'active' : ''}" onclick="event.preventDefault(); goToHeroSlide(${idx})" aria-label="Go to story ${idx + 1}"></button>
       `).join('');
 
       leadContainer.innerHTML = `
-        <img src="${leadImg}" alt="${leadTitle}" class="hero-lead-bg" loading="eager">
-        <div class="hero-lead-overlay"></div>
-        <div class="hero-lead-content">
-          <div class="hero-lead-top">
-            <div class="hero-badges-row">
-              <span class="hero-cat-tag">${leadCatLabel}</span>
-              ${leadReadTag}
-            </div>
-            <a href="${leadUrl}">
-              <h2 class="hero-lead-title">${leadTitle}</h2>
-              ${leadSupportTitleHtml}
-            </a>
-            ${leadExcerptHtml}
-          </div>
-          <div class="hero-lead-footer">
-            <div class="hero-levels-group">
-              ${levelPillsHtml}
-            </div>
-            <a href="${leadUrl}" class="hero-lead-link">${t.readStory || 'Read story →'}</a>
-          </div>
+        <div class="hero-slider-track" id="hero-slider-track">
+          ${slidesHtml}
         </div>
+        ${leadStories.length > 1 ? `
+          <button class="hero-slider-arrow hero-slider-prev" onclick="prevHeroSlide(event)" aria-label="Previous story">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <button class="hero-slider-arrow hero-slider-next" onclick="nextHeroSlide(event)" aria-label="Next story">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+          <div class="hero-slider-dots" id="hero-slider-dots">
+            ${dotsHtml}
+          </div>
+        ` : ''}
       `;
 
-      // 2. Sub-features (articlesDatabase[1], articlesDatabase[2], articlesDatabase[3])
-      const sub1 = articlesDatabase[1] || articlesDatabase[0];
-      const sub2 = articlesDatabase[2] || articlesDatabase[0];
-      const sub3 = articlesDatabase[3] || articlesDatabase[0];
+      initHeroSlider(leadStories.length);
+
+      // 2. Sub-features (articlesDatabase[5], articlesDatabase[6], articlesDatabase[7] or distinct fallback)
+      const subPool = articlesDatabase.length >= 8 ? articlesDatabase.slice(5, 8) : articlesDatabase.slice(1, 4);
+      const sub1 = subPool[0] || articlesDatabase[0];
+      const sub2 = subPool[1] || articlesDatabase[1];
+      const sub3 = subPool[2] || articlesDatabase[2];
 
       function buildMosaicCardHtml(art, extraClass = "") {
         const cat = formatCategoryLabel((art.categoryTranslations && art.categoryTranslations[supportLang]) || art.category);
@@ -2219,8 +2471,8 @@
 
       const t = uiTranslations[supportLang] || uiTranslations.en;
 
-      // Take stories 4 through 8 for trending column
-      const trendingSource = articlesDatabase.length > 4 ? articlesDatabase.slice(4, 9) : articlesDatabase.slice(0, 5);
+      // Take stories starting after sub-features for trending column
+      const trendingSource = articlesDatabase.length >= 13 ? articlesDatabase.slice(8, 13) : (articlesDatabase.length > 4 ? articlesDatabase.slice(4, 9) : articlesDatabase.slice(0, 5));
 
       trendingSource.forEach(art => {
         const cat = formatCategoryLabel((art.categoryTranslations && art.categoryTranslations[supportLang]) || art.category);

@@ -2,7 +2,6 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Arılar Yok Olursa Ne Olur? — Leenardo</title>
   <meta name="description" content="Arılar Yok Olursa Ne Olur?. Graded multilingual story with sentence-by-sentence translations and interactive vocabulary tools on Leenardo.">
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Arılar Yok Olursa Ne Olur?. Graded multilingual story with sentence-by-sentence translations and interactive vocabulary tools on Leenardo.">
   <meta name="twitter:image" content="https://leenardo.com/images/doga-arilar-yok-olursa-ne-olur.jpg">
 
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="64x64" href="/favicon-64.png">
-  <link rel="apple-touch-icon" sizes="192x192" href="/logo-192.png">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="../favicon-64.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="../logo-192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/auth.css">
+  <link rel="stylesheet" href="../auth.css">
   <script>
     (function() {
       try {
@@ -2009,7 +2008,7 @@
   <header class="top-header">
     <div class="top-header-inner">
       <div class="brand-group">
-        <a href="/index.html" class="brand-title" onclick="goToHome(event)" aria-label="Leenardo">
+        <a href="../index.html" class="brand-title" onclick="goToHome(event)" aria-label="Leenardo">
           <span class="brand-glyph-l" aria-hidden="true">
             <svg viewBox="290 210 445 600" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
@@ -2092,7 +2091,7 @@
           </svg>
           <span id="btn-top-share-text">Share</span>
         </button>
-        <a href="/index.html" class="article-topic-selector-link" id="article-change-topic-link" onclick="goToHome(event)" title="Browse all stories">
+        <a href="../index.html" class="article-topic-selector-link" id="article-change-topic-link" onclick="goToHome(event)" title="Browse all stories">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <line x1="19" y1="12" x2="5" y2="12"></line>
             <polyline points="12 19 5 12 12 5"></polyline>
@@ -2426,7 +2425,7 @@
   <div class="toast" id="toast-msg"><span id="toast-text">Copied to clipboard</span></div>
 
   <!-- External Data Source (CORS-free for file:// and HTTP) -->
-  <script src="/articles-data.js"></script>
+  <script src="../articles-data.js"></script>
 
   <script>
     const SUPPORTED_LANGUAGES = ['tr', 'en', 'es', 'de', 'fr'];
@@ -3118,7 +3117,8 @@
 
     async function loadArticlesData() {
       try {
-        const resp = await fetch("/articles.json").catch(() => fetch("articles.json"));
+        const jsonPath = window.location.pathname.includes("/articles/") ? "../articles.json" : "articles.json";
+        const resp = await fetch(jsonPath).catch(() => fetch("/articles.json")).catch(() => null);
         if (resp && resp.ok) {
           const freshData = await resp.json();
           if (Array.isArray(freshData) && freshData.length > 0) {
@@ -3142,7 +3142,7 @@
       const urlParams = new URLSearchParams(window.location.search);
       const queryId = urlParams.get("id");
       const isOldUrl = window.location.pathname.endsWith("/article.html") || window.location.pathname === "/article.html";
-      if (queryId && isOldUrl) {
+      if (queryId && isOldUrl && window.location.protocol !== "file:") {
         urlParams.delete("id");
         const qs = urlParams.toString() ? ("?" + urlParams.toString()) : "";
         window.location.replace(`/articles/${encodeURIComponent(queryId)}.html${qs}`);
@@ -3170,13 +3170,21 @@
       if (paramTarget && SUPPORTED_LANGUAGES.includes(paramTarget)) {
         targetLang = paramTarget;
       } else {
-        targetLang = localStorage.getItem("mia_target_lang") || "tr";
+        try {
+          targetLang = localStorage.getItem("mia_target_lang") || "tr";
+        } catch (e) {
+          targetLang = "tr";
+        }
       }
 
       if (paramSupport && SUPPORTED_LANGUAGES.includes(paramSupport)) {
         supportLang = paramSupport;
       } else {
-        supportLang = localStorage.getItem("mia_support_lang") || (targetLang === "en" ? "tr" : "en");
+        try {
+          supportLang = localStorage.getItem("mia_support_lang") || (targetLang === "en" ? "tr" : "en");
+        } catch (e) {
+          supportLang = targetLang === "en" ? "tr" : "en";
+        }
       }
 
       // Enforce targetLang !== supportLang
@@ -3187,14 +3195,20 @@
       if (paramLevel && SUPPORTED_LEVELS.includes(paramLevel)) {
         currentLevel = paramLevel;
       } else {
-        currentLevel = localStorage.getItem("mia_preferred_level") || "A1";
+        try {
+          currentLevel = localStorage.getItem("mia_preferred_level") || "A1";
+        } catch (e) {
+          currentLevel = "A1";
+        }
         if (!SUPPORTED_LEVELS.includes(currentLevel)) currentLevel = "A1";
       }
 
       // Persist State
-      localStorage.setItem("mia_target_lang", targetLang);
-      localStorage.setItem("mia_support_lang", supportLang);
-      localStorage.setItem("mia_preferred_level", currentLevel);
+      try {
+        localStorage.setItem("mia_target_lang", targetLang);
+        localStorage.setItem("mia_support_lang", supportLang);
+        localStorage.setItem("mia_preferred_level", currentLevel);
+      } catch (e) {}
 
       // Sync Language Selectors
       const tarSelect = document.getElementById("target-lang-select");
@@ -3282,7 +3296,7 @@
 
     function updateUrlState(pushHistory = false) {
       try {
-        if (window.history) {
+        if (window.history && window.location.protocol !== "file:") {
           const url = new URL(window.location.href);
           if (currentArticleId) {
             url.pathname = `/articles/${encodeURIComponent(currentArticleId)}.html`;
@@ -3307,7 +3321,11 @@
 
     function goToHome(e) {
       if (e) e.preventDefault();
-      const homePath = window.location.protocol === "file:" ? "../index.html" : "/index.html";
+      const inArticles = window.location.pathname.includes("/articles/");
+      let homePath = inArticles ? "../index.html" : "index.html";
+      if (window.location.protocol !== "file:" && !inArticles) {
+        homePath = "/index.html";
+      }
       window.location.href = `${homePath}?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
     }
 
@@ -3610,6 +3628,16 @@
       canonical.setAttribute("href", pageUrl);
     }
 
+    function resolveAssetPath(relPath) {
+      if (!relPath) return "";
+      if (relPath.startsWith("http://") || relPath.startsWith("https://") || relPath.startsWith("data:")) {
+        return relPath;
+      }
+      let clean = relPath.startsWith("/") ? relPath.slice(1) : relPath;
+      const isInSubdir = window.location.pathname.includes("/articles/");
+      return (isInSubdir ? "../" : "") + clean;
+    }
+
     function renderArticleContent() {
       closeWordPopover();
       const article = articlesDatabase.find(a => a.id === currentArticleId) || articlesDatabase[0];
@@ -3652,7 +3680,7 @@
       const featImg = document.getElementById("article-featured-img");
 
       const rawImg = (article.visual && article.visual.imageUrl) || article.featuredImage;
-      const imgUrl = rawImg ? (rawImg.startsWith('/') || rawImg.startsWith('http') ? rawImg : ('/' + rawImg)) : '';
+      const imgUrl = resolveAssetPath(rawImg);
       if (imgUrl && imgUrl.trim() !== "") {
         imgBox.style.display = "block";
         featImg.src = imgUrl;
@@ -3799,7 +3827,7 @@
         }
 
         const rawImg = (art.visual && art.visual.imageUrl) || art.featuredImage;
-        const imgUrl = rawImg ? (rawImg.startsWith('/') || rawImg.startsWith('http') ? rawImg : ('/' + rawImg)) : '';
+        const imgUrl = resolveAssetPath(rawImg);
         let imgHtml = (imgUrl && imgUrl.trim() !== "")
           ? `<img src="${imgUrl}" alt="${primaryTitle}" class="rec-img" loading="lazy">`
           : `<div class="rec-placeholder-img">Leenardo</div>`;
@@ -5532,7 +5560,7 @@
   </script>
   <!-- Supabase & Leenardo Auth Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="/supabase-client.js"></script>
-  <script src="/auth-ui.js"></script>
+  <script src="../supabase-client.js"></script>
+  <script src="../auth-ui.js"></script>
 </body>
 </html>
