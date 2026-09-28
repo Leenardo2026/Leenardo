@@ -591,18 +591,51 @@
     }
 
     /* Clickable Word Spans */
+    .word-span,
     .word-token {
       display: inline;
       cursor: pointer;
       border-radius: 4px;
-      transition: color 0.15s ease;
+      padding: 1px 2px;
+      margin: -1px -2px;
+      transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
     }
 
+    .word-span:hover,
     .word-token:hover {
-      color: var(--brand-coral);
+      color: var(--brand-coral-dark);
+      background-color: rgba(255, 98, 83, 0.12);
       text-decoration: underline;
       text-decoration-thickness: 1.5px;
       text-underline-offset: 3px;
+    }
+
+    /* Active / Clicked Word Highlight: Clearly highlights the word whose translation is currently open */
+    .word-span.active-word,
+    .word-token.active-word {
+      background-color: #ff5240 !important;
+      color: #ffffff !important;
+      font-weight: 600;
+      border-radius: 4px;
+      padding: 2px 4px;
+      margin: -2px -2px;
+      box-shadow: 0 1px 5px rgba(255, 82, 64, 0.45);
+      text-decoration: none !important;
+      position: relative;
+      z-index: 10;
+    }
+
+    [data-theme="dark"] .word-span:hover,
+    [data-theme="dark"] .word-token:hover {
+      color: #ff9185;
+      background-color: rgba(255, 98, 83, 0.2);
+    }
+
+    [data-theme="dark"] .word-span.active-word,
+    [data-theme="dark"] .word-token.active-word {
+      background-color: #ff6253 !important;
+      color: #ffffff !important;
+      box-shadow: 0 1px 6px rgba(255, 98, 83, 0.6);
     }
 
     /* Sentence Tooltip Balloon (Support language on hover) */
@@ -4864,10 +4897,8 @@
         popover.classList.add("hidden");
         popover.style.display = "none";
       }
-      if (currentActiveWordSpan) {
-        currentActiveWordSpan.classList.remove("active-word");
-        currentActiveWordSpan = null;
-      }
+      document.querySelectorAll(".word-span.active-word, .word-token.active-word").forEach(s => s.classList.remove("active-word"));
+      currentActiveWordSpan = null;
       document.body.classList.remove("word-popover-active");
     }
 
