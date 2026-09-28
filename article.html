@@ -1241,7 +1241,6 @@
     <div class="article-top-meta">
       <div class="meta-badges-group">
         <span class="article-category-tag" id="article-category-badge">Category</span>
-        <span class="article-read-time" id="article-read-time">4 min read</span>
         <span class="article-read-badge" id="article-read-badge" style="display:none;">✓ Read</span>
       </div>
       <div style="display:flex; align-items:center; gap:1.25rem;">
@@ -2393,11 +2392,10 @@
         return;
       }
 
-      // 1. Meta Badges & Read Time
+      // 1. Meta Badges
       const catText = (article.categoryTranslations && article.categoryTranslations[supportLang]) || article.category;
       document.getElementById("article-category-badge").textContent = catText;
       const t = uiTranslations[supportLang] || uiTranslations.en;
-      document.getElementById("article-read-time").textContent = `${article.readTime || '4 min'} • ${currentLevel}`;
 
       // 2. Headlines
       document.getElementById("article-main-title").textContent = targetData.title;
@@ -2538,7 +2536,6 @@
         card.setAttribute("tabindex", "0");
 
         const catLabel = (art.categoryTranslations && art.categoryTranslations[supportLang]) || art.category;
-        const readTime = `${art.readTime || '4 min'}`;
 
         const targetLevelData = (art.languages && art.languages[targetLang] && art.languages[targetLang][currentLevel])
                              || (art.languages && art.languages[targetLang] && art.languages[targetLang].A1);
@@ -2570,7 +2567,6 @@
             <div>
               <div class="rec-card-meta">
                 <span class="rec-badge">${catLabel}</span>
-                <span class="rec-readtime">${readTime}</span>
                 ${recReadBadge}
               </div>
               <h4 class="rec-card-title">${primaryTitle}</h4>

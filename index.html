@@ -2091,8 +2091,6 @@
         const url = `article.html?id=${encodeURIComponent(art.id)}&target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
         const isRead = isArticleRead(art.id);
         const readBadge = isRead ? `<span>✓ ${t.readStatus || 'Read'}</span>` : '';
-        const timeStr = art.readTime || `4 ${t.readMin || 'min'}`;
-
         return `
           <div class="mosaic-card ${extraClass}">
             <img src="${img}" alt="${title}" class="mosaic-card-bg" loading="lazy">
@@ -2104,8 +2102,6 @@
               </a>
               <div class="mosaic-meta">
                 <span>${currentLevel}</span>
-                <span>•</span>
-                <span>${timeStr}</span>
                 ${readBadge ? '<span>•</span> ' + readBadge : ''}
               </div>
             </div>
@@ -2144,8 +2140,6 @@
         const url = `article.html?id=${encodeURIComponent(art.id)}&target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
         const isRead = isArticleRead(art.id);
         const readBadge = isRead ? `<span class="card-read-badge">✓</span>` : '';
-        const timeStr = art.readTime || `4 ${t.readMin || 'min'}`;
-
         const item = document.createElement("div");
         item.className = "trending-item";
         item.innerHTML = `
@@ -2159,9 +2153,7 @@
             </a>
             <div class="trending-meta">
               <span>${currentLevel}</span>
-              <span>•</span>
-              <span>${timeStr}</span>
-              ${readBadge}
+              ${readBadge ? '<span>•</span> ' + readBadge : ''}
             </div>
           </div>
         `;
