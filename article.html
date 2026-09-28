@@ -4,6 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Leenardo — Graded Multilingual Reader</title>
+  <meta name="description" content="Read authentic graded multilingual articles with interactive sentence translations, smart vocabulary flashcards, and native audio.">
+  <link rel="canonical" href="https://leenardo.com/article.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Leenardo">
+  <meta property="og:title" content="Leenardo — Graded Multilingual Reader">
+  <meta property="og:description" content="Read authentic graded multilingual articles with interactive sentence translations, smart vocabulary flashcards, and native audio.">
+  <meta property="og:image" content="https://leenardo.com/logo-1024.png">
+  <meta property="og:url" content="https://leenardo.com/article.html">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Leenardo — Graded Multilingual Reader">
+  <meta name="twitter:description" content="Read authentic graded multilingual articles with interactive sentence translations, smart vocabulary flashcards, and native audio.">
+  <meta name="twitter:image" content="https://leenardo.com/logo-1024.png">
+
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
@@ -2902,6 +2919,85 @@
       if (card) card.classList.toggle("collapsed");
     }
 
+    function updateArticleSeoMetadata(article, targetData, supportData) {
+      if (!article || !targetData) return;
+
+      const supportTitle = (supportLang !== targetLang && supportData && supportData.title) 
+        ? supportData.title 
+        : ((article.titleTranslations && article.titleTranslations[supportLang]) || "");
+
+      // Page Title: unique per article, including support language title and CEFR level
+      if (supportTitle && supportLang !== targetLang) {
+        document.title = `${targetData.title} (${supportTitle}) [${currentLevel}] — Leenardo`;
+      } else {
+        document.title = `${targetData.title} [${currentLevel}] — Leenardo`;
+      }
+
+      // Meta Description: unique in the support language (grammarDesc / teaser / first sentence translation)
+      let metaDescription = "";
+      if (supportData && supportData.grammarDesc && supportData.grammarDesc.trim()) {
+        metaDescription = supportData.grammarDesc.trim();
+      } else if (article.teaserTranslations && article.teaserTranslations[supportLang]) {
+        metaDescription = article.teaserTranslations[supportLang].trim();
+      } else if (targetData.paragraphs && targetData.paragraphs[0] && targetData.paragraphs[0][0]) {
+        const firstSent = targetData.paragraphs[0][0];
+        if (firstSent.translations && firstSent.translations[supportLang]) {
+          metaDescription = firstSent.translations[supportLang].trim();
+        } else {
+          metaDescription = firstSent.target.trim();
+        }
+      }
+      if (!metaDescription) {
+        metaDescription = `${targetData.title}. Read graded multilingual stories with sentence translations and vocabulary tools on Leenardo.`;
+      }
+
+      // Canonical & Open Graph URL
+      const pageUrl = `https://leenardo.com/article.html?id=${encodeURIComponent(article.id)}&target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
+
+      // Open Graph Image: absolute URL
+      const rawImg = (article.visual && article.visual.imageUrl) || article.featuredImage || "images/cover_01.jpg";
+      let fullImgUrl = rawImg;
+      if (fullImgUrl.startsWith("/")) {
+        fullImgUrl = "https://leenardo.com" + fullImgUrl;
+      } else if (!fullImgUrl.startsWith("http://") && !fullImgUrl.startsWith("https://")) {
+        fullImgUrl = "https://leenardo.com/" + fullImgUrl;
+      }
+
+      const socialTitle = (supportTitle && supportLang !== targetLang)
+        ? `${targetData.title} (${supportTitle}) | Leenardo`
+        : `${targetData.title} | Leenardo`;
+
+      function setMeta(selector, attrName, attrVal, content) {
+        let tag = document.querySelector(selector);
+        if (!tag) {
+          tag = document.createElement("meta");
+          tag.setAttribute(attrName, attrVal);
+          document.head.appendChild(tag);
+        }
+        tag.setAttribute("content", content);
+      }
+
+      setMeta('meta[name="description"]', "name", "description", metaDescription);
+      setMeta('meta[property="og:title"]', "property", "og:title", socialTitle);
+      setMeta('meta[property="og:description"]', "property", "og:description", metaDescription);
+      setMeta('meta[property="og:image"]', "property", "og:image", fullImgUrl);
+      setMeta('meta[property="og:url"]', "property", "og:url", pageUrl);
+      setMeta('meta[property="og:type"]', "property", "og:type", "article");
+      setMeta('meta[property="og:site_name"]', "property", "og:site_name", "Leenardo");
+      setMeta('meta[name="twitter:card"]', "name", "twitter:card", "summary_large_image");
+      setMeta('meta[name="twitter:title"]', "name", "twitter:title", socialTitle);
+      setMeta('meta[name="twitter:description"]', "name", "twitter:description", metaDescription);
+      setMeta('meta[name="twitter:image"]', "name", "twitter:image", fullImgUrl);
+
+      let canonical = document.querySelector('link[rel="canonical"]');
+      if (!canonical) {
+        canonical = document.createElement("link");
+        canonical.setAttribute("rel", "canonical");
+        document.head.appendChild(canonical);
+      }
+      canonical.setAttribute("href", pageUrl);
+    }
+
     function renderArticleContent() {
       closeWordPopover();
       const article = articlesDatabase.find(a => a.id === currentArticleId) || articlesDatabase[0];
@@ -2935,6 +3031,9 @@
       // 2. Headlines
       document.getElementById("article-main-title").textContent = targetData.title;
       document.getElementById("article-support-title").textContent = (supportLang !== targetLang && supportData) ? supportData.title : "";
+
+      // 2.1 Update SEO, Social Sharing (Open Graph / Twitter) & Page Title in Support Language
+      updateArticleSeoMetadata(article, targetData, supportData);
 
       // 3. Featured Image
       const imgBox = document.getElementById("featured-img-box");
