@@ -1383,11 +1383,13 @@
       padding-bottom: 0.75rem;
     }
 
+    .modal-header h2,
     .modal-header h3 {
       font-family: var(--font-serif);
       font-size: 1.35rem;
       font-weight: 700;
       color: var(--brand-purple);
+      margin: 0;
     }
 
     .modal-close-btn {
@@ -1396,6 +1398,154 @@
       font-size: 1.4rem;
       color: var(--text-muted);
       cursor: pointer;
+    }
+
+    /* Side-by-Side Parallel Reading Modal Styles */
+    #parallel-modal .modal-content-wide {
+      max-width: 1080px;
+      width: 95vw;
+      max-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      padding: 1.75rem 2rem;
+    }
+
+    .parallel-header-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--divider-hairline);
+      margin-bottom: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    .parallel-col-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .comp-badge {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .comp-badge-target {
+      background: var(--brand-purple);
+      color: #ffffff;
+    }
+
+    .comp-badge-support {
+      background: var(--brand-coral-contrast);
+      color: #ffffff;
+    }
+
+    .parallel-col-header h4 {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--ink-navy);
+      margin: 0;
+    }
+
+    .parallel-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      overflow-y: auto;
+      padding-right: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .parallel-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      padding: 1.25rem 1.35rem;
+      border-radius: 16px;
+      background: var(--bg-surface);
+      border: 1px solid var(--divider-hairline);
+      transition: all 0.2s ease;
+      align-items: start;
+    }
+
+    .parallel-row:hover {
+      background: var(--bg-cream);
+      border-color: rgba(40, 25, 94, 0.2);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+
+    .parallel-title-row {
+      background: var(--brand-purple-light);
+      border-color: rgba(40, 25, 94, 0.15);
+    }
+
+    .parallel-title-row:hover {
+      background: var(--brand-purple-light);
+    }
+
+    .parallel-side {
+      position: relative;
+    }
+
+    .parallel-side-title {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--brand-purple);
+      line-height: 1.35;
+      margin: 0;
+    }
+
+    .parallel-side p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--ink-navy);
+      margin: 0;
+    }
+
+    .parallel-side.parallel-target p {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+    }
+
+    .parallel-side.parallel-support p {
+      font-family: var(--font-sans);
+      font-size: 0.96rem;
+      opacity: 0.92;
+    }
+
+    .parallel-para-num {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    @media (max-width: 768px) {
+      #parallel-modal .modal-content-wide {
+        padding: 1.25rem 1rem;
+      }
+      .parallel-header-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+      .parallel-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      .parallel-side.parallel-support {
+        padding-top: 0.75rem;
+        border-top: 1px dashed var(--divider-hairline);
+      }
     }
 
     .vn-tabs-bar {
@@ -1863,21 +2013,24 @@
 
   <!-- Parallel Comparison Modal -->
   <div class="modal-backdrop" id="parallel-modal" onclick="closeParallelModal(event)">
-    <div class="modal-content" onclick="event.stopPropagation()">
+    <div class="modal-content modal-content-wide" onclick="event.stopPropagation()">
       <div class="modal-header">
         <h2 id="modal-parallel-title">Side-by-Side Parallel Reading</h2>
         <button class="modal-close-btn" onclick="closeParallelModal()">&times;</button>
       </div>
-      <div class="comparison-cols">
-        <div class="comp-col">
-          <h4 id="comp-target-title" style="margin-bottom:0.75rem; color:var(--ink-navy); font-weight:700;">Target Language</h4>
-          <div id="comp-target-body"></div>
+      <div class="parallel-header-row">
+        <div class="parallel-col-header">
+          <span class="comp-badge comp-badge-target">TARGET</span>
+          <h4 id="comp-target-title">Target Language</h4>
         </div>
-        <div class="comp-col">
-          <h4 id="comp-support-title" style="margin-bottom:0.75rem; color:var(--ink-navy); font-weight:700;">Support Language</h4>
-          <div id="comp-support-body"></div>
+        <div class="parallel-col-header">
+          <span class="comp-badge comp-badge-support">SUPPORT</span>
+          <h4 id="comp-support-title">Support Language</h4>
         </div>
       </div>
+      <div class="parallel-container" id="parallel-rows-container"></div>
+      <div id="comp-target-body" style="display:none;"></div>
+      <div id="comp-support-body" style="display:none;"></div>
     </div>
   </div>
 
@@ -4767,27 +4920,71 @@
       const targetData = article.languages && article.languages[targetLang] && article.languages[targetLang][currentLevel];
       const supportData = article.languages && article.languages[supportLang] && article.languages[supportLang][currentLevel];
 
-      document.getElementById("comp-target-title").textContent = `${langNames[targetLang]} (${currentLevel})`;
-      document.getElementById("comp-support-title").textContent = `${langNames[supportLang]} (${currentLevel})`;
+      const tTitleElem = document.getElementById("comp-target-title");
+      const sTitleElem = document.getElementById("comp-support-title");
+      if (tTitleElem) tTitleElem.textContent = `${langNames[targetLang] || targetLang.toUpperCase()} (${currentLevel})`;
+      if (sTitleElem) sTitleElem.textContent = `${langNames[supportLang] || supportLang.toUpperCase()} (${currentLevel})`;
 
-      let tHtml = "";
-      if (targetData && targetData.paragraphs) {
-        targetData.paragraphs.forEach(p => {
-          tHtml += `<p style="margin-bottom:1rem;">${p.map(s => s.target).join(" ")}</p>`;
-        });
+      const tParagraphs = (targetData && targetData.paragraphs) || [];
+      const sParagraphs = (supportData && supportData.paragraphs) || [];
+      const maxParas = Math.max(tParagraphs.length, sParagraphs.length);
+
+      let rowsHtml = "";
+
+      // 1. Article Title Header Row
+      const tTitle = (targetData && targetData.title) || "";
+      const sTitle = (supportData && supportData.title) || (article.titleTranslations && article.titleTranslations[supportLang]) || "";
+      if (tTitle || sTitle) {
+        rowsHtml += `
+          <div class="parallel-row parallel-title-row">
+            <div class="parallel-side parallel-target">
+              <h3 class="parallel-side-title">${tTitle}</h3>
+            </div>
+            <div class="parallel-side parallel-support">
+              <h3 class="parallel-side-title">${sTitle}</h3>
+            </div>
+          </div>
+        `;
       }
 
-      let sHtml = "";
-      if (supportData && supportData.paragraphs) {
-        supportData.paragraphs.forEach(p => {
-          sHtml += `<p style="margin-bottom:1rem;">${p.map(s => s.target).join(" ")}</p>`;
-        });
+      // 2. Side-by-Side Paragraph Rows
+      for (let i = 0; i < maxParas; i++) {
+        const tPara = tParagraphs[i];
+        const sPara = sParagraphs[i];
+
+        let tText = "";
+        if (tPara) {
+          tText = tPara.map(s => s.target).join(" ");
+        }
+
+        let sText = "";
+        if (sPara) {
+          sText = sPara.map(s => s.target).join(" ");
+        } else if (tPara) {
+          sText = tPara.map(s => (s.translations && s.translations[supportLang]) || s.target).join(" ");
+        }
+
+        rowsHtml += `
+          <div class="parallel-row">
+            <div class="parallel-side parallel-target">
+              <span class="parallel-para-num">¶ ${i + 1}</span>
+              <p>${tText}</p>
+            </div>
+            <div class="parallel-side parallel-support">
+              <span class="parallel-para-num">¶ ${i + 1}</span>
+              <p>${sText}</p>
+            </div>
+          </div>
+        `;
       }
 
-      document.getElementById("comp-target-body").innerHTML = tHtml;
-      document.getElementById("comp-support-body").innerHTML = sHtml;
+      const container = document.getElementById("parallel-rows-container");
+      if (container) {
+        container.innerHTML = rowsHtml;
+      }
 
-      document.getElementById("parallel-modal").classList.add("show");
+      const modal = document.getElementById("parallel-modal");
+      if (modal) modal.classList.add("show");
     }
 
     function closeParallelModal() {
