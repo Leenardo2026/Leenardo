@@ -979,6 +979,37 @@
       color: var(--brand-coral);
     }
 
+    .feed-title-support {
+      font-size: 0.82rem;
+      line-height: 1.35;
+      color: var(--text-muted, #8A8A8A);
+      font-style: italic;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+      margin-top: 0.25rem;
+    }
+
+    .hero-lead-box .feed-title-support {
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.95rem;
+      margin-top: -0.35rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .mosaic-card .feed-title-support {
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.82rem;
+      margin-top: -0.15rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .trending-info .feed-title-support {
+      font-size: 0.78rem;
+      margin-top: 0.15rem;
+    }
+
     .feed-desc {
       font-size: 0.85rem;
       color: var(--ink-navy);
@@ -1928,6 +1959,7 @@
       localStorage.setItem("mia_preferred_level", currentLevel);
       updateUrlState();
       renderMagazineHero();
+      renderTrendingColumn();
       renderMainFeed();
       renderSidebarWidgets();
     }
@@ -2049,6 +2081,15 @@
       renderMainFeed(q);
     }
 
+    function getSupportTitle(art) {
+      if (!art || supportLang === targetLang) return "";
+      const supLevelData = art.languages && art.languages[supportLang] && art.languages[supportLang][currentLevel];
+      const supTitle = (supLevelData && supLevelData.title)
+                    || (art.titleTranslations && art.titleTranslations[supportLang])
+                    || "";
+      return typeof supTitle === "string" ? supTitle.trim() : "";
+    }
+
     function renderMagazineHero() {
       const leadContainer = document.getElementById("hero-lead-box");
       const subContainer = document.getElementById("hero-mosaic-sub");
@@ -2066,6 +2107,9 @@
                      || (lead.titleTranslations && lead.titleTranslations[targetLang])
                      || lead.topic;
       
+      const leadSupportTitle = getSupportTitle(lead);
+      const leadSupportTitleHtml = leadSupportTitle ? `<span class="feed-title-support">${leadSupportTitle}</span>` : "";
+
       // Card excerpt: use teaser field; omit if missing
       let leadTeaser = "";
       if (lead.teaserTranslations && lead.teaserTranslations[supportLang]) {
@@ -2095,6 +2139,7 @@
             </div>
             <a href="${leadUrl}">
               <h2 class="hero-lead-title">${leadTitle}</h2>
+              ${leadSupportTitleHtml}
             </a>
             ${leadExcerptHtml}
           </div>
@@ -2117,6 +2162,8 @@
         const lData = (art.languages && art.languages[targetLang] && art.languages[targetLang][currentLevel])
                    || (art.languages && art.languages[targetLang] && art.languages[targetLang].A1);
         const title = (lData && lData.title) || (art.titleTranslations && art.titleTranslations[targetLang]) || art.topic;
+        const subSupportTitle = getSupportTitle(art);
+        const subSupportTitleHtml = subSupportTitle ? `<span class="feed-title-support">${subSupportTitle}</span>` : "";
         const img = (art.visual && art.visual.imageUrl) ? art.visual.imageUrl : 'images/cover_01.jpg';
         const url = `article.html?id=${encodeURIComponent(art.id)}&target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
         const isRead = isArticleRead(art.id);
@@ -2129,6 +2176,7 @@
               <span class="mosaic-cat-pill">${cat}</span>
               <a href="${url}">
                 <h3 class="mosaic-title">${title}</h3>
+                ${subSupportTitleHtml}
               </a>
               <div class="mosaic-meta">
                 <span>${currentLevel}</span>
@@ -2162,6 +2210,8 @@
         const lData = (art.languages && art.languages[targetLang] && art.languages[targetLang][currentLevel])
                    || (art.languages && art.languages[targetLang] && art.languages[targetLang].A1);
         const title = (lData && lData.title) || (art.titleTranslations && art.titleTranslations[targetLang]) || art.topic;
+        const trendSupportTitle = getSupportTitle(art);
+        const trendSupportTitleHtml = trendSupportTitle ? `<span class="feed-title-support">${trendSupportTitle}</span>` : "";
         const img = (art.visual && art.visual.imageUrl) ? art.visual.imageUrl : 'images/cover_01.jpg';
         const url = `article.html?id=${encodeURIComponent(art.id)}&target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
         const isRead = isArticleRead(art.id);
@@ -2176,6 +2226,7 @@
             <span class="trending-cat">${cat}</span>
             <a href="${url}">
               <h4 class="trending-title">${title}</h4>
+              ${trendSupportTitleHtml}
             </a>
             <div class="trending-meta">
               <span>${currentLevel}</span>
@@ -2197,6 +2248,9 @@
       const cardTitle = (targetLevelData && targetLevelData.title)
                      || (art.titleTranslations && art.titleTranslations[targetLang])
                      || art.topic;
+
+      const supportTitle = getSupportTitle(art);
+      const supportTitleHtml = supportTitle ? `<span class="feed-title-support">${supportTitle}</span>` : "";
 
       // Card excerpt: use teaser field; omit if missing
       let teaser = "";
@@ -2227,6 +2281,7 @@
           </div>
           <a href="${articleBaseUrl}&level=${currentLevel}">
             <h3 class="feed-title">${cardTitle}</h3>
+            ${supportTitleHtml}
           </a>
           ${teaserHtml}
           <div class="feed-levels-row">
