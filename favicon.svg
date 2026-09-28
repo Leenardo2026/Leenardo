@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="187 185 650 650" width="100%" height="100%">
+  <defs>
+    <style>
+      .fav-glyph { fill: #ff6253; }
+      .fav-ribbon { fill: #28195e; }
+      .fav-shadow { fill: #1b1042; }
+      @media (prefers-color-scheme: dark) {
+        .fav-glyph { fill: #ff6253; }
+        .fav-ribbon { fill: #a594f9; }
+        .fav-shadow { fill: #6f59e8; }
+      }
+    </style>
+  </defs>
+  <!-- 'L' Glyph -->
+  <g class="fav-glyph">
+    <path d="M 296 340
+             C 296 262, 348 217, 424 217
+             C 440 217, 449 226, 449 242
+             L 449 495
+             C 448 518, 420 560, 357 628
+             L 459 557
+             L 459 673
+             L 374 673
+             C 328 673, 296 641, 296 595
+             Z" />
+    <path d="M 552 511
+             C 580 503, 620 502, 660 506
+             C 695 510, 718 522, 727 538
+             L 727 645
+             C 727 662, 718 673, 706 673
+             L 552 673
+             Z" />
+  </g>
+  <!-- Bookmark Ribbon -->
+  <g>
+    <path class="fav-ribbon"
+          d="M 459 557
+             C 485 540, 520 521, 551 511
+             L 551 804
+             L 505 762
+             L 459 804
+             Z" />
+    <path class="fav-shadow"
+          d="M 459 557
+             C 485 540, 520 521, 551 511
+             L 551 526
+             C 525 536, 485 558, 459 582
+             Z" />
+  </g>
+</svg>

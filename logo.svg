@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <clipPath id="ribbonClip">
+      <path d="M 459 557
+               C 485 540, 520 521, 551 511
+               L 551 804
+               L 505 762
+               L 459 804
+               Z" />
+    </clipPath>
+  </defs>
+
+  <!-- Leenardo Logo Brand Mark -->
+  <g id="leenardo-logo">
+    <!-- Purple 'L' Glyph -->
+    <g id="l-glyph" fill="#28195e">
+      <!-- Vertical Stem and Left Base -->
+      <path id="stem-and-base"
+            d="M 296 340
+               C 296 262, 348 217, 424 217
+               C 440 217, 449 226, 449 242
+               L 449 495
+               C 448 518, 420 560, 357 628
+               L 459 557
+               L 459 673
+               L 374 673
+               C 328 673, 296 641, 296 595
+               Z" />
+
+      <!-- Horizontal Right Arm -->
+      <path id="right-arm"
+            d="M 552 511
+               C 580 503, 620 502, 660 506
+               C 695 510, 718 522, 727 538
+               L 727 645
+               C 727 662, 718 673, 706 673
+               L 552 673
+               Z" />
+    </g>
+
+    <!-- Bookmark Ribbon -->
+    <g id="bookmark-ribbon">
+      <!-- Main Ribbon Body -->
+      <path id="ribbon-body"
+            d="M 459 557
+               C 485 540, 520 521, 551 511
+               L 551 804
+               L 505 762
+               L 459 804
+               Z"
+            fill="#ff6253" />
+
+      <!-- Fold Shadow (Depth inside crevice) -->
+      <path id="ribbon-fold-shadow"
+            d="M 459 557
+               C 485 540, 520 521, 551 511
+               L 551 526
+               C 525 536, 485 558, 459 582
+               Z"
+            fill="#d43f38" />
+    </g>
+  </g>
+</svg>
