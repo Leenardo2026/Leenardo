@@ -1656,9 +1656,14 @@
       }
     };
 
+    // Filter helper: Only display articles that have a valid cover visual and are not hidden
+    function hasValidVisual(art) {
+      return Boolean(art && art.visual && art.visual.imageUrl && art.visual.imageUrl.trim() !== "" && !art.hidden);
+    }
+
     // Global Dataset State
     const initialRawData = (typeof window !== "undefined") ? (window.ARTICLES_DATA || window.articlesDatabase) : null;
-    let articlesDatabase = Array.isArray(initialRawData) ? initialRawData : [];
+    let articlesDatabase = Array.isArray(initialRawData) ? initialRawData.filter(hasValidVisual) : [];
 
     // Language & Level State
     let targetLang = "tr";
@@ -1698,7 +1703,7 @@
         if (resp.ok) {
           const freshData = await resp.json();
           if (Array.isArray(freshData) && freshData.length > 0) {
-            articlesDatabase = freshData;
+            articlesDatabase = freshData.filter(hasValidVisual);
             return;
           }
         }
@@ -1706,7 +1711,7 @@
       if (!articlesDatabase || articlesDatabase.length === 0) {
         const fallback = (typeof window !== "undefined") ? (window.ARTICLES_DATA || window.articlesDatabase) : null;
         if (Array.isArray(fallback) && fallback.length > 0) {
-          articlesDatabase = fallback;
+          articlesDatabase = fallback.filter(hasValidVisual);
         }
       }
     }

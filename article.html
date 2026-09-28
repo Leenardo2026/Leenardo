@@ -1994,8 +1994,9 @@
 
       if (paramId && articlesDatabase.some(a => a.id === paramId)) {
         currentArticleId = paramId;
-      } else if (articlesDatabase.length > 0) {
-        currentArticleId = articlesDatabase[0].id;
+      } else {
+        const firstWithVisual = articlesDatabase.find(a => a && a.visual && a.visual.imageUrl && a.visual.imageUrl.trim() !== "" && !a.hidden);
+        currentArticleId = firstWithVisual ? firstWithVisual.id : (articlesDatabase[0] ? articlesDatabase[0].id : "");
       }
 
       if (paramTarget && SUPPORTED_LANGUAGES.includes(paramTarget)) {
@@ -2465,7 +2466,7 @@
 
     function getRecommendedArticles(currentId, count = 3) {
       if (!articlesDatabase || articlesDatabase.length === 0) return [];
-      const otherArticles = articlesDatabase.filter(a => a.id !== currentId);
+      const otherArticles = articlesDatabase.filter(a => a.id !== currentId && a.visual && a.visual.imageUrl && a.visual.imageUrl.trim() !== "" && !a.hidden);
       if (otherArticles.length <= count) return otherArticles;
 
       const currentArt = articlesDatabase.find(a => a.id === currentId);
