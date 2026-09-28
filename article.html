@@ -1545,7 +1545,6 @@
     <!-- Featured Visual -->
     <div class="featured-image-box" id="featured-img-box" style="display:none;">
       <img id="article-featured-img" class="featured-image" src="" alt="Featured Visual">
-      <div class="featured-caption" id="article-img-caption"></div>
     </div>
 
     <!-- SAME TOPIC / DIFFERENT DIFFICULTY TAB SELECTOR -->
@@ -2688,14 +2687,11 @@
       // 3. Featured Image
       const imgBox = document.getElementById("featured-img-box");
       const featImg = document.getElementById("article-featured-img");
-      const captionOverlay = document.getElementById("article-img-caption");
 
       const imgUrl = (article.visual && article.visual.imageUrl) || article.featuredImage;
       if (imgUrl && imgUrl.trim() !== "") {
         imgBox.style.display = "block";
         featImg.src = imgUrl;
-        const caption = (article.visual && article.visual.captionTr) || targetData.title;
-        captionOverlay.textContent = caption;
       } else {
         imgBox.style.display = "none";
       }
