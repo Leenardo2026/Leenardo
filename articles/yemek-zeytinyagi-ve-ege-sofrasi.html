@@ -302,77 +302,136 @@
       width: 100%;
     }
 
-    /* Article Meta & Breadcrumb */
+    /* Article Top Meta & Actions Bar */
+    .article-top-meta,
     .article-meta-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 1rem;
       margin-bottom: 1.5rem;
-      padding-bottom: 0.75rem;
+      padding-bottom: 0.85rem;
       border-bottom: 1px solid var(--divider-hairline);
     }
 
-    .btn-back-home {
+    .meta-badges-group {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      font-size: 0.84rem;
-      font-weight: 700;
-      color: var(--brand-purple);
-      background: var(--brand-purple-light);
-      padding: 5px 14px;
-      border-radius: 999px;
-      text-decoration: none;
-      transition: all 0.2s ease;
+      gap: 0.5rem;
+      flex-wrap: wrap;
     }
 
-    .btn-back-home:hover {
-      background: var(--brand-coral);
-      color: #ffffff;
-      transform: translateX(-2px);
-    }
-
-    .meta-tags-right {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
+    /* Category Badge */
+    .article-category-tag,
     .cat-badge {
+      font-family: var(--font-sans);
       font-size: 0.72rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
       color: var(--brand-coral);
       background: var(--brand-coral-light);
-      padding: 3px 10px;
+      border: 1px solid rgba(255, 98, 83, 0.2);
+      padding: 4px 12px;
       border-radius: 999px;
+      line-height: 1.25;
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
     }
 
-    .read-time-tag {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    .btn-meta-share {
-      background: transparent;
-      border: 1px solid var(--divider-hairline);
-      border-radius: 999px;
+    /* Read Badge */
+    .article-read-badge {
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #059669;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.25);
       padding: 4px 10px;
-      font-size: 0.75rem;
+      border-radius: 999px;
+      line-height: 1.25;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    /* Top Actions Group */
+    .article-top-actions,
+    .meta-tags-right {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      margin-left: auto;
+    }
+
+    /* Share Button */
+    .btn-meta-share {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
       font-weight: 600;
       color: var(--text-muted);
+      background: var(--bg-surface);
+      border: 1px solid var(--divider-hairline);
+      border-radius: 999px;
+      padding: 5px 14px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 0.35rem;
+      gap: 0.45rem;
       transition: all 0.2s ease;
+      line-height: 1.2;
+    }
+
+    .btn-meta-share svg {
+      flex-shrink: 0;
+      stroke-width: 2.2;
     }
 
     .btn-meta-share:hover {
-      border-color: var(--brand-coral);
       color: var(--brand-coral);
+      border-color: var(--brand-coral);
+      background: var(--brand-coral-light);
+      transform: translateY(-1px);
+    }
+
+    /* Browse All Stories Link */
+    .article-topic-selector-link,
+    .btn-back-home {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--bg-surface);
+      border: 1px solid var(--divider-hairline);
+      border-radius: 999px;
+      padding: 5px 14px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.2s ease;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .article-topic-selector-link svg,
+    .btn-back-home svg {
+      flex-shrink: 0;
+      stroke-width: 2.2;
+      transition: transform 0.2s ease;
+    }
+
+    .article-topic-selector-link:hover,
+    .btn-back-home:hover {
+      color: var(--brand-purple);
+      border-color: var(--brand-purple);
+      background: var(--brand-purple-light);
+      transform: translateY(-1px);
+    }
+
+    .article-topic-selector-link:hover svg,
+    .btn-back-home:hover svg {
+      transform: translateX(-2px);
     }
 
     .btn-mark-read {
@@ -401,27 +460,73 @@
       color: #10b981;
     }
 
+    [data-theme="dark"] .article-category-tag,
+    [data-theme="dark"] .cat-badge {
+      background: rgba(255, 98, 83, 0.18);
+      border-color: rgba(255, 98, 83, 0.35);
+      color: #ff8577;
+    }
+
+    [data-theme="dark"] .btn-meta-share,
+    [data-theme="dark"] .article-topic-selector-link,
+    [data-theme="dark"] .btn-back-home {
+      background: var(--bg-surface);
+      border-color: var(--divider-hairline);
+      color: var(--text-muted);
+    }
+
+    [data-theme="dark"] .btn-meta-share:hover {
+      color: #ff8577;
+      border-color: #ff8577;
+      background: rgba(255, 98, 83, 0.15);
+    }
+
+    [data-theme="dark"] .article-topic-selector-link:hover,
+    [data-theme="dark"] .btn-back-home:hover {
+      color: #a594f9;
+      border-color: #a594f9;
+      background: rgba(165, 148, 249, 0.15);
+    }
+
+    @media (max-width: 640px) {
+      .article-top-meta,
+      .article-meta-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+      .article-top-actions,
+      .meta-tags-right {
+        width: 100%;
+        justify-content: flex-start;
+        margin-left: 0;
+      }
+    }
+
     /* Primary Article Headlines */
+    .article-title-block,
     .article-header {
       margin-bottom: 2rem;
     }
 
+    .article-main-title,
     .article-title {
       font-family: var(--font-serif);
-      font-size: clamp(2.1rem, 4vw, 2.9rem);
+      font-size: clamp(2rem, 3.8vw, 2.85rem);
       font-weight: 700;
       color: var(--ink-navy);
-      line-height: 1.2;
-      margin-bottom: 0.65rem;
-      letter-spacing: -0.01em;
+      line-height: 1.22;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
     }
 
     .article-support-title {
       font-family: var(--font-serif);
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       color: var(--text-muted);
       font-style: italic;
-      line-height: 1.4;
+      font-weight: 400;
+      line-height: 1.45;
     }
 
     /* Featured Image */
@@ -1970,18 +2075,29 @@
   <!-- Focused Editorial Reading Shell -->
   <main class="reading-shell">
 
-    <!-- Top Metadata Breadcrumb -->
+    <!-- Top Metadata Breadcrumb & Actions Bar -->
     <div class="article-top-meta">
       <div class="meta-badges-group">
         <span class="article-category-tag" id="article-category-badge">Category</span>
         <span class="article-read-badge" id="article-read-badge" style="display:none;">✓ Read</span>
       </div>
-      <div style="display:flex; align-items:center; gap:1.25rem;">
-        <button class="btn-meta-share" id="btn-top-share" onclick="shareCurrentStory()">
-          Share
+      <div class="article-top-actions">
+        <button class="btn-meta-share" id="btn-top-share" onclick="shareCurrentStory()" aria-label="Share this story" title="Share this story">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="18" cy="5" r="3"></circle>
+            <circle cx="6" cy="12" r="3"></circle>
+            <circle cx="18" cy="19" r="3"></circle>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+          </svg>
+          <span id="btn-top-share-text">Share</span>
         </button>
-        <a href="/index.html" class="article-topic-selector-link" id="article-change-topic-link" onclick="goToHome(event)">
-          Browse all stories
+        <a href="/index.html" class="article-topic-selector-link" id="article-change-topic-link" onclick="goToHome(event)" title="Browse all stories">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span id="article-change-topic-text">Browse all stories</span>
         </a>
       </div>
     </div>
@@ -3304,8 +3420,13 @@
       const swDesc = document.getElementById("switcher-desc");
       if (swDesc) swDesc.textContent = t.switcherDesc;
 
+      const changeTopicText = document.getElementById("article-change-topic-text");
       const changeTopicLink = document.getElementById("article-change-topic-link");
-      if (changeTopicLink) changeTopicLink.textContent = t.browseStories;
+      if (changeTopicText) {
+        changeTopicText.textContent = t.browseStories || "Browse all stories";
+      } else if (changeTopicLink) {
+        changeTopicLink.textContent = t.browseStories || "Browse all stories";
+      }
 
       // Localize Level button subtexts
       const labels = levelLabels[supportLang] || levelLabels.en;
@@ -3386,8 +3507,13 @@
       }
 
       // Share and Action Bar buttons
+      const btnTopShareText = document.getElementById("btn-top-share-text");
       const btnTopShare = document.getElementById("btn-top-share");
-      if (btnTopShare) btnTopShare.textContent = t.shareBtn;
+      if (btnTopShareText) {
+        btnTopShareText.textContent = t.shareBtn || "Share";
+      } else if (btnTopShare) {
+        btnTopShare.textContent = t.shareBtn || "Share";
+      }
 
       const btnBottomShare = document.getElementById("btn-share-bottom-text");
       if (btnBottomShare) btnBottomShare.textContent = t.shareBtn;
