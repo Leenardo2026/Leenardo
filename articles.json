@@ -94310,8 +94310,14 @@
     "readTime": "4 dk",
     "visual": {
       "imageUrl": "images/tarih-gobeklitepe-dunyanin-en-eski-tapinagi.jpg",
-      "alt": "Monolithic T-shaped stone pillars of Göbeklitepe under warm sunlight",
-      "source": "Editorial AI (Sanzo Wada palette)"
+      "alt": "Göbekli Tepe dairesel tapınak yapısı ve T biçimli dikilitaşlar",
+      "source": "Görsel: Teomancimit / Wikimedia Commons (CC BY-SA 3.0) - Eğitim amaçlıdır.",
+      "attribution": {
+        "creator": "Teomancimit",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:G%C3%B6bekli_Tepe,_Urfa.jpg"
+      }
     },
     "titleTr": "Göbeklitepe: Dünyanın En Eski Tapınağı",
     "titleEn": "Gobeklitepe: The World's Oldest Temple",
