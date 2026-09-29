@@ -89053,67 +89053,67 @@
           "paragraphs": [
             [
               {
-                "target": "Steve Jobs dünyaca ünlü büyük bir teknoloji lideriydi.",
+                "target": "Steve Jobs çok ünlü bir liderdi.",
                 "translations": {
-                  "tr": "Steve Jobs dünyaca ünlü büyük bir teknoloji lideriydi.",
-                  "en": "Steve Jobs was a world-famous, prominent technology leader.",
-                  "es": "Steve Jobs era un líder tecnológico de fama mundial.",
-                  "de": "Steve Jobs war ein weltberühmter, bedeutender Technologieführer.",
-                  "fr": "Steve Jobs était un grand leader technologique de renommée mondiale."
+                  "tr": "Steve Jobs çok ünlü bir liderdi.",
+                  "en": "Steve Jobs was a famous leader.",
+                  "es": "Steve Jobs era un líder famoso.",
+                  "de": "Steve Jobs war ein berühmter Anführer.",
+                  "fr": "Steve Jobs était un dirigeant célèbre."
                 }
               },
               {
-                "target": "O her gün siyah bir kazak ve mavi bir pantolon giyerdi.",
+                "target": "Her gün aynı siyah kazağı giyerdi.",
                 "translations": {
-                  "tr": "O her gün siyah bir kazak ve mavi bir pantolon giyerdi.",
-                  "en": "He wore a black sweater and blue jeans every day.",
-                  "es": "Llevaba un jersey negro y pantalones azules todos los días.",
-                  "de": "Er trug jeden Tag einen schwarzen Pullover und eine blaue Jeans.",
-                  "fr": "Il portait chaque jour un pull noir et un pantalon bleu."
+                  "tr": "Her gün aynı siyah kazağı giyerdi.",
+                  "en": "He always wore a black sweater.",
+                  "es": "Siempre vestía un suéter negro.",
+                  "de": "Er trug immer einen schwarzen Pullover.",
+                  "fr": "Il portait toujours un pull noir."
                 }
               }
             ],
             [
               {
-                "target": "İnsanlar ona bu tercihin sebebini sık sık sorarlardı.",
+                "target": "Sabahları kıyafet seçmek istemezdi.",
                 "translations": {
-                  "tr": "İnsanlar ona bu tercihin sebebini sık sık sorarlardı.",
-                  "en": "People often asked him the reason for this choice.",
-                  "es": "La gente le preguntaba con frecuencia la razón de esta elección.",
-                  "de": "Die Leute fragten ihn oft nach dem Grund für diese Wahl.",
-                  "fr": "Les gens lui demandaient souvent la raison de ce choix."
+                  "tr": "Sabahları kıyafet seçmek istemezdi.",
+                  "en": "He did not choose clothes daily.",
+                  "es": "No elegía ropa cada mañana.",
+                  "de": "Er wählte morgens keine Kleidung.",
+                  "fr": "Il ne choisissait pas ses vêtements."
                 }
               },
               {
-                "target": "Jobs sabahları kıyafet seçerek vakit kaybetmek istemezdi.",
+                "target": "Sade kıyafetler insanı rahatlatır.",
                 "translations": {
-                  "tr": "Jobs sabahları kıyafet seçerek vakit kaybetmek istemezdi.",
-                  "en": "Jobs did not want to waste time choosing clothes in the morning.",
-                  "es": "Jobs no quería perder tiempo eligiendo ropa por las mañanas.",
-                  "de": "Jobs wollte morgens keine Zeit mit der Kleiderwahl verschwenden.",
-                  "fr": "Jobs ne voulait pas perdre de temps à choisir ses vêtements le matin."
+                  "tr": "Sade kıyafetler insanı rahatlatır.",
+                  "en": "Simple clothes help people feel calm.",
+                  "es": "La ropa sencilla ayuda a calmarse.",
+                  "de": "Einfache Kleidung hilft Menschen ruhig zu bleiben.",
+                  "fr": "Les vêtements simples calment les personnes."
+                }
+              },
+              {
+                "target": "Zamanını sadece önemli işlerine ayırırdı.",
+                "translations": {
+                  "tr": "Zamanını sadece önemli işlerine ayırırdı.",
+                  "en": "He saved time for important work.",
+                  "es": "Ahorraba tiempo para el trabajo importante.",
+                  "de": "Er sparte Zeit für wichtige Arbeit.",
+                  "fr": "Il gardait son temps pour travailler."
                 }
               }
             ],
             [
               {
-                "target": "Sade bir gardırop zihnimizi rahatlatır ve bizi mutlu eder.",
+                "target": "Böylece işine daha iyi odaklanırdı.",
                 "translations": {
-                  "tr": "Sade bir gardırop zihnimizi rahatlatır ve bizi mutlu eder.",
-                  "en": "A simple wardrobe relaxes our mind and makes us happy.",
-                  "es": "Un armario sencillo relaja nuestra mente y nos hace felices.",
-                  "de": "Ein schlichter Kleiderschrank entspannt unseren Geist und macht uns glücklich.",
-                  "fr": "Une garde-robe simple détend notre esprit et nous rend heureux."
-                }
-              },
-              {
-                "target": "Böylece önemli işlerimize daha kolay odaklanabiliriz.",
-                "translations": {
-                  "tr": "Böylece önemli işlerimize daha kolay odaklanabiliriz.",
-                  "en": "In this way, we can focus on our important work much more easily.",
-                  "es": "De esta forma, podemos concentrarnos en nuestro trabajo importante mucho más fácilmente.",
-                  "de": "So können wir uns viel leichter auf unsere wichtigen Aufgaben konzentrieren.",
-                  "fr": "Ainsi, nous pouvons nous concentrer beaucoup plus facilement sur notre travail important."
+                  "tr": "Böylece işine daha iyi odaklanırdı.",
+                  "en": "He focused better on his projects.",
+                  "es": "Se concentraba mejor en sus proyectos.",
+                  "de": "Er konzentrierte sich besser auf Projekte.",
+                  "fr": "Il se concentrait mieux sur ses projets."
                 }
               }
             ]
@@ -89223,57 +89223,55 @@
           "paragraphs": [
             [
               {
-                "target": "Her sabah uyandığımızda 'Bugün ne giysem?' sorusu aklımıza gelir ve bizi yorar.",
+                "target": "İnsanlar her sabah kıyafet seçer ve bu seçim onları yorar.",
                 "translations": {
-                  "tr": "Her sabah uyandığımızda 'Bugün ne giysem?' sorusu aklımıza gelir ve bizi yorar.",
-                  "en": "Every morning when we wake up, the question 'What should I wear today?' comes to mind and tires us.",
-                  "es": "Cada mañana, al despertarnos, la pregunta '¿Qué me pongo hoy?' viene a nuestra mente y nos agota.",
-                  "de": "Jeden Morgen, wenn wir aufwachen, kommt uns die Frage 'Was soll ich heute anziehen?' in den Sinn und ermüdet uns.",
-                  "fr": "Chaque matin au réveil, la question « Que vais-je porter aujourd'hui ? » nous vient à l'esprit et nous fatigue."
+                  "tr": "İnsanlar her sabah kıyafet seçer ve bu seçim onları yorar.",
+                  "en": "Choosing clothes every morning is tiring and wastes mental energy.",
+                  "es": "Elegir ropa cada mañana es agotador y gasta energía mental.",
+                  "de": "Jeden Morgen Kleidung zu wählen ist anstrengend und ermüdend.",
+                  "fr": "Choisir ses vêtements chaque matin fatigue et use lénergie."
                 }
               },
               {
-                "target": "Steve Jobs bu küçük kararı hayatından tamamen çıkarmaya karar verdi.",
+                "target": "Steve Jobs bu küçük kararı hayatından tamamen çıkardı.",
                 "translations": {
-                  "tr": "Steve Jobs bu küçük kararı hayatından tamamen çıkarmaya karar verdi.",
-                  "en": "Steve Jobs decided to eliminate this minor decision completely from his daily life.",
-                  "es": "Steve Jobs decidió eliminar por completo esta pequeña decisión de su vida diaria.",
-                  "de": "Steve Jobs beschloss, diese kleine Entscheidung vollständig aus seinem Alltag zu streichen.",
-                  "fr": "Steve Jobs a décidé de supprimer complètement cette petite décision de sa vie quotidienne."
+                  "tr": "Steve Jobs bu küçük kararı hayatından tamamen çıkardı.",
+                  "en": "Steve Jobs decided to remove this small decision completely.",
+                  "es": "Steve Jobs decidió eliminar esta pequeña decisión por completo.",
+                  "de": "Steve Jobs entfernte diese kleine Entscheidung vollständig aus seinem Leben.",
+                  "fr": "Steve Jobs décida de supprimer cette petite décision complètement."
                 }
               }
             ],
             [
               {
-                "target": "Dolabında yüzden fazla aynı siyah boğazlı kazaktan vardı.",
+                "target": "Dolabında yüzden fazla aynı siyah kazaktan vardı.",
                 "translations": {
-                  "tr": "Dolabında yüzden fazla aynı siyah boğazlı kazaktan vardı.",
-                  "en": "In his closet, he had more than a hundred identical black turtlenecks.",
-                  "es": "En su armario tenía más de cien jerséis negros de cuello alto idénticos.",
-                  "de": "In seinem Schrank hatte er über hundert identische schwarze Rollkragenpullover.",
-                  "fr": "Dans sa penderie, il possédait plus de cent pulls à col roulé noirs identiques."
+                  "tr": "Dolabında yüzden fazla aynı siyah kazaktan vardı.",
+                  "en": "He kept dozens of identical black sweaters in his closet.",
+                  "es": "Guardaba docenas de jerséis negros idénticos en su armario.",
+                  "de": "Er besaß viele identische schwarze Pullover in seinem Schrank.",
+                  "fr": "Il gardait des dizaines de pulls noirs identiques dans son placard."
                 }
               },
               {
-                "target": "Bu yüzden sabahları hiç düşünmeden hemen giyinip işine başlayabiliyordu.",
+                "target": "Sabahları hiç düşünmeden giyinirdi çünkü vaktini iyi korumak isterdi.",
                 "translations": {
-                  "tr": "Bu yüzden sabahları hiç düşünmeden hemen giyinip işine başlayabiliyordu.",
-                  "en": "Because of this, he could dress immediately in the morning without thinking and begin his work.",
-                  "es": "Por esta razón, podía vestirse de inmediato por la mañana sin pensar y comenzar a trabajar.",
-                  "de": "Deshalb konnte er sich morgens ohne Nachdenken sofort anziehen und mit der Arbeit beginnen.",
-                  "fr": "C'est pourquoi il pouvait s'habiller immédiatement le matin sans réfléchir et se mettre au travail."
+                  "tr": "Sabahları hiç düşünmeden giyinirdi çünkü vaktini iyi korumak isterdi.",
+                  "en": "He dressed quickly because he wanted to start work immediately.",
+                  "es": "Se vestía rápido porque quería empezar a trabajar de inmediato.",
+                  "de": "Er zog sich schnell an, weil er sofort arbeiten wollte.",
+                  "fr": "Il shabillait vite parce quil voulait travailler immédiatement."
                 }
-              }
-            ],
-            [
+              },
               {
-                "target": "Küçük kararları azaltmak, gün içindeki büyük kararlar için enerjimizi korur.",
+                "target": "Küçük kararları azaltırsak gün içinde daha enerjik kalırız.",
                 "translations": {
-                  "tr": "Küçük kararları azaltmak, gün içindeki büyük kararlar için enerjimizi korur.",
-                  "en": "Reducing trivial decisions preserves our energy for major choices during the day.",
-                  "es": "Reducir las pequeñas decisiones conserva nuestra energía para las grandes decisiones del día.",
-                  "de": "Kleine Entscheidungen zu reduzieren, spart unsere Energie für große Entscheidungen des Tages.",
-                  "fr": "Réduire les petites décisions préserve notre énergie pour les choix majeurs de la journée."
+                  "tr": "Küçük kararları azaltırsak gün içinde daha enerjik kalırız.",
+                  "en": "Making fewer morning choices protects our daily energy.",
+                  "es": "Tomar menos decisiones matutinas protege nuestra energía diaria.",
+                  "de": "Weniger Entscheidungen am Morgen schützen unsere tägliche Energie.",
+                  "fr": "Prendre moins de décisions matinales protège notre énergie quotidienne."
                 }
               }
             ]
@@ -89365,57 +89363,55 @@
           "paragraphs": [
             [
               {
-                "target": "Psikologlara göre insan beyni gün boyunca yapabileceği sınırlı sayıda kaliteli karar verme kapasitesine sahiptir.",
+                "target": "Psikologlara göre insan beyni gün içinde sınırlı sayıda kaliteli karar verebilir.",
                 "translations": {
-                  "tr": "Psikologlara göre insan beyni gün boyunca yapabileceği sınırlı sayıda kaliteli karar verme kapasitesine sahiptir.",
-                  "en": "According to psychologists, the human brain possesses a limited daily capacity for making high-quality decisions.",
-                  "es": "Según los psicólogos, el cerebro humano posee una capacidad diaria limitada para tomar decisiones de alta calidad.",
-                  "de": "Laut Psychologen besitzt das menschliche Gehirn eine begrenzte tägliche Kapazität, um fundierte Entscheidungen zu treffen.",
-                  "fr": "Selon les psychologues, le cerveau humain dispose d'une capacité quotidienne limitée pour prendre des décisions de haute qualité."
+                  "tr": "Psikologlara göre insan beyni gün içinde sınırlı sayıda kaliteli karar verebilir.",
+                  "en": "Psychologists explain that the human brain can only make a limited number of good decisions each day.",
+                  "es": "Según los psicólogos, el cerebro humano solo puede tomar un número limitado de buenas decisiones al día.",
+                  "de": "Psychologen zufolge kann das menschliche Gehirn täglich nur eine begrenzte Anzahl guter Entscheidungen treffen.",
+                  "fr": "Selon les psychologues, le cerveau humain ne peut prendre quun nombre limité de bonnes décisions par jour."
                 }
               },
               {
-                "target": "Sabah ne yeneceği ya da ne giyileceği gibi önemsiz detaylar bile zihinsel enerjiyi hızla tüketir.",
+                "target": "Sabah ne giyeceğini düşünmek bile insanın enerjisini erkenden tüketmeye başlar.",
                 "translations": {
-                  "tr": "Sabah ne yeneceği ya da ne giyileceği gibi önemsiz detaylar bile zihinsel enerjiyi hızla tüketir.",
-                  "en": "Even trivial details such as what to eat or wear in the morning deplete mental energy rapidly.",
-                  "es": "Incluso detalles triviales como qué desayunar o qué ropa ponerse consumen rápidamente la energía mental.",
-                  "de": "Selbst banale Details wie das Frühstück oder die Kleiderwahl am Morgen verbrauchen rasch mentale Energie.",
-                  "fr": "Même des détails anodins comme le petit-déjeuner ou le choix des vêtements épuisent rapidement l'énergie mentale."
+                  "tr": "Sabah ne giyeceğini düşünmek bile insanın enerjisini erkenden tüketmeye başlar.",
+                  "en": "Spending time on clothes every morning quickly drains a persons mental energy.",
+                  "es": "Pensar qué ropa ponerse cada mañana agota rápidamente la energía de una persona.",
+                  "de": "Die morgendliche Kleiderwahl erschöpft bereits früh die geistige Energie des Menschen.",
+                  "fr": "Penser à ses vêtements chaque matin épuise rapidement lénergie dune personne."
                 }
               }
             ],
             [
               {
-                "target": "Bu bilimsel duruma modern psikolojide 'karar yorgunluğu' adı verilir.",
+                "target": "Bilim insanları bu zihinsel yorgunluğa karar yorgunluğu adını verirler.",
                 "translations": {
-                  "tr": "Bu bilimsel duruma modern psikolojide 'karar yorgunluğu' adı verilir.",
-                  "en": "In modern psychology, this scientific condition is referred to as 'decision fatigue.'",
-                  "es": "En la psicología moderna, esta condición científica se denomina 'fatiga por decisión'.",
-                  "de": "In der modernen Psychologie wird dieser wissenschaftliche Zustand als 'Entscheidungsmüdigkeit' bezeichnet.",
-                  "fr": "Dans la psychologie moderne, cet état scientifique est appelé « fatigue décisionnelle »."
+                  "tr": "Bilim insanları bu zihinsel yorgunluğa karar yorgunluğu adını verirler.",
+                  "en": "Scientists call this common mental condition decision fatigue in modern psychology.",
+                  "es": "Los científicos llaman fatiga por decisión a esta condición mental tan común.",
+                  "de": "Wissenschaftler nennen diesen häufigen geistigen Zustand Entscheidungsmüdigkeit.",
+                  "fr": "Les scientifiques appellent cet état mental courant la fatigue décisionnelle."
                 }
               },
               {
-                "target": "Steve Jobs tasarımcı Issey Miyake tarafından özel olarak üretilen siyah kazakları benimseyerek kişisel bir üniforma yarattı.",
+                "target": "Steve Jobs her gün aynı sade kıyafetleri giyerek kişisel bir üniforma oluşturdu.",
                 "translations": {
-                  "tr": "Steve Jobs tasarımcı Issey Miyake tarafından özel olarak üretilen siyah kazakları benimseyerek kişisel bir üniforma yarattı.",
-                  "en": "Steve Jobs adopted black turtlenecks custom-crafted by designer Issey Miyake, creating a distinct personal uniform.",
-                  "es": "Steve Jobs adoptó jerséis negros diseñados a medida por Issey Miyake, creando un uniforme personal inconfundible.",
-                  "de": "Steve Jobs entschied sich für speziell vom Designer Issey Miyake gefertigte Rollkragenpullover und schuf so eine persönliche Uniform.",
-                  "fr": "Steve Jobs adopta des cols roulés noirs confectionnés sur mesure par le styliste Issey Miyake, se forgeant un uniforme personnel emblématique."
+                  "tr": "Steve Jobs her gün aynı sade kıyafetleri giyerek kişisel bir üniforma oluşturdu.",
+                  "en": "Steve Jobs created a personal uniform by wearing the same simple clothes every day.",
+                  "es": "Steve Jobs creó un uniforme personal llevando la misma ropa sencilla cada día.",
+                  "de": "Steve Jobs schuf eine persönliche Uniform, indem er täglich dieselbe schlichte Kleidung trug.",
+                  "fr": "Steve Jobs a créé un uniforme personnel en portant les mêmes vêtements simples chaque jour."
                 }
-              }
-            ],
-            [
+              },
               {
-                "target": "Kıyafet seçimini otomatikleştirmek, Jobs'ın tüm yaratıcı dikkatini devrim niteliğindeki ürün tasarımlarına ayırmasını sağladı.",
+                "target": "Kıyafet seçimini otomatikleştirmek, onun bütün dikkatini yeni teknolojiler geliştirmeye vermesini sağladı.",
                 "translations": {
-                  "tr": "Kıyafet seçimini otomatikleştirmek, Jobs'ın tüm yaratıcı dikkatini devrim niteliğindeki ürün tasarımlarına ayırmasını sağladı.",
-                  "en": "Automating wardrobe selection allowed Jobs to dedicate all his creative attention to revolutionary product designs.",
-                  "es": "Automatizar la elección de su vestimenta le permitió a Jobs dedicar toda su atención creativa al diseño de productos revolucionarios.",
-                  "de": "Die Automatisierung der Kleiderwahl ermöglichte es Jobs, seine gesamte kreative Aufmerksamkeit revolutionären Produktdesigns zu widmen.",
-                  "fr": "Automatiser le choix de ses vêtements permit à Jobs de consacrer toute son attention créative à la conception de produits révolutionnaires."
+                  "tr": "Kıyafet seçimini otomatikleştirmek, onun bütün dikkatini yeni teknolojiler geliştirmeye vermesini sağladı.",
+                  "en": "Removing daily clothing decisions allowed him to concentrate on building great technology.",
+                  "es": "Automatizar la elección de ropa le permitió concentrarse en crear gran tecnología.",
+                  "de": "Die automatische Kleiderwahl ermöglichte es ihm, sich voll auf moderne Technologie zu konzentrieren.",
+                  "fr": "Automatiser ce choix lui a permis de concentrer toute son attention sur la technologie."
                 }
               }
             ]
@@ -89649,79 +89645,77 @@
           "paragraphs": [
             [
               {
-                "target": "Sanayi sonrası toplumların bireye vadettiği sınırsız seçim özgürlüğü, paradoksal biçimde modern insanın omuzlarına ağır bir bilişsel yük bindirmiştir.",
+                "target": "Modern hayatın sunduğu sınırsız seçenekler, insanın omuzlarına görünenden çok daha ağır bir yük bindiriyor.",
                 "translations": {
-                  "tr": "Sanayi sonrası toplumların bireye vadettiği sınırsız seçim özgürlüğü, paradoksal biçimde modern insanın omuzlarına ağır bir bilişsel yük bindirmiştir.",
-                  "en": "The illusion of boundless choice promised to the individual by post-industrial societies has, paradoxically, saddled modern human cognition with an overwhelming psychological burden.",
-                  "es": "La ilusión de elección ilimitada prometida al individuo por las sociedades posindustriales ha impuesto, paradójicamente, una abrumadora carga cognitiva sobre la mente moderna.",
-                  "de": "Die Verheißung grenzenloser Wahlfreiheit, die postindustrielle Gesellschaften dem Individuum versprachen, bürdete der menschlichen Kognition paradoxerweise eine erdrückende mentale Last auf.",
-                  "fr": "L'illusion d'un choix infini promise à l'individu par les sociétés post-industrielles a, paradoxalement, fait peser un fardeau cognitif accablant sur l'esprit contemporain."
+                  "tr": "Modern hayatın sunduğu sınırsız seçenekler, insanın omuzlarına görünenden çok daha ağır bir yük bindiriyor.",
+                  "en": "The endless choices of modern life place a surprisingly heavy burden on human willpower.",
+                  "es": "Las infinitas opciones de la vida moderna imponen una pesada carga sobre la voluntad humana.",
+                  "de": "Die grenzenlose Auswahl des modernen Lebens bürdet der menschlichen Willenskraft eine schwere Last auf.",
+                  "fr": "Les choix illimités de la société moderne font peser un fardeau surprenant sur la volonté humaine."
                 }
               },
               {
-                "target": "Günün ilk ışıklarıyla birlikte gardırop karşısında yaşanan o görünüşte masum kararsızlık anı, beynin prefrontal korteksindeki sınırlı irade rezervini daha mesai başlamadan tüketmeye başlar.",
+                "target": "Günün ilk saatlerinde ayna karşısında yaşanan masum bir kararsızlık bile, günün geri kalanındaki irademizi sessizce tüketmeye başlar.",
                 "translations": {
-                  "tr": "Günün ilk ışıklarıyla birlikte gardırop karşısında yaşanan o görünüşte masum kararsızlık anı, beynin prefrontal korteksindeki sınırlı irade rezervini daha mesai başlamadan tüketmeye başlar.",
-                  "en": "That seemingly innocuous moment of hesitation before the wardrobe at dawn begins depleting the finite willpower reserves of the prefrontal cortex long before the working day even commences.",
-                  "es": "Ese momento de vacilación aparentemente inocente frente al guardarropa al amanecer comienza a agotar las reservas finitas de voluntad de la corteza prefrontal mucho antes de que inicie la jornada laboral.",
-                  "de": "Jener scheinbar harmlose Moment des Zögerns vor dem Kleiderschrank im Morgengrauen zehrt an den endlichen Willenskraftreserven des präfrontalen Kortex, noch bevor der eigentliche Arbeitstag beginnt.",
-                  "fr": "Ce moment d'hésitation en apparence anodin devant la penderie dès l'aube commence à entamer les réserves limitées de volonté du cortex préfrontal bien avant que la journée ne commence."
+                  "tr": "Günün ilk saatlerinde ayna karşısında yaşanan masum bir kararsızlık bile, günün geri kalanındaki irademizi sessizce tüketmeye başlar.",
+                  "en": "A few moments of hesitation before the wardrobe each morning quietly drain our concentration before the workday even begins.",
+                  "es": "Unos instantes de duda ante el armario cada mañana desgastan silenciosamente nuestra concentración antes de empezar la jornada laboral.",
+                  "de": "Wenige Augenblicke des Zögerns vor dem Kleiderschrank am Morgen verzehren leise unsere Konzentration, noch bevor der Tag beginnt.",
+                  "fr": "Quelques instants dhésitation devant larmoire chaque matin entament notre concentration bien avant que la journée ne commence."
                 }
               }
             ],
             [
               {
-                "target": "Steve Jobs'ın Issey Miyake imzalı siyah boğazlı kazak, Levi's 501 kot pantolon ve New Balance spor ayakkabılardan müteşekkil değişmez kombini, alelade bir eksantriklik değil, radikal bir bilişsel ergonomi tatbikatıydı.",
+                "target": "Steve Jobsın siyah boğazlı kazağı ve kot pantolondan oluşan değişmez kıyafeti, tuhaf bir takıntı değil, zihinsel berraklığı koruma sanatıdır.",
                 "translations": {
-                  "tr": "Steve Jobs'ın Issey Miyake imzalı siyah boğazlı kazak, Levi's 501 kot pantolon ve New Balance spor ayakkabılardan müteşekkil değişmez kombini, alelade bir eksantriklik değil, radikal bir bilişsel ergonomi tatbikatıydı.",
-                  "en": "Steve Jobs's immutable uniform—composed of Issey Miyake black turtlenecks, Levi's 501 denim, and New Balance sneakers—was by no means an eccentric quirk, but rather a masterclass in cognitive ergonomics.",
-                  "es": "El uniforme inmutable de Steve Jobs—compuesto por jerséis de cuello alto de Issey Miyake, vaqueros Levi's 501 y zapatillas New Balance—no era una excentricidad trivial, sino un ejercicio magistral de ergonomía cognitiva.",
-                  "de": "Steve Jobs' unveränderliche Kombination aus Issey Miyake Rollkragenpullovern, Levi's 501 Jeans und New Balance Turnschuhen war keineswegs eine bloße Schrulle, sondern eine radikale Praxis kognitiver Ergonomie.",
-                  "fr": "La tenue invariable de Steve Jobs — composée de cols roulés Issey Miyake, de jeans Levi's 501 et de baskets New Balance — n'était nullement une toquade excentrique, mais une éclatante démonstration d'ergonomie cognitive."
+                  "tr": "Steve Jobsın siyah boğazlı kazağı ve kot pantolondan oluşan değişmez kıyafeti, tuhaf bir takıntı değil, zihinsel berraklığı koruma sanatıdır.",
+                  "en": "Steve Jobss iconic uniform of a black turtleneck and jeans was no eccentric whim, but a masterclass in protecting mental clarity.",
+                  "es": "El uniforme invariable de Steve Jobs de cuello alto y vaqueros no era una rareza excéntrica, sino una lección de claridad mental.",
+                  "de": "Steve Jobs unverkennbare Kombination aus Rollkragenpullover und Jeans war keine exzentrische Laune, sondern eine bewusste Lektion in geistiger Klarheit.",
+                  "fr": "La tenue immuable de Steve Jobs, faite dun col roulé et dun jean, nétait point un caprice, mais une leçon de clarté mentale."
                 }
               },
               {
-                "target": "Gündelik hayatın mikro kararlarını sistematik biçimde elimine eden Jobs, zihinsel enerjisini Apple'ın çığır açan kullanıcı deneyimlerine ve kusursuz donanım mimarisine kanalize edebilmiştir.",
+                "target": "Gündelik hayatın küçük seçimlerini hayatından çıkaran Jobs, tüm dikkatini Appleın çığır açan tasarımlarına yöneltebilmiştir.",
                 "translations": {
-                  "tr": "Gündelik hayatın mikro kararlarını sistematik biçimde elimine eden Jobs, zihinsel enerjisini Apple'ın çığır açan kullanıcı deneyimlerine ve kusursuz donanım mimarisine kanalize edebilmiştir.",
-                  "en": "By systematically eliminating the micro-decisions of mundane existence, Jobs successfully channeled his undivided mental vitality into Apple's groundbreaking user experiences and meticulous hardware architecture.",
-                  "es": "Al eliminar sistemáticamente las microdecisiones de la existencia mundana, Jobs logró canalizar su vitalidad mental hacia las revolucionarias experiencias de usuario y la arquitectura de hardware de Apple.",
-                  "de": "Durch die methodische Ausschaltung trivialer Mikro-Entscheidungen vermochte Jobs seine ungeteilte mentale Schaffenskraft vollends auf die bahnbrechenden Benutzererlebnisse und die akribische Hardware-Architektur von Apple zu bündeln.",
-                  "fr": "En éliminant méthodiquement les micro-décisions du quotidien, Jobs a pu canaliser l'intégralité de sa vivacité mentale vers les interfaces révolutionnaires et l'architecture matérielle raffinée d'Apple."
+                  "tr": "Gündelik hayatın küçük seçimlerini hayatından çıkaran Jobs, tüm dikkatini Appleın çığır açan tasarımlarına yöneltebilmiştir.",
+                  "en": "By eliminating trivial morning decisions, Jobs channeled his undivided attention into Apples groundbreaking designs.",
+                  "es": "Al suprimir pequeñas decisiones cotidianas, Jobs canalizó toda su atención en los innovadores diseños de Apple.",
+                  "de": "Durch den Verzicht auf banale Alltagsentscheidungen lenkte Jobs seine ganze Aufmerksamkeit auf wegweisende Designs.",
+                  "fr": "En éliminant les choix insignifiants du quotidien, Jobs a dirigé toute son attention vers les créations révolutionnaires dApple."
                 }
               }
             ],
             [
               {
-                "target": "Bu felsefi indirgemecilik, eşyanın kölesi olmak yerine zihni özgürleştirme gayretinin en berrak tezahürüdür.",
+                "target": "Bu bilinçli sadelik, eşyalara bağımlı olmak yerine zihni özgür kılma arzusunun en net göstergesidir.",
                 "translations": {
-                  "tr": "Bu felsefi indirgemecilik, eşyanın kölesi olmak yerine zihni özgürleştirme gayretinin en berrak tezahürüdür.",
-                  "en": "This philosophical reductionism represents the clearest manifestation of liberating the human mind rather than remaining subservient to material possessions.",
-                  "es": "Este reduccionismo filosófico representa la manifestación más nítida de liberar la mente humana en lugar de permanecer subyugado a las posesiones materiales.",
-                  "de": "Dieser philosophische Reduktionismus verkörpert die reinste Manifestation des Bestrebens, den Geist zu emanzipieren, statt sich den Besitztümern zu unterwerfen.",
-                  "fr": "Ce réductionnisme philosophique incarne l'expression la plus éclatante d'un esprit cherchant à s'émanciper plutôt qu'à s'asservir aux biens matériels."
+                  "tr": "Bu bilinçli sadelik, eşyalara bağımlı olmak yerine zihni özgür kılma arzusunun en net göstergesidir.",
+                  "en": "This deliberate minimalism reflects a desire to free the mind rather than serve material possessions.",
+                  "es": "Este minimalismo consciente refleja el deseo de liberar la mente en lugar de someterse a las posesiones materiales.",
+                  "de": "Dieser bewusste Minimalismus spiegelt den Wunsch wider, den Geist zu befreien, statt materiellen Dingen zu dienen.",
+                  "fr": "Ce dépouillement délibéré traduit le désir de libérer lesprit plutôt que de servir les biens matériels."
                 }
               },
               {
-                "target": "Zira gerçek yaratıcılık, hayatımıza ne kadar çok şey kattığımızla değil, asıl olana yer açmak için neleri feda edebildiğimizle ölçülür.",
+                "target": "Gerçek yaratıcılık hayatımıza ne kadar çok şey kattığımızla değil, asıl olana yer açmak için nelerden vazgeçebildiğimizle ölçülür.",
                 "translations": {
-                  "tr": "Zira gerçek yaratıcılık, hayatımıza ne kadar çok şey kattığımızla değil, asıl olana yer açmak için neleri feda edebildiğimizle ölçülür.",
-                  "en": "For true creative genius is measured not by how much superfluous clutter we accumulate, but by what we are willing to subtract to illuminate the essential.",
-                  "es": "Pues la verdadera genialidad creativa no se mide por cuántas cosas superfluas acumulamos, sino por lo que estamos dispuestos a sustraer para dar espacio a lo esencial.",
-                  "de": "Denn wahre Schöpferkraft bemisst sich nicht daran, wie viel Überflüssiges wir anhäufen, sondern daran, worauf wir zu verzichten bereit sind, um dem Wesentlichen Raum zu geben.",
-                  "fr": "Car le véritable génie créatif ne se mesure point à l'accumulation de futilités, mais à notre disposition à retrancher le superflu pour faire rayonner l'essentiel."
+                  "tr": "Gerçek yaratıcılık hayatımıza ne kadar çok şey kattığımızla değil, asıl olana yer açmak için nelerden vazgeçebildiğimizle ölçülür.",
+                  "en": "True creativity is measured not by how much we accumulate, but by what we are willing to remove to highlight what truly matters.",
+                  "es": "La verdadera creatividad no se mide por cuánto acumulamos, sino por lo que estamos dispuestos a retirar para iluminar lo esencial.",
+                  "de": "Wahre Kreativität bemisst sich nicht daran, wie viel wir anhäufen, sondern worauf wir verzichten, um das Wesentliche hervorzuheben.",
+                  "fr": "La véritable créativité ne se mesure point à ce que nous accumulons, mais à ce que nous retranchons pour faire rayonner lessentiel."
                 }
-              }
-            ],
-            [
+              },
               {
-                "target": "Son tahlilde aynı kazağı giymek bir kısıtlama değil; modern insanın bilgi ve uyaran obezitesine karşı geliştirdiği en zarif ve güçlü zihinsel panzehirdir.",
+                "target": "Aynı kıyafeti giymek bir sınırlama değil, çağımızın dikkat dağınıklığına karşı geliştirilmiş en zarif zihinsel kalkanlardan biridir.",
                 "translations": {
-                  "tr": "Son tahlilde aynı kazağı giymek bir kısıtlama değil; modern insanın bilgi ve uyaran obezitesine karşı geliştirdiği en zarif ve güçlü zihinsel panzehirdir.",
-                  "en": "In the final analysis, donning the identical sweater is not an act of deprivation, but the most elegant and potent cognitive antidote conceived against modern information overload.",
-                  "es": "En última instancia, vestir el mismo jersey no es un acto de privación, sino el antídoto cognitivo más elegante y potente concebido contra la sobrecarga de información moderna.",
-                  "de": "Letzten Endes ist das Tragen desselben Pullovers keine Beschränkung, sondern das eleganteste und wirkungsvollste kognitive Antidot gegen die Reizüberflutung des modernen Zeitalters.",
-                  "fr": "En dernière analyse, porter le même vêtement n'a rien d'un renoncement étriqué : c'est le contrepoison cognitif le plus élégant et le plus puissant contre la surcharge mentale du monde moderne."
+                  "tr": "Aynı kıyafeti giymek bir sınırlama değil, çağımızın dikkat dağınıklığına karşı geliştirilmiş en zarif zihinsel kalkanlardan biridir.",
+                  "en": "Wearing the same clothes is not a limitation, but an elegant defense against the distractions of the modern world.",
+                  "es": "Llevar la misma ropa no supone una limitación, sino una elegante defensa contra las distracciones del mundo moderno.",
+                  "de": "Dieselbe Kleidung zu tragen ist keine Einschränkung, sondern ein eleganter Schutz gegen die Ablenkungen der modernen Zeit.",
+                  "fr": "Porter les mêmes vêtements nest pas une contrainte, mais un rempart raffiné contre les distractions du monde moderne."
                 }
               }
             ]
@@ -89815,67 +89809,67 @@
           "paragraphs": [
             [
               {
-                "target": "Steve Jobs was a world-famous, prominent technology leader.",
+                "target": "Steve Jobs was a famous leader.",
                 "translations": {
-                  "tr": "Steve Jobs dünyaca ünlü büyük bir teknoloji lideriydi.",
-                  "en": "Steve Jobs was a world-famous, prominent technology leader.",
-                  "es": "Steve Jobs era un líder tecnológico de fama mundial.",
-                  "de": "Steve Jobs war ein weltberühmter, bedeutender Technologieführer.",
-                  "fr": "Steve Jobs était un grand leader technologique de renommée mondiale."
+                  "tr": "Steve Jobs çok ünlü bir liderdi.",
+                  "en": "Steve Jobs was a famous leader.",
+                  "es": "Steve Jobs era un líder famoso.",
+                  "de": "Steve Jobs war ein berühmter Anführer.",
+                  "fr": "Steve Jobs était un dirigeant célèbre."
                 }
               },
               {
-                "target": "He wore a black sweater and blue jeans every day.",
+                "target": "He always wore a black sweater.",
                 "translations": {
-                  "tr": "O her gün siyah bir kazak ve mavi bir pantolon giyerdi.",
-                  "en": "He wore a black sweater and blue jeans every day.",
-                  "es": "Llevaba un jersey negro y pantalones azules todos los días.",
-                  "de": "Er trug jeden Tag einen schwarzen Pullover und eine blaue Jeans.",
-                  "fr": "Il portait chaque jour un pull noir et un pantalon bleu."
+                  "tr": "Her gün aynı siyah kazağı giyerdi.",
+                  "en": "He always wore a black sweater.",
+                  "es": "Siempre vestía un suéter negro.",
+                  "de": "Er trug immer einen schwarzen Pullover.",
+                  "fr": "Il portait toujours un pull noir."
                 }
               }
             ],
             [
               {
-                "target": "People often asked him the reason for this choice.",
+                "target": "He did not choose clothes daily.",
                 "translations": {
-                  "tr": "İnsanlar ona bu tercihin sebebini sık sık sorarlardı.",
-                  "en": "People often asked him the reason for this choice.",
-                  "es": "La gente le preguntaba con frecuencia la razón de esta elección.",
-                  "de": "Die Leute fragten ihn oft nach dem Grund für diese Wahl.",
-                  "fr": "Les gens lui demandaient souvent la raison de ce choix."
+                  "tr": "Sabahları kıyafet seçmek istemezdi.",
+                  "en": "He did not choose clothes daily.",
+                  "es": "No elegía ropa cada mañana.",
+                  "de": "Er wählte morgens keine Kleidung.",
+                  "fr": "Il ne choisissait pas ses vêtements."
                 }
               },
               {
-                "target": "Jobs did not want to waste time choosing clothes in the morning.",
+                "target": "Simple clothes help people feel calm.",
                 "translations": {
-                  "tr": "Jobs sabahları kıyafet seçerek vakit kaybetmek istemezdi.",
-                  "en": "Jobs did not want to waste time choosing clothes in the morning.",
-                  "es": "Jobs no quería perder tiempo eligiendo ropa por las mañanas.",
-                  "de": "Jobs wollte morgens keine Zeit mit der Kleiderwahl verschwenden.",
-                  "fr": "Jobs ne voulait pas perdre de temps à choisir ses vêtements le matin."
+                  "tr": "Sade kıyafetler insanı rahatlatır.",
+                  "en": "Simple clothes help people feel calm.",
+                  "es": "La ropa sencilla ayuda a calmarse.",
+                  "de": "Einfache Kleidung hilft Menschen ruhig zu bleiben.",
+                  "fr": "Les vêtements simples calment les personnes."
+                }
+              },
+              {
+                "target": "He saved time for important work.",
+                "translations": {
+                  "tr": "Zamanını sadece önemli işlerine ayırırdı.",
+                  "en": "He saved time for important work.",
+                  "es": "Ahorraba tiempo para el trabajo importante.",
+                  "de": "Er sparte Zeit für wichtige Arbeit.",
+                  "fr": "Il gardait son temps pour travailler."
                 }
               }
             ],
             [
               {
-                "target": "A simple wardrobe relaxes our mind and makes us happy.",
+                "target": "He focused better on his projects.",
                 "translations": {
-                  "tr": "Sade bir gardırop zihnimizi rahatlatır ve bizi mutlu eder.",
-                  "en": "A simple wardrobe relaxes our mind and makes us happy.",
-                  "es": "Un armario sencillo relaja nuestra mente y nos hace felices.",
-                  "de": "Ein schlichter Kleiderschrank entspannt unseren Geist und macht uns glücklich.",
-                  "fr": "Une garde-robe simple détend notre esprit et nous rend heureux."
-                }
-              },
-              {
-                "target": "In this way, we can focus on our important work much more easily.",
-                "translations": {
-                  "tr": "Böylece önemli işlerimize daha kolay odaklanabiliriz.",
-                  "en": "In this way, we can focus on our important work much more easily.",
-                  "es": "De esta forma, podemos concentrarnos en nuestro trabajo importante mucho más fácilmente.",
-                  "de": "So können wir uns viel leichter auf unsere wichtigen Aufgaben konzentrieren.",
-                  "fr": "Ainsi, nous pouvons nous concentrer beaucoup plus facilement sur notre travail important."
+                  "tr": "Böylece işine daha iyi odaklanırdı.",
+                  "en": "He focused better on his projects.",
+                  "es": "Se concentraba mejor en sus proyectos.",
+                  "de": "Er konzentrierte sich besser auf Projekte.",
+                  "fr": "Il se concentrait mieux sur ses projets."
                 }
               }
             ]
@@ -89985,57 +89979,55 @@
           "paragraphs": [
             [
               {
-                "target": "Every morning when we wake up, the question 'What should I wear today?' comes to mind and tires us.",
+                "target": "Choosing clothes every morning is tiring and wastes mental energy.",
                 "translations": {
-                  "tr": "Her sabah uyandığımızda 'Bugün ne giysem?' sorusu aklımıza gelir ve bizi yorar.",
-                  "en": "Every morning when we wake up, the question 'What should I wear today?' comes to mind and tires us.",
-                  "es": "Cada mañana, al despertarnos, la pregunta '¿Qué me pongo hoy?' viene a nuestra mente y nos agota.",
-                  "de": "Jeden Morgen, wenn wir aufwachen, kommt uns die Frage 'Was soll ich heute anziehen?' in den Sinn und ermüdet uns.",
-                  "fr": "Chaque matin au réveil, la question « Que vais-je porter aujourd'hui ? » nous vient à l'esprit et nous fatigue."
+                  "tr": "İnsanlar her sabah kıyafet seçer ve bu seçim onları yorar.",
+                  "en": "Choosing clothes every morning is tiring and wastes mental energy.",
+                  "es": "Elegir ropa cada mañana es agotador y gasta energía mental.",
+                  "de": "Jeden Morgen Kleidung zu wählen ist anstrengend und ermüdend.",
+                  "fr": "Choisir ses vêtements chaque matin fatigue et use lénergie."
                 }
               },
               {
-                "target": "Steve Jobs decided to eliminate this minor decision completely from his daily life.",
+                "target": "Steve Jobs decided to remove this small decision completely.",
                 "translations": {
-                  "tr": "Steve Jobs bu küçük kararı hayatından tamamen çıkarmaya karar verdi.",
-                  "en": "Steve Jobs decided to eliminate this minor decision completely from his daily life.",
-                  "es": "Steve Jobs decidió eliminar por completo esta pequeña decisión de su vida diaria.",
-                  "de": "Steve Jobs beschloss, diese kleine Entscheidung vollständig aus seinem Alltag zu streichen.",
-                  "fr": "Steve Jobs a décidé de supprimer complètement cette petite décision de sa vie quotidienne."
+                  "tr": "Steve Jobs bu küçük kararı hayatından tamamen çıkardı.",
+                  "en": "Steve Jobs decided to remove this small decision completely.",
+                  "es": "Steve Jobs decidió eliminar esta pequeña decisión por completo.",
+                  "de": "Steve Jobs entfernte diese kleine Entscheidung vollständig aus seinem Leben.",
+                  "fr": "Steve Jobs décida de supprimer cette petite décision complètement."
                 }
               }
             ],
             [
               {
-                "target": "In his closet, he had more than a hundred identical black turtlenecks.",
+                "target": "He kept dozens of identical black sweaters in his closet.",
                 "translations": {
-                  "tr": "Dolabında yüzden fazla aynı siyah boğazlı kazaktan vardı.",
-                  "en": "In his closet, he had more than a hundred identical black turtlenecks.",
-                  "es": "En su armario tenía más de cien jerséis negros de cuello alto idénticos.",
-                  "de": "In seinem Schrank hatte er über hundert identische schwarze Rollkragenpullover.",
-                  "fr": "Dans sa penderie, il possédait plus de cent pulls à col roulé noirs identiques."
+                  "tr": "Dolabında yüzden fazla aynı siyah kazaktan vardı.",
+                  "en": "He kept dozens of identical black sweaters in his closet.",
+                  "es": "Guardaba docenas de jerséis negros idénticos en su armario.",
+                  "de": "Er besaß viele identische schwarze Pullover in seinem Schrank.",
+                  "fr": "Il gardait des dizaines de pulls noirs identiques dans son placard."
                 }
               },
               {
-                "target": "Because of this, he could dress immediately in the morning without thinking and begin his work.",
+                "target": "He dressed quickly because he wanted to start work immediately.",
                 "translations": {
-                  "tr": "Bu yüzden sabahları hiç düşünmeden hemen giyinip işine başlayabiliyordu.",
-                  "en": "Because of this, he could dress immediately in the morning without thinking and begin his work.",
-                  "es": "Por esta razón, podía vestirse de inmediato por la mañana sin pensar y comenzar a trabajar.",
-                  "de": "Deshalb konnte er sich morgens ohne Nachdenken sofort anziehen und mit der Arbeit beginnen.",
-                  "fr": "C'est pourquoi il pouvait s'habiller immédiatement le matin sans réfléchir et se mettre au travail."
+                  "tr": "Sabahları hiç düşünmeden giyinirdi çünkü vaktini iyi korumak isterdi.",
+                  "en": "He dressed quickly because he wanted to start work immediately.",
+                  "es": "Se vestía rápido porque quería empezar a trabajar de inmediato.",
+                  "de": "Er zog sich schnell an, weil er sofort arbeiten wollte.",
+                  "fr": "Il shabillait vite parce quil voulait travailler immédiatement."
                 }
-              }
-            ],
-            [
+              },
               {
-                "target": "Reducing trivial decisions preserves our energy for major choices during the day.",
+                "target": "Making fewer morning choices protects our daily energy.",
                 "translations": {
-                  "tr": "Küçük kararları azaltmak, gün içindeki büyük kararlar için enerjimizi korur.",
-                  "en": "Reducing trivial decisions preserves our energy for major choices during the day.",
-                  "es": "Reducir las pequeñas decisiones conserva nuestra energía para las grandes decisiones del día.",
-                  "de": "Kleine Entscheidungen zu reduzieren, spart unsere Energie für große Entscheidungen des Tages.",
-                  "fr": "Réduire les petites décisions préserve notre énergie pour les choix majeurs de la journée."
+                  "tr": "Küçük kararları azaltırsak gün içinde daha enerjik kalırız.",
+                  "en": "Making fewer morning choices protects our daily energy.",
+                  "es": "Tomar menos decisiones matutinas protege nuestra energía diaria.",
+                  "de": "Weniger Entscheidungen am Morgen schützen unsere tägliche Energie.",
+                  "fr": "Prendre moins de décisions matinales protège notre énergie quotidienne."
                 }
               }
             ]
@@ -90127,57 +90119,55 @@
           "paragraphs": [
             [
               {
-                "target": "According to psychologists, the human brain possesses a limited daily capacity for making high-quality decisions.",
+                "target": "Psychologists explain that the human brain can only make a limited number of good decisions each day.",
                 "translations": {
-                  "tr": "Psikologlara göre insan beyni gün boyunca yapabileceği sınırlı sayıda kaliteli karar verme kapasitesine sahiptir.",
-                  "en": "According to psychologists, the human brain possesses a limited daily capacity for making high-quality decisions.",
-                  "es": "Según los psicólogos, el cerebro humano posee una capacidad diaria limitada para tomar decisiones de alta calidad.",
-                  "de": "Laut Psychologen besitzt das menschliche Gehirn eine begrenzte tägliche Kapazität, um fundierte Entscheidungen zu treffen.",
-                  "fr": "Selon les psychologues, le cerveau humain dispose d'une capacité quotidienne limitée pour prendre des décisions de haute qualité."
+                  "tr": "Psikologlara göre insan beyni gün içinde sınırlı sayıda kaliteli karar verebilir.",
+                  "en": "Psychologists explain that the human brain can only make a limited number of good decisions each day.",
+                  "es": "Según los psicólogos, el cerebro humano solo puede tomar un número limitado de buenas decisiones al día.",
+                  "de": "Psychologen zufolge kann das menschliche Gehirn täglich nur eine begrenzte Anzahl guter Entscheidungen treffen.",
+                  "fr": "Selon les psychologues, le cerveau humain ne peut prendre quun nombre limité de bonnes décisions par jour."
                 }
               },
               {
-                "target": "Even trivial details such as what to eat or wear in the morning deplete mental energy rapidly.",
+                "target": "Spending time on clothes every morning quickly drains a persons mental energy.",
                 "translations": {
-                  "tr": "Sabah ne yeneceği ya da ne giyileceği gibi önemsiz detaylar bile zihinsel enerjiyi hızla tüketir.",
-                  "en": "Even trivial details such as what to eat or wear in the morning deplete mental energy rapidly.",
-                  "es": "Incluso detalles triviales como qué desayunar o qué ropa ponerse consumen rápidamente la energía mental.",
-                  "de": "Selbst banale Details wie das Frühstück oder die Kleiderwahl am Morgen verbrauchen rasch mentale Energie.",
-                  "fr": "Même des détails anodins comme le petit-déjeuner ou le choix des vêtements épuisent rapidement l'énergie mentale."
+                  "tr": "Sabah ne giyeceğini düşünmek bile insanın enerjisini erkenden tüketmeye başlar.",
+                  "en": "Spending time on clothes every morning quickly drains a persons mental energy.",
+                  "es": "Pensar qué ropa ponerse cada mañana agota rápidamente la energía de una persona.",
+                  "de": "Die morgendliche Kleiderwahl erschöpft bereits früh die geistige Energie des Menschen.",
+                  "fr": "Penser à ses vêtements chaque matin épuise rapidement lénergie dune personne."
                 }
               }
             ],
             [
               {
-                "target": "In modern psychology, this scientific condition is referred to as 'decision fatigue.'",
+                "target": "Scientists call this common mental condition decision fatigue in modern psychology.",
                 "translations": {
-                  "tr": "Bu bilimsel duruma modern psikolojide 'karar yorgunluğu' adı verilir.",
-                  "en": "In modern psychology, this scientific condition is referred to as 'decision fatigue.'",
-                  "es": "En la psicología moderna, esta condición científica se denomina 'fatiga por decisión'.",
-                  "de": "In der modernen Psychologie wird dieser wissenschaftliche Zustand als 'Entscheidungsmüdigkeit' bezeichnet.",
-                  "fr": "Dans la psychologie moderne, cet état scientifique est appelé « fatigue décisionnelle »."
+                  "tr": "Bilim insanları bu zihinsel yorgunluğa karar yorgunluğu adını verirler.",
+                  "en": "Scientists call this common mental condition decision fatigue in modern psychology.",
+                  "es": "Los científicos llaman fatiga por decisión a esta condición mental tan común.",
+                  "de": "Wissenschaftler nennen diesen häufigen geistigen Zustand Entscheidungsmüdigkeit.",
+                  "fr": "Les scientifiques appellent cet état mental courant la fatigue décisionnelle."
                 }
               },
               {
-                "target": "Steve Jobs adopted black turtlenecks custom-crafted by designer Issey Miyake, creating a distinct personal uniform.",
+                "target": "Steve Jobs created a personal uniform by wearing the same simple clothes every day.",
                 "translations": {
-                  "tr": "Steve Jobs tasarımcı Issey Miyake tarafından özel olarak üretilen siyah kazakları benimseyerek kişisel bir üniforma yarattı.",
-                  "en": "Steve Jobs adopted black turtlenecks custom-crafted by designer Issey Miyake, creating a distinct personal uniform.",
-                  "es": "Steve Jobs adoptó jerséis negros diseñados a medida por Issey Miyake, creando un uniforme personal inconfundible.",
-                  "de": "Steve Jobs entschied sich für speziell vom Designer Issey Miyake gefertigte Rollkragenpullover und schuf so eine persönliche Uniform.",
-                  "fr": "Steve Jobs adopta des cols roulés noirs confectionnés sur mesure par le styliste Issey Miyake, se forgeant un uniforme personnel emblématique."
+                  "tr": "Steve Jobs her gün aynı sade kıyafetleri giyerek kişisel bir üniforma oluşturdu.",
+                  "en": "Steve Jobs created a personal uniform by wearing the same simple clothes every day.",
+                  "es": "Steve Jobs creó un uniforme personal llevando la misma ropa sencilla cada día.",
+                  "de": "Steve Jobs schuf eine persönliche Uniform, indem er täglich dieselbe schlichte Kleidung trug.",
+                  "fr": "Steve Jobs a créé un uniforme personnel en portant les mêmes vêtements simples chaque jour."
                 }
-              }
-            ],
-            [
+              },
               {
-                "target": "Automating wardrobe selection allowed Jobs to dedicate all his creative attention to revolutionary product designs.",
+                "target": "Removing daily clothing decisions allowed him to concentrate on building great technology.",
                 "translations": {
-                  "tr": "Kıyafet seçimini otomatikleştirmek, Jobs'ın tüm yaratıcı dikkatini devrim niteliğindeki ürün tasarımlarına ayırmasını sağladı.",
-                  "en": "Automating wardrobe selection allowed Jobs to dedicate all his creative attention to revolutionary product designs.",
-                  "es": "Automatizar la elección de su vestimenta le permitió a Jobs dedicar toda su atención creativa al diseño de productos revolucionarios.",
-                  "de": "Die Automatisierung der Kleiderwahl ermöglichte es Jobs, seine gesamte kreative Aufmerksamkeit revolutionären Produktdesigns zu widmen.",
-                  "fr": "Automatiser le choix de ses vêtements permit à Jobs de consacrer toute son attention créative à la conception de produits révolutionnaires."
+                  "tr": "Kıyafet seçimini otomatikleştirmek, onun bütün dikkatini yeni teknolojiler geliştirmeye vermesini sağladı.",
+                  "en": "Removing daily clothing decisions allowed him to concentrate on building great technology.",
+                  "es": "Automatizar la elección de ropa le permitió concentrarse en crear gran tecnología.",
+                  "de": "Die automatische Kleiderwahl ermöglichte es ihm, sich voll auf moderne Technologie zu konzentrieren.",
+                  "fr": "Automatiser ce choix lui a permis de concentrer toute son attention sur la technologie."
                 }
               }
             ]
@@ -90411,79 +90401,77 @@
           "paragraphs": [
             [
               {
-                "target": "The illusion of boundless choice promised to the individual by post-industrial societies has, paradoxically, saddled modern human cognition with an overwhelming psychological burden.",
+                "target": "The endless choices of modern life place a surprisingly heavy burden on human willpower.",
                 "translations": {
-                  "tr": "Sanayi sonrası toplumların bireye vadettiği sınırsız seçim özgürlüğü, paradoksal biçimde modern insanın omuzlarına ağır bir bilişsel yük bindirmiştir.",
-                  "en": "The illusion of boundless choice promised to the individual by post-industrial societies has, paradoxically, saddled modern human cognition with an overwhelming psychological burden.",
-                  "es": "La ilusión de elección ilimitada prometida al individuo por las sociedades posindustriales ha impuesto, paradójicamente, una abrumadora carga cognitiva sobre la mente moderna.",
-                  "de": "Die Verheißung grenzenloser Wahlfreiheit, die postindustrielle Gesellschaften dem Individuum versprachen, bürdete der menschlichen Kognition paradoxerweise eine erdrückende mentale Last auf.",
-                  "fr": "L'illusion d'un choix infini promise à l'individu par les sociétés post-industrielles a, paradoxalement, fait peser un fardeau cognitif accablant sur l'esprit contemporain."
+                  "tr": "Modern hayatın sunduğu sınırsız seçenekler, insanın omuzlarına görünenden çok daha ağır bir yük bindiriyor.",
+                  "en": "The endless choices of modern life place a surprisingly heavy burden on human willpower.",
+                  "es": "Las infinitas opciones de la vida moderna imponen una pesada carga sobre la voluntad humana.",
+                  "de": "Die grenzenlose Auswahl des modernen Lebens bürdet der menschlichen Willenskraft eine schwere Last auf.",
+                  "fr": "Les choix illimités de la société moderne font peser un fardeau surprenant sur la volonté humaine."
                 }
               },
               {
-                "target": "That seemingly innocuous moment of hesitation before the wardrobe at dawn begins depleting the finite willpower reserves of the prefrontal cortex long before the working day even commences.",
+                "target": "A few moments of hesitation before the wardrobe each morning quietly drain our concentration before the workday even begins.",
                 "translations": {
-                  "tr": "Günün ilk ışıklarıyla birlikte gardırop karşısında yaşanan o görünüşte masum kararsızlık anı, beynin prefrontal korteksindeki sınırlı irade rezervini daha mesai başlamadan tüketmeye başlar.",
-                  "en": "That seemingly innocuous moment of hesitation before the wardrobe at dawn begins depleting the finite willpower reserves of the prefrontal cortex long before the working day even commences.",
-                  "es": "Ese momento de vacilación aparentemente inocente frente al guardarropa al amanecer comienza a agotar las reservas finitas de voluntad de la corteza prefrontal mucho antes de que inicie la jornada laboral.",
-                  "de": "Jener scheinbar harmlose Moment des Zögerns vor dem Kleiderschrank im Morgengrauen zehrt an den endlichen Willenskraftreserven des präfrontalen Kortex, noch bevor der eigentliche Arbeitstag beginnt.",
-                  "fr": "Ce moment d'hésitation en apparence anodin devant la penderie dès l'aube commence à entamer les réserves limitées de volonté du cortex préfrontal bien avant que la journée ne commence."
+                  "tr": "Günün ilk saatlerinde ayna karşısında yaşanan masum bir kararsızlık bile, günün geri kalanındaki irademizi sessizce tüketmeye başlar.",
+                  "en": "A few moments of hesitation before the wardrobe each morning quietly drain our concentration before the workday even begins.",
+                  "es": "Unos instantes de duda ante el armario cada mañana desgastan silenciosamente nuestra concentración antes de empezar la jornada laboral.",
+                  "de": "Wenige Augenblicke des Zögerns vor dem Kleiderschrank am Morgen verzehren leise unsere Konzentration, noch bevor der Tag beginnt.",
+                  "fr": "Quelques instants dhésitation devant larmoire chaque matin entament notre concentration bien avant que la journée ne commence."
                 }
               }
             ],
             [
               {
-                "target": "Steve Jobs's immutable uniform—composed of Issey Miyake black turtlenecks, Levi's 501 denim, and New Balance sneakers—was by no means an eccentric quirk, but rather a masterclass in cognitive ergonomics.",
+                "target": "Steve Jobss iconic uniform of a black turtleneck and jeans was no eccentric whim, but a masterclass in protecting mental clarity.",
                 "translations": {
-                  "tr": "Steve Jobs'ın Issey Miyake imzalı siyah boğazlı kazak, Levi's 501 kot pantolon ve New Balance spor ayakkabılardan müteşekkil değişmez kombini, alelade bir eksantriklik değil, radikal bir bilişsel ergonomi tatbikatıydı.",
-                  "en": "Steve Jobs's immutable uniform—composed of Issey Miyake black turtlenecks, Levi's 501 denim, and New Balance sneakers—was by no means an eccentric quirk, but rather a masterclass in cognitive ergonomics.",
-                  "es": "El uniforme inmutable de Steve Jobs—compuesto por jerséis de cuello alto de Issey Miyake, vaqueros Levi's 501 y zapatillas New Balance—no era una excentricidad trivial, sino un ejercicio magistral de ergonomía cognitiva.",
-                  "de": "Steve Jobs' unveränderliche Kombination aus Issey Miyake Rollkragenpullovern, Levi's 501 Jeans und New Balance Turnschuhen war keineswegs eine bloße Schrulle, sondern eine radikale Praxis kognitiver Ergonomie.",
-                  "fr": "La tenue invariable de Steve Jobs — composée de cols roulés Issey Miyake, de jeans Levi's 501 et de baskets New Balance — n'était nullement une toquade excentrique, mais une éclatante démonstration d'ergonomie cognitive."
+                  "tr": "Steve Jobsın siyah boğazlı kazağı ve kot pantolondan oluşan değişmez kıyafeti, tuhaf bir takıntı değil, zihinsel berraklığı koruma sanatıdır.",
+                  "en": "Steve Jobss iconic uniform of a black turtleneck and jeans was no eccentric whim, but a masterclass in protecting mental clarity.",
+                  "es": "El uniforme invariable de Steve Jobs de cuello alto y vaqueros no era una rareza excéntrica, sino una lección de claridad mental.",
+                  "de": "Steve Jobs unverkennbare Kombination aus Rollkragenpullover und Jeans war keine exzentrische Laune, sondern eine bewusste Lektion in geistiger Klarheit.",
+                  "fr": "La tenue immuable de Steve Jobs, faite dun col roulé et dun jean, nétait point un caprice, mais une leçon de clarté mentale."
                 }
               },
               {
-                "target": "By systematically eliminating the micro-decisions of mundane existence, Jobs successfully channeled his undivided mental vitality into Apple's groundbreaking user experiences and meticulous hardware architecture.",
+                "target": "By eliminating trivial morning decisions, Jobs channeled his undivided attention into Apples groundbreaking designs.",
                 "translations": {
-                  "tr": "Gündelik hayatın mikro kararlarını sistematik biçimde elimine eden Jobs, zihinsel enerjisini Apple'ın çığır açan kullanıcı deneyimlerine ve kusursuz donanım mimarisine kanalize edebilmiştir.",
-                  "en": "By systematically eliminating the micro-decisions of mundane existence, Jobs successfully channeled his undivided mental vitality into Apple's groundbreaking user experiences and meticulous hardware architecture.",
-                  "es": "Al eliminar sistemáticamente las microdecisiones de la existencia mundana, Jobs logró canalizar su vitalidad mental hacia las revolucionarias experiencias de usuario y la arquitectura de hardware de Apple.",
-                  "de": "Durch die methodische Ausschaltung trivialer Mikro-Entscheidungen vermochte Jobs seine ungeteilte mentale Schaffenskraft vollends auf die bahnbrechenden Benutzererlebnisse und die akribische Hardware-Architektur von Apple zu bündeln.",
-                  "fr": "En éliminant méthodiquement les micro-décisions du quotidien, Jobs a pu canaliser l'intégralité de sa vivacité mentale vers les interfaces révolutionnaires et l'architecture matérielle raffinée d'Apple."
+                  "tr": "Gündelik hayatın küçük seçimlerini hayatından çıkaran Jobs, tüm dikkatini Appleın çığır açan tasarımlarına yöneltebilmiştir.",
+                  "en": "By eliminating trivial morning decisions, Jobs channeled his undivided attention into Apples groundbreaking designs.",
+                  "es": "Al suprimir pequeñas decisiones cotidianas, Jobs canalizó toda su atención en los innovadores diseños de Apple.",
+                  "de": "Durch den Verzicht auf banale Alltagsentscheidungen lenkte Jobs seine ganze Aufmerksamkeit auf wegweisende Designs.",
+                  "fr": "En éliminant les choix insignifiants du quotidien, Jobs a dirigé toute son attention vers les créations révolutionnaires dApple."
                 }
               }
             ],
             [
               {
-                "target": "This philosophical reductionism represents the clearest manifestation of liberating the human mind rather than remaining subservient to material possessions.",
+                "target": "This deliberate minimalism reflects a desire to free the mind rather than serve material possessions.",
                 "translations": {
-                  "tr": "Bu felsefi indirgemecilik, eşyanın kölesi olmak yerine zihni özgürleştirme gayretinin en berrak tezahürüdür.",
-                  "en": "This philosophical reductionism represents the clearest manifestation of liberating the human mind rather than remaining subservient to material possessions.",
-                  "es": "Este reduccionismo filosófico representa la manifestación más nítida de liberar la mente humana en lugar de permanecer subyugado a las posesiones materiales.",
-                  "de": "Dieser philosophische Reduktionismus verkörpert die reinste Manifestation des Bestrebens, den Geist zu emanzipieren, statt sich den Besitztümern zu unterwerfen.",
-                  "fr": "Ce réductionnisme philosophique incarne l'expression la plus éclatante d'un esprit cherchant à s'émanciper plutôt qu'à s'asservir aux biens matériels."
+                  "tr": "Bu bilinçli sadelik, eşyalara bağımlı olmak yerine zihni özgür kılma arzusunun en net göstergesidir.",
+                  "en": "This deliberate minimalism reflects a desire to free the mind rather than serve material possessions.",
+                  "es": "Este minimalismo consciente refleja el deseo de liberar la mente en lugar de someterse a las posesiones materiales.",
+                  "de": "Dieser bewusste Minimalismus spiegelt den Wunsch wider, den Geist zu befreien, statt materiellen Dingen zu dienen.",
+                  "fr": "Ce dépouillement délibéré traduit le désir de libérer lesprit plutôt que de servir les biens matériels."
                 }
               },
               {
-                "target": "For true creative genius is measured not by how much superfluous clutter we accumulate, but by what we are willing to subtract to illuminate the essential.",
+                "target": "True creativity is measured not by how much we accumulate, but by what we are willing to remove to highlight what truly matters.",
                 "translations": {
-                  "tr": "Zira gerçek yaratıcılık, hayatımıza ne kadar çok şey kattığımızla değil, asıl olana yer açmak için neleri feda edebildiğimizle ölçülür.",
-                  "en": "For true creative genius is measured not by how much superfluous clutter we accumulate, but by what we are willing to subtract to illuminate the essential.",
-                  "es": "Pues la verdadera genialidad creativa no se mide por cuántas cosas superfluas acumulamos, sino por lo que estamos dispuestos a sustraer para dar espacio a lo esencial.",
-                  "de": "Denn wahre Schöpferkraft bemisst sich nicht daran, wie viel Überflüssiges wir anhäufen, sondern daran, worauf wir zu verzichten bereit sind, um dem Wesentlichen Raum zu geben.",
-                  "fr": "Car le véritable génie créatif ne se mesure point à l'accumulation de futilités, mais à notre disposition à retrancher le superflu pour faire rayonner l'essentiel."
+                  "tr": "Gerçek yaratıcılık hayatımıza ne kadar çok şey kattığımızla değil, asıl olana yer açmak için nelerden vazgeçebildiğimizle ölçülür.",
+                  "en": "True creativity is measured not by how much we accumulate, but by what we are willing to remove to highlight what truly matters.",
+                  "es": "La verdadera creatividad no se mide por cuánto acumulamos, sino por lo que estamos dispuestos a retirar para iluminar lo esencial.",
+                  "de": "Wahre Kreativität bemisst sich nicht daran, wie viel wir anhäufen, sondern worauf wir verzichten, um das Wesentliche hervorzuheben.",
+                  "fr": "La véritable créativité ne se mesure point à ce que nous accumulons, mais à ce que nous retranchons pour faire rayonner lessentiel."
                 }
-              }
-            ],
-            [
+              },
               {
-                "target": "In the final analysis, donning the identical sweater is not an act of deprivation, but the most elegant and potent cognitive antidote conceived against modern information overload.",
+                "target": "Wearing the same clothes is not a limitation, but an elegant defense against the distractions of the modern world.",
                 "translations": {
-                  "tr": "Son tahlilde aynı kazağı giymek bir kısıtlama değil; modern insanın bilgi ve uyaran obezitesine karşı geliştirdiği en zarif ve güçlü zihinsel panzehirdir.",
-                  "en": "In the final analysis, donning the identical sweater is not an act of deprivation, but the most elegant and potent cognitive antidote conceived against modern information overload.",
-                  "es": "En última instancia, vestir el mismo jersey no es un acto de privación, sino el antídoto cognitivo más elegante y potente concebido contra la sobrecarga de información moderna.",
-                  "de": "Letzten Endes ist das Tragen desselben Pullovers keine Beschränkung, sondern das eleganteste und wirkungsvollste kognitive Antidot gegen die Reizüberflutung des modernen Zeitalters.",
-                  "fr": "En dernière analyse, porter le même vêtement n'a rien d'un renoncement étriqué : c'est le contrepoison cognitif le plus élégant et le plus puissant contre la surcharge mentale du monde moderne."
+                  "tr": "Aynı kıyafeti giymek bir sınırlama değil, çağımızın dikkat dağınıklığına karşı geliştirilmiş en zarif zihinsel kalkanlardan biridir.",
+                  "en": "Wearing the same clothes is not a limitation, but an elegant defense against the distractions of the modern world.",
+                  "es": "Llevar la misma ropa no supone una limitación, sino una elegante defensa contra las distracciones del mundo moderno.",
+                  "de": "Dieselbe Kleidung zu tragen ist keine Einschränkung, sondern ein eleganter Schutz gegen die Ablenkungen der modernen Zeit.",
+                  "fr": "Porter les mêmes vêtements nest pas une contrainte, mais un rempart raffiné contre les distractions du monde moderne."
                 }
               }
             ]
@@ -90577,67 +90565,67 @@
           "paragraphs": [
             [
               {
-                "target": "Steve Jobs era un líder tecnológico de fama mundial.",
+                "target": "Steve Jobs era un líder famoso.",
                 "translations": {
-                  "tr": "Steve Jobs dünyaca ünlü büyük bir teknoloji lideriydi.",
-                  "en": "Steve Jobs was a world-famous, prominent technology leader.",
-                  "es": "Steve Jobs era un líder tecnológico de fama mundial.",
-                  "de": "Steve Jobs war ein weltberühmter, bedeutender Technologieführer.",
-                  "fr": "Steve Jobs était un grand leader technologique de renommée mondiale."
+                  "tr": "Steve Jobs çok ünlü bir liderdi.",
+                  "en": "Steve Jobs was a famous leader.",
+                  "es": "Steve Jobs era un líder famoso.",
+                  "de": "Steve Jobs war ein berühmter Anführer.",
+                  "fr": "Steve Jobs était un dirigeant célèbre."
                 }
               },
               {
-                "target": "Llevaba un jersey negro y pantalones azules todos los días.",
+                "target": "Siempre vestía un suéter negro.",
                 "translations": {
-                  "tr": "O her gün siyah bir kazak ve mavi bir pantolon giyerdi.",
-                  "en": "He wore a black sweater and blue jeans every day.",
-                  "es": "Llevaba un jersey negro y pantalones azules todos los días.",
-                  "de": "Er trug jeden Tag einen schwarzen Pullover und eine blaue Jeans.",
-                  "fr": "Il portait chaque jour un pull noir et un pantalon bleu."
+                  "tr": "Her gün aynı siyah kazağı giyerdi.",
+                  "en": "He always wore a black sweater.",
+                  "es": "Siempre vestía un suéter negro.",
+                  "de": "Er trug immer einen schwarzen Pullover.",
+                  "fr": "Il portait toujours un pull noir."
                 }
               }
             ],
             [
               {
-                "target": "La gente le preguntaba con frecuencia la razón de esta elección.",
+                "target": "No elegía ropa cada mañana.",
                 "translations": {
-                  "tr": "İnsanlar ona bu tercihin sebebini sık sık sorarlardı.",
-                  "en": "People often asked him the reason for this choice.",
-                  "es": "La gente le preguntaba con frecuencia la razón de esta elección.",
-                  "de": "Die Leute fragten ihn oft nach dem Grund für diese Wahl.",
-                  "fr": "Les gens lui demandaient souvent la raison de ce choix."
+                  "tr": "Sabahları kıyafet seçmek istemezdi.",
+                  "en": "He did not choose clothes daily.",
+                  "es": "No elegía ropa cada mañana.",
+                  "de": "Er wählte morgens keine Kleidung.",
+                  "fr": "Il ne choisissait pas ses vêtements."
                 }
               },
               {
-                "target": "Jobs no quería perder tiempo eligiendo ropa por las mañanas.",
+                "target": "La ropa sencilla ayuda a calmarse.",
                 "translations": {
-                  "tr": "Jobs sabahları kıyafet seçerek vakit kaybetmek istemezdi.",
-                  "en": "Jobs did not want to waste time choosing clothes in the morning.",
-                  "es": "Jobs no quería perder tiempo eligiendo ropa por las mañanas.",
-                  "de": "Jobs wollte morgens keine Zeit mit der Kleiderwahl verschwenden.",
-                  "fr": "Jobs ne voulait pas perdre de temps à choisir ses vêtements le matin."
+                  "tr": "Sade kıyafetler insanı rahatlatır.",
+                  "en": "Simple clothes help people feel calm.",
+                  "es": "La ropa sencilla ayuda a calmarse.",
+                  "de": "Einfache Kleidung hilft Menschen ruhig zu bleiben.",
+                  "fr": "Les vêtements simples calment les personnes."
+                }
+              },
+              {
+                "target": "Ahorraba tiempo para el trabajo importante.",
+                "translations": {
+                  "tr": "Zamanını sadece önemli işlerine ayırırdı.",
+                  "en": "He saved time for important work.",
+                  "es": "Ahorraba tiempo para el trabajo importante.",
+                  "de": "Er sparte Zeit für wichtige Arbeit.",
+                  "fr": "Il gardait son temps pour travailler."
                 }
               }
             ],
             [
               {
-                "target": "Un armario sencillo relaja nuestra mente y nos hace felices.",
+                "target": "Se concentraba mejor en sus proyectos.",
                 "translations": {
-                  "tr": "Sade bir gardırop zihnimizi rahatlatır ve bizi mutlu eder.",
-                  "en": "A simple wardrobe relaxes our mind and makes us happy.",
-                  "es": "Un armario sencillo relaja nuestra mente y nos hace felices.",
-                  "de": "Ein schlichter Kleiderschrank entspannt unseren Geist und macht uns glücklich.",
-                  "fr": "Une garde-robe simple détend notre esprit et nous rend heureux."
-                }
-              },
-              {
-                "target": "De esta forma, podemos concentrarnos en nuestro trabajo importante mucho más fácilmente.",
-                "translations": {
-                  "tr": "Böylece önemli işlerimize daha kolay odaklanabiliriz.",
-                  "en": "In this way, we can focus on our important work much more easily.",
-                  "es": "De esta forma, podemos concentrarnos en nuestro trabajo importante mucho más fácilmente.",
-                  "de": "So können wir uns viel leichter auf unsere wichtigen Aufgaben konzentrieren.",
-                  "fr": "Ainsi, nous pouvons nous concentrer beaucoup plus facilement sur notre travail important."
+                  "tr": "Böylece işine daha iyi odaklanırdı.",
+                  "en": "He focused better on his projects.",
+                  "es": "Se concentraba mejor en sus proyectos.",
+                  "de": "Er konzentrierte sich besser auf Projekte.",
+                  "fr": "Il se concentrait mieux sur ses projets."
                 }
               }
             ]
@@ -90747,57 +90735,55 @@
           "paragraphs": [
             [
               {
-                "target": "Cada mañana, al despertarnos, la pregunta '¿Qué me pongo hoy?' viene a nuestra mente y nos agota.",
+                "target": "Elegir ropa cada mañana es agotador y gasta energía mental.",
                 "translations": {
-                  "tr": "Her sabah uyandığımızda 'Bugün ne giysem?' sorusu aklımıza gelir ve bizi yorar.",
-                  "en": "Every morning when we wake up, the question 'What should I wear today?' comes to mind and tires us.",
-                  "es": "Cada mañana, al despertarnos, la pregunta '¿Qué me pongo hoy?' viene a nuestra mente y nos agota.",
-                  "de": "Jeden Morgen, wenn wir aufwachen, kommt uns die Frage 'Was soll ich heute anziehen?' in den Sinn und ermüdet uns.",
-                  "fr": "Chaque matin au réveil, la question « Que vais-je porter aujourd'hui ? » nous vient à l'esprit et nous fatigue."
+                  "tr": "İnsanlar her sabah kıyafet seçer ve bu seçim onları yorar.",
+                  "en": "Choosing clothes every morning is tiring and wastes mental energy.",
+                  "es": "Elegir ropa cada mañana es agotador y gasta energía mental.",
+                  "de": "Jeden Morgen Kleidung zu wählen ist anstrengend und ermüdend.",
+                  "fr": "Choisir ses vêtements chaque matin fatigue et use lénergie."
                 }
               },
               {
-                "target": "Steve Jobs decidió eliminar por completo esta pequeña decisión de su vida diaria.",
+                "target": "Steve Jobs decidió eliminar esta pequeña decisión por completo.",
                 "translations": {
-                  "tr": "Steve Jobs bu küçük kararı hayatından tamamen çıkarmaya karar verdi.",
-                  "en": "Steve Jobs decided to eliminate this minor decision completely from his daily life.",
-                  "es": "Steve Jobs decidió eliminar por completo esta pequeña decisión de su vida diaria.",
-                  "de": "Steve Jobs beschloss, diese kleine Entscheidung vollständig aus seinem Alltag zu streichen.",
-                  "fr": "Steve Jobs a décidé de supprimer complètement cette petite décision de sa vie quotidienne."
+                  "tr": "Steve Jobs bu küçük kararı hayatından tamamen çıkardı.",
+                  "en": "Steve Jobs decided to remove this small decision completely.",
+                  "es": "Steve Jobs decidió eliminar esta pequeña decisión por completo.",
+                  "de": "Steve Jobs entfernte diese kleine Entscheidung vollständig aus seinem Leben.",
+                  "fr": "Steve Jobs décida de supprimer cette petite décision complètement."
                 }
               }
             ],
             [
               {
-                "target": "En su armario tenía más de cien jerséis negros de cuello alto idénticos.",
+                "target": "Guardaba docenas de jerséis negros idénticos en su armario.",
                 "translations": {
-                  "tr": "Dolabında yüzden fazla aynı siyah boğazlı kazaktan vardı.",
-                  "en": "In his closet, he had more than a hundred identical black turtlenecks.",
-                  "es": "En su armario tenía más de cien jerséis negros de cuello alto idénticos.",
-                  "de": "In seinem Schrank hatte er über hundert identische schwarze Rollkragenpullover.",
-                  "fr": "Dans sa penderie, il possédait plus de cent pulls à col roulé noirs identiques."
+                  "tr": "Dolabında yüzden fazla aynı siyah kazaktan vardı.",
+                  "en": "He kept dozens of identical black sweaters in his closet.",
+                  "es": "Guardaba docenas de jerséis negros idénticos en su armario.",
+                  "de": "Er besaß viele identische schwarze Pullover in seinem Schrank.",
+                  "fr": "Il gardait des dizaines de pulls noirs identiques dans son placard."
                 }
               },
               {
-                "target": "Por esta razón, podía vestirse de inmediato por la mañana sin pensar y comenzar a trabajar.",
+                "target": "Se vestía rápido porque quería empezar a trabajar de inmediato.",
                 "translations": {
-                  "tr": "Bu yüzden sabahları hiç düşünmeden hemen giyinip işine başlayabiliyordu.",
-                  "en": "Because of this, he could dress immediately in the morning without thinking and begin his work.",
-                  "es": "Por esta razón, podía vestirse de inmediato por la mañana sin pensar y comenzar a trabajar.",
-                  "de": "Deshalb konnte er sich morgens ohne Nachdenken sofort anziehen und mit der Arbeit beginnen.",
-                  "fr": "C'est pourquoi il pouvait s'habiller immédiatement le matin sans réfléchir et se mettre au travail."
+                  "tr": "Sabahları hiç düşünmeden giyinirdi çünkü vaktini iyi korumak isterdi.",
+                  "en": "He dressed quickly because he wanted to start work immediately.",
+                  "es": "Se vestía rápido porque quería empezar a trabajar de inmediato.",
+                  "de": "Er zog sich schnell an, weil er sofort arbeiten wollte.",
+                  "fr": "Il shabillait vite parce quil voulait travailler immédiatement."
                 }
-              }
-            ],
-            [
+              },
               {
-                "target": "Reducir las pequeñas decisiones conserva nuestra energía para las grandes decisiones del día.",
+                "target": "Tomar menos decisiones matutinas protege nuestra energía diaria.",
                 "translations": {
-                  "tr": "Küçük kararları azaltmak, gün içindeki büyük kararlar için enerjimizi korur.",
-                  "en": "Reducing trivial decisions preserves our energy for major choices during the day.",
-                  "es": "Reducir las pequeñas decisiones conserva nuestra energía para las grandes decisiones del día.",
-                  "de": "Kleine Entscheidungen zu reduzieren, spart unsere Energie für große Entscheidungen des Tages.",
-                  "fr": "Réduire les petites décisions préserve notre énergie pour les choix majeurs de la journée."
+                  "tr": "Küçük kararları azaltırsak gün içinde daha enerjik kalırız.",
+                  "en": "Making fewer morning choices protects our daily energy.",
+                  "es": "Tomar menos decisiones matutinas protege nuestra energía diaria.",
+                  "de": "Weniger Entscheidungen am Morgen schützen unsere tägliche Energie.",
+                  "fr": "Prendre moins de décisions matinales protège notre énergie quotidienne."
                 }
               }
             ]
@@ -90889,57 +90875,55 @@
           "paragraphs": [
             [
               {
-                "target": "Según los psicólogos, el cerebro humano posee una capacidad diaria limitada para tomar decisiones de alta calidad.",
+                "target": "Según los psicólogos, el cerebro humano solo puede tomar un número limitado de buenas decisiones al día.",
                 "translations": {
-                  "tr": "Psikologlara göre insan beyni gün boyunca yapabileceği sınırlı sayıda kaliteli karar verme kapasitesine sahiptir.",
-                  "en": "According to psychologists, the human brain possesses a limited daily capacity for making high-quality decisions.",
-                  "es": "Según los psicólogos, el cerebro humano posee una capacidad diaria limitada para tomar decisiones de alta calidad.",
-                  "de": "Laut Psychologen besitzt das menschliche Gehirn eine begrenzte tägliche Kapazität, um fundierte Entscheidungen zu treffen.",
-                  "fr": "Selon les psychologues, le cerveau humain dispose d'une capacité quotidienne limitée pour prendre des décisions de haute qualité."
+                  "tr": "Psikologlara göre insan beyni gün içinde sınırlı sayıda kaliteli karar verebilir.",
+                  "en": "Psychologists explain that the human brain can only make a limited number of good decisions each day.",
+                  "es": "Según los psicólogos, el cerebro humano solo puede tomar un número limitado de buenas decisiones al día.",
+                  "de": "Psychologen zufolge kann das menschliche Gehirn täglich nur eine begrenzte Anzahl guter Entscheidungen treffen.",
+                  "fr": "Selon les psychologues, le cerveau humain ne peut prendre quun nombre limité de bonnes décisions par jour."
                 }
               },
               {
-                "target": "Incluso detalles triviales como qué desayunar o qué ropa ponerse consumen rápidamente la energía mental.",
+                "target": "Pensar qué ropa ponerse cada mañana agota rápidamente la energía de una persona.",
                 "translations": {
-                  "tr": "Sabah ne yeneceği ya da ne giyileceği gibi önemsiz detaylar bile zihinsel enerjiyi hızla tüketir.",
-                  "en": "Even trivial details such as what to eat or wear in the morning deplete mental energy rapidly.",
-                  "es": "Incluso detalles triviales como qué desayunar o qué ropa ponerse consumen rápidamente la energía mental.",
-                  "de": "Selbst banale Details wie das Frühstück oder die Kleiderwahl am Morgen verbrauchen rasch mentale Energie.",
-                  "fr": "Même des détails anodins comme le petit-déjeuner ou le choix des vêtements épuisent rapidement l'énergie mentale."
+                  "tr": "Sabah ne giyeceğini düşünmek bile insanın enerjisini erkenden tüketmeye başlar.",
+                  "en": "Spending time on clothes every morning quickly drains a persons mental energy.",
+                  "es": "Pensar qué ropa ponerse cada mañana agota rápidamente la energía de una persona.",
+                  "de": "Die morgendliche Kleiderwahl erschöpft bereits früh die geistige Energie des Menschen.",
+                  "fr": "Penser à ses vêtements chaque matin épuise rapidement lénergie dune personne."
                 }
               }
             ],
             [
               {
-                "target": "En la psicología moderna, esta condición científica se denomina 'fatiga por decisión'.",
+                "target": "Los científicos llaman fatiga por decisión a esta condición mental tan común.",
                 "translations": {
-                  "tr": "Bu bilimsel duruma modern psikolojide 'karar yorgunluğu' adı verilir.",
-                  "en": "In modern psychology, this scientific condition is referred to as 'decision fatigue.'",
-                  "es": "En la psicología moderna, esta condición científica se denomina 'fatiga por decisión'.",
-                  "de": "In der modernen Psychologie wird dieser wissenschaftliche Zustand als 'Entscheidungsmüdigkeit' bezeichnet.",
-                  "fr": "Dans la psychologie moderne, cet état scientifique est appelé « fatigue décisionnelle »."
+                  "tr": "Bilim insanları bu zihinsel yorgunluğa karar yorgunluğu adını verirler.",
+                  "en": "Scientists call this common mental condition decision fatigue in modern psychology.",
+                  "es": "Los científicos llaman fatiga por decisión a esta condición mental tan común.",
+                  "de": "Wissenschaftler nennen diesen häufigen geistigen Zustand Entscheidungsmüdigkeit.",
+                  "fr": "Les scientifiques appellent cet état mental courant la fatigue décisionnelle."
                 }
               },
               {
-                "target": "Steve Jobs adoptó jerséis negros diseñados a medida por Issey Miyake, creando un uniforme personal inconfundible.",
+                "target": "Steve Jobs creó un uniforme personal llevando la misma ropa sencilla cada día.",
                 "translations": {
-                  "tr": "Steve Jobs tasarımcı Issey Miyake tarafından özel olarak üretilen siyah kazakları benimseyerek kişisel bir üniforma yarattı.",
-                  "en": "Steve Jobs adopted black turtlenecks custom-crafted by designer Issey Miyake, creating a distinct personal uniform.",
-                  "es": "Steve Jobs adoptó jerséis negros diseñados a medida por Issey Miyake, creando un uniforme personal inconfundible.",
-                  "de": "Steve Jobs entschied sich für speziell vom Designer Issey Miyake gefertigte Rollkragenpullover und schuf so eine persönliche Uniform.",
-                  "fr": "Steve Jobs adopta des cols roulés noirs confectionnés sur mesure par le styliste Issey Miyake, se forgeant un uniforme personnel emblématique."
+                  "tr": "Steve Jobs her gün aynı sade kıyafetleri giyerek kişisel bir üniforma oluşturdu.",
+                  "en": "Steve Jobs created a personal uniform by wearing the same simple clothes every day.",
+                  "es": "Steve Jobs creó un uniforme personal llevando la misma ropa sencilla cada día.",
+                  "de": "Steve Jobs schuf eine persönliche Uniform, indem er täglich dieselbe schlichte Kleidung trug.",
+                  "fr": "Steve Jobs a créé un uniforme personnel en portant les mêmes vêtements simples chaque jour."
                 }
-              }
-            ],
-            [
+              },
               {
-                "target": "Automatizar la elección de su vestimenta le permitió a Jobs dedicar toda su atención creativa al diseño de productos revolucionarios.",
+                "target": "Automatizar la elección de ropa le permitió concentrarse en crear gran tecnología.",
                 "translations": {
-                  "tr": "Kıyafet seçimini otomatikleştirmek, Jobs'ın tüm yaratıcı dikkatini devrim niteliğindeki ürün tasarımlarına ayırmasını sağladı.",
-                  "en": "Automating wardrobe selection allowed Jobs to dedicate all his creative attention to revolutionary product designs.",
-                  "es": "Automatizar la elección de su vestimenta le permitió a Jobs dedicar toda su atención creativa al diseño de productos revolucionarios.",
-                  "de": "Die Automatisierung der Kleiderwahl ermöglichte es Jobs, seine gesamte kreative Aufmerksamkeit revolutionären Produktdesigns zu widmen.",
-                  "fr": "Automatiser le choix de ses vêtements permit à Jobs de consacrer toute son attention créative à la conception de produits révolutionnaires."
+                  "tr": "Kıyafet seçimini otomatikleştirmek, onun bütün dikkatini yeni teknolojiler geliştirmeye vermesini sağladı.",
+                  "en": "Removing daily clothing decisions allowed him to concentrate on building great technology.",
+                  "es": "Automatizar la elección de ropa le permitió concentrarse en crear gran tecnología.",
+                  "de": "Die automatische Kleiderwahl ermöglichte es ihm, sich voll auf moderne Technologie zu konzentrieren.",
+                  "fr": "Automatiser ce choix lui a permis de concentrer toute son attention sur la technologie."
                 }
               }
             ]
@@ -91173,79 +91157,77 @@
           "paragraphs": [
             [
               {
-                "target": "La ilusión de elección ilimitada prometida al individuo por las sociedades posindustriales ha impuesto, paradójicamente, una abrumadora carga cognitiva sobre la mente moderna.",
+                "target": "Las infinitas opciones de la vida moderna imponen una pesada carga sobre la voluntad humana.",
                 "translations": {
-                  "tr": "Sanayi sonrası toplumların bireye vadettiği sınırsız seçim özgürlüğü, paradoksal biçimde modern insanın omuzlarına ağır bir bilişsel yük bindirmiştir.",
-                  "en": "The illusion of boundless choice promised to the individual by post-industrial societies has, paradoxically, saddled modern human cognition with an overwhelming psychological burden.",
-                  "es": "La ilusión de elección ilimitada prometida al individuo por las sociedades posindustriales ha impuesto, paradójicamente, una abrumadora carga cognitiva sobre la mente moderna.",
-                  "de": "Die Verheißung grenzenloser Wahlfreiheit, die postindustrielle Gesellschaften dem Individuum versprachen, bürdete der menschlichen Kognition paradoxerweise eine erdrückende mentale Last auf.",
-                  "fr": "L'illusion d'un choix infini promise à l'individu par les sociétés post-industrielles a, paradoxalement, fait peser un fardeau cognitif accablant sur l'esprit contemporain."
+                  "tr": "Modern hayatın sunduğu sınırsız seçenekler, insanın omuzlarına görünenden çok daha ağır bir yük bindiriyor.",
+                  "en": "The endless choices of modern life place a surprisingly heavy burden on human willpower.",
+                  "es": "Las infinitas opciones de la vida moderna imponen una pesada carga sobre la voluntad humana.",
+                  "de": "Die grenzenlose Auswahl des modernen Lebens bürdet der menschlichen Willenskraft eine schwere Last auf.",
+                  "fr": "Les choix illimités de la société moderne font peser un fardeau surprenant sur la volonté humaine."
                 }
               },
               {
-                "target": "Ese momento de vacilación aparentemente inocente frente al guardarropa al amanecer comienza a agotar las reservas finitas de voluntad de la corteza prefrontal mucho antes de que inicie la jornada laboral.",
+                "target": "Unos instantes de duda ante el armario cada mañana desgastan silenciosamente nuestra concentración antes de empezar la jornada laboral.",
                 "translations": {
-                  "tr": "Günün ilk ışıklarıyla birlikte gardırop karşısında yaşanan o görünüşte masum kararsızlık anı, beynin prefrontal korteksindeki sınırlı irade rezervini daha mesai başlamadan tüketmeye başlar.",
-                  "en": "That seemingly innocuous moment of hesitation before the wardrobe at dawn begins depleting the finite willpower reserves of the prefrontal cortex long before the working day even commences.",
-                  "es": "Ese momento de vacilación aparentemente inocente frente al guardarropa al amanecer comienza a agotar las reservas finitas de voluntad de la corteza prefrontal mucho antes de que inicie la jornada laboral.",
-                  "de": "Jener scheinbar harmlose Moment des Zögerns vor dem Kleiderschrank im Morgengrauen zehrt an den endlichen Willenskraftreserven des präfrontalen Kortex, noch bevor der eigentliche Arbeitstag beginnt.",
-                  "fr": "Ce moment d'hésitation en apparence anodin devant la penderie dès l'aube commence à entamer les réserves limitées de volonté du cortex préfrontal bien avant que la journée ne commence."
+                  "tr": "Günün ilk saatlerinde ayna karşısında yaşanan masum bir kararsızlık bile, günün geri kalanındaki irademizi sessizce tüketmeye başlar.",
+                  "en": "A few moments of hesitation before the wardrobe each morning quietly drain our concentration before the workday even begins.",
+                  "es": "Unos instantes de duda ante el armario cada mañana desgastan silenciosamente nuestra concentración antes de empezar la jornada laboral.",
+                  "de": "Wenige Augenblicke des Zögerns vor dem Kleiderschrank am Morgen verzehren leise unsere Konzentration, noch bevor der Tag beginnt.",
+                  "fr": "Quelques instants dhésitation devant larmoire chaque matin entament notre concentration bien avant que la journée ne commence."
                 }
               }
             ],
             [
               {
-                "target": "El uniforme inmutable de Steve Jobs—compuesto por jerséis de cuello alto de Issey Miyake, vaqueros Levi's 501 y zapatillas New Balance—no era una excentricidad trivial, sino un ejercicio magistral de ergonomía cognitiva.",
+                "target": "El uniforme invariable de Steve Jobs de cuello alto y vaqueros no era una rareza excéntrica, sino una lección de claridad mental.",
                 "translations": {
-                  "tr": "Steve Jobs'ın Issey Miyake imzalı siyah boğazlı kazak, Levi's 501 kot pantolon ve New Balance spor ayakkabılardan müteşekkil değişmez kombini, alelade bir eksantriklik değil, radikal bir bilişsel ergonomi tatbikatıydı.",
-                  "en": "Steve Jobs's immutable uniform—composed of Issey Miyake black turtlenecks, Levi's 501 denim, and New Balance sneakers—was by no means an eccentric quirk, but rather a masterclass in cognitive ergonomics.",
-                  "es": "El uniforme inmutable de Steve Jobs—compuesto por jerséis de cuello alto de Issey Miyake, vaqueros Levi's 501 y zapatillas New Balance—no era una excentricidad trivial, sino un ejercicio magistral de ergonomía cognitiva.",
-                  "de": "Steve Jobs' unveränderliche Kombination aus Issey Miyake Rollkragenpullovern, Levi's 501 Jeans und New Balance Turnschuhen war keineswegs eine bloße Schrulle, sondern eine radikale Praxis kognitiver Ergonomie.",
-                  "fr": "La tenue invariable de Steve Jobs — composée de cols roulés Issey Miyake, de jeans Levi's 501 et de baskets New Balance — n'était nullement une toquade excentrique, mais une éclatante démonstration d'ergonomie cognitive."
+                  "tr": "Steve Jobsın siyah boğazlı kazağı ve kot pantolondan oluşan değişmez kıyafeti, tuhaf bir takıntı değil, zihinsel berraklığı koruma sanatıdır.",
+                  "en": "Steve Jobss iconic uniform of a black turtleneck and jeans was no eccentric whim, but a masterclass in protecting mental clarity.",
+                  "es": "El uniforme invariable de Steve Jobs de cuello alto y vaqueros no era una rareza excéntrica, sino una lección de claridad mental.",
+                  "de": "Steve Jobs unverkennbare Kombination aus Rollkragenpullover und Jeans war keine exzentrische Laune, sondern eine bewusste Lektion in geistiger Klarheit.",
+                  "fr": "La tenue immuable de Steve Jobs, faite dun col roulé et dun jean, nétait point un caprice, mais une leçon de clarté mentale."
                 }
               },
               {
-                "target": "Al eliminar sistemáticamente las microdecisiones de la existencia mundana, Jobs logró canalizar su vitalidad mental hacia las revolucionarias experiencias de usuario y la arquitectura de hardware de Apple.",
+                "target": "Al suprimir pequeñas decisiones cotidianas, Jobs canalizó toda su atención en los innovadores diseños de Apple.",
                 "translations": {
-                  "tr": "Gündelik hayatın mikro kararlarını sistematik biçimde elimine eden Jobs, zihinsel enerjisini Apple'ın çığır açan kullanıcı deneyimlerine ve kusursuz donanım mimarisine kanalize edebilmiştir.",
-                  "en": "By systematically eliminating the micro-decisions of mundane existence, Jobs successfully channeled his undivided mental vitality into Apple's groundbreaking user experiences and meticulous hardware architecture.",
-                  "es": "Al eliminar sistemáticamente las microdecisiones de la existencia mundana, Jobs logró canalizar su vitalidad mental hacia las revolucionarias experiencias de usuario y la arquitectura de hardware de Apple.",
-                  "de": "Durch die methodische Ausschaltung trivialer Mikro-Entscheidungen vermochte Jobs seine ungeteilte mentale Schaffenskraft vollends auf die bahnbrechenden Benutzererlebnisse und die akribische Hardware-Architektur von Apple zu bündeln.",
-                  "fr": "En éliminant méthodiquement les micro-décisions du quotidien, Jobs a pu canaliser l'intégralité de sa vivacité mentale vers les interfaces révolutionnaires et l'architecture matérielle raffinée d'Apple."
+                  "tr": "Gündelik hayatın küçük seçimlerini hayatından çıkaran Jobs, tüm dikkatini Appleın çığır açan tasarımlarına yöneltebilmiştir.",
+                  "en": "By eliminating trivial morning decisions, Jobs channeled his undivided attention into Apples groundbreaking designs.",
+                  "es": "Al suprimir pequeñas decisiones cotidianas, Jobs canalizó toda su atención en los innovadores diseños de Apple.",
+                  "de": "Durch den Verzicht auf banale Alltagsentscheidungen lenkte Jobs seine ganze Aufmerksamkeit auf wegweisende Designs.",
+                  "fr": "En éliminant les choix insignifiants du quotidien, Jobs a dirigé toute son attention vers les créations révolutionnaires dApple."
                 }
               }
             ],
             [
               {
-                "target": "Este reduccionismo filosófico representa la manifestación más nítida de liberar la mente humana en lugar de permanecer subyugado a las posesiones materiales.",
+                "target": "Este minimalismo consciente refleja el deseo de liberar la mente en lugar de someterse a las posesiones materiales.",
                 "translations": {
-                  "tr": "Bu felsefi indirgemecilik, eşyanın kölesi olmak yerine zihni özgürleştirme gayretinin en berrak tezahürüdür.",
-                  "en": "This philosophical reductionism represents the clearest manifestation of liberating the human mind rather than remaining subservient to material possessions.",
-                  "es": "Este reduccionismo filosófico representa la manifestación más nítida de liberar la mente humana en lugar de permanecer subyugado a las posesiones materiales.",
-                  "de": "Dieser philosophische Reduktionismus verkörpert die reinste Manifestation des Bestrebens, den Geist zu emanzipieren, statt sich den Besitztümern zu unterwerfen.",
-                  "fr": "Ce réductionnisme philosophique incarne l'expression la plus éclatante d'un esprit cherchant à s'émanciper plutôt qu'à s'asservir aux biens matériels."
+                  "tr": "Bu bilinçli sadelik, eşyalara bağımlı olmak yerine zihni özgür kılma arzusunun en net göstergesidir.",
+                  "en": "This deliberate minimalism reflects a desire to free the mind rather than serve material possessions.",
+                  "es": "Este minimalismo consciente refleja el deseo de liberar la mente en lugar de someterse a las posesiones materiales.",
+                  "de": "Dieser bewusste Minimalismus spiegelt den Wunsch wider, den Geist zu befreien, statt materiellen Dingen zu dienen.",
+                  "fr": "Ce dépouillement délibéré traduit le désir de libérer lesprit plutôt que de servir les biens matériels."
                 }
               },
               {
-                "target": "Pues la verdadera genialidad creativa no se mide por cuántas cosas superfluas acumulamos, sino por lo que estamos dispuestos a sustraer para dar espacio a lo esencial.",
+                "target": "La verdadera creatividad no se mide por cuánto acumulamos, sino por lo que estamos dispuestos a retirar para iluminar lo esencial.",
                 "translations": {
-                  "tr": "Zira gerçek yaratıcılık, hayatımıza ne kadar çok şey kattığımızla değil, asıl olana yer açmak için neleri feda edebildiğimizle ölçülür.",
-                  "en": "For true creative genius is measured not by how much superfluous clutter we accumulate, but by what we are willing to subtract to illuminate the essential.",
-                  "es": "Pues la verdadera genialidad creativa no se mide por cuántas cosas superfluas acumulamos, sino por lo que estamos dispuestos a sustraer para dar espacio a lo esencial.",
-                  "de": "Denn wahre Schöpferkraft bemisst sich nicht daran, wie viel Überflüssiges wir anhäufen, sondern daran, worauf wir zu verzichten bereit sind, um dem Wesentlichen Raum zu geben.",
-                  "fr": "Car le véritable génie créatif ne se mesure point à l'accumulation de futilités, mais à notre disposition à retrancher le superflu pour faire rayonner l'essentiel."
+                  "tr": "Gerçek yaratıcılık hayatımıza ne kadar çok şey kattığımızla değil, asıl olana yer açmak için nelerden vazgeçebildiğimizle ölçülür.",
+                  "en": "True creativity is measured not by how much we accumulate, but by what we are willing to remove to highlight what truly matters.",
+                  "es": "La verdadera creatividad no se mide por cuánto acumulamos, sino por lo que estamos dispuestos a retirar para iluminar lo esencial.",
+                  "de": "Wahre Kreativität bemisst sich nicht daran, wie viel wir anhäufen, sondern worauf wir verzichten, um das Wesentliche hervorzuheben.",
+                  "fr": "La véritable créativité ne se mesure point à ce que nous accumulons, mais à ce que nous retranchons pour faire rayonner lessentiel."
                 }
-              }
-            ],
-            [
+              },
               {
-                "target": "En última instancia, vestir el mismo jersey no es un acto de privación, sino el antídoto cognitivo más elegante y potente concebido contra la sobrecarga de información moderna.",
+                "target": "Llevar la misma ropa no supone una limitación, sino una elegante defensa contra las distracciones del mundo moderno.",
                 "translations": {
-                  "tr": "Son tahlilde aynı kazağı giymek bir kısıtlama değil; modern insanın bilgi ve uyaran obezitesine karşı geliştirdiği en zarif ve güçlü zihinsel panzehirdir.",
-                  "en": "In the final analysis, donning the identical sweater is not an act of deprivation, but the most elegant and potent cognitive antidote conceived against modern information overload.",
-                  "es": "En última instancia, vestir el mismo jersey no es un acto de privación, sino el antídoto cognitivo más elegante y potente concebido contra la sobrecarga de información moderna.",
-                  "de": "Letzten Endes ist das Tragen desselben Pullovers keine Beschränkung, sondern das eleganteste und wirkungsvollste kognitive Antidot gegen die Reizüberflutung des modernen Zeitalters.",
-                  "fr": "En dernière analyse, porter le même vêtement n'a rien d'un renoncement étriqué : c'est le contrepoison cognitif le plus élégant et le plus puissant contre la surcharge mentale du monde moderne."
+                  "tr": "Aynı kıyafeti giymek bir sınırlama değil, çağımızın dikkat dağınıklığına karşı geliştirilmiş en zarif zihinsel kalkanlardan biridir.",
+                  "en": "Wearing the same clothes is not a limitation, but an elegant defense against the distractions of the modern world.",
+                  "es": "Llevar la misma ropa no supone una limitación, sino una elegante defensa contra las distracciones del mundo moderno.",
+                  "de": "Dieselbe Kleidung zu tragen ist keine Einschränkung, sondern ein eleganter Schutz gegen die Ablenkungen der modernen Zeit.",
+                  "fr": "Porter les mêmes vêtements nest pas une contrainte, mais un rempart raffiné contre les distractions du monde moderne."
                 }
               }
             ]
@@ -91339,67 +91321,67 @@
           "paragraphs": [
             [
               {
-                "target": "Steve Jobs war ein weltberühmter, bedeutender Technologieführer.",
+                "target": "Steve Jobs war ein berühmter Anführer.",
                 "translations": {
-                  "tr": "Steve Jobs dünyaca ünlü büyük bir teknoloji lideriydi.",
-                  "en": "Steve Jobs was a world-famous, prominent technology leader.",
-                  "es": "Steve Jobs era un líder tecnológico de fama mundial.",
-                  "de": "Steve Jobs war ein weltberühmter, bedeutender Technologieführer.",
-                  "fr": "Steve Jobs était un grand leader technologique de renommée mondiale."
+                  "tr": "Steve Jobs çok ünlü bir liderdi.",
+                  "en": "Steve Jobs was a famous leader.",
+                  "es": "Steve Jobs era un líder famoso.",
+                  "de": "Steve Jobs war ein berühmter Anführer.",
+                  "fr": "Steve Jobs était un dirigeant célèbre."
                 }
               },
               {
-                "target": "Er trug jeden Tag einen schwarzen Pullover und eine blaue Jeans.",
+                "target": "Er trug immer einen schwarzen Pullover.",
                 "translations": {
-                  "tr": "O her gün siyah bir kazak ve mavi bir pantolon giyerdi.",
-                  "en": "He wore a black sweater and blue jeans every day.",
-                  "es": "Llevaba un jersey negro y pantalones azules todos los días.",
-                  "de": "Er trug jeden Tag einen schwarzen Pullover und eine blaue Jeans.",
-                  "fr": "Il portait chaque jour un pull noir et un pantalon bleu."
+                  "tr": "Her gün aynı siyah kazağı giyerdi.",
+                  "en": "He always wore a black sweater.",
+                  "es": "Siempre vestía un suéter negro.",
+                  "de": "Er trug immer einen schwarzen Pullover.",
+                  "fr": "Il portait toujours un pull noir."
                 }
               }
             ],
             [
               {
-                "target": "Die Leute fragten ihn oft nach dem Grund für diese Wahl.",
+                "target": "Er wählte morgens keine Kleidung.",
                 "translations": {
-                  "tr": "İnsanlar ona bu tercihin sebebini sık sık sorarlardı.",
-                  "en": "People often asked him the reason for this choice.",
-                  "es": "La gente le preguntaba con frecuencia la razón de esta elección.",
-                  "de": "Die Leute fragten ihn oft nach dem Grund für diese Wahl.",
-                  "fr": "Les gens lui demandaient souvent la raison de ce choix."
+                  "tr": "Sabahları kıyafet seçmek istemezdi.",
+                  "en": "He did not choose clothes daily.",
+                  "es": "No elegía ropa cada mañana.",
+                  "de": "Er wählte morgens keine Kleidung.",
+                  "fr": "Il ne choisissait pas ses vêtements."
                 }
               },
               {
-                "target": "Jobs wollte morgens keine Zeit mit der Kleiderwahl verschwenden.",
+                "target": "Einfache Kleidung hilft Menschen ruhig zu bleiben.",
                 "translations": {
-                  "tr": "Jobs sabahları kıyafet seçerek vakit kaybetmek istemezdi.",
-                  "en": "Jobs did not want to waste time choosing clothes in the morning.",
-                  "es": "Jobs no quería perder tiempo eligiendo ropa por las mañanas.",
-                  "de": "Jobs wollte morgens keine Zeit mit der Kleiderwahl verschwenden.",
-                  "fr": "Jobs ne voulait pas perdre de temps à choisir ses vêtements le matin."
+                  "tr": "Sade kıyafetler insanı rahatlatır.",
+                  "en": "Simple clothes help people feel calm.",
+                  "es": "La ropa sencilla ayuda a calmarse.",
+                  "de": "Einfache Kleidung hilft Menschen ruhig zu bleiben.",
+                  "fr": "Les vêtements simples calment les personnes."
+                }
+              },
+              {
+                "target": "Er sparte Zeit für wichtige Arbeit.",
+                "translations": {
+                  "tr": "Zamanını sadece önemli işlerine ayırırdı.",
+                  "en": "He saved time for important work.",
+                  "es": "Ahorraba tiempo para el trabajo importante.",
+                  "de": "Er sparte Zeit für wichtige Arbeit.",
+                  "fr": "Il gardait son temps pour travailler."
                 }
               }
             ],
             [
               {
-                "target": "Ein schlichter Kleiderschrank entspannt unseren Geist und macht uns glücklich.",
+                "target": "Er konzentrierte sich besser auf Projekte.",
                 "translations": {
-                  "tr": "Sade bir gardırop zihnimizi rahatlatır ve bizi mutlu eder.",
-                  "en": "A simple wardrobe relaxes our mind and makes us happy.",
-                  "es": "Un armario sencillo relaja nuestra mente y nos hace felices.",
-                  "de": "Ein schlichter Kleiderschrank entspannt unseren Geist und macht uns glücklich.",
-                  "fr": "Une garde-robe simple détend notre esprit et nous rend heureux."
-                }
-              },
-              {
-                "target": "So können wir uns viel leichter auf unsere wichtigen Aufgaben konzentrieren.",
-                "translations": {
-                  "tr": "Böylece önemli işlerimize daha kolay odaklanabiliriz.",
-                  "en": "In this way, we can focus on our important work much more easily.",
-                  "es": "De esta forma, podemos concentrarnos en nuestro trabajo importante mucho más fácilmente.",
-                  "de": "So können wir uns viel leichter auf unsere wichtigen Aufgaben konzentrieren.",
-                  "fr": "Ainsi, nous pouvons nous concentrer beaucoup plus facilement sur notre travail important."
+                  "tr": "Böylece işine daha iyi odaklanırdı.",
+                  "en": "He focused better on his projects.",
+                  "es": "Se concentraba mejor en sus proyectos.",
+                  "de": "Er konzentrierte sich besser auf Projekte.",
+                  "fr": "Il se concentrait mieux sur ses projets."
                 }
               }
             ]
@@ -91509,57 +91491,55 @@
           "paragraphs": [
             [
               {
-                "target": "Jeden Morgen, wenn wir aufwachen, kommt uns die Frage 'Was soll ich heute anziehen?' in den Sinn und ermüdet uns.",
+                "target": "Jeden Morgen Kleidung zu wählen ist anstrengend und ermüdend.",
                 "translations": {
-                  "tr": "Her sabah uyandığımızda 'Bugün ne giysem?' sorusu aklımıza gelir ve bizi yorar.",
-                  "en": "Every morning when we wake up, the question 'What should I wear today?' comes to mind and tires us.",
-                  "es": "Cada mañana, al despertarnos, la pregunta '¿Qué me pongo hoy?' viene a nuestra mente y nos agota.",
-                  "de": "Jeden Morgen, wenn wir aufwachen, kommt uns die Frage 'Was soll ich heute anziehen?' in den Sinn und ermüdet uns.",
-                  "fr": "Chaque matin au réveil, la question « Que vais-je porter aujourd'hui ? » nous vient à l'esprit et nous fatigue."
+                  "tr": "İnsanlar her sabah kıyafet seçer ve bu seçim onları yorar.",
+                  "en": "Choosing clothes every morning is tiring and wastes mental energy.",
+                  "es": "Elegir ropa cada mañana es agotador y gasta energía mental.",
+                  "de": "Jeden Morgen Kleidung zu wählen ist anstrengend und ermüdend.",
+                  "fr": "Choisir ses vêtements chaque matin fatigue et use lénergie."
                 }
               },
               {
-                "target": "Steve Jobs beschloss, diese kleine Entscheidung vollständig aus seinem Alltag zu streichen.",
+                "target": "Steve Jobs entfernte diese kleine Entscheidung vollständig aus seinem Leben.",
                 "translations": {
-                  "tr": "Steve Jobs bu küçük kararı hayatından tamamen çıkarmaya karar verdi.",
-                  "en": "Steve Jobs decided to eliminate this minor decision completely from his daily life.",
-                  "es": "Steve Jobs decidió eliminar por completo esta pequeña decisión de su vida diaria.",
-                  "de": "Steve Jobs beschloss, diese kleine Entscheidung vollständig aus seinem Alltag zu streichen.",
-                  "fr": "Steve Jobs a décidé de supprimer complètement cette petite décision de sa vie quotidienne."
+                  "tr": "Steve Jobs bu küçük kararı hayatından tamamen çıkardı.",
+                  "en": "Steve Jobs decided to remove this small decision completely.",
+                  "es": "Steve Jobs decidió eliminar esta pequeña decisión por completo.",
+                  "de": "Steve Jobs entfernte diese kleine Entscheidung vollständig aus seinem Leben.",
+                  "fr": "Steve Jobs décida de supprimer cette petite décision complètement."
                 }
               }
             ],
             [
               {
-                "target": "In seinem Schrank hatte er über hundert identische schwarze Rollkragenpullover.",
+                "target": "Er besaß viele identische schwarze Pullover in seinem Schrank.",
                 "translations": {
-                  "tr": "Dolabında yüzden fazla aynı siyah boğazlı kazaktan vardı.",
-                  "en": "In his closet, he had more than a hundred identical black turtlenecks.",
-                  "es": "En su armario tenía más de cien jerséis negros de cuello alto idénticos.",
-                  "de": "In seinem Schrank hatte er über hundert identische schwarze Rollkragenpullover.",
-                  "fr": "Dans sa penderie, il possédait plus de cent pulls à col roulé noirs identiques."
+                  "tr": "Dolabında yüzden fazla aynı siyah kazaktan vardı.",
+                  "en": "He kept dozens of identical black sweaters in his closet.",
+                  "es": "Guardaba docenas de jerséis negros idénticos en su armario.",
+                  "de": "Er besaß viele identische schwarze Pullover in seinem Schrank.",
+                  "fr": "Il gardait des dizaines de pulls noirs identiques dans son placard."
                 }
               },
               {
-                "target": "Deshalb konnte er sich morgens ohne Nachdenken sofort anziehen und mit der Arbeit beginnen.",
+                "target": "Er zog sich schnell an, weil er sofort arbeiten wollte.",
                 "translations": {
-                  "tr": "Bu yüzden sabahları hiç düşünmeden hemen giyinip işine başlayabiliyordu.",
-                  "en": "Because of this, he could dress immediately in the morning without thinking and begin his work.",
-                  "es": "Por esta razón, podía vestirse de inmediato por la mañana sin pensar y comenzar a trabajar.",
-                  "de": "Deshalb konnte er sich morgens ohne Nachdenken sofort anziehen und mit der Arbeit beginnen.",
-                  "fr": "C'est pourquoi il pouvait s'habiller immédiatement le matin sans réfléchir et se mettre au travail."
+                  "tr": "Sabahları hiç düşünmeden giyinirdi çünkü vaktini iyi korumak isterdi.",
+                  "en": "He dressed quickly because he wanted to start work immediately.",
+                  "es": "Se vestía rápido porque quería empezar a trabajar de inmediato.",
+                  "de": "Er zog sich schnell an, weil er sofort arbeiten wollte.",
+                  "fr": "Il shabillait vite parce quil voulait travailler immédiatement."
                 }
-              }
-            ],
-            [
+              },
               {
-                "target": "Kleine Entscheidungen zu reduzieren, spart unsere Energie für große Entscheidungen des Tages.",
+                "target": "Weniger Entscheidungen am Morgen schützen unsere tägliche Energie.",
                 "translations": {
-                  "tr": "Küçük kararları azaltmak, gün içindeki büyük kararlar için enerjimizi korur.",
-                  "en": "Reducing trivial decisions preserves our energy for major choices during the day.",
-                  "es": "Reducir las pequeñas decisiones conserva nuestra energía para las grandes decisiones del día.",
-                  "de": "Kleine Entscheidungen zu reduzieren, spart unsere Energie für große Entscheidungen des Tages.",
-                  "fr": "Réduire les petites décisions préserve notre énergie pour les choix majeurs de la journée."
+                  "tr": "Küçük kararları azaltırsak gün içinde daha enerjik kalırız.",
+                  "en": "Making fewer morning choices protects our daily energy.",
+                  "es": "Tomar menos decisiones matutinas protege nuestra energía diaria.",
+                  "de": "Weniger Entscheidungen am Morgen schützen unsere tägliche Energie.",
+                  "fr": "Prendre moins de décisions matinales protège notre énergie quotidienne."
                 }
               }
             ]
@@ -91651,57 +91631,55 @@
           "paragraphs": [
             [
               {
-                "target": "Laut Psychologen besitzt das menschliche Gehirn eine begrenzte tägliche Kapazität, um fundierte Entscheidungen zu treffen.",
+                "target": "Psychologen zufolge kann das menschliche Gehirn täglich nur eine begrenzte Anzahl guter Entscheidungen treffen.",
                 "translations": {
-                  "tr": "Psikologlara göre insan beyni gün boyunca yapabileceği sınırlı sayıda kaliteli karar verme kapasitesine sahiptir.",
-                  "en": "According to psychologists, the human brain possesses a limited daily capacity for making high-quality decisions.",
-                  "es": "Según los psicólogos, el cerebro humano posee una capacidad diaria limitada para tomar decisiones de alta calidad.",
-                  "de": "Laut Psychologen besitzt das menschliche Gehirn eine begrenzte tägliche Kapazität, um fundierte Entscheidungen zu treffen.",
-                  "fr": "Selon les psychologues, le cerveau humain dispose d'une capacité quotidienne limitée pour prendre des décisions de haute qualité."
+                  "tr": "Psikologlara göre insan beyni gün içinde sınırlı sayıda kaliteli karar verebilir.",
+                  "en": "Psychologists explain that the human brain can only make a limited number of good decisions each day.",
+                  "es": "Según los psicólogos, el cerebro humano solo puede tomar un número limitado de buenas decisiones al día.",
+                  "de": "Psychologen zufolge kann das menschliche Gehirn täglich nur eine begrenzte Anzahl guter Entscheidungen treffen.",
+                  "fr": "Selon les psychologues, le cerveau humain ne peut prendre quun nombre limité de bonnes décisions par jour."
                 }
               },
               {
-                "target": "Selbst banale Details wie das Frühstück oder die Kleiderwahl am Morgen verbrauchen rasch mentale Energie.",
+                "target": "Die morgendliche Kleiderwahl erschöpft bereits früh die geistige Energie des Menschen.",
                 "translations": {
-                  "tr": "Sabah ne yeneceği ya da ne giyileceği gibi önemsiz detaylar bile zihinsel enerjiyi hızla tüketir.",
-                  "en": "Even trivial details such as what to eat or wear in the morning deplete mental energy rapidly.",
-                  "es": "Incluso detalles triviales como qué desayunar o qué ropa ponerse consumen rápidamente la energía mental.",
-                  "de": "Selbst banale Details wie das Frühstück oder die Kleiderwahl am Morgen verbrauchen rasch mentale Energie.",
-                  "fr": "Même des détails anodins comme le petit-déjeuner ou le choix des vêtements épuisent rapidement l'énergie mentale."
+                  "tr": "Sabah ne giyeceğini düşünmek bile insanın enerjisini erkenden tüketmeye başlar.",
+                  "en": "Spending time on clothes every morning quickly drains a persons mental energy.",
+                  "es": "Pensar qué ropa ponerse cada mañana agota rápidamente la energía de una persona.",
+                  "de": "Die morgendliche Kleiderwahl erschöpft bereits früh die geistige Energie des Menschen.",
+                  "fr": "Penser à ses vêtements chaque matin épuise rapidement lénergie dune personne."
                 }
               }
             ],
             [
               {
-                "target": "In der modernen Psychologie wird dieser wissenschaftliche Zustand als 'Entscheidungsmüdigkeit' bezeichnet.",
+                "target": "Wissenschaftler nennen diesen häufigen geistigen Zustand Entscheidungsmüdigkeit.",
                 "translations": {
-                  "tr": "Bu bilimsel duruma modern psikolojide 'karar yorgunluğu' adı verilir.",
-                  "en": "In modern psychology, this scientific condition is referred to as 'decision fatigue.'",
-                  "es": "En la psicología moderna, esta condición científica se denomina 'fatiga por decisión'.",
-                  "de": "In der modernen Psychologie wird dieser wissenschaftliche Zustand als 'Entscheidungsmüdigkeit' bezeichnet.",
-                  "fr": "Dans la psychologie moderne, cet état scientifique est appelé « fatigue décisionnelle »."
+                  "tr": "Bilim insanları bu zihinsel yorgunluğa karar yorgunluğu adını verirler.",
+                  "en": "Scientists call this common mental condition decision fatigue in modern psychology.",
+                  "es": "Los científicos llaman fatiga por decisión a esta condición mental tan común.",
+                  "de": "Wissenschaftler nennen diesen häufigen geistigen Zustand Entscheidungsmüdigkeit.",
+                  "fr": "Les scientifiques appellent cet état mental courant la fatigue décisionnelle."
                 }
               },
               {
-                "target": "Steve Jobs entschied sich für speziell vom Designer Issey Miyake gefertigte Rollkragenpullover und schuf so eine persönliche Uniform.",
+                "target": "Steve Jobs schuf eine persönliche Uniform, indem er täglich dieselbe schlichte Kleidung trug.",
                 "translations": {
-                  "tr": "Steve Jobs tasarımcı Issey Miyake tarafından özel olarak üretilen siyah kazakları benimseyerek kişisel bir üniforma yarattı.",
-                  "en": "Steve Jobs adopted black turtlenecks custom-crafted by designer Issey Miyake, creating a distinct personal uniform.",
-                  "es": "Steve Jobs adoptó jerséis negros diseñados a medida por Issey Miyake, creando un uniforme personal inconfundible.",
-                  "de": "Steve Jobs entschied sich für speziell vom Designer Issey Miyake gefertigte Rollkragenpullover und schuf so eine persönliche Uniform.",
-                  "fr": "Steve Jobs adopta des cols roulés noirs confectionnés sur mesure par le styliste Issey Miyake, se forgeant un uniforme personnel emblématique."
+                  "tr": "Steve Jobs her gün aynı sade kıyafetleri giyerek kişisel bir üniforma oluşturdu.",
+                  "en": "Steve Jobs created a personal uniform by wearing the same simple clothes every day.",
+                  "es": "Steve Jobs creó un uniforme personal llevando la misma ropa sencilla cada día.",
+                  "de": "Steve Jobs schuf eine persönliche Uniform, indem er täglich dieselbe schlichte Kleidung trug.",
+                  "fr": "Steve Jobs a créé un uniforme personnel en portant les mêmes vêtements simples chaque jour."
                 }
-              }
-            ],
-            [
+              },
               {
-                "target": "Die Automatisierung der Kleiderwahl ermöglichte es Jobs, seine gesamte kreative Aufmerksamkeit revolutionären Produktdesigns zu widmen.",
+                "target": "Die automatische Kleiderwahl ermöglichte es ihm, sich voll auf moderne Technologie zu konzentrieren.",
                 "translations": {
-                  "tr": "Kıyafet seçimini otomatikleştirmek, Jobs'ın tüm yaratıcı dikkatini devrim niteliğindeki ürün tasarımlarına ayırmasını sağladı.",
-                  "en": "Automating wardrobe selection allowed Jobs to dedicate all his creative attention to revolutionary product designs.",
-                  "es": "Automatizar la elección de su vestimenta le permitió a Jobs dedicar toda su atención creativa al diseño de productos revolucionarios.",
-                  "de": "Die Automatisierung der Kleiderwahl ermöglichte es Jobs, seine gesamte kreative Aufmerksamkeit revolutionären Produktdesigns zu widmen.",
-                  "fr": "Automatiser le choix de ses vêtements permit à Jobs de consacrer toute son attention créative à la conception de produits révolutionnaires."
+                  "tr": "Kıyafet seçimini otomatikleştirmek, onun bütün dikkatini yeni teknolojiler geliştirmeye vermesini sağladı.",
+                  "en": "Removing daily clothing decisions allowed him to concentrate on building great technology.",
+                  "es": "Automatizar la elección de ropa le permitió concentrarse en crear gran tecnología.",
+                  "de": "Die automatische Kleiderwahl ermöglichte es ihm, sich voll auf moderne Technologie zu konzentrieren.",
+                  "fr": "Automatiser ce choix lui a permis de concentrer toute son attention sur la technologie."
                 }
               }
             ]
@@ -91935,79 +91913,77 @@
           "paragraphs": [
             [
               {
-                "target": "Die Verheißung grenzenloser Wahlfreiheit, die postindustrielle Gesellschaften dem Individuum versprachen, bürdete der menschlichen Kognition paradoxerweise eine erdrückende mentale Last auf.",
+                "target": "Die grenzenlose Auswahl des modernen Lebens bürdet der menschlichen Willenskraft eine schwere Last auf.",
                 "translations": {
-                  "tr": "Sanayi sonrası toplumların bireye vadettiği sınırsız seçim özgürlüğü, paradoksal biçimde modern insanın omuzlarına ağır bir bilişsel yük bindirmiştir.",
-                  "en": "The illusion of boundless choice promised to the individual by post-industrial societies has, paradoxically, saddled modern human cognition with an overwhelming psychological burden.",
-                  "es": "La ilusión de elección ilimitada prometida al individuo por las sociedades posindustriales ha impuesto, paradójicamente, una abrumadora carga cognitiva sobre la mente moderna.",
-                  "de": "Die Verheißung grenzenloser Wahlfreiheit, die postindustrielle Gesellschaften dem Individuum versprachen, bürdete der menschlichen Kognition paradoxerweise eine erdrückende mentale Last auf.",
-                  "fr": "L'illusion d'un choix infini promise à l'individu par les sociétés post-industrielles a, paradoxalement, fait peser un fardeau cognitif accablant sur l'esprit contemporain."
+                  "tr": "Modern hayatın sunduğu sınırsız seçenekler, insanın omuzlarına görünenden çok daha ağır bir yük bindiriyor.",
+                  "en": "The endless choices of modern life place a surprisingly heavy burden on human willpower.",
+                  "es": "Las infinitas opciones de la vida moderna imponen una pesada carga sobre la voluntad humana.",
+                  "de": "Die grenzenlose Auswahl des modernen Lebens bürdet der menschlichen Willenskraft eine schwere Last auf.",
+                  "fr": "Les choix illimités de la société moderne font peser un fardeau surprenant sur la volonté humaine."
                 }
               },
               {
-                "target": "Jener scheinbar harmlose Moment des Zögerns vor dem Kleiderschrank im Morgengrauen zehrt an den endlichen Willenskraftreserven des präfrontalen Kortex, noch bevor der eigentliche Arbeitstag beginnt.",
+                "target": "Wenige Augenblicke des Zögerns vor dem Kleiderschrank am Morgen verzehren leise unsere Konzentration, noch bevor der Tag beginnt.",
                 "translations": {
-                  "tr": "Günün ilk ışıklarıyla birlikte gardırop karşısında yaşanan o görünüşte masum kararsızlık anı, beynin prefrontal korteksindeki sınırlı irade rezervini daha mesai başlamadan tüketmeye başlar.",
-                  "en": "That seemingly innocuous moment of hesitation before the wardrobe at dawn begins depleting the finite willpower reserves of the prefrontal cortex long before the working day even commences.",
-                  "es": "Ese momento de vacilación aparentemente inocente frente al guardarropa al amanecer comienza a agotar las reservas finitas de voluntad de la corteza prefrontal mucho antes de que inicie la jornada laboral.",
-                  "de": "Jener scheinbar harmlose Moment des Zögerns vor dem Kleiderschrank im Morgengrauen zehrt an den endlichen Willenskraftreserven des präfrontalen Kortex, noch bevor der eigentliche Arbeitstag beginnt.",
-                  "fr": "Ce moment d'hésitation en apparence anodin devant la penderie dès l'aube commence à entamer les réserves limitées de volonté du cortex préfrontal bien avant que la journée ne commence."
+                  "tr": "Günün ilk saatlerinde ayna karşısında yaşanan masum bir kararsızlık bile, günün geri kalanındaki irademizi sessizce tüketmeye başlar.",
+                  "en": "A few moments of hesitation before the wardrobe each morning quietly drain our concentration before the workday even begins.",
+                  "es": "Unos instantes de duda ante el armario cada mañana desgastan silenciosamente nuestra concentración antes de empezar la jornada laboral.",
+                  "de": "Wenige Augenblicke des Zögerns vor dem Kleiderschrank am Morgen verzehren leise unsere Konzentration, noch bevor der Tag beginnt.",
+                  "fr": "Quelques instants dhésitation devant larmoire chaque matin entament notre concentration bien avant que la journée ne commence."
                 }
               }
             ],
             [
               {
-                "target": "Steve Jobs' unveränderliche Kombination aus Issey Miyake Rollkragenpullovern, Levi's 501 Jeans und New Balance Turnschuhen war keineswegs eine bloße Schrulle, sondern eine radikale Praxis kognitiver Ergonomie.",
+                "target": "Steve Jobs unverkennbare Kombination aus Rollkragenpullover und Jeans war keine exzentrische Laune, sondern eine bewusste Lektion in geistiger Klarheit.",
                 "translations": {
-                  "tr": "Steve Jobs'ın Issey Miyake imzalı siyah boğazlı kazak, Levi's 501 kot pantolon ve New Balance spor ayakkabılardan müteşekkil değişmez kombini, alelade bir eksantriklik değil, radikal bir bilişsel ergonomi tatbikatıydı.",
-                  "en": "Steve Jobs's immutable uniform—composed of Issey Miyake black turtlenecks, Levi's 501 denim, and New Balance sneakers—was by no means an eccentric quirk, but rather a masterclass in cognitive ergonomics.",
-                  "es": "El uniforme inmutable de Steve Jobs—compuesto por jerséis de cuello alto de Issey Miyake, vaqueros Levi's 501 y zapatillas New Balance—no era una excentricidad trivial, sino un ejercicio magistral de ergonomía cognitiva.",
-                  "de": "Steve Jobs' unveränderliche Kombination aus Issey Miyake Rollkragenpullovern, Levi's 501 Jeans und New Balance Turnschuhen war keineswegs eine bloße Schrulle, sondern eine radikale Praxis kognitiver Ergonomie.",
-                  "fr": "La tenue invariable de Steve Jobs — composée de cols roulés Issey Miyake, de jeans Levi's 501 et de baskets New Balance — n'était nullement une toquade excentrique, mais une éclatante démonstration d'ergonomie cognitive."
+                  "tr": "Steve Jobsın siyah boğazlı kazağı ve kot pantolondan oluşan değişmez kıyafeti, tuhaf bir takıntı değil, zihinsel berraklığı koruma sanatıdır.",
+                  "en": "Steve Jobss iconic uniform of a black turtleneck and jeans was no eccentric whim, but a masterclass in protecting mental clarity.",
+                  "es": "El uniforme invariable de Steve Jobs de cuello alto y vaqueros no era una rareza excéntrica, sino una lección de claridad mental.",
+                  "de": "Steve Jobs unverkennbare Kombination aus Rollkragenpullover und Jeans war keine exzentrische Laune, sondern eine bewusste Lektion in geistiger Klarheit.",
+                  "fr": "La tenue immuable de Steve Jobs, faite dun col roulé et dun jean, nétait point un caprice, mais une leçon de clarté mentale."
                 }
               },
               {
-                "target": "Durch die methodische Ausschaltung trivialer Mikro-Entscheidungen vermochte Jobs seine ungeteilte mentale Schaffenskraft vollends auf die bahnbrechenden Benutzererlebnisse und die akribische Hardware-Architektur von Apple zu bündeln.",
+                "target": "Durch den Verzicht auf banale Alltagsentscheidungen lenkte Jobs seine ganze Aufmerksamkeit auf wegweisende Designs.",
                 "translations": {
-                  "tr": "Gündelik hayatın mikro kararlarını sistematik biçimde elimine eden Jobs, zihinsel enerjisini Apple'ın çığır açan kullanıcı deneyimlerine ve kusursuz donanım mimarisine kanalize edebilmiştir.",
-                  "en": "By systematically eliminating the micro-decisions of mundane existence, Jobs successfully channeled his undivided mental vitality into Apple's groundbreaking user experiences and meticulous hardware architecture.",
-                  "es": "Al eliminar sistemáticamente las microdecisiones de la existencia mundana, Jobs logró canalizar su vitalidad mental hacia las revolucionarias experiencias de usuario y la arquitectura de hardware de Apple.",
-                  "de": "Durch die methodische Ausschaltung trivialer Mikro-Entscheidungen vermochte Jobs seine ungeteilte mentale Schaffenskraft vollends auf die bahnbrechenden Benutzererlebnisse und die akribische Hardware-Architektur von Apple zu bündeln.",
-                  "fr": "En éliminant méthodiquement les micro-décisions du quotidien, Jobs a pu canaliser l'intégralité de sa vivacité mentale vers les interfaces révolutionnaires et l'architecture matérielle raffinée d'Apple."
+                  "tr": "Gündelik hayatın küçük seçimlerini hayatından çıkaran Jobs, tüm dikkatini Appleın çığır açan tasarımlarına yöneltebilmiştir.",
+                  "en": "By eliminating trivial morning decisions, Jobs channeled his undivided attention into Apples groundbreaking designs.",
+                  "es": "Al suprimir pequeñas decisiones cotidianas, Jobs canalizó toda su atención en los innovadores diseños de Apple.",
+                  "de": "Durch den Verzicht auf banale Alltagsentscheidungen lenkte Jobs seine ganze Aufmerksamkeit auf wegweisende Designs.",
+                  "fr": "En éliminant les choix insignifiants du quotidien, Jobs a dirigé toute son attention vers les créations révolutionnaires dApple."
                 }
               }
             ],
             [
               {
-                "target": "Dieser philosophische Reduktionismus verkörpert die reinste Manifestation des Bestrebens, den Geist zu emanzipieren, statt sich den Besitztümern zu unterwerfen.",
+                "target": "Dieser bewusste Minimalismus spiegelt den Wunsch wider, den Geist zu befreien, statt materiellen Dingen zu dienen.",
                 "translations": {
-                  "tr": "Bu felsefi indirgemecilik, eşyanın kölesi olmak yerine zihni özgürleştirme gayretinin en berrak tezahürüdür.",
-                  "en": "This philosophical reductionism represents the clearest manifestation of liberating the human mind rather than remaining subservient to material possessions.",
-                  "es": "Este reduccionismo filosófico representa la manifestación más nítida de liberar la mente humana en lugar de permanecer subyugado a las posesiones materiales.",
-                  "de": "Dieser philosophische Reduktionismus verkörpert die reinste Manifestation des Bestrebens, den Geist zu emanzipieren, statt sich den Besitztümern zu unterwerfen.",
-                  "fr": "Ce réductionnisme philosophique incarne l'expression la plus éclatante d'un esprit cherchant à s'émanciper plutôt qu'à s'asservir aux biens matériels."
+                  "tr": "Bu bilinçli sadelik, eşyalara bağımlı olmak yerine zihni özgür kılma arzusunun en net göstergesidir.",
+                  "en": "This deliberate minimalism reflects a desire to free the mind rather than serve material possessions.",
+                  "es": "Este minimalismo consciente refleja el deseo de liberar la mente en lugar de someterse a las posesiones materiales.",
+                  "de": "Dieser bewusste Minimalismus spiegelt den Wunsch wider, den Geist zu befreien, statt materiellen Dingen zu dienen.",
+                  "fr": "Ce dépouillement délibéré traduit le désir de libérer lesprit plutôt que de servir les biens matériels."
                 }
               },
               {
-                "target": "Denn wahre Schöpferkraft bemisst sich nicht daran, wie viel Überflüssiges wir anhäufen, sondern daran, worauf wir zu verzichten bereit sind, um dem Wesentlichen Raum zu geben.",
+                "target": "Wahre Kreativität bemisst sich nicht daran, wie viel wir anhäufen, sondern worauf wir verzichten, um das Wesentliche hervorzuheben.",
                 "translations": {
-                  "tr": "Zira gerçek yaratıcılık, hayatımıza ne kadar çok şey kattığımızla değil, asıl olana yer açmak için neleri feda edebildiğimizle ölçülür.",
-                  "en": "For true creative genius is measured not by how much superfluous clutter we accumulate, but by what we are willing to subtract to illuminate the essential.",
-                  "es": "Pues la verdadera genialidad creativa no se mide por cuántas cosas superfluas acumulamos, sino por lo que estamos dispuestos a sustraer para dar espacio a lo esencial.",
-                  "de": "Denn wahre Schöpferkraft bemisst sich nicht daran, wie viel Überflüssiges wir anhäufen, sondern daran, worauf wir zu verzichten bereit sind, um dem Wesentlichen Raum zu geben.",
-                  "fr": "Car le véritable génie créatif ne se mesure point à l'accumulation de futilités, mais à notre disposition à retrancher le superflu pour faire rayonner l'essentiel."
+                  "tr": "Gerçek yaratıcılık hayatımıza ne kadar çok şey kattığımızla değil, asıl olana yer açmak için nelerden vazgeçebildiğimizle ölçülür.",
+                  "en": "True creativity is measured not by how much we accumulate, but by what we are willing to remove to highlight what truly matters.",
+                  "es": "La verdadera creatividad no se mide por cuánto acumulamos, sino por lo que estamos dispuestos a retirar para iluminar lo esencial.",
+                  "de": "Wahre Kreativität bemisst sich nicht daran, wie viel wir anhäufen, sondern worauf wir verzichten, um das Wesentliche hervorzuheben.",
+                  "fr": "La véritable créativité ne se mesure point à ce que nous accumulons, mais à ce que nous retranchons pour faire rayonner lessentiel."
                 }
-              }
-            ],
-            [
+              },
               {
-                "target": "Letzten Endes ist das Tragen desselben Pullovers keine Beschränkung, sondern das eleganteste und wirkungsvollste kognitive Antidot gegen die Reizüberflutung des modernen Zeitalters.",
+                "target": "Dieselbe Kleidung zu tragen ist keine Einschränkung, sondern ein eleganter Schutz gegen die Ablenkungen der modernen Zeit.",
                 "translations": {
-                  "tr": "Son tahlilde aynı kazağı giymek bir kısıtlama değil; modern insanın bilgi ve uyaran obezitesine karşı geliştirdiği en zarif ve güçlü zihinsel panzehirdir.",
-                  "en": "In the final analysis, donning the identical sweater is not an act of deprivation, but the most elegant and potent cognitive antidote conceived against modern information overload.",
-                  "es": "En última instancia, vestir el mismo jersey no es un acto de privación, sino el antídoto cognitivo más elegante y potente concebido contra la sobrecarga de información moderna.",
-                  "de": "Letzten Endes ist das Tragen desselben Pullovers keine Beschränkung, sondern das eleganteste und wirkungsvollste kognitive Antidot gegen die Reizüberflutung des modernen Zeitalters.",
-                  "fr": "En dernière analyse, porter le même vêtement n'a rien d'un renoncement étriqué : c'est le contrepoison cognitif le plus élégant et le plus puissant contre la surcharge mentale du monde moderne."
+                  "tr": "Aynı kıyafeti giymek bir sınırlama değil, çağımızın dikkat dağınıklığına karşı geliştirilmiş en zarif zihinsel kalkanlardan biridir.",
+                  "en": "Wearing the same clothes is not a limitation, but an elegant defense against the distractions of the modern world.",
+                  "es": "Llevar la misma ropa no supone una limitación, sino una elegante defensa contra las distracciones del mundo moderno.",
+                  "de": "Dieselbe Kleidung zu tragen ist keine Einschränkung, sondern ein eleganter Schutz gegen die Ablenkungen der modernen Zeit.",
+                  "fr": "Porter les mêmes vêtements nest pas une contrainte, mais un rempart raffiné contre les distractions du monde moderne."
                 }
               }
             ]
@@ -92101,67 +92077,67 @@
           "paragraphs": [
             [
               {
-                "target": "Steve Jobs était un grand leader technologique de renommée mondiale.",
+                "target": "Steve Jobs était un dirigeant célèbre.",
                 "translations": {
-                  "tr": "Steve Jobs dünyaca ünlü büyük bir teknoloji lideriydi.",
-                  "en": "Steve Jobs was a world-famous, prominent technology leader.",
-                  "es": "Steve Jobs era un líder tecnológico de fama mundial.",
-                  "de": "Steve Jobs war ein weltberühmter, bedeutender Technologieführer.",
-                  "fr": "Steve Jobs était un grand leader technologique de renommée mondiale."
+                  "tr": "Steve Jobs çok ünlü bir liderdi.",
+                  "en": "Steve Jobs was a famous leader.",
+                  "es": "Steve Jobs era un líder famoso.",
+                  "de": "Steve Jobs war ein berühmter Anführer.",
+                  "fr": "Steve Jobs était un dirigeant célèbre."
                 }
               },
               {
-                "target": "Il portait chaque jour un pull noir et un pantalon bleu.",
+                "target": "Il portait toujours un pull noir.",
                 "translations": {
-                  "tr": "O her gün siyah bir kazak ve mavi bir pantolon giyerdi.",
-                  "en": "He wore a black sweater and blue jeans every day.",
-                  "es": "Llevaba un jersey negro y pantalones azules todos los días.",
-                  "de": "Er trug jeden Tag einen schwarzen Pullover und eine blaue Jeans.",
-                  "fr": "Il portait chaque jour un pull noir et un pantalon bleu."
+                  "tr": "Her gün aynı siyah kazağı giyerdi.",
+                  "en": "He always wore a black sweater.",
+                  "es": "Siempre vestía un suéter negro.",
+                  "de": "Er trug immer einen schwarzen Pullover.",
+                  "fr": "Il portait toujours un pull noir."
                 }
               }
             ],
             [
               {
-                "target": "Les gens lui demandaient souvent la raison de ce choix.",
+                "target": "Il ne choisissait pas ses vêtements.",
                 "translations": {
-                  "tr": "İnsanlar ona bu tercihin sebebini sık sık sorarlardı.",
-                  "en": "People often asked him the reason for this choice.",
-                  "es": "La gente le preguntaba con frecuencia la razón de esta elección.",
-                  "de": "Die Leute fragten ihn oft nach dem Grund für diese Wahl.",
-                  "fr": "Les gens lui demandaient souvent la raison de ce choix."
+                  "tr": "Sabahları kıyafet seçmek istemezdi.",
+                  "en": "He did not choose clothes daily.",
+                  "es": "No elegía ropa cada mañana.",
+                  "de": "Er wählte morgens keine Kleidung.",
+                  "fr": "Il ne choisissait pas ses vêtements."
                 }
               },
               {
-                "target": "Jobs ne voulait pas perdre de temps à choisir ses vêtements le matin.",
+                "target": "Les vêtements simples calment les personnes.",
                 "translations": {
-                  "tr": "Jobs sabahları kıyafet seçerek vakit kaybetmek istemezdi.",
-                  "en": "Jobs did not want to waste time choosing clothes in the morning.",
-                  "es": "Jobs no quería perder tiempo eligiendo ropa por las mañanas.",
-                  "de": "Jobs wollte morgens keine Zeit mit der Kleiderwahl verschwenden.",
-                  "fr": "Jobs ne voulait pas perdre de temps à choisir ses vêtements le matin."
+                  "tr": "Sade kıyafetler insanı rahatlatır.",
+                  "en": "Simple clothes help people feel calm.",
+                  "es": "La ropa sencilla ayuda a calmarse.",
+                  "de": "Einfache Kleidung hilft Menschen ruhig zu bleiben.",
+                  "fr": "Les vêtements simples calment les personnes."
+                }
+              },
+              {
+                "target": "Il gardait son temps pour travailler.",
+                "translations": {
+                  "tr": "Zamanını sadece önemli işlerine ayırırdı.",
+                  "en": "He saved time for important work.",
+                  "es": "Ahorraba tiempo para el trabajo importante.",
+                  "de": "Er sparte Zeit für wichtige Arbeit.",
+                  "fr": "Il gardait son temps pour travailler."
                 }
               }
             ],
             [
               {
-                "target": "Une garde-robe simple détend notre esprit et nous rend heureux.",
+                "target": "Il se concentrait mieux sur ses projets.",
                 "translations": {
-                  "tr": "Sade bir gardırop zihnimizi rahatlatır ve bizi mutlu eder.",
-                  "en": "A simple wardrobe relaxes our mind and makes us happy.",
-                  "es": "Un armario sencillo relaja nuestra mente y nos hace felices.",
-                  "de": "Ein schlichter Kleiderschrank entspannt unseren Geist und macht uns glücklich.",
-                  "fr": "Une garde-robe simple détend notre esprit et nous rend heureux."
-                }
-              },
-              {
-                "target": "Ainsi, nous pouvons nous concentrer beaucoup plus facilement sur notre travail important.",
-                "translations": {
-                  "tr": "Böylece önemli işlerimize daha kolay odaklanabiliriz.",
-                  "en": "In this way, we can focus on our important work much more easily.",
-                  "es": "De esta forma, podemos concentrarnos en nuestro trabajo importante mucho más fácilmente.",
-                  "de": "So können wir uns viel leichter auf unsere wichtigen Aufgaben konzentrieren.",
-                  "fr": "Ainsi, nous pouvons nous concentrer beaucoup plus facilement sur notre travail important."
+                  "tr": "Böylece işine daha iyi odaklanırdı.",
+                  "en": "He focused better on his projects.",
+                  "es": "Se concentraba mejor en sus proyectos.",
+                  "de": "Er konzentrierte sich besser auf Projekte.",
+                  "fr": "Il se concentrait mieux sur ses projets."
                 }
               }
             ]
@@ -92271,57 +92247,55 @@
           "paragraphs": [
             [
               {
-                "target": "Chaque matin au réveil, la question « Que vais-je porter aujourd'hui ? » nous vient à l'esprit et nous fatigue.",
+                "target": "Choisir ses vêtements chaque matin fatigue et use lénergie.",
                 "translations": {
-                  "tr": "Her sabah uyandığımızda 'Bugün ne giysem?' sorusu aklımıza gelir ve bizi yorar.",
-                  "en": "Every morning when we wake up, the question 'What should I wear today?' comes to mind and tires us.",
-                  "es": "Cada mañana, al despertarnos, la pregunta '¿Qué me pongo hoy?' viene a nuestra mente y nos agota.",
-                  "de": "Jeden Morgen, wenn wir aufwachen, kommt uns die Frage 'Was soll ich heute anziehen?' in den Sinn und ermüdet uns.",
-                  "fr": "Chaque matin au réveil, la question « Que vais-je porter aujourd'hui ? » nous vient à l'esprit et nous fatigue."
+                  "tr": "İnsanlar her sabah kıyafet seçer ve bu seçim onları yorar.",
+                  "en": "Choosing clothes every morning is tiring and wastes mental energy.",
+                  "es": "Elegir ropa cada mañana es agotador y gasta energía mental.",
+                  "de": "Jeden Morgen Kleidung zu wählen ist anstrengend und ermüdend.",
+                  "fr": "Choisir ses vêtements chaque matin fatigue et use lénergie."
                 }
               },
               {
-                "target": "Steve Jobs a décidé de supprimer complètement cette petite décision de sa vie quotidienne.",
+                "target": "Steve Jobs décida de supprimer cette petite décision complètement.",
                 "translations": {
-                  "tr": "Steve Jobs bu küçük kararı hayatından tamamen çıkarmaya karar verdi.",
-                  "en": "Steve Jobs decided to eliminate this minor decision completely from his daily life.",
-                  "es": "Steve Jobs decidió eliminar por completo esta pequeña decisión de su vida diaria.",
-                  "de": "Steve Jobs beschloss, diese kleine Entscheidung vollständig aus seinem Alltag zu streichen.",
-                  "fr": "Steve Jobs a décidé de supprimer complètement cette petite décision de sa vie quotidienne."
+                  "tr": "Steve Jobs bu küçük kararı hayatından tamamen çıkardı.",
+                  "en": "Steve Jobs decided to remove this small decision completely.",
+                  "es": "Steve Jobs decidió eliminar esta pequeña decisión por completo.",
+                  "de": "Steve Jobs entfernte diese kleine Entscheidung vollständig aus seinem Leben.",
+                  "fr": "Steve Jobs décida de supprimer cette petite décision complètement."
                 }
               }
             ],
             [
               {
-                "target": "Dans sa penderie, il possédait plus de cent pulls à col roulé noirs identiques.",
+                "target": "Il gardait des dizaines de pulls noirs identiques dans son placard.",
                 "translations": {
-                  "tr": "Dolabında yüzden fazla aynı siyah boğazlı kazaktan vardı.",
-                  "en": "In his closet, he had more than a hundred identical black turtlenecks.",
-                  "es": "En su armario tenía más de cien jerséis negros de cuello alto idénticos.",
-                  "de": "In seinem Schrank hatte er über hundert identische schwarze Rollkragenpullover.",
-                  "fr": "Dans sa penderie, il possédait plus de cent pulls à col roulé noirs identiques."
+                  "tr": "Dolabında yüzden fazla aynı siyah kazaktan vardı.",
+                  "en": "He kept dozens of identical black sweaters in his closet.",
+                  "es": "Guardaba docenas de jerséis negros idénticos en su armario.",
+                  "de": "Er besaß viele identische schwarze Pullover in seinem Schrank.",
+                  "fr": "Il gardait des dizaines de pulls noirs identiques dans son placard."
                 }
               },
               {
-                "target": "C'est pourquoi il pouvait s'habiller immédiatement le matin sans réfléchir et se mettre au travail.",
+                "target": "Il shabillait vite parce quil voulait travailler immédiatement.",
                 "translations": {
-                  "tr": "Bu yüzden sabahları hiç düşünmeden hemen giyinip işine başlayabiliyordu.",
-                  "en": "Because of this, he could dress immediately in the morning without thinking and begin his work.",
-                  "es": "Por esta razón, podía vestirse de inmediato por la mañana sin pensar y comenzar a trabajar.",
-                  "de": "Deshalb konnte er sich morgens ohne Nachdenken sofort anziehen und mit der Arbeit beginnen.",
-                  "fr": "C'est pourquoi il pouvait s'habiller immédiatement le matin sans réfléchir et se mettre au travail."
+                  "tr": "Sabahları hiç düşünmeden giyinirdi çünkü vaktini iyi korumak isterdi.",
+                  "en": "He dressed quickly because he wanted to start work immediately.",
+                  "es": "Se vestía rápido porque quería empezar a trabajar de inmediato.",
+                  "de": "Er zog sich schnell an, weil er sofort arbeiten wollte.",
+                  "fr": "Il shabillait vite parce quil voulait travailler immédiatement."
                 }
-              }
-            ],
-            [
+              },
               {
-                "target": "Réduire les petites décisions préserve notre énergie pour les choix majeurs de la journée.",
+                "target": "Prendre moins de décisions matinales protège notre énergie quotidienne.",
                 "translations": {
-                  "tr": "Küçük kararları azaltmak, gün içindeki büyük kararlar için enerjimizi korur.",
-                  "en": "Reducing trivial decisions preserves our energy for major choices during the day.",
-                  "es": "Reducir las pequeñas decisiones conserva nuestra energía para las grandes decisiones del día.",
-                  "de": "Kleine Entscheidungen zu reduzieren, spart unsere Energie für große Entscheidungen des Tages.",
-                  "fr": "Réduire les petites décisions préserve notre énergie pour les choix majeurs de la journée."
+                  "tr": "Küçük kararları azaltırsak gün içinde daha enerjik kalırız.",
+                  "en": "Making fewer morning choices protects our daily energy.",
+                  "es": "Tomar menos decisiones matutinas protege nuestra energía diaria.",
+                  "de": "Weniger Entscheidungen am Morgen schützen unsere tägliche Energie.",
+                  "fr": "Prendre moins de décisions matinales protège notre énergie quotidienne."
                 }
               }
             ]
@@ -92413,57 +92387,55 @@
           "paragraphs": [
             [
               {
-                "target": "Selon les psychologues, le cerveau humain dispose d'une capacité quotidienne limitée pour prendre des décisions de haute qualité.",
+                "target": "Selon les psychologues, le cerveau humain ne peut prendre quun nombre limité de bonnes décisions par jour.",
                 "translations": {
-                  "tr": "Psikologlara göre insan beyni gün boyunca yapabileceği sınırlı sayıda kaliteli karar verme kapasitesine sahiptir.",
-                  "en": "According to psychologists, the human brain possesses a limited daily capacity for making high-quality decisions.",
-                  "es": "Según los psicólogos, el cerebro humano posee una capacidad diaria limitada para tomar decisiones de alta calidad.",
-                  "de": "Laut Psychologen besitzt das menschliche Gehirn eine begrenzte tägliche Kapazität, um fundierte Entscheidungen zu treffen.",
-                  "fr": "Selon les psychologues, le cerveau humain dispose d'une capacité quotidienne limitée pour prendre des décisions de haute qualité."
+                  "tr": "Psikologlara göre insan beyni gün içinde sınırlı sayıda kaliteli karar verebilir.",
+                  "en": "Psychologists explain that the human brain can only make a limited number of good decisions each day.",
+                  "es": "Según los psicólogos, el cerebro humano solo puede tomar un número limitado de buenas decisiones al día.",
+                  "de": "Psychologen zufolge kann das menschliche Gehirn täglich nur eine begrenzte Anzahl guter Entscheidungen treffen.",
+                  "fr": "Selon les psychologues, le cerveau humain ne peut prendre quun nombre limité de bonnes décisions par jour."
                 }
               },
               {
-                "target": "Même des détails anodins comme le petit-déjeuner ou le choix des vêtements épuisent rapidement l'énergie mentale.",
+                "target": "Penser à ses vêtements chaque matin épuise rapidement lénergie dune personne.",
                 "translations": {
-                  "tr": "Sabah ne yeneceği ya da ne giyileceği gibi önemsiz detaylar bile zihinsel enerjiyi hızla tüketir.",
-                  "en": "Even trivial details such as what to eat or wear in the morning deplete mental energy rapidly.",
-                  "es": "Incluso detalles triviales como qué desayunar o qué ropa ponerse consumen rápidamente la energía mental.",
-                  "de": "Selbst banale Details wie das Frühstück oder die Kleiderwahl am Morgen verbrauchen rasch mentale Energie.",
-                  "fr": "Même des détails anodins comme le petit-déjeuner ou le choix des vêtements épuisent rapidement l'énergie mentale."
+                  "tr": "Sabah ne giyeceğini düşünmek bile insanın enerjisini erkenden tüketmeye başlar.",
+                  "en": "Spending time on clothes every morning quickly drains a persons mental energy.",
+                  "es": "Pensar qué ropa ponerse cada mañana agota rápidamente la energía de una persona.",
+                  "de": "Die morgendliche Kleiderwahl erschöpft bereits früh die geistige Energie des Menschen.",
+                  "fr": "Penser à ses vêtements chaque matin épuise rapidement lénergie dune personne."
                 }
               }
             ],
             [
               {
-                "target": "Dans la psychologie moderne, cet état scientifique est appelé « fatigue décisionnelle ».",
+                "target": "Les scientifiques appellent cet état mental courant la fatigue décisionnelle.",
                 "translations": {
-                  "tr": "Bu bilimsel duruma modern psikolojide 'karar yorgunluğu' adı verilir.",
-                  "en": "In modern psychology, this scientific condition is referred to as 'decision fatigue.'",
-                  "es": "En la psicología moderna, esta condición científica se denomina 'fatiga por decisión'.",
-                  "de": "In der modernen Psychologie wird dieser wissenschaftliche Zustand als 'Entscheidungsmüdigkeit' bezeichnet.",
-                  "fr": "Dans la psychologie moderne, cet état scientifique est appelé « fatigue décisionnelle »."
+                  "tr": "Bilim insanları bu zihinsel yorgunluğa karar yorgunluğu adını verirler.",
+                  "en": "Scientists call this common mental condition decision fatigue in modern psychology.",
+                  "es": "Los científicos llaman fatiga por decisión a esta condición mental tan común.",
+                  "de": "Wissenschaftler nennen diesen häufigen geistigen Zustand Entscheidungsmüdigkeit.",
+                  "fr": "Les scientifiques appellent cet état mental courant la fatigue décisionnelle."
                 }
               },
               {
-                "target": "Steve Jobs adopta des cols roulés noirs confectionnés sur mesure par le styliste Issey Miyake, se forgeant un uniforme personnel emblématique.",
+                "target": "Steve Jobs a créé un uniforme personnel en portant les mêmes vêtements simples chaque jour.",
                 "translations": {
-                  "tr": "Steve Jobs tasarımcı Issey Miyake tarafından özel olarak üretilen siyah kazakları benimseyerek kişisel bir üniforma yarattı.",
-                  "en": "Steve Jobs adopted black turtlenecks custom-crafted by designer Issey Miyake, creating a distinct personal uniform.",
-                  "es": "Steve Jobs adoptó jerséis negros diseñados a medida por Issey Miyake, creando un uniforme personal inconfundible.",
-                  "de": "Steve Jobs entschied sich für speziell vom Designer Issey Miyake gefertigte Rollkragenpullover und schuf so eine persönliche Uniform.",
-                  "fr": "Steve Jobs adopta des cols roulés noirs confectionnés sur mesure par le styliste Issey Miyake, se forgeant un uniforme personnel emblématique."
+                  "tr": "Steve Jobs her gün aynı sade kıyafetleri giyerek kişisel bir üniforma oluşturdu.",
+                  "en": "Steve Jobs created a personal uniform by wearing the same simple clothes every day.",
+                  "es": "Steve Jobs creó un uniforme personal llevando la misma ropa sencilla cada día.",
+                  "de": "Steve Jobs schuf eine persönliche Uniform, indem er täglich dieselbe schlichte Kleidung trug.",
+                  "fr": "Steve Jobs a créé un uniforme personnel en portant les mêmes vêtements simples chaque jour."
                 }
-              }
-            ],
-            [
+              },
               {
-                "target": "Automatiser le choix de ses vêtements permit à Jobs de consacrer toute son attention créative à la conception de produits révolutionnaires.",
+                "target": "Automatiser ce choix lui a permis de concentrer toute son attention sur la technologie.",
                 "translations": {
-                  "tr": "Kıyafet seçimini otomatikleştirmek, Jobs'ın tüm yaratıcı dikkatini devrim niteliğindeki ürün tasarımlarına ayırmasını sağladı.",
-                  "en": "Automating wardrobe selection allowed Jobs to dedicate all his creative attention to revolutionary product designs.",
-                  "es": "Automatizar la elección de su vestimenta le permitió a Jobs dedicar toda su atención creativa al diseño de productos revolucionarios.",
-                  "de": "Die Automatisierung der Kleiderwahl ermöglichte es Jobs, seine gesamte kreative Aufmerksamkeit revolutionären Produktdesigns zu widmen.",
-                  "fr": "Automatiser le choix de ses vêtements permit à Jobs de consacrer toute son attention créative à la conception de produits révolutionnaires."
+                  "tr": "Kıyafet seçimini otomatikleştirmek, onun bütün dikkatini yeni teknolojiler geliştirmeye vermesini sağladı.",
+                  "en": "Removing daily clothing decisions allowed him to concentrate on building great technology.",
+                  "es": "Automatizar la elección de ropa le permitió concentrarse en crear gran tecnología.",
+                  "de": "Die automatische Kleiderwahl ermöglichte es ihm, sich voll auf moderne Technologie zu konzentrieren.",
+                  "fr": "Automatiser ce choix lui a permis de concentrer toute son attention sur la technologie."
                 }
               }
             ]
@@ -92697,79 +92669,77 @@
           "paragraphs": [
             [
               {
-                "target": "L'illusion d'un choix infini promise à l'individu par les sociétés post-industrielles a, paradoxalement, fait peser un fardeau cognitif accablant sur l'esprit contemporain.",
+                "target": "Les choix illimités de la société moderne font peser un fardeau surprenant sur la volonté humaine.",
                 "translations": {
-                  "tr": "Sanayi sonrası toplumların bireye vadettiği sınırsız seçim özgürlüğü, paradoksal biçimde modern insanın omuzlarına ağır bir bilişsel yük bindirmiştir.",
-                  "en": "The illusion of boundless choice promised to the individual by post-industrial societies has, paradoxically, saddled modern human cognition with an overwhelming psychological burden.",
-                  "es": "La ilusión de elección ilimitada prometida al individuo por las sociedades posindustriales ha impuesto, paradójicamente, una abrumadora carga cognitiva sobre la mente moderna.",
-                  "de": "Die Verheißung grenzenloser Wahlfreiheit, die postindustrielle Gesellschaften dem Individuum versprachen, bürdete der menschlichen Kognition paradoxerweise eine erdrückende mentale Last auf.",
-                  "fr": "L'illusion d'un choix infini promise à l'individu par les sociétés post-industrielles a, paradoxalement, fait peser un fardeau cognitif accablant sur l'esprit contemporain."
+                  "tr": "Modern hayatın sunduğu sınırsız seçenekler, insanın omuzlarına görünenden çok daha ağır bir yük bindiriyor.",
+                  "en": "The endless choices of modern life place a surprisingly heavy burden on human willpower.",
+                  "es": "Las infinitas opciones de la vida moderna imponen una pesada carga sobre la voluntad humana.",
+                  "de": "Die grenzenlose Auswahl des modernen Lebens bürdet der menschlichen Willenskraft eine schwere Last auf.",
+                  "fr": "Les choix illimités de la société moderne font peser un fardeau surprenant sur la volonté humaine."
                 }
               },
               {
-                "target": "Ce moment d'hésitation en apparence anodin devant la penderie dès l'aube commence à entamer les réserves limitées de volonté du cortex préfrontal bien avant que la journée ne commence.",
+                "target": "Quelques instants dhésitation devant larmoire chaque matin entament notre concentration bien avant que la journée ne commence.",
                 "translations": {
-                  "tr": "Günün ilk ışıklarıyla birlikte gardırop karşısında yaşanan o görünüşte masum kararsızlık anı, beynin prefrontal korteksindeki sınırlı irade rezervini daha mesai başlamadan tüketmeye başlar.",
-                  "en": "That seemingly innocuous moment of hesitation before the wardrobe at dawn begins depleting the finite willpower reserves of the prefrontal cortex long before the working day even commences.",
-                  "es": "Ese momento de vacilación aparentemente inocente frente al guardarropa al amanecer comienza a agotar las reservas finitas de voluntad de la corteza prefrontal mucho antes de que inicie la jornada laboral.",
-                  "de": "Jener scheinbar harmlose Moment des Zögerns vor dem Kleiderschrank im Morgengrauen zehrt an den endlichen Willenskraftreserven des präfrontalen Kortex, noch bevor der eigentliche Arbeitstag beginnt.",
-                  "fr": "Ce moment d'hésitation en apparence anodin devant la penderie dès l'aube commence à entamer les réserves limitées de volonté du cortex préfrontal bien avant que la journée ne commence."
+                  "tr": "Günün ilk saatlerinde ayna karşısında yaşanan masum bir kararsızlık bile, günün geri kalanındaki irademizi sessizce tüketmeye başlar.",
+                  "en": "A few moments of hesitation before the wardrobe each morning quietly drain our concentration before the workday even begins.",
+                  "es": "Unos instantes de duda ante el armario cada mañana desgastan silenciosamente nuestra concentración antes de empezar la jornada laboral.",
+                  "de": "Wenige Augenblicke des Zögerns vor dem Kleiderschrank am Morgen verzehren leise unsere Konzentration, noch bevor der Tag beginnt.",
+                  "fr": "Quelques instants dhésitation devant larmoire chaque matin entament notre concentration bien avant que la journée ne commence."
                 }
               }
             ],
             [
               {
-                "target": "La tenue invariable de Steve Jobs — composée de cols roulés Issey Miyake, de jeans Levi's 501 et de baskets New Balance — n'était nullement une toquade excentrique, mais une éclatante démonstration d'ergonomie cognitive.",
+                "target": "La tenue immuable de Steve Jobs, faite dun col roulé et dun jean, nétait point un caprice, mais une leçon de clarté mentale.",
                 "translations": {
-                  "tr": "Steve Jobs'ın Issey Miyake imzalı siyah boğazlı kazak, Levi's 501 kot pantolon ve New Balance spor ayakkabılardan müteşekkil değişmez kombini, alelade bir eksantriklik değil, radikal bir bilişsel ergonomi tatbikatıydı.",
-                  "en": "Steve Jobs's immutable uniform—composed of Issey Miyake black turtlenecks, Levi's 501 denim, and New Balance sneakers—was by no means an eccentric quirk, but rather a masterclass in cognitive ergonomics.",
-                  "es": "El uniforme inmutable de Steve Jobs—compuesto por jerséis de cuello alto de Issey Miyake, vaqueros Levi's 501 y zapatillas New Balance—no era una excentricidad trivial, sino un ejercicio magistral de ergonomía cognitiva.",
-                  "de": "Steve Jobs' unveränderliche Kombination aus Issey Miyake Rollkragenpullovern, Levi's 501 Jeans und New Balance Turnschuhen war keineswegs eine bloße Schrulle, sondern eine radikale Praxis kognitiver Ergonomie.",
-                  "fr": "La tenue invariable de Steve Jobs — composée de cols roulés Issey Miyake, de jeans Levi's 501 et de baskets New Balance — n'était nullement une toquade excentrique, mais une éclatante démonstration d'ergonomie cognitive."
+                  "tr": "Steve Jobsın siyah boğazlı kazağı ve kot pantolondan oluşan değişmez kıyafeti, tuhaf bir takıntı değil, zihinsel berraklığı koruma sanatıdır.",
+                  "en": "Steve Jobss iconic uniform of a black turtleneck and jeans was no eccentric whim, but a masterclass in protecting mental clarity.",
+                  "es": "El uniforme invariable de Steve Jobs de cuello alto y vaqueros no era una rareza excéntrica, sino una lección de claridad mental.",
+                  "de": "Steve Jobs unverkennbare Kombination aus Rollkragenpullover und Jeans war keine exzentrische Laune, sondern eine bewusste Lektion in geistiger Klarheit.",
+                  "fr": "La tenue immuable de Steve Jobs, faite dun col roulé et dun jean, nétait point un caprice, mais une leçon de clarté mentale."
                 }
               },
               {
-                "target": "En éliminant méthodiquement les micro-décisions du quotidien, Jobs a pu canaliser l'intégralité de sa vivacité mentale vers les interfaces révolutionnaires et l'architecture matérielle raffinée d'Apple.",
+                "target": "En éliminant les choix insignifiants du quotidien, Jobs a dirigé toute son attention vers les créations révolutionnaires dApple.",
                 "translations": {
-                  "tr": "Gündelik hayatın mikro kararlarını sistematik biçimde elimine eden Jobs, zihinsel enerjisini Apple'ın çığır açan kullanıcı deneyimlerine ve kusursuz donanım mimarisine kanalize edebilmiştir.",
-                  "en": "By systematically eliminating the micro-decisions of mundane existence, Jobs successfully channeled his undivided mental vitality into Apple's groundbreaking user experiences and meticulous hardware architecture.",
-                  "es": "Al eliminar sistemáticamente las microdecisiones de la existencia mundana, Jobs logró canalizar su vitalidad mental hacia las revolucionarias experiencias de usuario y la arquitectura de hardware de Apple.",
-                  "de": "Durch die methodische Ausschaltung trivialer Mikro-Entscheidungen vermochte Jobs seine ungeteilte mentale Schaffenskraft vollends auf die bahnbrechenden Benutzererlebnisse und die akribische Hardware-Architektur von Apple zu bündeln.",
-                  "fr": "En éliminant méthodiquement les micro-décisions du quotidien, Jobs a pu canaliser l'intégralité de sa vivacité mentale vers les interfaces révolutionnaires et l'architecture matérielle raffinée d'Apple."
+                  "tr": "Gündelik hayatın küçük seçimlerini hayatından çıkaran Jobs, tüm dikkatini Appleın çığır açan tasarımlarına yöneltebilmiştir.",
+                  "en": "By eliminating trivial morning decisions, Jobs channeled his undivided attention into Apples groundbreaking designs.",
+                  "es": "Al suprimir pequeñas decisiones cotidianas, Jobs canalizó toda su atención en los innovadores diseños de Apple.",
+                  "de": "Durch den Verzicht auf banale Alltagsentscheidungen lenkte Jobs seine ganze Aufmerksamkeit auf wegweisende Designs.",
+                  "fr": "En éliminant les choix insignifiants du quotidien, Jobs a dirigé toute son attention vers les créations révolutionnaires dApple."
                 }
               }
             ],
             [
               {
-                "target": "Ce réductionnisme philosophique incarne l'expression la plus éclatante d'un esprit cherchant à s'émanciper plutôt qu'à s'asservir aux biens matériels.",
+                "target": "Ce dépouillement délibéré traduit le désir de libérer lesprit plutôt que de servir les biens matériels.",
                 "translations": {
-                  "tr": "Bu felsefi indirgemecilik, eşyanın kölesi olmak yerine zihni özgürleştirme gayretinin en berrak tezahürüdür.",
-                  "en": "This philosophical reductionism represents the clearest manifestation of liberating the human mind rather than remaining subservient to material possessions.",
-                  "es": "Este reduccionismo filosófico representa la manifestación más nítida de liberar la mente humana en lugar de permanecer subyugado a las posesiones materiales.",
-                  "de": "Dieser philosophische Reduktionismus verkörpert die reinste Manifestation des Bestrebens, den Geist zu emanzipieren, statt sich den Besitztümern zu unterwerfen.",
-                  "fr": "Ce réductionnisme philosophique incarne l'expression la plus éclatante d'un esprit cherchant à s'émanciper plutôt qu'à s'asservir aux biens matériels."
+                  "tr": "Bu bilinçli sadelik, eşyalara bağımlı olmak yerine zihni özgür kılma arzusunun en net göstergesidir.",
+                  "en": "This deliberate minimalism reflects a desire to free the mind rather than serve material possessions.",
+                  "es": "Este minimalismo consciente refleja el deseo de liberar la mente en lugar de someterse a las posesiones materiales.",
+                  "de": "Dieser bewusste Minimalismus spiegelt den Wunsch wider, den Geist zu befreien, statt materiellen Dingen zu dienen.",
+                  "fr": "Ce dépouillement délibéré traduit le désir de libérer lesprit plutôt que de servir les biens matériels."
                 }
               },
               {
-                "target": "Car le véritable génie créatif ne se mesure point à l'accumulation de futilités, mais à notre disposition à retrancher le superflu pour faire rayonner l'essentiel.",
+                "target": "La véritable créativité ne se mesure point à ce que nous accumulons, mais à ce que nous retranchons pour faire rayonner lessentiel.",
                 "translations": {
-                  "tr": "Zira gerçek yaratıcılık, hayatımıza ne kadar çok şey kattığımızla değil, asıl olana yer açmak için neleri feda edebildiğimizle ölçülür.",
-                  "en": "For true creative genius is measured not by how much superfluous clutter we accumulate, but by what we are willing to subtract to illuminate the essential.",
-                  "es": "Pues la verdadera genialidad creativa no se mide por cuántas cosas superfluas acumulamos, sino por lo que estamos dispuestos a sustraer para dar espacio a lo esencial.",
-                  "de": "Denn wahre Schöpferkraft bemisst sich nicht daran, wie viel Überflüssiges wir anhäufen, sondern daran, worauf wir zu verzichten bereit sind, um dem Wesentlichen Raum zu geben.",
-                  "fr": "Car le véritable génie créatif ne se mesure point à l'accumulation de futilités, mais à notre disposition à retrancher le superflu pour faire rayonner l'essentiel."
+                  "tr": "Gerçek yaratıcılık hayatımıza ne kadar çok şey kattığımızla değil, asıl olana yer açmak için nelerden vazgeçebildiğimizle ölçülür.",
+                  "en": "True creativity is measured not by how much we accumulate, but by what we are willing to remove to highlight what truly matters.",
+                  "es": "La verdadera creatividad no se mide por cuánto acumulamos, sino por lo que estamos dispuestos a retirar para iluminar lo esencial.",
+                  "de": "Wahre Kreativität bemisst sich nicht daran, wie viel wir anhäufen, sondern worauf wir verzichten, um das Wesentliche hervorzuheben.",
+                  "fr": "La véritable créativité ne se mesure point à ce que nous accumulons, mais à ce que nous retranchons pour faire rayonner lessentiel."
                 }
-              }
-            ],
-            [
+              },
               {
-                "target": "En dernière analyse, porter le même vêtement n'a rien d'un renoncement étriqué : c'est le contrepoison cognitif le plus élégant et le plus puissant contre la surcharge mentale du monde moderne.",
+                "target": "Porter les mêmes vêtements nest pas une contrainte, mais un rempart raffiné contre les distractions du monde moderne.",
                 "translations": {
-                  "tr": "Son tahlilde aynı kazağı giymek bir kısıtlama değil; modern insanın bilgi ve uyaran obezitesine karşı geliştirdiği en zarif ve güçlü zihinsel panzehirdir.",
-                  "en": "In the final analysis, donning the identical sweater is not an act of deprivation, but the most elegant and potent cognitive antidote conceived against modern information overload.",
-                  "es": "En última instancia, vestir el mismo jersey no es un acto de privación, sino el antídoto cognitivo más elegante y potente concebido contra la sobrecarga de información moderna.",
-                  "de": "Letzten Endes ist das Tragen desselben Pullovers keine Beschränkung, sondern das eleganteste und wirkungsvollste kognitive Antidot gegen die Reizüberflutung des modernen Zeitalters.",
-                  "fr": "En dernière analyse, porter le même vêtement n'a rien d'un renoncement étriqué : c'est le contrepoison cognitif le plus élégant et le plus puissant contre la surcharge mentale du monde moderne."
+                  "tr": "Aynı kıyafeti giymek bir sınırlama değil, çağımızın dikkat dağınıklığına karşı geliştirilmiş en zarif zihinsel kalkanlardan biridir.",
+                  "en": "Wearing the same clothes is not a limitation, but an elegant defense against the distractions of the modern world.",
+                  "es": "Llevar la misma ropa no supone una limitación, sino una elegante defensa contra las distracciones del mundo moderno.",
+                  "de": "Dieselbe Kleidung zu tragen ist keine Einschränkung, sondern ein eleganter Schutz gegen die Ablenkungen der modernen Zeit.",
+                  "fr": "Porter les mêmes vêtements nest pas une contrainte, mais un rempart raffiné contre les distractions du monde moderne."
                 }
               }
             ]
