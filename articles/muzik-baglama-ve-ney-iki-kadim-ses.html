@@ -2305,10 +2305,6 @@
     <header class="article-title-block">
       <h1 class="article-main-title" id="article-main-title">Article Headline</h1>
       <div class="article-support-title" id="article-support-title">Translated Headline</div>
-      <div class="article-ai-notice" id="article-ai-notice">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-        <span id="article-ai-notice-text">AI-generated content, reviewed for accuracy</span>
-      </div>
     </header>
 
     <!-- Featured Visual -->
@@ -4164,6 +4160,7 @@
         const eduNotice = eduNoticeMap[supportLang] || eduNoticeMap.tr;
 
         let captionText = "";
+        // Only credit images that actually require attribution (e.g. Wikimedia Commons, museum, CC licenses)
         if (vis.attribution && vis.attribution.sourceUrl) {
           const creator = vis.attribution.creator || "Wikimedia Commons";
           const lic = vis.attribution.license ? ` (${vis.attribution.license})` : "";
@@ -4171,14 +4168,16 @@
         } else if (vis.source && vis.source.includes("Wikimedia")) {
           const baseSource = vis.source.replace(/-\s*Eğitim amaçlıdır\.?/gi, "").replace(/\(Eğitim amacıyla kullanılmıştır\)/gi, "").trim();
           captionText = `${baseSource} ${eduNotice}`;
-        } else if (vis.source && !vis.source.toLowerCase().includes("gemini")) {
-          captionText = `Görsel: ${vis.source} ${eduNotice}`;
-        } else {
-          captionText = `Görsel: Leenardo Editoryal ${eduNotice}`;
         }
 
         if (featCaption) {
-          featCaption.textContent = captionText;
+          if (captionText) {
+            featCaption.textContent = captionText;
+            featCaption.style.display = "block";
+          } else {
+            featCaption.textContent = "";
+            featCaption.style.display = "none";
+          }
         }
       } else {
         imgBox.style.display = "none";
