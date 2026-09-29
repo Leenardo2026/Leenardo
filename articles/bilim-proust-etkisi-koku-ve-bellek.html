@@ -4851,33 +4851,61 @@
     const wordTranslationCache = {};
 
     async function fetchWordTranslation(word, fromLang, toLang) {
-      const cacheKey = fromLang + "_" + toLang + "_" + word.toLowerCase();
+      if (!word) return "";
+      const cacheKey = fromLang + "_" + toLang + "_" + word.toLowerCase().trim();
       if (wordTranslationCache[cacheKey]) {
         return wordTranslationCache[cacheKey];
       }
 
+      // 1. Primary: High-speed, CORS-enabled Google Dictionary/Translation API
       try {
-        const url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=" + fromLang + "&tl=" + toLang + "&dt=t&q=" + encodeURIComponent(word);
+        const url = "https://clients5.google.com/translate_a/t?client=dict-chrome-ex&sl=" + fromLang + "&tl=" + toLang + "&q=" + encodeURIComponent(word);
         const res = await fetch(url);
         if (res.ok) {
           const data = await res.json();
-          if (data && data[0] && data[0][0] && data[0][0][0]) {
-            const trans = data[0][0][0];
-            wordTranslationCache[cacheKey] = trans;
-            return trans;
+          let trans = "";
+          if (Array.isArray(data) && data[0]) {
+            trans = typeof data[0] === "string" ? data[0] : (data[0][0] || "");
+          }
+          if (trans && trans.trim().toLowerCase() !== word.trim().toLowerCase()) {
+            wordTranslationCache[cacheKey] = trans.trim();
+            return trans.trim();
           }
         }
       } catch (err) {}
 
+      // 2. Secondary: MyMemory Translated API with alternative matches
       try {
         const url = "https://api.mymemory.translated.net/get?q=" + encodeURIComponent(word) + "&langpair=" + fromLang + "|" + toLang;
         const res = await fetch(url);
         if (res.ok) {
           const data = await res.json();
           if (data && data.responseData && data.responseData.translatedText) {
-            const trans = data.responseData.translatedText.trim();
-            wordTranslationCache[cacheKey] = trans;
-            return trans;
+            let trans = data.responseData.translatedText.trim();
+            if (trans.toLowerCase() === word.toLowerCase() && Array.isArray(data.matches)) {
+              const alt = data.matches.find(m => m.translation && m.translation.trim().toLowerCase() !== word.trim().toLowerCase());
+              if (alt) trans = alt.translation.trim();
+            }
+            if (trans && trans.trim().toLowerCase() !== word.trim().toLowerCase()) {
+              wordTranslationCache[cacheKey] = trans;
+              return trans;
+            }
+          }
+        }
+      } catch (err) {}
+
+      // 3. Fallback: Legacy Google single endpoint
+      try {
+        const url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=" + fromLang + "&tl=" + toLang + "&dt=t&q=" + encodeURIComponent(word);
+        const res = await fetch(url);
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data[0] && data[0][0] && data[0][0][0]) {
+            const trans = data[0][0][0].trim();
+            if (trans && trans.toLowerCase() !== word.toLowerCase()) {
+              wordTranslationCache[cacheKey] = trans;
+              return trans;
+            }
           }
         }
       } catch (err) {}
@@ -6689,7 +6717,13 @@
 
       if (precomputedGloss) {
         displayTarget = precomputedGloss.token;
-        displayTrans = (precomputedGloss.gloss && (precomputedGloss.gloss[toLang] || precomputedGloss.gloss.en || Object.values(precomputedGloss.gloss)[0])) || "";
+        const rawGloss = (precomputedGloss.gloss && (precomputedGloss.gloss[toLang] || (toLang === "en" ? precomputedGloss.gloss.en : ""))) || "";
+        // Treat identical fallback translation as a miss if source and target languages differ
+        if (rawGloss && rawGloss.trim().toLowerCase() !== displayTarget.trim().toLowerCase() && fromLang !== toLang) {
+          displayTrans = rawGloss;
+        } else {
+          displayTrans = "";
+        }
         badgeText = precomputedGloss.pos || "";
         if (precomputedGloss.lemma && precomputedGloss.lemma.toLowerCase() !== precomputedGloss.token.toLowerCase()) {
           componentsText = `${precomputedGloss.token} (kök: ${precomputedGloss.lemma})`;
@@ -6717,14 +6751,24 @@
           }
         }
 
-        displayTrans = (pd.translations && (pd.translations[toLang] || pd.translations.en || Object.values(pd.translations)[0])) || "";
+        const rawPhraseTrans = (pd.translations && (pd.translations[toLang] || (toLang === "en" ? pd.translations.en : ""))) || "";
+        if (rawPhraseTrans && rawPhraseTrans.trim().toLowerCase() !== displayTarget.trim().toLowerCase() && fromLang !== toLang) {
+          displayTrans = rawPhraseTrans;
+        } else {
+          displayTrans = "";
+        }
         badgeText = pd.type || (t.compoundBadge || "Compound Phrase");
         componentsText = pd.components || "";
         morphologicalNote = pd.note || "";
       } else if (detectedUnit && detectedUnit.type === "morphology") {
         const md = detectedUnit.data;
         displayTarget = md.lemma || cleanWord;
-        displayTrans = (md.translations && md.translations[toLang]) || md.translations.en || Object.values(md.translations)[0];
+        const rawMorphTrans = (md.translations && md.translations[toLang]) || (toLang === "en" ? md.translations.en : "");
+        if (rawMorphTrans && rawMorphTrans.trim().toLowerCase() !== displayTarget.trim().toLowerCase() && fromLang !== toLang) {
+          displayTrans = rawMorphTrans;
+        } else {
+          displayTrans = "";
+        }
         badgeText = `[${md.pos || "Noun"}] lemma: ${md.lemma}`;
         componentsText = md.morphology || "";
         morphologicalNote = md.note || "";
@@ -6765,9 +6809,17 @@
           return vt === dt || vt === cw || dt.startsWith(vt) || vt.startsWith(dt) || cw.startsWith(vt) || vt.startsWith(cw);
         });
         if (matchedVocab && matchedVocab.translations) {
-          lessonTrans = matchedVocab.translations[toLang] || matchedVocab.translations.en || Object.values(matchedVocab.translations)[0];
-          badgeText = t.lessonWordBadge || "Key Word";
+          const vTrans = matchedVocab.translations[toLang] || (toLang === "en" ? matchedVocab.translations.en : "");
+          if (vTrans && vTrans.trim().toLowerCase() !== displayTarget.trim().toLowerCase()) {
+            lessonTrans = vTrans;
+            badgeText = t.lessonWordBadge || "Key Word";
+          }
         }
+      }
+
+      // Final guard: never consider an identical translation as valid when source and target languages differ
+      if (lessonTrans && lessonTrans.trim().toLowerCase() === displayTarget.trim().toLowerCase() && fromLang !== toLang) {
+        lessonTrans = null;
       }
 
       if (lessonTrans) {
