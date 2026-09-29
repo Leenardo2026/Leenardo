@@ -5983,6 +5983,66 @@
       "onlar", "bunlar", "şunlar", "kimse", "nerede", "burada", "orada", "kendi", "belki", "çünkü", "sanki", "nasıl"
     ]);
 
+    const TURKISH_COMMON_PAST_VERBS = new Set([
+      "gösterdi", "başladı", "yaşadı", "gitti", "oluştu", "bulundu", "sağladı",
+      "katıldı", "kullandı", "etti", "yaptı", "geldi", "oldu", "aldı", "verdi",
+      "gördü", "duydu", "sevdi", "bitti", "çıktı", "girdi", "kaldı", "yazdı",
+      "çalıştı", "anlattı", "öğrendi", "inandı", "bıraktı", "tanıdı", "doğdu",
+      "üretti", "tüketti", "kazandı", "kaybetti", "söyledi", "istedi", "anladı"
+    ]);
+
+    function isAgglutinativeVerbOrParticiple(word, lang = "tr") {
+      if (!word) return false;
+      const s = word.toLowerCase().trim();
+
+      if (lang === "tr") {
+        // Genuine noun roots that end in -ık/-ik/-ük and soften: sandık, fındık, düdük, tanık, açık, başlık
+        if (/^(?:sand|fınd|düd|tan|aç|başl|kıld)[ıiuü]?[kğ]/.test(s)) {
+          return false;
+        }
+
+        // 1. Participles (-dığı, -duğu, -tığı, -tüğü, -acağı, -eceği with any case or possessive)
+        // e.g. geldiğini, olduğunu, yaptığını, gördüğünü, gittiğinde, yaşadığına, geleceğini, olacağını
+        if (/(?:[dt][ıiuü]ğ|[ae]ceğ|[ae]cağ)(?:[ıiuü](?:n[ıiuüdae])?|[ıiuü]n[ıiuüdae]?|[ıiuü]m|[ıiuü]z|[ıiuü]n)?$/.test(s)) {
+          return true;
+        }
+
+        // 2. Compound and past verb tenses:
+        // -muştu, -müştü, -mıştı, -mişti, -iyordu, -uyordu, -üyordu, -ecekti, -acaktı, -irdi, -ırdı
+        if (/(?:m[ıiuü]ş|y?[ıiuü]?or|[ae]cak|[ıiuü]r)[dt][ıiuü]$/.test(s)) {
+          return true;
+        }
+
+        // -diydi, -tiydi, -dıydı, -tıydı
+        if (/[dt][ıiuü]yd[ıiuü]$/.test(s)) {
+          return true;
+        }
+
+        // -dılar, -diler, -tılar, -tiler, -muşlar, -mişler
+        if (/(?:[dt][ıiuü]|m[ıiuü]ş)l[ae]r$/.test(s)) {
+          return true;
+        }
+
+        // -diğinde, -diğince, -diğinden
+        if (/[dt][ıiuü]ğ[ıiuü]n(?:de|ce|den)$/.test(s)) {
+          return true;
+        }
+
+        // -ken, -erek, -arak, -ınca, -ince, -unca, -ünce, -dıkça, -dikçe, -madan, -meden
+        if (/(?:ken|[ae]r[ae]k|[ıiuü]nc[ae]|[dt][ıiuü]kç[ae]|m[ae]d[ae]n)$/.test(s) && s.length > 4) {
+          return true;
+        }
+
+        // Common 3rd person past verbs
+        if (TURKISH_COMMON_PAST_VERBS.has(s)) {
+          return true;
+        }
+      }
+
+      // Extensible: hooks for future agglutinative languages (e.g. Japanese, Korean, Finnish, Hungarian, Azerbaijani)
+      return false;
+    }
+
     function countTurkishVowels(strVal) {
       const m = strVal.match(/[aeıioöuü]/gi);
       return m ? m.length : 0;
@@ -5993,6 +6053,11 @@
       const raw = rawWord.trim();
       const isUpper = raw.length > 0 && raw[0] === raw[0].toUpperCase() && raw[0] !== raw[0].toLowerCase();
       const w = raw.toLowerCase();
+
+      // Guard: Do not run noun suffix stripping on verbs or participles
+      if (isAgglutinativeVerbOrParticiple(w, "tr")) {
+        return raw;
+      }
 
       if (TURKISH_KNOWN_PRESERVE.has(w)) return raw;
       if (TURKISH_VOWEL_DROP_MAP[w]) {
