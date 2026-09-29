@@ -706,6 +706,20 @@
       flex-wrap: wrap;
     }
 
+    .hero-image-credit {
+      margin-left: auto;
+      font-size: 0.62rem;
+      color: rgba(255, 255, 255, 0.72);
+      font-style: italic;
+      background: rgba(0, 0, 0, 0.38);
+      padding: 2px 7px;
+      border-radius: 4px;
+      backdrop-filter: blur(4px);
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
     .hero-cat-tag {
       background: var(--brand-coral-contrast);
       color: #ffffff;
@@ -2363,6 +2377,17 @@
           <button class="hero-lvl-pill ${lvl === currentLevel ? 'active' : ''}" onclick="event.preventDefault(); event.stopPropagation(); setLevel('${lvl}')">${lvl}</button>
         `).join('');
 
+        const leadVis = lead.visual || {};
+        let leadCreditText = "";
+        if (leadVis.attribution && leadVis.attribution.creator) {
+          leadCreditText = `${leadVis.attribution.creator} / Wikimedia (${leadVis.attribution.license || 'CC'}) (Eğitim amaçlı)`;
+        } else if (leadVis.source && leadVis.source.includes("Wikimedia")) {
+          leadCreditText = "Wikimedia Commons (Eğitim amaçlı)";
+        } else {
+          leadCreditText = "Editoryal İllüstrasyon (Eğitim amaçlı)";
+        }
+        const leadCreditHtml = `<span class="hero-image-credit">${leadCreditText}</span>`;
+
         return `
           <div class="hero-slide" data-index="${idx}">
             <img src="${leadImg}" alt="${leadTitle}" class="hero-lead-bg" loading="${idx === 0 ? 'eager' : 'lazy'}">
@@ -2372,6 +2397,7 @@
                 <div class="hero-badges-row">
                   <span class="hero-cat-tag">${leadCatLabel}</span>
                   ${leadReadTag}
+                  ${leadCreditHtml}
                 </div>
                 <a href="${leadUrl}">
                   <h2 class="hero-lead-title">${leadTitle}</h2>

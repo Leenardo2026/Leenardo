@@ -570,6 +570,19 @@
       transform: scale(1.015);
     }
 
+    .featured-image-caption {
+      font-size: 0.72rem;
+      color: #8c94a0;
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      padding: 0.45rem 1rem;
+      text-align: right;
+      line-height: 1.4;
+      background: var(--bg-surface);
+      border-top: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
     /* SAME CONTENT / DIFFERENT DIFFICULTY TAB SELECTOR */
     .same-topic-switcher {
       background: var(--bg-white);
@@ -2301,6 +2314,7 @@
     <!-- Featured Visual -->
     <div class="featured-image-box" id="featured-img-box" style="display:none;">
       <img id="article-featured-img" class="featured-image" src="" alt="Featured Visual">
+      <figcaption class="featured-image-caption" id="article-featured-caption"></figcaption>
     </div>
 
     <!-- SAME TOPIC / DIFFERENT DIFFICULTY TAB SELECTOR -->
@@ -4127,15 +4141,45 @@
       // 2.1 Update SEO, Social Sharing (Open Graph / Twitter) & Page Title in Support Language
       updateArticleSeoMetadata(article, targetData, supportData);
 
-      // 3. Featured Image
+      // 3. Featured Image & Attribution
       const imgBox = document.getElementById("featured-img-box");
       const featImg = document.getElementById("article-featured-img");
+      const featCaption = document.getElementById("article-featured-caption");
 
       const rawImg = (article.visual && article.visual.imageUrl) || article.featuredImage;
       const imgUrl = resolveAssetPath(rawImg);
       if (imgUrl && imgUrl.trim() !== "") {
         imgBox.style.display = "block";
         featImg.src = imgUrl;
+
+        // Attribution & Educational notice
+        const vis = article.visual || {};
+        const eduNoticeMap = {
+          tr: "(Eğitim amacıyla kullanılmıştır)",
+          en: "(Used for educational purposes)",
+          es: "(Utilizado con fines educativos)",
+          de: "(Für Bildungszwecke verwendet)",
+          fr: "(Utilisé à des fins éducatives)"
+        };
+        const eduNotice = eduNoticeMap[supportLang] || eduNoticeMap.tr;
+
+        let captionText = "";
+        if (vis.attribution && vis.attribution.sourceUrl) {
+          const creator = vis.attribution.creator || "Wikimedia Commons";
+          const lic = vis.attribution.license ? ` (${vis.attribution.license})` : "";
+          captionText = `Görsel: ${creator} / Wikimedia Commons${lic} ${eduNotice}`;
+        } else if (vis.source && vis.source.includes("Wikimedia")) {
+          const baseSource = vis.source.replace(/-\s*Eğitim amaçlıdır\.?/gi, "").replace(/\(Eğitim amacıyla kullanılmıştır\)/gi, "").trim();
+          captionText = `${baseSource} ${eduNotice}`;
+        } else if (vis.source && !vis.source.toLowerCase().includes("gemini")) {
+          captionText = `Görsel: ${vis.source} ${eduNotice}`;
+        } else {
+          captionText = `Görsel: Leenardo Editoryal ${eduNotice}`;
+        }
+
+        if (featCaption) {
+          featCaption.textContent = captionText;
+        }
       } else {
         imgBox.style.display = "none";
       }
