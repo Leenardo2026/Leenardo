@@ -150,17 +150,57 @@ def run_validation():
                     tags = lvl_obj.get("grammarTags", [])
                     c1_tags_all.update(tags)
 
+    # B1 Register & Forbidden Abstract Words Check
+    b1_register_violations = []
+    b1_banned = {
+        "en": ["posthumously", "malice", "phantom", "virtue"],
+        "es": ["póstumamente", "vileza", "virtud"],
+        "fr": ["malice", "vertu"],
+        "de": ["postum", "tugend"],
+        "tr": ["posthumous"]
+    }
+
+    for art in articles:
+        art_id = art.get("id")
+        for lang, words in b1_banned.items():
+            lvl_b1 = art.get("languages", {}).get(lang, {}).get("B1", {})
+            for p in lvl_b1.get("paragraphs", []):
+                for s in p:
+                    txt = (s.get("target") if isinstance(s, dict) else str(s)).lower()
+                    for bw in words:
+                        if bw in txt:
+                            b1_register_violations.append(f"[{art_id}][{lang}][B1] Found abstract/literary term '{bw}' in: {txt[:60]}...")
+
+    if b1_register_violations:
+        for viol in b1_register_violations[:5]:
+            warnings.append(f"CEFR B1 Register Warning: {viol}")
+
     print(f"\n--- AUDIT SUMMARY ---")
     print(f"Total Content Items (Articles): {len(seen_ids)}")
     print(f"Total Language-Level Permutations: {total_units} / {len(articles) * 5 * 5} expected.")
     print(f"Validation Errors: {len(errors)}")
     print(f"Validation Warnings: {len(warnings)}")
 
-    print(f"\n--- CEFR LINGUISTIC PROGRESSION AUDIT ---")
+    print(f"\n--- CEFR LINGUISTIC PROGRESSION & DIFFICULTY CALIBRATION AUDIT ---")
+    cefr_targets = {
+        "A1": "5-8 words/sentence, simple present/past, no subordinate clauses, no passive",
+        "A2": "8-12 words/sentence, max 2 simple clauses with and/but/because, no idioms",
+        "B1": "12-18 words/sentence, 1 subordinate clause max, no rare/abstract vocabulary",
+        "B2": "Up to 25 words/sentence, multiple clauses, moderate complexity",
+        "C1": "Rich vocabulary, complex syntax, near-native essay register"
+    }
+
     for lvl in SUPPORTED_LEVELS:
         avg_w = sum(level_word_counts[lvl]) / len(level_word_counts[lvl]) if level_word_counts[lvl] else 0
         avg_w_s = sum(level_sentence_lengths[lvl]) / len(level_sentence_lengths[lvl]) if level_sentence_lengths[lvl] else 0
-        print(f"  [{lvl}] Avg Word Count: {avg_w:5.1f} | Avg Sentence Length: {avg_w_s:4.1f} words/sentence")
+        target_rule = cefr_targets.get(lvl, "")
+        print(f"  [{lvl}] Avg Words: {avg_w:5.1f} | Avg Sentence Length: {avg_w_s:4.1f} w/s | Target: {target_rule}")
+
+    print(f"\n--- B1 REGISTER SANITIZATION CHECK ---")
+    if not b1_register_violations:
+        print("  ✓ Zero banned abstract/literary words ('posthumously', 'malice', 'phantom', 'virtue') detected in B1.")
+    else:
+        print(f"  ⚠️ {len(b1_register_violations)} potential B1 register infractions flagged.")
 
     # Check that A1 < A2 < B1 < B2 < C1 in complexity
     avg_a1 = sum(level_word_counts["A1"]) / len(level_word_counts["A1"])

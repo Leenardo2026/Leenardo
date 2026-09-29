@@ -528,6 +528,24 @@
       line-height: 1.45;
     }
 
+    /* AI Notice at Top of Article */
+    .article-ai-notice {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.72rem;
+      font-family: var(--font-sans);
+      color: var(--text-muted);
+      opacity: 0.85;
+      margin-top: 0.85rem;
+      letter-spacing: 0.01em;
+    }
+
+    .article-ai-notice svg {
+      opacity: 0.75;
+      flex-shrink: 0;
+    }
+
     /* Featured Image */
     .featured-image-box {
       margin-bottom: 2.25rem;
@@ -2105,6 +2123,10 @@
     <header class="article-title-block">
       <h1 class="article-main-title" id="article-main-title">Article Headline</h1>
       <div class="article-support-title" id="article-support-title">Translated Headline</div>
+      <div class="article-ai-notice" id="article-ai-notice">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+        <span id="article-ai-notice-text">AI-generated content, reviewed for accuracy</span>
+      </div>
     </header>
 
     <!-- Featured Visual -->
@@ -2403,16 +2425,13 @@
     </div>
   </div>
 
-  <!-- Site Footer (Houses Relocated Pedagogical Assurance & Legal Notices) -->
+  <!-- Site Footer (Houses Legal & Educational Notices) -->
   <footer class="site-footer">
     <div class="site-footer-inner">
       <div class="footer-brand">Leenardo</div>
       <div class="footer-disclaimers">
         <p id="notice-banner-text">
-          Pedagogical Assurance: All materials are curated for language learning under CEFR standards.
-        </p>
-        <p id="footer-disclaimer">
-          These texts are generated with AI solely for language education purposes and do not represent a real news agency.
+          Content is generated with AI and structured to follow CEFR level guidelines, refined through ongoing review.
         </p>
         <p id="notice-contact-text">
           Notice & Takedown Inquiries: <a href="mailto:contact@leenardo.com">contact@leenardo.com</a> (24h response time).
@@ -2470,7 +2489,8 @@
         myWords: "Kelimelerim",
         targetLangLabel: "Öğrenilen Dil:",
         supportLangLabel: "Destek Dili:",
-        noticeBanner: "<strong>Pedagojik Güvence:</strong> Tüm içerikler dil eğitimi ve CEFR standartlarına uygun olarak tasarlanmıştır.",
+        aiGeneratedNotice: "Yapay zekâ ile üretilmiş içerik, doğruluk kontrolünden geçirilmiştir",
+        noticeBanner: "İçerikler yapay zekâ ile üretilmiş olup CEFR seviye yönergelerine uygun şekilde yapılandırılmış ve sürekli incelemelerle geliştirilmektedir.",
         noticeContact: "Telif bildirimi: <a href='mailto:contact@leenardo.com'>contact@leenardo.com</a> (24 saat içinde yanıtlanır)",
         switcherTitle: "Aynı Konu, Farklı Seviye",
         switcherDesc: "Bu metnin zorluk derecesini ve dil derinliğini seviyene göre hemen ayarla",
@@ -2538,7 +2558,8 @@
         myWords: "Vocabulary",
         targetLangLabel: "Target:",
         supportLangLabel: "Support:",
-        noticeBanner: "<strong>Pedagogical Assurance:</strong> All materials are curated for language learning under CEFR standards.",
+        aiGeneratedNotice: "AI-generated content, reviewed for accuracy",
+        noticeBanner: "Content is generated with AI and structured to follow CEFR level guidelines, refined through ongoing review.",
         noticeContact: "Notice & Takedown Inquiries: <a href='mailto:contact@leenardo.com'>contact@leenardo.com</a> (24h response time).",
         switcherTitle: "Same Topic, Different Level",
         switcherDesc: "Adjust the linguistic complexity of this exact story to your level",
@@ -2606,7 +2627,8 @@
         myWords: "Vocabulario",
         targetLangLabel: "Objetivo:",
         supportLangLabel: "Apoyo:",
-        noticeBanner: "<strong>Garantía Pedagógica:</strong> Contenidos educativos diseñados bajo estándares CEFR.",
+        aiGeneratedNotice: "Contenido generado con IA, revisado para mayor precisión",
+        noticeBanner: "El contenido se genera con IA y se estructura siguiendo las pautas de nivel MCER, perfeccionándose mediante revisiones continuas.",
         noticeContact: "Contacto por derechos: <a href='mailto:contact@leenardo.com'>contact@leenardo.com</a> (respuesta en 24h)",
         switcherTitle: "Mismo Tema, Diferente Nivel",
         switcherDesc: "Ajusta la complejidad lingüística de esta misma historia a tu nivel",
@@ -2674,7 +2696,8 @@
         myWords: "Wortschatz",
         targetLangLabel: "Zielsprache:",
         supportLangLabel: "Hilfssprache:",
-        noticeBanner: "<strong>Pädagogische Qualität:</strong> Alle Texte folgen den CEFR-Stufenrichtlinien.",
+        aiGeneratedNotice: "KI-generierter Inhalt, auf Genauigkeit überprüft",
+        noticeBanner: "Die Inhalte werden mit KI erstellt, nach den GER-Stufenrichtlinien strukturiert und durch fortlaufende Prüfungen verfeinert.",
         noticeContact: "Urheberrechtsanfragen: <a href='mailto:contact@leenardo.com'>contact@leenardo.com</a> (Antwort in 24 Std.)",
         switcherTitle: "Gleiches Thema, Anderes Sprachniveau",
         switcherDesc: "Passe die sprachliche Komplexität dieses Artikels an dein Niveau an",
@@ -2742,7 +2765,8 @@
         myWords: "Vocabulaire",
         targetLangLabel: "Langue Cible:",
         supportLangLabel: "Langue de Soutien:",
-        noticeBanner: "<strong>Garantie Pédagogique:</strong> Contenus pédagogiques conçus selon les critères CEFR.",
+        aiGeneratedNotice: "Contenu généré par IA, vérifié pour son exactitude",
+        noticeBanner: "Le contenu est généré par IA et structuré selon les lignes directrices du CECRL, affiné par un examen continu.",
         noticeContact: "Contact droits d'auteur: <a href='mailto:contact@leenardo.com'>contact@leenardo.com</a> (réponse sous 24h)",
         switcherTitle: "Même Sujet, Niveau Différent",
         switcherDesc: "Adaptez la complexité de cet article à votre niveau de compréhension",
@@ -3432,6 +3456,9 @@
 
       const nBanner = document.getElementById("notice-banner-text");
       if (nBanner) nBanner.innerHTML = t.noticeBanner;
+
+      const aiNotice = document.getElementById("article-ai-notice-text");
+      if (aiNotice) aiNotice.textContent = t.aiGeneratedNotice || "AI-generated content, reviewed for accuracy";
 
       const swTitle = document.getElementById("switcher-title");
       if (swTitle) swTitle.textContent = t.switcherTitle;

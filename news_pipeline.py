@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-💎 Daily Turkish with Mia - Multilingual Graded News Pipeline
+💎 Leenardo - Multilingual Graded Content Pipeline
 --------------------------------------------------------------
-Çok dilli (TR, ES, DE, FR, EN) haberleri CEFR A1-C1 standartlarına göre
+Çok dilli (TR, ES, DE, FR, EN) içerikleri CEFR A1-C1 standartlarına göre
 seviyelendiren, sözlük ve anlama soruları oluşturan, yasal uyar-kaldır
 korumalı çalışma kağıtları ve JSON veritabanı üreten pipeline motoru.
 
-YASAL GÜVENCE:
-- C2 seviyesi (telif riski) kaldırılmıştır. En yüksek seviye C1'dir.
+YASAL BİLGİ & TELİF:
+- C2 seviyesi kaldırılmıştır. En yüksek seviye C1'dir.
 - Orijinal basın fotoğrafları çekilmez ve depolanmaz.
-- Her haber altında açık kaynak atfı ve uyar-kaldır (copyright@dailyturkishmia.com) yer alır.
-- İçerikler %100 pedagojik dil öğretimi amaçlıdır.
+- Her haber altında telif bildirimi ve iletişim (contact@leenardo.com) yer alır.
+- İçerikler yapay zekâ ile üretilmiş olup CEFR seviye yönergelerine uygun şekilde yapılandırılmış ve sürekli incelemelerle geliştirilmektedir.
 """
 
 import os
@@ -32,20 +32,44 @@ LANG_NAMES = {
 }
 
 CEFR_REWRITE_SYSTEM_PROMPT = """
-Sen, çok dilli yabancı dil eğitimi (CEFR A1-C1) konusunda uzman bir müfredat tasarımcısısın.
-Sana verilen güncel olayı seçilen HEDEF DİLDE (Target Language) 5 farklı CEFR seviyesine (A1, A2, B1, B2, C1) dönüştür.
+Sen, çok dilli yabancı dil eğitimi (CEFR A1-C1) konusunda uzman bir müfredat ve dilbilim tasarımcısısın.
+Sana verilen konuyu seçilen HEDEF DİLDE (Target Language) 5 farklı CEFR seviyesine (A1, A2, B1, B2, C1) dönüştür.
 
-ZORUNLU KURALLAR:
-1. Kesinlikle C2 seviyesi üretilmez (orijinal metin kopyalanmaz, telif koruması gereği A1-C1 aralığında özgün yazılır).
-2. Basın fotoğrafı veya telifli edebi alıntı yapılmaz.
-3. Her seviye o dilin resmi dil bilgisi (gramer) kurallarına sadık kalmalıdır:
-   - A1: Temel zamanlar, yalın cümleler, günlük kelimeler.
-   - A2: Geçmiş zamanlar, temel bağlaçlar, rutinler.
-   - B1: Süreçler, edilgen çatılar, yan cümleler, akıcı anlatım.
-   - B2: Analiz dili, soyut kavramlar, ileri bağlaçlar.
-   - C1: Üst düzey edebi ve akademik sentaks, deyimler, nüanslı argümantasyon.
-4. Cümleler, kelimeler ve sorular çok dilli çeviri haritasıyla (translations: {en, tr, es, de, fr}) yapılandırılmalıdır.
-5. Her makalede telif & uyar-kaldır (Notice & Takedown) iletişim e-postası (copyright@dailyturkishmia.com) yer almalıdır.
+ZORUNLU CEFR SEVİYE VE ZORLUK KALİBRASYON KURALLARI (TÜM DİLLER İÇİN GEÇERLİDİR):
+Seviyelerin birbirine benzemesini ve hepsinin aynı edebi tona kaymasını kesinlikle engelle. Her seviye için aşağıdaki sınırlamaları tavizsiz uygula:
+
+1. A1 SEVİYESİ (Beginner):
+   - Cümle uzunluğu: Cümle başına KESİNLİKLE 5-8 kelime.
+   - Zamanlar / Çatılar: Yalnızca yalın geniş zaman / şimdiki zaman veya basit geçmiş zaman (simple present/past only).
+   - Kelime dağarcığı: Yalnızca hedef dilde en sık kullanılan 500-750 kelime.
+   - KESİNLİKLE YASAK: Yan cümle (subordinate clause), deyimler (idioms), edilgen çatı (passive voice).
+
+2. A2 SEVİYESİ (Elementary):
+   - Cümle uzunluğu: Cümle başına KESİNLİKLE 8-12 kelime.
+   - Cümle yapısı: En fazla iki basit cümleyi "ve / ama / çünkü" (and / but / because) bağlaçlarıyla bağlayabilir.
+   - Kelime dağarcığı: En sık kullanılan 1000-1500 kelime.
+   - KESİNLİKLE YASAK: Deyimler, edebi veya soyut kelimeler, edilgen çatı (passive voice).
+
+3. B1 SEVİYESİ (Intermediate):
+   - Cümle uzunluğu: Cümle başına KESİNLİKLE 12-18 kelime.
+   - Cümle yapısı: Cümle başına en fazla bir (1) yan cümle (subordinate clause). Sade, doğrudan ve akıcı sentaks; retorik veya süslü sanatlardan kaçın.
+   - Kelime dağarcığı: En sık kullanılan 2000-3000 kelime + somut konuya özgü terimler.
+   - KESİNLİKLE YASAK / KAÇINILACAKLAR: Edebi/şiirsel anlatım, nadir eşanlamlılar, soyut felsefi terimler (örn. "posthumously", "malice", "phantom", "virtue" gibi kelimeler KULLANILMAZ — yerine "after his death", "unkind", "illusion", "good character" gibi yalın karşılıklar kullanılır).
+
+4. B2 SEVİYESİ (Upper-Intermediate):
+   - Cümle uzunluğu: Cümle başına en fazla 25 kelimeye kadar.
+   - Cümle yapısı: Birden fazla yan cümle ve karmaşık sentaks serbesttir.
+   - Kelime dağarcığı: Genişletilmiş ve soyut kavramlar, yaygın deyimler kabul edilebilir, orta düzey sentaks karmaşıklığı.
+
+5. C1 SEVİYESİ (Advanced):
+   - Cümle yapısı & Üslup: Zengin kelime dağarcığı, karmaşık sentaks, anadili seviyesine yakın doğal akış (near-native register). Kaliteli bir gazete incelemesi (long-read) veya edebi deneme üslubu.
+   - KAÇINILACAKLAR: Konunun kendisi o teknik uzmanlık alanı olmadıkça aşırı teknik akademik/bilimsel jargon ve arkaik/nadir kelimelerden kaçın.
+
+GENEL İLKE:
+- Her seviyeyi sonuçlandırmadan önce kelime sıklığı ve cümle uzunluğu kısıtlamalarına göre tek tek doğrula.
+- Bu kuralları tüm hedef dillerde (Türkçe, İspanyolca, İngilizce, Almanca, Fransızca) kelimesi kelimesine çeviri olarak değil, fonksiyonel dilbilimsel denklik temelinde tutarlı şekilde uygula.
+- Kesinlikle telifli orijinal metin kopyalanmaz veya basın fotoğrafı kullanılmaz.
+- İçerikler yapay zekâ ile üretilmiş olup CEFR seviye yönergelerine uygun şekilde yapılandırılmış ve sürekli incelemelerle geliştirilmektedir.
 """
 
 def load_existing_articles():
@@ -133,14 +157,14 @@ def generate_worksheets(articles=None):
                 output_file = WORKSHEETS_DIR / f"worksheet_{art_id}_{t_lang}.md"
 
                 content = []
-                content.append(f"# 💎 Daily Turkish with Mia - {t_lang_name} Ders Çalışma Kağıdı")
+                content.append(f"# 💎 Leenardo - {t_lang_name} Ders Çalışma Kağıdı")
                 content.append(f"**Kategori:** {category_name}")
                 content.append(f"**Eğitim Konusu:** {topic_title}")
-                content.append(f"**İçerik Türü:** %100 Özgün Kurgusal Pedagojik Metin (Telif ve Basın Alıntısı İçermez)")
+                content.append(f"**İçerik Türü:** %100 Özgün Pedagojik Metin (Telif ve Basın Alıntısı İçermez)")
                 content.append("")
-                content.append("> ⚖️ **EĞİTİM AMACI & TELİF GÜVENCESİ:**")
-                content.append(f"> Bu metinler yalnızca dil öğretimi amacıyla yapay zeka ile üretilmiştir, gerçek bir haber kaynağını temsil etmez.")
-                content.append("> İletişim: `copyright@dailyturkishmia.com`.")
+                content.append("> ⚖️ **EĞİTİM AMACI & YASAL BİLGİ:**")
+                content.append(f"> İçerikler yapay zekâ ile üretilmiş olup CEFR seviye yönergelerine uygun şekilde yapılandırılmış ve sürekli incelemelerle geliştirilmektedir.")
+                content.append("> İletişim: `contact@leenardo.com`.")
                 content.append("")
                 content.append("---")
                 content.append("")
