@@ -3,3 +3,6 @@ __pycache__/
 *.pyc
 .env
 .gemini/
+logo-*.jpg
+leenardo_*.jpg
+logo-preview.html

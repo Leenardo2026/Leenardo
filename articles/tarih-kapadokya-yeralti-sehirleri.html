@@ -2050,53 +2050,108 @@
       box-shadow: 0 4px 12px var(--brand-coral-glow);
     }
 
-    /* Flashcards */
+    /* Flashcards 3D Interactive Stage */
+    .fc-stage {
+      perspective: 1000px;
+      max-width: 440px;
+      margin: 0 auto 1.5rem;
+      cursor: pointer;
+    }
+
     .fc-card {
-      background: var(--bg-cream);
-      border: 1px solid var(--divider-hairline);
+      position: relative;
+      width: 100%;
+      min-height: 240px;
+      transform-style: preserve-3d;
+      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
       border-radius: 20px;
-      padding: 2.5rem 1.5rem;
-      text-align: center;
-      min-height: 220px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    }
+
+    .fc-card.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .fc-face {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 20px;
+      border: 1px solid var(--divider-hairline);
+      background: var(--bg-cream);
+      padding: 1.5rem;
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
+      box-sizing: border-box;
+    }
+
+    .fc-back {
+      transform: rotateY(180deg);
+      background: var(--bg-surface);
+    }
+
+    .fc-card-header {
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      margin-bottom: 1.5rem;
-      transition: transform 0.2s ease;
+      width: 100%;
     }
 
-    .fc-card:hover {
-      transform: scale(1.02);
-    }
-
-    .fc-word {
-      font-family: var(--font-serif);
-      font-size: 1.75rem;
+    .fc-tag {
+      font-size: 0.72rem;
       font-weight: 700;
-      color: var(--brand-purple);
-      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      background: var(--bg-white);
+      border: 1px solid var(--divider-hairline);
+      padding: 3px 8px;
+      border-radius: 6px;
     }
 
-    .fc-translation {
-      font-size: 1.15rem;
+    .fc-front-word {
+      font-family: var(--font-serif);
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: var(--ink-navy);
+      text-align: center;
+      line-height: 1.25;
+    }
+
+    .fc-back-trans {
+      font-family: var(--font-serif);
+      font-size: 1.65rem;
+      font-weight: 700;
       color: var(--brand-coral);
-      font-weight: 600;
+      text-align: center;
+      line-height: 1.25;
     }
 
-    .fc-controls {
+    .fc-card-footer {
+      font-size: 0.75rem;
+      color: var(--slate-500);
+      text-align: center;
+      opacity: 0.75;
+    }
+
+    .fc-controls-bar, .fc-controls {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 1rem;
+      margin-top: 1rem;
     }
 
     .fc-ctrl-btn {
-      padding: 8px 20px;
+      padding: 9px 24px;
       border-radius: 999px;
       font-weight: 700;
-      font-size: 0.84rem;
+      font-size: 0.88rem;
       cursor: pointer;
       border: 1px solid var(--divider-hairline);
       background: var(--bg-white);
@@ -2104,16 +2159,30 @@
       transition: all 0.2s ease;
     }
 
-    .fc-ctrl-btn.learn {
+    .fc-ctrl-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .fc-ctrl-btn.btn-repeat, .fc-ctrl-btn.repeat {
+      background: var(--bg-white);
+      color: var(--brand-coral);
+      border-color: var(--brand-coral);
+    }
+
+    .fc-ctrl-btn.btn-repeat:hover, .fc-ctrl-btn.repeat:hover {
+      background: var(--brand-coral);
+      color: #ffffff;
+    }
+
+    .fc-ctrl-btn.btn-master, .fc-ctrl-btn.learn {
       background: #10b981;
       color: #ffffff;
       border-color: #10b981;
     }
 
-    .fc-ctrl-btn.repeat {
-      background: var(--brand-coral);
-      color: #ffffff;
-      border-color: var(--brand-coral);
+    .fc-ctrl-btn.btn-master:hover, .fc-ctrl-btn.learn:hover {
+      background: #059669;
+      border-color: #059669;
     }
 
     /* Toast */
@@ -2409,7 +2478,7 @@
           <summary class="pop-details-summary">Context & Details</summary>
           <div class="pop-details-content">
             <div class="popover-root-row" id="pop-root-row" style="display:none;">
-              <span id="pop-root-label" style="color:var(--text-muted);">Root:</span> <strong id="pop-root-word" style="color:var(--ink-navy);"></strong> (<span id="pop-root-trans" style="color:var(--text-muted);"></span>)
+              <span id="pop-root-label" style="color:var(--text-muted);">Root:</span> <strong id="pop-root-word" style="color:var(--ink-navy);"></strong> <span id="pop-root-trans-wrap" style="color:var(--text-muted); display:none;">(<span id="pop-root-trans"></span>)</span>
             </div>
             <div class="popover-examples-box" id="pop-examples-container" style="display:none;">
               <div class="popover-examples-title" style="font-size:0.75rem; font-weight:600; color:var(--text-muted); margin-bottom:0.25rem;">Sentence Context:</div>
@@ -4242,11 +4311,11 @@
               const unit = detectContextualUnit(cleanWords, idx, targetLang);
               if (unit && (unit.type === "phrase" || unit.type === "compound")) {
                 const spanGroup = wordSpans.slice(unit.startIdx, unit.endIdx + 1);
-                handleWordClick(unit.phrase, wSpan, targetData, targetLang, supportLang, sentObj.target, spanGroup, unit);
+                handleWordClick(unit.phrase, wSpan, targetData, targetLang, supportLang, sentObj.target, spanGroup, unit, sentObj, idx);
               } else if (unit && unit.type === "morphology") {
-                handleWordClick(cleanWords[idx], wSpan, targetData, targetLang, supportLang, sentObj.target, [wSpan], unit);
+                handleWordClick(cleanWords[idx], wSpan, targetData, targetLang, supportLang, sentObj.target, [wSpan], unit, sentObj, idx);
               } else {
-                handleWordClick(cleanWords[idx], wSpan, targetData, targetLang, supportLang, sentObj.target, [wSpan], null);
+                handleWordClick(cleanWords[idx], wSpan, targetData, targetLang, supportLang, sentObj.target, [wSpan], null, sentObj, idx);
               }
             };
           });
@@ -6567,7 +6636,7 @@
       };
     }
 
-    async function handleWordClick(rawWord, wordSpan, levelData, fromLang, toLang, parentSentence = "", spanGroup = null, detectedUnit = null) {
+    async function handleWordClick(rawWord, wordSpan, levelData, fromLang, toLang, parentSentence = "", spanGroup = null, detectedUnit = null, sentObj = null, tokenIdx = null) {
       const cleanWord = rawWord.replace(/[^\p{L}\p{M}\p{N}'-]/gu, '').trim();
       if (!cleanWord && !detectedUnit) return;
 
@@ -6604,7 +6673,31 @@
       let componentsText = "";
       let morphologicalNote = "";
 
-      if (detectedUnit && (detectedUnit.type === "phrase" || detectedUnit.type === "compound")) {
+      // 1. High-precision contextual precomputed token gloss
+      let precomputedGloss = null;
+      if (sentObj && Array.isArray(sentObj.tokens) && sentObj.tokens.length > 0) {
+        if (tokenIdx !== null && tokenIdx !== undefined && sentObj.tokens[tokenIdx]) {
+          const cand = sentObj.tokens[tokenIdx];
+          if (cand.token && cand.token.toLowerCase() === cleanWord.toLowerCase()) {
+            precomputedGloss = cand;
+          }
+        }
+        if (!precomputedGloss) {
+          precomputedGloss = sentObj.tokens.find(t => t.token && t.token.toLowerCase() === cleanWord.toLowerCase());
+        }
+      }
+
+      if (precomputedGloss) {
+        displayTarget = precomputedGloss.token;
+        displayTrans = (precomputedGloss.gloss && (precomputedGloss.gloss[toLang] || precomputedGloss.gloss.en || Object.values(precomputedGloss.gloss)[0])) || "";
+        badgeText = precomputedGloss.pos || "";
+        if (precomputedGloss.lemma && precomputedGloss.lemma.toLowerCase() !== precomputedGloss.token.toLowerCase()) {
+          componentsText = `${precomputedGloss.token} (kök: ${precomputedGloss.lemma})`;
+        }
+        if (precomputedGloss.note) {
+          morphologicalNote = precomputedGloss.note;
+        }
+      } else if (detectedUnit && (detectedUnit.type === "phrase" || detectedUnit.type === "compound")) {
         const pd = detectedUnit.data;
         displayTarget = (pd && pd.phrase) ? pd.phrase : (detectedUnit.phrase || cleanWord);
 
@@ -6636,6 +6729,14 @@
         componentsText = md.morphology || "";
         morphologicalNote = md.note || "";
       } else {
+        // Fallback: log miss as requested so we track unglossed words
+        console.warn("[Gloss Miss - Live Fallback]", {
+          word: cleanWord,
+          sentence: parentSentence,
+          fromLang,
+          toLang
+        });
+
         // Single word: normalize to bare dictionary form (e.g. imparatoru -> imparator)
         if (fromLang === "tr") {
           const bareWord = getBareTurkishWord(cleanWord);
@@ -6653,7 +6754,7 @@
         speakSingleSentence(displayTarget, null);
       };
 
-      // If neither phrase nor morphology matched, check lesson curated vocab
+      // If neither token-gloss nor phrase matched, check lesson curated vocab
       let lessonTrans = displayTrans || null;
       let matchedVocab = null;
       if (!lessonTrans && levelData && Array.isArray(levelData.vocab)) {
@@ -6671,7 +6772,7 @@
 
       if (lessonTrans) {
         if (vocabBadge) {
-          vocabBadge.style.display = "inline-block";
+          vocabBadge.style.display = badgeText ? "inline-block" : "none";
           vocabBadge.textContent = badgeText;
         }
         transTextElem.textContent = lessonTrans;
@@ -6683,7 +6784,14 @@
           if (rootWordElem) rootWordElem.textContent = componentsText || matchedVocab.root;
           const rTrans = (matchedVocab?.rootTranslations && matchedVocab.rootTranslations[toLang])
                       || (matchedVocab?.rootTranslations && matchedVocab.rootTranslations.en) || "";
-          if (rootTransElem) rootTransElem.textContent = rTrans;
+          const transWrap = document.getElementById("pop-root-trans-wrap");
+          if (rTrans) {
+            if (rootTransElem) rootTransElem.textContent = rTrans;
+            if (transWrap) transWrap.style.display = "inline";
+          } else {
+            if (rootTransElem) rootTransElem.textContent = "";
+            if (transWrap) transWrap.style.display = "none";
+          }
         } else {
           if (rootRow) rootRow.style.display = "none";
         }
@@ -6702,6 +6810,8 @@
           if (rootLabel) rootLabel.textContent = t.structureLabel || "Structure:";
           if (rootWordElem) rootWordElem.textContent = componentsText;
           if (rootTransElem) rootTransElem.textContent = "";
+          const transWrap = document.getElementById("pop-root-trans-wrap");
+          if (transWrap) transWrap.style.display = "none";
         } else {
           if (rootRow) rootRow.style.display = "none";
         }
@@ -6993,6 +7103,7 @@
               <div class="vn-word-primary">${w.word} <span style="font-size:0.75rem;font-weight:600;color:var(--text-muted);margin-left:0.35rem;">[${fromName} / ${toName}]</span></div>
               <div class="vn-word-secondary">${w.translation}</div>
               ${w.root ? `<div class="vn-word-root">${t.rootLabel} ${w.root}${w.rootTranslation ? ' (' + w.rootTranslation + ')' : ''}</div>` : ''}
+              ${w.contextSentence ? `<div style="font-size:0.78rem;font-style:italic;color:var(--text-muted);margin-top:0.3rem;line-height:1.35;">"${highlightWordInSentence(w.contextSentence, w.word)}"</div>` : ''}
             </div>
             <div style="display:flex;align-items:center;gap:0.5rem;">
               <button class="popover-audio-btn" onclick="speakSingleSentence('${escapeSingleQuotes(w.word)}', event)">${AUDIO_ICON_SVG}</button>
@@ -7117,7 +7228,8 @@
               </div>
               <div style="margin:auto;">
                 <div class="fc-back-trans">${card.translation}</div>
-                ${(card.root && card.rootTranslation) ? `<div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.35rem;">${t.rootLabel} ${card.root} (${card.rootTranslation})</div>` : ''}
+                ${(card.root && card.rootTranslation) ? `<div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.35rem;">${t.rootLabel} ${card.root} (${card.rootTranslation})</div>` : (card.root ? `<div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.35rem;">${t.rootLabel} ${card.root}</div>` : '')}
+                ${card.contextSentence ? `<div style="font-size:0.82rem;font-style:italic;color:var(--text-muted);margin-top:0.6rem;padding-top:0.5rem;border-top:1px dashed var(--divider-hairline);line-height:1.35;">"${highlightWordInSentence(card.contextSentence, card.word)}"</div>` : ''}
               </div>
               <div class="fc-card-footer">${t.flipHintBack}</div>
             </div>
