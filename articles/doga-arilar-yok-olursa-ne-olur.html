@@ -3434,6 +3434,13 @@
 
     let currentSelectedReportIssue = null;
 
+    function getCurrentArticleObject() {
+      if (typeof articlesDatabase !== "undefined" && Array.isArray(articlesDatabase)) {
+        return articlesDatabase.find(a => a.id === currentArticleId) || articlesDatabase[0] || null;
+      }
+      return null;
+    }
+
     function openReportModal() {
       const modal = document.getElementById("report-modal");
       if (!modal) return;
@@ -3444,9 +3451,10 @@
       const badge = document.getElementById("report-context-badge");
       if (badge) {
         let topic = "Story";
-        if (currentArticle) {
-          const titleMap = currentArticle.titleTranslations || {};
-          topic = titleMap[supportLang] || titleMap.tr || currentArticle.topic || currentArticle.id;
+        const currentArt = getCurrentArticleObject();
+        if (currentArt) {
+          const titleMap = currentArt.titleTranslations || {};
+          topic = titleMap[supportLang] || titleMap.tr || currentArt.topic || currentArt.id;
         }
         const langPair = `${(targetLang || "en").toUpperCase()} ➔ ${(supportLang || "tr").toUpperCase()}`;
         badge.textContent = `${topic} • ${currentLevel || "A1"} (${langPair})`;
@@ -3500,9 +3508,11 @@
       if (submitText) submitText.textContent = t.translatingText || "...";
 
       try {
+        const currentArt = getCurrentArticleObject();
+        const artId = currentArt ? currentArt.id : (currentArticleId || "unknown");
         if (window.LeenardoReports && typeof window.LeenardoReports.submitArticleReport === "function") {
           await window.LeenardoReports.submitArticleReport({
-            articleId: currentArticle ? currentArticle.id : (currentArticleId || "unknown"),
+            articleId: artId,
             targetLang: targetLang,
             supportLang: supportLang,
             cefrLevel: currentLevel,
