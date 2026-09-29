@@ -1695,6 +1695,175 @@
       background: #10b981;
     }
 
+    /* Article Issue Reporting Modal Styles */
+    .modal-report-box {
+      max-width: 520px;
+      width: 92vw;
+      padding: 1.75rem 2rem;
+    }
+
+    .report-header-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .report-context-badge {
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--brand-purple);
+      background: var(--brand-purple-light);
+      padding: 3px 10px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      border: 1px solid rgba(40, 25, 94, 0.08);
+    }
+
+    .report-modal-body {
+      margin-top: 1rem;
+    }
+
+    .report-instruction {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+
+    .report-issue-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .report-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.55rem 0.95rem;
+      border-radius: 999px;
+      background: var(--bg-cream);
+      border: 1.5px solid var(--divider-hairline);
+      color: var(--ink-navy);
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      font-family: var(--font-sans);
+    }
+
+    .report-pill:hover {
+      background: var(--bg-surface);
+      border-color: var(--brand-coral);
+      color: var(--brand-coral);
+      transform: translateY(-1px);
+    }
+
+    .report-pill.active {
+      background: var(--brand-coral);
+      border-color: var(--brand-coral);
+      color: #ffffff;
+      box-shadow: 0 3px 10px rgba(222, 115, 87, 0.3);
+    }
+
+    .report-pill .pill-icon {
+      font-size: 0.95rem;
+      line-height: 1;
+    }
+
+    .report-notes-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .report-notes-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--ink-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .report-textarea {
+      width: 100%;
+      box-sizing: border-box;
+      border: 1px solid var(--divider-hairline);
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      color: var(--ink-navy);
+      background: var(--bg-cream);
+      resize: vertical;
+      min-height: 75px;
+      line-height: 1.5;
+      outline: none;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .report-textarea:focus {
+      border-color: var(--brand-coral);
+      background: var(--bg-surface);
+      box-shadow: 0 0 0 3px rgba(222, 115, 87, 0.12);
+    }
+
+    .report-modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--divider-hairline);
+    }
+
+    .report-modal-footer .btn-primary {
+      padding: 0.55rem 1.35rem;
+      border-radius: 999px;
+      background: var(--brand-coral);
+      color: #ffffff;
+      border: none;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .report-modal-footer .btn-primary:hover {
+      background: #c85e44;
+      transform: translateY(-1px);
+    }
+
+    .report-modal-footer .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .report-modal-footer .btn-secondary {
+      padding: 0.55rem 1.15rem;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--divider-hairline);
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .report-modal-footer .btn-secondary:hover {
+      color: var(--ink-navy);
+      border-color: var(--text-muted);
+    }
+
     /* Side-by-Side Parallel Reading Modal Styles */
     #parallel-modal .modal-content-wide {
       max-width: 1080px;
@@ -2185,6 +2354,13 @@
           <button class="btn-secondary" id="btn-share-bottom" onclick="shareCurrentStory()">
             <span id="btn-share-bottom-text">Share</span>
           </button>
+          <button class="btn-secondary" id="btn-report-bottom" onclick="openReportModal()" title="Report an issue">
+            <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;">
+              <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
+              <line x1="4" y1="22" x2="4" y2="15"></line>
+            </svg>
+            <span id="btn-report-bottom-text">Report</span>
+          </button>
         </div>
         <div class="reading-actions-right">
           <button class="btn-secondary" id="btn-parallel" onclick="openParallelModal()">
@@ -2393,6 +2569,59 @@
     </div>
   </div>
 
+  <!-- Article Issue Reporting Modal -->
+  <div class="modal-backdrop" id="report-modal" onclick="closeReportModal(event)">
+    <div class="modal-content modal-report-box" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="report-header-title-group">
+          <h3 id="modal-report-title">Report an Issue</h3>
+          <span class="report-context-badge" id="report-context-badge">Story</span>
+        </div>
+        <button class="modal-close-btn" onclick="closeReportModal()">&times;</button>
+      </div>
+      <div class="modal-body report-modal-body">
+        <p class="report-instruction" id="report-instruction-text">What kind of issue did you notice in this story?</p>
+        
+        <div class="report-issue-pills" id="report-issue-pills">
+          <button type="button" class="report-pill" data-issue="translation_error" onclick="selectReportIssue('translation_error')">
+            <span class="pill-icon">🌐</span>
+            <span id="report-lbl-translation">Translation Error</span>
+          </button>
+          <button type="button" class="report-pill" data-issue="factual_error" onclick="selectReportIssue('factual_error')">
+            <span class="pill-icon">💡</span>
+            <span id="report-lbl-factual">Factual Inaccuracy</span>
+          </button>
+          <button type="button" class="report-pill" data-issue="typo_grammar" onclick="selectReportIssue('typo_grammar')">
+            <span class="pill-icon">✍️</span>
+            <span id="report-lbl-grammar">Typo / Grammar</span>
+          </button>
+          <button type="button" class="report-pill" data-issue="cefr_mismatch" onclick="selectReportIssue('cefr_mismatch')">
+            <span class="pill-icon">📊</span>
+            <span id="report-lbl-level">CEFR Level Mismatch</span>
+          </button>
+          <button type="button" class="report-pill" data-issue="other" onclick="selectReportIssue('other')">
+            <span class="pill-icon">💬</span>
+            <span id="report-lbl-other">Other</span>
+          </button>
+        </div>
+
+        <div class="report-notes-group">
+          <label for="report-notes" class="report-notes-label" id="report-lbl-notes">Details (optional):</label>
+          <textarea id="report-notes" class="report-textarea" rows="3" maxlength="600" placeholder="Paste the sentence or describe the error..."></textarea>
+        </div>
+
+        <div class="report-modal-footer">
+          <button type="button" class="btn-secondary" id="btn-report-cancel" onclick="closeReportModal()">
+            <span id="report-btn-cancel-text">Cancel</span>
+          </button>
+          <button type="button" class="btn-primary" id="btn-report-submit" onclick="submitCurrentReport()">
+            <span id="report-btn-submit-text">Submit Report</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Vocabulary Notebook & Flashcard Modal -->
   <div class="modal-backdrop" id="vocab-notebook-modal" onclick="closeVocabNotebook(event)">
     <div class="modal-content" onclick="event.stopPropagation()">
@@ -2550,7 +2779,21 @@
         markedReadToast: "Okundu olarak işaretlendi! 'Rastgele Hikaye' diğer hikayeleri önceliklendirecek.",
         unmarkedReadToast: "Okundu işareti kaldırıldı.",
         themeNight: "Gece",
-        themeDay: "Gündüz"
+        themeDay: "Gündüz",
+        reportBtn: "Hata Bildir",
+        modalReportTitle: "Bir Hata Bildirin",
+        reportInstruction: "Bu makalede ne tür bir sorunla karşılaştınız?",
+        reportIssueTranslation: "Yanlış / Eksik Çeviri",
+        reportIssueFactual: "Bilgi / Mantık Hatası",
+        reportIssueGrammar: "Yazım / Dilbilgisi Hatası",
+        reportIssueLevel: "Seviye Uyumsuzluğu",
+        reportIssueOther: "Diğer",
+        reportNotesLabel: "Detaylar (İsteğe bağlı):",
+        reportNotesPlaceholder: "Cümleyi yapıştırabilir veya sorunu kısaca açıklayabilirsiniz...",
+        reportCancelBtn: "Vazgeç",
+        reportSubmitBtn: "Raporu Gönder",
+        reportSuccessToast: "Geri bildiriminiz için teşekkürler! İletildi. ✓",
+        reportSelectCategoryPrompt: "Lütfen en az bir hata kategorisi seçin."
       },
       en: {
         backHome: "Library",
@@ -2619,7 +2862,21 @@
         markedReadToast: "Marked as read! 'Surprise Me' will prioritize other stories.",
         unmarkedReadToast: "Marked as unread.",
         themeNight: "Night",
-        themeDay: "Day"
+        themeDay: "Day",
+        reportBtn: "Report Issue",
+        modalReportTitle: "Report an Issue",
+        reportInstruction: "What kind of issue did you notice in this story?",
+        reportIssueTranslation: "Translation Error",
+        reportIssueFactual: "Factual Inaccuracy",
+        reportIssueGrammar: "Typo / Grammar",
+        reportIssueLevel: "CEFR Level Mismatch",
+        reportIssueOther: "Other",
+        reportNotesLabel: "Details (Optional):",
+        reportNotesPlaceholder: "Paste the sentence or describe the issue briefly...",
+        reportCancelBtn: "Cancel",
+        reportSubmitBtn: "Submit Report",
+        reportSuccessToast: "Thank you for your feedback! Submitted. ✓",
+        reportSelectCategoryPrompt: "Please select an issue category."
       },
       es: {
         backHome: "Biblioteca",
@@ -2688,7 +2945,21 @@
         markedReadToast: "¡Marcado como leído! 'Sorpréndeme' priorizará otras historias.",
         unmarkedReadToast: "Marcado como no leído.",
         themeNight: "Noche",
-        themeDay: "Día"
+        themeDay: "Día",
+        reportBtn: "Reportar",
+        modalReportTitle: "Reportar un problema",
+        reportInstruction: "¿Qué tipo de problema notaste en esta historia?",
+        reportIssueTranslation: "Error de traducción",
+        reportIssueFactual: "Error factual / información",
+        reportIssueGrammar: "Ortografía / Gramática",
+        reportIssueLevel: "Nivel CEFR inadecuado",
+        reportIssueOther: "Otro",
+        reportNotesLabel: "Detalles (Opcional):",
+        reportNotesPlaceholder: "Pega la frase o describe brevemente el error...",
+        reportCancelBtn: "Cancelar",
+        reportSubmitBtn: "Enviar reporte",
+        reportSuccessToast: "¡Gracias por tus comentarios! Enviado. ✓",
+        reportSelectCategoryPrompt: "Por favor, selecciona una categoría de problema."
       },
       de: {
         backHome: "Bibliothek",
@@ -2757,7 +3028,21 @@
         markedReadToast: "Als gelesen markiert! 'Überraschung' priorisiert andere Geschichten.",
         unmarkedReadToast: "Als ungelesen markiert.",
         themeNight: "Nacht",
-        themeDay: "Tag"
+        themeDay: "Tag",
+        reportBtn: "Melden",
+        modalReportTitle: "Ein Problem melden",
+        reportInstruction: "Welches Problem ist Ihnen bei dieser Geschichte aufgefallen?",
+        reportIssueTranslation: "Übersetzungsfehler",
+        reportIssueFactual: "Sachlicher Fehler",
+        reportIssueGrammar: "Tipp- / Grammatikfehler",
+        reportIssueLevel: "Falsches Sprachniveau (CEFR)",
+        reportIssueOther: "Anderes",
+        reportNotesLabel: "Details (Optional):",
+        reportNotesPlaceholder: "Satz einfügen oder das Problem kurz beschreiben...",
+        reportCancelBtn: "Abbrechen",
+        reportSubmitBtn: "Bericht senden",
+        reportSuccessToast: "Vielen Dank für Ihr Feedback! Gesendet. ✓",
+        reportSelectCategoryPrompt: "Bitte wählen Sie eine Kategorie aus."
       },
       fr: {
         backHome: "Bibliothèque",
@@ -2826,7 +3111,21 @@
         markedReadToast: "Marqué comme lu ! 'Surprenez-moi' priorisera d'autres histoires.",
         unmarkedReadToast: "Marqué comme non lu.",
         themeNight: "Nuit",
-        themeDay: "Jour"
+        themeDay: "Jour",
+        reportBtn: "Signaler",
+        modalReportTitle: "Signaler un problème",
+        reportInstruction: "Quel problème avez-vous remarqué dans cette histoire ?",
+        reportIssueTranslation: "Erreur de traduction",
+        reportIssueFactual: "Erreur factuelle",
+        reportIssueGrammar: "Faute d'orthographe / grammaire",
+        reportIssueLevel: "Niveau CEFR inadapté",
+        reportIssueOther: "Autre",
+        reportNotesLabel: "Détails (Optionnel) :",
+        reportNotesPlaceholder: "Collez la phrase ou décrivez brièvement le problème...",
+        reportCancelBtn: "Annuler",
+        reportSubmitBtn: "Envoyer le signalement",
+        reportSuccessToast: "Merci pour votre retour ! Envoyé. ✓",
+        reportSelectCategoryPrompt: "Veuillez sélectionner une catégorie de problème."
       }
     };
 
@@ -3133,6 +3432,94 @@
       }, 2500);
     }
 
+    let currentSelectedReportIssue = null;
+
+    function openReportModal() {
+      const modal = document.getElementById("report-modal");
+      if (!modal) return;
+
+      const t = uiTranslations[supportLang] || uiTranslations.en;
+      
+      // Update Context Badge: Story Topic • Level • Lang Pair
+      const badge = document.getElementById("report-context-badge");
+      if (badge) {
+        let topic = "Story";
+        if (currentArticle) {
+          const titleMap = currentArticle.titleTranslations || {};
+          topic = titleMap[supportLang] || titleMap.tr || currentArticle.topic || currentArticle.id;
+        }
+        const langPair = `${(targetLang || "en").toUpperCase()} ➔ ${(supportLang || "tr").toUpperCase()}`;
+        badge.textContent = `${topic} • ${currentLevel || "A1"} (${langPair})`;
+      }
+
+      // Reset selection and textarea
+      currentSelectedReportIssue = null;
+      document.querySelectorAll(".report-pill").forEach(p => p.classList.remove("active"));
+      const notes = document.getElementById("report-notes");
+      if (notes) notes.value = "";
+
+      const submitBtn = document.getElementById("btn-report-submit");
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        const submitText = document.getElementById("report-btn-submit-text");
+        if (submitText) submitText.textContent = t.reportSubmitBtn || "Submit Report";
+      }
+
+      modal.classList.add("show");
+    }
+
+    function closeReportModal() {
+      const modal = document.getElementById("report-modal");
+      if (modal) modal.classList.remove("show");
+    }
+
+    function selectReportIssue(issueType) {
+      currentSelectedReportIssue = issueType;
+      document.querySelectorAll(".report-pill").forEach(p => {
+        if (p.getAttribute("data-issue") === issueType) {
+          p.classList.add("active");
+        } else {
+          p.classList.remove("active");
+        }
+      });
+    }
+
+    async function submitCurrentReport() {
+      const t = uiTranslations[supportLang] || uiTranslations.en;
+      if (!currentSelectedReportIssue) {
+        showToast(t.reportSelectCategoryPrompt || "Please select an issue category.");
+        return;
+      }
+
+      const submitBtn = document.getElementById("btn-report-submit");
+      const submitText = document.getElementById("report-btn-submit-text");
+      const notesInput = document.getElementById("report-notes");
+      const notes = notesInput ? notesInput.value.trim() : "";
+
+      if (submitBtn) submitBtn.disabled = true;
+      if (submitText) submitText.textContent = t.translatingText || "...";
+
+      try {
+        if (window.LeenardoReports && typeof window.LeenardoReports.submitArticleReport === "function") {
+          await window.LeenardoReports.submitArticleReport({
+            articleId: currentArticle ? currentArticle.id : (currentArticleId || "unknown"),
+            targetLang: targetLang,
+            supportLang: supportLang,
+            cefrLevel: currentLevel,
+            issueType: currentSelectedReportIssue,
+            notes: notes
+          });
+        }
+      } catch (err) {
+        console.warn("Report error:", err);
+      }
+
+      showToast(t.reportSuccessToast || "Thank you for your feedback! Submitted. ✓");
+      setTimeout(() => {
+        closeReportModal();
+      }, 400);
+    }
+
     let currentPopoverWordData = null;
     let flashcardDeck = [];
     let currentFlashcardIndex = 0;
@@ -3264,6 +3651,7 @@
           closeVocabNotebook();
           closeParallelModal();
           closeShareModal();
+          closeReportModal();
         }
         const modal = document.getElementById("vocab-notebook-modal");
         if (modal && modal.classList.contains("active")) {
@@ -3563,6 +3951,33 @@
 
       const btnBottomShare = document.getElementById("btn-share-bottom-text");
       if (btnBottomShare) btnBottomShare.textContent = t.shareBtn;
+
+      const btnBottomReport = document.getElementById("btn-report-bottom-text");
+      if (btnBottomReport) btnBottomReport.textContent = t.reportBtn || "Report";
+
+      // Report Modal Translations
+      const modReport = document.getElementById("modal-report-title");
+      if (modReport) modReport.textContent = t.modalReportTitle || "Report an Issue";
+      const repInstruction = document.getElementById("report-instruction-text");
+      if (repInstruction) repInstruction.textContent = t.reportInstruction || "What kind of issue did you notice in this story?";
+      const repLblTrans = document.getElementById("report-lbl-translation");
+      if (repLblTrans) repLblTrans.textContent = t.reportIssueTranslation || "Translation Error";
+      const repLblFact = document.getElementById("report-lbl-factual");
+      if (repLblFact) repLblFact.textContent = t.reportIssueFactual || "Factual Inaccuracy";
+      const repLblGrammar = document.getElementById("report-lbl-grammar");
+      if (repLblGrammar) repLblGrammar.textContent = t.reportIssueGrammar || "Typo / Grammar";
+      const repLblLevel = document.getElementById("report-lbl-level");
+      if (repLblLevel) repLblLevel.textContent = t.reportIssueLevel || "CEFR Level Mismatch";
+      const repLblOther = document.getElementById("report-lbl-other");
+      if (repLblOther) repLblOther.textContent = t.reportIssueOther || "Other";
+      const repLblNotes = document.getElementById("report-lbl-notes");
+      if (repLblNotes) repLblNotes.textContent = t.reportNotesLabel || "Details (optional):";
+      const repNotesInput = document.getElementById("report-notes");
+      if (repNotesInput) repNotesInput.placeholder = t.reportNotesPlaceholder || "Paste the sentence or describe the error...";
+      const repBtnCancel = document.getElementById("report-btn-cancel-text");
+      if (repBtnCancel) repBtnCancel.textContent = t.reportCancelBtn || "Cancel";
+      const repBtnSubmit = document.getElementById("report-btn-submit-text");
+      if (repBtnSubmit) repBtnSubmit.textContent = t.reportSubmitBtn || "Submit Report";
 
       const btnParallelText = document.getElementById("btn-parallel-text");
       if (btnParallelText) btnParallelText.textContent = t.bilingualCompare;
