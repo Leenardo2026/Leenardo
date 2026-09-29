@@ -2755,7 +2755,9 @@
         quizWrong: "Yanlış cevap, tekrar deneyin.",
         noQuiz: "Bu seviye için test hazırlanıyor.",
         lessonWordBadge: "Ders Kelimesi",
+        compoundBadge: "İsim / Sıfat Tamlaması",
         rootLabel: "kök:",
+        structureLabel: "Yapı:",
         translatingText: "Çevriliyor...",
         saveWord: "Kaydet",
         savedWord: "Kaydedildi",
@@ -2838,7 +2840,9 @@
         quizWrong: "Incorrect, try again.",
         noQuiz: "Quiz in preparation for this level.",
         lessonWordBadge: "Key Word",
+        compoundBadge: "Compound Phrase",
         rootLabel: "root:",
+        structureLabel: "Structure:",
         translatingText: "Translating...",
         saveWord: "Save",
         savedWord: "Saved",
@@ -2921,7 +2925,9 @@
         quizWrong: "Incorrecto, inténtalo de nuevo.",
         noQuiz: "No hay test disponible para este nivel.",
         lessonWordBadge: "Palabra Clave",
+        compoundBadge: "Sintagma Nominal",
         rootLabel: "raíz:",
+        structureLabel: "Estructura:",
         translatingText: "Traduciendo...",
         saveWord: "Guardar",
         savedWord: "Guardado",
@@ -3004,7 +3010,9 @@
         quizWrong: "Leider falsch, versuche es noch einmal.",
         noQuiz: "Für dieses Niveau ist kein Quiz verfügbar.",
         lessonWordBadge: "Lektionsvokabel",
+        compoundBadge: "Zusammengesetzter Begriff",
         rootLabel: "Stamm:",
+        structureLabel: "Struktur:",
         translatingText: "Übersetzen...",
         saveWord: "Speichern",
         savedWord: "Gespeichert",
@@ -3087,7 +3095,9 @@
         quizWrong: "Réponse incorrecte, réessayez.",
         noQuiz: "Quiz en préparation pour ce niveau.",
         lessonWordBadge: "Mot Clé",
+        compoundBadge: "Locution Nominale",
         rootLabel: "racine :",
+        structureLabel: "Structure :",
         translatingText: "Traduction...",
         saveWord: "Enregistrer",
         savedWord: "Enregistré",
@@ -4183,6 +4193,9 @@
         imgBox.style.display = "none";
       }
 
+      // Harvest dynamic multi-word phrases from lesson vocabulary
+      currentHarvestedPhrases = harvestVocabPhrases(targetData, targetLang, supportLang);
+
       // 4. Render Body Paragraphs with Sentence Hover Balloons & Word Click Handlers
       const bodyContainer = document.getElementById("article-body-content");
       bodyContainer.innerHTML = "";
@@ -4227,7 +4240,7 @@
             wSpan.onclick = (e) => {
               e.stopPropagation();
               const unit = detectContextualUnit(cleanWords, idx, targetLang);
-              if (unit && unit.type === "phrase") {
+              if (unit && (unit.type === "phrase" || unit.type === "compound")) {
                 const spanGroup = wordSpans.slice(unit.startIdx, unit.endIdx + 1);
                 handleWordClick(unit.phrase, wSpan, targetData, targetLang, supportLang, sentObj.target, spanGroup, unit);
               } else if (unit && unit.type === "morphology") {
@@ -4987,6 +5000,104 @@
           type: "Cultural Amulet",
           components: "nazar (evil glance) + boncuk (bead) + -u",
           note: "Blue glass talisman traditionally believed to ward off envious glances."
+        },
+        {
+          phrase: "taze fasulye",
+          stemSequence: [["taze"], ["fasulye", "fasülye"]],
+          translations: {
+            en: "fresh green beans",
+            es: "judías verdes",
+            de: "grüne Bohnen",
+            fr: "haricots verts",
+            tr: "taze fasulye"
+          },
+          type: "Culinary Noun Compound",
+          components: "taze (fresh) + fasulye (bean)",
+          note: "Traditional Mediterranean/Aegean olive oil dish made with tender green beans."
+        },
+        {
+          phrase: "zeytin ağacı",
+          stemSequence: [["zeytin"], ["ağaç", "ağac"]],
+          translations: {
+            en: "olive tree",
+            es: "árbol de olivo / olivo",
+            de: "Olivenbaum",
+            fr: "olivier",
+            tr: "zeytin ağacı"
+          },
+          type: "Botanical Noun Compound",
+          components: "zeytin (olive) + ağaç (tree) + -ı",
+          note: "Ancient Mediterranean tree symbolizing peace, longevity, and abundance."
+        },
+        {
+          phrase: "portakal suyu",
+          stemSequence: [["portakal"], ["su", "suy"]],
+          translations: {
+            en: "orange juice",
+            es: "zumo de naranja",
+            de: "Orangensaft",
+            fr: "jus d'orange",
+            tr: "portakal suyu"
+          },
+          type: "Noun Compound",
+          components: "portakal (orange) + su (juice) + -(y)u",
+          note: "Fresh citrus fruit beverage."
+        },
+        {
+          phrase: "elma suyu",
+          stemSequence: [["elma"], ["su", "suy"]],
+          translations: {
+            en: "apple juice",
+            es: "zumo de manzana",
+            de: "Apfelsaft",
+            fr: "jus de pomme",
+            tr: "elma suyu"
+          },
+          type: "Noun Compound",
+          components: "elma (apple) + su (juice) + -(y)u",
+          note: "Sweet fruit juice pressed from apples."
+        },
+        {
+          phrase: "çay bardağı",
+          stemSequence: [["çay"], ["bardak", "bardağ"]],
+          translations: {
+            en: "tea glass",
+            es: "vaso de té",
+            de: "Teeglas",
+            fr: "verre à thé",
+            tr: "çay bardağı"
+          },
+          type: "Noun Compound",
+          components: "çay (tea) + bardak (glass) + -ı",
+          note: "Small curved glass specifically crafted for drinking Turkish tea."
+        },
+        {
+          phrase: "yeraltı şehri",
+          stemSequence: [["yeraltı", "yer altı"], ["şehir", "şehr"]],
+          translations: {
+            en: "underground city",
+            es: "ciudad subterránea",
+            de: "unterirdische Stadt",
+            fr: "cité souterraine",
+            tr: "yeraltı şehri"
+          },
+          type: "Historical Noun Compound",
+          components: "yeraltı (underground) + şehir (city) + -i",
+          note: "Subterranean multi-level settlements such as Derinkuyu in Cappadocia."
+        },
+        {
+          phrase: "altın tozu",
+          stemSequence: [["altın"], ["toz"]],
+          translations: {
+            en: "gold dust",
+            es: "polvo de oro",
+            de: "Goldstaub",
+            fr: "poussière d'or",
+            tr: "altın tozu"
+          },
+          type: "Noun Compound",
+          components: "altın (gold) + toz (dust) + -u",
+          note: "Fine particles of gold or decorative gold dust."
         }
       ],
       en: [
@@ -5045,6 +5156,104 @@
           type: "Compound Noun",
           components: "tea + spoon",
           note: "Small spoon used for stirring tea or coffee."
+        },
+        {
+          phrase: "green beans",
+          stemSequence: [["green"], ["bean", "beans"]],
+          translations: {
+            tr: "taze fasulye",
+            es: "judías verdes",
+            de: "grüne Bohnen",
+            fr: "haricots verts",
+            en: "green beans"
+          },
+          type: "Noun Compound",
+          components: "green + beans",
+          note: "Unripe, fresh pods of the common bean."
+        },
+        {
+          phrase: "olive tree",
+          stemSequence: [["olive"], ["tree", "trees"]],
+          translations: {
+            tr: "zeytin ağacı",
+            es: "árbol de olivo / olivo",
+            de: "Olivenbaum",
+            fr: "olivier",
+            en: "olive tree"
+          },
+          type: "Botanical Noun Compound",
+          components: "olive + tree",
+          note: "Cultivated tree of the Mediterranean basin."
+        },
+        {
+          phrase: "orange juice",
+          stemSequence: [["orange"], ["juice", "juices"]],
+          translations: {
+            tr: "portakal suyu",
+            es: "zumo de naranja",
+            de: "Orangensaft",
+            fr: "jus d'orange",
+            en: "orange juice"
+          },
+          type: "Noun Compound",
+          components: "orange + juice",
+          note: "Liquid extract of the orange fruit."
+        },
+        {
+          phrase: "apple juice",
+          stemSequence: [["apple"], ["juice", "juices"]],
+          translations: {
+            tr: "elma suyu",
+            es: "zumo de manzana",
+            de: "Apfelsaft",
+            fr: "jus de pomme",
+            en: "apple juice"
+          },
+          type: "Noun Compound",
+          components: "apple + juice",
+          note: "Fruit juice produced by the maceration and pressing of apples."
+        },
+        {
+          phrase: "tea glass",
+          stemSequence: [["tea"], ["glass", "glasses"]],
+          translations: {
+            tr: "çay bardağı",
+            es: "vaso de té",
+            de: "Teeglas",
+            fr: "verre à thé",
+            en: "tea glass"
+          },
+          type: "Noun Compound",
+          components: "tea + glass",
+          note: "Small glass designed for serving hot tea."
+        },
+        {
+          phrase: "underground city",
+          stemSequence: [["underground"], ["city", "cities"]],
+          translations: {
+            tr: "yeraltı şehri",
+            es: "ciudad subterránea",
+            de: "unterirdische Stadt",
+            fr: "cité souterraine",
+            en: "underground city"
+          },
+          type: "Historical Noun Compound",
+          components: "underground + city",
+          note: "Network of subterranean tunnels and dwellings."
+        },
+        {
+          phrase: "gold dust",
+          stemSequence: [["gold"], ["dust"]],
+          translations: {
+            tr: "altın tozu",
+            es: "polvo de oro",
+            de: "Goldstaub",
+            fr: "poussière d'or",
+            en: "gold dust"
+          },
+          type: "Noun Compound",
+          components: "gold + dust",
+          note: "Fine particles of gold."
         }
       ],
       es: [
@@ -5089,6 +5298,104 @@
           type: "Sintagma Nominal",
           components: "cucharilla + de + té",
           note: "Cubierto pequeño para remover el té o café."
+        },
+        {
+          phrase: "judías verdes",
+          stemSequence: [["judía", "judías", "judia", "judias"], ["verde", "verdes"]],
+          translations: {
+            tr: "taze fasulye",
+            en: "green beans",
+            de: "grüne Bohnen",
+            fr: "haricots verts",
+            es: "judías verdes"
+          },
+          type: "Sintagma Nominal",
+          components: "judías + verdes",
+          note: "Vainas tiernas de la planta de judía."
+        },
+        {
+          phrase: "árbol de olivo",
+          stemSequence: [["árbol", "arbol", "árboles", "arboles"], ["de"], ["olivo", "olivos"]],
+          translations: {
+            tr: "zeytin ağacı",
+            en: "olive tree",
+            de: "Olivenbaum",
+            fr: "olivier",
+            es: "árbol de olivo"
+          },
+          type: "Sintagma Nominal",
+          components: "árbol + de + olivo",
+          note: "Árbol mediterráneo perenne de gran longevidad."
+        },
+        {
+          phrase: "zumo de naranja",
+          stemSequence: [["zumo", "zumos"], ["de"], ["naranja", "naranjas"]],
+          translations: {
+            tr: "portakal suyu",
+            en: "orange juice",
+            de: "Orangensaft",
+            fr: "jus d'orange",
+            es: "zumo de naranja"
+          },
+          type: "Sintagma Nominal",
+          components: "zumo + de + naranja",
+          note: "Bebida elaborada exprimiendo naranjas frescas."
+        },
+        {
+          phrase: "zumo de manzana",
+          stemSequence: [["zumo", "zumos"], ["de"], ["manzana", "manzanas"]],
+          translations: {
+            tr: "elma suyu",
+            en: "apple juice",
+            de: "Apfelsaft",
+            fr: "jus de pomme",
+            es: "zumo de manzana"
+          },
+          type: "Sintagma Nominal",
+          components: "zumo + de + manzana",
+          note: "Bebida elaborada a partir del prensado de manzanas."
+        },
+        {
+          phrase: "vaso de té",
+          stemSequence: [["vaso", "vasos"], ["de"], ["té", "te"]],
+          translations: {
+            tr: "çay bardağı",
+            en: "tea glass",
+            de: "Teeglas",
+            fr: "verre à thé",
+            es: "vaso de té"
+          },
+          type: "Sintagma Nominal",
+          components: "vaso + de + té",
+          note: "Vaso de cristal pequeño para servir té caliente."
+        },
+        {
+          phrase: "ciudad subterránea",
+          stemSequence: [["ciudad", "ciudades"], ["subterránea", "subterranea", "subterráneas", "subterraneas"]],
+          translations: {
+            tr: "yeraltı şehri",
+            en: "underground city",
+            de: "unterirdische Stadt",
+            fr: "cité souterraine",
+            es: "ciudad subterránea"
+          },
+          type: "Sintagma Nominal",
+          components: "ciudad + subterránea",
+          note: "Asentamiento subterráneo excavado en la roca."
+        },
+        {
+          phrase: "polvo de oro",
+          stemSequence: [["polvo", "polvos"], ["de"], ["oro"]],
+          translations: {
+            tr: "altın tozu",
+            en: "gold dust",
+            de: "Goldstaub",
+            fr: "poussière d'or",
+            es: "polvo de oro"
+          },
+          type: "Sintagma Nominal",
+          components: "polvo + de + oro",
+          note: "Partículas finas de oro."
         }
       ],
       de: [
@@ -5133,6 +5440,104 @@
           type: "Kompositum",
           components: "Tee + Löffel",
           note: "Kleiner Löffel zum Umrühren von Heißgetränken."
+        },
+        {
+          phrase: "grüne Bohnen",
+          stemSequence: [["grün", "grüne", "grünen", "gruene", "gruenen"], ["bohnen", "bohne"]],
+          translations: {
+            tr: "taze fasulye",
+            en: "green beans",
+            es: "judías verdes",
+            fr: "haricots verts",
+            de: "grüne Bohnen"
+          },
+          type: "Substantivgruppe",
+          components: "grün + Bohnen",
+          note: "Frische Busch- oder Stangenbohnen als Gemüse."
+        },
+        {
+          phrase: "Olivenbaum",
+          stemSequence: [["olivenbaum", "olivenbäume", "olivenbaumes"]],
+          translations: {
+            tr: "zeytin ağacı",
+            en: "olive tree",
+            es: "árbol de olivo",
+            fr: "olivier",
+            de: "Olivenbaum"
+          },
+          type: "Kompositum",
+          components: "Olive + Baum",
+          note: "Charakteristischer mediterraner Kulturbaum."
+        },
+        {
+          phrase: "Orangensaft",
+          stemSequence: [["orangensaft", "orangensäfte", "orangensaftes"]],
+          translations: {
+            tr: "portakal suyu",
+            en: "orange juice",
+            es: "zumo de naranja",
+            fr: "jus d'orange",
+            de: "Orangensaft"
+          },
+          type: "Kompositum",
+          components: "Orange + Saft",
+          note: "Fruchtsaft aus gepressten Orangen."
+        },
+        {
+          phrase: "Apfelsaft",
+          stemSequence: [["apfelsaft", "apfelsäfte", "apfelsaftes"]],
+          translations: {
+            tr: "elma suyu",
+            en: "apple juice",
+            es: "zumo de manzana",
+            fr: "jus de pomme",
+            de: "Apfelsaft"
+          },
+          type: "Kompositum",
+          components: "Apfel + Saft",
+          note: "Fruchtsaft aus gepressten Äpfeln."
+        },
+        {
+          phrase: "Teeglas",
+          stemSequence: [["teeglas", "teegläser", "teeglases"]],
+          translations: {
+            tr: "çay bardağı",
+            en: "tea glass",
+            es: "vaso de té",
+            fr: "verre à thé",
+            de: "Teeglas"
+          },
+          type: "Kompositum",
+          components: "Tee + Glas",
+          note: "Kleines Glas zum Servieren von Tee."
+        },
+        {
+          phrase: "unterirdische Stadt",
+          stemSequence: [["unterirdisch", "unterirdische", "unterirdischen", "unterirdischer"], ["stadt", "städte"]],
+          translations: {
+            tr: "yeraltı şehri",
+            en: "underground city",
+            es: "ciudad subterránea",
+            fr: "cité souterraine",
+            de: "unterirdische Stadt"
+          },
+          type: "Substantivgruppe",
+          components: "unterirdisch + Stadt",
+          note: "In den Fels gehauene unterirdische Siedlung."
+        },
+        {
+          phrase: "Goldstaub",
+          stemSequence: [["goldstaub", "goldstaubes"]],
+          translations: {
+            tr: "altın tozu",
+            en: "gold dust",
+            es: "polvo de oro",
+            fr: "poussière d'or",
+            de: "Goldstaub"
+          },
+          type: "Kompositum",
+          components: "Gold + Staub",
+          note: "Feine Partikel aus elementarem Gold."
         }
       ],
       fr: [
@@ -5177,6 +5582,104 @@
           type: "Locution Nominale",
           components: "cuillère + à + café",
           note: "Petite cuillère servant à remuer les boissons chaudes."
+        },
+        {
+          phrase: "haricots verts",
+          stemSequence: [["haricot", "haricots"], ["vert", "verts"]],
+          translations: {
+            tr: "taze fasulye",
+            en: "green beans",
+            es: "judías verdes",
+            de: "grüne Bohnen",
+            fr: "haricots verts"
+          },
+          type: "Locution Nominale",
+          components: "haricots + verts",
+          note: "Gousses fraîches et tendres consommées comme légume."
+        },
+        {
+          phrase: "arbre à olives",
+          stemSequence: [["arbre", "arbres"], ["à", "a"], ["olives", "olive"]],
+          translations: {
+            tr: "zeytin ağacı",
+            en: "olive tree",
+            es: "árbol de olivo",
+            de: "Olivenbaum",
+            fr: "arbre à olives"
+          },
+          type: "Locution Nominale",
+          components: "arbre + à + olives",
+          note: "Arbre emblématique du bassin méditerranéen."
+        },
+        {
+          phrase: "jus d'orange",
+          stemSequence: [["jus"], ["d'orange", "d'oranges", "orange", "oranges"]],
+          translations: {
+            tr: "portakal suyu",
+            en: "orange juice",
+            es: "zumo de naranja",
+            de: "Orangensaft",
+            fr: "jus d'orange"
+          },
+          type: "Locution Nominale",
+          components: "jus + d'orange",
+          note: "Boisson obtenue en pressant des oranges."
+        },
+        {
+          phrase: "jus de pomme",
+          stemSequence: [["jus"], ["de"], ["pomme", "pommes"]],
+          translations: {
+            tr: "elma suyu",
+            en: "apple juice",
+            es: "zumo de manzana",
+            de: "Apfelsaft",
+            fr: "jus de pomme"
+          },
+          type: "Locution Nominale",
+          components: "jus + de + pomme",
+          note: "Boisson naturelle obtenue par pressurage de pommes."
+        },
+        {
+          phrase: "verre à thé",
+          stemSequence: [["verre", "verres"], ["à", "a"], ["thé", "the"]],
+          translations: {
+            tr: "çay bardağı",
+            en: "tea glass",
+            es: "vaso de té",
+            de: "Teeglas",
+            fr: "verre à thé"
+          },
+          type: "Locution Nominale",
+          components: "verre + à + thé",
+          note: "Petit verre utilisé pour servir le thé traditionnel."
+        },
+        {
+          phrase: "cité souterraine",
+          stemSequence: [["cité", "cite", "cités", "cites"], ["souterraine", "souterraines"]],
+          translations: {
+            tr: "yeraltı şehri",
+            en: "underground city",
+            es: "ciudad subterránea",
+            de: "unterirdische Stadt",
+            fr: "cité souterraine"
+          },
+          type: "Locution Nominale",
+          components: "cité + souterraine",
+          note: "Ensemble d'habitations et galeries creusées sous terre."
+        },
+        {
+          phrase: "poussière d'or",
+          stemSequence: [["poussière", "poussiere"], ["d'or", "or"]],
+          translations: {
+            tr: "altın tozu",
+            en: "gold dust",
+            es: "polvo de oro",
+            de: "Goldstaub",
+            fr: "poussière d'or"
+          },
+          type: "Locution Nominale",
+          components: "poussière + d'or",
+          note: "Fines particules d'or métallique."
         }
       ]
     };
@@ -5289,14 +5792,373 @@
       return s;
     }
 
-    function detectContextualUnit(cleanTokens, clickedIdx, lang = "tr") {
-      const registry = MULTILINGUAL_PHRASE_REGISTRY[lang] || [];
-      const stemmed = cleanTokens.map(t => lang === "tr" ? stemTurkishWord(t) : t.toLowerCase());
+    /* ==========================================================
+       PHASE 6: MULTILINGUAL COMPOUND & NOUN PHRASE ENGINE
+       ========================================================== */
+    const SAFE_HEAD_NOUNS_TR = new Set([
+      // Liquids, foods & beverages
+      "suyu", "çayı", "kahvesi", "sütü", "yağı", "çorbası", "reçeli", "salatası", "yemeği", "şerbeti", "sirkesi", "şarabı", "ekmeği", "böreği", "tatlısı",
+      // Botany & plant parts
+      "ağacı", "yaprağı", "dalı", "çiçeği", "tohumu", "kökü", "meyvesi", "kabuğu", "bahçesi", "ormanı", "tarlası", "bağı",
+      // Vessels, utensils & craft
+      "bardağı", "fincanı", "kaşığı", "tabağı", "kasesi", "şişesi", "kutusu", "tozu", "teli", "sandığı", "kazanı", "tenceresi",
+      // Structures & civic
+      "şehri", "sarayı", "kalesi", "kapısı", "sokağı", "meydanı", "odası", "evi", "merkezi", "hanı", "hamamı", "köprüsü", "müzesi", "limanı", "yolu",
+      // Cultural & eras
+      "çağı", "dönemi", "yüzyılı", "geleneği", "ozanı", "sanatı", "akımı", "tarihi", "töreni", "bayramı", "kültürü"
+    ]);
 
-      // Check longest match first (3-grams, 2-grams, 1-grams)
-      const sortedRegistry = registry.slice().sort((a, b) => b.stemSequence.length - a.stemSequence.length);
+    const SAFE_ADJECTIVES_TR = new Set([
+      "taze", "kuru", "sıcak", "soğuk", "yeşil", "mavi", "kara", "ak", "beyaz", "kırmızı", "sarı",
+      "tatlı", "acı", "ekşi", "tuzlu", "büyük", "küçük", "eski", "yeni", "ince", "kalın", "uzun",
+      "kısa", "derin", "yüksek", "alçak", "sert", "yumuşak", "doğal", "organik", "geleneksel", "tarihi"
+    ]);
 
-      for (const p of sortedRegistry) {
+    const BANNED_PHRASE_TOKENS = {
+      tr: new Set([
+        "ve", "ile", "ama", "fakat", "lakin", "ancak", "çünkü", "de", "da", "ki", "bu", "şu", "o",
+        "bir", "her", "bazı", "tüm", "bütün", "ben", "sen", "biz", "siz", "onlar", "bana", "sana",
+        "ona", "bize", "size", "onlara", "beni", "seni", "onu", "bizi", "sizi", "onları", "var",
+        "yok", "gibi", "için", "kadar", "sonra", "önce", "göre", "karşı", "gitti", "geldi", "oldu",
+        "yaptı", "aldı", "verdi", "dedi", "dedim", "olur", "etmek", "yapmak", "olmak", "ise", "mı",
+        "mi", "mu", "mü", "daha", "çok", "en", "pek", "hiç", "bile"
+      ]),
+      en: new Set([
+        "the", "a", "an", "and", "or", "but", "in", "on", "at", "to", "for", "of", "with", "by",
+        "from", "about", "is", "are", "was", "were", "be", "been", "have", "has", "had", "do",
+        "does", "did", "it", "this", "that", "these", "those", "they", "he", "she", "we", "you",
+        "i", "not", "no", "as", "if", "when", "so", "can", "will", "would", "could", "very", "more"
+      ]),
+      es: new Set([
+        "el", "la", "los", "las", "un", "una", "unos", "unas", "y", "e", "o", "u", "pero", "sino",
+        "con", "por", "para", "en", "sobre", "es", "son", "fue", "eran", "ha", "han", "hay",
+        "que", "se", "su", "sus", "este", "esta", "estos", "estas", "yo", "tú", "él", "ella",
+        "nosotros", "ellos", "no", "si", "como", "muy", "más"
+      ]),
+      fr: new Set([
+        "le", "la", "les", "un", "une", "des", "du", "et", "ou", "mais", "donc", "or", "ni", "car",
+        "avec", "dans", "par", "pour", "sur", "sous", "est", "sont", "était", "été", "a", "ont",
+        "il", "elle", "ils", "elles", "ce", "cette", "ces", "qui", "que", "ne", "pas", "si",
+        "comme", "très", "plus"
+      ]),
+      de: new Set([
+        "der", "die", "das", "den", "dem", "des", "ein", "eine", "einen", "einem", "einer", "eines",
+        "und", "oder", "aber", "denn", "in", "an", "auf", "mit", "von", "zu", "für", "ist", "sind",
+        "war", "waren", "wird", "haben", "hat", "er", "sie", "es", "wir", "ihr", "nicht", "kein",
+        "wie", "wenn", "dass", "sehr", "mehr"
+      ])
+    };
+
+    const SAFE_ADJECTIVES_ES = new Set([
+      "verde", "verdes", "blanco", "blanca", "blancos", "blancas", "negro", "negra", "rojo", "roja",
+      "fresco", "fresca", "frescos", "frescas", "seco", "seca", "turco", "turca", "subterráneo",
+      "subterránea", "subterráneos", "subterráneas", "tradicional", "tradicionales", "antiguo", "antigua",
+      "nuevo", "nueva", "virgen", "natural"
+    ]);
+
+    const SAFE_ADJECTIVES_FR = new Set([
+      "vert", "verte", "verts", "vertes", "frais", "fraîche", "fraiche", "sec", "sèche", "seche",
+      "noir", "noire", "blanc", "blanche", "rouge", "turc", "turque", "souterrain", "souterraine",
+      "traditionnel", "traditionnelle", "ancien", "ancienne", "vierge", "naturel", "naturelle"
+    ]);
+
+    const SAFE_ADJECTIVES_EN = new Set([
+      "fresh", "green", "dry", "dried", "hot", "cold", "black", "white", "red", "blue", "sweet",
+      "sour", "bitter", "traditional", "ancient", "underground", "organic", "natural", "virgin",
+      "extra-virgin", "turkish"
+    ]);
+
+    const SAFE_HEAD_NOUNS_EN = new Set([
+      "juice", "juices", "tea", "teas", "coffee", "oil", "oils", "tree", "trees", "leaf", "leaves",
+      "flower", "flowers", "seed", "seeds", "glass", "glasses", "cup", "cups", "spoon", "spoons",
+      "city", "cities", "castle", "castles", "gate", "gates", "street", "streets", "square", "squares",
+      "era", "age", "water", "waters", "soup", "soups", "bread", "breads", "pot", "pots", "dust"
+    ]);
+
+    const SAFE_ADJECTIVES_DE_STEMS = new Set([
+      "grün", "frisch", "trocken", "heiß", "kalt", "schwarz", "weiß", "rot", "blau", "süß", "bitter",
+      "alt", "neu", "unterirdisch", "traditionell", "türkisch"
+    ]);
+
+    function stemHeadNounTR(word) {
+      let s = (word || "").toLowerCase().trim();
+      if (SAFE_HEAD_NOUNS_TR.has(s)) return s;
+
+      // In Turkish noun compounds, case suffixes follow the 3rd person possessive with pronominal 'n':
+      // -na/-ne, -nda/-nde, -ndan/-nden, -nı/-ni/-nu/-nü
+      const c1 = s.replace(/(?:nda|nde|ndan|nden|na|ne|nı|ni|nu|nü)$/, '');
+      if (SAFE_HEAD_NOUNS_TR.has(c1)) return c1;
+
+      // Plural compound forms: -ları/-leri, -larında/-lerinde, etc.
+      const cPl = s.replace(/(?:larında|lerinde|larından|lerinden|larına|lerine|larını|lerini|ları|leri)$/, '');
+      for (const h of SAFE_HEAD_NOUNS_TR) {
+        const hStem = h.replace(/(?:sı|si|su|sü|[ıiuü])$/, '');
+        if (cPl === hStem) return h;
+      }
+
+      return s;
+    }
+
+    function detectRuleBasedCompound(cleanTokens, clickedIdx, lang = "tr") {
+      const banned = BANNED_PHRASE_TOKENS[lang] || new Set();
+      const n = cleanTokens.length;
+
+      if (lang === "tr") {
+        const checkTamlama = (modIdx, headIdx) => {
+          if (modIdx < 0 || headIdx >= n) return null;
+          const mod = cleanTokens[modIdx].toLowerCase();
+          const headRaw = cleanTokens[headIdx].toLowerCase();
+          if (banned.has(mod) || banned.has(headRaw) || mod.length < 2 || headRaw.length < 2) return null;
+          const stemmedHead = stemHeadNounTR(headRaw);
+          if (SAFE_HEAD_NOUNS_TR.has(stemmedHead)) {
+            return {
+              type: "compound",
+              phrase: `${cleanTokens[modIdx]} ${cleanTokens[headIdx]}`,
+              startIdx: modIdx,
+              endIdx: headIdx,
+              data: {
+                phrase: `${cleanTokens[modIdx]} ${cleanTokens[headIdx]}`,
+                type: "İsim Tamlaması",
+                components: `${cleanTokens[modIdx]} (tamlayan) + ${cleanTokens[headIdx]} (tamlanan: ${stemmedHead})`,
+                translations: {}
+              }
+            };
+          }
+          return null;
+        };
+
+        const checkSifat = (adjIdx, nounIdx) => {
+          if (adjIdx < 0 || nounIdx >= n) return null;
+          const adj = cleanTokens[adjIdx].toLowerCase();
+          const noun = cleanTokens[nounIdx].toLowerCase();
+          if (banned.has(adj) || banned.has(noun) || noun.length < 2) return null;
+          if (SAFE_ADJECTIVES_TR.has(adj)) {
+            return {
+              type: "compound",
+              phrase: `${cleanTokens[adjIdx]} ${cleanTokens[nounIdx]}`,
+              startIdx: adjIdx,
+              endIdx: nounIdx,
+              data: {
+                phrase: `${cleanTokens[adjIdx]} ${cleanTokens[nounIdx]}`,
+                type: "Sıfat Tamlaması",
+                components: `${cleanTokens[adjIdx]} (sıfat) + ${cleanTokens[nounIdx]} (isim)`,
+                translations: {}
+              }
+            };
+          }
+          return null;
+        };
+
+        // Try head clicked, then mod clicked, then adj clicked, then noun clicked
+        return checkTamlama(clickedIdx - 1, clickedIdx)
+            || checkTamlama(clickedIdx, clickedIdx + 1)
+            || checkSifat(clickedIdx, clickedIdx + 1)
+            || checkSifat(clickedIdx - 1, clickedIdx);
+      }
+
+      if (lang === "es") {
+        // 1. [NounA] + "de" / "del" + [NounB]
+        const checkDeChain = (startIdx) => {
+          if (startIdx < 0 || startIdx + 2 >= n) return null;
+          const w0 = cleanTokens[startIdx].toLowerCase();
+          const prep = cleanTokens[startIdx + 1].toLowerCase();
+          const w2 = cleanTokens[startIdx + 2].toLowerCase();
+          if ((prep === "de" || prep === "del") && !banned.has(w0) && !banned.has(w2) && w0.length >= 2 && w2.length >= 2) {
+            return {
+              type: "compound",
+              phrase: `${cleanTokens[startIdx]} ${cleanTokens[startIdx + 1]} ${cleanTokens[startIdx + 2]}`,
+              startIdx: startIdx,
+              endIdx: startIdx + 2,
+              data: {
+                phrase: `${cleanTokens[startIdx]} ${cleanTokens[startIdx + 1]} ${cleanTokens[startIdx + 2]}`,
+                type: "Sintagma Nominal",
+                components: `${cleanTokens[startIdx]} + ${cleanTokens[startIdx + 1]} + ${cleanTokens[startIdx + 2]}`,
+                translations: {}
+              }
+            };
+          }
+          return null;
+        };
+
+        for (const offset of [0, -1, -2]) {
+          const res = checkDeChain(clickedIdx + offset);
+          if (res) return res;
+        }
+
+        // 2. [Noun] + [SafeAdj]
+        const checkAdjES = (nIdx, aIdx) => {
+          if (nIdx < 0 || aIdx >= n) return null;
+          const noun = cleanTokens[nIdx].toLowerCase();
+          const adj = cleanTokens[aIdx].toLowerCase();
+          if (SAFE_ADJECTIVES_ES.has(adj) && !banned.has(noun) && noun.length >= 2) {
+            return {
+              type: "compound",
+              phrase: `${cleanTokens[nIdx]} ${cleanTokens[aIdx]}`,
+              startIdx: nIdx,
+              endIdx: aIdx,
+              data: {
+                phrase: `${cleanTokens[nIdx]} ${cleanTokens[aIdx]}`,
+                type: "Sintagma Nominal",
+                components: `${cleanTokens[nIdx]} + ${cleanTokens[aIdx]}`,
+                translations: {}
+              }
+            };
+          }
+          return null;
+        };
+
+        return checkAdjES(clickedIdx, clickedIdx + 1) || checkAdjES(clickedIdx - 1, clickedIdx);
+      }
+
+      if (lang === "fr") {
+        // 1. [NounA] + "de" / "d'" / "à" + [NounB]
+        const checkPrepChain = (startIdx) => {
+          if (startIdx < 0 || startIdx + 2 >= n) return null;
+          const w0 = cleanTokens[startIdx].toLowerCase();
+          const prep = cleanTokens[startIdx + 1].toLowerCase();
+          const w2 = cleanTokens[startIdx + 2].toLowerCase();
+          if ((prep === "de" || prep === "d'" || prep === "à" || prep === "a") && !banned.has(w0) && !banned.has(w2) && w0.length >= 2 && w2.length >= 2) {
+            return {
+              type: "compound",
+              phrase: `${cleanTokens[startIdx]} ${cleanTokens[startIdx + 1]} ${cleanTokens[startIdx + 2]}`,
+              startIdx: startIdx,
+              endIdx: startIdx + 2,
+              data: {
+                phrase: `${cleanTokens[startIdx]} ${cleanTokens[startIdx + 1]} ${cleanTokens[startIdx + 2]}`,
+                type: "Locution Nominale",
+                components: `${cleanTokens[startIdx]} + ${cleanTokens[startIdx + 1]} + ${cleanTokens[startIdx + 2]}`,
+                translations: {}
+              }
+            };
+          }
+          return null;
+        };
+
+        for (const offset of [0, -1, -2]) {
+          const res = checkPrepChain(clickedIdx + offset);
+          if (res) return res;
+        }
+
+        // 2. [Noun] + [SafeAdj]
+        const checkAdjFR = (nIdx, aIdx) => {
+          if (nIdx < 0 || aIdx >= n) return null;
+          const noun = cleanTokens[nIdx].toLowerCase();
+          const adj = cleanTokens[aIdx].toLowerCase();
+          if (SAFE_ADJECTIVES_FR.has(adj) && !banned.has(noun) && noun.length >= 2) {
+            return {
+              type: "compound",
+              phrase: `${cleanTokens[nIdx]} ${cleanTokens[aIdx]}`,
+              startIdx: nIdx,
+              endIdx: aIdx,
+              data: {
+                phrase: `${cleanTokens[nIdx]} ${cleanTokens[aIdx]}`,
+                type: "Locution Nominale",
+                components: `${cleanTokens[nIdx]} + ${cleanTokens[aIdx]}`,
+                translations: {}
+              }
+            };
+          }
+          return null;
+        };
+
+        return checkAdjFR(clickedIdx, clickedIdx + 1) || checkAdjFR(clickedIdx - 1, clickedIdx);
+      }
+
+      if (lang === "en") {
+        const checkPairEN = (w0Idx, w1Idx) => {
+          if (w0Idx < 0 || w1Idx >= n) return null;
+          const w0 = cleanTokens[w0Idx].toLowerCase();
+          const w1 = cleanTokens[w1Idx].toLowerCase();
+          if (banned.has(w0) || banned.has(w1) || w0.length < 2 || w1.length < 2) return null;
+          if (SAFE_ADJECTIVES_EN.has(w0) || SAFE_HEAD_NOUNS_EN.has(w1)) {
+            return {
+              type: "compound",
+              phrase: `${cleanTokens[w0Idx]} ${cleanTokens[w1Idx]}`,
+              startIdx: w0Idx,
+              endIdx: w1Idx,
+              data: {
+                phrase: `${cleanTokens[w0Idx]} ${cleanTokens[w1Idx]}`,
+                type: "Noun Phrase",
+                components: `${cleanTokens[w0Idx]} + ${cleanTokens[w1Idx]}`,
+                translations: {}
+              }
+            };
+          }
+          return null;
+        };
+
+        return checkPairEN(clickedIdx, clickedIdx + 1) || checkPairEN(clickedIdx - 1, clickedIdx);
+      }
+
+      if (lang === "de") {
+        const checkPairDE = (aIdx, nIdx) => {
+          if (aIdx < 0 || nIdx >= n) return null;
+          const adj = cleanTokens[aIdx].toLowerCase();
+          const noun = cleanTokens[nIdx];
+          const stem = adj.replace(/(?:en|em|er|es|e)$/, '');
+          if (SAFE_ADJECTIVES_DE_STEMS.has(stem) && noun.length >= 2 && noun[0] === noun[0].toUpperCase() && !banned.has(noun.toLowerCase())) {
+            return {
+              type: "compound",
+              phrase: `${cleanTokens[aIdx]} ${cleanTokens[nIdx]}`,
+              startIdx: aIdx,
+              endIdx: nIdx,
+              data: {
+                phrase: `${cleanTokens[aIdx]} ${cleanTokens[nIdx]}`,
+                type: "Substantivgruppe",
+                components: `${cleanTokens[aIdx]} + ${cleanTokens[nIdx]}`,
+                translations: {}
+              }
+            };
+          }
+          return null;
+        };
+
+        return checkPairDE(clickedIdx, clickedIdx + 1) || checkPairDE(clickedIdx - 1, clickedIdx);
+      }
+
+      return null;
+    }
+
+    let currentHarvestedPhrases = [];
+
+    function harvestVocabPhrases(targetData, targetLang, supportLang = "en") {
+      if (!targetData || !Array.isArray(targetData.vocab)) return [];
+      const harvested = [];
+      const t = uiTranslations[supportLang] || uiTranslations.en;
+
+      targetData.vocab.forEach(v => {
+        if (!v || !v.target) return;
+        const rawPhrase = v.target.trim();
+        const words = rawPhrase.split(/\s+/).map(w => w.replace(/[^\p{L}\p{M}\p{N}'-]/gu, '').trim()).filter(Boolean);
+        if (words.length < 2) return;
+
+        const stemSeq = words.map(w => {
+          const wLower = w.toLowerCase();
+          if (targetLang === "tr") {
+            const st = stemTurkishWord(wLower);
+            return Array.from(new Set([wLower, st]));
+          }
+          return [wLower];
+        });
+
+        harvested.push({
+          phrase: rawPhrase,
+          stemSequence: stemSeq,
+          translations: v.translations || {},
+          type: (v.pos ? `${v.pos} ` : "") + (t.lessonWordBadge || "Lesson Phrase"),
+          components: v.root ? `${rawPhrase} (${t.rootLabel || "Root"}: ${v.root})` : rawPhrase,
+          note: v.definition || ""
+        });
+      });
+
+      return harvested;
+    }
+
+    function matchPhraseList(list, cleanTokens, stemmed, clickedIdx) {
+      if (!list || list.length === 0) return null;
+      const sorted = list.slice().sort((a, b) => b.stemSequence.length - a.stemSequence.length);
+
+      for (const p of sorted) {
         const seq = p.stemSequence;
         const seqLen = seq.length;
         const minStart = Math.max(0, clickedIdx - seqLen + 1);
@@ -5326,8 +6188,26 @@
           }
         }
       }
+      return null;
+    }
 
-      // Check Turkish morphology registry if no multi-word phrase matched
+    function detectContextualUnit(cleanTokens, clickedIdx, lang = "tr") {
+      const stemmed = cleanTokens.map(t => lang === "tr" ? stemTurkishWord(t) : t.toLowerCase());
+
+      // 1. Check dynamically harvested lesson vocabulary phrases
+      const dynamicMatch = matchPhraseList(currentHarvestedPhrases, cleanTokens, stemmed, clickedIdx);
+      if (dynamicMatch) return dynamicMatch;
+
+      // 2. Check static curated phrase registry
+      const registry = MULTILINGUAL_PHRASE_REGISTRY[lang] || [];
+      const registryMatch = matchPhraseList(registry, cleanTokens, stemmed, clickedIdx);
+      if (registryMatch) return registryMatch;
+
+      // 3. Check safe grammatical rule-based compounds (TR, ES, FR, EN, DE)
+      const compoundMatch = detectRuleBasedCompound(cleanTokens, clickedIdx, lang);
+      if (compoundMatch) return compoundMatch;
+
+      // 4. Check Turkish morphology registry if no multi-word phrase matched
       const clickedWord = cleanTokens[clickedIdx].toLowerCase();
       if (lang === "tr" && TURKISH_MORPHOLOGY_REGISTRY[clickedWord]) {
         return {
@@ -5380,11 +6260,11 @@
       let componentsText = "";
       let morphologicalNote = "";
 
-      if (detectedUnit && detectedUnit.type === "phrase") {
+      if (detectedUnit && (detectedUnit.type === "phrase" || detectedUnit.type === "compound")) {
         const pd = detectedUnit.data;
-        displayTarget = pd.phrase;
-        displayTrans = (pd.translations && pd.translations[toLang]) || pd.translations.en || Object.values(pd.translations)[0];
-        badgeText = pd.type || "Idiomatic Phrase";
+        displayTarget = detectedUnit.phrase || pd.phrase;
+        displayTrans = (pd.translations && (pd.translations[toLang] || pd.translations.en || Object.values(pd.translations)[0])) || "";
+        badgeText = pd.type || (t.compoundBadge || "Compound Phrase");
         componentsText = pd.components || "";
         morphologicalNote = pd.note || "";
       } else if (detectedUnit && detectedUnit.type === "morphology") {
@@ -5428,7 +6308,7 @@
         if (componentsText || (matchedVocab && matchedVocab.root && matchedVocab.root.trim() !== "")) {
           if (rootRow) rootRow.style.display = "block";
           const rootLabel = document.getElementById("pop-root-label");
-          if (rootLabel) rootLabel.textContent = componentsText ? "Structure:" : (t.rootLabel || "Root:");
+          if (rootLabel) rootLabel.textContent = componentsText ? (t.structureLabel || "Structure:") : (t.rootLabel || "Root:");
           if (rootWordElem) rootWordElem.textContent = componentsText || matchedVocab.root;
           const rTrans = (matchedVocab?.rootTranslations && matchedVocab.rootTranslations[toLang])
                       || (matchedVocab?.rootTranslations && matchedVocab.rootTranslations.en) || "";
@@ -5437,8 +6317,23 @@
           if (rootRow) rootRow.style.display = "none";
         }
       } else {
-        if (vocabBadge) vocabBadge.style.display = "none";
-        if (rootRow) rootRow.style.display = "none";
+        if (vocabBadge) {
+          if (badgeText) {
+            vocabBadge.style.display = "inline-block";
+            vocabBadge.textContent = badgeText;
+          } else {
+            vocabBadge.style.display = "none";
+          }
+        }
+        if (componentsText) {
+          if (rootRow) rootRow.style.display = "block";
+          const rootLabel = document.getElementById("pop-root-label");
+          if (rootLabel) rootLabel.textContent = t.structureLabel || "Structure:";
+          if (rootWordElem) rootWordElem.textContent = componentsText;
+          if (rootTransElem) rootTransElem.textContent = "";
+        } else {
+          if (rootRow) rootRow.style.display = "none";
+        }
         transTextElem.innerHTML = `<span style="opacity:0.6;">${t.translatingText || "Translating..."}</span>`;
       }
 
