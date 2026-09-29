@@ -5880,6 +5880,150 @@
       "alt", "neu", "unterirdisch", "traditionell", "türkisch"
     ]);
 
+    const TURKISH_VOWEL_DROP_MAP = {
+      "ömr": "ömür",
+      "şehr": "şehir",
+      "akl": "akıl",
+      "fikr": "fikir",
+      "resm": "resim",
+      "metn": "metin",
+      "keşf": "keşif",
+      "karn": "karın",
+      "burn": "burun",
+      "oğl": "oğul",
+      "omz": "omuz",
+      "vakt": "vakit",
+      "aln": "alın",
+      "boyn": "boyun",
+      "göğs": "göğüs",
+      "nehr": "nehir",
+      "nesl": "nesil",
+      "sabr": "sabır",
+      "ufk": "ufuk",
+      "kısm": "kısım",
+      "hükm": "hüküm",
+      "ism": "isim",
+      "cism": "cisim",
+      "zehr": "zehir",
+      "devr": "devir",
+      "nakl": "nakil",
+      "kayb": "kayıp",
+      "koyn": "koyun",
+      "hiss": "his",
+      "hakk": "hak",
+      "sırr": "sır",
+      "redd": "ret",
+      "aff": "af",
+      "tıbb": "tıp",
+      "hadd": "hat"
+    };
+
+    const TURKISH_KNOWN_PRESERVE = new Set([
+      "fasulye", "fasülye", "türbe", "kahve", "müze", "tepe", "bahçe", "bölge", "kale",
+      "anne", "baba", "kedi", "arı", "kutu", "çatı", "halı", "yazı", "kapı", "oda",
+      "elma", "ayna", "balta", "tarla", "ada", "masa", "sıra", "gölge", "köprü", "öykü",
+      "taze", "zeytin", "metin", "ekin", "kadın", "torun", "burun", "boyun", "odun", "yemin"
+    ]);
+
+    function getBareTurkishWord(rawWord) {
+      if (!rawWord) return "";
+      const raw = rawWord.trim();
+      const isUpper = raw.length > 0 && raw[0] === raw[0].toUpperCase() && raw[0] !== raw[0].toLowerCase();
+      const w = raw.toLowerCase();
+
+      if (TURKISH_KNOWN_PRESERVE.has(w)) return raw;
+      if (TURKISH_VOWEL_DROP_MAP[w]) {
+        const res = TURKISH_VOWEL_DROP_MAP[w];
+        return isUpper ? (res.charAt(0).toUpperCase() + res.slice(1)) : res;
+      }
+
+      let s = w;
+
+      // 1. Copula: -dır/-dir/-dur/-dür/-tır/-tir/-tur/-tür
+      s = s.replace(/(?:[dt][ıiuü]r)$/, '');
+
+      // 2. Case with buffer n: -ndan/-nden, -nda/-nde, -na/-ne, -nı/-ni/-nu/-nü
+      s = s.replace(/(?:ndan|nden|nda|nde|na|ne)$/, '');
+      if (!s.startsWith("zeytin")) {
+        s = s.replace(/(?:nı|ni|nu|nü)$/, '');
+      }
+
+      // 3. Ablative / Locative / Instrumental
+      if (s.endsWith("dan") || s.endsWith("den") || s.endsWith("tan") || s.endsWith("ten")) {
+        if (s.length > 4) s = s.slice(0, -3);
+      } else if (s.endsWith("da") || s.endsWith("de") || s.endsWith("ta") || s.endsWith("te")) {
+        if (s.length > 4 && !TURKISH_KNOWN_PRESERVE.has(s)) s = s.slice(0, -2);
+      } else if (s.endsWith("yla") || s.endsWith("yle")) {
+        if (s.length > 4) s = s.slice(0, -3);
+      } else if (s.endsWith("la") || s.endsWith("le")) {
+        if (s.length > 5 && !TURKISH_KNOWN_PRESERVE.has(s)) s = s.slice(0, -2);
+      }
+
+      // 4. Genitive / 2nd possessive: -(n)ın/-(n)in/-(n)un/-(n)ün
+      if (!TURKISH_KNOWN_PRESERVE.has(s)) {
+        if (/(?:nın|nin|nun|nün|[ıiuü]n)$/.test(s) && s.length > 4) {
+          s = s.replace(/(?:nın|nin|nun|nün|[ıiuü]n)$/, '');
+        }
+      }
+
+      // 5. Dative: -ya/-ye / -a/-e
+      if (s.endsWith("ya") || s.endsWith("ye")) {
+        if (s.length > 4) s = s.slice(0, -2);
+      } else if ((s.endsWith("a") || s.endsWith("e")) && s.length > 5 && !TURKISH_KNOWN_PRESERVE.has(s)) {
+        const pre = s.charAt(s.length - 2);
+        if (!"aeıioöuü".includes(pre)) {
+          s = s.slice(0, -1);
+        }
+      }
+
+      // 6. Accusative with buffer: -yı/-yi/-yu/-yü
+      if (/y[ıiuü]$/.test(s) && s.length > 4) {
+        s = s.slice(0, -2);
+      }
+
+      // 7. Plural & Possessive
+      if (/(?:ları|leri)$/.test(s) && s.length > 5) {
+        s = s.replace(/(?:ları|leri)$/, '');
+      }
+      if (/(?:[ıiuü]m[ıiuü]z|[ıiuü]n[ıiuü]z)$/.test(s) && s.length > 5) {
+        s = s.replace(/(?:[ıiuü]m[ıiuü]z|[ıiuü]n[ıiuü]z)$/, '');
+      }
+      if (/(?:s[ıiuü])$/.test(s) && s.length > 3) {
+        s = s.replace(/s[ıiuü]$/, '');
+      }
+      if (/(?:[ıiuü]m)$/.test(s) && s.length > 5) {
+        s = s.replace(/[ıiuü]m$/, '');
+      }
+      if (/(?:lar|ler)$/.test(s) && s.length > 4) {
+        s = s.replace(/(?:lar|ler)$/, '');
+      }
+
+      // 8. Single vowel: -ı/-i/-u/-ü
+      if (TURKISH_VOWEL_DROP_MAP[s.slice(0, -1)]) {
+        s = s.slice(0, -1);
+      } else if (/[ıiuü]$/.test(s) && s.length > 4 && !TURKISH_KNOWN_PRESERVE.has(s)) {
+        s = s.slice(0, -1);
+      }
+
+      // 9. Vowel drop restoration
+      if (TURKISH_VOWEL_DROP_MAP[s]) {
+        s = TURKISH_VOWEL_DROP_MAP[s];
+      }
+
+      // 10. Consonant softening reversal
+      if (s.endsWith("ğ")) {
+        s = s.slice(0, -1) + "k";
+      } else if (s.endsWith("b") && s.length > 3) {
+        s = s.slice(0, -1) + "p";
+      } else if (s.endsWith("c") && s.length > 3) {
+        s = s.slice(0, -1) + "ç";
+      } else if (s.endsWith("d") && s.length > 3) {
+        s = s.slice(0, -1) + "t";
+      }
+
+      return isUpper ? (s.charAt(0).toUpperCase() + s.slice(1)) : s;
+    }
+
     function stemHeadNounTR(word) {
       let s = (word || "").toLowerCase().trim();
       if (SAFE_HEAD_NOUNS_TR.has(s)) return s;
@@ -6262,18 +6406,44 @@
 
       if (detectedUnit && (detectedUnit.type === "phrase" || detectedUnit.type === "compound")) {
         const pd = detectedUnit.data;
-        displayTarget = detectedUnit.phrase || pd.phrase;
+        displayTarget = (pd && pd.phrase) ? pd.phrase : (detectedUnit.phrase || cleanWord);
+
+        // Normalize compound phrases to their bare citation form
+        if (fromLang === "tr" && detectedUnit.type === "compound") {
+          const parts = displayTarget.split(/\s+/);
+          if (parts.length === 2) {
+            const mod = parts[0];
+            const head = parts[1];
+            if (pd.type === "İsim Tamlaması") {
+              const bareHead = stemHeadNounTR(head);
+              displayTarget = `${mod} ${bareHead}`;
+            } else if (pd.type === "Sıfat Tamlaması") {
+              const bareNoun = getBareTurkishWord(head);
+              displayTarget = `${mod} ${bareNoun}`;
+            }
+          }
+        }
+
         displayTrans = (pd.translations && (pd.translations[toLang] || pd.translations.en || Object.values(pd.translations)[0])) || "";
         badgeText = pd.type || (t.compoundBadge || "Compound Phrase");
         componentsText = pd.components || "";
         morphologicalNote = pd.note || "";
       } else if (detectedUnit && detectedUnit.type === "morphology") {
         const md = detectedUnit.data;
-        displayTarget = cleanWord;
+        displayTarget = md.lemma || cleanWord;
         displayTrans = (md.translations && md.translations[toLang]) || md.translations.en || Object.values(md.translations)[0];
         badgeText = `[${md.pos || "Noun"}] lemma: ${md.lemma}`;
         componentsText = md.morphology || "";
         morphologicalNote = md.note || "";
+      } else {
+        // Single word: normalize to bare dictionary form (e.g. imparatoru -> imparator)
+        if (fromLang === "tr") {
+          const bareWord = getBareTurkishWord(cleanWord);
+          if (bareWord && bareWord.toLowerCase() !== cleanWord.toLowerCase()) {
+            displayTarget = bareWord;
+            componentsText = `${cleanWord} (yalın: ${bareWord})`;
+          }
+        }
       }
 
       wordTargetElem.textContent = displayTarget;
@@ -6288,9 +6458,10 @@
       let matchedVocab = null;
       if (!lessonTrans && levelData && Array.isArray(levelData.vocab)) {
         const cw = cleanWord.toLowerCase();
+        const dt = displayTarget.toLowerCase();
         matchedVocab = levelData.vocab.find(v => {
           const vt = (v.target || "").toLowerCase().trim();
-          return vt === cw || cw.startsWith(vt) || vt.startsWith(cw);
+          return vt === dt || vt === cw || dt.startsWith(vt) || vt.startsWith(dt) || cw.startsWith(vt) || vt.startsWith(cw);
         });
         if (matchedVocab && matchedVocab.translations) {
           lessonTrans = matchedVocab.translations[toLang] || matchedVocab.translations.en || Object.values(matchedVocab.translations)[0];
