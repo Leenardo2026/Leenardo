@@ -5811,7 +5811,8 @@
     const SAFE_ADJECTIVES_TR = new Set([
       "taze", "kuru", "sıcak", "soğuk", "yeşil", "mavi", "kara", "ak", "beyaz", "kırmızı", "sarı",
       "tatlı", "acı", "ekşi", "tuzlu", "büyük", "küçük", "eski", "yeni", "ince", "kalın", "uzun",
-      "kısa", "derin", "yüksek", "alçak", "sert", "yumuşak", "doğal", "organik", "geleneksel", "tarihi"
+      "kısa", "derin", "yüksek", "alçak", "sert", "yumuşak", "doğal", "organik", "geleneksel", "tarihi",
+      "zeytinyağlı", "önemli", "sağlıklı"
     ]);
 
     const BANNED_PHRASE_TOKENS = {
@@ -5881,6 +5882,27 @@
     ]);
 
     const TURKISH_VOWEL_DROP_MAP = {
+      "keyf": "keyif",
+      "zihn": "zihin",
+      "şekl": "şekil",
+      "fasl": "fasıl",
+      "asl": "asıl",
+      "aksl": "akis",
+      "ağz": "ağız",
+      "bağr": "bağır",
+      "genz": "geniz",
+      "gönl": "gönül",
+      "hacm": "hacim",
+      "lutf": "lütuf",
+      "kavm": "kavim",
+      "kutb": "kutup",
+      "nutk": "nutuk",
+      "sihr": "sihir",
+      "şahs": "şahıs",
+      "uzv": "uzuv",
+      "zulm": "zulüm",
+      "ilm": "ilim",
+      "hüsn": "hüsün",
       "ömr": "ömür",
       "şehr": "şehir",
       "akl": "akıl",
@@ -5915,15 +5937,56 @@
       "redd": "ret",
       "aff": "af",
       "tıbb": "tıp",
-      "hadd": "hat"
+      "hadd": "hat",
+      "hazz": "haz",
+      "zann": "zan",
+      "zıdd": "zıt",
+      "rabb": "rab"
     };
 
     const TURKISH_KNOWN_PRESERVE = new Set([
+      // Protected base words ending in vowels:
       "fasulye", "fasülye", "türbe", "kahve", "müze", "tepe", "bahçe", "bölge", "kale",
       "anne", "baba", "kedi", "arı", "kutu", "çatı", "halı", "yazı", "kapı", "oda",
       "elma", "ayna", "balta", "tarla", "ada", "masa", "sıra", "gölge", "köprü", "öykü",
-      "taze", "zeytin", "metin", "ekin", "kadın", "torun", "burun", "boyun", "odun", "yemin"
+      "taze", "zeytin", "metin", "ekin", "kadın", "torun", "burun", "boyun", "odun", "yemin",
+      // Protected -e / -a nominals:
+      "kelime", "makale", "sahne", "çevre", "tehlike", "mucize", "hikaye", "hikâye",
+      "hazine", "define", "makine", "çene", "tane", "kütüphane", "hastane", "postane",
+      "abone", "kanepe", "gaye", "çare", "meşale", "kafile", "vesile", "tercüme",
+      // Protected -u / -ü / -ı / -i nominals & adjectives:
+      "koku", "dolu", "koyu", "doğru", "duru", "kuru", "çalı", "yapı", "anı",
+      "bilgi", "sevgi", "saygı", "duygu", "korku", "çalgı", "etki", "tepki", "katkı",
+      "bitki", "yetki", "baskı", "övgü", "ezgi", "coşku", "ölçü", "döngü", "sezgi",
+      "örgü", "sorgu", "tilki", "şarkı", "yolcu", "avcı", "denizci", "öğrenci", "tarihçi",
+      "kapıcı", "yazıcı", "okuyucu", "iğne", "deve", "gece", "öte", "yöre", "töre",
+      // Protected derivational -lı/-li/-lu/-lü adjectives & nouns:
+      "zeytinyağlı", "önemli", "sağlıklı", "tatlı", "farklı", "canlı", "köylü", "yaşlı", "osmanlı",
+      "değerli", "çeşitli", "düzenli", "hızlı", "güçlü", "sürekli", "lezzetli", "renkli",
+      "gizli", "telli", "belli", "sorumlu", "alçakgönüllü", "faydalı", "pahalı", "öfkeli", "neşeli",
+      // Protected -den/-dan nouns (not ablative):
+      "beden", "maden", "neden", "fidan", "vicdan", "meydan", "cüzdan", "vatan", "kaptan",
+      "destan", "bostan", "sultan", "şaman", "orman", "uzman", "duman", "roman", "liman",
+      "zaman", "tavan", "taban", "yalan", "kalan", "yılan", "plan",
+      // Protected -in/-un/-ün nouns & adjectives (not genitive):
+      "hüzün", "zemin", "düğün", "tütün", "sürgün", "yangın", "aydın", "salgın", "engin",
+      "derin", "serin", "kalın", "yalın", "yakın", "uzun", "bütün", "üstün", "özgün",
+      "disiplin", "latin", "basin", "basın", "yayın", "sayın", "ekin", "belin",
+      // Protected -im/-um/-üm nominals (not 1st possessive):
+      "toplum", "mevsim", "teslim", "durum", "kurum", "uyum", "doğum", "kavram", "anlam",
+      "toplam", "bölüm", "çözüm", "ölüm", "verim", "üretim", "tüketim", "deneyim",
+      "gelişim", "iletişim", "yaşam", "bilim", "resim", "iklim", "hekim", "hakim",
+      // Protected -dir/-dür/-tır/-tir nouns (not copula):
+      "çadır", "müdür", "satır", "demir", "kadir", "nadir", "takdir", "tekdir", "sedir",
+      // Protected short base nouns / adverbs / pronouns:
+      "ses", "nefes", "meclis", "polis", "servis", "dolar", "aksi", "böyle", "şöyle", "öyle",
+      "onlar", "bunlar", "şunlar", "kimse", "nerede", "burada", "orada", "kendi", "belki", "çünkü", "sanki", "nasıl"
     ]);
+
+    function countTurkishVowels(strVal) {
+      const m = strVal.match(/[aeıioöuü]/gi);
+      return m ? m.length : 0;
+    }
 
     function getBareTurkishWord(rawWord) {
       if (!rawWord) return "";
@@ -5937,72 +6000,139 @@
         return isUpper ? (res.charAt(0).toUpperCase() + res.slice(1)) : res;
       }
 
+      // Check if word starts with a known contracted vowel-drop root
+      // e.g. keyfi, keyfidir, keyfince, keyfine, zihnim, zihnimiz, zihninde, ömrün, ömründe, şehrin, aklından, fikrinde
+      for (const [vStem, vBare] of Object.entries(TURKISH_VOWEL_DROP_MAP)) {
+        if (vStem.length >= 3 && w.startsWith(vStem)) {
+          if ((vStem === "asl" || vStem === "aksl") && w.length > vStem.length + 3) {
+            continue;
+          }
+          return isUpper ? (vBare.charAt(0).toUpperCase() + vBare.slice(1)) : vBare;
+        }
+      }
+
+      // Handle compounds ending in 'oğlu' like 'insanoğlu', 'eyüboğlu'
+      if (w.includes("oğlu") || w.includes("oğluna") || w.includes("oğlunun") || w.includes("oğlunda") || w.includes("oğlundan") || w.includes("oğlunu")) {
+        const stem = w.replace(/(?:oğluna|oğlunun|oğlunda|oğlundan|oğlunu)$/, 'oğlu');
+        return isUpper ? (stem.charAt(0).toUpperCase() + stem.slice(1)) : stem;
+      }
+
+      // Handle 'ses' stem (sesi, sesini, sesinin, sesinden -> ses)
+      if (w.startsWith("ses") && w.length <= 7 && !w.startsWith("sesli") && !w.startsWith("sessiz")) {
+        return isUpper ? "Ses" : "ses";
+      }
+
+      // Handle 'aksi' stem (aksine -> aksi)
+      if (w === "aksine") {
+        return isUpper ? "Aksi" : "aksi";
+      }
+
       let s = w;
 
       // 1. Copula: -dır/-dir/-dur/-dür/-tır/-tir/-tur/-tür
-      s = s.replace(/(?:[dt][ıiuü]r)$/, '');
-
-      // 2. Case with buffer n: -ndan/-nden, -nda/-nde, -na/-ne, -nı/-ni/-nu/-nü
-      s = s.replace(/(?:ndan|nden|nda|nde|na|ne)$/, '');
-      if (!s.startsWith("zeytin")) {
-        s = s.replace(/(?:nı|ni|nu|nü)$/, '');
+      if (/(?:[dt][ıiuü]r)$/.test(s) && s.length > 5 && !TURKISH_KNOWN_PRESERVE.has(s)) {
+        const stem = s.replace(/(?:[dt][ıiuü]r)$/, '');
+        if (stem.length >= 3) {
+          s = stem;
+        }
       }
 
-      // 3. Ablative / Locative / Instrumental
-      if (s.endsWith("dan") || s.endsWith("den") || s.endsWith("tan") || s.endsWith("ten")) {
-        if (s.length > 4) s = s.slice(0, -3);
-      } else if (s.endsWith("da") || s.endsWith("de") || s.endsWith("ta") || s.endsWith("te")) {
-        if (s.length > 4 && !TURKISH_KNOWN_PRESERVE.has(s)) s = s.slice(0, -2);
-      } else if (s.endsWith("yla") || s.endsWith("yle")) {
-        if (s.length > 4) s = s.slice(0, -3);
-      } else if (s.endsWith("la") || s.endsWith("le")) {
-        if (s.length > 5 && !TURKISH_KNOWN_PRESERVE.has(s)) s = s.slice(0, -2);
+      // 2. Case with buffer n after 3rd person possessive:
+      // Pattern: [vowel] + n + (da|de|dan|den|a|e|ı|i|u|ü)
+      // Requires at least 2 vowels before buffer n (e.g. ev-i-nde, araba-sı-nda, kitab-ı-nda)
+      // Prevents mangling 1-vowel stems: gün-de, gün-den, han-da, man-da, ta-ne, çe-ne
+      if (!TURKISH_KNOWN_PRESERVE.has(s)) {
+        const bufMatch = s.match(/([aeıioöuü])n(dan|den|da|de|a|e|[ıiuü])$/);
+        if (bufMatch) {
+          const beforeN = s.slice(0, bufMatch.index + 1);
+          if (countTurkishVowels(beforeN) >= 2) {
+            s = beforeN;
+          }
+        }
+      }
+
+      // 3. Regular Ablative / Locative / Instrumental
+      if (!TURKISH_KNOWN_PRESERVE.has(s)) {
+        if (s.endsWith("dan") || s.endsWith("den") || s.endsWith("tan") || s.endsWith("ten")) {
+          if (s.length > 4 && !TURKISH_KNOWN_PRESERVE.has(s)) s = s.slice(0, -3);
+        } else if (s.endsWith("da") || s.endsWith("de") || s.endsWith("ta") || s.endsWith("te")) {
+          if (s.length > 4 && !TURKISH_KNOWN_PRESERVE.has(s)) s = s.slice(0, -2);
+        } else if (s.endsWith("yla") || s.endsWith("yle")) {
+          if (s.length > 4 && !TURKISH_KNOWN_PRESERVE.has(s)) s = s.slice(0, -3);
+        } else if (s.endsWith("la") || s.endsWith("le")) {
+          if (s.length > 5 && !TURKISH_KNOWN_PRESERVE.has(s)) s = s.slice(0, -2);
+        }
       }
 
       // 4. Genitive / 2nd possessive: -(n)ın/-(n)in/-(n)un/-(n)ün
       if (!TURKISH_KNOWN_PRESERVE.has(s)) {
-        if (/(?:nın|nin|nun|nün|[ıiuü]n)$/.test(s) && s.length > 4) {
-          s = s.replace(/(?:nın|nin|nun|nün|[ıiuü]n)$/, '');
+        if (/(?:nın|nin|nun|nün)$/.test(s) && s.length > 4) {
+          s = s.replace(/(?:nın|nin|nun|nün)$/, '');
+        } else if (/[ıiuü]n$/.test(s) && s.length > 4 && !TURKISH_KNOWN_PRESERVE.has(s)) {
+          const stem = s.slice(0, -2);
+          if (stem.length >= 3) {
+            s = stem;
+          }
         }
       }
 
       // 5. Dative: -ya/-ye / -a/-e
-      if (s.endsWith("ya") || s.endsWith("ye")) {
-        if (s.length > 4) s = s.slice(0, -2);
-      } else if ((s.endsWith("a") || s.endsWith("e")) && s.length > 5 && !TURKISH_KNOWN_PRESERVE.has(s)) {
-        const pre = s.charAt(s.length - 2);
-        if (!"aeıioöuü".includes(pre)) {
-          s = s.slice(0, -1);
+      if (!TURKISH_KNOWN_PRESERVE.has(s)) {
+        if (s.endsWith("ya") || s.endsWith("ye")) {
+          if (s.length > 4) s = s.slice(0, -2);
+        } else if ((s.endsWith("a") || s.endsWith("e")) && s.length > 5 && !TURKISH_KNOWN_PRESERVE.has(s)) {
+          const pre = s.charAt(s.length - 2);
+          if (!"aeıioöuü".includes(pre)) {
+            s = s.slice(0, -1);
+          }
         }
       }
 
       // 6. Accusative with buffer: -yı/-yi/-yu/-yü
-      if (/y[ıiuü]$/.test(s) && s.length > 4) {
+      if (!TURKISH_KNOWN_PRESERVE.has(s) && /y[ıiuü]$/.test(s) && s.length > 4) {
         s = s.slice(0, -2);
       }
 
       // 7. Plural & Possessive
-      if (/(?:ları|leri)$/.test(s) && s.length > 5) {
-        s = s.replace(/(?:ları|leri)$/, '');
-      }
-      if (/(?:[ıiuü]m[ıiuü]z|[ıiuü]n[ıiuü]z)$/.test(s) && s.length > 5) {
-        s = s.replace(/(?:[ıiuü]m[ıiuü]z|[ıiuü]n[ıiuü]z)$/, '');
-      }
-      if (/(?:s[ıiuü])$/.test(s) && s.length > 3) {
-        s = s.replace(/s[ıiuü]$/, '');
-      }
-      if (/(?:[ıiuü]m)$/.test(s) && s.length > 5) {
-        s = s.replace(/[ıiuü]m$/, '');
-      }
-      if (/(?:lar|ler)$/.test(s) && s.length > 4) {
-        s = s.replace(/(?:lar|ler)$/, '');
+      if (!TURKISH_KNOWN_PRESERVE.has(s)) {
+        if (/(?:ları|leri)$/.test(s) && s.length > 5 && !TURKISH_KNOWN_PRESERVE.has(s)) {
+          s = s.replace(/(?:ları|leri)$/, '');
+        }
+        if (/(?:[ıiuü]m[ıiuü]z|[ıiuü]n[ıiuü]z)$/.test(s) && s.length > 5) {
+          s = s.replace(/(?:[ıiuü]m[ıiuü]z|[ıiuü]n[ıiuü]z)$/, '');
+        }
+        if (/(?:s[ıiuü])$/.test(s) && s.length > 3 && !TURKISH_KNOWN_PRESERVE.has(s)) {
+          s = s.replace(/s[ıiuü]$/, '');
+        }
+        if (/(?:lar|ler)$/.test(s) && s.length > 4 && !TURKISH_KNOWN_PRESERVE.has(s)) {
+          s = s.replace(/(?:lar|ler)$/, '');
+        }
       }
 
-      // 8. Single vowel: -ı/-i/-u/-ü
+      // Re-check preserve list after suffix stripping (e.g. zeytinyağlılar -> zeytinyağlı, toplumda -> toplum)
+      if (TURKISH_KNOWN_PRESERVE.has(s)) {
+        return isUpper ? (s.charAt(0).toUpperCase() + s.slice(1)) : s;
+      }
+
+      // 8. Single vowel: -ı/-i/-u/-ü (possessive / accusative)
+      // Guarded against derivational suffixes:
+      // A) Derivational -lı/-li/-lu/-lü (e.g. zeytinyağlı, önemli, sağlıklı, tatlı, köylü, yaşlı, vb.)
+      // B) Derivational agent -cı/-ci/-cu/-cü
+      // C) Derivational -gı/-gi/-gu/-gü / -kı/-ki/-ku/-kü (bilgi, sevgi, saygı, duygu, korku, etki, tepki, vb.)
+      // D) Words in TURKISH_KNOWN_PRESERVE
       if (TURKISH_VOWEL_DROP_MAP[s.slice(0, -1)]) {
         s = s.slice(0, -1);
       } else if (/[ıiuü]$/.test(s) && s.length > 4 && !TURKISH_KNOWN_PRESERVE.has(s)) {
-        s = s.slice(0, -1);
+        const isLiSuffix = /[a-zçğıöşü]l[ıiuü]$/.test(s);
+        const isCiAgent = /(?:[ıiuü]c[ıiuü]|[a-zçğıöşü]ç[ıiuü])$/.test(s);
+        const isGiSuffix = /[a-zçğıöşü][gk][ıiuü]$/.test(s);
+
+        if (!isLiSuffix && !isCiAgent && !isGiSuffix) {
+          const stem = s.slice(0, -1);
+          if (!TURKISH_KNOWN_PRESERVE.has(stem)) {
+            s = stem;
+          }
+        }
       }
 
       // 9. Vowel drop restoration
@@ -6010,9 +6140,14 @@
         s = TURKISH_VOWEL_DROP_MAP[s];
       }
 
-      // 10. Consonant softening reversal
+      // 10. Consonant softening reversal:
+      // ğ -> k (kitabında -> kitap, bardağından -> bardak, ağacında -> ağaç)
+      // But preserve genuine roots ending in ğ: ağ, dağ, bağ, sağ, çağ, yağ (and compounds)
       if (s.endsWith("ğ")) {
-        s = s.slice(0, -1) + "k";
+        const noKReversal = ["ağ", "dağ", "bağ", "sağ", "çağ", "yağ"];
+        if (!noKReversal.includes(s) && !s.endsWith("dağ") && !s.endsWith("bağ") && !s.endsWith("yağ")) {
+          s = s.slice(0, -1) + "k";
+        }
       } else if (s.endsWith("b") && s.length > 3) {
         s = s.slice(0, -1) + "p";
       } else if (s.endsWith("c") && s.length > 3) {
