@@ -214,7 +214,7 @@ const LeenardoDB = {
    */
   async syncLocalWordsToCloud(userId) {
     if (!supabaseClient || !userId) return;
-    const STORAGE_KEY = "mia_saved_words_v1";
+    const STORAGE_KEY = "leenardo_saved_words_v1";
     let localWords = [];
     try {
       const raw = localStorage.getItem(STORAGE_KEY);

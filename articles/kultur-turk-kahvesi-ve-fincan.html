@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,9 +32,24 @@
   <script>
     (function() {
       try {
-        const saved = localStorage.getItem("leenardo_theme");
-        const theme = saved || "light";
-        document.documentElement.setAttribute("data-theme", theme);
+        // One-time backward-compatibility migration from mia_* to leenardo_*
+        const legacyMigrationMap = {
+          mia_target_lang: "leenardo_target_lang",
+          mia_support_lang: "leenardo_support_lang",
+          mia_preferred_level: "leenardo_preferred_level",
+          mia_saved_words_v1: "leenardo_saved_words_v1"
+        };
+        for (const [oldKey, newKey] of Object.entries(legacyMigrationMap)) {
+          const oldVal = localStorage.getItem(oldKey);
+          if (oldVal !== null && localStorage.getItem(newKey) === null) {
+            localStorage.setItem(newKey, oldVal);
+          }
+        }
+
+        const savedTheme = localStorage.getItem("leenardo_theme") || "light";
+        document.documentElement.setAttribute("data-theme", savedTheme);
+        const savedLang = localStorage.getItem("leenardo_support_lang") || "en";
+        document.documentElement.setAttribute("lang", savedLang);
       } catch (e) {}
     })();
   </script>
@@ -3345,7 +3360,7 @@
     let currentUtterance = null;
     let isSpeaking = false;
 
-    const SAVED_WORDS_STORAGE_KEY = "mia_saved_words_v1";
+    const SAVED_WORDS_STORAGE_KEY = "leenardo_saved_words_v1";
     const LEENARDO_READ_KEY = "leenardo_read_articles";
 
     function getReadArticleIds() {
@@ -3545,7 +3560,7 @@
           const titleMap = currentArt.titleTranslations || {};
           topic = titleMap[supportLang] || titleMap.tr || currentArt.topic || currentArt.id;
         }
-        const langPair = `${(targetLang || "en").toUpperCase()} ➔ ${(supportLang || "tr").toUpperCase()}`;
+        const langPair = `${(targetLang || "en").toLocaleUpperCase('en-US')} ➔ ${(supportLang || "tr").toLocaleUpperCase('en-US')}`;
         badge.textContent = `${topic} • ${currentLevel || "A1"} (${langPair})`;
       }
 
@@ -3681,7 +3696,7 @@
         targetLang = paramTarget;
       } else {
         try {
-          targetLang = localStorage.getItem("mia_target_lang") || "tr";
+          targetLang = localStorage.getItem("leenardo_target_lang") || "tr";
         } catch (e) {
           targetLang = "tr";
         }
@@ -3691,7 +3706,7 @@
         supportLang = paramSupport;
       } else {
         try {
-          supportLang = localStorage.getItem("mia_support_lang") || (targetLang === "en" ? "tr" : "en");
+          supportLang = localStorage.getItem("leenardo_support_lang") || (targetLang === "en" ? "tr" : "en");
         } catch (e) {
           supportLang = targetLang === "en" ? "tr" : "en";
         }
@@ -3706,7 +3721,7 @@
         currentLevel = paramLevel;
       } else {
         try {
-          currentLevel = localStorage.getItem("mia_preferred_level") || "A1";
+          currentLevel = localStorage.getItem("leenardo_preferred_level") || "A1";
         } catch (e) {
           currentLevel = "A1";
         }
@@ -3715,9 +3730,9 @@
 
       // Persist State
       try {
-        localStorage.setItem("mia_target_lang", targetLang);
-        localStorage.setItem("mia_support_lang", supportLang);
-        localStorage.setItem("mia_preferred_level", currentLevel);
+        localStorage.setItem("leenardo_target_lang", targetLang);
+        localStorage.setItem("leenardo_support_lang", supportLang);
+        localStorage.setItem("leenardo_preferred_level", currentLevel);
       } catch (e) {}
 
       // Sync Language Selectors
@@ -3844,12 +3859,12 @@
       if (!SUPPORTED_LANGUAGES.includes(newTarget)) return;
       const prevTarget = targetLang;
       targetLang = newTarget;
-      localStorage.setItem("mia_target_lang", targetLang);
+      localStorage.setItem("leenardo_target_lang", targetLang);
 
       // Strict enforcement: targetLanguage !== supportLanguage
       if (targetLang === supportLang) {
         supportLang = prevTarget !== targetLang ? prevTarget : SUPPORTED_LANGUAGES.find(l => l !== targetLang);
-        localStorage.setItem("mia_support_lang", supportLang);
+        localStorage.setItem("leenardo_support_lang", supportLang);
         const supElem = document.getElementById("support-lang-select");
         if (supElem) supElem.value = supportLang;
       }
@@ -3864,12 +3879,12 @@
       if (!SUPPORTED_LANGUAGES.includes(newSupport)) return;
       const prevSupport = supportLang;
       supportLang = newSupport;
-      localStorage.setItem("mia_support_lang", supportLang);
+      localStorage.setItem("leenardo_support_lang", supportLang);
 
       // Strict enforcement: targetLanguage !== supportLanguage
       if (supportLang === targetLang) {
         targetLang = prevSupport !== supportLang ? prevSupport : SUPPORTED_LANGUAGES.find(l => l !== supportLang);
-        localStorage.setItem("mia_target_lang", targetLang);
+        localStorage.setItem("leenardo_target_lang", targetLang);
         const tarElem = document.getElementById("target-lang-select");
         if (tarElem) tarElem.value = targetLang;
       }
@@ -3886,7 +3901,7 @@
       if (currentLevel === level) return;
 
       currentLevel = level;
-      localStorage.setItem("mia_preferred_level", level);
+      localStorage.setItem("leenardo_preferred_level", level);
       stopSpeech();
       
       // Intentional browser history push so Back / Forward steps between levels
@@ -3926,7 +3941,20 @@
       updateThemeButtonUI();
     }
 
+    function toLocaleUpper(str, lang = (supportLang || 'en')) {
+      if (!str) return '';
+      const map = { tr: 'tr-TR', en: 'en-US', de: 'de-DE', es: 'es-ES', fr: 'fr-FR' };
+      return str.toLocaleUpperCase(map[lang] || 'en-US');
+    }
+
+    function toLocaleLower(str, lang = (supportLang || 'en')) {
+      if (!str) return '';
+      const map = { tr: 'tr-TR', en: 'en-US', de: 'de-DE', es: 'es-ES', fr: 'fr-FR' };
+      return str.toLocaleLowerCase(map[lang] || 'en-US');
+    }
+
     function applyUiTranslations() {
+      document.documentElement.setAttribute("lang", supportLang || "en");
       const t = uiTranslations[supportLang] || uiTranslations.en;
 
       const backText = document.getElementById("back-home-text");
@@ -4210,8 +4238,20 @@
       const t = uiTranslations[supportLang] || uiTranslations.en;
 
       // 2. Headlines
-      document.getElementById("article-main-title").textContent = targetData.title;
-      document.getElementById("article-support-title").textContent = (supportLang !== targetLang && supportData) ? supportData.title : "";
+      const mainTitleElem = document.getElementById("article-main-title");
+      if (mainTitleElem) {
+        mainTitleElem.textContent = targetData.title;
+        mainTitleElem.setAttribute("lang", targetLang);
+      }
+      const supTitleElem = document.getElementById("article-support-title");
+      if (supTitleElem) {
+        supTitleElem.textContent = (supportLang !== targetLang && supportData) ? supportData.title : "";
+        supTitleElem.setAttribute("lang", supportLang);
+      }
+      const bodyContainer = document.getElementById("article-body-content");
+      if (bodyContainer) {
+        bodyContainer.setAttribute("lang", targetLang);
+      }
 
       // 2.1 Update SEO, Social Sharing (Open Graph / Twitter) & Page Title in Support Language
       updateArticleSeoMetadata(article, targetData, supportData);
@@ -7334,8 +7374,14 @@
 
       const tTitleElem = document.getElementById("comp-target-title");
       const sTitleElem = document.getElementById("comp-support-title");
-      if (tTitleElem) tTitleElem.textContent = `${langNames[targetLang] || targetLang.toUpperCase()} (${currentLevel})`;
-      if (sTitleElem) sTitleElem.textContent = `${langNames[supportLang] || supportLang.toUpperCase()} (${currentLevel})`;
+      if (tTitleElem) {
+        tTitleElem.textContent = `${langNames[targetLang] || toLocaleUpper(targetLang, 'en')} (${currentLevel})`;
+        tTitleElem.setAttribute("lang", targetLang);
+      }
+      if (sTitleElem) {
+        sTitleElem.textContent = `${langNames[supportLang] || toLocaleUpper(supportLang, 'en')} (${currentLevel})`;
+        sTitleElem.setAttribute("lang", supportLang);
+      }
 
       const tParagraphs = (targetData && targetData.paragraphs) || [];
       const sParagraphs = (supportData && supportData.paragraphs) || [];

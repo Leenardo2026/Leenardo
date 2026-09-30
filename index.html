@@ -32,9 +32,23 @@
   <script>
     (function() {
       try {
+        // One-time backward-compatibility migration from mia_* to leenardo_*
+        const legacyMigrationMap = {
+          mia_target_lang: "leenardo_target_lang",
+          mia_support_lang: "leenardo_support_lang",
+          mia_preferred_level: "leenardo_preferred_level",
+          mia_saved_words_v1: "leenardo_saved_words_v1"
+        };
+        for (const [oldKey, newKey] of Object.entries(legacyMigrationMap)) {
+          const oldVal = localStorage.getItem(oldKey);
+          if (oldVal !== null && localStorage.getItem(newKey) === null) {
+            localStorage.setItem(newKey, oldVal);
+          }
+        }
+
         const savedTheme = localStorage.getItem("leenardo_theme") || "light";
         document.documentElement.setAttribute("data-theme", savedTheme);
-        const savedLang = localStorage.getItem("mia_support_lang") || "en";
+        const savedLang = localStorage.getItem("leenardo_support_lang") || "en";
         document.documentElement.setAttribute("lang", savedLang);
       } catch (e) {}
     })();
@@ -2408,7 +2422,7 @@
 
     function getSavedWords() {
       try {
-        const raw = localStorage.getItem("mia_saved_words_v1");
+        const raw = localStorage.getItem("leenardo_saved_words_v1");
         return raw ? JSON.parse(raw) : [];
       } catch (e) {
         return [];
@@ -2443,13 +2457,13 @@
       if (paramTarget && SUPPORTED_LANGUAGES.includes(paramTarget)) {
         targetLang = paramTarget;
       } else {
-        targetLang = localStorage.getItem("mia_target_lang") || "tr";
+        targetLang = localStorage.getItem("leenardo_target_lang") || "tr";
       }
 
       if (paramSupport && SUPPORTED_LANGUAGES.includes(paramSupport)) {
         supportLang = paramSupport;
       } else {
-        supportLang = localStorage.getItem("mia_support_lang") || (targetLang === "en" ? "tr" : "en");
+        supportLang = localStorage.getItem("leenardo_support_lang") || (targetLang === "en" ? "tr" : "en");
       }
 
       if (targetLang === supportLang) {
@@ -2459,13 +2473,13 @@
       if (paramLevel && SUPPORTED_LEVELS.includes(paramLevel)) {
         currentLevel = paramLevel;
       } else {
-        currentLevel = localStorage.getItem("mia_preferred_level") || "A1";
+        currentLevel = localStorage.getItem("leenardo_preferred_level") || "A1";
         if (!SUPPORTED_LEVELS.includes(currentLevel)) currentLevel = "A1";
       }
 
-      localStorage.setItem("mia_target_lang", targetLang);
-      localStorage.setItem("mia_support_lang", supportLang);
-      localStorage.setItem("mia_preferred_level", currentLevel);
+      localStorage.setItem("leenardo_target_lang", targetLang);
+      localStorage.setItem("leenardo_support_lang", supportLang);
+      localStorage.setItem("leenardo_preferred_level", currentLevel);
 
       const tarSelect = document.getElementById("target-lang-select");
       const supSelect = document.getElementById("support-lang-select");
@@ -2580,9 +2594,9 @@
       currentLevel = chosenLevel;
 
       try {
-        localStorage.setItem("mia_target_lang", targetLang);
-        localStorage.setItem("mia_support_lang", supportLang);
-        localStorage.setItem("mia_preferred_level", currentLevel);
+        localStorage.setItem("leenardo_target_lang", targetLang);
+        localStorage.setItem("leenardo_support_lang", supportLang);
+        localStorage.setItem("leenardo_preferred_level", currentLevel);
       } catch (e) {}
 
       const tarElem = document.getElementById("target-lang-select");
@@ -2649,11 +2663,11 @@
       if (!SUPPORTED_LANGUAGES.includes(newTarget)) return;
       const prevTarget = targetLang;
       targetLang = newTarget;
-      localStorage.setItem("mia_target_lang", targetLang);
+      localStorage.setItem("leenardo_target_lang", targetLang);
 
       if (targetLang === supportLang) {
         supportLang = prevTarget !== targetLang ? prevTarget : SUPPORTED_LANGUAGES.find(l => l !== targetLang);
-        localStorage.setItem("mia_support_lang", supportLang);
+        localStorage.setItem("leenardo_support_lang", supportLang);
         const supElem = document.getElementById("support-lang-select");
         if (supElem) supElem.value = supportLang;
       }
@@ -2672,11 +2686,11 @@
       if (!SUPPORTED_LANGUAGES.includes(newSupport)) return;
       const prevSupport = supportLang;
       supportLang = newSupport;
-      localStorage.setItem("mia_support_lang", supportLang);
+      localStorage.setItem("leenardo_support_lang", supportLang);
 
       if (supportLang === targetLang) {
         targetLang = prevSupport !== supportLang ? prevSupport : SUPPORTED_LANGUAGES.find(l => l !== supportLang);
-        localStorage.setItem("mia_target_lang", targetLang);
+        localStorage.setItem("leenardo_target_lang", targetLang);
         const tarElem = document.getElementById("target-lang-select");
         if (tarElem) tarElem.value = targetLang;
       }
@@ -2695,7 +2709,7 @@
     function setLevel(newLevel) {
       if (!SUPPORTED_LEVELS.includes(newLevel)) return;
       currentLevel = newLevel;
-      localStorage.setItem("mia_preferred_level", currentLevel);
+      localStorage.setItem("leenardo_preferred_level", currentLevel);
       updateUrlState();
       renderMagazineHero();
       renderTrendingColumn();

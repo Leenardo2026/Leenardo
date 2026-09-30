@@ -32,9 +32,23 @@
   <script>
     (function() {
       try {
+        // One-time backward-compatibility migration from mia_* to leenardo_*
+        const legacyMigrationMap = {
+          mia_target_lang: "leenardo_target_lang",
+          mia_support_lang: "leenardo_support_lang",
+          mia_preferred_level: "leenardo_preferred_level",
+          mia_saved_words_v1: "leenardo_saved_words_v1"
+        };
+        for (const [oldKey, newKey] of Object.entries(legacyMigrationMap)) {
+          const oldVal = localStorage.getItem(oldKey);
+          if (oldVal !== null && localStorage.getItem(newKey) === null) {
+            localStorage.setItem(newKey, oldVal);
+          }
+        }
+
         const savedTheme = localStorage.getItem("leenardo_theme") || "light";
         document.documentElement.setAttribute("data-theme", savedTheme);
-        const savedLang = localStorage.getItem("mia_support_lang") || "en";
+        const savedLang = localStorage.getItem("leenardo_support_lang") || "en";
         document.documentElement.setAttribute("lang", savedLang);
       } catch (e) {}
     })();
@@ -3346,7 +3360,7 @@
     let currentUtterance = null;
     let isSpeaking = false;
 
-    const SAVED_WORDS_STORAGE_KEY = "mia_saved_words_v1";
+    const SAVED_WORDS_STORAGE_KEY = "leenardo_saved_words_v1";
     const LEENARDO_READ_KEY = "leenardo_read_articles";
 
     function getReadArticleIds() {
@@ -3682,7 +3696,7 @@
         targetLang = paramTarget;
       } else {
         try {
-          targetLang = localStorage.getItem("mia_target_lang") || "tr";
+          targetLang = localStorage.getItem("leenardo_target_lang") || "tr";
         } catch (e) {
           targetLang = "tr";
         }
@@ -3692,7 +3706,7 @@
         supportLang = paramSupport;
       } else {
         try {
-          supportLang = localStorage.getItem("mia_support_lang") || (targetLang === "en" ? "tr" : "en");
+          supportLang = localStorage.getItem("leenardo_support_lang") || (targetLang === "en" ? "tr" : "en");
         } catch (e) {
           supportLang = targetLang === "en" ? "tr" : "en";
         }
@@ -3707,7 +3721,7 @@
         currentLevel = paramLevel;
       } else {
         try {
-          currentLevel = localStorage.getItem("mia_preferred_level") || "A1";
+          currentLevel = localStorage.getItem("leenardo_preferred_level") || "A1";
         } catch (e) {
           currentLevel = "A1";
         }
@@ -3716,9 +3730,9 @@
 
       // Persist State
       try {
-        localStorage.setItem("mia_target_lang", targetLang);
-        localStorage.setItem("mia_support_lang", supportLang);
-        localStorage.setItem("mia_preferred_level", currentLevel);
+        localStorage.setItem("leenardo_target_lang", targetLang);
+        localStorage.setItem("leenardo_support_lang", supportLang);
+        localStorage.setItem("leenardo_preferred_level", currentLevel);
       } catch (e) {}
 
       // Sync Language Selectors
@@ -3845,12 +3859,12 @@
       if (!SUPPORTED_LANGUAGES.includes(newTarget)) return;
       const prevTarget = targetLang;
       targetLang = newTarget;
-      localStorage.setItem("mia_target_lang", targetLang);
+      localStorage.setItem("leenardo_target_lang", targetLang);
 
       // Strict enforcement: targetLanguage !== supportLanguage
       if (targetLang === supportLang) {
         supportLang = prevTarget !== targetLang ? prevTarget : SUPPORTED_LANGUAGES.find(l => l !== targetLang);
-        localStorage.setItem("mia_support_lang", supportLang);
+        localStorage.setItem("leenardo_support_lang", supportLang);
         const supElem = document.getElementById("support-lang-select");
         if (supElem) supElem.value = supportLang;
       }
@@ -3865,12 +3879,12 @@
       if (!SUPPORTED_LANGUAGES.includes(newSupport)) return;
       const prevSupport = supportLang;
       supportLang = newSupport;
-      localStorage.setItem("mia_support_lang", supportLang);
+      localStorage.setItem("leenardo_support_lang", supportLang);
 
       // Strict enforcement: targetLanguage !== supportLanguage
       if (supportLang === targetLang) {
         targetLang = prevSupport !== supportLang ? prevSupport : SUPPORTED_LANGUAGES.find(l => l !== supportLang);
-        localStorage.setItem("mia_target_lang", targetLang);
+        localStorage.setItem("leenardo_target_lang", targetLang);
         const tarElem = document.getElementById("target-lang-select");
         if (tarElem) tarElem.value = targetLang;
       }
@@ -3887,7 +3901,7 @@
       if (currentLevel === level) return;
 
       currentLevel = level;
-      localStorage.setItem("mia_preferred_level", level);
+      localStorage.setItem("leenardo_preferred_level", level);
       stopSpeech();
       
       // Intentional browser history push so Back / Forward steps between levels
