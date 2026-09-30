@@ -4,6 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>💎 Leenardo — Graded Multilingual Reader & Magazine</title>
+
+  <!-- Google Analytics 4 (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-L5G7ZG5437"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-L5G7ZG5437');
+  </script>
+
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "CLARITY_PROJECT_ID");
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
@@ -1292,12 +1311,47 @@
       });
     }
 
+    function slugify(text) {
+      if (!text) return "story";
+      let s = text.replace(/İ/g, "i").replace(/I/g, "i").replace(/ı/g, "i")
+                  .replace(/ş/g, "s").replace(/Ş/g, "s")
+                  .replace(/ğ/g, "g").replace(/Ğ/g, "g")
+                  .replace(/ç/g, "c").replace(/Ç/g, "c")
+                  .replace(/ö/g, "o").replace(/Ö/g, "o")
+                  .replace(/ü/g, "u").replace(/Ü/g, "u")
+                  .replace(/ß/g, "ss");
+      s = s.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+      s = s.replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+      return s || "story";
+    }
+
+    function getArticleUrl(art, target, support, level) {
+      if (!art) return "/";
+      const targetData = (art.languages && art.languages[target] && art.languages[target][level || "A1"])
+                      || (art.languages && art.languages[target] && art.languages[target].A1);
+      const title = (targetData && targetData.title)
+                 || (art.titleTranslations && art.titleTranslations[target])
+                 || art.topic || "";
+      const slug = slugify(title);
+      let url = `/${target}/stories/${art.id}/${slug}/`;
+      const queryParts = [];
+      if (support && support !== (target === "en" ? "tr" : "en")) {
+        queryParts.push(`support=${encodeURIComponent(support)}`);
+      }
+      if (level && level !== "A1") {
+        queryParts.push(`level=${encodeURIComponent(level)}`);
+      }
+      if (queryParts.length > 0) {
+        url += `?${queryParts.join("&")}`;
+      }
+      return url;
+    }
+
     function surpriseMe() {
       if (!articlesDatabase || articlesDatabase.length === 0) return;
       const randomIndex = Math.floor(Math.random() * articlesDatabase.length);
       const article = articlesDatabase[randomIndex];
-      const targetUrl = `article.html?id=${encodeURIComponent(article.id)}&target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
-      window.location.href = targetUrl;
+      window.location.href = getArticleUrl(article, targetLang, supportLang, currentLevel);
     }
 
     function applyUiTranslations() {
@@ -1397,7 +1451,7 @@
         desc = `${title} — A rich exploration of cultural history and everyday life.`;
       }
 
-      const articleUrl = `article.html?id=${encodeURIComponent(featured.id)}&target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
+      const articleUrl = getArticleUrl(featured, targetLang, supportLang, currentLevel);
       let visualHtml = '';
       if (featured.visual && featured.visual.imageUrl) {
         visualHtml = `<a href="${articleUrl}" class="spotlight-visual-link"><img src="${featured.visual.imageUrl}" alt="${title}" class="spotlight-img"></a>`;
@@ -1424,7 +1478,7 @@
             <div class="spotlight-footer">
               <div class="level-pills-list">
                 ${SUPPORTED_LEVELS.map(lvl => `
-                  <a href="article.html?id=${encodeURIComponent(featured.id)}&target=${targetLang}&support=${supportLang}&level=${lvl}" 
+                  <a href="${getArticleUrl(featured, targetLang, supportLang, lvl)}" 
                      class="level-pill-mini ${lvl === currentLevel ? 'active' : ''}">${lvl}</a>
                 `).join('')}
               </div>
@@ -1565,26 +1619,26 @@
           desc = `${cardTitle}`;
         }
 
-        // Article Target URL preserving full state
-        const articleBaseUrl = `article.html?id=${encodeURIComponent(art.id)}&target=${targetLang}&support=${supportLang}`;
+        // Article Target URL preserving full state with canonical slug
+        const articleUrl = getArticleUrl(art, targetLang, supportLang, currentLevel);
 
         let imageHtml = "";
         if (art.visual && art.visual.imageUrl) {
           imageHtml = `
-            <a href="${articleBaseUrl}&level=${currentLevel}" class="card-img-link">
+            <a href="${articleUrl}" class="card-img-link">
               <img src="${art.visual.imageUrl}" alt="${cardTitle}" class="card-img" loading="lazy">
             </a>
           `;
         } else {
           imageHtml = `
-            <a href="${articleBaseUrl}&level=${currentLevel}" class="card-img-link" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1e1b4b 0%,#4338ca 100%);color:#fff;font-size:2.5rem;">
+            <a href="${articleUrl}" class="card-img-link" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1e1b4b 0%,#4338ca 100%);color:#fff;font-size:2.5rem;">
               <span>🎨</span>
             </a>
           `;
         }
 
         const levelPillsHtml = SUPPORTED_LEVELS.map(lvl => `
-          <a href="${articleBaseUrl}&level=${lvl}" class="level-pill-mini ${lvl === currentLevel ? 'active' : ''}">${lvl}</a>
+          <a href="${getArticleUrl(art, targetLang, supportLang, lvl)}" class="level-pill-mini ${lvl === currentLevel ? 'active' : ''}">${lvl}</a>
         `).join('');
 
         card.innerHTML = `
@@ -1594,7 +1648,7 @@
               <span class="card-category">${catLabel}</span>
               <span class="card-readtime">${readTime}</span>
             </div>
-            <a href="${articleBaseUrl}&level=${currentLevel}" style="text-decoration:none;">
+            <a href="${articleUrl}" style="text-decoration:none;">
               <h2 class="card-title">${cardTitle}</h2>
             </a>
             ${subtitleHtml}
@@ -1605,7 +1659,7 @@
             <div class="level-pills-list">
               ${levelPillsHtml}
             </div>
-            <a href="${articleBaseUrl}&level=${currentLevel}" class="btn-read">${t.startReading}</a>
+            <a href="${articleUrl}" class="btn-read">${t.startReading}</a>
           </div>
         `;
 

@@ -1,0 +1,5 @@
+# robots.txt for Leenardo Graded Multilingual Reader
+User-agent: *
+Allow: /
+
+Sitemap: https://leenardo.com/sitemap.xml

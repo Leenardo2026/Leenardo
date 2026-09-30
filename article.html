@@ -4,6 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>💎 Leenardo — Graded Multilingual Reader</title>
+
+  <!-- Google Analytics 4 (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-L5G7ZG5437"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-L5G7ZG5437');
+  </script>
+
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "CLARITY_PROJECT_ID");
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
@@ -2414,13 +2433,59 @@
       }
     }
 
+    function slugify(text) {
+      if (!text) return "story";
+      let s = text.replace(/İ/g, "i").replace(/I/g, "i").replace(/ı/g, "i")
+                  .replace(/ş/g, "s").replace(/Ş/g, "s")
+                  .replace(/ğ/g, "g").replace(/Ğ/g, "g")
+                  .replace(/ç/g, "c").replace(/Ç/g, "c")
+                  .replace(/ö/g, "o").replace(/Ö/g, "o")
+                  .replace(/ü/g, "u").replace(/Ü/g, "u")
+                  .replace(/ß/g, "ss");
+      s = s.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+      s = s.replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+      return s || "story";
+    }
+
     function initArticlePage() {
-      // 1. Resolve State from URL, then LocalStorage
+      // 1. Resolve State from Path, SSR Context, or URL query parameters
       const urlParams = new URLSearchParams(window.location.search);
-      const paramId = urlParams.get("id");
-      const paramTarget = urlParams.get("target") || urlParams.get("lang");
-      const paramSupport = urlParams.get("support");
-      const paramLevel = urlParams.get("level");
+      let paramId = urlParams.get("id");
+      let paramTarget = urlParams.get("target") || urlParams.get("lang");
+      let paramSupport = urlParams.get("support");
+      let paramLevel = urlParams.get("level");
+
+      // Extract from path: /{lang}/stories/{id}/{slug}/ or /{lang}/stories/{id}/
+      const pathParts = window.location.pathname.split("/").filter(Boolean);
+      if (pathParts.length >= 3 && pathParts[1] === "stories") {
+        if (!paramTarget && SUPPORTED_LANGUAGES.includes(pathParts[0])) {
+          paramTarget = pathParts[0];
+        }
+        if (!paramId && articlesDatabase.some(a => a.id === pathParts[2])) {
+          paramId = pathParts[2];
+        }
+      }
+
+      // Pre-rendered SSR context fallback
+      if (window.LEENARDO_SSR) {
+        if (!paramId) paramId = window.LEENARDO_SSR.articleId;
+        if (!paramTarget) paramTarget = window.LEENARDO_SSR.targetLang;
+        if (!paramSupport) paramSupport = window.LEENARDO_SSR.supportLang;
+      }
+
+      // Handle legacy URL redirect: /article.html?id=... -> canonical URL
+      const isLegacy = window.location.pathname.endsWith("article.html") || window.location.pathname.endsWith("article");
+      if (isLegacy && paramId && articlesDatabase.some(a => a.id === paramId)) {
+        const art = articlesDatabase.find(a => a.id === paramId);
+        const tLang = (paramTarget && SUPPORTED_LANGUAGES.includes(paramTarget)) ? paramTarget : (localStorage.getItem("mia_target_lang") || "tr");
+        const sLang = (paramSupport && SUPPORTED_LANGUAGES.includes(paramSupport)) ? paramSupport : (tLang === "en" ? "tr" : "en");
+        const lvl = (paramLevel && SUPPORTED_LEVELS.includes(paramLevel)) ? paramLevel : (localStorage.getItem("mia_preferred_level") || "A1");
+        const title = (art.titleTranslations && art.titleTranslations[tLang]) || art.topic || "";
+        const slug = slugify(title);
+        const query = (sLang !== (tLang === "en" ? "tr" : "en") || lvl !== "A1") ? `?support=${sLang}&level=${lvl}` : "";
+        window.location.replace(`/${tLang}/stories/${art.id}/${slug}/${query}`);
+        return;
+      }
 
       if (paramId && articlesDatabase.some(a => a.id === paramId)) {
         currentArticleId = paramId;
@@ -2539,11 +2604,27 @@
       try {
         if (window.history) {
           const url = new URL(window.location.href);
-          if (currentArticleId) url.searchParams.set("id", currentArticleId);
-          url.searchParams.set("target", targetLang);
-          url.searchParams.set("support", supportLang);
-          url.searchParams.set("level", currentLevel);
-          url.searchParams.delete("lang");
+          if (url.pathname.includes("/stories/")) {
+            url.searchParams.delete("id");
+            url.searchParams.delete("target");
+            url.searchParams.delete("lang");
+            if (currentLevel && currentLevel !== "A1") {
+              url.searchParams.set("level", currentLevel);
+            } else {
+              url.searchParams.delete("level");
+            }
+            if (supportLang && supportLang !== (targetLang === "en" ? "tr" : "en")) {
+              url.searchParams.set("support", supportLang);
+            } else {
+              url.searchParams.delete("support");
+            }
+          } else {
+            if (currentArticleId) url.searchParams.set("id", currentArticleId);
+            url.searchParams.set("target", targetLang);
+            url.searchParams.set("support", supportLang);
+            url.searchParams.set("level", currentLevel);
+            url.searchParams.delete("lang");
+          }
           const stateObj = { id: currentArticleId, target: targetLang, support: supportLang, level: currentLevel };
           if (pushHistory && window.history.pushState) {
             window.history.pushState(stateObj, "", url.toString());
@@ -2558,7 +2639,7 @@
 
     function goToHome(e) {
       if (e) e.preventDefault();
-      window.location.href = `index.html?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
+      window.location.href = `/?target=${targetLang}&support=${supportLang}`;
     }
 
     function onTargetLanguageChange(newTarget) {
@@ -2573,6 +2654,17 @@
         localStorage.setItem("mia_support_lang", supportLang);
         const supElem = document.getElementById("support-lang-select");
         if (supElem) supElem.value = supportLang;
+      }
+
+      if (window.location.pathname.includes("/stories/")) {
+        const art = articlesDatabase.find(a => a.id === currentArticleId);
+        if (art) {
+          const title = (art.titleTranslations && art.titleTranslations[targetLang]) || art.topic || "";
+          const slug = slugify(title);
+          const query = (supportLang !== (targetLang === "en" ? "tr" : "en") || currentLevel !== "A1") ? `?support=${supportLang}&level=${currentLevel}` : "";
+          window.location.href = `/${targetLang}/stories/${currentArticleId}/${slug}/${query}`;
+          return;
+        }
       }
 
       stopSpeech();
@@ -2617,6 +2709,16 @@
 
     function navigateToArticle(newId) {
       if (!newId || newId === currentArticleId) return;
+      if (window.location.pathname.includes("/stories/")) {
+        const art = articlesDatabase.find(a => a.id === newId);
+        if (art) {
+          const title = (art.titleTranslations && art.titleTranslations[targetLang]) || art.topic || "";
+          const slug = slugify(title);
+          const query = (supportLang !== (targetLang === "en" ? "tr" : "en") || currentLevel !== "A1") ? `?support=${supportLang}&level=${currentLevel}` : "";
+          window.location.href = `/${targetLang}/stories/${newId}/${slug}/${query}`;
+          return;
+        }
+      }
       currentArticleId = newId;
       stopSpeech();
       updateUrlState(true);

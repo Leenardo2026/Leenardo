@@ -32,6 +32,14 @@ def sync_database():
         f.write(js_content)
 
     print(f"✓ Synchronized {len(data)} articles from canonical {ARTICLES_JSON.name} -> runtime {ARTICLES_DATA_JS.name} ({ARTICLES_DATA_JS.stat().st_size:,} bytes).")
+
+    # Automatically generate SEO static pages, sitemap.xml, robots.txt, and redirects
+    try:
+        from build_seo import generate_seo
+        generate_seo()
+    except Exception as e:
+        print(f"⚠️ Warning: generate_seo failed: {e}")
+
     return True
 
 if __name__ == "__main__":
