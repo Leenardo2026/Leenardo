@@ -2843,6 +2843,39 @@
       return typeof supTitle === "string" ? supTitle.trim() : "";
     }
 
+    function getArticleExcerpt(art, lvlData) {
+      if (!art) return "";
+      // 1. Explicit teaser translation in user's support language
+      if (art.teaserTranslations && art.teaserTranslations[supportLang]) {
+        return art.teaserTranslations[supportLang];
+      }
+      // 2. Generic teaser property
+      if (art.teaser) {
+        const t = typeof art.teaser === "object" ? (art.teaser[supportLang] || art.teaser.en || "") : art.teaser;
+        if (t) return t;
+      }
+      // 3. Opening story excerpt from article paragraphs at the active CEFR level
+      if (lvlData && Array.isArray(lvlData.paragraphs) && lvlData.paragraphs.length > 0) {
+        const firstPara = lvlData.paragraphs[0];
+        if (Array.isArray(firstPara) && firstPara.length > 0) {
+          const sentences = firstPara
+            .map(s => (s && s.target ? s.target.trim() : ""))
+            .filter(Boolean);
+          if (sentences.length > 0) {
+            const combined = sentences.slice(0, 2).join(" ");
+            return combined.length > 170 ? sentences[0] : combined;
+          }
+        }
+      }
+      // 4. Grammar description / pedagogical summary
+      if (lvlData && lvlData.grammarDesc) {
+        const gd = lvlData.grammarDesc;
+        const desc = typeof gd === "object" ? (gd[supportLang] || gd.en || gd.tr || "") : gd;
+        if (desc) return desc;
+      }
+      return "";
+    }
+
     let currentHeroSlideIndex = 0;
     let heroSliderTimer = null;
     let heroSlidesCount = 0;
@@ -2965,14 +2998,9 @@
         const leadSupportTitle = getSupportTitle(lead);
         const leadSupportTitleHtml = leadSupportTitle ? `<span class="feed-title-support">${leadSupportTitle}</span>` : "";
 
-        // Card excerpt: use teaser field; omit if missing
-        let leadTeaser = "";
-        if (lead.teaserTranslations && lead.teaserTranslations[supportLang]) {
-          leadTeaser = lead.teaserTranslations[supportLang];
-        } else if (lead.teaser) {
-          leadTeaser = typeof lead.teaser === "object" ? (lead.teaser[supportLang] || lead.teaser.en || "") : lead.teaser;
-        }
-        const leadExcerptHtml = leadTeaser ? `<p class="hero-lead-excerpt">${leadTeaser}</p>` : "";
+        // Card excerpt: use getArticleExcerpt with full fallback support
+        const leadExcerpt = getArticleExcerpt(lead, leadLevelData);
+        const leadExcerptHtml = leadExcerpt ? `<p class="hero-lead-excerpt">${leadExcerpt}</p>` : "";
 
         const leadUrl = `articles/${encodeURIComponent(lead.id)}.html?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
         const leadImg = (lead.visual && lead.visual.imageUrl) ? lead.visual.imageUrl : 'images/cover_01.jpg';
@@ -3138,14 +3166,9 @@
       const supportTitle = getSupportTitle(art);
       const supportTitleHtml = supportTitle ? `<span class="feed-title-support">${supportTitle}</span>` : "";
 
-      // Card excerpt: use teaser field; omit if missing
-      let teaser = "";
-      if (art.teaserTranslations && art.teaserTranslations[supportLang]) {
-        teaser = art.teaserTranslations[supportLang];
-      } else if (art.teaser) {
-        teaser = typeof art.teaser === "object" ? (art.teaser[supportLang] || art.teaser.en || "") : art.teaser;
-      }
-      const teaserHtml = teaser ? `<p class="feed-desc">${teaser}</p>` : "";
+      // Card excerpt: use getArticleExcerpt with full fallback support
+      const excerpt = getArticleExcerpt(art, targetLevelData);
+      const teaserHtml = excerpt ? `<p class="feed-desc">${excerpt}</p>` : "";
 
       const articleBaseUrl = `articles/${encodeURIComponent(art.id)}.html?target=${targetLang}&support=${supportLang}`;
       const imageUrl = (art.visual && art.visual.imageUrl) ? art.visual.imageUrl : 'images/cover_01.jpg';
