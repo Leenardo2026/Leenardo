@@ -6705,6 +6705,60 @@
       };
     }
 
+    const CORE_LEXICON_FALLBACKS = {
+      es: {
+        "se": { tr: "kendisi / kendini / (dönüşlülük zamiri)", en: "himself / herself / itself / themselves / each other" },
+        "su": { tr: "onun / onların / sizin", en: "his / her / its / their / your" },
+        "sus": { tr: "onun / onların / sizin", en: "his / her / its / their / your" },
+        "mi": { tr: "benim", en: "my" },
+        "mis": { tr: "benim", en: "my" },
+        "tu": { tr: "senin", en: "your" },
+        "tus": { tr: "senin", en: "your" },
+        "nuestro": { tr: "bizim", en: "our" },
+        "nuestra": { tr: "bizim", en: "our" },
+        "nuestros": { tr: "bizim", en: "our" },
+        "nuestras": { tr: "bizim", en: "our" },
+        "levantó": { tr: "dikti / ayağa kaldırdı / inşa etti", en: "raised / built / erected" },
+        "vestía": { tr: "giyiyordu / giyerdi", en: "wore / was wearing" },
+        "concentraba": { tr: "odaklanıyordu / yoğunlaşıyordu", en: "concentrated / was focusing" },
+        "proyectos": { tr: "projeler", en: "projects" },
+        "mejor": { tr: "daha iyi / en iyi", en: "better / best" },
+        "cada": { tr: "her / her bir", en: "each / every" },
+        "pilares": { tr: "sütunlar / direkler", en: "pillars" },
+        "pilar": { tr: "sütun / direk", en: "pillar" },
+        "monolitos": { tr: "dikilitaşlar / monolitler", en: "monoliths" },
+        "monolito": { tr: "dikilitaş / monolit", en: "monolith" },
+        "templo": { tr: "tapınak / mabet", en: "temple" },
+        "más": { tr: "daha / en çok", en: "more / most" },
+        "menos": { tr: "daha az / en az", en: "less / least" },
+        "muy": { tr: "çok", en: "very" },
+        "no": { tr: "hayır / değil", en: "no / not" },
+        "también": { tr: "de, da / ayrıca", en: "also / too" },
+        "siempre": { tr: "her zaman / daima", en: "always" },
+        "nunca": { tr: "asla / hiçbir zaman", en: "never" },
+        "después": { tr: "sonra", en: "after / afterwards" },
+        "antes": { tr: "önce", en: "before" },
+        "durante": { tr: "sırasında / boyunca", en: "during" },
+        "sobre": { tr: "üzerinde / hakkında", en: "on / about" },
+        "entre": { tr: "arasında", en: "between / among" },
+        "desde": { tr: "-den beri / -den", en: "from / since" },
+        "hasta": { tr: "-e kadar / hatta", en: "until / up to" },
+        "hacia": { tr: "-e doğru", en: "towards" },
+        "según": { tr: "-e göre", en: "according to" },
+        "sin": { tr: "-siz / olmadan", en: "without" },
+        "con": { tr: "ile / birlikte", en: "with" },
+        "por": { tr: "için / tarafından / nedeniyle", en: "for / by / because of" },
+        "para": { tr: "için / amacıyla", en: "for / in order to" },
+        "como": { tr: "gibi / olarak", en: "like / as" },
+        "cuando": { tr: "zaman / iken", en: "when" },
+        "donde": { tr: "nerede / olduğu yer", en: "where" },
+        "pero": { tr: "ama / fakat", en: "but" },
+        "porque": { tr: "çünkü", en: "because" },
+        "aunque": { tr: "-e rağmen", en: "although / even though" },
+        "mientras": { tr: "iken / sürece", en: "while / as long as" }
+      }
+    };
+
     async function handleWordClick(rawWord, wordSpan, levelData, fromLang, toLang, parentSentence = "", spanGroup = null, detectedUnit = null, sentObj = null, tokenIdx = null) {
       const cleanWord = rawWord.replace(/[^\p{L}\p{M}\p{N}'-]/gu, '').trim();
       if (!cleanWord && !detectedUnit) return;
@@ -6759,8 +6813,9 @@
       if (precomputedGloss) {
         displayTarget = precomputedGloss.token;
         const rawGloss = (precomputedGloss.gloss && (precomputedGloss.gloss[toLang] || (toLang === "en" ? precomputedGloss.gloss.en : ""))) || "";
-        // Treat identical fallback translation as a miss if source and target languages differ
-        if (rawGloss && rawGloss.trim().toLowerCase() !== displayTarget.trim().toLowerCase() && fromLang !== toLang) {
+        const isBogusGloss = rawGloss.includes("(geçmiş zaman)") || rawGloss.includes("(şimdiki zaman") || rawGloss.includes("(çoğul)");
+        // Treat identical fallback translation or bogus placeholder as a miss if source and target languages differ
+        if (rawGloss && !isBogusGloss && rawGloss.trim().toLowerCase() !== displayTarget.trim().toLowerCase() && fromLang !== toLang) {
           displayTrans = rawGloss;
         } else {
           displayTrans = "";
@@ -6847,13 +6902,29 @@
         const dt = displayTarget.toLowerCase();
         matchedVocab = levelData.vocab.find(v => {
           const vt = (v.target || "").toLowerCase().trim();
-          return vt === dt || vt === cw || dt.startsWith(vt) || vt.startsWith(dt) || cw.startsWith(vt) || vt.startsWith(cw);
+          if (vt === dt || vt === cw) return true;
+          // Only allow prefix match if BOTH words are >= 5 chars and close in length (prevent short words like "se" matching "sencillo")
+          if (vt.length >= 5 && cw.length >= 5 && Math.abs(vt.length - cw.length) <= 2) {
+            return dt.startsWith(vt) || vt.startsWith(dt) || cw.startsWith(vt) || vt.startsWith(cw);
+          }
+          return false;
         });
         if (matchedVocab && matchedVocab.translations) {
           const vTrans = matchedVocab.translations[toLang] || (toLang === "en" ? matchedVocab.translations.en : "");
           if (vTrans && vTrans.trim().toLowerCase() !== displayTarget.trim().toLowerCase()) {
             lessonTrans = vTrans;
             badgeText = t.lessonWordBadge || "Key Word";
+          }
+        }
+      }
+
+      // High-speed client-side core lexicon fallbacks
+      if (!lessonTrans && CORE_LEXICON_FALLBACKS[fromLang]) {
+        const entry = CORE_LEXICON_FALLBACKS[fromLang][displayTarget.toLowerCase()] || CORE_LEXICON_FALLBACKS[fromLang][cleanWord.toLowerCase()];
+        if (entry) {
+          const fbTrans = entry[toLang] || (toLang === "en" ? entry.en : "");
+          if (fbTrans && fbTrans.trim().toLowerCase() !== displayTarget.trim().toLowerCase()) {
+            lessonTrans = fbTrans;
           }
         }
       }

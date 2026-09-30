@@ -124,13 +124,13 @@ FR_FUNCTION_WORDS = {
     "se": ("se", "Pronom réfléchi", "kendini / birbirini", "oneself / each other"),
     "son": ("son", "Possessif (Masc)", "onun", "his / her / its"),
     "sa": ("son", "Possessif (Fem)", "onun", "his / her / its"),
-    "ses": ("son", "Possessif (Plur)", "onun (çoğul nesne)", "his / her / its"),
+    "ses": ("son", "Possessif (Plur)", "onun", "his / her / its"),
     "leur": ("leur", "Possessif / Pronom", "onların / onlara", "their / to them"),
-    "leurs": ("leur", "Possessif (Plur)", "onların (çoğul nesne)", "their"),
+    "leurs": ("leur", "Possessif (Plur)", "onların", "their"),
     "notre": ("notre", "Possessif", "bizim", "our"),
-    "nos": ("notre", "Possessif (Plur)", "bizim (çoğul)", "our"),
+    "nos": ("notre", "Possessif (Plur)", "bizim", "our"),
     "votre": ("votre", "Possessif", "sizin", "your"),
-    "vos": ("votre", "Possessif (Plur)", "sizin (çoğul)", "your"),
+    "vos": ("votre", "Possessif (Plur)", "sizin", "your"),
 
     # Auxiliary / Copula: être / avoir
     "est": ("être", "Verbe copule (Présent 3sg)", "-dır, -dir", "is"),
@@ -361,16 +361,37 @@ def analyze_french_token(token, sentence_fr="", sentence_tr="", curated_vocab=No
             "gloss": {"tr": tr_m, "en": en_m}
         }
 
+def make_turkish_plural(tr_text):
+    if not tr_text:
+        return ""
+    parts = [p.strip() for p in tr_text.split("/")]
+    res = []
+    for part in parts:
+        vowels = re.findall(r"[aeıioöuüAEIİOÖUÜ]", part)
+        if vowels:
+            last_v = vowels[-1].lower()
+            if last_v in "aıou":
+                res.append(part + "lar")
+            else:
+                res.append(part + "ler")
+        else:
+            res.append(part)
+    return " / ".join(res)
+
+
     # 6. Check Regular Plural (-s / -x)
     if raw_lower.endswith("s") and len(raw_lower) > 3:
         cand = raw_lower[:-1]
         if cand in FR_CONTENT_LEXICON:
             lemma, pos, tr_m, en_m = FR_CONTENT_LEXICON[cand]
+            # French adjectives agree in plural, but Turkish adjectives do not take plural suffixes!
+            tr_plural = tr_m if "Adjectif" in pos else make_turkish_plural(tr_m)
+            en_plural = en_m if en_m.endswith("s") else f"{en_m}s"
             return {
                 "token": clean,
                 "lemma": lemma,
                 "pos": f"{pos} (Pluriel)",
-                "gloss": {"tr": f"{tr_m} (çoğul)", "en": f"{en_m}s"}
+                "gloss": {"tr": tr_plural, "en": en_plural}
             }
 
     # 7. Proper Noun Heuristic

@@ -11,6 +11,11 @@ import json
 import re
 import os
 import sys
+from pathlib import Path
+
+# Add project root to sys.path to import curated lexicon data
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from scripts.spanish_lexicon_data import ES_CURATED_MAP
 
 # Clitic pronouns in Spanish
 CLITIC_PRONOUNS = {
@@ -33,17 +38,88 @@ SPANISH_CONTRACTIONS = {
     "del": ("de el", "Contracción (de + el)", "of the / from the", "-in / -den (de + el)")
 }
 
+def make_turkish_plural(tr_text):
+    if not tr_text:
+        return ""
+    parts = [p.strip() for p in tr_text.split("/")]
+    res = []
+    for part in parts:
+        vowels = re.findall(r"[aeıioöuüAEIİOÖUÜ]", part)
+        if vowels:
+            last_v = vowels[-1].lower()
+            if last_v in "aıou":
+                res.append(part + "lar")
+            else:
+                res.append(part + "ler")
+        else:
+            res.append(part)
+    return " / ".join(res)
+
+
 # Spanish Function Words
 ES_FUNCTION_WORDS = {
+    # Negations & Quantifiers
+    "no": ("no", "Adverbio de Negación", "no / not", "hayır / değil / -ma, -me"),
+    "ni": ("ni", "Conjunción", "neither / nor / not even", "ne / ne de / bile"),
+    "nada": ("nada", "Pronombre Indefinido", "nothing / anything", "hiçbir şey"),
+    "nadie": ("nadie", "Pronombre Indefinido", "nobody / no one", "hiç kimse"),
+    "ningún": ("ninguno", "Determinante", "no / none / any", "hiçbir"),
+    "ninguno": ("ninguno", "Pronombre", "none / no one", "hiçbiri"),
+    "ninguna": ("ninguno", "Determinante / Pronombre", "none / no one", "hiçbiri"),
+    "uno": ("uno", "Numeral / Pronombre", "one", "bir / biri"),
+    "unos": ("un", "Artículo Indeterminado (Masc Plur)", "some / a few", "bazı / birkaç"),
+    "unas": ("un", "Artículo Indeterminado (Fem Plur)", "some / a few", "bazı / birkaç"),
+    "alguien": ("alguien", "Pronombre Indefinido", "someone / somebody", "biri / birisi"),
+    "algo": ("algo", "Pronombre Indefinido / Adverbio", "something / somewhat", "bir şey / biraz"),
+    "algún": ("alguno", "Determinante", "some / any", "bazı / herhangi bir"),
+    "alguno": ("alguno", "Pronombre", "some / any", "bazısı / biri"),
+    "alguna": ("alguno", "Determinante / Pronombre", "some / any", "bazı / biri"),
+    "algunos": ("alguno", "Pronombre / Determinante (Plur)", "some / a few", "bazıları / birkaç"),
+    "algunas": ("alguno", "Pronombre / Determinante (Fem Plur)", "some / a few", "bazıları / birkaç"),
+    "varios": ("varios", "Determinante / Pronombre", "several / various", "çeşitli / birkaç"),
+    "varias": ("varios", "Determinante / Pronombre (Fem)", "several / various", "çeşitli / birkaç"),
+
+    # Pronouns (Subject & Object)
+    "yo": ("yo", "Pronombre Personal (1sg)", "I", "ben"),
+    "tú": ("tú", "Pronombre Personal (2sg)", "you", "sen"),
+    "él": ("él", "Pronombre Personal (3sg masc)", "he / him", "o (eril)"),
+    "ella": ("ella", "Pronombre Personal (3sg fem)", "she / her", "o (dişil)"),
+    "ello": ("ello", "Pronombre Neutro", "it / that", "o / bu durum"),
+    "usted": ("usted", "Pronombre Formal (2sg)", "you (formal)", "siz"),
+    "nosotros": ("nosotros", "Pronombre Personal (1pl masc)", "we", "biz"),
+    "nosotras": ("nosotros", "Pronombre Personal (1pl fem)", "we", "biz"),
+    "vosotros": ("vosotros", "Pronombre Personal (2pl masc)", "you all", "siz"),
+    "vosotras": ("vosotros", "Pronombre Personal (2pl fem)", "you all", "siz"),
+    "ellos": ("ellos", "Pronombre Personal (3pl masc)", "they", "onlar"),
+    "ellas": ("ellos", "Pronombre Personal (3pl fem)", "they", "onlar"),
+    "ustedes": ("ustedes", "Pronombre Formal (2pl)", "you all", "sizler"),
+    "me": ("me", "Pronombre (Objeto)", "me / to me / myself", "beni / bana / kendimi"),
+    "te": ("te", "Pronombre (Objeto)", "you / to you / yourself", "seni / sana / kendini"),
+    "se": ("se", "Pronombre Reflexivo", "himself / herself / itself / themselves / each other", "kendisi / kendini / (dönüşlülük zamiri)"),
+    "nos": ("nos", "Pronombre (Objeto)", "us / to us / ourselves", "bizi / bize / kendimizi"),
+    "os": ("os", "Pronombre (Objeto)", "you all (object)", "sizi / size"),
+    "le": ("le", "Pronombre (Objeto Indirecto)", "to him / to her / to you", "ona / size"),
+    "les": ("le", "Pronombre (Objeto Indirecto Plur)", "to them / to you all", "onlara / sizlere"),
+
+    # Possessives
+    "mi": ("mi", "Posesivo", "my", "benim"),
+    "mis": ("mi", "Posesivo (Plural)", "my", "benim"),
+    "tu": ("tu", "Posesivo", "your", "senin"),
+    "tus": ("tu", "Posesivo (Plural)", "your", "senin"),
+    "su": ("su", "Posesivo", "his / her / its / their / your", "onun / onların / sizin"),
+    "sus": ("su", "Posesivo (Plural)", "his / her / its / their / your", "onun / onların / sizin"),
+    "nuestro": ("nuestro", "Posesivo", "our (masc)", "bizim"),
+    "nuestra": ("nuestro", "Posesivo (Fem)", "our (fem)", "bizim"),
+    "nuestros": ("nuestro", "Posesivo (Plur)", "our", "bizim"),
+    "nuestras": ("nuestro", "Posesivo (Fem Plur)", "our", "bizim"),
+
     # Articles
-    "el": ("el", "Artículo Determinado (Masc)", "the (masc)", "o / erik artikel"),
+    "el": ("el", "Artículo Determinado (Masc)", "the (masc)", "o / eril artikel"),
     "la": ("el", "Artículo Determinado (Fem)", "the (fem)", "o / dişil artikel"),
     "los": ("el", "Artículo Determinado (Masc Plur)", "the (masc plur)", "onlar / çoğul eril"),
     "las": ("el", "Artículo Determinado (Fem Plur)", "the (fem plur)", "onlar / çoğul dişil"),
     "un": ("un", "Artículo Indeterminado (Masc)", "a / an (masc)", "bir (eril)"),
     "una": ("un", "Artículo Indeterminado (Fem)", "a / an (fem)", "bir (dişil)"),
-    "unos": ("un", "Artículo Indeterminado (Masc Plur)", "some / a few (masc)", "bazı / birkaç (eril)"),
-    "unas": ("un", "Artículo Indeterminado (Fem Plur)", "some / a few (fem)", "bazı / birkaç (dişil)"),
     "lo": ("lo", "Artículo Neutro / Pronombre", "the (neutral) / it / that which", "nötr artikel / onu"),
 
     # Prepositions
@@ -63,6 +139,9 @@ ES_FUNCTION_WORDS = {
     "contra": ("contra", "Preposición", "against", "karşı"),
     "durante": ("durante", "Preposición", "during", "sırasında / boyunca"),
     "mediante": ("mediante", "Preposición", "by means of / through", "aracılığıyla"),
+    "tras": ("tras", "Preposición", "after / behind", "-den sonra / arkasında"),
+    "bajo": ("bajo", "Preposición", "under / below", "altında"),
+    "ante": ("ante", "Preposición", "before / in the face of", "karşısında / önünde"),
 
     # Conjunctions
     "y": ("y", "Conjunción", "and", "ve"),
@@ -110,6 +189,27 @@ ES_FUNCTION_WORDS = {
     "ahora": ("ahora", "Adverbio", "now", "şimdi"),
     "entonces": ("entonces", "Adverbio", "then / at that time", "o zaman / o halde"),
     "así": ("así", "Adverbio", "thus / so / in this way", "böylece / bu şekilde"),
+    "antes": ("antes", "Adverbio", "before / earlier", "önce / eskiden"),
+    "después": ("después", "Adverbio", "after / afterwards", "sonra"),
+    "luego": ("luego", "Adverbio", "then / later", "daha sonra / sonra"),
+    "pronto": ("pronto", "Adverbio", "soon", "yakında / erkenden"),
+    "tarde": ("tarde", "Adverbio / Sustantivo", "late / afternoon", "geç / öğleden sonra"),
+    "temprano": ("temprano", "Adverbio", "early", "erken"),
+    "aquí": ("aquí", "Adverbio de Lugar", "here", "burada"),
+    "acá": ("acá", "Adverbio de Lugar", "here / over here", "buraya / burada"),
+    "allí": ("allí", "Adverbio de Lugar", "there", "orada"),
+    "allá": ("allá", "Adverbio de Lugar", "over there", "orada / ötelerde"),
+    "arriba": ("arriba", "Adverbio de Lugar", "up / above", "yukarıda"),
+    "abajo": ("abajo", "Adverbio de Lugar", "down / below", "aşağıda"),
+    "cerca": ("cerca", "Adverbio de Lugar", "near / close", "yakın / yakında"),
+    "lejos": ("lejos", "Adverbio de Lugar", "far / away", "uzak / uzakta"),
+    "dentro": ("dentro", "Adverbio de Lugar", "inside", "içinde / içeriye"),
+    "fuera": ("fuera", "Adverbio de Lugar", "outside", "dışında / dışarıda"),
+    "delante": ("delante", "Adverbio de Lugar", "in front", "önünde"),
+    "detrás": ("detrás", "Adverbio de Lugar", "behind", "arkasında"),
+    "alrededor": ("alrededor", "Adverbio de Lugar", "around", "etrafında / çevresinde"),
+    "además": ("además", "Adverbio", "in addition / moreover", "ayrıca / üstelik"),
+    "embargo": ("embargo", "Sustantivo / Locución", "sin embargo: however / nonetheless", "sin embargo: ancak / yine de"),
     "todo": ("todo", "Pronombre / Adjetivo", "all / everything", "her şey / bütün"),
     "toda": ("todo", "Adjetivo (Fem)", "all / whole", "bütün / tüm"),
     "todos": ("todo", "Pronombre / Adjetivo (Plur)", "all / everyone", "herkes / tüm"),
@@ -276,11 +376,23 @@ def remove_accents(text):
 
 
 def analyze_spanish_token(token, sentence_es="", sentence_tr="", curated_vocab=None):
-    clean = re.sub(r"[^\w'-]", "", token, flags=re.UNICODE).strip()
+    clean = token.strip("'-_\"«»“”‘’¿?¡!.,;:()")
+    clean = re.sub(r"[^\w'-]", "", clean, flags=re.UNICODE).strip("'-_\"«»“”‘’¿?¡!.,;:()")
     if not clean:
         return None
 
     raw_lower = clean.lower()
+
+    # 0. Check Master Curated Spanish Lexicon (exact verified translations)
+    if raw_lower in ES_CURATED_MAP:
+        lemma, pos, en_m, tr_m, note = ES_CURATED_MAP[raw_lower]
+        return {
+            "token": clean,
+            "lemma": lemma,
+            "pos": pos,
+            "gloss": {"tr": tr_m, "en": en_m},
+            "note": note
+        }
 
     # 1. Curated Vocabulary Match from current level / database
     if curated_vocab and raw_lower in curated_vocab:
@@ -373,20 +485,58 @@ def analyze_spanish_token(token, sentence_es="", sentence_tr="", curated_vocab=N
             "gloss": {"tr": tr_m, "en": en_m}
         }
 
-    # 6. Check Regular Verb Endings (-ó, -aron, -ió, -ieron, -aba, -aban)
-    if raw_lower.endswith(("ó", "aron", "ió", "ieron")):
+    # 6. Check Regular Verb Endings with intelligent infinitive resolution
+    cand_inf = None
+    verb_pos = "Verbo"
+    verb_suffix_tr = ""
+    verb_suffix_en = ""
+
+    if raw_lower.endswith("ó") and len(raw_lower) > 3:
+        cand_inf = raw_lower[:-1] + "ar"
+        verb_pos = "Verbo (Pretérito Indefinido)"
+        verb_suffix_tr = "dı / di"
+        verb_suffix_en = "ed"
+    elif raw_lower.endswith("aron") and len(raw_lower) > 5:
+        cand_inf = raw_lower[:-4] + "ar"
+        verb_pos = "Verbo (Pretérito Indefinido)"
+        verb_suffix_tr = "dılar / diler"
+        verb_suffix_en = "ed"
+    elif raw_lower.endswith("ió") and len(raw_lower) > 4:
+        cand_inf = raw_lower[:-2] + "er"
+        if cand_inf not in ES_CONTENT_LEXICON and cand_inf not in ES_CURATED_MAP:
+            cand_inf = raw_lower[:-2] + "ir"
+        verb_pos = "Verbo (Pretérito Indefinido)"
+        verb_suffix_tr = "dı / di"
+        verb_suffix_en = "ed"
+    elif raw_lower.endswith("ieron") and len(raw_lower) > 6:
+        cand_inf = raw_lower[:-5] + "er"
+        if cand_inf not in ES_CONTENT_LEXICON and cand_inf not in ES_CURATED_MAP:
+            cand_inf = raw_lower[:-5] + "ir"
+        verb_pos = "Verbo (Pretérito Indefinido)"
+        verb_suffix_tr = "dılar / diler"
+        verb_suffix_en = "ed"
+    elif raw_lower.endswith("aba") and len(raw_lower) > 4:
+        cand_inf = raw_lower[:-3] + "ar"
+        verb_pos = "Verbo (Pretérito Imperfecto)"
+        verb_suffix_tr = "ıyordu / ardı"
+        verb_suffix_en = "was -ing"
+    elif raw_lower.endswith("aban") and len(raw_lower) > 5:
+        cand_inf = raw_lower[:-4] + "ar"
+        verb_pos = "Verbo (Pretérito Imperfecto)"
+        verb_suffix_tr = "ıyorlardı / arlardı"
+        verb_suffix_en = "were -ing"
+
+    if cand_inf and (cand_inf in ES_CONTENT_LEXICON or cand_inf in ES_CURATED_MAP):
+        source = ES_CONTENT_LEXICON.get(cand_inf) or ES_CURATED_MAP.get(cand_inf)
+        lemma = source[0]
+        en_m = source[2]
+        tr_m = source[3]
         return {
             "token": clean,
-            "lemma": clean,
-            "pos": "Verbo (Pretérito Indefinido)",
-            "gloss": {"tr": f"{clean} (geçmiş zaman)", "en": clean}
-        }
-    if raw_lower.endswith(("aba", "aban", "ía", "ían")):
-        return {
-            "token": clean,
-            "lemma": clean,
-            "pos": "Verbo (Pretérito Imperfecto)",
-            "gloss": {"tr": f"{clean} (şimdiki zamanın hikayesi)", "en": clean}
+            "lemma": lemma,
+            "pos": verb_pos,
+            "gloss": {"tr": tr_m, "en": en_m},
+            "note": f"{clean} (kök: {lemma})"
         }
 
     # 7. Check Regular Plural (-s / -es)
@@ -394,21 +544,23 @@ def analyze_spanish_token(token, sentence_es="", sentence_tr="", curated_vocab=N
         cand = raw_lower[:-2]
         if cand in ES_CONTENT_LEXICON:
             lemma, pos, en_m, tr_m = ES_CONTENT_LEXICON[cand]
+            en_plural = en_m if en_m.endswith("s") else f"{en_m}s"
             return {
                 "token": clean,
                 "lemma": lemma,
                 "pos": f"{pos} (Plural)",
-                "gloss": {"tr": f"{tr_m} (çoğul)", "en": f"{en_m}s"}
+                "gloss": {"tr": make_turkish_plural(tr_m), "en": en_plural}
             }
     if raw_lower.endswith("s") and len(raw_lower) > 3:
         cand = raw_lower[:-1]
         if cand in ES_CONTENT_LEXICON:
             lemma, pos, en_m, tr_m = ES_CONTENT_LEXICON[cand]
+            en_plural = en_m if en_m.endswith("s") else f"{en_m}s"
             return {
                 "token": clean,
                 "lemma": lemma,
                 "pos": f"{pos} (Plural)",
-                "gloss": {"tr": f"{tr_m} (çoğul)", "en": f"{en_m}s"}
+                "gloss": {"tr": make_turkish_plural(tr_m), "en": en_plural}
             }
 
     # 8. Proper Noun Heuristic
@@ -427,10 +579,10 @@ def tokenize_target(target):
     for tok in raw_tokens:
         if re.match(r"^\s+$", tok) or re.match(r"^[.,!?:;«»\"“”()]+$", tok):
             continue
-        if len(tok) > 0:
-            c = re.sub(r"[^\w'-]", "", tok, flags=re.UNICODE).strip()
-            if c:
-                clean_words.append((tok, c))
+        c = tok.strip("'-_\"«»“”‘’¿?¡!.,;:()")
+        c = re.sub(r"[^\w'-]", "", c, flags=re.UNICODE).strip("'-_\"«»“”‘’¿?¡!.,;:()")
+        if c:
+            clean_words.append((tok, c))
     return clean_words
 
 

@@ -559,6 +559,50 @@ def analyze_english_token(token, sentence_en="", sentence_tr="", curated_vocab=N
             "note": f"{clean} (iyelik eki: 's)"
         }
 
+def make_turkish_plural(tr_text):
+    if not tr_text:
+        return ""
+    parts = [p.strip() for p in tr_text.split("/")]
+    res = []
+    for part in parts:
+        vowels = re.findall(r"[aeıioöuüAEIİOÖUÜ]", part)
+        if vowels:
+            last_v = vowels[-1].lower()
+            if last_v in "aıou":
+                res.append(part + "lar")
+            else:
+                res.append(part + "ler")
+        else:
+            res.append(part)
+    return " / ".join(res)
+
+
+def make_past_turkish(tr_text):
+    if not tr_text:
+        return ""
+    parts = [p.strip() for p in tr_text.split("/")]
+    res = []
+    for part in parts:
+        if part.endswith(("mak", "mek")):
+            stem = part[:-3]
+            vowels = re.findall(r"[aeıioöuüAEIİOÖUÜ]", stem)
+            last_v = vowels[-1].lower() if vowels else "e"
+            is_hard = stem and stem[-1] in "çfhksşptÇFHKSŞPT"
+            d_or_t = "t" if is_hard else "d"
+            if last_v in "aı":
+                suffix = d_or_t + "ı"
+            elif last_v in "ei":
+                suffix = d_or_t + "i"
+            elif last_v in "ou":
+                suffix = d_or_t + "u"
+            else:
+                suffix = d_or_t + "ü"
+            res.append(stem + suffix)
+        else:
+            res.append(part)
+    return " / ".join(res)
+
+
     # 8. Check Regular -ed Past Tense
     if raw_lower.endswith("ed") and len(raw_lower) > 4:
         # e.g. explored -> explore, painted -> paint
@@ -571,7 +615,7 @@ def analyze_english_token(token, sentence_en="", sentence_tr="", curated_vocab=N
                     "token": clean,
                     "lemma": lemma,
                     "pos": "Verb (Past Tense -ed)",
-                    "gloss": {"tr": f"{tr} (geçmiş zaman)", "en": clean},
+                    "gloss": {"tr": make_past_turkish(tr), "en": clean},
                     "note": f"{clean} (past tense of {lemma})"
                 }
 
@@ -582,11 +626,14 @@ def analyze_english_token(token, sentence_en="", sentence_tr="", curated_vocab=N
         for cand in (cand_stem_e, cand_stem):
             if cand in EN_CONTENT_LEXICON:
                 lemma, _, tr = EN_CONTENT_LEXICON[cand]
+                tr_ing = tr
+                if tr.endswith(("mak", "mek")):
+                    tr_ing = f"{tr[:-3]}ma / {tr[:-3]}arak"
                 return {
                     "token": clean,
                     "lemma": lemma,
                     "pos": "Verb (Participle / Gerund -ing)",
-                    "gloss": {"tr": f"{tr} (şimdiki/zarf-fiil)", "en": clean},
+                    "gloss": {"tr": tr_ing, "en": clean},
                     "note": f"{clean} (-ing form of {lemma})"
                 }
 
@@ -600,11 +647,20 @@ def analyze_english_token(token, sentence_en="", sentence_tr="", curated_vocab=N
         for cand in (cand_stem, cand_stem_es):
             if cand and cand in EN_CONTENT_LEXICON:
                 lemma, pos, tr = EN_CONTENT_LEXICON[cand]
+                if "Noun" in pos:
+                    tr_gloss = make_turkish_plural(tr)
+                    pos_label = f"{pos} (Plural -s)"
+                elif "Verb" in pos:
+                    tr_gloss = tr # verb 3sg
+                    pos_label = f"{pos} (3rd Person Singular -s)"
+                else:
+                    tr_gloss = tr
+                    pos_label = pos
                 return {
                     "token": clean,
                     "lemma": lemma,
-                    "pos": f"{pos} (Plural -s)",
-                    "gloss": {"tr": f"{tr} (çoğul)", "en": clean}
+                    "pos": pos_label,
+                    "gloss": {"tr": tr_gloss, "en": clean}
                 }
 
     # 11. Proper Noun Heuristic (Capitalized not at start of sentence)
