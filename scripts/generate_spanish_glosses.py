@@ -17,6 +17,14 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from scripts.spanish_lexicon_data import ES_CURATED_MAP
 
+try:
+    from scripts.spanish_fallthrough_dict import ES_ADDITIONAL_FALLTHROUGH_MAP
+except ImportError:
+    try:
+        from spanish_fallthrough_dict import ES_ADDITIONAL_FALLTHROUGH_MAP
+    except ImportError:
+        ES_ADDITIONAL_FALLTHROUGH_MAP = {}
+
 # Clitic pronouns in Spanish
 CLITIC_PRONOUNS = {
     "melo": "me it", "telo": "you it", "selo": "him/her it", "noslo": "us it",
@@ -562,6 +570,17 @@ def analyze_spanish_token(token, sentence_es="", sentence_tr="", curated_vocab=N
                 "pos": f"{pos} (Plural)",
                 "gloss": {"tr": make_turkish_plural(tr_m), "en": en_plural}
             }
+
+    # 7b. Check Verified Fallthrough & Additional Lexicon
+    if raw_lower in ES_ADDITIONAL_FALLTHROUGH_MAP:
+        lemma, pos, tr_m, en_m, note = ES_ADDITIONAL_FALLTHROUGH_MAP[raw_lower]
+        return {
+            "token": clean,
+            "lemma": lemma,
+            "pos": pos,
+            "gloss": {"tr": tr_m, "en": en_m},
+            "note": note
+        }
 
     # 8. Proper Noun Heuristic
     is_cap = clean[0].isupper() and clean[0] != clean[0].lower()
