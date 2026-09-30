@@ -19549,7 +19549,19 @@
         }
       }
     },
-    "visual": null,
+    "visual": {
+      "imageUrl": "images/sanat-bedri-rahmi-mavi-yolculuk.jpg",
+      "alt": "Bedri Rahmi Eyüboğlu balık resmi, Bedri Rahmi Koyu, Göcek",
+      "captionTr": "Bedri Rahmi Eyüboğlu'nun 1974'te Göcek'te bir kaya üzerine yaptığı balık resmi.",
+      "captionEn": "The fish figure painted by artist Bedri Rahmi Eyüboğlu on a rock at Bedri Rahmi Bay, Göcek.",
+      "source": "Görsel: Raicem / Wikimedia Commons (CC BY-SA 4.0) - Eğitim amaçlıdır.",
+      "attribution": {
+        "creator": "Raicem",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fish_Figure_on_a_Rock_Painted_By_Bedri_Rahmi_Ey%C3%BCbo%C4%9Flu,_located_in_Bedri_Rahmi_Bay_in_G%C3%B6cek.jpg"
+      }
+    },
     "titleTr": "Bedri Rahmi Eyüboğlu ve Mavi Yolculuk Kültürü",
     "titleEn": "Bedri Rahmi Eyüboğlu and the Blue Cruise Culture",
     "titleTranslations": {
