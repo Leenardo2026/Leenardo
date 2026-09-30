@@ -4306,8 +4306,9 @@
       currentHarvestedPhrases = harvestVocabPhrases(targetData, targetLang, supportLang);
 
       // 4. Render Body Paragraphs with Sentence Hover Balloons & Word Click Handlers
-      const bodyContainer = document.getElementById("article-body-content");
-      bodyContainer.innerHTML = "";
+      if (bodyContainer) {
+        bodyContainer.innerHTML = "";
+      }
 
       targetData.paragraphs.forEach((paraSentences, pIndex) => {
         const pElem = document.createElement("p");
