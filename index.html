@@ -2168,8 +2168,8 @@
     </div>
   </div>
 
-  <!-- External Data Source -->
-  <script src="articles-data.js"></script>
+  <!-- External Data Source (Lightweight Summary for Fast Homepage Load) -->
+  <script src="articles-summary.js"></script>
 
   <script>
     const SUPPORTED_LANGUAGES = ['tr', 'en', 'es', 'de', 'fr'];
@@ -2394,7 +2394,7 @@
     }
 
     // Global Dataset State (Ordered newest-first so latest published articles lead the editorial flow)
-    const initialRawData = (typeof window !== "undefined") ? (window.ARTICLES_DATA || window.articlesDatabase) : null;
+    const initialRawData = (typeof window !== "undefined") ? (window.ARTICLES_SUMMARY || window.ARTICLES_DATA || window.articlesDatabase) : null;
     let articlesDatabase = Array.isArray(initialRawData) ? initialRawData.filter(hasValidVisual).reverse() : [];
 
     // Language & Level State
@@ -2431,7 +2431,7 @@
 
     async function loadArticlesData() {
       try {
-        const resp = await fetch("articles.json");
+        const resp = await fetch("articles-summary.json");
         if (resp.ok) {
           const freshData = await resp.json();
           if (Array.isArray(freshData) && freshData.length > 0) {
@@ -2441,7 +2441,7 @@
         }
       } catch (e) {}
       if (!articlesDatabase || articlesDatabase.length === 0) {
-        const fallback = (typeof window !== "undefined") ? (window.ARTICLES_DATA || window.articlesDatabase) : null;
+        const fallback = (typeof window !== "undefined") ? (window.ARTICLES_SUMMARY || window.ARTICLES_DATA || window.articlesDatabase) : null;
         if (Array.isArray(fallback) && fallback.length > 0) {
           articlesDatabase = fallback.filter(hasValidVisual).reverse();
         }

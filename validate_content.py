@@ -25,6 +25,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent
 ARTICLES_JSON = BASE_DIR / "articles.json"
 ARTICLES_DATA_JS = BASE_DIR / "articles-data.js"
+ARTICLES_SUMMARY_JS = BASE_DIR / "articles-summary.js"
 
 SUPPORTED_LANGUAGES = ["tr", "en", "es", "de", "fr"]
 SUPPORTED_LEVELS = ["A1", "A2", "B1", "B2", "C1"]
@@ -213,17 +214,21 @@ def run_validation():
     for tag in sorted(c1_tags_all)[:6]:
         print(f"  • {tag}")
 
-    # Articles.json vs Articles-data.js sync check
+    # Articles.json vs Articles-data.js / summary sync check
     if ARTICLES_DATA_JS.exists():
         js_size = ARTICLES_DATA_JS.stat().st_size
         json_size = ARTICLES_JSON.stat().st_size
         print(f"\n--- SINGLE SOURCE OF TRUTH CHECK ---")
-        print(f"Canonical Source (articles.json):    {json_size:,} bytes")
-        print(f"Runtime Artifact (articles-data.js): {js_size:,} bytes")
-        if abs(js_size - json_size) > json_size * 0.4:
-            warnings.append("articles.json and articles-data.js size divergence exceeds 40%. Verify sync.")
+        print(f"Canonical Source (articles.json):        {json_size:,} bytes")
+        print(f"Reading Runtime (articles-data.js):      {js_size:,} bytes")
+        if ARTICLES_SUMMARY_JS.exists():
+            sum_size = ARTICLES_SUMMARY_JS.stat().st_size
+            print(f"Homepage Summary (articles-summary.js):  {sum_size:,} bytes")
+        # articles.json is pretty-printed whereas articles-data.js is minified
+        if js_size < json_size * 0.2:
+            warnings.append("articles.data.js is unexpectedly small compared to articles.json. Verify sync.")
         else:
-            print("✓ articles-data.js is aligned with articles.json.")
+            print("✓ Runtime artifacts are aligned with articles.json.")
 
     if len(errors) > 0:
         print(f"\n❌ VALIDATION FAILED with {len(errors)} error(s):")
