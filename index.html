@@ -1503,13 +1503,14 @@
     .onboarding-card {
       background: var(--bg-surface);
       border: 1px solid var(--divider-hairline);
-      border-radius: 20px;
-      box-shadow: 0 24px 60px -12px rgba(15, 23, 42, 0.25);
+      border-top: 5px solid #ff7363;
+      border-radius: 4px;
+      box-shadow: 0 24px 64px -12px rgba(15, 23, 42, 0.35), 0 0 0 1px rgba(255, 115, 99, 0.15);
       width: 100%;
-      max-width: 520px;
+      max-width: 580px;
       max-height: 90vh;
       overflow-y: auto;
-      padding: 2rem 2.25rem;
+      padding: 2.25rem 2.25rem 1.75rem;
       position: relative;
     }
 
@@ -1528,7 +1529,7 @@
     }
 
     .onboarding-close-btn:hover {
-      color: var(--ink-navy);
+      color: #ff7363;
     }
 
     .onboarding-header {
@@ -1537,30 +1538,42 @@
     }
 
     .onboarding-tag {
-      font-size: 0.72rem;
-      font-weight: 700;
+      font-size: 0.76rem;
+      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--brand-coral);
+      letter-spacing: 0.12em;
+      color: #ff7363;
       display: inline-block;
       margin-bottom: 0.35rem;
     }
 
     .onboarding-headline {
       font-family: var(--font-serif);
-      font-size: 1.65rem;
+      font-size: 1.95rem;
       font-weight: 700;
       color: var(--ink-navy);
-      line-height: 1.25;
-      margin: 0;
+      line-height: 1.2;
+      margin: 0.2rem 0 0.3rem;
+    }
+
+    .onboarding-subheadline {
+      font-size: 1.05rem;
+      font-family: var(--font-serif);
+      color: #475569;
+      font-style: italic;
+      font-weight: 500;
+      margin: 0.2rem 0 0;
+      line-height: 1.35;
     }
 
     /* Small static demo card */
     .onboarding-demo-card {
-      background: var(--bg-cream);
-      border: 1px solid var(--divider-hairline);
-      border-radius: 12px;
+      background: rgba(255, 115, 99, 0.05);
+      border: 1px solid rgba(255, 115, 99, 0.22);
+      border-left: 4px solid #ff7363;
+      border-radius: 4px;
       padding: 1rem 1.15rem;
+      margin-top: 1.15rem;
       margin-bottom: 1.35rem;
     }
 
@@ -1588,17 +1601,17 @@
 
     .onboarding-level-badge {
       font-size: 0.72rem;
-      font-weight: 700;
-      padding: 1px 6px;
-      border-radius: 4px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 3px;
       background: var(--bg-surface);
-      border: 1px solid var(--divider-hairline);
-      color: var(--brand-coral);
+      border: 1px solid rgba(255, 115, 99, 0.4);
+      color: #ff4e3d;
       flex-shrink: 0;
     }
 
     .onboarding-demo-text {
-      font-size: 0.84rem;
+      font-size: 0.85rem;
       color: var(--ink-navy);
       line-height: 1.45;
     }
@@ -1624,7 +1637,7 @@
     .onboarding-select-wrap select {
       width: 100%;
       padding: 0.65rem 0.85rem;
-      border-radius: 10px;
+      border-radius: 4px;
       border: 1px solid var(--divider-hairline);
       background: var(--bg-cream);
       color: var(--ink-navy);
@@ -1632,12 +1645,13 @@
       font-size: 0.92rem;
       font-weight: 600;
       cursor: pointer;
-      transition: border-color 0.15s ease;
+      transition: all 0.15s ease;
     }
 
     .onboarding-select-wrap select:focus {
       outline: none;
-      border-color: var(--brand-coral);
+      border-color: #ff7363;
+      box-shadow: 0 0 0 3px rgba(255, 115, 99, 0.2);
     }
 
     /* Level Selector */
@@ -1676,7 +1690,7 @@
       align-items: center;
       justify-content: center;
       padding: 0.55rem 0.25rem;
-      border-radius: 10px;
+      border-radius: 4px;
       border: 1px solid var(--divider-hairline);
       background: var(--bg-cream);
       color: var(--ink-navy);
@@ -1685,14 +1699,15 @@
     }
 
     .onboarding-lvl-btn:hover {
-      border-color: var(--brand-coral);
+      border-color: #ff7363;
     }
 
     .onboarding-lvl-btn.active {
-      background: var(--brand-coral);
+      background: #ff7363;
+      background: linear-gradient(135deg, #ff7363 0%, #ff4e3d 100%);
       color: #ffffff;
-      border-color: var(--brand-coral);
-      box-shadow: 0 4px 12px var(--brand-coral-glow);
+      border-color: #ff7363;
+      box-shadow: 0 4px 14px rgba(255, 115, 99, 0.4);
     }
 
     .onboarding-lvl-name {
@@ -1705,7 +1720,7 @@
       font-size: 0.65rem;
       font-weight: 500;
       margin-top: 0.2rem;
-      opacity: 0.85;
+      opacity: 0.9;
       text-align: center;
       white-space: nowrap;
       overflow: hidden;
@@ -1716,23 +1731,26 @@
     /* Actions */
     .onboarding-cta-btn {
       width: 100%;
-      padding: 0.85rem 1.5rem;
-      border-radius: 999px;
-      background: var(--brand-coral);
+      padding: 0.9rem 1.5rem;
+      border-radius: 4px;
+      background: #ff7363;
+      background: linear-gradient(135deg, #ff7363 0%, #ff4e3d 100%);
       color: #ffffff;
       border: none;
       font-family: var(--font-sans);
-      font-size: 0.96rem;
-      font-weight: 700;
+      font-size: 0.98rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
       cursor: pointer;
       margin-top: 1.35rem;
       transition: all 0.2s ease;
-      box-shadow: 0 4px 14px var(--brand-coral-glow);
+      box-shadow: 0 6px 18px rgba(255, 115, 99, 0.4);
     }
 
     .onboarding-cta-btn:hover {
-      background: var(--brand-coral-dark);
+      background: linear-gradient(135deg, #ff6253 0%, #e03b2a 100%);
       transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(255, 115, 99, 0.55);
     }
 
     .onboarding-skip-btn {
@@ -1745,22 +1763,25 @@
       font-size: 0.82rem;
       font-weight: 500;
       cursor: pointer;
-      margin-top: 0.75rem;
+      margin-top: 0.85rem;
       padding: 0.25rem;
       text-decoration: underline;
       transition: color 0.15s ease;
     }
 
     .onboarding-skip-btn:hover {
-      color: var(--ink-navy);
+      color: #ff7363;
     }
 
     @media (max-width: 520px) {
       .onboarding-card {
-        padding: 1.5rem 1.15rem;
+        padding: 1.65rem 1.25rem;
       }
       .onboarding-headline {
-        font-size: 1.35rem;
+        font-size: 1.55rem;
+      }
+      .onboarding-subheadline {
+        font-size: 0.92rem;
       }
       .onboarding-langs-grid {
         grid-template-columns: 1fr;
@@ -2009,8 +2030,9 @@
       <button class="onboarding-close-btn" onclick="skipOnboarding()" aria-label="Close onboarding">&times;</button>
 
       <div class="onboarding-header">
-        <span class="onboarding-tag">Leenardo</span>
-        <h2 class="onboarding-headline" id="onboarding-headline">Read what interests you. At your level.</h2>
+        <span class="onboarding-tag">WELCOME</span>
+        <h2 class="onboarding-headline" id="onboarding-headline">Welcome to Leenardo!</h2>
+        <p class="onboarding-subheadline">Read what interests you. At your level.</p>
       </div>
 
       <!-- Small static demo card -->
