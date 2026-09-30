@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,9 +32,10 @@
   <script>
     (function() {
       try {
-        const saved = localStorage.getItem("leenardo_theme");
-        const theme = saved || "light";
-        document.documentElement.setAttribute("data-theme", theme);
+        const savedTheme = localStorage.getItem("leenardo_theme") || "light";
+        document.documentElement.setAttribute("data-theme", savedTheme);
+        const savedLang = localStorage.getItem("mia_support_lang") || "en";
+        document.documentElement.setAttribute("lang", savedLang);
       } catch (e) {}
     })();
   </script>
@@ -2063,17 +2064,16 @@
   </footer>
 
   <!-- First-Time User Onboarding Overlay -->
-  <div class="onboarding-backdrop" id="onboarding-overlay" onclick="closeOnboardingModal(event)" role="dialog" aria-modal="true" aria-labelledby="onboarding-headline" style="display: none;">
-    <div class="onboarding-card" onclick="event.stopPropagation()">
+  <div class="onboarding-backdrop" id="onboarding-overlay" onclick="closeOnboardingModal(event)" role="dialog" aria-modal="true" aria-labelledby="onboarding-headline" lang="en" style="display: none;">
+    <div class="onboarding-card" onclick="event.stopPropagation()" lang="en">
       <button class="onboarding-close-btn" onclick="skipOnboarding()" aria-label="Close onboarding">&times;</button>
 
       <div class="onboarding-grid">
         <!-- Left Column: Welcome & Demo Story -->
         <div class="onboarding-col-left">
           <div class="onboarding-header">
-            <span class="onboarding-tag">WELCOME</span>
             <h2 class="onboarding-headline" id="onboarding-headline">Welcome to Leenardo!</h2>
-            <p class="onboarding-subheadline">Read what interests you. At your level.</p>
+            <p class="onboarding-subheadline">Read what interests you. In the language you want, at your level.</p>
           </div>
 
           <!-- Small static demo card -->
@@ -2083,6 +2083,10 @@
               <div class="onboarding-demo-row">
                 <span class="onboarding-level-badge">A1</span>
                 <span class="onboarding-demo-text">A museum finds an old painting.</span>
+              </div>
+              <div class="onboarding-demo-row">
+                <span class="onboarding-level-badge">A2</span>
+                <span class="onboarding-demo-text">A museum discovers an old painting that was forgotten for years.</span>
               </div>
               <div class="onboarding-demo-row">
                 <span class="onboarding-level-badge">B1</span>
@@ -3259,7 +3263,20 @@
       if (countBadge) countBadge.textContent = savedWords.length;
     }
 
+    function toLocaleUpper(str, lang = (supportLang || 'en')) {
+      if (!str) return '';
+      const map = { tr: 'tr-TR', en: 'en-US', de: 'de-DE', es: 'es-ES', fr: 'fr-FR' };
+      return str.toLocaleUpperCase(map[lang] || 'en-US');
+    }
+
+    function toLocaleLower(str, lang = (supportLang || 'en')) {
+      if (!str) return '';
+      const map = { tr: 'tr-TR', en: 'en-US', de: 'de-DE', es: 'es-ES', fr: 'fr-FR' };
+      return str.toLocaleLowerCase(map[lang] || 'en-US');
+    }
+
     function applyUiTranslations() {
+      document.documentElement.setAttribute("lang", supportLang || "en");
       const t = uiTranslations[supportLang] || uiTranslations.en;
 
       const subElem = document.getElementById("brand-subtitle");
