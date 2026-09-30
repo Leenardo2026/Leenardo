@@ -1475,6 +1475,312 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* ==========================================================================
+       FIRST-TIME USER ONBOARDING OVERLAY
+       ========================================================================== */
+    .onboarding-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+
+    .onboarding-backdrop.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .onboarding-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--divider-hairline);
+      border-radius: 20px;
+      box-shadow: 0 24px 60px -12px rgba(15, 23, 42, 0.25);
+      width: 100%;
+      max-width: 520px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 2rem 2.25rem;
+      position: relative;
+    }
+
+    .onboarding-close-btn {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      line-height: 1;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 0.25rem 0.5rem;
+      transition: color 0.15s ease;
+    }
+
+    .onboarding-close-btn:hover {
+      color: var(--ink-navy);
+    }
+
+    .onboarding-header {
+      margin-bottom: 1.25rem;
+      padding-right: 1.5rem;
+    }
+
+    .onboarding-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--brand-coral);
+      display: inline-block;
+      margin-bottom: 0.35rem;
+    }
+
+    .onboarding-headline {
+      font-family: var(--font-serif);
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: var(--ink-navy);
+      line-height: 1.25;
+      margin: 0;
+    }
+
+    /* Small static demo card */
+    .onboarding-demo-card {
+      background: var(--bg-cream);
+      border: 1px solid var(--divider-hairline);
+      border-radius: 12px;
+      padding: 1rem 1.15rem;
+      margin-bottom: 1.35rem;
+    }
+
+    .onboarding-demo-title {
+      font-family: var(--font-serif);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 0.65rem;
+    }
+
+    .onboarding-demo-lines {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .onboarding-demo-row {
+      display: flex;
+      align-items: baseline;
+      gap: 0.65rem;
+    }
+
+    .onboarding-level-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: var(--bg-surface);
+      border: 1px solid var(--divider-hairline);
+      color: var(--brand-coral);
+      flex-shrink: 0;
+    }
+
+    .onboarding-demo-text {
+      font-size: 0.84rem;
+      color: var(--ink-navy);
+      line-height: 1.45;
+    }
+
+    /* Dropdown selectors */
+    .onboarding-langs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .onboarding-field label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .onboarding-select-wrap select {
+      width: 100%;
+      padding: 0.65rem 0.85rem;
+      border-radius: 10px;
+      border: 1px solid var(--divider-hairline);
+      background: var(--bg-cream);
+      color: var(--ink-navy);
+      font-family: var(--font-sans);
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 0.15s ease;
+    }
+
+    .onboarding-select-wrap select:focus {
+      outline: none;
+      border-color: var(--brand-coral);
+    }
+
+    /* Level Selector */
+    .onboarding-level-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .onboarding-level-header label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .onboarding-subtext {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .onboarding-level-pills {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.45rem;
+    }
+
+    .onboarding-lvl-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0.55rem 0.25rem;
+      border-radius: 10px;
+      border: 1px solid var(--divider-hairline);
+      background: var(--bg-cream);
+      color: var(--ink-navy);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .onboarding-lvl-btn:hover {
+      border-color: var(--brand-coral);
+    }
+
+    .onboarding-lvl-btn.active {
+      background: var(--brand-coral);
+      color: #ffffff;
+      border-color: var(--brand-coral);
+      box-shadow: 0 4px 12px var(--brand-coral-glow);
+    }
+
+    .onboarding-lvl-name {
+      font-size: 0.95rem;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .onboarding-lvl-desc {
+      font-size: 0.65rem;
+      font-weight: 500;
+      margin-top: 0.2rem;
+      opacity: 0.85;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+
+    /* Actions */
+    .onboarding-cta-btn {
+      width: 100%;
+      padding: 0.85rem 1.5rem;
+      border-radius: 999px;
+      background: var(--brand-coral);
+      color: #ffffff;
+      border: none;
+      font-family: var(--font-sans);
+      font-size: 0.96rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 1.35rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 14px var(--brand-coral-glow);
+    }
+
+    .onboarding-cta-btn:hover {
+      background: var(--brand-coral-dark);
+      transform: translateY(-1px);
+    }
+
+    .onboarding-skip-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: 0.75rem;
+      padding: 0.25rem;
+      text-decoration: underline;
+      transition: color 0.15s ease;
+    }
+
+    .onboarding-skip-btn:hover {
+      color: var(--ink-navy);
+    }
+
+    @media (max-width: 520px) {
+      .onboarding-card {
+        padding: 1.5rem 1.15rem;
+      }
+      .onboarding-headline {
+        font-size: 1.35rem;
+      }
+      .onboarding-langs-grid {
+        grid-template-columns: 1fr;
+        gap: 0.65rem;
+      }
+      .onboarding-lvl-desc {
+        display: none;
+      }
+      .onboarding-lvl-btn {
+        padding: 0.65rem 0.25rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .onboarding-backdrop, .onboarding-card, .onboarding-lvl-btn, .onboarding-cta-btn {
+        transition: none !important;
+        transform: none !important;
+        animation: none !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1696,6 +2002,85 @@
       </div>
     </div>
   </footer>
+
+  <!-- First-Time User Onboarding Overlay -->
+  <div class="onboarding-backdrop" id="onboarding-overlay" onclick="closeOnboardingModal(event)" role="dialog" aria-modal="true" aria-labelledby="onboarding-headline" style="display: none;">
+    <div class="onboarding-card" onclick="event.stopPropagation()">
+      <button class="onboarding-close-btn" onclick="skipOnboarding()" aria-label="Close onboarding">&times;</button>
+
+      <div class="onboarding-header">
+        <span class="onboarding-tag">Leenardo</span>
+        <h2 class="onboarding-headline" id="onboarding-headline">Read what interests you. At your level.</h2>
+      </div>
+
+      <!-- Small static demo card -->
+      <div class="onboarding-demo-card">
+        <div class="onboarding-demo-title">The Lost Painting</div>
+        <div class="onboarding-demo-lines">
+          <div class="onboarding-demo-row">
+            <span class="onboarding-level-badge">A1</span>
+            <span class="onboarding-demo-text">A museum finds an old painting.</span>
+          </div>
+          <div class="onboarding-demo-row">
+            <span class="onboarding-level-badge">B1</span>
+            <span class="onboarding-demo-text">A museum discovers an old painting that has been missing for many years.</span>
+          </div>
+          <div class="onboarding-demo-row">
+            <span class="onboarding-level-badge">C1</span>
+            <span class="onboarding-demo-text">A museum unexpectedly discovers a long-lost painting, prompting experts to reconsider its origins.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Selectors Form -->
+      <div class="onboarding-selectors">
+        <div class="onboarding-langs-grid">
+          <div class="onboarding-field">
+            <label for="onboarding-learning-select">I'm learning</label>
+            <div class="onboarding-select-wrap">
+              <select id="onboarding-learning-select" onchange="onOnboardingLearningChange()">
+                <option value="tr">Türkçe</option>
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="de">Deutsch</option>
+                <option value="fr">Français</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="onboarding-field">
+            <label for="onboarding-understand-select">I understand</label>
+            <div class="onboarding-select-wrap">
+              <select id="onboarding-understand-select" onchange="onOnboardingUnderstandChange()">
+                <option value="en">English</option>
+                <option value="tr">Türkçe</option>
+                <option value="es">Español</option>
+                <option value="de">Deutsch</option>
+                <option value="fr">Français</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Level Selector -->
+        <div class="onboarding-level-section">
+          <div class="onboarding-level-header">
+            <label>Where would you like to start?</label>
+            <span class="onboarding-subtext">You can change this anytime.</span>
+          </div>
+          <div class="onboarding-level-pills" id="onboarding-level-pills" role="radiogroup" aria-label="Starting CEFR level">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="onboarding-actions">
+        <button class="onboarding-cta-btn" onclick="submitOnboarding()">Start Reading</button>
+        <button class="onboarding-skip-btn" onclick="skipOnboarding()">Skip, I'll choose later</button>
+      </div>
+    </div>
+  </div>
 
   <!-- External Data Source -->
   <script src="articles-data.js"></script>
@@ -2024,7 +2409,156 @@
       renderTrendingColumn();
       renderMainFeed();
       renderSidebarWidgets();
+      checkOnboarding();
     }
+
+    /* ==========================================================================
+       FIRST-TIME USER ONBOARDING CONTROLLER
+       ========================================================================== */
+    let onboardingSelectedLevel = "A1";
+
+    function checkOnboarding() {
+      try {
+        if (localStorage.getItem("onboardingCompleted") !== "true") {
+          setTimeout(openOnboardingModal, 150);
+        }
+      } catch (e) {}
+    }
+
+    function openOnboardingModal() {
+      const overlay = document.getElementById("onboarding-overlay");
+      if (!overlay) return;
+
+      const learnSelect = document.getElementById("onboarding-learning-select");
+      const understandSelect = document.getElementById("onboarding-understand-select");
+      if (learnSelect) learnSelect.value = targetLang || "tr";
+      if (understandSelect) understandSelect.value = supportLang || (targetLang === "en" ? "tr" : "en");
+
+      if (learnSelect && understandSelect && learnSelect.value === understandSelect.value) {
+        understandSelect.value = learnSelect.value === "en" ? "tr" : "en";
+      }
+
+      onboardingSelectedLevel = currentLevel || "A1";
+      renderOnboardingLevels();
+
+      overlay.style.display = "flex";
+      // Force browser reflow for clean CSS opacity transition
+      overlay.offsetHeight;
+      overlay.classList.add("show");
+    }
+
+    function renderOnboardingLevels() {
+      const container = document.getElementById("onboarding-level-pills");
+      if (!container) return;
+
+      container.innerHTML = SUPPORTED_LEVELS.map(lvl => {
+        const desc = (levelDescriptions[lvl] && (levelDescriptions[lvl].en || Object.values(levelDescriptions[lvl])[0])) || "";
+        const isActive = lvl === onboardingSelectedLevel;
+        return `
+          <button type="button" class="onboarding-lvl-btn ${isActive ? 'active' : ''}" onclick="selectOnboardingLevel('${lvl}')" aria-pressed="${isActive}">
+            <span class="onboarding-lvl-name">${lvl}</span>
+            <span class="onboarding-lvl-desc">${desc}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectOnboardingLevel(lvl) {
+      if (!SUPPORTED_LEVELS.includes(lvl)) return;
+      onboardingSelectedLevel = lvl;
+      renderOnboardingLevels();
+    }
+
+    function onOnboardingLearningChange() {
+      const learnSelect = document.getElementById("onboarding-learning-select");
+      const understandSelect = document.getElementById("onboarding-understand-select");
+      if (!learnSelect || !understandSelect) return;
+
+      if (learnSelect.value === understandSelect.value) {
+        understandSelect.value = learnSelect.value === "en" ? "tr" : "en";
+      }
+    }
+
+    function onOnboardingUnderstandChange() {
+      const learnSelect = document.getElementById("onboarding-learning-select");
+      const understandSelect = document.getElementById("onboarding-understand-select");
+      if (!learnSelect || !understandSelect) return;
+
+      if (understandSelect.value === learnSelect.value) {
+        learnSelect.value = understandSelect.value === "en" ? "tr" : "en";
+      }
+    }
+
+    function submitOnboarding() {
+      const learnSelect = document.getElementById("onboarding-learning-select");
+      const understandSelect = document.getElementById("onboarding-understand-select");
+      const chosenTarget = learnSelect ? learnSelect.value : targetLang;
+      let chosenSupport = understandSelect ? understandSelect.value : supportLang;
+      if (chosenTarget === chosenSupport) {
+        chosenSupport = chosenTarget === "en" ? "tr" : "en";
+      }
+      const chosenLevel = onboardingSelectedLevel || currentLevel || "A1";
+
+      try {
+        localStorage.setItem("onboardingCompleted", "true");
+      } catch (e) {}
+
+      targetLang = chosenTarget;
+      supportLang = chosenSupport;
+      currentLevel = chosenLevel;
+
+      try {
+        localStorage.setItem("mia_target_lang", targetLang);
+        localStorage.setItem("mia_support_lang", supportLang);
+        localStorage.setItem("mia_preferred_level", currentLevel);
+      } catch (e) {}
+
+      const tarElem = document.getElementById("target-lang-select");
+      const supElem = document.getElementById("support-lang-select");
+      if (tarElem) tarElem.value = targetLang;
+      if (supElem) supElem.value = supportLang;
+
+      updateUrlState();
+      applyUiTranslations();
+      updateDateDisplay();
+      updateLatestTicker();
+      renderCategoryNav();
+      renderMagazineHero();
+      renderTrendingColumn();
+      renderMainFeed();
+      renderSidebarWidgets();
+
+      closeOnboardingModal();
+    }
+
+    function skipOnboarding() {
+      try {
+        localStorage.setItem("onboardingCompleted", "true");
+      } catch (e) {}
+      closeOnboardingModal();
+    }
+
+    function closeOnboardingModal(event) {
+      if (event && event.target && event.target.id !== "onboarding-overlay" && !event.target.classList.contains("onboarding-backdrop")) {
+        return;
+      }
+      const overlay = document.getElementById("onboarding-overlay");
+      if (overlay) {
+        overlay.classList.remove("show");
+        setTimeout(() => {
+          overlay.style.display = "none";
+        }, 250);
+      }
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        const overlay = document.getElementById("onboarding-overlay");
+        if (overlay && overlay.classList.contains("show")) {
+          skipOnboarding();
+        }
+      }
+    });
 
     function updateUrlState() {
       try {
