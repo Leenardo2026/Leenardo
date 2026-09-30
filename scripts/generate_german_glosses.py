@@ -12,6 +12,14 @@ import re
 import os
 import sys
 
+try:
+    from scripts.german_fallthrough_dict import DE_ADDITIONAL_FALLTHROUGH_MAP
+except ImportError:
+    try:
+        from german_fallthrough_dict import DE_ADDITIONAL_FALLTHROUGH_MAP
+    except ImportError:
+        DE_ADDITIONAL_FALLTHROUGH_MAP = {}
+
 # Separable Verb mappings: (conjugated_verb, prefix) -> (full_infinitive, pos, tr_meaning, en_meaning)
 SEPARABLE_VERB_PAIRS = {
     ("ließen", "zurück"): ("zurücklassen", "Trennbares Verb", "geride bırakmak", "to leave behind"),
@@ -405,6 +413,17 @@ def analyze_german_token(token, sentence_de="", sentence_tr="", curated_vocab=No
             "lemma": lemma,
             "pos": pos,
             "gloss": {"tr": tr_m, "en": en_m}
+        }
+
+    # 5b. Check Verified Fallthrough & Additional Lexicon
+    if raw_lower in DE_ADDITIONAL_FALLTHROUGH_MAP:
+        lemma, pos, tr_m, en_m, note = DE_ADDITIONAL_FALLTHROUGH_MAP[raw_lower]
+        return {
+            "token": clean,
+            "lemma": lemma,
+            "pos": pos,
+            "gloss": {"tr": tr_m, "en": en_m},
+            "note": note
         }
 
     # 6. Proper Noun Heuristic

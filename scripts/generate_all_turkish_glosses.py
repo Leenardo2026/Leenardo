@@ -12,6 +12,14 @@ import re
 import os
 import sys
 
+try:
+    from scripts.turkish_fallthrough_dict import TR_ADDITIONAL_FALLTHROUGH_MAP
+except ImportError:
+    try:
+        from turkish_fallthrough_dict import TR_ADDITIONAL_FALLTHROUGH_MAP
+    except ImportError:
+        TR_ADDITIONAL_FALLTHROUGH_MAP = {}
+
 # Core Vowel-drop roots in Turkish
 VOWEL_DROP_MAP = {
     "akl": "akıl", "aln": "alın", "burn": "burun", "boyn": "boyun",
@@ -884,6 +892,17 @@ def analyze_turkish_token(token, sentence_tr="", sentence_en="", curated_vocab=N
                     "pos": "İsim (Çoğul)",
                     "gloss": {"en": f"{n_info[2]}s", "tr": clean}
                 }
+
+    # 8d. Verified Fallthrough & Additional Dictionary Lookup
+    if raw_lower in TR_ADDITIONAL_FALLTHROUGH_MAP:
+        lemma, pos, en_trans, note = TR_ADDITIONAL_FALLTHROUGH_MAP[raw_lower]
+        return {
+            "token": clean,
+            "lemma": lemma,
+            "pos": pos,
+            "gloss": {"en": en_trans, "tr": clean},
+            "note": note
+        }
 
     # 9. Fallback: Heuristic capitalization and basic dictionary lookup
     is_cap = clean[0].isupper() and clean[0] != clean[0].lower()
