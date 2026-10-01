@@ -7,6 +7,7 @@ const SUPABASE_CONFIG = {
   url: "https://vkddnvpqnccstcjnqfyq.supabase.co",
   anonKey: "sb_publishable_wPeD9aYQWmnAJYf1pqDxvQ_PiPm-GC-"
 };
+window.SUPABASE_CONFIG = SUPABASE_CONFIG;
 
 // Initialize the Supabase Client if library is available
 let supabaseClient = null;

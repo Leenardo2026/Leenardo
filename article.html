@@ -21,14 +21,19 @@
   <meta name="twitter:description" content="Read authentic graded multilingual articles with interactive sentence translations, smart vocabulary flashcards, and native audio.">
   <meta name="twitter:image" content="https://leenardo.com/logo-1024.png">
 
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-  <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
-  <link rel="apple-touch-icon" sizes="192x192" href="logo-192.png">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="/favicon-64.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="/logo-192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="auth.css">
+  <link rel="stylesheet" href="/auth.css">
+
+  <!-- Supabase & Leenardo Auth Scripts (Single source of truth) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/supabase-client.js"></script>
+  <script src="/auth-ui.js"></script>
   <script>
     (function() {
       try {
@@ -2310,7 +2315,7 @@
   <header class="top-header">
     <div class="top-header-inner">
       <div class="brand-group">
-        <a href="index.html" class="brand-title" onclick="goToHome(event)" aria-label="Leenardo">
+        <a href="/" class="brand-title" onclick="goToHome(event)" aria-label="Leenardo">
           <span class="brand-glyph-l" aria-hidden="true">
             <svg viewBox="290 210 445 600" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
@@ -2393,7 +2398,7 @@
           </svg>
           <span id="btn-top-share-text">Share</span>
         </button>
-        <a href="index.html" class="article-topic-selector-link" id="article-change-topic-link" onclick="goToHome(event)" title="Browse all stories">
+        <a href="/" class="article-topic-selector-link" id="article-change-topic-link" onclick="goToHome(event)" title="Browse all stories">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <line x1="19" y1="12" x2="5" y2="12"></line>
             <polyline points="12 19 5 12 12 5"></polyline>
@@ -3373,12 +3378,6 @@
         .replace(/'/g, "&#39;");
     }
 
-    // Supabase Configuration (Public Anon Publishable Key only)
-    const SUPABASE_CONFIG = {
-      url: "https://vkddnvpqnccstcjnqfyq.supabase.co",
-      anonKey: "sb_publishable_wPeD9aYQWmnAJYf1pqDxvQ_PiPm-GC-"
-    };
-
     /**
      * Adapter: converts a Supabase public.articles row into the exact object shape
      * expected by the reading engine, level switcher, flashcards, and quizzes.
@@ -3697,17 +3696,23 @@
     let flashcardLearnedCount = 0;
     let flashcardRepeatCount = 0;
 
+    const getSupabaseConfig = () => (typeof SUPABASE_CONFIG !== "undefined" ? SUPABASE_CONFIG : (window.SUPABASE_CONFIG || {
+      url: "https://vkddnvpqnccstcjnqfyq.supabase.co",
+      anonKey: "sb_publishable_wPeD9aYQWmnAJYf1pqDxvQ_PiPm-GC-"
+    }));
+
     async function fetchArticleFromSupabase(articleId) {
       if (!articleId) return null;
+      const config = getSupabaseConfig();
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 5000);
       try {
-        const endpoint = `${SUPABASE_CONFIG.url}/rest/v1/articles?id=eq.${encodeURIComponent(articleId)}&select=*`;
+        const endpoint = `${config.url}/rest/v1/articles?id=eq.${encodeURIComponent(articleId)}&select=*`;
         const resp = await fetch(endpoint, {
           signal: controller.signal,
           headers: {
-            "apikey": SUPABASE_CONFIG.anonKey,
-            "Authorization": `Bearer ${SUPABASE_CONFIG.anonKey}`
+            "apikey": config.anonKey,
+            "Authorization": `Bearer ${config.anonKey}`
           }
         });
         clearTimeout(timeoutId);
@@ -3727,15 +3732,16 @@
     }
 
     async function fetchCatalogueFromSupabase() {
+      const config = getSupabaseConfig();
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 5000);
       try {
-        const endpoint = `${SUPABASE_CONFIG.url}/rest/v1/articles?select=id,category,topic,visual,category_translations,title_translations,title_tr,title_en,read_time,summary,status,hidden&status=eq.published&hidden=eq.false&order=published_at.desc`;
+        const endpoint = `${config.url}/rest/v1/articles?select=id,category,topic,visual,category_translations,title_translations,title_tr,title_en,read_time,summary,status,hidden&status=eq.published&hidden=eq.false&order=published_at.desc`;
         const resp = await fetch(endpoint, {
           signal: controller.signal,
           headers: {
-            "apikey": SUPABASE_CONFIG.anonKey,
-            "Authorization": `Bearer ${SUPABASE_CONFIG.anonKey}`
+            "apikey": config.anonKey,
+            "Authorization": `Bearer ${config.anonKey}`
           }
         });
         clearTimeout(timeoutId);
@@ -3762,8 +3768,7 @@
           return;
         }
 
-        const inArticlesDir = window.location.pathname.includes("/articles/");
-        const scriptPath = inArticlesDir ? "../articles-data.js" : "articles-data.js";
+        const scriptPath = "/articles-data.js";
         const scriptElem = document.createElement("script");
         scriptElem.src = scriptPath;
         scriptElem.onload = () => {
@@ -3772,7 +3777,7 @@
         };
         scriptElem.onerror = async () => {
           try {
-            const jsonPath = inArticlesDir ? "../articles.json" : "articles.json";
+            const jsonPath = "/articles.json";
             const resp = await fetch(jsonPath);
             if (resp.ok) {
               const freshData = await resp.json();
@@ -3861,7 +3866,7 @@
         box.appendChild(p);
 
         const homeBtn = document.createElement("a");
-        homeBtn.href = "index.html";
+        homeBtn.href = "/";
         homeBtn.onclick = (e) => goToHome(e);
         homeBtn.className = "btn-primary-action";
         homeBtn.style.display = "inline-block";
@@ -4185,10 +4190,7 @@
     function goToHome(e) {
       if (e) e.preventDefault();
       const inArticles = window.location.pathname.includes("/articles/");
-      let homePath = inArticles ? "../index.html" : "index.html";
-      if (window.location.protocol !== "file:" && !inArticles) {
-        homePath = "/index.html";
-      }
+      const homePath = window.location.protocol === "file:" ? (inArticles ? "../index.html" : "index.html") : "/";
       window.location.href = `${homePath}?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
     }
 
@@ -4566,8 +4568,11 @@
         return relPath;
       }
       let clean = relPath.startsWith("/") ? relPath.slice(1) : relPath;
-      const isInSubdir = window.location.pathname.includes("/articles/");
-      return (isInSubdir ? "../" : "") + clean;
+      if (window.location.protocol === "file:") {
+        const isInSubdir = window.location.pathname.includes("/articles/");
+        return (isInSubdir ? "../" : "") + clean;
+      }
+      return "/" + clean;
     }
 
     function renderArticleContent() {
@@ -7975,9 +7980,5 @@
       }
     }
   </script>
-  <!-- Supabase & Leenardo Auth Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-client.js"></script>
-  <script src="auth-ui.js"></script>
 </body>
 </html>
