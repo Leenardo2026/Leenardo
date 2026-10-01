@@ -4037,13 +4037,9 @@
         }
       }
 
-      // Enforce targetLang !== supportLang without clobbering native support language
+      // Enforce targetLang !== supportLang
       if (targetLang === supportLang) {
-        if (paramTarget && !paramSupport) {
-          supportLang = targetLang === "en" ? "tr" : "en";
-        } else {
-          targetLang = supportLang === "tr" ? "es" : "tr";
-        }
+        supportLang = targetLang === "en" ? "tr" : "en";
       }
 
       // Expose globally for helper modules (e.g., supabase-client sync)
