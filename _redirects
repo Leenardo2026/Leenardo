@@ -3,15 +3,28 @@
 # ==============================================================================
 
 # ------------------------------------------------------------------------------
-# Security: Block internal docs, scripts, workflows, and tools from public serving
+# Security: Block root internal files explicitly (Netlify requires exact paths)
 # ------------------------------------------------------------------------------
-/*.md               /404.html  404!
-/docs/*             /404.html  404!
-/.github/*          /404.html  404!
-/scripts/*          /404.html  404!
-/supabase/*         /404.html  404!
-/*.py               /404.html  404!
-/*.sh               /404.html  404!
+/LAUNCH_CHECKLIST.md                      /404.html  404!
+/BRANCHES.md                              /404.html  404!
+/PROJECT_STATUS.md                        /404.html  404!
+/README.md                                /404.html  404!
+/generate_article_pages.py                /404.html  404!
+/generate_sitemap.py                      /404.html  404!
+/news_pipeline.py                         /404.html  404!
+/sync_database.py                         /404.html  404!
+/validate_content.py                      /404.html  404!
+/Daily_Turkish_with_Mia_100_Topics.csv    /404.html  404!
+/Daily_Turkish_with_Mia_100_Topics.xlsx   /404.html  404!
+/logo-preview.html                        /404.html  404!
+
+# Internal and draft directories (splat wildcard at end is supported by Netlify)
+/scripts/*                                /404.html  404!
+/supabase/*                               /404.html  404!
+/docs/*                                   /404.html  404!
+/.github/*                                /404.html  404!
+/worksheets/*                             /404.html  404!
+/konular/*                                /404.html  404!
 
 # 301 Permanent Redirects from legacy query-param URLs (/article.html?id=...)
 # to distinct article URLs (/articles/:id.html), preserving user preferences

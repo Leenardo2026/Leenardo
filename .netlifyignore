@@ -1,0 +1,14 @@
+# Netlify Ignore - Prevent internal files and draft assets from being published to CDN
+*.md
+*.py
+*.xlsx
+*.csv
+scripts/
+supabase/
+docs/
+.github/
+worksheets/
+konular/
+logo-*.jpg
+leenardo_*.jpg
+logo-preview.html
