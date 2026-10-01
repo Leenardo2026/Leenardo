@@ -8,7 +8,7 @@ This file tracks active and historical development branches across the Leenardo 
 
 | Branch | Owner / Collaborators | Start Date | Status | Description |
 | :--- | :--- | :--- | :--- | :--- |
-| `feature/supabase-article-architecture` | Sencan Yüksel & Antigravity | 2026-10-01 | In Planning | Migrate articles from static HTML/JSON files to dynamic Supabase database storage with clean URLs and SEO rendering so publishing new stories requires zero Netlify redeploys. |
+| `feature/supabase-article-architecture` | Sencan Yüksel & Antigravity | 2026-10-01 | Phase 2 (Dynamic Reader) | Migrate articles from static HTML/JSON files to dynamic Supabase database storage with clean URLs and SEO rendering so publishing new stories requires zero Netlify redeploys. |
 
 ---
 

@@ -3348,9 +3348,28 @@
       return tag;
     }
 
+    // Supabase Configuration
+    const SUPABASE_CONFIG = {
+      url: "https://vkddnvpqnccstcjnqfyq.supabase.co",
+      anonKey: "sb_publishable_wPeD9aYQWmnAJYf1pqDxvQ_PiPm-GC-"
+    };
+
+    function normalizeArticle(art) {
+      if (!art) return null;
+      return {
+        ...art,
+        categoryTranslations: art.categoryTranslations || art.category_translations || {},
+        titleTranslations: art.titleTranslations || art.title_translations || {},
+        teaserTranslations: art.teaserTranslations || art.teaser_translations || {},
+        titleTr: art.titleTr || art.title_tr || "",
+        titleEn: art.titleEn || art.title_en || "",
+        readTime: art.readTime || art.read_time || "3 min read"
+      };
+    }
+
     // Global State
     const initialRawData = (typeof window !== "undefined") ? (window.ARTICLES_DATA || window.articlesDatabase) : null;
-    let articlesDatabase = Array.isArray(initialRawData) ? initialRawData : [];
+    let articlesDatabase = Array.isArray(initialRawData) ? initialRawData.map(normalizeArticle) : [];
     let targetLang = "tr";
     let supportLang = "en";
     let currentArticleId = "";
@@ -3640,24 +3659,120 @@
     let flashcardLearnedCount = 0;
     let flashcardRepeatCount = 0;
 
-    async function loadArticlesData() {
+    async function fetchArticleFromSupabase(articleId) {
+      if (!articleId) return null;
       try {
-        const jsonPath = window.location.pathname.includes("/articles/") ? "../articles.json" : "articles.json";
-        const resp = await fetch(jsonPath).catch(() => fetch("/articles.json")).catch(() => null);
-        if (resp && resp.ok) {
-          const freshData = await resp.json();
-          if (Array.isArray(freshData) && freshData.length > 0) {
-            articlesDatabase = freshData;
-            return;
+        const endpoint = `${SUPABASE_CONFIG.url}/rest/v1/articles?id=eq.${encodeURIComponent(articleId)}&select=*`;
+        const resp = await fetch(endpoint, {
+          headers: {
+            "apikey": SUPABASE_CONFIG.anonKey,
+            "Authorization": `Bearer ${SUPABASE_CONFIG.anonKey}`
+          }
+        });
+        if (resp.ok) {
+          const rows = await resp.json();
+          if (Array.isArray(rows) && rows.length > 0) {
+            return normalizeArticle(rows[0]);
           }
         }
-      } catch (e) {
-        // Fallback to window.ARTICLES_DATA or window.articlesDatabase
+      } catch (err) {
+        console.warn("Could not fetch article from Supabase:", err);
       }
-      if (!articlesDatabase || articlesDatabase.length === 0) {
-        const fallback = (typeof window !== "undefined") ? (window.ARTICLES_DATA || window.articlesDatabase) : null;
-        if (Array.isArray(fallback) && fallback.length > 0) {
-          articlesDatabase = fallback;
+      return null;
+    }
+
+    async function fetchCatalogueFromSupabase() {
+      try {
+        const endpoint = `${SUPABASE_CONFIG.url}/rest/v1/articles?select=id,category,topic,visual,category_translations,title_translations,title_tr,title_en,read_time,summary,status,hidden&status=eq.published&hidden=eq.false&order=published_at.desc`;
+        const resp = await fetch(endpoint, {
+          headers: {
+            "apikey": SUPABASE_CONFIG.anonKey,
+            "Authorization": `Bearer ${SUPABASE_CONFIG.anonKey}`
+          }
+        });
+        if (resp.ok) {
+          const rows = await resp.json();
+          if (Array.isArray(rows) && rows.length > 0) {
+            return rows.map(normalizeArticle);
+          }
+        }
+      } catch (err) {
+        console.warn("Could not fetch catalogue from Supabase:", err);
+      }
+      return [];
+    }
+
+    async function loadArticlesData() {
+      // 1. Resolve requested article ID from clean pathname (/articles/:slug or /articles/:slug.html) or legacy query param (?id=...)
+      let pathArticleId = null;
+      const pathMatch = window.location.pathname.match(/\/articles\/([^\/\.]+)(?:\.html)?/);
+      if (pathMatch) {
+        pathArticleId = decodeURIComponent(pathMatch[1]);
+      }
+      const urlParams = new URLSearchParams(window.location.search);
+      const queryId = urlParams.get("id");
+      const targetId = pathArticleId || queryId;
+
+      let primaryArticle = null;
+
+      // 2. Dynamic Fetch from Supabase (Primary live path)
+      if (window.location.protocol !== "file:") {
+        try {
+          if (targetId) {
+            primaryArticle = await fetchArticleFromSupabase(targetId);
+          }
+
+          const remoteCatalogue = await fetchCatalogueFromSupabase();
+          if (remoteCatalogue && remoteCatalogue.length > 0) {
+            if (primaryArticle) {
+              currentArticleId = primaryArticle.id;
+              // Merge catalogue with full active article
+              articlesDatabase = remoteCatalogue.map(a => a.id === primaryArticle.id ? primaryArticle : a);
+              if (!articlesDatabase.some(a => a.id === primaryArticle.id)) {
+                articlesDatabase.unshift(primaryArticle);
+              }
+            } else {
+              // If no specific article requested or targetId wasn't found, load the first article in full
+              articlesDatabase = remoteCatalogue;
+              const firstWithVisual = articlesDatabase.find(a => a && a.visual && a.visual.imageUrl && a.visual.imageUrl.trim() !== "" && !a.hidden);
+              const fallbackId = firstWithVisual ? firstWithVisual.id : (articlesDatabase[0] ? articlesDatabase[0].id : "");
+              if (fallbackId) {
+                primaryArticle = await fetchArticleFromSupabase(fallbackId);
+                if (primaryArticle) {
+                  currentArticleId = primaryArticle.id;
+                  articlesDatabase = articlesDatabase.map(a => a.id === primaryArticle.id ? primaryArticle : a);
+                }
+              }
+            }
+          } else if (primaryArticle) {
+            currentArticleId = primaryArticle.id;
+            articlesDatabase = [primaryArticle];
+          }
+        } catch (e) {
+          console.warn("Supabase fetch failed, falling back to local dataset:", e);
+        }
+      }
+
+      // 3. Fallback to local files or window.ARTICLES_DATA if offline / file:// / Supabase unreachable
+      if (!articlesDatabase || articlesDatabase.length === 0 || !currentArticleId) {
+        try {
+          const jsonPath = window.location.pathname.includes("/articles/") ? "../articles.json" : "articles.json";
+          const resp = await fetch(jsonPath).catch(() => fetch("/articles.json")).catch(() => null);
+          if (resp && resp.ok) {
+            const freshData = await resp.json();
+            if (Array.isArray(freshData) && freshData.length > 0) {
+              articlesDatabase = freshData.map(normalizeArticle);
+            }
+          }
+        } catch (e) {
+          // Fallback to window.ARTICLES_DATA or window.articlesDatabase
+        }
+
+        if (!articlesDatabase || articlesDatabase.length === 0) {
+          const fallback = (typeof window !== "undefined") ? (window.ARTICLES_DATA || window.articlesDatabase) : null;
+          if (Array.isArray(fallback) && fallback.length > 0) {
+            articlesDatabase = fallback.map(normalizeArticle);
+          }
         }
       }
     }
@@ -3670,11 +3785,11 @@
       if (queryId && isOldUrl && window.location.protocol !== "file:") {
         urlParams.delete("id");
         const qs = urlParams.toString() ? ("?" + urlParams.toString()) : "";
-        window.location.replace(`/articles/${encodeURIComponent(queryId)}.html${qs}`);
+        window.location.replace(`/articles/${encodeURIComponent(queryId)}${qs}`);
         return;
       }
 
-      // 1. Resolve State from Pathname (/articles/:id.html) or Query Param, then LocalStorage
+      // 1. Resolve State from Pathname (/articles/:id or /articles/:id.html) or Query Param, then LocalStorage
       let pathArticleId = null;
       const pathMatch = window.location.pathname.match(/\/articles\/([^\/\.]+)(?:\.html)?/);
       if (pathMatch) {
@@ -3687,7 +3802,7 @@
 
       if (paramId && articlesDatabase.some(a => a.id === paramId)) {
         currentArticleId = paramId;
-      } else {
+      } else if (!currentArticleId) {
         const firstWithVisual = articlesDatabase.find(a => a && a.visual && a.visual.imageUrl && a.visual.imageUrl.trim() !== "" && !a.hidden);
         currentArticleId = firstWithVisual ? firstWithVisual.id : (articlesDatabase[0] ? articlesDatabase[0].id : "");
       }
@@ -3785,7 +3900,7 @@
       });
 
       // Browser back/forward (popstate) support across levels & articles
-      window.addEventListener("popstate", (e) => {
+      window.addEventListener("popstate", async (e) => {
         let pid = (e && e.state && e.state.id) || null;
         if (!pid) {
           const match = window.location.pathname.match(/\/articles\/([^\/\.]+)(?:\.html)?/);
@@ -3797,8 +3912,24 @@
         const ptar = (e && e.state && e.state.target) || params.get("target") || params.get("lang");
         const psup = (e && e.state && e.state.support) || params.get("support");
 
-        if (pid && articlesDatabase.some(a => a.id === pid)) {
+        if (pid) {
           currentArticleId = pid;
+          let art = articlesDatabase.find(a => a.id === pid);
+          const hasFullTokens = Boolean(
+            art &&
+            art.languages &&
+            art.languages[targetLang || 'tr'] &&
+            art.languages[targetLang || 'tr'][currentLevel || 'A1'] &&
+            Array.isArray(art.languages[targetLang || 'tr'][currentLevel || 'A1'].paragraphs)
+          );
+          if (!hasFullTokens) {
+            const fullArt = await fetchArticleFromSupabase(pid);
+            if (fullArt) {
+              const idx = articlesDatabase.findIndex(a => a.id === pid);
+              if (idx !== -1) articlesDatabase[idx] = fullArt;
+              else articlesDatabase.push(fullArt);
+            }
+          }
         }
         if (plvl && SUPPORTED_LEVELS.includes(plvl)) currentLevel = plvl;
         if (ptar && SUPPORTED_LANGUAGES.includes(ptar)) targetLang = ptar;
@@ -3825,7 +3956,8 @@
         if (window.history && window.location.protocol !== "file:") {
           const url = new URL(window.location.href);
           if (currentArticleId) {
-            url.pathname = `/articles/${encodeURIComponent(currentArticleId)}.html`;
+            const hasHtmlExt = window.location.pathname.endsWith(".html");
+            url.pathname = `/articles/${encodeURIComponent(currentArticleId)}${hasHtmlExt ? ".html" : ""}`;
           }
           url.searchParams.delete("id");
           url.searchParams.delete("lang");
@@ -3909,10 +4041,36 @@
       renderArticleContent();
     }
 
-    function navigateToArticle(newId) {
+    async function navigateToArticle(newId) {
       if (!newId || newId === currentArticleId) return;
       currentArticleId = newId;
       stopSpeech();
+
+      // Ensure full tokens are loaded for the target article
+      let art = articlesDatabase.find(a => a.id === newId);
+      const hasFullTokens = Boolean(
+        art &&
+        art.languages &&
+        art.languages[targetLang] &&
+        art.languages[targetLang][currentLevel] &&
+        Array.isArray(art.languages[targetLang][currentLevel].paragraphs) &&
+        art.languages[targetLang][currentLevel].paragraphs[0] &&
+        art.languages[targetLang][currentLevel].paragraphs[0][0] &&
+        Array.isArray(art.languages[targetLang][currentLevel].paragraphs[0][0].tokens)
+      );
+
+      if (!hasFullTokens) {
+        const fullArt = await fetchArticleFromSupabase(newId);
+        if (fullArt) {
+          const idx = articlesDatabase.findIndex(a => a.id === newId);
+          if (idx !== -1) {
+            articlesDatabase[idx] = fullArt;
+          } else {
+            articlesDatabase.push(fullArt);
+          }
+        }
+      }
+
       updateUrlState(true);
       renderArticleContent();
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -4431,17 +4589,23 @@
         const catLabel = (art.categoryTranslations && art.categoryTranslations[supportLang]) || art.category;
 
         const targetLevelData = (art.languages && art.languages[targetLang] && art.languages[targetLang][currentLevel])
-                             || (art.languages && art.languages[targetLang] && art.languages[targetLang].A1);
+                             || (art.languages && art.languages[targetLang] && art.languages[targetLang].A1)
+                             || (art.summary && art.summary[targetLang] && art.summary[targetLang][currentLevel])
+                             || (art.summary && art.summary[targetLang] && art.summary[targetLang].A1);
         const primaryTitle = (targetLevelData && targetLevelData.title)
                           || (art.titleTranslations && art.titleTranslations[targetLang])
+                          || (targetLang === 'tr' ? art.titleTr : (targetLang === 'en' ? art.titleEn : ''))
                           || art.topic || "Article";
 
         let subTitle = "";
         if (supportLang !== targetLang) {
           const supportLevelData = (art.languages && art.languages[supportLang] && art.languages[supportLang][currentLevel])
-                                || (art.languages && art.languages[supportLang] && art.languages[supportLang].A1);
+                                || (art.languages && art.languages[supportLang] && art.languages[supportLang].A1)
+                                || (art.summary && art.summary[supportLang] && art.summary[supportLang][currentLevel])
+                                || (art.summary && art.summary[supportLang] && art.summary[supportLang].A1);
           subTitle = (supportLevelData && supportLevelData.title)
-                  || (art.titleTranslations && art.titleTranslations[supportLang]) || "";
+                  || (art.titleTranslations && art.titleTranslations[supportLang])
+                  || (supportLang === 'tr' ? art.titleTr : (supportLang === 'en' ? art.titleEn : '')) || "";
         }
 
         const rawImg = (art.visual && art.visual.imageUrl) || art.featuredImage;
@@ -7287,8 +7451,9 @@
       const t = uiTranslations[supportLang] || uiTranslations.en;
 
       if (forceArticleVocab || currentPairWords.length === 0) {
+        const curArt = getCurrentArticleObject();
+        const artVocab = curArt?.languages?.[targetLang]?.[currentLevel]?.vocab || [];
         if (!forceArticleVocab && currentPairWords.length === 0) {
-          const artVocab = currentArticleData?.languages?.[targetLang]?.[currentLevel]?.vocab || [];
           if (artVocab.length > 0) {
             area.innerHTML = `
               <div style="text-align:center; padding:2rem 1rem; color:var(--text-muted);">
@@ -7312,7 +7477,6 @@
         }
 
         if (forceArticleVocab) {
-          const artVocab = currentArticleData?.languages?.[targetLang]?.[currentLevel]?.vocab || [];
           flashcardDeck = artVocab.map(v => ({
             id: (v.target || "").toLowerCase().trim() + "_" + targetLang + "_" + supportLang,
             word: v.target,
