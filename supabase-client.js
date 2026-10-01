@@ -232,24 +232,26 @@ const LeenardoDB = {
       }
     });
 
-    const activeTarget = (typeof window !== "undefined" && window.targetLang) ? window.targetLang : "tr";
-    const activeSupport = (typeof window !== "undefined" && window.supportLang) ? window.supportLang : "en";
+    const mergeMetadata = (cw) => {
+      const existing = localMap.get((cw.word || "").toLowerCase().trim());
+      const res = { ...cw };
+      if (existing) {
+        if (existing.id) res.id = existing.id;
+        if (existing.fromLang !== undefined && existing.fromLang !== null) res.fromLang = existing.fromLang;
+        if (existing.toLang !== undefined && existing.toLang !== null) res.toLang = existing.toLang;
+        if (existing.root !== undefined && existing.root !== null) res.root = existing.root;
+        if (existing.rootTranslation !== undefined && existing.rootTranslation !== null) res.rootTranslation = existing.rootTranslation;
+        if (existing.contextSentence && !res.contextSentence) res.contextSentence = existing.contextSentence;
+      }
+      return res;
+    };
 
     if (!Array.isArray(localWords) || localWords.length === 0) {
-      // If local is empty, pull cloud words to local and attach active fallback languages
+      // If local is empty, pull cloud words to local without inventing language defaults
       const cloudWords = await this.getCloudWords(userId);
       if (cloudWords.length > 0) {
-        const enriched = cloudWords.map(cw => {
-          const existing = localMap.get((cw.word || "").toLowerCase().trim());
-          return {
-            ...cw,
-            fromLang: (existing && existing.fromLang) || cw.fromLang || activeTarget,
-            toLang: (existing && existing.toLang) || cw.toLang || activeSupport,
-            root: (existing && existing.root) || cw.root || "",
-            rootTranslation: (existing && existing.rootTranslation) || cw.rootTranslation || ""
-          };
-        });
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(enriched));
+        const merged = cloudWords.map(mergeMetadata);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
         if (typeof updateSavedWordBadges === "function") updateSavedWordBadges();
         if (typeof renderSavedWordsList === "function") renderSavedWordsList();
       }
@@ -263,19 +265,9 @@ const LeenardoDB = {
       }
     }
 
-    // Pull combined list from cloud and merge with rich local metadata
+    // Pull combined list from cloud and merge with existing local metadata
     const updatedCloudWords = await this.getCloudWords(userId);
-    const enriched = updatedCloudWords.map(cw => {
-      const existing = localMap.get((cw.word || "").toLowerCase().trim());
-      return {
-        ...cw,
-        id: (existing && existing.id) || cw.id,
-        fromLang: (existing && existing.fromLang) || cw.fromLang || activeTarget,
-        toLang: (existing && existing.toLang) || cw.toLang || activeSupport,
-        root: (existing && existing.root) || cw.root || "",
-        rootTranslation: (existing && existing.rootTranslation) || cw.rootTranslation || ""
-      };
-    });
+    const enriched = updatedCloudWords.map(mergeMetadata);
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(enriched));
 
