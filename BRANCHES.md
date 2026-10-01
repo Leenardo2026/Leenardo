@@ -8,7 +8,8 @@ This file tracks active and historical development branches across the Leenardo 
 
 | Branch | Owner / Collaborators | Start Date | Status | Description |
 | :--- | :--- | :--- | :--- | :--- |
-| `feature/supabase-article-architecture` | Sencan Yüksel & Antigravity | 2026-10-01 | Phase 2 (Dynamic Reader) | Migrate articles from static HTML/JSON files to dynamic Supabase database storage with clean URLs and SEO rendering so publishing new stories requires zero Netlify redeploys. |
+| `chore/supabase-heartbeat` | Sencan Yüksel | 2026-10-01 | Merged into main | Keep Supabase free-tier project from pausing via scheduled GitHub Actions curl ping to the articles endpoint. |
+| `feature/supabase-article-architecture` | Sencan Yüksel & Antigravity | 2026-10-01 | Phase 2: article.html reads from Supabase, static fallback | Migrate articles from static HTML/JSON files to dynamic Supabase database storage with clean URLs and SEO rendering so publishing new stories requires zero Netlify redeploys. |
 
 ---
 
@@ -17,6 +18,7 @@ This file tracks active and historical development branches across the Leenardo 
 | Branch | Base / Merged Into | Purpose / Scope |
 | :--- | :--- | :--- |
 | `main` | Production | Live production branch hosting the static deployment. |
+| `chore/supabase-heartbeat` | Merged into `main` | Supabase keep-alive cron ping workflow & pre-launch checklist. |
 | `feature/media-and-homepage-optimization` | Merged into `main` | Web-optimized image compression (~120KB), lightweight `articles-summary.js` homepage payload, and screenshot cleanup. |
 | `feature/multilingual-token-gloss-and-lab` | Merged into `main` | Deep contextual AI glosses for Spanish, Turkish, and German verb fallthrough tokens. |
 | `feature/cefr-calibration-and-disclaimers` | Merged into `main` | CEFR progression calibrations and automated linguistic validator pipeline. |
