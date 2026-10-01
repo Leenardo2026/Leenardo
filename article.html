@@ -21,14 +21,19 @@
   <meta name="twitter:description" content="Read authentic graded multilingual articles with interactive sentence translations, smart vocabulary flashcards, and native audio.">
   <meta name="twitter:image" content="https://leenardo.com/logo-1024.png">
 
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-  <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
-  <link rel="apple-touch-icon" sizes="192x192" href="logo-192.png">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="/favicon-64.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="/logo-192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="auth.css">
+  <link rel="stylesheet" href="/auth.css">
+
+  <!-- Supabase & Leenardo Auth Scripts (Single source of truth) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/supabase-client.js"></script>
+  <script src="/auth-ui.js"></script>
   <script>
     (function() {
       try {
@@ -2284,6 +2289,24 @@
         flex-direction: column;
       }
     }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(13, 27, 42, 0.1);
+      border-top-color: var(--primary, #3b82f6);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 1.25rem;
+    }
+    .article-loading-state, .article-not-found-state {
+      text-align: center;
+      padding: 4rem 1.5rem;
+      max-width: 520px;
+      margin: 0 auto;
+    }
   </style>
 </head>
 <body>
@@ -2292,7 +2315,7 @@
   <header class="top-header">
     <div class="top-header-inner">
       <div class="brand-group">
-        <a href="index.html" class="brand-title" onclick="goToHome(event)" aria-label="Leenardo">
+        <a href="/" class="brand-title" onclick="goToHome(event)" aria-label="Leenardo">
           <span class="brand-glyph-l" aria-hidden="true">
             <svg viewBox="290 210 445 600" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
@@ -2375,7 +2398,7 @@
           </svg>
           <span id="btn-top-share-text">Share</span>
         </button>
-        <a href="index.html" class="article-topic-selector-link" id="article-change-topic-link" onclick="goToHome(event)" title="Browse all stories">
+        <a href="/" class="article-topic-selector-link" id="article-change-topic-link" onclick="goToHome(event)" title="Browse all stories">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <line x1="19" y1="12" x2="5" y2="12"></line>
             <polyline points="12 19 5 12 12 5"></polyline>
@@ -2765,9 +2788,6 @@
 
   <!-- Toast Element -->
   <div class="toast" id="toast-msg"><span id="toast-text">Copied to clipboard</span></div>
-
-  <!-- External Data Source (CORS-free for file:// and HTTP) -->
-  <script src="articles-data.js"></script>
 
   <script>
     const SUPPORTED_LANGUAGES = ['tr', 'en', 'es', 'de', 'fr'];
@@ -3348,9 +3368,45 @@
       return tag;
     }
 
+    function escapeHtml(str) {
+      if (!str) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    /**
+     * Adapter: converts a Supabase public.articles row into the exact object shape
+     * expected by the reading engine, level switcher, flashcards, and quizzes.
+     */
+    function mapSupabaseArticleToClient(art) {
+      if (!art) return null;
+      return {
+        id: art.id || "",
+        topic: art.topic || "",
+        category: art.category || "",
+        categoryTranslations: art.categoryTranslations || art.category_translations || {},
+        titleTr: art.titleTr || art.title_tr || "",
+        titleEn: art.titleEn || art.title_en || "",
+        titleTranslations: art.titleTranslations || art.title_translations || {},
+        teaser: art.teaser || {},
+        teaserTranslations: art.teaserTranslations || art.teaser_translations || {},
+        visual: art.visual || {},
+        readTime: art.readTime || art.read_time || "3 min read",
+        languages: art.languages || {},
+        summary: art.summary || {},
+        status: art.status || "published",
+        hidden: Boolean(art.hidden)
+      };
+    }
+    const normalizeArticle = mapSupabaseArticleToClient;
+
     // Global State
-    const initialRawData = (typeof window !== "undefined") ? (window.ARTICLES_DATA || window.articlesDatabase) : null;
-    let articlesDatabase = Array.isArray(initialRawData) ? initialRawData : [];
+    let articlesDatabase = [];
+    let articleNotFound = false;
     let targetLang = "tr";
     let supportLang = "en";
     let currentArticleId = "";
@@ -3640,29 +3696,298 @@
     let flashcardLearnedCount = 0;
     let flashcardRepeatCount = 0;
 
-    async function loadArticlesData() {
+    const getSupabaseConfig = () => (typeof SUPABASE_CONFIG !== "undefined" ? SUPABASE_CONFIG : (window.SUPABASE_CONFIG || {
+      url: "https://vkddnvpqnccstcjnqfyq.supabase.co",
+      anonKey: "sb_publishable_wPeD9aYQWmnAJYf1pqDxvQ_PiPm-GC-"
+    }));
+
+    async function fetchArticleFromSupabase(articleId) {
+      if (!articleId) return null;
+      const config = getSupabaseConfig();
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000);
       try {
-        const jsonPath = window.location.pathname.includes("/articles/") ? "../articles.json" : "articles.json";
-        const resp = await fetch(jsonPath).catch(() => fetch("/articles.json")).catch(() => null);
-        if (resp && resp.ok) {
-          const freshData = await resp.json();
-          if (Array.isArray(freshData) && freshData.length > 0) {
-            articlesDatabase = freshData;
-            return;
+        const endpoint = `${config.url}/rest/v1/articles?id=eq.${encodeURIComponent(articleId)}&select=*`;
+        const resp = await fetch(endpoint, {
+          signal: controller.signal,
+          headers: {
+            "apikey": config.anonKey,
+            "Authorization": `Bearer ${config.anonKey}`
+          }
+        });
+        clearTimeout(timeoutId);
+        if (resp.ok) {
+          const rows = await resp.json();
+          if (Array.isArray(rows) && rows.length > 0) {
+            return mapSupabaseArticleToClient(rows[0]);
+          }
+          // Supabase responded 200 with 0 rows -> explicit not found
+          return { notFound: true, id: articleId };
+        }
+      } catch (err) {
+        clearTimeout(timeoutId);
+        console.warn("Could not fetch article from Supabase (timeout/network):", err);
+      }
+      return null; // Signals network failure / timeout
+    }
+
+    async function fetchCatalogueFromSupabase() {
+      const config = getSupabaseConfig();
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000);
+      try {
+        const endpoint = `${config.url}/rest/v1/articles?select=id,category,topic,visual,category_translations,title_translations,title_tr,title_en,read_time,summary,status,hidden&status=eq.published&hidden=eq.false&order=published_at.desc`;
+        const resp = await fetch(endpoint, {
+          signal: controller.signal,
+          headers: {
+            "apikey": config.anonKey,
+            "Authorization": `Bearer ${config.anonKey}`
+          }
+        });
+        clearTimeout(timeoutId);
+        if (resp.ok) {
+          const rows = await resp.json();
+          if (Array.isArray(rows) && rows.length > 0) {
+            return rows.map(mapSupabaseArticleToClient);
           }
         }
-      } catch (e) {
-        // Fallback to window.ARTICLES_DATA or window.articlesDatabase
+      } catch (err) {
+        clearTimeout(timeoutId);
+        console.warn("Could not fetch catalogue from Supabase:", err);
       }
-      if (!articlesDatabase || articlesDatabase.length === 0) {
-        const fallback = (typeof window !== "undefined") ? (window.ARTICLES_DATA || window.articlesDatabase) : null;
-        if (Array.isArray(fallback) && fallback.length > 0) {
-          articlesDatabase = fallback;
+      return [];
+    }
+
+    let staticFallbackPromise = null;
+    function lazyLoadStaticFallback() {
+      if (staticFallbackPromise) return staticFallbackPromise;
+      console.warn("[Leenardo] Supabase request failed or timed out. Falling back to local static data.");
+      staticFallbackPromise = new Promise((resolve) => {
+        if (typeof window !== "undefined" && window.ARTICLES_DATA && Array.isArray(window.ARTICLES_DATA) && window.ARTICLES_DATA.length > 0) {
+          resolve(window.ARTICLES_DATA.map(mapSupabaseArticleToClient));
+          return;
+        }
+
+        const scriptPath = "/articles-data.js";
+        const scriptElem = document.createElement("script");
+        scriptElem.src = scriptPath;
+        scriptElem.onload = () => {
+          const loaded = window.ARTICLES_DATA || [];
+          resolve(Array.isArray(loaded) ? loaded.map(mapSupabaseArticleToClient) : []);
+        };
+        scriptElem.onerror = async () => {
+          try {
+            const jsonPath = "/articles.json";
+            const resp = await fetch(jsonPath);
+            if (resp.ok) {
+              const freshData = await resp.json();
+              if (Array.isArray(freshData) && freshData.length > 0) {
+                resolve(freshData.map(mapSupabaseArticleToClient));
+                return;
+              }
+            }
+          } catch (e) {}
+          resolve([]);
+        };
+        document.head.appendChild(scriptElem);
+      });
+      return staticFallbackPromise;
+    }
+
+    function renderLoadingState() {
+      const mainTitle = document.getElementById("article-main-title");
+      if (mainTitle) mainTitle.textContent = "Loading Story...";
+      const subTitle = document.getElementById("article-support-title");
+      if (subTitle) subTitle.textContent = "";
+      const bodyContainer = document.getElementById("article-body-content");
+      if (bodyContainer) {
+        bodyContainer.innerHTML = "";
+        const box = document.createElement("div");
+        box.className = "article-loading-state";
+
+        const spinner = document.createElement("div");
+        spinner.className = "loading-spinner";
+        box.appendChild(spinner);
+
+        const p = document.createElement("p");
+        p.style.fontSize = "0.95rem";
+        p.style.color = "var(--text-muted)";
+        p.textContent = "Loading story...";
+        box.appendChild(p);
+
+        bodyContainer.appendChild(box);
+      }
+    }
+
+    function renderNotFoundState(requestedSlug) {
+      const mainTitle = document.getElementById("article-main-title");
+      if (mainTitle) mainTitle.textContent = "Story Not Found";
+      const subTitle = document.getElementById("article-support-title");
+      if (subTitle) subTitle.textContent = "";
+      const catBadge = document.getElementById("article-category-badge");
+      if (catBadge) catBadge.textContent = "404";
+      const readBadge = document.getElementById("article-read-badge");
+      if (readBadge) readBadge.style.display = "none";
+      const switcher = document.getElementById("same-topic-switcher");
+      if (switcher) switcher.style.display = "none";
+      const featBox = document.getElementById("featured-img-box");
+      if (featBox) featBox.style.display = "none";
+      const actionsBar = document.querySelector(".reading-actions-bar");
+      if (actionsBar) actionsBar.style.display = "none";
+
+      const bodyContainer = document.getElementById("article-body-content");
+      if (bodyContainer) {
+        bodyContainer.innerHTML = "";
+        const box = document.createElement("div");
+        box.className = "article-not-found-state";
+        
+        const icon = document.createElement("div");
+        icon.style.fontSize = "3rem";
+        icon.style.marginBottom = "1rem";
+        icon.textContent = "📖";
+        box.appendChild(icon);
+
+        const h2 = document.createElement("h2");
+        h2.style.fontSize = "1.35rem";
+        h2.style.fontWeight = "700";
+        h2.style.marginBottom = "0.75rem";
+        h2.style.color = "var(--ink-navy)";
+        h2.textContent = "Story Not Found";
+        box.appendChild(h2);
+
+        const p = document.createElement("p");
+        p.style.fontSize = "0.95rem";
+        p.style.color = "var(--text-muted)";
+        p.style.lineHeight = "1.6";
+        p.style.marginBottom = "1.75rem";
+        p.textContent = requestedSlug 
+          ? `We couldn't find a story matching "${requestedSlug}". It may have been removed or the link might be misspelled.`
+          : "The requested story could not be found.";
+        box.appendChild(p);
+
+        const homeBtn = document.createElement("a");
+        homeBtn.href = "/";
+        homeBtn.onclick = (e) => goToHome(e);
+        homeBtn.className = "btn-primary-action";
+        homeBtn.style.display = "inline-block";
+        homeBtn.style.textDecoration = "none";
+        homeBtn.style.padding = "0.75rem 1.75rem";
+        homeBtn.textContent = "Browse All Stories";
+        box.appendChild(homeBtn);
+
+        bodyContainer.appendChild(box);
+      }
+
+      // Hide secondary tools
+      const toolIds = ["vocab-list-container", "grammar-box", "qa-list-container", "quiz-box"];
+      toolIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el.parentElement) el.parentElement.style.display = "none";
+      });
+    }
+
+    async function loadArticlesData() {
+      // 1. Resolve requested article ID from clean pathname (/articles/:slug or /articles/:slug.html) or legacy query param (?id=...)
+      let pathArticleId = null;
+      const pathMatch = window.location.pathname.match(/\/articles\/([^\/\.]+)(?:\.html)?/);
+      if (pathMatch) {
+        pathArticleId = decodeURIComponent(pathMatch[1]);
+      }
+      const urlParams = new URLSearchParams(window.location.search);
+      const queryId = urlParams.get("id");
+      const targetId = pathArticleId || queryId;
+
+      let primaryArticle = null;
+      let supabaseSuccess = false;
+
+      // 2. Dynamic Fetch from Supabase (Primary live path)
+      if (window.location.protocol !== "file:") {
+        try {
+          if (targetId) {
+            primaryArticle = await fetchArticleFromSupabase(targetId);
+            if (primaryArticle && primaryArticle.notFound) {
+              articleNotFound = true;
+              currentArticleId = targetId;
+              return;
+            }
+          }
+
+          const remoteCatalogue = await fetchCatalogueFromSupabase();
+          if (remoteCatalogue && remoteCatalogue.length > 0) {
+            supabaseSuccess = true;
+            if (primaryArticle && !primaryArticle.notFound) {
+              currentArticleId = primaryArticle.id;
+              articlesDatabase = remoteCatalogue.map(a => a.id === primaryArticle.id ? primaryArticle : a);
+              if (!articlesDatabase.some(a => a.id === primaryArticle.id)) {
+                articlesDatabase.unshift(primaryArticle);
+              }
+            } else if (!targetId) {
+              // If no specific article requested, pick first with visual
+              articlesDatabase = remoteCatalogue;
+              const firstWithVisual = articlesDatabase.find(a => a && a.visual && a.visual.imageUrl && a.visual.imageUrl.trim() !== "" && !a.hidden);
+              const fallbackId = firstWithVisual ? firstWithVisual.id : (articlesDatabase[0] ? articlesDatabase[0].id : "");
+              if (fallbackId) {
+                primaryArticle = await fetchArticleFromSupabase(fallbackId);
+                if (primaryArticle && !primaryArticle.notFound) {
+                  currentArticleId = primaryArticle.id;
+                  articlesDatabase = articlesDatabase.map(a => a.id === primaryArticle.id ? primaryArticle : a);
+                }
+              }
+            }
+          } else if (primaryArticle && !primaryArticle.notFound) {
+            supabaseSuccess = true;
+            currentArticleId = primaryArticle.id;
+            articlesDatabase = [primaryArticle];
+          }
+        } catch (e) {
+          console.warn("Supabase fetch encountered error:", e);
+        }
+      }
+
+      // 3. Fallback to local static files if offline / file:// / Supabase failed or timed out
+      if (!supabaseSuccess || !articlesDatabase || articlesDatabase.length === 0 || !currentArticleId) {
+        const fallbackData = await lazyLoadStaticFallback();
+        if (Array.isArray(fallbackData) && fallbackData.length > 0) {
+          articlesDatabase = fallbackData;
+          if (targetId) {
+            const foundInStatic = articlesDatabase.find(a => a.id === targetId);
+            if (foundInStatic) {
+              currentArticleId = foundInStatic.id;
+              articleNotFound = false;
+            } else {
+              articleNotFound = true;
+              currentArticleId = targetId;
+            }
+          } else {
+            const firstWithVisual = articlesDatabase.find(a => a && a.visual && a.visual.imageUrl && a.visual.imageUrl.trim() !== "" && !a.hidden);
+            currentArticleId = firstWithVisual ? firstWithVisual.id : (articlesDatabase[0] ? articlesDatabase[0].id : "");
+          }
+        } else if (targetId) {
+          articleNotFound = true;
+          currentArticleId = targetId;
         }
       }
     }
 
     function initArticlePage() {
+      if (articleNotFound) {
+        renderNotFoundState(currentArticleId);
+        return;
+      }
+
+      // Restore component visibility
+      const switcher = document.getElementById("same-topic-switcher");
+      if (switcher) switcher.style.display = "";
+      const featBox = document.getElementById("featured-img-box");
+      if (featBox) featBox.style.display = "";
+      const actionsBar = document.querySelector(".reading-actions-bar");
+      if (actionsBar) actionsBar.style.display = "";
+      const toolIds = ["vocab-list-container", "grammar-box", "qa-list-container", "quiz-box"];
+      toolIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el.parentElement) el.parentElement.style.display = "";
+      });
+
       // 0. Fallback redirect from legacy query-param URL (/article.html?id=...)
       const urlParams = new URLSearchParams(window.location.search);
       const queryId = urlParams.get("id");
@@ -3670,11 +3995,11 @@
       if (queryId && isOldUrl && window.location.protocol !== "file:") {
         urlParams.delete("id");
         const qs = urlParams.toString() ? ("?" + urlParams.toString()) : "";
-        window.location.replace(`/articles/${encodeURIComponent(queryId)}.html${qs}`);
+        window.location.replace(`/articles/${encodeURIComponent(queryId)}${qs}`);
         return;
       }
 
-      // 1. Resolve State from Pathname (/articles/:id.html) or Query Param, then LocalStorage
+      // 1. Resolve State from Pathname (/articles/:id or /articles/:id.html) or Query Param, then LocalStorage
       let pathArticleId = null;
       const pathMatch = window.location.pathname.match(/\/articles\/([^\/\.]+)(?:\.html)?/);
       if (pathMatch) {
@@ -3687,7 +4012,7 @@
 
       if (paramId && articlesDatabase.some(a => a.id === paramId)) {
         currentArticleId = paramId;
-      } else {
+      } else if (!currentArticleId) {
         const firstWithVisual = articlesDatabase.find(a => a && a.visual && a.visual.imageUrl && a.visual.imageUrl.trim() !== "" && !a.hidden);
         currentArticleId = firstWithVisual ? firstWithVisual.id : (articlesDatabase[0] ? articlesDatabase[0].id : "");
       }
@@ -3716,6 +4041,10 @@
       if (targetLang === supportLang) {
         supportLang = targetLang === "en" ? "tr" : "en";
       }
+
+      // Expose globally for helper modules (e.g., supabase-client sync)
+      window.targetLang = targetLang;
+      window.supportLang = supportLang;
 
       if (paramLevel && SUPPORTED_LEVELS.includes(paramLevel)) {
         currentLevel = paramLevel;
@@ -3785,7 +4114,7 @@
       });
 
       // Browser back/forward (popstate) support across levels & articles
-      window.addEventListener("popstate", (e) => {
+      window.addEventListener("popstate", async (e) => {
         let pid = (e && e.state && e.state.id) || null;
         if (!pid) {
           const match = window.location.pathname.match(/\/articles\/([^\/\.]+)(?:\.html)?/);
@@ -3797,8 +4126,24 @@
         const ptar = (e && e.state && e.state.target) || params.get("target") || params.get("lang");
         const psup = (e && e.state && e.state.support) || params.get("support");
 
-        if (pid && articlesDatabase.some(a => a.id === pid)) {
+        if (pid) {
           currentArticleId = pid;
+          let art = articlesDatabase.find(a => a.id === pid);
+          const hasFullTokens = Boolean(
+            art &&
+            art.languages &&
+            art.languages[targetLang || 'tr'] &&
+            art.languages[targetLang || 'tr'][currentLevel || 'A1'] &&
+            Array.isArray(art.languages[targetLang || 'tr'][currentLevel || 'A1'].paragraphs)
+          );
+          if (!hasFullTokens) {
+            const fullArt = await fetchArticleFromSupabase(pid);
+            if (fullArt) {
+              const idx = articlesDatabase.findIndex(a => a.id === pid);
+              if (idx !== -1) articlesDatabase[idx] = fullArt;
+              else articlesDatabase.push(fullArt);
+            }
+          }
         }
         if (plvl && SUPPORTED_LEVELS.includes(plvl)) currentLevel = plvl;
         if (ptar && SUPPORTED_LANGUAGES.includes(ptar)) targetLang = ptar;
@@ -3825,7 +4170,8 @@
         if (window.history && window.location.protocol !== "file:") {
           const url = new URL(window.location.href);
           if (currentArticleId) {
-            url.pathname = `/articles/${encodeURIComponent(currentArticleId)}.html`;
+            const hasHtmlExt = window.location.pathname.endsWith(".html");
+            url.pathname = `/articles/${encodeURIComponent(currentArticleId)}${hasHtmlExt ? ".html" : ""}`;
           }
           url.searchParams.delete("id");
           url.searchParams.delete("lang");
@@ -3848,10 +4194,7 @@
     function goToHome(e) {
       if (e) e.preventDefault();
       const inArticles = window.location.pathname.includes("/articles/");
-      let homePath = inArticles ? "../index.html" : "index.html";
-      if (window.location.protocol !== "file:" && !inArticles) {
-        homePath = "/index.html";
-      }
+      const homePath = window.location.protocol === "file:" ? (inArticles ? "../index.html" : "index.html") : "/";
       window.location.href = `${homePath}?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
     }
 
@@ -3868,6 +4211,9 @@
         const supElem = document.getElementById("support-lang-select");
         if (supElem) supElem.value = supportLang;
       }
+
+      window.targetLang = targetLang;
+      window.supportLang = supportLang;
 
       stopSpeech();
       updateUrlState(true);
@@ -3889,6 +4235,9 @@
         if (tarElem) tarElem.value = targetLang;
       }
 
+      window.targetLang = targetLang;
+      window.supportLang = supportLang;
+
       stopSpeech();
       updateUrlState(true);
       applyUiTranslations();
@@ -3909,10 +4258,36 @@
       renderArticleContent();
     }
 
-    function navigateToArticle(newId) {
+    async function navigateToArticle(newId) {
       if (!newId || newId === currentArticleId) return;
       currentArticleId = newId;
       stopSpeech();
+
+      // Ensure full tokens are loaded for the target article
+      let art = articlesDatabase.find(a => a.id === newId);
+      const hasFullTokens = Boolean(
+        art &&
+        art.languages &&
+        art.languages[targetLang] &&
+        art.languages[targetLang][currentLevel] &&
+        Array.isArray(art.languages[targetLang][currentLevel].paragraphs) &&
+        art.languages[targetLang][currentLevel].paragraphs[0] &&
+        art.languages[targetLang][currentLevel].paragraphs[0][0] &&
+        Array.isArray(art.languages[targetLang][currentLevel].paragraphs[0][0].tokens)
+      );
+
+      if (!hasFullTokens) {
+        const fullArt = await fetchArticleFromSupabase(newId);
+        if (fullArt) {
+          const idx = articlesDatabase.findIndex(a => a.id === newId);
+          if (idx !== -1) {
+            articlesDatabase[idx] = fullArt;
+          } else {
+            articlesDatabase.push(fullArt);
+          }
+        }
+      }
+
       updateUrlState(true);
       renderArticleContent();
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -4203,8 +4578,11 @@
         return relPath;
       }
       let clean = relPath.startsWith("/") ? relPath.slice(1) : relPath;
-      const isInSubdir = window.location.pathname.includes("/articles/");
-      return (isInSubdir ? "../" : "") + clean;
+      if (window.location.protocol === "file:") {
+        const isInSubdir = window.location.pathname.includes("/articles/");
+        return (isInSubdir ? "../" : "") + clean;
+      }
+      return "/" + clean;
     }
 
     function renderArticleContent() {
@@ -4431,17 +4809,23 @@
         const catLabel = (art.categoryTranslations && art.categoryTranslations[supportLang]) || art.category;
 
         const targetLevelData = (art.languages && art.languages[targetLang] && art.languages[targetLang][currentLevel])
-                             || (art.languages && art.languages[targetLang] && art.languages[targetLang].A1);
+                             || (art.languages && art.languages[targetLang] && art.languages[targetLang].A1)
+                             || (art.summary && art.summary[targetLang] && art.summary[targetLang][currentLevel])
+                             || (art.summary && art.summary[targetLang] && art.summary[targetLang].A1);
         const primaryTitle = (targetLevelData && targetLevelData.title)
                           || (art.titleTranslations && art.titleTranslations[targetLang])
+                          || (targetLang === 'tr' ? art.titleTr : (targetLang === 'en' ? art.titleEn : ''))
                           || art.topic || "Article";
 
         let subTitle = "";
         if (supportLang !== targetLang) {
           const supportLevelData = (art.languages && art.languages[supportLang] && art.languages[supportLang][currentLevel])
-                                || (art.languages && art.languages[supportLang] && art.languages[supportLang].A1);
+                                || (art.languages && art.languages[supportLang] && art.languages[supportLang].A1)
+                                || (art.summary && art.summary[supportLang] && art.summary[supportLang][currentLevel])
+                                || (art.summary && art.summary[supportLang] && art.summary[supportLang].A1);
           subTitle = (supportLevelData && supportLevelData.title)
-                  || (art.titleTranslations && art.titleTranslations[supportLang]) || "";
+                  || (art.titleTranslations && art.titleTranslations[supportLang])
+                  || (supportLang === 'tr' ? art.titleTr : (supportLang === 'en' ? art.titleEn : '')) || "";
         }
 
         const rawImg = (art.visual && art.visual.imageUrl) || art.featuredImage;
@@ -4460,14 +4844,14 @@
           <div class="rec-card-body">
             <div>
               <div class="rec-card-meta">
-                <span class="rec-badge">${catLabel}</span>
+                <span class="rec-badge">${escapeHtml(catLabel)}</span>
                 ${recReadBadge}
               </div>
-              <h4 class="rec-card-title">${primaryTitle}</h4>
-              ${subTitle ? `<div class="rec-card-sub">${subTitle}</div>` : ""}
+              <h4 class="rec-card-title">${escapeHtml(primaryTitle)}</h4>
+              ${subTitle ? `<div class="rec-card-sub">${escapeHtml(subTitle)}</div>` : ""}
             </div>
             <div style="margin-top:auto; display:flex; justify-content:flex-end;">
-              <span class="rec-btn">${t.readNow || "Read Now"}</span>
+              <span class="rec-btn">${escapeHtml(t.readNow || "Read Now")}</span>
             </div>
           </div>
         `;
@@ -4519,7 +4903,7 @@
             if (cleanRoot && cleanRoot !== cleanWord) {
               const rTrans = (v.rootTranslations && (v.rootTranslations[supportLang] || v.rootTranslations.en)) || "";
               const label = t.rootLabel || "kök:";
-              rootHtml = `<div class="vocab-card-bottom"><span class="vocab-card-root">${label} <strong>${v.root}</strong>${rTrans ? ' (' + rTrans + ')' : ''}</span></div>`;
+              rootHtml = `<div class="vocab-card-bottom"><span class="vocab-card-root">${escapeHtml(label)} <strong>${escapeHtml(v.root)}</strong>${rTrans ? ' (' + escapeHtml(rTrans) + ')' : ''}</span></div>`;
             }
           }
 
@@ -4527,14 +4911,14 @@
             <div>
               <div class="vocab-card-top">
                 <div class="vocab-card-word-group">
-                  <span class="vocab-card-word">${v.target}</span>
+                  <span class="vocab-card-word">${escapeHtml(v.target)}</span>
                   <button class="popover-audio-btn" title="Pronounce" aria-label="Pronounce" onclick="event.stopPropagation(); speakSingleSentence('${escapeSingleQuotes(v.target)}', null)">${AUDIO_ICON_SVG}</button>
                 </div>
                 <button class="vocab-save-btn ${isSaved ? 'saved' : ''}" id="vsave-${wordStorageId}" onclick="event.stopPropagation(); toggleVocabCardSave('${escapeSingleQuotes(v.target)}', '${escapeSingleQuotes(trans)}', '${escapeSingleQuotes(v.root || '')}', this)">
-                  ${isSaved ? (t.savedWord || 'Saved') : (t.saveWord || 'Save')}
+                  ${isSaved ? escapeHtml(t.savedWord || 'Saved') : escapeHtml(t.saveWord || 'Save')}
                 </button>
               </div>
-              <div class="vocab-card-trans">${trans}</div>
+              <div class="vocab-card-trans">${escapeHtml(trans)}</div>
             </div>
             ${rootHtml}
           `;
@@ -4634,16 +5018,16 @@
       if (authenticSentence) {
         quoteHtml = `
           <div class="grammar-example-quote">
-            <div class="grammar-quote-label">${t.sentenceFromArticle || "Sentence from this article"} (${currentLevel})</div>
-            <div class="grammar-quote-text">"${authenticSentence}"</div>
-            ${authenticTranslation ? `<div style="font-size:0.88rem; color:var(--text-muted); margin-top:0.4rem; font-style:normal;">${authenticTranslation}</div>` : ""}
+            <div class="grammar-quote-label">${escapeHtml(t.sentenceFromArticle || "Sentence from this article")} (${currentLevel})</div>
+            <div class="grammar-quote-text">&ldquo;${escapeHtml(authenticSentence)}&rdquo;</div>
+            ${authenticTranslation ? `<div style="font-size:0.88rem; color:var(--text-muted); margin-top:0.4rem; font-style:normal;">${escapeHtml(authenticTranslation)}</div>` : ""}
           </div>
         `;
       }
 
       grammarBox.innerHTML = `
         ${tagsHtml}
-        <div style="font-size:0.95rem; color:var(--ink-navy); line-height:1.6;">${desc}</div>
+        <div style="font-size:0.95rem; color:var(--ink-navy); line-height:1.6;">${escapeHtml(desc)}</div>
         ${quoteHtml}
       `;
     }
@@ -4658,7 +5042,7 @@
       const qaList = (targetData && Array.isArray(targetData.qa)) ? targetData.qa : [];
 
       if (titleElem) {
-        titleElem.innerHTML = `<span>${t.toolQaTitle || "Comprehension & Discussion"}</span> <span style="font-size:0.75rem; font-weight:600; color:var(--text-muted); margin-left:0.4rem;">(${qaList.length})</span>`;
+        titleElem.innerHTML = `<span>${escapeHtml(t.toolQaTitle || "Comprehension & Discussion")}</span> <span style="font-size:0.75rem; font-weight:600; color:var(--text-muted); margin-left:0.4rem;">(${qaList.length})</span>`;
       }
 
       if (qaList.length > 0) {
@@ -4677,12 +5061,12 @@
 
           qaBox.innerHTML = `
             <div class="qa-question-bar" role="button" tabindex="0" aria-expanded="false" id="qa-bar-${qIdx}" onclick="toggleQA(${qIdx})" onkeydown="handleQAKey(event, ${qIdx})">
-              <span><strong>Q${qIdx + 1}:</strong> ${qText}</span>
+              <span><strong>Q${qIdx + 1}:</strong> ${escapeHtml(qText)}</span>
               <span class="qa-chevron" id="qa-chev-${qIdx}">▼</span>
             </div>
             <div class="qa-answer-box" id="ans-${qIdx}" style="display:none;">
               <div class="qa-answer-label">Answer:</div>
-              <div>${aText}</div>
+              <div>${escapeHtml(aText)}</div>
             </div>
           `;
 
@@ -4738,11 +5122,11 @@
         qObj.options.forEach((optText, optIdx) => {
           const isCorrect = (optIdx === qObj.answerIndex);
           const letter = letters[optIdx] || (optIdx + 1);
-          optionsHtml += `<button class="quiz-opt-btn" data-correct="${isCorrect}" onclick="checkQuizAnswer(this, ${isCorrect}, '${escapeSingleQuotes(qObj.explanation || '')}')"><span style="font-weight:700; margin-right:0.4rem; color:var(--primary);">${letter})</span> ${optText}</button>`;
+          optionsHtml += `<button class="quiz-opt-btn" data-correct="${isCorrect}" onclick="checkQuizAnswer(this, ${isCorrect}, '${escapeSingleQuotes(qObj.explanation || '')}')"><span style="font-weight:700; margin-right:0.4rem; color:var(--primary);">${letter})</span> ${escapeHtml(optText)}</button>`;
         });
 
         container.innerHTML = `
-          <div class="quiz-q-title" style="font-size:1.05rem; font-weight:700; color:var(--slate-900); margin-bottom:1rem;">${qObj.question}</div>
+          <div class="quiz-q-title" style="font-size:1.05rem; font-weight:700; color:var(--slate-900); margin-bottom:1rem;">${escapeHtml(qObj.question)}</div>
           <div class="quiz-options-list">${optionsHtml}</div>
           <div id="quiz-feedback-box"></div>
         `;
@@ -4769,7 +5153,7 @@
         fb.innerHTML = `
           <div class="quiz-explanation-box correct">
             <strong>✓ ${t.quizCorrect || "Correct!"}</strong>
-            ${explanation ? `<div style="margin-top:0.35rem;">${explanation}</div>` : ""}
+            ${explanation ? `<div style="margin-top:0.35rem;">${escapeHtml(explanation)}</div>` : ""}
           </div>
         `;
       } else {
@@ -4777,7 +5161,7 @@
         fb.innerHTML = `
           <div class="quiz-explanation-box incorrect">
             <strong>✗ ${t.quizIncorrect || "Not quite."}</strong>
-            ${explanation ? `<div style="margin-top:0.35rem;">${explanation}</div>` : ""}
+            ${explanation ? `<div style="margin-top:0.35rem;">${escapeHtml(explanation)}</div>` : ""}
           </div>
         `;
       }
@@ -7103,6 +7487,9 @@
     }
 
     function saveWordItem(item) {
+      if (!item) return;
+      if (!item.fromLang) item.fromLang = targetLang;
+      if (!item.toLang) item.toLang = supportLang;
       const words = getSavedWords();
       const existingIdx = words.findIndex(w => w.id === item.id);
       if (existingIdx >= 0) {
@@ -7259,8 +7646,10 @@
 
       let html = "";
       words.forEach(w => {
-        const fromName = langNames[w.fromLang] || w.fromLang;
-        const toName = langNames[w.toLang] || w.toLang;
+        const fromCode = w.fromLang || targetLang;
+        const toCode = w.toLang || supportLang;
+        const fromName = langNames[fromCode] || fromCode || "—";
+        const toName = langNames[toCode] || toCode || "—";
         html += `
           <div class="vn-word-item">
             <div>
@@ -7282,13 +7671,18 @@
     /* Flashcards Engine */
     function initFlashcards(initialWordId = null, forceArticleVocab = false) {
       let words = getSavedWords();
-      const currentPairWords = words.filter(w => w.fromLang === targetLang && w.toLang === supportLang);
+      const currentPairWords = words.filter(w => {
+        const f = w.fromLang || targetLang;
+        const t = w.toLang || supportLang;
+        return f === targetLang && t === supportLang;
+      });
       const area = document.getElementById("fc-interactive-area");
       const t = uiTranslations[supportLang] || uiTranslations.en;
 
       if (forceArticleVocab || currentPairWords.length === 0) {
+        const curArt = getCurrentArticleObject();
+        const artVocab = curArt?.languages?.[targetLang]?.[currentLevel]?.vocab || [];
         if (!forceArticleVocab && currentPairWords.length === 0) {
-          const artVocab = currentArticleData?.languages?.[targetLang]?.[currentLevel]?.vocab || [];
           if (artVocab.length > 0) {
             area.innerHTML = `
               <div style="text-align:center; padding:2rem 1rem; color:var(--text-muted);">
@@ -7312,7 +7706,6 @@
         }
 
         if (forceArticleVocab) {
-          const artVocab = currentArticleData?.languages?.[targetLang]?.[currentLevel]?.vocab || [];
           flashcardDeck = artVocab.map(v => ({
             id: (v.target || "").toLowerCase().trim() + "_" + targetLang + "_" + supportLang,
             word: v.target,
@@ -7360,8 +7753,10 @@
       }
 
       const card = flashcardDeck[currentFlashcardIndex];
-      const fromName = langNames[card.fromLang] || card.fromLang;
-      const toName = langNames[card.toLang] || card.toLang;
+      const fromCode = card.fromLang || targetLang;
+      const toCode = card.toLang || supportLang;
+      const fromName = langNames[fromCode] || fromCode || "—";
+      const toName = langNames[toCode] || toCode || "—";
 
       area.innerHTML = `
         <div style="display:flex; justify-content:space-between; align-items:center; max-width:440px; margin:0 auto 0.5rem; font-size:0.8rem; color:var(--slate-500); font-weight:700;">
@@ -7583,8 +7978,13 @@
     }
 
     async function start() {
+      renderLoadingState();
       await loadArticlesData();
-      initArticlePage();
+      if (articleNotFound) {
+        renderNotFoundState(currentArticleId);
+      } else {
+        initArticlePage();
+      }
     }
 
     if (document.readyState === "loading") {
@@ -7601,9 +8001,5 @@
       }
     }
   </script>
-  <!-- Supabase & Leenardo Auth Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-client.js"></script>
-  <script src="auth-ui.js"></script>
 </body>
 </html>

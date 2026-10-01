@@ -7,6 +7,7 @@ const SUPABASE_CONFIG = {
   url: "https://vkddnvpqnccstcjnqfyq.supabase.co",
   anonKey: "sb_publishable_wPeD9aYQWmnAJYf1pqDxvQ_PiPm-GC-"
 };
+window.SUPABASE_CONFIG = SUPABASE_CONFIG;
 
 // Initialize the Supabase Client if library is available
 let supabaseClient = null;
@@ -223,11 +224,34 @@ const LeenardoDB = {
       localWords = [];
     }
 
+    // Index existing local words to preserve rich client metadata (fromLang, toLang, root, rootTranslation)
+    const localMap = new Map();
+    localWords.forEach(w => {
+      if (w && w.word) {
+        localMap.set(w.word.toLowerCase().trim(), w);
+      }
+    });
+
+    const mergeMetadata = (cw) => {
+      const existing = localMap.get((cw.word || "").toLowerCase().trim());
+      const res = { ...cw };
+      if (existing) {
+        if (existing.id) res.id = existing.id;
+        if (existing.fromLang !== undefined && existing.fromLang !== null) res.fromLang = existing.fromLang;
+        if (existing.toLang !== undefined && existing.toLang !== null) res.toLang = existing.toLang;
+        if (existing.root !== undefined && existing.root !== null) res.root = existing.root;
+        if (existing.rootTranslation !== undefined && existing.rootTranslation !== null) res.rootTranslation = existing.rootTranslation;
+        if (existing.contextSentence && !res.contextSentence) res.contextSentence = existing.contextSentence;
+      }
+      return res;
+    };
+
     if (!Array.isArray(localWords) || localWords.length === 0) {
-      // If local is empty, pull cloud words to local
+      // If local is empty, pull cloud words to local without inventing language defaults
       const cloudWords = await this.getCloudWords(userId);
       if (cloudWords.length > 0) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(cloudWords));
+        const merged = cloudWords.map(mergeMetadata);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
         if (typeof updateSavedWordBadges === "function") updateSavedWordBadges();
         if (typeof renderSavedWordsList === "function") renderSavedWordsList();
       }
@@ -241,13 +265,15 @@ const LeenardoDB = {
       }
     }
 
-    // Pull combined list from cloud
+    // Pull combined list from cloud and merge with existing local metadata
     const updatedCloudWords = await this.getCloudWords(userId);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedCloudWords));
+    const enriched = updatedCloudWords.map(mergeMetadata);
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(enriched));
 
     if (typeof updateSavedWordBadges === "function") updateSavedWordBadges();
     if (typeof renderSavedWordsList === "function") renderSavedWordsList();
-    console.log(`✅ Synced ${updatedCloudWords.length} words with cloud.`);
+    console.log(`✅ Synced ${enriched.length} words with cloud.`);
   }
 };
 
