@@ -7548,11 +7548,24 @@
       // Remove from Supabase cloud if user is authenticated
       const authUser = getActiveAuthUser();
       if (typeof LeenardoDB !== "undefined" && authUser && targetWord.word) {
-        const res = await LeenardoDB.removeWordFromCloud(authUser.id, targetWord.word);
-        if (!res || !res.success || res.count < 1) {
+        try {
+          const res = await LeenardoDB.removeWordFromCloud(authUser.id, targetWord.word);
+          if (!res || res.error) {
+            const t = (typeof uiTranslations !== "undefined" && uiTranslations[supportLang]) || (typeof uiTranslations !== "undefined" && uiTranslations.en) || {};
+            const errMsg = t.deleteError || "Could not delete word from cloud. Please try again.";
+            console.error("Error deleting word from cloud:", { id, word: targetWord.word, res });
+            if (typeof showToast === "function") {
+              showToast(errMsg);
+            }
+            return false;
+          }
+          if (res.count === 0) {
+            console.info("Word was not present in cloud (local-only row); removing locally:", { id, word: targetWord.word });
+          }
+        } catch (err) {
           const t = (typeof uiTranslations !== "undefined" && uiTranslations[supportLang]) || (typeof uiTranslations !== "undefined" && uiTranslations.en) || {};
           const errMsg = t.deleteError || "Could not delete word from cloud. Please try again.";
-          console.error("Delete unconfirmed (0 rows affected or error):", { id, word: targetWord.word, res });
+          console.error("Exception in removeWordFromCloud:", { id, word: targetWord.word, err });
           if (typeof showToast === "function") {
             showToast(errMsg);
           }
