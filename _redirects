@@ -2,6 +2,17 @@
 # Leenardo Netlify Redirects & Route Rewrites
 # ==============================================================================
 
+# ------------------------------------------------------------------------------
+# Security: Block internal docs, scripts, workflows, and tools from public serving
+# ------------------------------------------------------------------------------
+/*.md               /404.html  404!
+/docs/*             /404.html  404!
+/.github/*          /404.html  404!
+/scripts/*          /404.html  404!
+/supabase/*         /404.html  404!
+/*.py               /404.html  404!
+/*.sh               /404.html  404!
+
 # 301 Permanent Redirects from legacy query-param URLs (/article.html?id=...)
 # to distinct article URLs (/articles/:id.html), preserving user preferences
 /article.html  id=:id  target=:target  support=:support  level=:level  /articles/:id.html?target=:target&support=:support&level=:level  301!
