@@ -224,11 +224,32 @@ const LeenardoDB = {
       localWords = [];
     }
 
+    // Index existing local words to preserve rich client metadata (fromLang, toLang, root, rootTranslation)
+    const localMap = new Map();
+    localWords.forEach(w => {
+      if (w && w.word) {
+        localMap.set(w.word.toLowerCase().trim(), w);
+      }
+    });
+
+    const activeTarget = (typeof window !== "undefined" && window.targetLang) ? window.targetLang : "tr";
+    const activeSupport = (typeof window !== "undefined" && window.supportLang) ? window.supportLang : "en";
+
     if (!Array.isArray(localWords) || localWords.length === 0) {
-      // If local is empty, pull cloud words to local
+      // If local is empty, pull cloud words to local and attach active fallback languages
       const cloudWords = await this.getCloudWords(userId);
       if (cloudWords.length > 0) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(cloudWords));
+        const enriched = cloudWords.map(cw => {
+          const existing = localMap.get((cw.word || "").toLowerCase().trim());
+          return {
+            ...cw,
+            fromLang: (existing && existing.fromLang) || cw.fromLang || activeTarget,
+            toLang: (existing && existing.toLang) || cw.toLang || activeSupport,
+            root: (existing && existing.root) || cw.root || "",
+            rootTranslation: (existing && existing.rootTranslation) || cw.rootTranslation || ""
+          };
+        });
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(enriched));
         if (typeof updateSavedWordBadges === "function") updateSavedWordBadges();
         if (typeof renderSavedWordsList === "function") renderSavedWordsList();
       }
@@ -242,13 +263,25 @@ const LeenardoDB = {
       }
     }
 
-    // Pull combined list from cloud
+    // Pull combined list from cloud and merge with rich local metadata
     const updatedCloudWords = await this.getCloudWords(userId);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedCloudWords));
+    const enriched = updatedCloudWords.map(cw => {
+      const existing = localMap.get((cw.word || "").toLowerCase().trim());
+      return {
+        ...cw,
+        id: (existing && existing.id) || cw.id,
+        fromLang: (existing && existing.fromLang) || cw.fromLang || activeTarget,
+        toLang: (existing && existing.toLang) || cw.toLang || activeSupport,
+        root: (existing && existing.root) || cw.root || "",
+        rootTranslation: (existing && existing.rootTranslation) || cw.rootTranslation || ""
+      };
+    });
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(enriched));
 
     if (typeof updateSavedWordBadges === "function") updateSavedWordBadges();
     if (typeof renderSavedWordsList === "function") renderSavedWordsList();
-    console.log(`✅ Synced ${updatedCloudWords.length} words with cloud.`);
+    console.log(`✅ Synced ${enriched.length} words with cloud.`);
   }
 };
 

@@ -4037,10 +4037,18 @@
         }
       }
 
-      // Enforce targetLang !== supportLang
+      // Enforce targetLang !== supportLang without clobbering native support language
       if (targetLang === supportLang) {
-        supportLang = targetLang === "en" ? "tr" : "en";
+        if (paramTarget && !paramSupport) {
+          supportLang = targetLang === "en" ? "tr" : "en";
+        } else {
+          targetLang = supportLang === "tr" ? "es" : "tr";
+        }
       }
+
+      // Expose globally for helper modules (e.g., supabase-client sync)
+      window.targetLang = targetLang;
+      window.supportLang = supportLang;
 
       if (paramLevel && SUPPORTED_LEVELS.includes(paramLevel)) {
         currentLevel = paramLevel;
@@ -4208,6 +4216,9 @@
         if (supElem) supElem.value = supportLang;
       }
 
+      window.targetLang = targetLang;
+      window.supportLang = supportLang;
+
       stopSpeech();
       updateUrlState(true);
       applyUiTranslations();
@@ -4227,6 +4238,9 @@
         const tarElem = document.getElementById("target-lang-select");
         if (tarElem) tarElem.value = targetLang;
       }
+
+      window.targetLang = targetLang;
+      window.supportLang = supportLang;
 
       stopSpeech();
       updateUrlState(true);
@@ -7477,6 +7491,9 @@
     }
 
     function saveWordItem(item) {
+      if (!item) return;
+      if (!item.fromLang) item.fromLang = targetLang;
+      if (!item.toLang) item.toLang = supportLang;
       const words = getSavedWords();
       const existingIdx = words.findIndex(w => w.id === item.id);
       if (existingIdx >= 0) {
@@ -7633,8 +7650,10 @@
 
       let html = "";
       words.forEach(w => {
-        const fromName = langNames[w.fromLang] || w.fromLang;
-        const toName = langNames[w.toLang] || w.toLang;
+        const fromCode = w.fromLang || targetLang;
+        const toCode = w.toLang || supportLang;
+        const fromName = langNames[fromCode] || fromCode || "—";
+        const toName = langNames[toCode] || toCode || "—";
         html += `
           <div class="vn-word-item">
             <div>
@@ -7656,7 +7675,11 @@
     /* Flashcards Engine */
     function initFlashcards(initialWordId = null, forceArticleVocab = false) {
       let words = getSavedWords();
-      const currentPairWords = words.filter(w => w.fromLang === targetLang && w.toLang === supportLang);
+      const currentPairWords = words.filter(w => {
+        const f = w.fromLang || targetLang;
+        const t = w.toLang || supportLang;
+        return f === targetLang && t === supportLang;
+      });
       const area = document.getElementById("fc-interactive-area");
       const t = uiTranslations[supportLang] || uiTranslations.en;
 
@@ -7734,8 +7757,10 @@
       }
 
       const card = flashcardDeck[currentFlashcardIndex];
-      const fromName = langNames[card.fromLang] || card.fromLang;
-      const toName = langNames[card.toLang] || card.toLang;
+      const fromCode = card.fromLang || targetLang;
+      const toCode = card.toLang || supportLang;
+      const fromName = langNames[fromCode] || fromCode || "—";
+      const toName = langNames[toCode] || toCode || "—";
 
       area.innerHTML = `
         <div style="display:flex; justify-content:space-between; align-items:center; max-width:440px; margin:0 auto 0.5rem; font-size:0.8rem; color:var(--slate-500); font-weight:700;">
