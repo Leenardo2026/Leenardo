@@ -9,7 +9,8 @@ This file tracks active and historical development branches across the Leenardo 
 | Branch | Owner / Collaborators | Start Date | Status | Description |
 | :--- | :--- | :--- | :--- | :--- |
 | `chore/supabase-heartbeat` | Sencan Yüksel | 2026-10-01 | Merged into main | Keep Supabase free-tier project from pausing via scheduled GitHub Actions curl ping to the articles endpoint. |
-| `feature/supabase-article-architecture` | Sencan Yüksel & Antigravity | 2026-10-01 | Phase 2: article.html reads from Supabase, static fallback | Migrate articles from static HTML/JSON files to dynamic Supabase database storage with clean URLs and SEO rendering so publishing new stories requires zero Netlify redeploys. |
+| `feature/supabase-article-architecture` | Sencan Yüksel & Antigravity | 2026-10-01 | Merged into main | Migrate articles from static HTML/JSON files to dynamic Supabase database storage with clean URLs and SEO rendering so publishing new stories requires zero Netlify redeploys. |
+| `fix/saved-words-delete-and-tabs` | Sencan Yüksel & Antigravity | 2026-10-02 | Active | Fix saved-words delete sync bug (confirm deletion in Supabase before UI removal) and fix notebook modal tabs overlapping/nested layout. |
 
 ---
 

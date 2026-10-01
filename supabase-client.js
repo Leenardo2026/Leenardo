@@ -24,6 +24,9 @@ if (window.supabase && typeof window.supabase.createClient === "function") {
 
 // Global state
 let currentAuthUser = null;
+if (typeof window !== "undefined") {
+  window.currentAuthUser = null;
+}
 
 // User state listeners
 const authStateListeners = [];
@@ -38,6 +41,9 @@ function onAuthStateChange(listener) {
 
 function notifyAuthStateListeners(user) {
   currentAuthUser = user;
+  if (typeof window !== "undefined") {
+    window.currentAuthUser = user;
+  }
   authStateListeners.forEach(fn => {
     try { fn(user); } catch (e) { console.error("Auth listener error:", e); }
   });
@@ -46,13 +52,23 @@ function notifyAuthStateListeners(user) {
 // Authentication API
 const LeenardoAuth = {
   /**
-   * Get current authenticated user
+   * Get current authenticated user (synchronous)
+   */
+  getCurrentUser() {
+    return currentAuthUser || (typeof window !== "undefined" ? window.currentAuthUser : null);
+  },
+
+  /**
+   * Get current authenticated user (asynchronous check against session)
    */
   async getUser() {
     if (!supabaseClient) return null;
     try {
       const { data: { session } } = await supabaseClient.auth.getSession();
       currentAuthUser = session ? session.user : null;
+      if (typeof window !== "undefined") {
+        window.currentAuthUser = currentAuthUser;
+      }
       return currentAuthUser;
     } catch (e) {
       console.error("Error getting session:", e);
@@ -191,22 +207,44 @@ const LeenardoDB = {
    * Delete a word from Supabase
    */
   async removeWordFromCloud(userId, wordText) {
-    if (!supabaseClient || !userId || !wordText) return false;
+    if (!supabaseClient || !userId || !wordText) {
+      console.warn("removeWordFromCloud: Missing required parameters", { userId, wordText });
+      return { success: false, count: 0, error: "Missing required parameters" };
+    }
     try {
-      const { error } = await supabaseClient
+      const cleanWord = wordText.trim();
+      const { data, error, count } = await supabaseClient
         .from("saved_words")
-        .delete()
+        .delete({ count: "exact" })
         .eq("user_id", userId)
-        .eq("word", wordText.trim());
+        .eq("word", cleanWord)
+        .select();
+
+      const affected = (data && Array.isArray(data)) ? data.length : (count || 0);
+
+      console.log("Supabase delete response:", {
+        word: cleanWord,
+        userId: userId,
+        data: data,
+        count: count,
+        affected: affected,
+        error: error
+      });
 
       if (error) {
         console.error("Error deleting word from Supabase:", error);
-        return false;
+        return { success: false, count: 0, error };
       }
-      return true;
+
+      return {
+        success: affected >= 1,
+        count: affected,
+        data: data,
+        error: null
+      };
     } catch (e) {
       console.error("Exception in removeWordFromCloud:", e);
-      return false;
+      return { success: false, count: 0, error: e };
     }
   },
 
