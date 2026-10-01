@@ -11,6 +11,8 @@ This file tracks active and historical development branches across the Leenardo 
 | `chore/supabase-heartbeat` | Sencan Yüksel | 2026-10-01 | In Progress | Keep Supabase free-tier project from pausing via scheduled GitHub Actions curl ping to the articles endpoint. |
 | `feature/supabase-article-architecture` | Sencan Yüksel & Antigravity | 2026-10-01 | Phase 2 (Dynamic Reader) | Migrate articles from static HTML/JSON files to dynamic Supabase database storage with clean URLs and SEO rendering so publishing new stories requires zero Netlify redeploys. |
 
+> **Merge Note:** `BRANCHES.md` was created independently on both `chore/supabase-heartbeat` and `feature/supabase-article-architecture` before merging to `main`. When `feature/supabase-article-architecture` is later merged into `main`, expect an add/add conflict on `BRANCHES.md` — resolve by keeping all entries from both versions.
+
 ---
 
 ## Reference & Archived Branches
