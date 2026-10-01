@@ -382,3 +382,13 @@
   border: 1px solid var(--auth-hairline);
   display: block;
 }
+
+/* Vocabulary Notebook & Flashcards Tab Panels */
+.vn-tab-panel {
+  display: none !important;
+}
+
+.vn-tab-panel.active {
+  display: block !important;
+}
+

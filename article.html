@@ -2070,6 +2070,14 @@
       box-shadow: 0 4px 12px var(--brand-coral-glow);
     }
 
+    .vn-tab-panel {
+      display: none;
+    }
+
+    .vn-tab-panel.active {
+      display: block;
+    }
+
     /* Flashcards 3D Interactive Stage */
     .fc-stage {
       perspective: 1000px;
@@ -2909,7 +2917,8 @@
         reportCancelBtn: "Vazgeç",
         reportSubmitBtn: "Raporu Gönder",
         reportSuccessToast: "Geri bildiriminiz için teşekkürler! İletildi. ✓",
-        reportSelectCategoryPrompt: "Lütfen en az bir hata kategorisi seçin."
+        reportSelectCategoryPrompt: "Lütfen en az bir hata kategorisi seçin.",
+        deleteError: "Kelime buluttan silinemedi. Lütfen tekrar deneyin."
       },
       en: {
         backHome: "Library",
@@ -2994,7 +3003,8 @@
         reportCancelBtn: "Cancel",
         reportSubmitBtn: "Submit Report",
         reportSuccessToast: "Thank you for your feedback! Submitted. ✓",
-        reportSelectCategoryPrompt: "Please select an issue category."
+        reportSelectCategoryPrompt: "Please select an issue category.",
+        deleteError: "Could not delete word from cloud. Please try again."
       },
       es: {
         backHome: "Biblioteca",
@@ -3079,7 +3089,8 @@
         reportCancelBtn: "Cancelar",
         reportSubmitBtn: "Enviar reporte",
         reportSuccessToast: "¡Gracias por tus comentarios! Enviado. ✓",
-        reportSelectCategoryPrompt: "Por favor, selecciona una categoría de problema."
+        reportSelectCategoryPrompt: "Por favor, selecciona una categoría de problema.",
+        deleteError: "No se pudo eliminar la palabra de la nube. Inténtalo de nuevo."
       },
       de: {
         backHome: "Bibliothek",
@@ -3164,7 +3175,8 @@
         reportCancelBtn: "Abbrechen",
         reportSubmitBtn: "Bericht senden",
         reportSuccessToast: "Vielen Dank für Ihr Feedback! Gesendet. ✓",
-        reportSelectCategoryPrompt: "Bitte wählen Sie eine Kategorie aus."
+        reportSelectCategoryPrompt: "Bitte wählen Sie eine Kategorie aus.",
+        deleteError: "Wort konnte nicht aus der Cloud gelöscht werden. Bitte erneut versuchen."
       },
       fr: {
         backHome: "Bibliothèque",
@@ -3249,7 +3261,8 @@
         reportCancelBtn: "Annuler",
         reportSubmitBtn: "Envoyer le signalement",
         reportSuccessToast: "Merci pour votre retour ! Envoyé. ✓",
-        reportSelectCategoryPrompt: "Veuillez sélectionner une catégorie de problème."
+        reportSelectCategoryPrompt: "Veuillez sélectionner une catégorie de problème.",
+        deleteError: "Impossible de supprimer le mot du cloud. Veuillez réessayer."
       }
     };
 
@@ -4931,14 +4944,16 @@
       }
     }
 
-    function toggleVocabCardSave(word, translation, root, btnElem) {
+    async function toggleVocabCardSave(word, translation, root, btnElem) {
       const t = uiTranslations[supportLang] || uiTranslations.en;
       const cleanWord = word.replace(/[^\p{L}\p{M}\p{N}'-]/gu, '').trim();
       const storageId = cleanWord.toLowerCase() + "_" + targetLang + "_" + supportLang;
       if (isWordSaved(storageId)) {
-        removeSavedWord(storageId);
-        btnElem.classList.remove("saved");
-        btnElem.textContent = t.saveWord || "Save";
+        const removed = await removeSavedWord(storageId);
+        if (removed !== false) {
+          btnElem.classList.remove("saved");
+          btnElem.textContent = t.saveWord || "Save";
+        }
       } else {
         const item = {
           id: storageId,
@@ -7486,6 +7501,22 @@
       }
     }
 
+    let pageAuthUser = null;
+    if (typeof onAuthStateChange === "function") {
+      onAuthStateChange(user => {
+        pageAuthUser = user;
+      });
+    }
+
+    function getActiveAuthUser() {
+      if (pageAuthUser) return pageAuthUser;
+      if (typeof window !== "undefined" && window.currentAuthUser) return window.currentAuthUser;
+      if (typeof LeenardoAuth !== "undefined" && typeof LeenardoAuth.getCurrentUser === "function") {
+        return LeenardoAuth.getCurrentUser();
+      }
+      return null;
+    }
+
     function saveWordItem(item) {
       if (!item) return;
       if (!item.fromLang) item.fromLang = targetLang;
@@ -7501,30 +7532,57 @@
       updateSavedWordBadges();
 
       // Sync to Supabase cloud if user is authenticated
-      if (typeof LeenardoDB !== "undefined" && typeof currentAuthUser !== "undefined" && currentAuthUser) {
-        LeenardoDB.saveWordToCloud(currentAuthUser.id, item).catch(err => {
+      const authUser = getActiveAuthUser();
+      if (typeof LeenardoDB !== "undefined" && authUser) {
+        LeenardoDB.saveWordToCloud(authUser.id, item).catch(err => {
           console.warn("Cloud save warning:", err);
         });
       }
     }
 
-    function removeSavedWord(id) {
-      const targetWord = getSavedWords().find(w => w.id === id);
-      const words = getSavedWords().filter(w => w.id !== id);
-      localStorage.setItem(SAVED_WORDS_STORAGE_KEY, JSON.stringify(words));
-      updateSavedWordBadges();
-      renderSavedWordsList();
+    async function removeSavedWord(id) {
+      const words = getSavedWords();
+      const targetWord = words.find(w => w.id === id || (w.word && w.word.toLowerCase().trim() === String(id).toLowerCase().trim()));
+      if (!targetWord) return false;
 
       // Remove from Supabase cloud if user is authenticated
-      if (typeof LeenardoDB !== "undefined" && typeof currentAuthUser !== "undefined" && currentAuthUser && targetWord) {
-        LeenardoDB.removeWordFromCloud(currentAuthUser.id, targetWord.word).catch(err => {
-          console.warn("Cloud remove warning:", err);
-        });
+      const authUser = getActiveAuthUser();
+      if (typeof LeenardoDB !== "undefined" && authUser && targetWord.word) {
+        try {
+          const res = await LeenardoDB.removeWordFromCloud(authUser.id, targetWord.word);
+          if (!res || res.error) {
+            const t = (typeof uiTranslations !== "undefined" && uiTranslations[supportLang]) || (typeof uiTranslations !== "undefined" && uiTranslations.en) || {};
+            const errMsg = t.deleteError || "Could not delete word from cloud. Please try again.";
+            console.error("Error deleting word from cloud:", { id, word: targetWord.word, res });
+            if (typeof showToast === "function") {
+              showToast(errMsg);
+            }
+            return false;
+          }
+          if (res.count === 0) {
+            console.info("Word was not present in cloud (local-only row); removing locally:", { id, word: targetWord.word });
+          }
+        } catch (err) {
+          const t = (typeof uiTranslations !== "undefined" && uiTranslations[supportLang]) || (typeof uiTranslations !== "undefined" && uiTranslations.en) || {};
+          const errMsg = t.deleteError || "Could not delete word from cloud. Please try again.";
+          console.error("Exception in removeWordFromCloud:", { id, word: targetWord.word, err });
+          if (typeof showToast === "function") {
+            showToast(errMsg);
+          }
+          return false;
+        }
       }
+
+      // Confirmed: remove from local storage and update UI
+      const remainingWords = words.filter(w => w.id !== targetWord.id && w.id !== id);
+      localStorage.setItem(SAVED_WORDS_STORAGE_KEY, JSON.stringify(remainingWords));
+      updateSavedWordBadges();
+      renderSavedWordsList();
+      return true;
     }
 
     function isWordSaved(id) {
-      return getSavedWords().some(w => w.id === id);
+      return getSavedWords().some(w => w.id === id || (w.word && w.word.toLowerCase().trim() === String(id).toLowerCase().trim()));
     }
 
     function updateSavedWordBadges() {
@@ -7553,14 +7611,16 @@
       }
     }
 
-    function toggleSaveCurrentWord(event) {
+    async function toggleSaveCurrentWord(event) {
       if (event) event.stopPropagation();
       if (!currentPopoverWordData) return;
       const id = currentPopoverWordData.id;
 
       if (isWordSaved(id)) {
-        removeSavedWord(id);
-        updatePopSaveButtonUI(false);
+        const removed = await removeSavedWord(id);
+        if (removed !== false) {
+          updatePopSaveButtonUI(false);
+        }
       } else {
         saveWordItem(currentPopoverWordData);
         updatePopSaveButtonUI(true);
@@ -7605,15 +7665,17 @@
       const panelWords = document.getElementById("vn-panel-words");
       const panelCards = document.getElementById("vn-panel-flashcards");
 
+      if (!panelWords || !panelCards) return;
+
       if (tabName === "words") {
-        tabWords.classList.add("active");
-        tabCards.classList.remove("active");
+        if (tabWords) tabWords.classList.add("active");
+        if (tabCards) tabCards.classList.remove("active");
         panelWords.classList.add("active");
         panelCards.classList.remove("active");
         renderSavedWordsList();
       } else {
-        tabCards.classList.add("active");
-        tabWords.classList.remove("active");
+        if (tabCards) tabCards.classList.add("active");
+        if (tabWords) tabWords.classList.remove("active");
         panelCards.classList.add("active");
         panelWords.classList.remove("active");
         initFlashcards(initialWordId);
@@ -7660,7 +7722,7 @@
             </div>
             <div style="display:flex;align-items:center;gap:0.5rem;">
               <button class="popover-audio-btn" onclick="speakSingleSentence('${escapeSingleQuotes(w.word)}', event)">${AUDIO_ICON_SVG}</button>
-              <button class="vn-del-btn" onclick="removeSavedWord('${w.id}')" title="Delete">&times;</button>
+              <button class="vn-del-btn" onclick="removeSavedWord('${escapeSingleQuotes(w.id)}')" title="Delete">&times;</button>
             </div>
           </div>
         `;
