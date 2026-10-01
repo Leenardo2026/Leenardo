@@ -1,0 +1,21 @@
+name: Supabase Heartbeat
+
+on:
+  schedule:
+    - cron: '0 6 * * 1,4'
+  workflow_dispatch:
+
+jobs:
+  heartbeat:
+    name: Ping Supabase Database
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase REST API
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          curl --fail --silent --show-error --max-time 30 \
+            "$SUPABASE_URL/rest/v1/articles?select=id&limit=1" \
+            -H "apikey: $SUPABASE_ANON_KEY" \
+            -H "Authorization: Bearer $SUPABASE_ANON_KEY"
