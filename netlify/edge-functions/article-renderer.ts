@@ -23,9 +23,13 @@ const DEFAULT_SUPABASE_ANON_KEY =
 export default async function handler(request: Request, context: Context) {
   const url = new URL(request.url);
 
+  // Diagnostic Entry Log
+  console.log(`[Edge] Incoming request: ${request.method} ${url.pathname}${url.search}`);
+
   // 1. Validate route params (:lang and :slug)
   const pathParts = url.pathname.replace(/^\/|\/$/g, "").split("/");
   if (pathParts.length !== 3 || pathParts[1] !== "articles") {
+    console.error(`[Edge] Invalid route structure for path: ${url.pathname}`);
     return context.next();
   }
 
@@ -33,12 +37,26 @@ export default async function handler(request: Request, context: Context) {
   const rawSlug = pathParts[2];
 
   if (!SUPPORTED_LANGUAGES.includes(rawLang as SupportedLanguage)) {
-    return new Response("Language not supported", { status: 404 });
+    console.error(`[Edge] Unsupported target language: "${rawLang}"`);
+    return new Response("Language not supported", {
+      status: 404,
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Cache-Control": "no-store",
+      },
+    });
   }
   const targetLang = rawLang as SupportedLanguage;
 
   if (!rawSlug || rawSlug.trim() === "") {
-    return new Response("Article not found", { status: 404 });
+    console.error("[Edge] Missing or empty article slug in request URL");
+    return new Response("Article not found", {
+      status: 404,
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Cache-Control": "no-store",
+      },
+    });
   }
   const slug = decodeURIComponent(rawSlug.trim());
 
@@ -94,11 +112,11 @@ export default async function handler(request: Request, context: Context) {
       slug
     )}&status=eq.published&hidden=eq.false&select=${selectQuery}`;
 
+    // Publishable keys are sent strictly in "apikey" header (never Authorization: Bearer)
     const resp = await fetch(endpoint, {
       signal: controller.signal,
       headers: {
         apikey: supabaseAnonKey,
-        Authorization: `Bearer ${supabaseAnonKey}`,
         Accept: "application/json",
       },
     });
@@ -109,14 +127,18 @@ export default async function handler(request: Request, context: Context) {
       const data = await resp.json();
       if (Array.isArray(data) && data.length > 0) {
         article = data[0];
+      } else {
+        console.error(`[Edge] Supabase query returned 0 rows for slug "${slug}"`);
       }
+    } else {
+      console.error(`[Edge] Supabase REST error for slug "${slug}": status ${resp.status}`);
     }
   } catch (fetchErr) {
     clearTimeout(timeoutId);
-    console.warn(`[Edge] Supabase fetch error for slug "${slug}":`, fetchErr);
+    console.error(`[Edge] Supabase fetch exception for slug "${slug}":`, fetchErr);
   }
 
-  // Fallback: If slim query returned empty or structure was unexpected, try full fetch
+  // Fallback: If slim query returned empty or structure was unexpected, try standard select
   if (!article) {
     try {
       const fallbackEndpoint = `${supabaseUrl}/rest/v1/articles?id=eq.${encodeURIComponent(
@@ -125,7 +147,7 @@ export default async function handler(request: Request, context: Context) {
       const fallbackResp = await fetch(fallbackEndpoint, {
         headers: {
           apikey: supabaseAnonKey,
-          Authorization: `Bearer ${supabaseAnonKey}`,
+          Accept: "application/json",
         },
       });
       if (fallbackResp.ok) {
@@ -133,24 +155,24 @@ export default async function handler(request: Request, context: Context) {
         if (Array.isArray(fullData) && fullData.length > 0) {
           article = fullData[0];
         }
+      } else {
+        console.error(`[Edge] Supabase fallback query failed: status ${fallbackResp.status}`);
       }
-    } catch (_) {}
+    } catch (fbErr) {
+      console.error("[Edge] Supabase fallback fetch exception:", fbErr);
+    }
   }
 
   // 5. Handle Article Not Found (404)
   if (!article) {
-    try {
-      const notFoundUrl = new URL("/404.html", request.url);
-      const notFoundResp = await fetch(notFoundUrl);
-      if (notFoundResp.ok) {
-        const notFoundHtml = await notFoundResp.text();
-        return new Response(notFoundHtml, {
-          status: 404,
-          headers: { "Content-Type": "text/html; charset=utf-8" },
-        });
-      }
-    } catch (_) {}
-    return new Response("Article not found", { status: 404 });
+    console.error(`[Edge] Story not found in database: "${slug}"`);
+    return new Response("Article not found", {
+      status: 404,
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Cache-Control": "no-store",
+      },
+    });
   }
 
   // Normalize languages dictionary if PostgREST returned languages->targetLang key
@@ -180,17 +202,48 @@ export default async function handler(request: Request, context: Context) {
         ""
       : "";
 
-  // 6. Fetch base template (article.html)
+  // 6. Fetch base template (article.html) via internal pipeline (context.next())
   let html = "";
   try {
-    const templateUrl = new URL("/article.html", request.url);
-    const templateResp = await fetch(templateUrl);
-    if (templateResp.ok) {
+    const templateResp = await context.next();
+    if (templateResp && templateResp.ok) {
       html = await templateResp.text();
+    } else {
+      console.error(`[Edge] context.next() template load returned non-200: ${templateResp?.status}`);
     }
   } catch (tplErr) {
-    console.error("[Edge] Failed to fetch article.html template:", tplErr);
-    return new Response("Internal Server Error", { status: 500 });
+    console.error("[Edge] context.next() template load threw exception:", tplErr);
+  }
+
+  // Fallback: If context.next() returned empty or non-200, try same-origin fetch
+  if (!html || html.trim() === "") {
+    try {
+      const originUrl = new URL("/article.html", request.url);
+      const directResp = await fetch(originUrl, {
+        headers: {
+          "Accept": "text/html",
+        },
+      });
+      if (directResp.ok) {
+        html = await directResp.text();
+      } else {
+        console.error(`[Edge] Direct template fetch failed: status ${directResp.status}`);
+      }
+    } catch (directErr) {
+      console.error("[Edge] Direct template fetch exception:", directErr);
+    }
+  }
+
+  // Strict Guard: Never return 200 with missing or empty template
+  if (!html || html.trim() === "") {
+    console.error(`[Edge] Fatal: Failed to load article.html template for slug "${slug}"`);
+    return new Response("Template error: unable to load page layout", {
+      status: 500,
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Cache-Control": "no-store",
+      },
+    });
   }
 
   // 7. Inject localized SEO Metadata & Hreflang Tags
@@ -280,6 +333,18 @@ export default async function handler(request: Request, context: Context) {
   `;
 
   html = html.replace("</body>", `${hydrationScript}\n</body>`);
+
+  // Final Guard: Verify rendered content integrity
+  if (!html || html.trim() === "" || !html.includes("article-main-title")) {
+    console.error(`[Edge] Fatal: Rendered HTML is corrupted or incomplete for slug "${slug}"`);
+    return new Response("Rendering error: incomplete output", {
+      status: 500,
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Cache-Control": "no-store",
+      },
+    });
+  }
 
   // 10. Return Response with Netlify CDN Layer 1 Edge Caching Headers
   return new Response(html, {

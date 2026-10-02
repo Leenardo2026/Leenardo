@@ -12,3 +12,10 @@
   path = "/:lang/articles/:slug"
   function = "article-renderer"
   cache = "manual"
+
+# Downstream rewrite allowing context.next() inside article-renderer to load /article.html
+# directly from origin without loopback network fetches
+[[redirects]]
+  from = "/:lang/articles/*"
+  to = "/article.html"
+  status = 200
