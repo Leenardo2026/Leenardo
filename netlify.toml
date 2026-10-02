@@ -13,6 +13,13 @@
   function = "article-renderer"
   cache = "manual"
 
+# Edge Function: Dynamic Sitemap Generator
+# Generates multilingual XML sitemap covering published articles across 5 languages
+[[edge_functions]]
+  path = "/sitemap.xml"
+  function = "sitemap"
+  cache = "manual"
+
 # Downstream rewrite allowing context.next() inside article-renderer to load /article.html
 # directly from origin without loopback network fetches
 [[redirects]]
