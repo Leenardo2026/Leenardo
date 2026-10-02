@@ -3316,9 +3316,24 @@
       }
 
       // 2. Vocabulary Widget Counter
-      const savedWords = getSavedWords();
+      updateIndexSavedWordBadge();
+    }
+
+    async function updateIndexSavedWordBadge() {
       const countBadge = document.getElementById("widget-saved-count");
-      if (countBadge) countBadge.textContent = savedWords.length;
+      if (!countBadge) return;
+      let isAuth = false;
+      if (typeof LeenardoAuth !== "undefined" && typeof LeenardoAuth.waitForSession === "function") {
+        try {
+          const user = await LeenardoAuth.waitForSession();
+          isAuth = !!user;
+        } catch (e) {
+          isAuth = false;
+        }
+      } else if (typeof window !== "undefined" && window.currentAuthUser) {
+        isAuth = true;
+      }
+      countBadge.textContent = isAuth ? getSavedWords().length : 0;
     }
 
     function toLocaleUpper(str, lang = (supportLang || 'en')) {
@@ -3407,6 +3422,11 @@
     async function start() {
       await loadArticlesData();
       initHome();
+      if (typeof onAuthStateChange === "function") {
+        onAuthStateChange(() => {
+          updateIndexSavedWordBadge();
+        });
+      }
     }
 
     if (document.readyState === "loading") {

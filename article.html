@@ -2889,6 +2889,10 @@
         modalNotebookTitle: "Kelime Defterim & Flashcard",
         emptyNotebookTitle: "Kayıtlı kelime bulunamadı",
         emptyNotebookDesc: "Metinleri okurken öğrenmek istediğiniz herhangi bir kelimenin üzerine tıklayın ve 'Kaydet' butonuna basın.",
+        guestSignInPromptTitle: "Kelimeleri kaydetmek için giriş yap",
+        guestSignInPromptDesc: "Okurken kelimeleri kaydetmek, özel kelime kartları oluşturmak ve tüm cihazlarında ilerlemeni sürdürmek için ücretsiz hesabına giriş yap.",
+        guestFlashcardPromptDesc: "İnteraktif flashcard'lar ile pratik yapmak ve kelime defterini senkronize etmek için giriş yap.",
+        signInButton: "Giriş Yap",
         congratsTitle: "Tebrikler! Deste Tamamlandı",
         congratsDesc: "Bu oturumda kartları başarıyla tamamladınız.",
         restartBtn: "Tekrar Başlat",
@@ -2978,6 +2982,10 @@
         modalNotebookTitle: "Vocabulary Notebook & Flashcards",
         emptyNotebookTitle: "No saved words found",
         emptyNotebookDesc: "Click any word while reading an article and hit 'Save' to study it here.",
+        guestSignInPromptTitle: "Sign in to save words",
+        guestSignInPromptDesc: "Sign in or create a free account to save vocabulary, build custom flashcard decks, and sync your progress across devices.",
+        guestFlashcardPromptDesc: "Sign in to study with interactive flashcards and sync your vocabulary notebook.",
+        signInButton: "Sign In",
         congratsTitle: "Congratulations! Deck Completed",
         congratsDesc: "You have reviewed all cards in this study session.",
         restartBtn: "Review Again",
@@ -3067,6 +3075,10 @@
         modalNotebookTitle: "Cuaderno de Vocabulario y Tarjetas",
         emptyNotebookTitle: "No hay palabras guardadas",
         emptyNotebookDesc: "Toca cualquier palabra mientras lees y pulsa 'Guardar'.",
+        guestSignInPromptTitle: "Inicia sesión para guardar palabras",
+        guestSignInPromptDesc: "Inicia sesión o crea una cuenta gratuita para guardar vocabulario, crear tarjetas de estudio y sincronizar tu progreso en todos tus dispositivos.",
+        guestFlashcardPromptDesc: "Inicia sesión para estudiar con tarjetas interactivas y sincronizar tu cuaderno de vocabulario.",
+        signInButton: "Iniciar sesión",
         congratsTitle: "¡Felicidades! Mazo Completado",
         congratsDesc: "Has completado todas las tarjetas de esta sesión.",
         restartBtn: "Repetir Mazo",
@@ -3156,6 +3168,10 @@
         modalNotebookTitle: "Vokabelheft & Karteikarten",
         emptyNotebookTitle: "Keine gespeicherten Wörter",
         emptyNotebookDesc: "Klicke beim Lesen auf ein Wort und drücke 'Speichern'.",
+        guestSignInPromptTitle: "Anmelden, um Wörter zu speichern",
+        guestSignInPromptDesc: "Melde dich an oder erstelle ein kostenloses Konto, um Vokabeln zu speichern, Lernkarten zu erstellen und deinen Fortschritt zu synchronisieren.",
+        guestFlashcardPromptDesc: "Melde dich an, um mit interaktiven Karteikarten zu lernen und dein Vokabelheft zu synchronisieren.",
+        signInButton: "Anmelden",
         congratsTitle: "Herzlichen Glückwunsch! Stapel abgeschlossen",
         congratsDesc: "Du hast alle Karteikarten geübt.",
         restartBtn: "Erneut Üben",
@@ -3245,6 +3261,10 @@
         modalNotebookTitle: "Carnet de Vocabulaire & Cartes",
         emptyNotebookTitle: "Aucun mot enregistré",
         emptyNotebookDesc: "Cliquez sur n'importe quel mot pendant la lecture et cliquez sur 'Enregistrer'.",
+        guestSignInPromptTitle: "Connectez-vous pour enregistrer des mots",
+        guestSignInPromptDesc: "Connectez-vous ou créez un compte gratuit pour enregistrer du vocabulaire, créer des cartes mémoires et synchroniser vos progrès.",
+        guestFlashcardPromptDesc: "Connectez-vous pour étudier avec des cartes interactives et synchroniser votre carnet de vocabulaire.",
+        signInButton: "Se connecter",
         congratsTitle: "Félicitations ! Session terminée",
         congratsDesc: "Vous avez révisé toutes les cartes de cette session.",
         restartBtn: "Recommencer",
@@ -5094,6 +5114,31 @@
       const t = uiTranslations[supportLang] || uiTranslations.en;
       const cleanWord = word.replace(/[^\p{L}\p{M}\p{N}'-]/gu, '').trim();
       const storageId = cleanWord.toLowerCase() + "_" + targetLang + "_" + supportLang;
+
+      const authUser = await getActiveAuthUser();
+      if (!authUser) {
+        pendingGuestSaveAction = {
+          type: "save",
+          item: {
+            id: storageId,
+            word: cleanWord,
+            fromLang: targetLang,
+            toLang: supportLang,
+            translation: translation,
+            root: root || "",
+            level: currentLevel,
+            articleId: currentArticleId,
+            date: new Date().toISOString()
+          },
+          btnElem: btnElem,
+          source: "vocabCard"
+        };
+        if (window.LeenardoUI && typeof window.LeenardoUI.openAuthModal === "function") {
+          window.LeenardoUI.openAuthModal("signin");
+        }
+        return;
+      }
+
       if (isWordSaved(storageId)) {
         const removed = await removeSavedWord(storageId);
         if (removed !== false) {
@@ -5112,7 +5157,7 @@
           articleId: currentArticleId,
           date: new Date().toISOString()
         };
-        saveWordItem(item);
+        await saveWordItem(item);
         btnElem.classList.add("saved");
         btnElem.textContent = t.savedWord || "Saved";
       }
@@ -7677,9 +7722,46 @@
     }
 
     let pageAuthUser = null;
+    let pendingGuestSaveAction = null;
+
+    document.addEventListener("leenardo:auth-modal-closed", (e) => {
+      if (!e || !e.detail || !e.detail.completed) {
+        pendingGuestSaveAction = null;
+      }
+    });
+
     if (typeof onAuthStateChange === "function") {
-      onAuthStateChange(user => {
+      onAuthStateChange(async user => {
         pageAuthUser = user;
+        updateSavedWordBadges();
+        if (currentArticleData) {
+          renderVocabCards(currentArticleData);
+        }
+        const modal = document.getElementById("vocab-notebook-modal");
+        if (modal && modal.classList.contains("show")) {
+          const tabCards = document.getElementById("vn-tab-flashcards");
+          if (tabCards && tabCards.classList.contains("active")) {
+            initFlashcards();
+          } else {
+            renderSavedWordsList();
+          }
+        }
+        if (pendingGuestSaveAction && user) {
+          const action = pendingGuestSaveAction;
+          pendingGuestSaveAction = null;
+          if (action.item) {
+            await saveWordItem(action.item);
+            const t = (typeof uiTranslations !== "undefined" && (uiTranslations[supportLang] || uiTranslations.en)) || {};
+            if (action.source === "popover") {
+              updatePopSaveButtonUI(true);
+              showToast(`"${action.item.word}" ${t.savedWord || 'saved'}`);
+            } else if (action.source === "vocabCard" && action.btnElem) {
+              action.btnElem.classList.add("saved");
+              action.btnElem.textContent = t.savedWord || "Saved";
+              showToast(`"${action.item.word}" ${t.savedWord || 'saved'}`);
+            }
+          }
+        }
       });
     }
 
@@ -7702,6 +7784,11 @@
 
     async function saveWordItem(item) {
       if (!item) return;
+      const authUser = await getActiveAuthUser();
+      if (!authUser) {
+        // Guests cannot save words
+        return;
+      }
       if (!item.fromLang) item.fromLang = targetLang;
       if (!item.toLang) item.toLang = supportLang;
       const words = getSavedWords();
@@ -7796,11 +7883,13 @@
     }
 
     function isWordSaved(id) {
+      if (!pageAuthUser && (typeof window === "undefined" || !window.currentAuthUser)) return false;
       return getSavedWords().some(w => w.id === id || (w.word && w.word.toLowerCase().trim() === String(id).toLowerCase().trim()));
     }
 
-    function updateSavedWordBadges() {
-      const count = getSavedWords().length;
+    async function updateSavedWordBadges() {
+      const authUser = await getActiveAuthUser();
+      const count = authUser ? getSavedWords().length : 0;
       ["saved-words-count", "saved-words-count-bar", "vn-tab-count-saved", "vn-tab-count-cards"].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.textContent = count;
@@ -7830,22 +7919,43 @@
       if (!currentPopoverWordData) return;
       const id = currentPopoverWordData.id;
 
+      const authUser = await getActiveAuthUser();
+      if (!authUser) {
+        pendingGuestSaveAction = {
+          type: "save",
+          item: Object.assign({}, currentPopoverWordData),
+          source: "popover"
+        };
+        if (window.LeenardoUI && typeof window.LeenardoUI.openAuthModal === "function") {
+          window.LeenardoUI.openAuthModal("signin");
+        }
+        return;
+      }
+
       if (isWordSaved(id)) {
         const removed = await removeSavedWord(id);
         if (removed !== false) {
           updatePopSaveButtonUI(false);
         }
       } else {
-        saveWordItem(currentPopoverWordData);
+        await saveWordItem(currentPopoverWordData);
         updatePopSaveButtonUI(true);
         const t = uiTranslations[supportLang] || uiTranslations.en;
         showToast(`"${currentPopoverWordData.word}" ${t.savedWord || 'saved'}`);
       }
     }
 
-    function studyCurrentWordFlashcard(event) {
+    async function studyCurrentWordFlashcard(event) {
       if (event) event.stopPropagation();
       if (!currentPopoverWordData) return;
+
+      const authUser = await getActiveAuthUser();
+      if (!authUser) {
+        if (window.LeenardoUI && typeof window.LeenardoUI.openAuthModal === "function") {
+          window.LeenardoUI.openAuthModal("signin");
+        }
+        return;
+      }
 
       if (!isWordSaved(currentPopoverWordData.id)) {
         const transText = document.getElementById("pop-trans-text").textContent.trim();
@@ -7853,7 +7963,7 @@
         if (transText && transText !== t.translatingText) {
           currentPopoverWordData.translation = transText;
         }
-        saveWordItem(currentPopoverWordData);
+        await saveWordItem(currentPopoverWordData);
         updatePopSaveButtonUI(true);
       }
 
@@ -7896,11 +8006,27 @@
       }
     }
 
-    function renderSavedWordsList(searchQuery = "") {
+    async function renderSavedWordsList(searchQuery = "") {
       const container = document.getElementById("vn-words-container");
       if (!container) return;
-      let words = getSavedWords();
       const t = uiTranslations[supportLang] || uiTranslations.en;
+
+      const authUser = await getActiveAuthUser();
+      if (!authUser) {
+        container.innerHTML = `
+          <div style="text-align:center; padding:3rem 1.5rem; color:var(--text-muted);">
+            <div style="font-size:2.2rem; margin-bottom:0.75rem;">🔒</div>
+            <h4 style="font-family:var(--font-serif); font-size:1.25rem; font-weight:700; color:var(--ink-navy);">${t.guestSignInPromptTitle || "Sign in to save words"}</h4>
+            <p style="font-size:0.88rem; margin:0.5rem auto 1.5rem; max-width:340px; line-height:1.5;">${t.guestSignInPromptDesc || "Sign in or create a free account to save vocabulary, build custom flashcard decks, and sync your progress across devices."}</p>
+            <button class="btn-primary-action" onclick="window.LeenardoUI && window.LeenardoUI.openAuthModal('signin')">
+              ${t.signInButton || "Sign In"}
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      let words = getSavedWords();
 
       if (searchQuery.trim() !== "") {
         const q = searchQuery.toLowerCase().trim();
@@ -7945,15 +8071,33 @@
     }
 
     /* Flashcards Engine */
-    function initFlashcards(initialWordId = null, forceArticleVocab = false) {
+    async function initFlashcards(initialWordId = null, forceArticleVocab = false) {
+      const area = document.getElementById("fc-interactive-area");
+      const t = uiTranslations[supportLang] || uiTranslations.en;
+
+      const authUser = await getActiveAuthUser();
+      if (!authUser) {
+        if (area) {
+          area.innerHTML = `
+            <div style="text-align:center; padding:3rem 1.5rem; color:var(--text-muted);">
+              <div style="font-size:2.2rem; margin-bottom:0.75rem;">🔒</div>
+              <h4 style="font-family:var(--font-serif); font-size:1.25rem; font-weight:700; color:var(--ink-navy);">${t.guestSignInPromptTitle || "Sign in to study flashcards"}</h4>
+              <p style="font-size:0.88rem; margin:0.5rem auto 1.5rem; max-width:340px; line-height:1.5;">${t.guestFlashcardPromptDesc || "Sign in to study with interactive flashcards and sync your vocabulary notebook."}</p>
+              <button class="btn-primary-action" onclick="window.LeenardoUI && window.LeenardoUI.openAuthModal('signin')">
+                ${t.signInButton || "Sign In"}
+              </button>
+            </div>
+          `;
+        }
+        return;
+      }
+
       let words = getSavedWords();
       const currentPairWords = words.filter(w => {
         const f = w.fromLang || targetLang;
         const t = w.toLang || supportLang;
         return f === targetLang && t === supportLang;
       });
-      const area = document.getElementById("fc-interactive-area");
-      const t = uiTranslations[supportLang] || uiTranslations.en;
 
       if (forceArticleVocab || currentPairWords.length === 0) {
         const curArt = getCurrentArticleObject();
