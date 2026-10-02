@@ -2801,6 +2801,10 @@
     const SUPPORTED_LANGUAGES = ['tr', 'en', 'es', 'de', 'fr'];
     const SUPPORTED_LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1'];
 
+    function getDefaultSupportLang(target) {
+      return target === "en" ? "es" : "en";
+    }
+
     const langNames = {
       tr: "Türkçe",
       en: "English",
@@ -4077,21 +4081,34 @@
         }
       }
 
-      if (paramSupport && SUPPORTED_LANGUAGES.includes(paramSupport)) {
-        supportLang = paramSupport;
-      } else if (window.__INITIAL_SUPPORT_LANG__ && SUPPORTED_LANGUAGES.includes(window.__INITIAL_SUPPORT_LANG__)) {
-        supportLang = window.__INITIAL_SUPPORT_LANG__;
-      } else {
-        try {
-          supportLang = localStorage.getItem("leenardo_support_lang") || (targetLang === "en" ? "tr" : "en");
-        } catch (e) {
-          supportLang = targetLang === "en" ? "tr" : "en";
+      // Support language resolution priority:
+      // 1. valid ?support= query param
+      // 2. localStorage "leenardo_support_lang" (if valid and != targetLang)
+      // 3. default: getDefaultSupportLang(targetLang)
+      const validParamSupport = (paramSupport && SUPPORTED_LANGUAGES.includes(paramSupport) && paramSupport !== targetLang) ? paramSupport : null;
+      const validInitialSupport = (window.__INITIAL_SUPPORT_LANG__ && SUPPORTED_LANGUAGES.includes(window.__INITIAL_SUPPORT_LANG__) && window.__INITIAL_SUPPORT_LANG__ !== targetLang) ? window.__INITIAL_SUPPORT_LANG__ : null;
+
+      let savedSupport = null;
+      try {
+        const stored = localStorage.getItem("leenardo_support_lang");
+        if (stored && SUPPORTED_LANGUAGES.includes(stored) && stored !== targetLang) {
+          savedSupport = stored;
         }
+      } catch (e) {}
+
+      if (validParamSupport) {
+        supportLang = validParamSupport;
+      } else if (savedSupport) {
+        supportLang = savedSupport;
+      } else if (validInitialSupport) {
+        supportLang = validInitialSupport;
+      } else {
+        supportLang = getDefaultSupportLang(targetLang);
       }
 
-      // Enforce targetLang !== supportLang
+      // Collision rule: support must never equal target; if it does, use getDefaultSupportLang(targetLang)
       if (targetLang === supportLang) {
-        supportLang = targetLang === "en" ? "tr" : "en";
+        supportLang = getDefaultSupportLang(targetLang);
       }
 
       // Expose globally for helper modules (e.g., supabase-client sync)
@@ -4208,7 +4225,7 @@
         if (plvl && SUPPORTED_LEVELS.includes(plvl)) currentLevel = plvl;
         if (ptar && SUPPORTED_LANGUAGES.includes(ptar)) targetLang = ptar;
         if (psup && SUPPORTED_LANGUAGES.includes(psup)) supportLang = psup;
-        if (targetLang === supportLang) supportLang = (targetLang === 'en') ? 'tr' : 'en';
+        if (targetLang === supportLang) supportLang = getDefaultSupportLang(targetLang);
 
         // Update selects
         if (tarSelect) tarSelect.value = targetLang;
@@ -4267,7 +4284,7 @@
 
       // Strict enforcement: targetLanguage !== supportLanguage
       if (targetLang === supportLang) {
-        supportLang = prevTarget !== targetLang ? prevTarget : SUPPORTED_LANGUAGES.find(l => l !== targetLang);
+        supportLang = getDefaultSupportLang(targetLang);
         try {
           localStorage.setItem("leenardo_support_lang", supportLang);
         } catch (e) {}

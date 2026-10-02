@@ -2175,6 +2175,10 @@
     const SUPPORTED_LANGUAGES = ['tr', 'en', 'es', 'de', 'fr'];
     const SUPPORTED_LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1'];
 
+    function getDefaultSupportLang(target) {
+      return target === "en" ? "es" : "en";
+    }
+
     const langNames = {
       tr: "Türkçe",
       en: "English",
@@ -2460,14 +2464,31 @@
         targetLang = localStorage.getItem("leenardo_target_lang") || "tr";
       }
 
-      if (paramSupport && SUPPORTED_LANGUAGES.includes(paramSupport)) {
-        supportLang = paramSupport;
+      // Support language resolution priority:
+      // 1. valid ?support= query param
+      // 2. localStorage "leenardo_support_lang" (if valid and != targetLang)
+      // 3. default: getDefaultSupportLang(targetLang)
+      const validParamSupport = (paramSupport && SUPPORTED_LANGUAGES.includes(paramSupport) && paramSupport !== targetLang) ? paramSupport : null;
+
+      let savedSupport = null;
+      try {
+        const stored = localStorage.getItem("leenardo_support_lang");
+        if (stored && SUPPORTED_LANGUAGES.includes(stored) && stored !== targetLang) {
+          savedSupport = stored;
+        }
+      } catch (e) {}
+
+      if (validParamSupport) {
+        supportLang = validParamSupport;
+      } else if (savedSupport) {
+        supportLang = savedSupport;
       } else {
-        supportLang = localStorage.getItem("leenardo_support_lang") || (targetLang === "en" ? "tr" : "en");
+        supportLang = getDefaultSupportLang(targetLang);
       }
 
+      // Collision rule: support must never equal target; if it does, use getDefaultSupportLang(targetLang)
       if (targetLang === supportLang) {
-        supportLang = targetLang === "en" ? "tr" : "en";
+        supportLang = getDefaultSupportLang(targetLang);
       }
 
       if (paramLevel && SUPPORTED_LEVELS.includes(paramLevel)) {
@@ -2518,10 +2539,10 @@
       const learnSelect = document.getElementById("onboarding-learning-select");
       const understandSelect = document.getElementById("onboarding-understand-select");
       if (learnSelect) learnSelect.value = targetLang || "tr";
-      if (understandSelect) understandSelect.value = supportLang || (targetLang === "en" ? "tr" : "en");
+      if (understandSelect) understandSelect.value = supportLang || getDefaultSupportLang(targetLang);
 
       if (learnSelect && understandSelect && learnSelect.value === understandSelect.value) {
-        understandSelect.value = learnSelect.value === "en" ? "tr" : "en";
+        understandSelect.value = getDefaultSupportLang(learnSelect.value);
       }
 
       onboardingSelectedLevel = currentLevel || "A1";
@@ -2666,7 +2687,7 @@
       localStorage.setItem("leenardo_target_lang", targetLang);
 
       if (targetLang === supportLang) {
-        supportLang = prevTarget !== targetLang ? prevTarget : SUPPORTED_LANGUAGES.find(l => l !== targetLang);
+        supportLang = getDefaultSupportLang(targetLang);
         localStorage.setItem("leenardo_support_lang", supportLang);
         const supElem = document.getElementById("support-lang-select");
         if (supElem) supElem.value = supportLang;

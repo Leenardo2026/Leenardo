@@ -14,6 +14,7 @@ import {
   generateArticleMeta,
   injectMetaIntoHtml,
   escapeHtml,
+  getDefaultSupportLang,
 } from "./lib/meta-generator.ts";
 
 const DEFAULT_SUPABASE_URL = "https://vkddnvpqnccstcjnqfyq.supabase.co";
@@ -70,13 +71,13 @@ export default async function handler(request: Request, context: Context) {
 
   // Resolve support language parameter (?support=en..tr)
   const querySupport = (url.searchParams.get("support") || "").toLowerCase();
-  const supportLang: SupportedLanguage = SUPPORTED_LANGUAGES.includes(
-    querySupport as SupportedLanguage
-  )
+  const hasValidSupport =
+    SUPPORTED_LANGUAGES.includes(querySupport as SupportedLanguage) &&
+    querySupport !== targetLang;
+
+  const supportLang: SupportedLanguage = hasValidSupport
     ? (querySupport as SupportedLanguage)
-    : targetLang === "tr"
-    ? "en"
-    : "tr";
+    : getDefaultSupportLang(targetLang);
 
   // 3. Supabase Configuration
   const supabaseUrl =
@@ -253,7 +254,7 @@ export default async function handler(request: Request, context: Context) {
     lang: targetLang,
     level: activeLevel,
     slug,
-    baseUrl: url.origin,
+    baseUrl: "https://leenardo.com",
   });
   html = injectMetaIntoHtml(html, metaData);
 
@@ -381,7 +382,7 @@ export default async function handler(request: Request, context: Context) {
     window.__INITIAL_ARTICLE__ = JSON.parse(document.getElementById("initial-article-data").textContent);
     window.__INITIAL_TARGET_LANG__ = "${targetLang}";
     window.__INITIAL_ACTIVE_LEVEL__ = "${activeLevel}";
-    window.__INITIAL_SUPPORT_LANG__ = "${supportLang}";
+    window.__INITIAL_SUPPORT_LANG__ = ${hasValidSupport ? `"${supportLang}"` : "null"};
   </script>
   `;
 

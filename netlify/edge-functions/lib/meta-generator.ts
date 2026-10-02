@@ -21,6 +21,16 @@ export const DEFAULT_BASE_URL = "https://leenardo.com";
 export const DEFAULT_IMAGE = "https://leenardo.com/logo-1024.png";
 export const X_DEFAULT_LANG: SupportedLanguage = "en";
 
+/**
+ * Resolves product-standard default support language.
+ * Strict rule: targetLang === "en" ? "es" : "en"
+ */
+export function getDefaultSupportLang(
+  targetLang: SupportedLanguage
+): SupportedLanguage {
+  return targetLang === "en" ? "es" : "en";
+}
+
 export interface ArticleMetaData {
   title: string;
   description: string;
