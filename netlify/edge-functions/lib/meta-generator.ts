@@ -154,12 +154,6 @@ export function injectMetaIntoHtml(html: string, meta: ArticleMetaData): string 
     `<meta name="description" content="${safeDesc}">`
   );
 
-  // 4. Update canonical link
-  output = output.replace(
-    /<link\s+rel="canonical"\s+href="[^"]*"\s*\/?>/i,
-    `<link rel="canonical" href="${safeCanonical}">`
-  );
-
   // 5. Update Open Graph tags
   output = output.replace(
     /<meta\s+property="og:title"\s+content="[^"]*"\s*\/?>/i,
