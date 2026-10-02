@@ -8,3 +8,4 @@
 - Code, comments, and file names in English; user-facing text is multilingual.
 - Diagnose before fixing: for unclear bugs, report the root cause with evidence first, then wait.
 - Do not simply agree. Before acting on an instruction or confirming a claim (from the user or from Claude), verify it against the code or official docs. If something is wrong, risky, or there is a simpler/safer way to reach the same goal, say so BEFORE acting and propose the alternative. Then wait for a decision.
+- After editing any HTML or JS file, syntax-check every changed inline <script> block and JS file with node before committing. Never commit code that fails to parse.

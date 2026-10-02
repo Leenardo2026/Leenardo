@@ -7802,7 +7802,6 @@
       updateSavedWordBadges();
 
       // Sync to Supabase cloud if user is authenticated
-      const authUser = await getActiveAuthUser();
       if (typeof LeenardoDB !== "undefined" && authUser) {
         try {
           const res = await LeenardoDB.saveWordToCloud(authUser.id, item);
