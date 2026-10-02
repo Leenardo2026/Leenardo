@@ -1,0 +1,14 @@
+# ==============================================================================
+# Leenardo Netlify Configuration
+# Phase 3: Edge-rendered multilingual article routes (/{lang}/articles/{slug})
+# ==============================================================================
+
+[build]
+  publish = "."
+
+# Edge Function: Article Renderer
+# Handles dynamic /{lang}/articles/{slug} routes with localized metadata and SSR C1 content
+[[edge_functions]]
+  path = "/:lang/articles/:slug"
+  function = "article-renderer"
+  cache = "manual"
