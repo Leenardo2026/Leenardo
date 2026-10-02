@@ -112,7 +112,7 @@ export default async function handler(request: Request, context: Context) {
       slug
     )}&status=eq.published&hidden=eq.false&select=${selectQuery}`;
 
-    // Publishable keys are sent strictly in "apikey" header (never Authorization: Bearer)
+    // Publishable keys are sent strictly in "apikey" header (no Bearer token)
     const resp = await fetch(endpoint, {
       signal: controller.signal,
       headers: {
