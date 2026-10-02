@@ -3508,7 +3508,8 @@
         ? supportData.title 
         : ((article && article.titleTranslations && article.titleTranslations[supportLang]) || "");
       
-      const shareUrl = window.location.href;
+      const shareOrigin = (typeof window !== "undefined" && window.location.origin) ? window.location.origin : "https://leenardo.com";
+      const shareUrl = `${shareOrigin}/${targetLang}/articles/${encodeURIComponent(currentArticleId)}?level=${currentLevel}&support=${supportLang}`;
       const shareText = supportTitle 
         ? `${currentTitle} (${supportTitle}) — Leenardo [${currentLevel}]`
         : `${currentTitle} — Leenardo [${currentLevel}]`;
@@ -3774,35 +3775,24 @@
     let staticFallbackPromise = null;
     function lazyLoadStaticFallback() {
       if (staticFallbackPromise) return staticFallbackPromise;
-      console.warn("[Leenardo] Supabase request failed or timed out. Falling back to local static data.");
-      staticFallbackPromise = new Promise((resolve) => {
+      staticFallbackPromise = new Promise(async (resolve) => {
         if (typeof window !== "undefined" && window.ARTICLES_DATA && Array.isArray(window.ARTICLES_DATA) && window.ARTICLES_DATA.length > 0) {
           resolve(window.ARTICLES_DATA.map(mapSupabaseArticleToClient));
           return;
         }
 
-        const scriptPath = "/articles-data.js";
-        const scriptElem = document.createElement("script");
-        scriptElem.src = scriptPath;
-        scriptElem.onload = () => {
-          const loaded = window.ARTICLES_DATA || [];
-          resolve(Array.isArray(loaded) ? loaded.map(mapSupabaseArticleToClient) : []);
-        };
-        scriptElem.onerror = async () => {
-          try {
-            const jsonPath = "/articles.json";
-            const resp = await fetch(jsonPath);
-            if (resp.ok) {
-              const freshData = await resp.json();
-              if (Array.isArray(freshData) && freshData.length > 0) {
-                resolve(freshData.map(mapSupabaseArticleToClient));
-                return;
-              }
+        try {
+          const jsonPath = "/articles.json";
+          const resp = await fetch(jsonPath);
+          if (resp.ok) {
+            const freshData = await resp.json();
+            if (Array.isArray(freshData) && freshData.length > 0) {
+              resolve(freshData.map(mapSupabaseArticleToClient));
+              return;
             }
-          } catch (e) {}
-          resolve([]);
-        };
-        document.head.appendChild(scriptElem);
+          }
+        } catch (e) {}
+        resolve([]);
       });
       return staticFallbackPromise;
     }
@@ -3900,11 +3890,39 @@
     }
 
     async function loadArticlesData() {
-      // 1. Resolve requested article ID from clean pathname (/articles/:slug or /articles/:slug.html) or legacy query param (?id=...)
+      // 0. Immediate hydration from Edge Function SSR payload
+      if (typeof window !== "undefined" && window.__INITIAL_ARTICLE__) {
+        const initialArt = mapSupabaseArticleToClient(window.__INITIAL_ARTICLE__);
+        if (initialArt && initialArt.id) {
+          currentArticleId = initialArt.id;
+          articlesDatabase = [initialArt];
+          supabaseSuccess = true;
+          // Background fetch catalogue for switcher without blocking reader
+          if (window.location.protocol !== "file:") {
+            fetchCatalogueFromSupabase().then(catalogue => {
+              if (catalogue && catalogue.length > 0) {
+                articlesDatabase = catalogue.map(a => a.id === initialArt.id ? initialArt : a);
+                if (!articlesDatabase.some(a => a.id === initialArt.id)) {
+                  articlesDatabase.unshift(initialArt);
+                }
+                renderTopicSelect();
+              }
+            }).catch(() => {});
+          }
+          return;
+        }
+      }
+
+      // 1. Resolve requested article ID from clean pathname (/:lang/articles/:slug or /articles/:slug.html) or legacy query param (?id=...)
       let pathArticleId = null;
-      const pathMatch = window.location.pathname.match(/\/articles\/([^\/\.]+)(?:\.html)?/);
+      let pathTargetLang = null;
+      const pathMatch = window.location.pathname.match(/\/(?:([a-z]{2})\/)?articles\/([^\/\.]+)(?:\.html)?/i);
       if (pathMatch) {
-        pathArticleId = decodeURIComponent(pathMatch[1]);
+        if (pathMatch[1] && SUPPORTED_LANGUAGES.includes(pathMatch[1].toLowerCase())) {
+          pathTargetLang = pathMatch[1].toLowerCase();
+          targetLang = pathTargetLang;
+        }
+        pathArticleId = decodeURIComponent(pathMatch[2]);
       }
       const urlParams = new URLSearchParams(window.location.search);
       const queryId = urlParams.get("id");
@@ -4006,20 +4024,27 @@
       const queryId = urlParams.get("id");
       const isOldUrl = window.location.pathname.endsWith("/article.html") || window.location.pathname === "/article.html";
       if (queryId && isOldUrl && window.location.protocol !== "file:") {
+        const reqTarget = urlParams.get("target") || urlParams.get("lang") || "tr";
         urlParams.delete("id");
+        urlParams.delete("target");
+        urlParams.delete("lang");
         const qs = urlParams.toString() ? ("?" + urlParams.toString()) : "";
-        window.location.replace(`/articles/${encodeURIComponent(queryId)}${qs}`);
+        window.location.replace(`/${encodeURIComponent(reqTarget)}/articles/${encodeURIComponent(queryId)}${qs}`);
         return;
       }
 
-      // 1. Resolve State from Pathname (/articles/:id or /articles/:id.html) or Query Param, then LocalStorage
+      // 1. Resolve State from Pathname (/:lang/articles/:slug or /articles/:slug.html) or Query Param, then LocalStorage
       let pathArticleId = null;
-      const pathMatch = window.location.pathname.match(/\/articles\/([^\/\.]+)(?:\.html)?/);
+      let pathTargetLang = null;
+      const pathMatch = window.location.pathname.match(/\/(?:([a-z]{2})\/)?articles\/([^\/\.]+)(?:\.html)?/i);
       if (pathMatch) {
-        pathArticleId = decodeURIComponent(pathMatch[1]);
+        if (pathMatch[1] && SUPPORTED_LANGUAGES.includes(pathMatch[1].toLowerCase())) {
+          pathTargetLang = pathMatch[1].toLowerCase();
+        }
+        pathArticleId = decodeURIComponent(pathMatch[2]);
       }
       const paramId = pathArticleId || queryId;
-      const paramTarget = urlParams.get("target") || urlParams.get("lang");
+      const paramTarget = pathTargetLang || urlParams.get("target") || urlParams.get("lang");
       const paramSupport = urlParams.get("support");
       const paramLevel = urlParams.get("level");
 
@@ -4030,7 +4055,9 @@
         currentArticleId = firstWithVisual ? firstWithVisual.id : (articlesDatabase[0] ? articlesDatabase[0].id : "");
       }
 
-      if (paramTarget && SUPPORTED_LANGUAGES.includes(paramTarget)) {
+      if (window.__INITIAL_TARGET_LANG__ && SUPPORTED_LANGUAGES.includes(window.__INITIAL_TARGET_LANG__)) {
+        targetLang = window.__INITIAL_TARGET_LANG__;
+      } else if (paramTarget && SUPPORTED_LANGUAGES.includes(paramTarget)) {
         targetLang = paramTarget;
       } else {
         try {
@@ -4040,7 +4067,9 @@
         }
       }
 
-      if (paramSupport && SUPPORTED_LANGUAGES.includes(paramSupport)) {
+      if (window.__INITIAL_SUPPORT_LANG__ && SUPPORTED_LANGUAGES.includes(window.__INITIAL_SUPPORT_LANG__)) {
+        supportLang = window.__INITIAL_SUPPORT_LANG__;
+      } else if (paramSupport && SUPPORTED_LANGUAGES.includes(paramSupport)) {
         supportLang = paramSupport;
       } else {
         try {
@@ -4059,15 +4088,17 @@
       window.targetLang = targetLang;
       window.supportLang = supportLang;
 
-      if (paramLevel && SUPPORTED_LEVELS.includes(paramLevel)) {
-        currentLevel = paramLevel;
+      if (paramLevel && SUPPORTED_LEVELS.includes(paramLevel.toUpperCase())) {
+        currentLevel = paramLevel.toUpperCase();
+      } else if (window.__INITIAL_ACTIVE_LEVEL__ && SUPPORTED_LEVELS.includes(window.__INITIAL_ACTIVE_LEVEL__)) {
+        currentLevel = window.__INITIAL_ACTIVE_LEVEL__;
       } else {
         try {
-          currentLevel = localStorage.getItem("leenardo_preferred_level") || "A1";
+          currentLevel = localStorage.getItem("leenardo_preferred_level") || "C1";
         } catch (e) {
-          currentLevel = "A1";
+          currentLevel = "C1";
         }
-        if (!SUPPORTED_LEVELS.includes(currentLevel)) currentLevel = "A1";
+        if (!SUPPORTED_LEVELS.includes(currentLevel)) currentLevel = "C1";
       }
 
       // Persist State
@@ -4129,14 +4160,20 @@
       // Browser back/forward (popstate) support across levels & articles
       window.addEventListener("popstate", async (e) => {
         let pid = (e && e.state && e.state.id) || null;
+        let pPathLang = null;
         if (!pid) {
-          const match = window.location.pathname.match(/\/articles\/([^\/\.]+)(?:\.html)?/);
-          if (match) pid = decodeURIComponent(match[1]);
+          const match = window.location.pathname.match(/\/(?:([a-z]{2})\/)?articles\/([^\/\.]+)(?:\.html)?/i);
+          if (match) {
+            if (match[1] && SUPPORTED_LANGUAGES.includes(match[1].toLowerCase())) {
+              pPathLang = match[1].toLowerCase();
+            }
+            pid = decodeURIComponent(match[2]);
+          }
         }
         const params = new URLSearchParams(window.location.search);
         if (!pid) pid = params.get("id");
         const plvl = (e && e.state && e.state.level) || params.get("level");
-        const ptar = (e && e.state && e.state.target) || params.get("target") || params.get("lang");
+        const ptar = (e && e.state && e.state.target) || pPathLang || params.get("target") || params.get("lang");
         const psup = (e && e.state && e.state.support) || params.get("support");
 
         if (pid) {
@@ -4183,12 +4220,11 @@
         if (window.history && window.location.protocol !== "file:") {
           const url = new URL(window.location.href);
           if (currentArticleId) {
-            const hasHtmlExt = window.location.pathname.endsWith(".html");
-            url.pathname = `/articles/${encodeURIComponent(currentArticleId)}${hasHtmlExt ? ".html" : ""}`;
+            url.pathname = `/${targetLang}/articles/${encodeURIComponent(currentArticleId)}`;
           }
           url.searchParams.delete("id");
+          url.searchParams.delete("target");
           url.searchParams.delete("lang");
-          url.searchParams.set("target", targetLang);
           url.searchParams.set("support", supportLang);
           url.searchParams.set("level", currentLevel);
           const stateObj = { id: currentArticleId, target: targetLang, support: supportLang, level: currentLevel };
@@ -4206,27 +4242,49 @@
 
     function goToHome(e) {
       if (e) e.preventDefault();
-      const inArticles = window.location.pathname.includes("/articles/");
+      const inArticles = window.location.pathname.includes("/articles");
       const homePath = window.location.protocol === "file:" ? (inArticles ? "../index.html" : "index.html") : "/";
       window.location.href = `${homePath}?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
     }
 
-    function onTargetLanguageChange(newTarget) {
+    async function onTargetLanguageChange(newTarget) {
       if (!SUPPORTED_LANGUAGES.includes(newTarget)) return;
       const prevTarget = targetLang;
       targetLang = newTarget;
-      localStorage.setItem("leenardo_target_lang", targetLang);
+      try {
+        localStorage.setItem("leenardo_target_lang", targetLang);
+      } catch (e) {}
 
       // Strict enforcement: targetLanguage !== supportLanguage
       if (targetLang === supportLang) {
         supportLang = prevTarget !== targetLang ? prevTarget : SUPPORTED_LANGUAGES.find(l => l !== targetLang);
-        localStorage.setItem("leenardo_support_lang", supportLang);
+        try {
+          localStorage.setItem("leenardo_support_lang", supportLang);
+        } catch (e) {}
         const supElem = document.getElementById("support-lang-select");
         if (supElem) supElem.value = supportLang;
       }
 
       window.targetLang = targetLang;
       window.supportLang = supportLang;
+
+      // Ensure tokens exist for newly selected target language
+      let art = articlesDatabase.find(a => a.id === currentArticleId);
+      const hasLangData = Boolean(
+        art &&
+        art.languages &&
+        art.languages[targetLang] &&
+        art.languages[targetLang][currentLevel] &&
+        Array.isArray(art.languages[targetLang][currentLevel].paragraphs)
+      );
+      if (!hasLangData && window.location.protocol !== "file:") {
+        const fullArt = await fetchArticleFromSupabase(currentArticleId);
+        if (fullArt) {
+          const idx = articlesDatabase.findIndex(a => a.id === currentArticleId);
+          if (idx !== -1) articlesDatabase[idx] = fullArt;
+          else articlesDatabase.push(fullArt);
+        }
+      }
 
       stopSpeech();
       updateUrlState(true);
@@ -4238,12 +4296,16 @@
       if (!SUPPORTED_LANGUAGES.includes(newSupport)) return;
       const prevSupport = supportLang;
       supportLang = newSupport;
-      localStorage.setItem("leenardo_support_lang", supportLang);
+      try {
+        localStorage.setItem("leenardo_support_lang", supportLang);
+      } catch (e) {}
 
       // Strict enforcement: targetLanguage !== supportLanguage
       if (supportLang === targetLang) {
         targetLang = prevSupport !== supportLang ? prevSupport : SUPPORTED_LANGUAGES.find(l => l !== supportLang);
-        localStorage.setItem("leenardo_target_lang", targetLang);
+        try {
+          localStorage.setItem("leenardo_target_lang", targetLang);
+        } catch (e) {}
         const tarElem = document.getElementById("target-lang-select");
         if (tarElem) tarElem.value = targetLang;
       }
@@ -4258,13 +4320,33 @@
     }
 
     /* Central Product Action: Switch Level of the Same Article */
-    function changeLevel(level) {
+    async function changeLevel(level) {
       if (!SUPPORTED_LEVELS.includes(level)) return;
       if (currentLevel === level) return;
 
       currentLevel = level;
-      localStorage.setItem("leenardo_preferred_level", level);
+      try {
+        localStorage.setItem("leenardo_preferred_level", level);
+      } catch (e) {}
       stopSpeech();
+
+      // Ensure tokens exist for this level/language
+      let art = articlesDatabase.find(a => a.id === currentArticleId);
+      const hasLevelData = Boolean(
+        art &&
+        art.languages &&
+        art.languages[targetLang] &&
+        art.languages[targetLang][level] &&
+        Array.isArray(art.languages[targetLang][level].paragraphs)
+      );
+      if (!hasLevelData && window.location.protocol !== "file:") {
+        const fullArt = await fetchArticleFromSupabase(currentArticleId);
+        if (fullArt) {
+          const idx = articlesDatabase.findIndex(a => a.id === currentArticleId);
+          if (idx !== -1) articlesDatabase[idx] = fullArt;
+          else articlesDatabase.push(fullArt);
+        }
+      }
       
       // Intentional browser history push so Back / Forward steps between levels
       updateUrlState(true);
