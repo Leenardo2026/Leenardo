@@ -7732,10 +7732,16 @@
 
     if (typeof onAuthStateChange === "function") {
       onAuthStateChange(async user => {
+        if (!user) {
+          pageAuthUser = null;
+          return;
+        }
         pageAuthUser = user;
         updateSavedWordBadges();
-        if (currentArticleData) {
-          renderVocabCards(currentArticleData);
+        const curArt = getCurrentArticleObject();
+        const targetData = curArt?.languages?.[targetLang]?.[currentLevel] || curArt?.[targetLang]?.[currentLevel];
+        if (targetData) {
+          renderVocabSection(targetData);
         }
         const modal = document.getElementById("vocab-notebook-modal");
         if (modal && modal.classList.contains("show")) {

@@ -9,3 +9,4 @@
 - Diagnose before fixing: for unclear bugs, report the root cause with evidence first, then wait.
 - Do not simply agree. Before acting on an instruction or confirming a claim (from the user or from Claude), verify it against the code or official docs. If something is wrong, risky, or there is a simpler/safer way to reach the same goal, say so BEFORE acting and propose the alternative. Then wait for a decision.
 - After editing any HTML or JS file, syntax-check every changed inline <script> block and JS file with node before committing. Never commit code that fails to parse.
+- Syntax checks do not catch undefined names. For every identifier you add or reference in a change, verify it is declared and in scope (file:line) before committing.
