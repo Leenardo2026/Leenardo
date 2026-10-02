@@ -2867,6 +2867,8 @@
         toolQuizTitle: "Hızlı Kavrama Testi",
         showAnswer: "Cevabı Göster",
         hideAnswer: "Cevabı Gizle",
+        showTranslation: "Çeviriyi Göster",
+        hideTranslation: "Çeviriyi Gizle",
         quizCorrect: "Tebrikler, doğru cevap!",
         quizWrong: "Yanlış cevap, tekrar deneyin.",
         noQuiz: "Bu seviye için test hazırlanıyor.",
@@ -2922,7 +2924,8 @@
         reportSubmitBtn: "Raporu Gönder",
         reportSuccessToast: "Geri bildiriminiz için teşekkürler! İletildi. ✓",
         reportSelectCategoryPrompt: "Lütfen en az bir hata kategorisi seçin.",
-        deleteError: "Kelime buluttan silinemedi. Lütfen tekrar deneyin."
+        deleteError: "Kelime buluttan silinemedi. Lütfen tekrar deneyin.",
+        syncPendingToast: "Bu cihaza kaydedildi, ancak hesabınızla eşitlenemedi. Tekrar denenecek."
       },
       en: {
         backHome: "Library",
@@ -2953,6 +2956,8 @@
         toolQuizTitle: "Quick Comprehension Quiz",
         showAnswer: "Show Answer",
         hideAnswer: "Hide Answer",
+        showTranslation: "Show Translation",
+        hideTranslation: "Hide Translation",
         quizCorrect: "Correct answer! Well done!",
         quizWrong: "Incorrect, try again.",
         noQuiz: "Quiz in preparation for this level.",
@@ -3008,7 +3013,8 @@
         reportSubmitBtn: "Submit Report",
         reportSuccessToast: "Thank you for your feedback! Submitted. ✓",
         reportSelectCategoryPrompt: "Please select an issue category.",
-        deleteError: "Could not delete word from cloud. Please try again."
+        deleteError: "Could not delete word from cloud. Please try again.",
+        syncPendingToast: "Saved on this device, but not synced to your account. We'll retry."
       },
       es: {
         backHome: "Biblioteca",
@@ -3039,6 +3045,8 @@
         toolQuizTitle: "Test Rápido de Comprensión",
         showAnswer: "Mostrar Respuesta",
         hideAnswer: "Ocultar Respuesta",
+        showTranslation: "Mostrar Traducción",
+        hideTranslation: "Ocultar Traducción",
         quizCorrect: "¡Correcto! ¡Muy bien hecho!",
         quizWrong: "Incorrecto, inténtalo de nuevo.",
         noQuiz: "No hay test disponible para este nivel.",
@@ -3094,7 +3102,8 @@
         reportSubmitBtn: "Enviar reporte",
         reportSuccessToast: "¡Gracias por tus comentarios! Enviado. ✓",
         reportSelectCategoryPrompt: "Por favor, selecciona una categoría de problema.",
-        deleteError: "No se pudo eliminar la palabra de la nube. Inténtalo de nuevo."
+        deleteError: "No se pudo eliminar la palabra de la nube. Inténtalo de nuevo.",
+        syncPendingToast: "Guardado en este dispositivo, pero no sincronizado con tu cuenta. Lo reintentaremos."
       },
       de: {
         backHome: "Bibliothek",
@@ -3125,6 +3134,8 @@
         toolQuizTitle: "Schnelltest",
         showAnswer: "Antwort Zeigen",
         hideAnswer: "Antwort Verbergen",
+        showTranslation: "Übersetzung Anzeigen",
+        hideTranslation: "Übersetzung Ausblenden",
         quizCorrect: "Richtig! Ausgezeichnet!",
         quizWrong: "Leider falsch, versuche es noch einmal.",
         noQuiz: "Für dieses Niveau ist kein Quiz verfügbar.",
@@ -3180,7 +3191,8 @@
         reportSubmitBtn: "Bericht senden",
         reportSuccessToast: "Vielen Dank für Ihr Feedback! Gesendet. ✓",
         reportSelectCategoryPrompt: "Bitte wählen Sie eine Kategorie aus.",
-        deleteError: "Wort konnte nicht aus der Cloud gelöscht werden. Bitte erneut versuchen."
+        deleteError: "Wort konnte nicht aus der Cloud gelöscht werden. Bitte erneut versuchen.",
+        syncPendingToast: "Auf diesem Gerät gespeichert, aber nicht mit deinem Konto synchronisiert. Wir versuchen es erneut."
       },
       fr: {
         backHome: "Bibliothèque",
@@ -3211,6 +3223,8 @@
         toolQuizTitle: "Quiz Rapide de Compréhension",
         showAnswer: "Afficher la Réponse",
         hideAnswer: "Masquer la Réponse",
+        showTranslation: "Afficher la Traduction",
+        hideTranslation: "Masquer la Traduction",
         quizCorrect: "Bonne réponse ! Bravo !",
         quizWrong: "Réponse incorrecte, réessayez.",
         noQuiz: "Quiz en préparation pour ce niveau.",
@@ -3266,7 +3280,8 @@
         reportSubmitBtn: "Envoyer le signalement",
         reportSuccessToast: "Merci pour votre retour ! Envoyé. ✓",
         reportSelectCategoryPrompt: "Veuillez sélectionner une catégorie de problème.",
-        deleteError: "Impossible de supprimer le mot du cloud. Veuillez réessayer."
+        deleteError: "Impossible de supprimer le mot du cloud. Veuillez réessayer.",
+        syncPendingToast: "Enregistré sur cet appareil, mais non synchronisé avec votre compte. Nouvelle tentative à venir."
       }
     };
 
@@ -3919,7 +3934,10 @@
                 if (!articlesDatabase.some(a => a.id === initialArt.id)) {
                   articlesDatabase.unshift(initialArt);
                 }
-                renderTopicSelect();
+                if (typeof renderTopicSelect === "function") {
+                  renderTopicSelect();
+                }
+                renderRecommendations();
               }
             }).catch(() => {});
           }
@@ -5194,22 +5212,35 @@
           qaBox.className = "qa-item";
           qaBox.id = `qa-item-${qIdx}`;
 
-          // Support language question translation if available
-          let qText = item.q;
-          let aText = item.a;
-          if (item.translations && item.translations[supportLang]) {
-            qText = item.translations[supportLang].q || item.q;
-            aText = item.translations[supportLang].a || item.a;
-          }
+          // Always show target language question and answer defensively ({q, a} or {question, answer})
+          const targetQ = (item && (item.q || item.question)) || "";
+          const targetA = (item && (item.a || item.answer)) || "";
+
+          // Check if support language translation exists
+          const transObj = (item && item.translations && item.translations[supportLang]) || null;
+          const transQ = transObj ? (transObj.q || transObj.question || "") : "";
+          const transA = transObj ? (transObj.a || transObj.answer || "") : "";
+          const hasTranslation = Boolean(transQ || transA);
 
           qaBox.innerHTML = `
             <div class="qa-question-bar" role="button" tabindex="0" aria-expanded="false" id="qa-bar-${qIdx}" onclick="toggleQA(${qIdx})" onkeydown="handleQAKey(event, ${qIdx})">
-              <span><strong>Q${qIdx + 1}:</strong> ${escapeHtml(qText)}</span>
+              <span><strong>Q${qIdx + 1}:</strong> ${escapeHtml(targetQ)}</span>
               <span class="qa-chevron" id="qa-chev-${qIdx}">▼</span>
             </div>
             <div class="qa-answer-box" id="ans-${qIdx}" style="display:none;">
               <div class="qa-answer-label">Answer:</div>
-              <div>${escapeHtml(aText)}</div>
+              <div>${escapeHtml(targetA)}</div>
+              ${hasTranslation ? `
+                <div class="qa-trans-wrapper" style="margin-top:0.6rem; padding-top:0.5rem; border-top:1px dashed var(--border-light, #e2e8f0);">
+                  <button type="button" class="btn-qa-trans-toggle" id="qa-trans-btn-${qIdx}" onclick="toggleQATranslation(${qIdx}, event)" style="background:none; border:none; color:var(--primary, #0284c7); font-size:0.8rem; font-weight:600; cursor:pointer; padding:0; display:inline-flex; align-items:center; gap:0.25rem;">
+                    <span id="qa-trans-btn-text-${qIdx}">${escapeHtml(t.showTranslation || "Show Translation")}</span>
+                  </button>
+                  <div id="qa-trans-box-${qIdx}" style="display:none; margin-top:0.4rem; font-size:0.85rem; color:var(--slate-600, #475569); background:rgba(0,0,0,0.03); padding:0.5rem 0.75rem; border-radius:6px; line-height:1.5;">
+                    ${transQ ? `<div style="font-weight:600; margin-bottom:0.25rem;">${escapeHtml(transQ)}</div>` : ''}
+                    ${transA ? `<div>${escapeHtml(transA)}</div>` : ''}
+                  </div>
+                </div>
+              ` : ''}
             </div>
           `;
 
@@ -5217,6 +5248,22 @@
         });
       } else {
         qaContainer.innerHTML = `<p style="font-size:0.88rem; color:var(--slate-500); font-style:italic;">${t.noQAAvailable || "No comprehension questions for this level."}</p>`;
+      }
+    }
+
+    function toggleQATranslation(qIdx, event) {
+      if (event) event.stopPropagation();
+      const box = document.getElementById(`qa-trans-box-${qIdx}`);
+      const btnText = document.getElementById(`qa-trans-btn-text-${qIdx}`);
+      if (!box || !btnText) return;
+      const t = uiTranslations[supportLang] || uiTranslations.en;
+      const isHidden = box.style.display === "none";
+      if (isHidden) {
+        box.style.display = "block";
+        btnText.textContent = t.hideTranslation || "Hide Translation";
+      } else {
+        box.style.display = "none";
+        btnText.textContent = t.showTranslation || "Show Translation";
       }
     }
 
@@ -7636,21 +7683,29 @@
       });
     }
 
-    function getActiveAuthUser() {
+    async function getActiveAuthUser() {
       if (pageAuthUser) return pageAuthUser;
       if (typeof window !== "undefined" && window.currentAuthUser) return window.currentAuthUser;
-      if (typeof LeenardoAuth !== "undefined" && typeof LeenardoAuth.getCurrentUser === "function") {
-        return LeenardoAuth.getCurrentUser();
+      if (typeof LeenardoAuth !== "undefined") {
+        if (typeof LeenardoAuth.waitForSession === "function") {
+          return await LeenardoAuth.waitForSession();
+        }
+        if (typeof LeenardoAuth.getUser === "function") {
+          return await LeenardoAuth.getUser();
+        }
+        if (typeof LeenardoAuth.getCurrentUser === "function") {
+          return LeenardoAuth.getCurrentUser();
+        }
       }
       return null;
     }
 
-    function saveWordItem(item) {
+    async function saveWordItem(item) {
       if (!item) return;
       if (!item.fromLang) item.fromLang = targetLang;
       if (!item.toLang) item.toLang = supportLang;
       const words = getSavedWords();
-      const existingIdx = words.findIndex(w => w.id === item.id);
+      const existingIdx = words.findIndex(w => w.id === item.id || (w.word && w.word.toLowerCase().trim() === item.word.toLowerCase().trim()));
       if (existingIdx >= 0) {
         words[existingIdx] = Object.assign({}, words[existingIdx], item, { updatedAt: Date.now() });
       } else {
@@ -7660,11 +7715,42 @@
       updateSavedWordBadges();
 
       // Sync to Supabase cloud if user is authenticated
-      const authUser = getActiveAuthUser();
+      const authUser = await getActiveAuthUser();
       if (typeof LeenardoDB !== "undefined" && authUser) {
-        LeenardoDB.saveWordToCloud(authUser.id, item).catch(err => {
-          console.warn("Cloud save warning:", err);
-        });
+        try {
+          const res = await LeenardoDB.saveWordToCloud(authUser.id, item);
+          if (res && res.success) {
+            const currentWords = getSavedWords();
+            const idx = currentWords.findIndex(w => w.id === item.id || (w.word && w.word.toLowerCase().trim() === item.word.toLowerCase().trim()));
+            if (idx >= 0 && currentWords[idx].pendingSync) {
+              delete currentWords[idx].pendingSync;
+              localStorage.setItem(SAVED_WORDS_STORAGE_KEY, JSON.stringify(currentWords));
+            }
+          } else {
+            const currentWords = getSavedWords();
+            const idx = currentWords.findIndex(w => w.id === item.id || (w.word && w.word.toLowerCase().trim() === item.word.toLowerCase().trim()));
+            if (idx >= 0) {
+              currentWords[idx].pendingSync = true;
+              localStorage.setItem(SAVED_WORDS_STORAGE_KEY, JSON.stringify(currentWords));
+            }
+            const t = (typeof uiTranslations !== "undefined" && uiTranslations[supportLang]) || (typeof uiTranslations !== "undefined" && uiTranslations.en) || {};
+            if (typeof showToast === "function") {
+              showToast(t.syncPendingToast || "Saved on this device, but not synced to your account. We'll retry.");
+            }
+          }
+        } catch (err) {
+          console.warn("Cloud save exception:", err);
+          const currentWords = getSavedWords();
+          const idx = currentWords.findIndex(w => w.id === item.id || (w.word && w.word.toLowerCase().trim() === item.word.toLowerCase().trim()));
+          if (idx >= 0) {
+            currentWords[idx].pendingSync = true;
+            localStorage.setItem(SAVED_WORDS_STORAGE_KEY, JSON.stringify(currentWords));
+          }
+          const t = (typeof uiTranslations !== "undefined" && uiTranslations[supportLang]) || (typeof uiTranslations !== "undefined" && uiTranslations.en) || {};
+          if (typeof showToast === "function") {
+            showToast(t.syncPendingToast || "Saved on this device, but not synced to your account. We'll retry.");
+          }
+        }
       }
     }
 
@@ -7673,9 +7759,9 @@
       const targetWord = words.find(w => w.id === id || (w.word && w.word.toLowerCase().trim() === String(id).toLowerCase().trim()));
       if (!targetWord) return false;
 
-      // Remove from Supabase cloud if user is authenticated
-      const authUser = getActiveAuthUser();
-      if (typeof LeenardoDB !== "undefined" && authUser && targetWord.word) {
+      // Remove from Supabase cloud if user is authenticated and word was already synced
+      const authUser = await getActiveAuthUser();
+      if (typeof LeenardoDB !== "undefined" && authUser && targetWord.word && !targetWord.pendingSync) {
         try {
           const res = await LeenardoDB.removeWordFromCloud(authUser.id, targetWord.word);
           if (!res || res.error) {
