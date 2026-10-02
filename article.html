@@ -3397,6 +3397,13 @@
      */
     function mapSupabaseArticleToClient(art) {
       if (!art) return null;
+      let langs = art.languages || {};
+      // If languages was empty or missing targetLang, map root-level language keys (e.g. art.tr)
+      SUPPORTED_LANGUAGES.forEach(l => {
+        if (art[l] && !langs[l]) {
+          langs[l] = art[l];
+        }
+      });
       return {
         id: art.id || "",
         topic: art.topic || "",
@@ -3409,7 +3416,7 @@
         teaserTranslations: art.teaserTranslations || art.teaser_translations || {},
         visual: art.visual || {},
         readTime: art.readTime || art.read_time || "3 min read",
-        languages: art.languages || {},
+        languages: langs,
         summary: art.summary || {},
         status: art.status || "published",
         hidden: Boolean(art.hidden)
@@ -4010,7 +4017,10 @@
       const switcher = document.getElementById("same-topic-switcher");
       if (switcher) switcher.style.display = "";
       const featBox = document.getElementById("featured-img-box");
-      if (featBox) featBox.style.display = "";
+      const featImg = document.getElementById("article-featured-img");
+      if (featBox && featImg && featImg.getAttribute("src") && featImg.getAttribute("src").trim() !== "") {
+        featBox.style.display = "";
+      }
       const actionsBar = document.querySelector(".reading-actions-bar");
       if (actionsBar) actionsBar.style.display = "";
       const toolIds = ["vocab-list-container", "grammar-box", "qa-list-container", "quiz-box"];
@@ -4695,13 +4705,25 @@
         }
       });
 
-      const targetData = article.languages && article.languages[targetLang] && article.languages[targetLang][currentLevel];
+      // Resolve targetData from article.languages[targetLang][currentLevel], with fallback to direct language key on article
+      let targetData = article.languages && article.languages[targetLang] && article.languages[targetLang][currentLevel];
+      if (!targetData && article[targetLang] && article[targetLang][currentLevel]) {
+        if (!article.languages) article.languages = {};
+        article.languages[targetLang] = article[targetLang];
+        targetData = article.languages[targetLang][currentLevel];
+      }
       const supportData = article.languages && article.languages[supportLang] && article.languages[supportLang][currentLevel];
 
       if (!targetData) {
+        // If server-rendered content already exists in the DOM, NEVER overwrite it with an unavailable state
+        const bodyContent = document.getElementById("article-body-content");
+        if (bodyContent && bodyContent.querySelector(".story-paragraph")) {
+          console.warn(`[Client] targetData not found for ${targetLang}/${currentLevel}, preserving server-rendered content.`);
+          return;
+        }
         document.getElementById("article-main-title").textContent = "Content Unavailable";
         document.getElementById("article-support-title").textContent = "";
-        document.getElementById("article-body-content").innerHTML = "<p>This language and level combination is currently being prepared.</p>";
+        if (bodyContent) bodyContent.innerHTML = "<p>This language and level combination is currently being prepared.</p>";
         return;
       }
 
@@ -4734,7 +4756,7 @@
       const featImg = document.getElementById("article-featured-img");
       const featCaption = document.getElementById("article-featured-caption");
 
-      const rawImg = (article.visual && article.visual.imageUrl) || article.featuredImage;
+      const rawImg = (article.visual && (article.visual.imageUrl || article.visual.image_url || article.visual.url)) || article.featuredImage || article.image_url;
       const imgUrl = resolveAssetPath(rawImg);
       if (imgUrl && imgUrl.trim() !== "") {
         imgBox.style.display = "block";

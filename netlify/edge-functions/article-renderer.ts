@@ -175,8 +175,9 @@ export default async function handler(request: Request, context: Context) {
     });
   }
 
-  // Normalize languages dictionary if PostgREST returned languages->targetLang key
+  // Normalize languages dictionary if PostgREST returned root language key (e.g. article.tr) or languages->targetLang
   const targetLangBlock =
+    article[targetLang] ||
     article[`languages->${targetLang}`] ||
     article.languages?.[targetLang] ||
     {};
@@ -334,6 +335,40 @@ export default async function handler(request: Request, context: Context) {
       bodyRegex,
       `<div class="article-body" id="article-body-content">\n${renderedParagraphsHtml}\n      </div>`
     );
+  }
+
+  // E. Featured Image SSR (ensure root-absolute URL)
+  const visualObj = article.visual || {};
+  const rawImgUrl =
+    visualObj.imageUrl ||
+    visualObj.url ||
+    visualObj.image_url ||
+    article.featuredImage ||
+    article.image_url ||
+    "";
+  if (rawImgUrl) {
+    const rootImgUrl =
+      rawImgUrl.startsWith("http://") || rawImgUrl.startsWith("https://")
+        ? rawImgUrl
+        : "/" + rawImgUrl.replace(/^\/+/, "");
+    const imgCaption =
+      (supportLang === "tr" ? visualObj.captionTr : visualObj.captionEn) ||
+      visualObj.caption ||
+      visualObj.alt ||
+      activeTitle ||
+      "";
+
+    const featBoxRegex = /<div class="featured-image-box"[^>]*id="featured-img-box"[^>]*style="display:none;"[^>]*>[\s\S]*?<\/div>/i;
+    if (featBoxRegex.test(html)) {
+      html = html.replace(
+        featBoxRegex,
+        `<div class="featured-image-box" id="featured-img-box">\n        <img id="article-featured-img" class="featured-image" src="${escapeHtml(
+          rootImgUrl
+        )}" alt="${escapeHtml(imgCaption)}">\n        <figcaption class="featured-image-caption" id="article-featured-caption">${escapeHtml(
+          imgCaption
+        )}</figcaption>\n      </div>`
+      );
+    }
   }
 
   // 9. Embed initial article payload for client hydration
