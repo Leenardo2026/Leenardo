@@ -28,25 +28,61 @@
 /worksheets/*                             /404.html  404!
 /konular/*                                /404.html  404!
 
-# 301 Permanent Redirects from legacy query-param URLs (/article.html?id=...)
-# to distinct article URLs (/articles/:id.html), preserving user preferences
-/article.html  id=:id  target=:target  support=:support  level=:level  /articles/:id.html?target=:target&support=:support&level=:level  301!
-/article.html  id=:id  target=:target  support=:support  /articles/:id.html?target=:target&support=:support  301!
-/article.html  id=:id  target=:target  level=:level  /articles/:id.html?target=:target&level=:level  301!
-/article.html  id=:id  support=:support  level=:level  /articles/:id.html?support=:support&level=:level  301!
-/article.html  id=:id  target=:target  /articles/:id.html?target=:target  301!
-/article.html  id=:id  support=:support  /articles/:id.html?support=:support  301!
-/article.html  id=:id  level=:level  /articles/:id.html?level=:level  301!
+# ------------------------------------------------------------------------------
+# Multilingual Article Redirects (Phase 3)
+# 1-hop 301 permanent redirects to /{lang}/articles/{id}
+# Most-specific query parameter rules are placed first.
+# Static files exist on disk, so all rules are forced (301!).
+# ------------------------------------------------------------------------------
 
-# Support legacy ?lang= alias for ?target=
-/article.html  id=:id  lang=:target  support=:support  level=:level  /articles/:id.html?target=:target&support=:support&level=:level  301!
-/article.html  id=:id  lang=:target  /articles/:id.html?target=:target  301!
+# 1. Legacy query-param URLs: /article.html?id=:id...
+# With target (or legacy ?lang= alias)
+/article.html  id=:id  target=:target  support=:support  level=:level  /:target/articles/:id?level=:level&support=:support  301!
+/article.html  id=:id  lang=:target    support=:support  level=:level  /:target/articles/:id?level=:level&support=:support  301!
+/article.html  id=:id  target=:target  support=:support                /:target/articles/:id?support=:support               301!
+/article.html  id=:id  lang=:target    support=:support                /:target/articles/:id?support=:support               301!
+/article.html  id=:id  target=:target  level=:level                    /:target/articles/:id?level=:level                   301!
+/article.html  id=:id  lang=:target    level=:level                    /:target/articles/:id?level=:level                   301!
+/article.html  id=:id  target=:target                                  /:target/articles/:id                                301!
+/article.html  id=:id  lang=:target                                    /:target/articles/:id                                301!
 
-# Fallback 301 redirect for any /article.html?id=... with no extra params
-/article.html  id=:id  /articles/:id.html  301!
+# Without target (defaults to /tr/articles/:id)
+/article.html  id=:id  support=:support  level=:level                  /tr/articles/:id?level=:level&support=:support       301!
+/article.html  id=:id  support=:support                                /tr/articles/:id?support=:support                    301!
+/article.html  id=:id  level=:level                                    /tr/articles/:id?level=:level                        301!
+/article.html  id=:id                                                  /tr/articles/:id                                     301!
 
-# Clean URL extensionless redirect: /articles/:id -> /articles/:id.html
-/articles/:id  /articles/:id.html  301
+# 2. Legacy static HTML URLs: /articles/:id.html...
+# (Must appear before /articles/:id to prevent :id capturing '.html')
+# With target (or legacy ?lang= alias)
+/articles/:id.html  target=:target  support=:support  level=:level     /:target/articles/:id?level=:level&support=:support  301!
+/articles/:id.html  lang=:target    support=:support  level=:level     /:target/articles/:id?level=:level&support=:support  301!
+/articles/:id.html  target=:target  support=:support                   /:target/articles/:id?support=:support               301!
+/articles/:id.html  lang=:target    support=:support                   /:target/articles/:id?support=:support               301!
+/articles/:id.html  target=:target  level=:level                       /:target/articles/:id?level=:level                   301!
+/articles/:id.html  lang=:target    level=:level                       /:target/articles/:id?level=:level                   301!
+/articles/:id.html  target=:target                                     /:target/articles/:id                                301!
+/articles/:id.html  lang=:target                                       /:target/articles/:id                                301!
 
-# Dynamic route rewrite fallback: any /articles/* route is handled by article.html
-/articles/*  /article.html  200
+# Without target (defaults to /tr/articles/:id)
+/articles/:id.html  support=:support  level=:level                     /tr/articles/:id?level=:level&support=:support       301!
+/articles/:id.html  support=:support                                   /tr/articles/:id?support=:support                    301!
+/articles/:id.html  level=:level                                       /tr/articles/:id?level=:level                        301!
+/articles/:id.html                                                     /tr/articles/:id                                     301!
+
+# 3. Clean legacy extensionless URLs: /articles/:id...
+# With target (or legacy ?lang= alias)
+/articles/:id  target=:target  support=:support  level=:level          /:target/articles/:id?level=:level&support=:support  301!
+/articles/:id  lang=:target    support=:support  level=:level          /:target/articles/:id?level=:level&support=:support  301!
+/articles/:id  target=:target  support=:support                        /:target/articles/:id?support=:support               301!
+/articles/:id  lang=:target    support=:support                        /:target/articles/:id?support=:support               301!
+/articles/:id  target=:target  level=:level                            /:target/articles/:id?level=:level                   301!
+/articles/:id  lang=:target    level=:level                            /:target/articles/:id?level=:level                   301!
+/articles/:id  target=:target                                          /:target/articles/:id                                301!
+/articles/:id  lang=:target                                            /:target/articles/:id                                301!
+
+# Without target (defaults to /tr/articles/:id)
+/articles/:id  support=:support  level=:level                          /tr/articles/:id?level=:level&support=:support       301!
+/articles/:id  support=:support                                        /tr/articles/:id?support=:support                    301!
+/articles/:id  level=:level                                            /tr/articles/:id?level=:level                        301!
+/articles/:id                                                          /tr/articles/:id                                     301!
