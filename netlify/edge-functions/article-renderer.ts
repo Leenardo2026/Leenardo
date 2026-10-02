@@ -409,9 +409,10 @@ export default async function handler(request: Request, context: Context) {
     headers: {
       "Content-Type": "text/html; charset=utf-8",
       "Netlify-CDN-Cache-Control":
-        "public, s-maxage=3600, stale-while-revalidate=86400",
-      "Netlify-Cache-Tag": `article-${slug},lang-${targetLang}`,
+        "public, s-maxage=3600, must-revalidate",
+      "Netlify-Cache-Tag": `article-${slug},lang-${targetLang},level-${activeLevel},support-${supportLang}`,
       "Cache-Control": "public, max-age=0, must-revalidate",
+      "Vary": "Accept-Encoding, Query",
     },
   });
 }

@@ -4065,10 +4065,10 @@
         currentArticleId = firstWithVisual ? firstWithVisual.id : (articlesDatabase[0] ? articlesDatabase[0].id : "");
       }
 
-      if (window.__INITIAL_TARGET_LANG__ && SUPPORTED_LANGUAGES.includes(window.__INITIAL_TARGET_LANG__)) {
-        targetLang = window.__INITIAL_TARGET_LANG__;
-      } else if (paramTarget && SUPPORTED_LANGUAGES.includes(paramTarget)) {
+      if (paramTarget && SUPPORTED_LANGUAGES.includes(paramTarget)) {
         targetLang = paramTarget;
+      } else if (window.__INITIAL_TARGET_LANG__ && SUPPORTED_LANGUAGES.includes(window.__INITIAL_TARGET_LANG__)) {
+        targetLang = window.__INITIAL_TARGET_LANG__;
       } else {
         try {
           targetLang = localStorage.getItem("leenardo_target_lang") || "tr";
@@ -4077,10 +4077,10 @@
         }
       }
 
-      if (window.__INITIAL_SUPPORT_LANG__ && SUPPORTED_LANGUAGES.includes(window.__INITIAL_SUPPORT_LANG__)) {
-        supportLang = window.__INITIAL_SUPPORT_LANG__;
-      } else if (paramSupport && SUPPORTED_LANGUAGES.includes(paramSupport)) {
+      if (paramSupport && SUPPORTED_LANGUAGES.includes(paramSupport)) {
         supportLang = paramSupport;
+      } else if (window.__INITIAL_SUPPORT_LANG__ && SUPPORTED_LANGUAGES.includes(window.__INITIAL_SUPPORT_LANG__)) {
+        supportLang = window.__INITIAL_SUPPORT_LANG__;
       } else {
         try {
           supportLang = localStorage.getItem("leenardo_support_lang") || (targetLang === "en" ? "tr" : "en");

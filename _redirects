@@ -28,3 +28,6 @@
 /worksheets/*                             /404.html  404!
 /konular/*                                /404.html  404!
 
+# Downstream rewrite allowing context.next() inside article-renderer to load /article.html
+/:lang/articles/*                         /article.html  200
+
