@@ -3890,6 +3890,9 @@
     }
 
     async function loadArticlesData() {
+      let supabaseSuccess = false;
+      let primaryArticle = null;
+
       // 0. Immediate hydration from Edge Function SSR payload
       if (typeof window !== "undefined" && window.__INITIAL_ARTICLE__) {
         const initialArt = mapSupabaseArticleToClient(window.__INITIAL_ARTICLE__);
@@ -3927,9 +3930,6 @@
       const urlParams = new URLSearchParams(window.location.search);
       const queryId = urlParams.get("id");
       const targetId = pathArticleId || queryId;
-
-      let primaryArticle = null;
-      let supabaseSuccess = false;
 
       // 2. Dynamic Fetch from Supabase (Primary live path)
       if (window.location.protocol !== "file:") {
@@ -8122,7 +8122,9 @@
     }
 
     async function start() {
-      renderLoadingState();
+      if (!window.__INITIAL_ARTICLE__) {
+        renderLoadingState();
+      }
       await loadArticlesData();
       if (articleNotFound) {
         renderNotFoundState(currentArticleId);

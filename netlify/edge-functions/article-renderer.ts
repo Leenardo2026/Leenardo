@@ -258,20 +258,30 @@ export default async function handler(request: Request, context: Context) {
 
   // 8. Inject Server-Rendered Content into editorial HTML placeholders
   // A. Article Headline
-  html = html.replace(
-    /<h1 class="article-main-title"[^>]*>[\s\S]*?<\/h1>/i,
-    `<h1 class="article-main-title" id="article-main-title">${escapeHtml(
-      activeTitle
-    )}</h1>`
-  );
+  const headlineRegex = /<h1 class="article-main-title"[^>]*>[\s\S]*?<\/h1>/i;
+  if (!headlineRegex.test(html)) {
+    console.error('[Edge] Required placeholder missing: <h1 class="article-main-title">');
+  } else {
+    html = html.replace(
+      headlineRegex,
+      `<h1 class="article-main-title" id="article-main-title">${escapeHtml(
+        activeTitle
+      )}</h1>`
+    );
+  }
 
   // B. Article Subtitle / Translation
-  html = html.replace(
-    /<div class="article-support-title"[^>]*>[\s\S]*?<\/div>/i,
-    `<div class="article-support-title" id="article-support-title">${escapeHtml(
-      supportTitle
-    )}</div>`
-  );
+  const subtitleRegex = /<div class="article-support-title"[^>]*>[\s\S]*?<\/div>/i;
+  if (!subtitleRegex.test(html)) {
+    console.error('[Edge] Required placeholder missing: <div class="article-support-title">');
+  } else {
+    html = html.replace(
+      subtitleRegex,
+      `<div class="article-support-title" id="article-support-title">${escapeHtml(
+        supportTitle
+      )}</div>`
+    );
+  }
 
   // C. Category Badge
   const catLabel =
@@ -279,12 +289,17 @@ export default async function handler(request: Request, context: Context) {
     article.category_translations?.en ||
     article.category ||
     "Story";
-  html = html.replace(
-    /<span class="article-category-tag"[^>]*>[\s\S]*?<\/span>/i,
-    `<span class="article-category-tag" id="article-category-badge">${escapeHtml(
-      catLabel
-    )}</span>`
-  );
+  const categoryRegex = /<span class="article-category-tag"[^>]*>[\s\S]*?<\/span>/i;
+  if (!categoryRegex.test(html)) {
+    console.error('[Edge] Required placeholder missing: <span class="article-category-tag">');
+  } else {
+    html = html.replace(
+      categoryRegex,
+      `<span class="article-category-tag" id="article-category-badge">${escapeHtml(
+        catLabel
+      )}</span>`
+    );
+  }
 
   // D. Server-render Body Paragraphs for Level
   const paragraphs = levelData.paragraphs || [];
@@ -311,10 +326,13 @@ export default async function handler(request: Request, context: Context) {
       .join("\n");
   }
 
-  if (renderedParagraphsHtml) {
+  const bodyRegex = /<div class="article-body"[^>]*id="article-body-content"[^>]*>[\s\S]*?<\/div>/i;
+  if (!bodyRegex.test(html)) {
+    console.error('[Edge] Required placeholder missing: <div class="article-body" id="article-body-content">');
+  } else if (renderedParagraphsHtml) {
     html = html.replace(
-      /<div class="article-body-content" id="article-body">[\s\S]*?<\/div>/i,
-      `<div class="article-body-content" id="article-body">${renderedParagraphsHtml}</div>`
+      bodyRegex,
+      `<div class="article-body" id="article-body-content">\n${renderedParagraphsHtml}\n      </div>`
     );
   }
 
@@ -332,7 +350,11 @@ export default async function handler(request: Request, context: Context) {
   </script>
   `;
 
-  html = html.replace("</body>", `${hydrationScript}\n</body>`);
+  if (!html.includes("</body>")) {
+    console.error('[Edge] Required placeholder missing: </body>');
+  } else {
+    html = html.replace("</body>", `${hydrationScript}\n</body>`);
+  }
 
   // Final Guard: Verify rendered content integrity
   if (!html || html.trim() === "" || !html.includes("article-main-title")) {
