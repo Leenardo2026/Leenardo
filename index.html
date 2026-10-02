@@ -2724,7 +2724,7 @@
       const pool = unreadList.length > 0 ? unreadList : articlesDatabase;
       const randomIndex = Math.floor(Math.random() * pool.length);
       const article = pool[randomIndex];
-      const targetUrl = `articles/${encodeURIComponent(article.id)}.html?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
+      const targetUrl = `/${targetLang}/articles/${encodeURIComponent(article.id)}?level=${currentLevel}&support=${supportLang}`;
       window.location.href = targetUrl;
     }
 
@@ -2771,7 +2771,7 @@
                  || (latest.titleTranslations && latest.titleTranslations[targetLang])
                  || latest.topic;
       tickerLink.textContent = title;
-      tickerLink.href = `articles/${encodeURIComponent(latest.id)}.html?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
+      tickerLink.href = `/${targetLang}/articles/${encodeURIComponent(latest.id)}?level=${currentLevel}&support=${supportLang}`;
     }
 
     function formatCategoryLabel(label) {
@@ -3002,7 +3002,7 @@
         const leadExcerpt = getArticleExcerpt(lead, leadLevelData);
         const leadExcerptHtml = leadExcerpt ? `<p class="hero-lead-excerpt">${leadExcerpt}</p>` : "";
 
-        const leadUrl = `articles/${encodeURIComponent(lead.id)}.html?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
+        const leadUrl = `/${targetLang}/articles/${encodeURIComponent(lead.id)}?level=${currentLevel}&support=${supportLang}`;
         const leadImg = (lead.visual && lead.visual.imageUrl) ? lead.visual.imageUrl : 'images/cover_01.jpg';
         const leadIsRead = isArticleRead(lead.id);
         const leadReadTag = leadIsRead ? `<span class="hero-read-tag">✓ ${t.readStatus || 'Read'}</span>` : '';
@@ -3079,7 +3079,7 @@
         const subSupportTitle = getSupportTitle(art);
         const subSupportTitleHtml = subSupportTitle ? `<span class="feed-title-support">${subSupportTitle}</span>` : "";
         const img = (art.visual && art.visual.imageUrl) ? art.visual.imageUrl : 'images/cover_01.jpg';
-        const url = `articles/${encodeURIComponent(art.id)}.html?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
+        const url = `/${targetLang}/articles/${encodeURIComponent(art.id)}?level=${currentLevel}&support=${supportLang}`;
         const isRead = isArticleRead(art.id);
         const readBadge = isRead ? `<span>✓ ${t.readStatus || 'Read'}</span>` : '';
         return `
@@ -3127,7 +3127,7 @@
         const trendSupportTitle = getSupportTitle(art);
         const trendSupportTitleHtml = trendSupportTitle ? `<span class="feed-title-support">${trendSupportTitle}</span>` : "";
         const img = (art.visual && art.visual.imageUrl) ? art.visual.imageUrl : 'images/cover_01.jpg';
-        const url = `articles/${encodeURIComponent(art.id)}.html?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
+        const url = `/${targetLang}/articles/${encodeURIComponent(art.id)}?level=${currentLevel}&support=${supportLang}`;
         const isRead = isArticleRead(art.id);
         const readBadge = isRead ? `<span class="card-read-badge">✓</span>` : '';
         const item = document.createElement("div");
@@ -3170,17 +3170,17 @@
       const excerpt = getArticleExcerpt(art, targetLevelData);
       const teaserHtml = excerpt ? `<p class="feed-desc">${excerpt}</p>` : "";
 
-      const articleBaseUrl = `articles/${encodeURIComponent(art.id)}.html?target=${targetLang}&support=${supportLang}`;
+      const articleBaseUrl = `/${targetLang}/articles/${encodeURIComponent(art.id)}`;
       const imageUrl = (art.visual && art.visual.imageUrl) ? art.visual.imageUrl : 'images/cover_01.jpg';
       const isRead = isArticleRead(art.id);
       const readBadgeHtml = isRead ? `<span class="card-read-badge">✓ ${t.readStatus || 'Read'}</span>` : '';
 
       const levelTabsHtml = SUPPORTED_LEVELS.map(lvl => `
-        <a href="${articleBaseUrl}&level=${lvl}" class="level-tab ${lvl === currentLevel ? 'active' : ''}">${lvl}</a>
+        <a href="${articleBaseUrl}?level=${lvl}&support=${supportLang}" class="level-tab ${lvl === currentLevel ? 'active' : ''}">${lvl}</a>
       `).join('');
 
       card.innerHTML = `
-        <a href="${articleBaseUrl}&level=${currentLevel}" class="feed-img-link">
+        <a href="${articleBaseUrl}?level=${currentLevel}&support=${supportLang}" class="feed-img-link">
           <img src="${imageUrl}" alt="${cardTitle}" class="feed-img" loading="lazy">
         </a>
         <div class="feed-body">
@@ -3188,7 +3188,7 @@
             <span class="feed-cat">${catLabel}</span>
             ${readBadgeHtml}
           </div>
-          <a href="${articleBaseUrl}&level=${currentLevel}">
+          <a href="${articleBaseUrl}?level=${currentLevel}&support=${supportLang}">
             <h3 class="feed-title">${cardTitle}</h3>
             ${supportTitleHtml}
           </a>
@@ -3197,7 +3197,7 @@
             <div class="level-tabs">
               ${levelTabsHtml}
             </div>
-            <a href="${articleBaseUrl}&level=${currentLevel}" class="card-read-link">
+            <a href="${articleBaseUrl}?level=${currentLevel}&support=${supportLang}" class="card-read-link">
               ${t.readStory || 'Read story →'}
             </a>
           </div>
