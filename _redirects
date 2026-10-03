@@ -28,25 +28,6 @@
 /worksheets/*                             /404.html  404!
 /konular/*                                /404.html  404!
 
-# 301 Permanent Redirects from legacy query-param URLs (/article.html?id=...)
-# to distinct article URLs (/articles/:id.html), preserving user preferences
-/article.html  id=:id  target=:target  support=:support  level=:level  /articles/:id.html?target=:target&support=:support&level=:level  301!
-/article.html  id=:id  target=:target  support=:support  /articles/:id.html?target=:target&support=:support  301!
-/article.html  id=:id  target=:target  level=:level  /articles/:id.html?target=:target&level=:level  301!
-/article.html  id=:id  support=:support  level=:level  /articles/:id.html?support=:support&level=:level  301!
-/article.html  id=:id  target=:target  /articles/:id.html?target=:target  301!
-/article.html  id=:id  support=:support  /articles/:id.html?support=:support  301!
-/article.html  id=:id  level=:level  /articles/:id.html?level=:level  301!
+# Downstream rewrite allowing context.next() inside article-renderer to load /article.html
+/:lang/articles/*                         /article.html  200
 
-# Support legacy ?lang= alias for ?target=
-/article.html  id=:id  lang=:target  support=:support  level=:level  /articles/:id.html?target=:target&support=:support&level=:level  301!
-/article.html  id=:id  lang=:target  /articles/:id.html?target=:target  301!
-
-# Fallback 301 redirect for any /article.html?id=... with no extra params
-/article.html  id=:id  /articles/:id.html  301!
-
-# Clean URL extensionless redirect: /articles/:id -> /articles/:id.html
-/articles/:id  /articles/:id.html  301
-
-# Dynamic route rewrite fallback: any /articles/* route is handled by article.html
-/articles/*  /article.html  200

@@ -96,20 +96,21 @@
     const linkBack = document.getElementById("link-back-to-signin");
 
     // Close logic
-    function closeModal() {
+    function closeModal(completed = false) {
       overlay.classList.remove("show");
       clearAlert();
+      document.dispatchEvent(new CustomEvent("leenardo:auth-modal-closed", { detail: { completed: !!completed } }));
     }
 
-    if (closeBtn) closeBtn.onclick = closeModal;
+    if (closeBtn) closeBtn.onclick = () => closeModal(false);
     if (overlay) {
       overlay.onclick = (e) => {
-        if (e.target === overlay) closeModal();
+        if (e.target === overlay) closeModal(false);
       };
     }
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && overlay && overlay.classList.contains("show")) {
-        closeModal();
+        closeModal(false);
       }
     });
 
@@ -155,7 +156,7 @@
         submitBtn.disabled = true;
         submitBtn.textContent = "Signing In...";
         await LeenardoAuth.signIn(email, password);
-        closeModal();
+        closeModal(true);
         showGlobalToast("Welcome back!");
       } catch (err) {
         showAlert(err.message || "Failed to sign in. Check your email & password.", "error");
@@ -180,7 +181,7 @@
         if (res?.user && !res?.session) {
           showAlert("Account created! Please check your email to confirm your account.", "success");
         } else {
-          closeModal();
+          closeModal(true);
           showGlobalToast("Welcome to Leenardo!");
         }
       } catch (err) {

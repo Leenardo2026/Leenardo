@@ -1,0 +1,41 @@
+# ==============================================================================
+# Leenardo Netlify Configuration
+# Phase 3: Edge-rendered multilingual article routes (/{lang}/articles/{slug})
+# ==============================================================================
+
+[build]
+  publish = "."
+
+# Edge Function: Article Renderer
+# Handles dynamic /{lang}/articles/{slug} routes with localized metadata and SSR C1 content
+[[edge_functions]]
+  path = "/:lang/articles/:slug"
+  function = "article-renderer"
+  cache = "manual"
+
+# Edge Function: Dynamic Sitemap Generator
+# Generates multilingual XML sitemap covering published articles across 5 languages
+[[edge_functions]]
+  path = "/sitemap.xml"
+  function = "sitemap"
+  cache = "manual"
+
+# Edge Function: Legacy Article Redirects
+# Intercepts /articles/* and /article.html, validates slug against Supabase,
+# and issues 1-hop 301 redirects to /{lang}/articles/{slug}
+[[edge_functions]]
+  path = "/articles/*"
+  function = "legacy-redirects"
+  cache = "manual"
+
+[[edge_functions]]
+  path = "/article.html"
+  function = "legacy-redirects"
+  cache = "manual"
+
+# Downstream rewrite allowing context.next() inside article-renderer to load /article.html
+# directly from origin without loopback network fetches
+[[redirects]]
+  from = "/:lang/articles/*"
+  to = "/article.html"
+  status = 200

@@ -11,10 +11,28 @@ window.SUPABASE_CONFIG = SUPABASE_CONFIG;
 
 // Initialize the Supabase Client if library is available
 let supabaseClient = null;
+let sessionCheckPromise = null;
+
+function checkInitialSession() {
+  if (!sessionCheckPromise && supabaseClient) {
+    sessionCheckPromise = supabaseClient.auth.getSession().then(({ data }) => {
+      const user = data && data.session ? data.session.user : null;
+      notifyAuthStateListeners(user);
+      return user;
+    }).catch(err => {
+      console.warn("getSession error:", err);
+      notifyAuthStateListeners(null);
+      return null;
+    });
+  }
+  return sessionCheckPromise;
+}
+
 if (window.supabase && typeof window.supabase.createClient === "function") {
   try {
     supabaseClient = window.supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);
     console.log("💎 Supabase client successfully initialized.");
+    checkInitialSession();
   } catch (err) {
     console.error("Failed to initialize Supabase client:", err);
   }
@@ -41,6 +59,9 @@ function onAuthStateChange(listener) {
 
 function notifyAuthStateListeners(user) {
   currentAuthUser = user;
+  if (!user) {
+    sessionCheckPromise = null;
+  }
   if (typeof window !== "undefined") {
     window.currentAuthUser = user;
   }
@@ -56,6 +77,19 @@ const LeenardoAuth = {
    */
   getCurrentUser() {
     return currentAuthUser || (typeof window !== "undefined" ? window.currentAuthUser : null);
+  },
+
+  /**
+   * Wait for session check to complete if in flight, or return current user
+   */
+  async waitForSession() {
+    if (currentAuthUser) return currentAuthUser;
+    if (sessionCheckPromise) {
+      const sessUser = await sessionCheckPromise;
+      if (sessUser) return sessUser;
+    }
+    if (supabaseClient) return await this.getUser();
+    return null;
   },
 
   /**
@@ -107,8 +141,8 @@ const LeenardoAuth = {
     if (error) throw error;
     if (data && data.user) {
       notifyAuthStateListeners(data.user);
-      // Automatically sync local words to cloud after login
-      LeenardoDB.syncLocalWordsToCloud(data.user.id).catch(err => {
+      // Automatically sync pending words to cloud after login
+      LeenardoDB.syncPendingWordsToCloud(data.user.id).catch(err => {
         console.warn("Background word sync warning:", err);
       });
     }
@@ -120,6 +154,7 @@ const LeenardoAuth = {
    */
   async signOut() {
     if (!supabaseClient) return;
+    sessionCheckPromise = null;
     const { error } = await supabaseClient.auth.signOut();
     if (error) console.error("Sign out error:", error);
     notifyAuthStateListeners(null);
@@ -175,9 +210,12 @@ const LeenardoDB = {
 
   /**
    * Save or update a word in Supabase
+   * @returns {Promise<{success: boolean, error: any}>}
    */
   async saveWordToCloud(userId, item) {
-    if (!supabaseClient || !userId || !item || !item.word) return false;
+    if (!supabaseClient || !userId || !item || !item.word) {
+      return { success: false, error: "Missing required parameters" };
+    }
     try {
       const payload = {
         user_id: userId,
@@ -194,12 +232,12 @@ const LeenardoDB = {
 
       if (error) {
         console.error("Error saving word to Supabase:", error);
-        return false;
+        return { success: false, error };
       }
-      return true;
+      return { success: true, error: null };
     } catch (e) {
       console.error("Exception in saveWordToCloud:", e);
-      return false;
+      return { success: false, error: e };
     }
   },
 
@@ -249,9 +287,10 @@ const LeenardoDB = {
   },
 
   /**
-   * Sync local storage words to Supabase upon user sign-in
+   * Retry pending local storage words to Supabase upon valid session confirmation.
+   * Uploads ONLY items with pendingSync: true to avoid resurrecting deleted words.
    */
-  async syncLocalWordsToCloud(userId) {
+  async syncPendingWordsToCloud(userId) {
     if (!supabaseClient || !userId) return;
     const STORAGE_KEY = "leenardo_saved_words_v1";
     let localWords = [];
@@ -262,56 +301,32 @@ const LeenardoDB = {
       localWords = [];
     }
 
-    // Index existing local words to preserve rich client metadata (fromLang, toLang, root, rootTranslation)
-    const localMap = new Map();
-    localWords.forEach(w => {
-      if (w && w.word) {
-        localMap.set(w.word.toLowerCase().trim(), w);
-      }
-    });
+    if (!Array.isArray(localWords) || localWords.length === 0) return;
 
-    const mergeMetadata = (cw) => {
-      const existing = localMap.get((cw.word || "").toLowerCase().trim());
-      const res = { ...cw };
-      if (existing) {
-        if (existing.id) res.id = existing.id;
-        if (existing.fromLang !== undefined && existing.fromLang !== null) res.fromLang = existing.fromLang;
-        if (existing.toLang !== undefined && existing.toLang !== null) res.toLang = existing.toLang;
-        if (existing.root !== undefined && existing.root !== null) res.root = existing.root;
-        if (existing.rootTranslation !== undefined && existing.rootTranslation !== null) res.rootTranslation = existing.rootTranslation;
-        if (existing.contextSentence && !res.contextSentence) res.contextSentence = existing.contextSentence;
-      }
-      return res;
-    };
-
-    if (!Array.isArray(localWords) || localWords.length === 0) {
-      // If local is empty, pull cloud words to local without inventing language defaults
-      const cloudWords = await this.getCloudWords(userId);
-      if (cloudWords.length > 0) {
-        const merged = cloudWords.map(mergeMetadata);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
-        if (typeof updateSavedWordBadges === "function") updateSavedWordBadges();
-        if (typeof renderSavedWordsList === "function") renderSavedWordsList();
-      }
-      return;
-    }
-
-    // Upsert each local word to cloud
+    let hasChanges = false;
     for (const item of localWords) {
-      if (item && item.word) {
-        await this.saveWordToCloud(userId, item);
+      if (item && item.word && item.pendingSync) {
+        const res = await this.saveWordToCloud(userId, item);
+        if (res && res.success) {
+          delete item.pendingSync;
+          hasChanges = true;
+        }
       }
     }
 
-    // Pull combined list from cloud and merge with existing local metadata
-    const updatedCloudWords = await this.getCloudWords(userId);
-    const enriched = updatedCloudWords.map(mergeMetadata);
+    if (hasChanges) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(localWords));
+      if (typeof updateSavedWordBadges === "function") updateSavedWordBadges();
+      if (typeof renderSavedWordsList === "function") renderSavedWordsList();
+      console.log("✅ Successfully synced pending local words to cloud.");
+    }
+  },
 
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(enriched));
-
-    if (typeof updateSavedWordBadges === "function") updateSavedWordBadges();
-    if (typeof renderSavedWordsList === "function") renderSavedWordsList();
-    console.log(`✅ Synced ${enriched.length} words with cloud.`);
+  /**
+   * Legacy alias: safely synchronizes only pending items
+   */
+  async syncLocalWordsToCloud(userId) {
+    return this.syncPendingWordsToCloud(userId);
   }
 };
 
@@ -383,18 +398,19 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   if (supabaseClient) {
-    // Check initial session
-    const { data: { session } } = await supabaseClient.auth.getSession();
-    if (session && session.user) {
-      notifyAuthStateListeners(session.user);
-    }
+    // Check initial session and retry pending words if user is authenticated
+    checkInitialSession().then(user => {
+      if (user) {
+        LeenardoDB.syncPendingWordsToCloud(user.id).catch(() => {});
+      }
+    });
 
     // Listen to real-time auth changes
     supabaseClient.auth.onAuthStateChange((event, session) => {
       const user = session ? session.user : null;
       notifyAuthStateListeners(user);
-      if (event === "SIGNED_IN" && user) {
-        LeenardoDB.syncLocalWordsToCloud(user.id);
+      if ((event === "SIGNED_IN" || event === "INITIAL_SESSION") && user) {
+        LeenardoDB.syncPendingWordsToCloud(user.id).catch(() => {});
       }
     });
   }

@@ -2801,6 +2801,10 @@
     const SUPPORTED_LANGUAGES = ['tr', 'en', 'es', 'de', 'fr'];
     const SUPPORTED_LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1'];
 
+    function getDefaultSupportLang(target) {
+      return target === "en" ? "es" : "en";
+    }
+
     const langNames = {
       tr: "Türkçe",
       en: "English",
@@ -2863,6 +2867,8 @@
         toolQuizTitle: "Hızlı Kavrama Testi",
         showAnswer: "Cevabı Göster",
         hideAnswer: "Cevabı Gizle",
+        showTranslation: "Çeviriyi Göster",
+        hideTranslation: "Çeviriyi Gizle",
         quizCorrect: "Tebrikler, doğru cevap!",
         quizWrong: "Yanlış cevap, tekrar deneyin.",
         noQuiz: "Bu seviye için test hazırlanıyor.",
@@ -2883,6 +2889,10 @@
         modalNotebookTitle: "Kelime Defterim & Flashcard",
         emptyNotebookTitle: "Kayıtlı kelime bulunamadı",
         emptyNotebookDesc: "Metinleri okurken öğrenmek istediğiniz herhangi bir kelimenin üzerine tıklayın ve 'Kaydet' butonuna basın.",
+        guestSignInPromptTitle: "Kelimeleri kaydetmek için giriş yap",
+        guestSignInPromptDesc: "Okurken kelimeleri kaydetmek, özel kelime kartları oluşturmak ve tüm cihazlarında ilerlemeni sürdürmek için ücretsiz hesabına giriş yap.",
+        guestFlashcardPromptDesc: "İnteraktif flashcard'lar ile pratik yapmak ve kelime defterini senkronize etmek için giriş yap.",
+        signInButton: "Giriş Yap",
         congratsTitle: "Tebrikler! Deste Tamamlandı",
         congratsDesc: "Bu oturumda kartları başarıyla tamamladınız.",
         restartBtn: "Tekrar Başlat",
@@ -2918,7 +2928,8 @@
         reportSubmitBtn: "Raporu Gönder",
         reportSuccessToast: "Geri bildiriminiz için teşekkürler! İletildi. ✓",
         reportSelectCategoryPrompt: "Lütfen en az bir hata kategorisi seçin.",
-        deleteError: "Kelime buluttan silinemedi. Lütfen tekrar deneyin."
+        deleteError: "Kelime buluttan silinemedi. Lütfen tekrar deneyin.",
+        syncPendingToast: "Bu cihaza kaydedildi, ancak hesabınızla eşitlenemedi. Tekrar denenecek."
       },
       en: {
         backHome: "Library",
@@ -2949,6 +2960,8 @@
         toolQuizTitle: "Quick Comprehension Quiz",
         showAnswer: "Show Answer",
         hideAnswer: "Hide Answer",
+        showTranslation: "Show Translation",
+        hideTranslation: "Hide Translation",
         quizCorrect: "Correct answer! Well done!",
         quizWrong: "Incorrect, try again.",
         noQuiz: "Quiz in preparation for this level.",
@@ -2969,6 +2982,10 @@
         modalNotebookTitle: "Vocabulary Notebook & Flashcards",
         emptyNotebookTitle: "No saved words found",
         emptyNotebookDesc: "Click any word while reading an article and hit 'Save' to study it here.",
+        guestSignInPromptTitle: "Sign in to save words",
+        guestSignInPromptDesc: "Sign in or create a free account to save vocabulary, build custom flashcard decks, and sync your progress across devices.",
+        guestFlashcardPromptDesc: "Sign in to study with interactive flashcards and sync your vocabulary notebook.",
+        signInButton: "Sign In",
         congratsTitle: "Congratulations! Deck Completed",
         congratsDesc: "You have reviewed all cards in this study session.",
         restartBtn: "Review Again",
@@ -3004,7 +3021,8 @@
         reportSubmitBtn: "Submit Report",
         reportSuccessToast: "Thank you for your feedback! Submitted. ✓",
         reportSelectCategoryPrompt: "Please select an issue category.",
-        deleteError: "Could not delete word from cloud. Please try again."
+        deleteError: "Could not delete word from cloud. Please try again.",
+        syncPendingToast: "Saved on this device, but not synced to your account. We'll retry."
       },
       es: {
         backHome: "Biblioteca",
@@ -3035,6 +3053,8 @@
         toolQuizTitle: "Test Rápido de Comprensión",
         showAnswer: "Mostrar Respuesta",
         hideAnswer: "Ocultar Respuesta",
+        showTranslation: "Mostrar Traducción",
+        hideTranslation: "Ocultar Traducción",
         quizCorrect: "¡Correcto! ¡Muy bien hecho!",
         quizWrong: "Incorrecto, inténtalo de nuevo.",
         noQuiz: "No hay test disponible para este nivel.",
@@ -3055,6 +3075,10 @@
         modalNotebookTitle: "Cuaderno de Vocabulario y Tarjetas",
         emptyNotebookTitle: "No hay palabras guardadas",
         emptyNotebookDesc: "Toca cualquier palabra mientras lees y pulsa 'Guardar'.",
+        guestSignInPromptTitle: "Inicia sesión para guardar palabras",
+        guestSignInPromptDesc: "Inicia sesión o crea una cuenta gratuita para guardar vocabulario, crear tarjetas de estudio y sincronizar tu progreso en todos tus dispositivos.",
+        guestFlashcardPromptDesc: "Inicia sesión para estudiar con tarjetas interactivas y sincronizar tu cuaderno de vocabulario.",
+        signInButton: "Iniciar sesión",
         congratsTitle: "¡Felicidades! Mazo Completado",
         congratsDesc: "Has completado todas las tarjetas de esta sesión.",
         restartBtn: "Repetir Mazo",
@@ -3090,7 +3114,8 @@
         reportSubmitBtn: "Enviar reporte",
         reportSuccessToast: "¡Gracias por tus comentarios! Enviado. ✓",
         reportSelectCategoryPrompt: "Por favor, selecciona una categoría de problema.",
-        deleteError: "No se pudo eliminar la palabra de la nube. Inténtalo de nuevo."
+        deleteError: "No se pudo eliminar la palabra de la nube. Inténtalo de nuevo.",
+        syncPendingToast: "Guardado en este dispositivo, pero no sincronizado con tu cuenta. Lo reintentaremos."
       },
       de: {
         backHome: "Bibliothek",
@@ -3121,6 +3146,8 @@
         toolQuizTitle: "Schnelltest",
         showAnswer: "Antwort Zeigen",
         hideAnswer: "Antwort Verbergen",
+        showTranslation: "Übersetzung Anzeigen",
+        hideTranslation: "Übersetzung Ausblenden",
         quizCorrect: "Richtig! Ausgezeichnet!",
         quizWrong: "Leider falsch, versuche es noch einmal.",
         noQuiz: "Für dieses Niveau ist kein Quiz verfügbar.",
@@ -3141,6 +3168,10 @@
         modalNotebookTitle: "Vokabelheft & Karteikarten",
         emptyNotebookTitle: "Keine gespeicherten Wörter",
         emptyNotebookDesc: "Klicke beim Lesen auf ein Wort und drücke 'Speichern'.",
+        guestSignInPromptTitle: "Anmelden, um Wörter zu speichern",
+        guestSignInPromptDesc: "Melde dich an oder erstelle ein kostenloses Konto, um Vokabeln zu speichern, Lernkarten zu erstellen und deinen Fortschritt zu synchronisieren.",
+        guestFlashcardPromptDesc: "Melde dich an, um mit interaktiven Karteikarten zu lernen und dein Vokabelheft zu synchronisieren.",
+        signInButton: "Anmelden",
         congratsTitle: "Herzlichen Glückwunsch! Stapel abgeschlossen",
         congratsDesc: "Du hast alle Karteikarten geübt.",
         restartBtn: "Erneut Üben",
@@ -3176,7 +3207,8 @@
         reportSubmitBtn: "Bericht senden",
         reportSuccessToast: "Vielen Dank für Ihr Feedback! Gesendet. ✓",
         reportSelectCategoryPrompt: "Bitte wählen Sie eine Kategorie aus.",
-        deleteError: "Wort konnte nicht aus der Cloud gelöscht werden. Bitte erneut versuchen."
+        deleteError: "Wort konnte nicht aus der Cloud gelöscht werden. Bitte erneut versuchen.",
+        syncPendingToast: "Auf diesem Gerät gespeichert, aber nicht mit deinem Konto synchronisiert. Wir versuchen es erneut."
       },
       fr: {
         backHome: "Bibliothèque",
@@ -3207,6 +3239,8 @@
         toolQuizTitle: "Quiz Rapide de Compréhension",
         showAnswer: "Afficher la Réponse",
         hideAnswer: "Masquer la Réponse",
+        showTranslation: "Afficher la Traduction",
+        hideTranslation: "Masquer la Traduction",
         quizCorrect: "Bonne réponse ! Bravo !",
         quizWrong: "Réponse incorrecte, réessayez.",
         noQuiz: "Quiz en préparation pour ce niveau.",
@@ -3227,6 +3261,10 @@
         modalNotebookTitle: "Carnet de Vocabulaire & Cartes",
         emptyNotebookTitle: "Aucun mot enregistré",
         emptyNotebookDesc: "Cliquez sur n'importe quel mot pendant la lecture et cliquez sur 'Enregistrer'.",
+        guestSignInPromptTitle: "Connectez-vous pour enregistrer des mots",
+        guestSignInPromptDesc: "Connectez-vous ou créez un compte gratuit pour enregistrer du vocabulaire, créer des cartes mémoires et synchroniser vos progrès.",
+        guestFlashcardPromptDesc: "Connectez-vous pour étudier avec des cartes interactives et synchroniser votre carnet de vocabulaire.",
+        signInButton: "Se connecter",
         congratsTitle: "Félicitations ! Session terminée",
         congratsDesc: "Vous avez révisé toutes les cartes de cette session.",
         restartBtn: "Recommencer",
@@ -3262,7 +3300,8 @@
         reportSubmitBtn: "Envoyer le signalement",
         reportSuccessToast: "Merci pour votre retour ! Envoyé. ✓",
         reportSelectCategoryPrompt: "Veuillez sélectionner une catégorie de problème.",
-        deleteError: "Impossible de supprimer le mot du cloud. Veuillez réessayer."
+        deleteError: "Impossible de supprimer le mot du cloud. Veuillez réessayer.",
+        syncPendingToast: "Enregistré sur cet appareil, mais non synchronisé avec votre compte. Nouvelle tentative à venir."
       }
     };
 
@@ -3397,6 +3436,13 @@
      */
     function mapSupabaseArticleToClient(art) {
       if (!art) return null;
+      let langs = art.languages || {};
+      // If languages was empty or missing targetLang, map root-level language keys (e.g. art.tr)
+      SUPPORTED_LANGUAGES.forEach(l => {
+        if (art[l] && !langs[l]) {
+          langs[l] = art[l];
+        }
+      });
       return {
         id: art.id || "",
         topic: art.topic || "",
@@ -3409,7 +3455,7 @@
         teaserTranslations: art.teaserTranslations || art.teaser_translations || {},
         visual: art.visual || {},
         readTime: art.readTime || art.read_time || "3 min read",
-        languages: art.languages || {},
+        languages: langs,
         summary: art.summary || {},
         status: art.status || "published",
         hidden: Boolean(art.hidden)
@@ -3508,7 +3554,8 @@
         ? supportData.title 
         : ((article && article.titleTranslations && article.titleTranslations[supportLang]) || "");
       
-      const shareUrl = window.location.href;
+      const shareOrigin = (typeof window !== "undefined" && window.location.origin) ? window.location.origin : "https://leenardo.com";
+      const shareUrl = `${shareOrigin}/${targetLang}/articles/${encodeURIComponent(currentArticleId)}?level=${currentLevel}&support=${supportLang}`;
       const shareText = supportTitle 
         ? `${currentTitle} (${supportTitle}) — Leenardo [${currentLevel}]`
         : `${currentTitle} — Leenardo [${currentLevel}]`;
@@ -3774,35 +3821,24 @@
     let staticFallbackPromise = null;
     function lazyLoadStaticFallback() {
       if (staticFallbackPromise) return staticFallbackPromise;
-      console.warn("[Leenardo] Supabase request failed or timed out. Falling back to local static data.");
-      staticFallbackPromise = new Promise((resolve) => {
+      staticFallbackPromise = new Promise(async (resolve) => {
         if (typeof window !== "undefined" && window.ARTICLES_DATA && Array.isArray(window.ARTICLES_DATA) && window.ARTICLES_DATA.length > 0) {
           resolve(window.ARTICLES_DATA.map(mapSupabaseArticleToClient));
           return;
         }
 
-        const scriptPath = "/articles-data.js";
-        const scriptElem = document.createElement("script");
-        scriptElem.src = scriptPath;
-        scriptElem.onload = () => {
-          const loaded = window.ARTICLES_DATA || [];
-          resolve(Array.isArray(loaded) ? loaded.map(mapSupabaseArticleToClient) : []);
-        };
-        scriptElem.onerror = async () => {
-          try {
-            const jsonPath = "/articles.json";
-            const resp = await fetch(jsonPath);
-            if (resp.ok) {
-              const freshData = await resp.json();
-              if (Array.isArray(freshData) && freshData.length > 0) {
-                resolve(freshData.map(mapSupabaseArticleToClient));
-                return;
-              }
+        try {
+          const jsonPath = "/articles.json";
+          const resp = await fetch(jsonPath);
+          if (resp.ok) {
+            const freshData = await resp.json();
+            if (Array.isArray(freshData) && freshData.length > 0) {
+              resolve(freshData.map(mapSupabaseArticleToClient));
+              return;
             }
-          } catch (e) {}
-          resolve([]);
-        };
-        document.head.appendChild(scriptElem);
+          }
+        } catch (e) {}
+        resolve([]);
       });
       return staticFallbackPromise;
     }
@@ -3900,18 +3936,49 @@
     }
 
     async function loadArticlesData() {
-      // 1. Resolve requested article ID from clean pathname (/articles/:slug or /articles/:slug.html) or legacy query param (?id=...)
+      let supabaseSuccess = false;
+      let primaryArticle = null;
+
+      // 0. Immediate hydration from Edge Function SSR payload
+      if (typeof window !== "undefined" && window.__INITIAL_ARTICLE__) {
+        const initialArt = mapSupabaseArticleToClient(window.__INITIAL_ARTICLE__);
+        if (initialArt && initialArt.id) {
+          currentArticleId = initialArt.id;
+          articlesDatabase = [initialArt];
+          supabaseSuccess = true;
+          // Background fetch catalogue for switcher without blocking reader
+          if (window.location.protocol !== "file:") {
+            fetchCatalogueFromSupabase().then(catalogue => {
+              if (catalogue && catalogue.length > 0) {
+                articlesDatabase = catalogue.map(a => a.id === initialArt.id ? initialArt : a);
+                if (!articlesDatabase.some(a => a.id === initialArt.id)) {
+                  articlesDatabase.unshift(initialArt);
+                }
+                if (typeof renderTopicSelect === "function") {
+                  renderTopicSelect();
+                }
+                renderRecommendations();
+              }
+            }).catch(() => {});
+          }
+          return;
+        }
+      }
+
+      // 1. Resolve requested article ID from clean pathname (/:lang/articles/:slug or /articles/:slug.html) or legacy query param (?id=...)
       let pathArticleId = null;
-      const pathMatch = window.location.pathname.match(/\/articles\/([^\/\.]+)(?:\.html)?/);
+      let pathTargetLang = null;
+      const pathMatch = window.location.pathname.match(/\/(?:([a-z]{2})\/)?articles\/([^\/\.]+)(?:\.html)?/i);
       if (pathMatch) {
-        pathArticleId = decodeURIComponent(pathMatch[1]);
+        if (pathMatch[1] && SUPPORTED_LANGUAGES.includes(pathMatch[1].toLowerCase())) {
+          pathTargetLang = pathMatch[1].toLowerCase();
+          targetLang = pathTargetLang;
+        }
+        pathArticleId = decodeURIComponent(pathMatch[2]);
       }
       const urlParams = new URLSearchParams(window.location.search);
       const queryId = urlParams.get("id");
       const targetId = pathArticleId || queryId;
-
-      let primaryArticle = null;
-      let supabaseSuccess = false;
 
       // 2. Dynamic Fetch from Supabase (Primary live path)
       if (window.location.protocol !== "file:") {
@@ -3992,7 +4059,10 @@
       const switcher = document.getElementById("same-topic-switcher");
       if (switcher) switcher.style.display = "";
       const featBox = document.getElementById("featured-img-box");
-      if (featBox) featBox.style.display = "";
+      const featImg = document.getElementById("article-featured-img");
+      if (featBox && featImg && featImg.getAttribute("src") && featImg.getAttribute("src").trim() !== "") {
+        featBox.style.display = "";
+      }
       const actionsBar = document.querySelector(".reading-actions-bar");
       if (actionsBar) actionsBar.style.display = "";
       const toolIds = ["vocab-list-container", "grammar-box", "qa-list-container", "quiz-box"];
@@ -4006,20 +4076,27 @@
       const queryId = urlParams.get("id");
       const isOldUrl = window.location.pathname.endsWith("/article.html") || window.location.pathname === "/article.html";
       if (queryId && isOldUrl && window.location.protocol !== "file:") {
+        const reqTarget = urlParams.get("target") || urlParams.get("lang") || "tr";
         urlParams.delete("id");
+        urlParams.delete("target");
+        urlParams.delete("lang");
         const qs = urlParams.toString() ? ("?" + urlParams.toString()) : "";
-        window.location.replace(`/articles/${encodeURIComponent(queryId)}${qs}`);
+        window.location.replace(`/${encodeURIComponent(reqTarget)}/articles/${encodeURIComponent(queryId)}${qs}`);
         return;
       }
 
-      // 1. Resolve State from Pathname (/articles/:id or /articles/:id.html) or Query Param, then LocalStorage
+      // 1. Resolve State from Pathname (/:lang/articles/:slug or /articles/:slug.html) or Query Param, then LocalStorage
       let pathArticleId = null;
-      const pathMatch = window.location.pathname.match(/\/articles\/([^\/\.]+)(?:\.html)?/);
+      let pathTargetLang = null;
+      const pathMatch = window.location.pathname.match(/\/(?:([a-z]{2})\/)?articles\/([^\/\.]+)(?:\.html)?/i);
       if (pathMatch) {
-        pathArticleId = decodeURIComponent(pathMatch[1]);
+        if (pathMatch[1] && SUPPORTED_LANGUAGES.includes(pathMatch[1].toLowerCase())) {
+          pathTargetLang = pathMatch[1].toLowerCase();
+        }
+        pathArticleId = decodeURIComponent(pathMatch[2]);
       }
       const paramId = pathArticleId || queryId;
-      const paramTarget = urlParams.get("target") || urlParams.get("lang");
+      const paramTarget = pathTargetLang || urlParams.get("target") || urlParams.get("lang");
       const paramSupport = urlParams.get("support");
       const paramLevel = urlParams.get("level");
 
@@ -4032,6 +4109,8 @@
 
       if (paramTarget && SUPPORTED_LANGUAGES.includes(paramTarget)) {
         targetLang = paramTarget;
+      } else if (window.__INITIAL_TARGET_LANG__ && SUPPORTED_LANGUAGES.includes(window.__INITIAL_TARGET_LANG__)) {
+        targetLang = window.__INITIAL_TARGET_LANG__;
       } else {
         try {
           targetLang = localStorage.getItem("leenardo_target_lang") || "tr";
@@ -4040,34 +4119,51 @@
         }
       }
 
-      if (paramSupport && SUPPORTED_LANGUAGES.includes(paramSupport)) {
-        supportLang = paramSupport;
-      } else {
-        try {
-          supportLang = localStorage.getItem("leenardo_support_lang") || (targetLang === "en" ? "tr" : "en");
-        } catch (e) {
-          supportLang = targetLang === "en" ? "tr" : "en";
+      // Support language resolution priority:
+      // 1. valid ?support= query param
+      // 2. localStorage "leenardo_support_lang" (if valid and != targetLang)
+      // 3. default: getDefaultSupportLang(targetLang)
+      const validParamSupport = (paramSupport && SUPPORTED_LANGUAGES.includes(paramSupport) && paramSupport !== targetLang) ? paramSupport : null;
+      const validInitialSupport = (window.__INITIAL_SUPPORT_LANG__ && SUPPORTED_LANGUAGES.includes(window.__INITIAL_SUPPORT_LANG__) && window.__INITIAL_SUPPORT_LANG__ !== targetLang) ? window.__INITIAL_SUPPORT_LANG__ : null;
+
+      let savedSupport = null;
+      try {
+        const stored = localStorage.getItem("leenardo_support_lang");
+        if (stored && SUPPORTED_LANGUAGES.includes(stored) && stored !== targetLang) {
+          savedSupport = stored;
         }
+      } catch (e) {}
+
+      if (validParamSupport) {
+        supportLang = validParamSupport;
+      } else if (savedSupport) {
+        supportLang = savedSupport;
+      } else if (validInitialSupport) {
+        supportLang = validInitialSupport;
+      } else {
+        supportLang = getDefaultSupportLang(targetLang);
       }
 
-      // Enforce targetLang !== supportLang
+      // Collision rule: support must never equal target; if it does, use getDefaultSupportLang(targetLang)
       if (targetLang === supportLang) {
-        supportLang = targetLang === "en" ? "tr" : "en";
+        supportLang = getDefaultSupportLang(targetLang);
       }
 
       // Expose globally for helper modules (e.g., supabase-client sync)
       window.targetLang = targetLang;
       window.supportLang = supportLang;
 
-      if (paramLevel && SUPPORTED_LEVELS.includes(paramLevel)) {
-        currentLevel = paramLevel;
+      if (paramLevel && SUPPORTED_LEVELS.includes(paramLevel.toUpperCase())) {
+        currentLevel = paramLevel.toUpperCase();
+      } else if (window.__INITIAL_ACTIVE_LEVEL__ && SUPPORTED_LEVELS.includes(window.__INITIAL_ACTIVE_LEVEL__)) {
+        currentLevel = window.__INITIAL_ACTIVE_LEVEL__;
       } else {
         try {
-          currentLevel = localStorage.getItem("leenardo_preferred_level") || "A1";
+          currentLevel = localStorage.getItem("leenardo_preferred_level") || "C1";
         } catch (e) {
-          currentLevel = "A1";
+          currentLevel = "C1";
         }
-        if (!SUPPORTED_LEVELS.includes(currentLevel)) currentLevel = "A1";
+        if (!SUPPORTED_LEVELS.includes(currentLevel)) currentLevel = "C1";
       }
 
       // Persist State
@@ -4129,14 +4225,20 @@
       // Browser back/forward (popstate) support across levels & articles
       window.addEventListener("popstate", async (e) => {
         let pid = (e && e.state && e.state.id) || null;
+        let pPathLang = null;
         if (!pid) {
-          const match = window.location.pathname.match(/\/articles\/([^\/\.]+)(?:\.html)?/);
-          if (match) pid = decodeURIComponent(match[1]);
+          const match = window.location.pathname.match(/\/(?:([a-z]{2})\/)?articles\/([^\/\.]+)(?:\.html)?/i);
+          if (match) {
+            if (match[1] && SUPPORTED_LANGUAGES.includes(match[1].toLowerCase())) {
+              pPathLang = match[1].toLowerCase();
+            }
+            pid = decodeURIComponent(match[2]);
+          }
         }
         const params = new URLSearchParams(window.location.search);
         if (!pid) pid = params.get("id");
         const plvl = (e && e.state && e.state.level) || params.get("level");
-        const ptar = (e && e.state && e.state.target) || params.get("target") || params.get("lang");
+        const ptar = (e && e.state && e.state.target) || pPathLang || params.get("target") || params.get("lang");
         const psup = (e && e.state && e.state.support) || params.get("support");
 
         if (pid) {
@@ -4161,7 +4263,7 @@
         if (plvl && SUPPORTED_LEVELS.includes(plvl)) currentLevel = plvl;
         if (ptar && SUPPORTED_LANGUAGES.includes(ptar)) targetLang = ptar;
         if (psup && SUPPORTED_LANGUAGES.includes(psup)) supportLang = psup;
-        if (targetLang === supportLang) supportLang = (targetLang === 'en') ? 'tr' : 'en';
+        if (targetLang === supportLang) supportLang = getDefaultSupportLang(targetLang);
 
         // Update selects
         if (tarSelect) tarSelect.value = targetLang;
@@ -4183,12 +4285,11 @@
         if (window.history && window.location.protocol !== "file:") {
           const url = new URL(window.location.href);
           if (currentArticleId) {
-            const hasHtmlExt = window.location.pathname.endsWith(".html");
-            url.pathname = `/articles/${encodeURIComponent(currentArticleId)}${hasHtmlExt ? ".html" : ""}`;
+            url.pathname = `/${targetLang}/articles/${encodeURIComponent(currentArticleId)}`;
           }
           url.searchParams.delete("id");
+          url.searchParams.delete("target");
           url.searchParams.delete("lang");
-          url.searchParams.set("target", targetLang);
           url.searchParams.set("support", supportLang);
           url.searchParams.set("level", currentLevel);
           const stateObj = { id: currentArticleId, target: targetLang, support: supportLang, level: currentLevel };
@@ -4206,27 +4307,49 @@
 
     function goToHome(e) {
       if (e) e.preventDefault();
-      const inArticles = window.location.pathname.includes("/articles/");
+      const inArticles = window.location.pathname.includes("/articles");
       const homePath = window.location.protocol === "file:" ? (inArticles ? "../index.html" : "index.html") : "/";
       window.location.href = `${homePath}?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
     }
 
-    function onTargetLanguageChange(newTarget) {
+    async function onTargetLanguageChange(newTarget) {
       if (!SUPPORTED_LANGUAGES.includes(newTarget)) return;
       const prevTarget = targetLang;
       targetLang = newTarget;
-      localStorage.setItem("leenardo_target_lang", targetLang);
+      try {
+        localStorage.setItem("leenardo_target_lang", targetLang);
+      } catch (e) {}
 
       // Strict enforcement: targetLanguage !== supportLanguage
       if (targetLang === supportLang) {
-        supportLang = prevTarget !== targetLang ? prevTarget : SUPPORTED_LANGUAGES.find(l => l !== targetLang);
-        localStorage.setItem("leenardo_support_lang", supportLang);
+        supportLang = getDefaultSupportLang(targetLang);
+        try {
+          localStorage.setItem("leenardo_support_lang", supportLang);
+        } catch (e) {}
         const supElem = document.getElementById("support-lang-select");
         if (supElem) supElem.value = supportLang;
       }
 
       window.targetLang = targetLang;
       window.supportLang = supportLang;
+
+      // Ensure tokens exist for newly selected target language
+      let art = articlesDatabase.find(a => a.id === currentArticleId);
+      const hasLangData = Boolean(
+        art &&
+        art.languages &&
+        art.languages[targetLang] &&
+        art.languages[targetLang][currentLevel] &&
+        Array.isArray(art.languages[targetLang][currentLevel].paragraphs)
+      );
+      if (!hasLangData && window.location.protocol !== "file:") {
+        const fullArt = await fetchArticleFromSupabase(currentArticleId);
+        if (fullArt) {
+          const idx = articlesDatabase.findIndex(a => a.id === currentArticleId);
+          if (idx !== -1) articlesDatabase[idx] = fullArt;
+          else articlesDatabase.push(fullArt);
+        }
+      }
 
       stopSpeech();
       updateUrlState(true);
@@ -4238,12 +4361,16 @@
       if (!SUPPORTED_LANGUAGES.includes(newSupport)) return;
       const prevSupport = supportLang;
       supportLang = newSupport;
-      localStorage.setItem("leenardo_support_lang", supportLang);
+      try {
+        localStorage.setItem("leenardo_support_lang", supportLang);
+      } catch (e) {}
 
       // Strict enforcement: targetLanguage !== supportLanguage
       if (supportLang === targetLang) {
         targetLang = prevSupport !== supportLang ? prevSupport : SUPPORTED_LANGUAGES.find(l => l !== supportLang);
-        localStorage.setItem("leenardo_target_lang", targetLang);
+        try {
+          localStorage.setItem("leenardo_target_lang", targetLang);
+        } catch (e) {}
         const tarElem = document.getElementById("target-lang-select");
         if (tarElem) tarElem.value = targetLang;
       }
@@ -4258,13 +4385,33 @@
     }
 
     /* Central Product Action: Switch Level of the Same Article */
-    function changeLevel(level) {
+    async function changeLevel(level) {
       if (!SUPPORTED_LEVELS.includes(level)) return;
       if (currentLevel === level) return;
 
       currentLevel = level;
-      localStorage.setItem("leenardo_preferred_level", level);
+      try {
+        localStorage.setItem("leenardo_preferred_level", level);
+      } catch (e) {}
       stopSpeech();
+
+      // Ensure tokens exist for this level/language
+      let art = articlesDatabase.find(a => a.id === currentArticleId);
+      const hasLevelData = Boolean(
+        art &&
+        art.languages &&
+        art.languages[targetLang] &&
+        art.languages[targetLang][level] &&
+        Array.isArray(art.languages[targetLang][level].paragraphs)
+      );
+      if (!hasLevelData && window.location.protocol !== "file:") {
+        const fullArt = await fetchArticleFromSupabase(currentArticleId);
+        if (fullArt) {
+          const idx = articlesDatabase.findIndex(a => a.id === currentArticleId);
+          if (idx !== -1) articlesDatabase[idx] = fullArt;
+          else articlesDatabase.push(fullArt);
+        }
+      }
       
       // Intentional browser history push so Back / Forward steps between levels
       updateUrlState(true);
@@ -4538,8 +4685,8 @@
         metaDescription = `${targetData.title}. Read graded multilingual stories with sentence translations and vocabulary tools on Leenardo.`;
       }
 
-      // Canonical & Open Graph URL
-      const pageUrl = `https://leenardo.com/articles/${encodeURIComponent(article.id)}.html?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
+      // Canonical & Open Graph URL: clean multilingual route without query parameters
+      const cleanArticleUrl = `https://leenardo.com/${targetLang}/articles/${encodeURIComponent(article.id)}`;
 
       // Open Graph Image: absolute URL
       const rawImg = (article.visual && article.visual.imageUrl) || article.featuredImage || "images/cover_01.jpg";
@@ -4568,7 +4715,7 @@
       setMeta('meta[property="og:title"]', "property", "og:title", socialTitle);
       setMeta('meta[property="og:description"]', "property", "og:description", metaDescription);
       setMeta('meta[property="og:image"]', "property", "og:image", fullImgUrl);
-      setMeta('meta[property="og:url"]', "property", "og:url", pageUrl);
+      setMeta('meta[property="og:url"]', "property", "og:url", cleanArticleUrl);
       setMeta('meta[property="og:type"]', "property", "og:type", "article");
       setMeta('meta[property="og:site_name"]', "property", "og:site_name", "Leenardo");
       setMeta('meta[name="twitter:card"]', "name", "twitter:card", "summary_large_image");
@@ -4582,7 +4729,7 @@
         canonical.setAttribute("rel", "canonical");
         document.head.appendChild(canonical);
       }
-      canonical.setAttribute("href", pageUrl);
+      canonical.setAttribute("href", cleanArticleUrl);
     }
 
     function resolveAssetPath(relPath) {
@@ -4613,13 +4760,25 @@
         }
       });
 
-      const targetData = article.languages && article.languages[targetLang] && article.languages[targetLang][currentLevel];
+      // Resolve targetData from article.languages[targetLang][currentLevel], with fallback to direct language key on article
+      let targetData = article.languages && article.languages[targetLang] && article.languages[targetLang][currentLevel];
+      if (!targetData && article[targetLang] && article[targetLang][currentLevel]) {
+        if (!article.languages) article.languages = {};
+        article.languages[targetLang] = article[targetLang];
+        targetData = article.languages[targetLang][currentLevel];
+      }
       const supportData = article.languages && article.languages[supportLang] && article.languages[supportLang][currentLevel];
 
       if (!targetData) {
+        // If server-rendered content already exists in the DOM, NEVER overwrite it with an unavailable state
+        const bodyContent = document.getElementById("article-body-content");
+        if (bodyContent && bodyContent.querySelector(".story-paragraph")) {
+          console.warn(`[Client] targetData not found for ${targetLang}/${currentLevel}, preserving server-rendered content.`);
+          return;
+        }
         document.getElementById("article-main-title").textContent = "Content Unavailable";
         document.getElementById("article-support-title").textContent = "";
-        document.getElementById("article-body-content").innerHTML = "<p>This language and level combination is currently being prepared.</p>";
+        if (bodyContent) bodyContent.innerHTML = "<p>This language and level combination is currently being prepared.</p>";
         return;
       }
 
@@ -4652,7 +4811,7 @@
       const featImg = document.getElementById("article-featured-img");
       const featCaption = document.getElementById("article-featured-caption");
 
-      const rawImg = (article.visual && article.visual.imageUrl) || article.featuredImage;
+      const rawImg = (article.visual && (article.visual.imageUrl || article.visual.image_url || article.visual.url)) || article.featuredImage || article.image_url;
       const imgUrl = resolveAssetPath(rawImg);
       if (imgUrl && imgUrl.trim() !== "") {
         imgBox.style.display = "block";
@@ -4814,10 +4973,12 @@
       const recs = getRecommendedArticles(currentArticleId, 3);
 
       recs.forEach(art => {
-        const card = document.createElement("div");
+        const recUrl = `/${targetLang}/articles/${encodeURIComponent(art.id)}?level=${currentLevel}&support=${supportLang}`;
+        const card = document.createElement("a");
         card.className = "rec-card";
-        card.setAttribute("role", "button");
-        card.setAttribute("tabindex", "0");
+        card.href = recUrl;
+        card.style.textDecoration = "none";
+        card.style.color = "inherit";
 
         const catLabel = (art.categoryTranslations && art.categoryTranslations[supportLang]) || art.category;
 
@@ -4869,7 +5030,12 @@
           </div>
         `;
 
-        card.onclick = () => navigateToArticle(art.id);
+        card.onclick = (e) => {
+          if (!e.ctrlKey && !e.metaKey && !e.shiftKey && e.button === 0) {
+            e.preventDefault();
+            navigateToArticle(art.id);
+          }
+        };
         card.onkeydown = (e) => {
           if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
@@ -4948,6 +5114,31 @@
       const t = uiTranslations[supportLang] || uiTranslations.en;
       const cleanWord = word.replace(/[^\p{L}\p{M}\p{N}'-]/gu, '').trim();
       const storageId = cleanWord.toLowerCase() + "_" + targetLang + "_" + supportLang;
+
+      const authUser = await getActiveAuthUser();
+      if (!authUser) {
+        pendingGuestSaveAction = {
+          type: "save",
+          item: {
+            id: storageId,
+            word: cleanWord,
+            fromLang: targetLang,
+            toLang: supportLang,
+            translation: translation,
+            root: root || "",
+            level: currentLevel,
+            articleId: currentArticleId,
+            date: new Date().toISOString()
+          },
+          btnElem: btnElem,
+          source: "vocabCard"
+        };
+        if (window.LeenardoUI && typeof window.LeenardoUI.openAuthModal === "function") {
+          window.LeenardoUI.openAuthModal("signin");
+        }
+        return;
+      }
+
       if (isWordSaved(storageId)) {
         const removed = await removeSavedWord(storageId);
         if (removed !== false) {
@@ -4966,7 +5157,7 @@
           articleId: currentArticleId,
           date: new Date().toISOString()
         };
-        saveWordItem(item);
+        await saveWordItem(item);
         btnElem.classList.add("saved");
         btnElem.textContent = t.savedWord || "Saved";
       }
@@ -5066,22 +5257,43 @@
           qaBox.className = "qa-item";
           qaBox.id = `qa-item-${qIdx}`;
 
-          // Support language question translation if available
-          let qText = item.q;
-          let aText = item.a;
-          if (item.translations && item.translations[supportLang]) {
-            qText = item.translations[supportLang].q || item.q;
-            aText = item.translations[supportLang].a || item.a;
-          }
+          // Always show target language question and answer defensively ({q, a} or {question, answer})
+          const targetQ = (item && (item.q || item.question)) || "";
+          const targetA = (item && (item.a || item.answer)) || "";
+
+          // Check if support language translation exists
+          const transObj = (item && item.translations && item.translations[supportLang]) || null;
+          const transQ = transObj ? (transObj.q || transObj.question || "") : "";
+          const transA = transObj ? (transObj.a || transObj.answer || "") : "";
 
           qaBox.innerHTML = `
             <div class="qa-question-bar" role="button" tabindex="0" aria-expanded="false" id="qa-bar-${qIdx}" onclick="toggleQA(${qIdx})" onkeydown="handleQAKey(event, ${qIdx})">
-              <span><strong>Q${qIdx + 1}:</strong> ${escapeHtml(qText)}</span>
+              <span><strong>Q${qIdx + 1}:</strong> ${escapeHtml(targetQ)}</span>
               <span class="qa-chevron" id="qa-chev-${qIdx}">▼</span>
             </div>
+            ${transQ ? `
+              <div class="qa-trans-q-wrapper" style="margin-top:0.35rem; margin-bottom:0.45rem; padding-left:0.25rem;">
+                <button type="button" class="btn-qa-trans-toggle" id="qa-q-trans-btn-${qIdx}" onclick="toggleQAQuestionTranslation(${qIdx}, event)" style="background:none; border:none; color:var(--primary, #0284c7); font-size:0.8rem; font-weight:600; cursor:pointer; padding:0; display:inline-flex; align-items:center; gap:0.25rem;">
+                  <span id="qa-q-trans-btn-text-${qIdx}">${escapeHtml(t.showTranslation || "Show Translation")}</span>
+                </button>
+                <div id="qa-q-trans-box-${qIdx}" style="display:none; margin-top:0.35rem; font-size:0.85rem; color:var(--slate-600, #475569); background:rgba(0,0,0,0.03); padding:0.45rem 0.7rem; border-radius:6px; line-height:1.5;">
+                  <div>${escapeHtml(transQ)}</div>
+                </div>
+              </div>
+            ` : ''}
             <div class="qa-answer-box" id="ans-${qIdx}" style="display:none;">
               <div class="qa-answer-label">Answer:</div>
-              <div>${escapeHtml(aText)}</div>
+              <div>${escapeHtml(targetA)}</div>
+              ${transA ? `
+                <div class="qa-trans-a-wrapper" style="margin-top:0.6rem; padding-top:0.5rem; border-top:1px dashed var(--border-light, #e2e8f0);">
+                  <button type="button" class="btn-qa-trans-toggle" id="qa-a-trans-btn-${qIdx}" onclick="toggleQAAnswerTranslation(${qIdx}, event)" style="background:none; border:none; color:var(--primary, #0284c7); font-size:0.8rem; font-weight:600; cursor:pointer; padding:0; display:inline-flex; align-items:center; gap:0.25rem;">
+                    <span id="qa-a-trans-btn-text-${qIdx}">${escapeHtml(t.showTranslation || "Show Translation")}</span>
+                  </button>
+                  <div id="qa-a-trans-box-${qIdx}" style="display:none; margin-top:0.4rem; font-size:0.85rem; color:var(--slate-600, #475569); background:rgba(0,0,0,0.03); padding:0.5rem 0.75rem; border-radius:6px; line-height:1.5;">
+                    <div>${escapeHtml(transA)}</div>
+                  </div>
+                </div>
+              ` : ''}
             </div>
           `;
 
@@ -5090,6 +5302,42 @@
       } else {
         qaContainer.innerHTML = `<p style="font-size:0.88rem; color:var(--slate-500); font-style:italic;">${t.noQAAvailable || "No comprehension questions for this level."}</p>`;
       }
+    }
+
+    function toggleQAQuestionTranslation(qIdx, event) {
+      if (event) event.stopPropagation();
+      const box = document.getElementById(`qa-q-trans-box-${qIdx}`);
+      const btnText = document.getElementById(`qa-q-trans-btn-text-${qIdx}`);
+      if (!box || !btnText) return;
+      const t = uiTranslations[supportLang] || uiTranslations.en;
+      const isHidden = box.style.display === "none";
+      if (isHidden) {
+        box.style.display = "block";
+        btnText.textContent = t.hideTranslation || "Hide Translation";
+      } else {
+        box.style.display = "none";
+        btnText.textContent = t.showTranslation || "Show Translation";
+      }
+    }
+
+    function toggleQAAnswerTranslation(qIdx, event) {
+      if (event) event.stopPropagation();
+      const box = document.getElementById(`qa-a-trans-box-${qIdx}`);
+      const btnText = document.getElementById(`qa-a-trans-btn-text-${qIdx}`);
+      if (!box || !btnText) return;
+      const t = uiTranslations[supportLang] || uiTranslations.en;
+      const isHidden = box.style.display === "none";
+      if (isHidden) {
+        box.style.display = "block";
+        btnText.textContent = t.hideTranslation || "Hide Translation";
+      } else {
+        box.style.display = "none";
+        btnText.textContent = t.showTranslation || "Show Translation";
+      }
+    }
+
+    function toggleQATranslation(qIdx, event) {
+      toggleQAAnswerTranslation(qIdx, event);
     }
 
     function toggleQA(qIdx) {
@@ -7502,27 +7750,100 @@
     }
 
     let pageAuthUser = null;
+    let pendingGuestSaveAction = null;
+
+    document.addEventListener("leenardo:auth-modal-closed", (e) => {
+      if (!e || !e.detail || !e.detail.completed) {
+        pendingGuestSaveAction = null;
+      }
+    });
+
     if (typeof onAuthStateChange === "function") {
-      onAuthStateChange(user => {
+      onAuthStateChange(async user => {
+        if (!user) {
+          pageAuthUser = null;
+          pendingGuestSaveAction = null;
+          updateSavedWordBadges(null);
+          const modal = document.getElementById("vocab-notebook-modal");
+          if (modal && modal.classList.contains("show")) {
+            const tabCards = document.getElementById("vn-tab-flashcards");
+            if (tabCards && tabCards.classList.contains("active")) {
+              initFlashcards();
+            } else {
+              renderSavedWordsList();
+            }
+          }
+          updatePopSaveButtonUI(false);
+          const t = (typeof uiTranslations !== "undefined" && (uiTranslations[supportLang] || uiTranslations.en)) || {};
+          document.querySelectorAll(".vocab-save-btn").forEach(btn => {
+            btn.classList.remove("saved");
+            btn.textContent = t.saveWord || "Save";
+          });
+          return;
+        }
         pageAuthUser = user;
+        updateSavedWordBadges(user);
+        const curArt = getCurrentArticleObject();
+        const targetData = curArt?.languages?.[targetLang]?.[currentLevel] || curArt?.[targetLang]?.[currentLevel];
+        if (targetData) {
+          renderVocabSection(targetData);
+        }
+        const modal = document.getElementById("vocab-notebook-modal");
+        if (modal && modal.classList.contains("show")) {
+          const tabCards = document.getElementById("vn-tab-flashcards");
+          if (tabCards && tabCards.classList.contains("active")) {
+            initFlashcards();
+          } else {
+            renderSavedWordsList();
+          }
+        }
+        if (pendingGuestSaveAction && user) {
+          const action = pendingGuestSaveAction;
+          pendingGuestSaveAction = null;
+          if (action.item) {
+            await saveWordItem(action.item);
+            const t = (typeof uiTranslations !== "undefined" && (uiTranslations[supportLang] || uiTranslations.en)) || {};
+            if (action.source === "popover") {
+              updatePopSaveButtonUI(true);
+              showToast(`"${action.item.word}" ${t.savedWord || 'saved'}`);
+            } else if (action.source === "vocabCard" && action.btnElem) {
+              action.btnElem.classList.add("saved");
+              action.btnElem.textContent = t.savedWord || "Saved";
+              showToast(`"${action.item.word}" ${t.savedWord || 'saved'}`);
+            }
+          }
+        }
       });
     }
 
-    function getActiveAuthUser() {
+    async function getActiveAuthUser() {
       if (pageAuthUser) return pageAuthUser;
       if (typeof window !== "undefined" && window.currentAuthUser) return window.currentAuthUser;
-      if (typeof LeenardoAuth !== "undefined" && typeof LeenardoAuth.getCurrentUser === "function") {
-        return LeenardoAuth.getCurrentUser();
+      if (typeof LeenardoAuth !== "undefined") {
+        if (typeof LeenardoAuth.waitForSession === "function") {
+          return await LeenardoAuth.waitForSession();
+        }
+        if (typeof LeenardoAuth.getUser === "function") {
+          return await LeenardoAuth.getUser();
+        }
+        if (typeof LeenardoAuth.getCurrentUser === "function") {
+          return LeenardoAuth.getCurrentUser();
+        }
       }
       return null;
     }
 
-    function saveWordItem(item) {
+    async function saveWordItem(item) {
       if (!item) return;
+      const authUser = await getActiveAuthUser();
+      if (!authUser) {
+        // Guests cannot save words
+        return;
+      }
       if (!item.fromLang) item.fromLang = targetLang;
       if (!item.toLang) item.toLang = supportLang;
       const words = getSavedWords();
-      const existingIdx = words.findIndex(w => w.id === item.id);
+      const existingIdx = words.findIndex(w => w.id === item.id || (w.word && w.word.toLowerCase().trim() === item.word.toLowerCase().trim()));
       if (existingIdx >= 0) {
         words[existingIdx] = Object.assign({}, words[existingIdx], item, { updatedAt: Date.now() });
       } else {
@@ -7532,11 +7853,41 @@
       updateSavedWordBadges();
 
       // Sync to Supabase cloud if user is authenticated
-      const authUser = getActiveAuthUser();
       if (typeof LeenardoDB !== "undefined" && authUser) {
-        LeenardoDB.saveWordToCloud(authUser.id, item).catch(err => {
-          console.warn("Cloud save warning:", err);
-        });
+        try {
+          const res = await LeenardoDB.saveWordToCloud(authUser.id, item);
+          if (res && res.success) {
+            const currentWords = getSavedWords();
+            const idx = currentWords.findIndex(w => w.id === item.id || (w.word && w.word.toLowerCase().trim() === item.word.toLowerCase().trim()));
+            if (idx >= 0 && currentWords[idx].pendingSync) {
+              delete currentWords[idx].pendingSync;
+              localStorage.setItem(SAVED_WORDS_STORAGE_KEY, JSON.stringify(currentWords));
+            }
+          } else {
+            const currentWords = getSavedWords();
+            const idx = currentWords.findIndex(w => w.id === item.id || (w.word && w.word.toLowerCase().trim() === item.word.toLowerCase().trim()));
+            if (idx >= 0) {
+              currentWords[idx].pendingSync = true;
+              localStorage.setItem(SAVED_WORDS_STORAGE_KEY, JSON.stringify(currentWords));
+            }
+            const t = (typeof uiTranslations !== "undefined" && uiTranslations[supportLang]) || (typeof uiTranslations !== "undefined" && uiTranslations.en) || {};
+            if (typeof showToast === "function") {
+              showToast(t.syncPendingToast || "Saved on this device, but not synced to your account. We'll retry.");
+            }
+          }
+        } catch (err) {
+          console.warn("Cloud save exception:", err);
+          const currentWords = getSavedWords();
+          const idx = currentWords.findIndex(w => w.id === item.id || (w.word && w.word.toLowerCase().trim() === item.word.toLowerCase().trim()));
+          if (idx >= 0) {
+            currentWords[idx].pendingSync = true;
+            localStorage.setItem(SAVED_WORDS_STORAGE_KEY, JSON.stringify(currentWords));
+          }
+          const t = (typeof uiTranslations !== "undefined" && uiTranslations[supportLang]) || (typeof uiTranslations !== "undefined" && uiTranslations.en) || {};
+          if (typeof showToast === "function") {
+            showToast(t.syncPendingToast || "Saved on this device, but not synced to your account. We'll retry.");
+          }
+        }
       }
     }
 
@@ -7545,9 +7896,9 @@
       const targetWord = words.find(w => w.id === id || (w.word && w.word.toLowerCase().trim() === String(id).toLowerCase().trim()));
       if (!targetWord) return false;
 
-      // Remove from Supabase cloud if user is authenticated
-      const authUser = getActiveAuthUser();
-      if (typeof LeenardoDB !== "undefined" && authUser && targetWord.word) {
+      // Remove from Supabase cloud if user is authenticated and word was already synced
+      const authUser = await getActiveAuthUser();
+      if (typeof LeenardoDB !== "undefined" && authUser && targetWord.word && !targetWord.pendingSync) {
         try {
           const res = await LeenardoDB.removeWordFromCloud(authUser.id, targetWord.word);
           if (!res || res.error) {
@@ -7582,11 +7933,13 @@
     }
 
     function isWordSaved(id) {
+      if (!pageAuthUser && (typeof window === "undefined" || !window.currentAuthUser)) return false;
       return getSavedWords().some(w => w.id === id || (w.word && w.word.toLowerCase().trim() === String(id).toLowerCase().trim()));
     }
 
-    function updateSavedWordBadges() {
-      const count = getSavedWords().length;
+    async function updateSavedWordBadges(userParam) {
+      const authUser = (userParam !== undefined) ? userParam : await getActiveAuthUser();
+      const count = authUser ? getSavedWords().length : 0;
       ["saved-words-count", "saved-words-count-bar", "vn-tab-count-saved", "vn-tab-count-cards"].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.textContent = count;
@@ -7616,22 +7969,43 @@
       if (!currentPopoverWordData) return;
       const id = currentPopoverWordData.id;
 
+      const authUser = await getActiveAuthUser();
+      if (!authUser) {
+        pendingGuestSaveAction = {
+          type: "save",
+          item: Object.assign({}, currentPopoverWordData),
+          source: "popover"
+        };
+        if (window.LeenardoUI && typeof window.LeenardoUI.openAuthModal === "function") {
+          window.LeenardoUI.openAuthModal("signin");
+        }
+        return;
+      }
+
       if (isWordSaved(id)) {
         const removed = await removeSavedWord(id);
         if (removed !== false) {
           updatePopSaveButtonUI(false);
         }
       } else {
-        saveWordItem(currentPopoverWordData);
+        await saveWordItem(currentPopoverWordData);
         updatePopSaveButtonUI(true);
         const t = uiTranslations[supportLang] || uiTranslations.en;
         showToast(`"${currentPopoverWordData.word}" ${t.savedWord || 'saved'}`);
       }
     }
 
-    function studyCurrentWordFlashcard(event) {
+    async function studyCurrentWordFlashcard(event) {
       if (event) event.stopPropagation();
       if (!currentPopoverWordData) return;
+
+      const authUser = await getActiveAuthUser();
+      if (!authUser) {
+        if (window.LeenardoUI && typeof window.LeenardoUI.openAuthModal === "function") {
+          window.LeenardoUI.openAuthModal("signin");
+        }
+        return;
+      }
 
       if (!isWordSaved(currentPopoverWordData.id)) {
         const transText = document.getElementById("pop-trans-text").textContent.trim();
@@ -7639,7 +8013,7 @@
         if (transText && transText !== t.translatingText) {
           currentPopoverWordData.translation = transText;
         }
-        saveWordItem(currentPopoverWordData);
+        await saveWordItem(currentPopoverWordData);
         updatePopSaveButtonUI(true);
       }
 
@@ -7682,11 +8056,27 @@
       }
     }
 
-    function renderSavedWordsList(searchQuery = "") {
+    async function renderSavedWordsList(searchQuery = "") {
       const container = document.getElementById("vn-words-container");
       if (!container) return;
-      let words = getSavedWords();
       const t = uiTranslations[supportLang] || uiTranslations.en;
+
+      const authUser = await getActiveAuthUser();
+      if (!authUser) {
+        container.innerHTML = `
+          <div style="text-align:center; padding:3rem 1.5rem; color:var(--text-muted);">
+            <div style="font-size:2.2rem; margin-bottom:0.75rem;">🔒</div>
+            <h4 style="font-family:var(--font-serif); font-size:1.25rem; font-weight:700; color:var(--ink-navy);">${t.guestSignInPromptTitle || "Sign in to save words"}</h4>
+            <p style="font-size:0.88rem; margin:0.5rem auto 1.5rem; max-width:340px; line-height:1.5;">${t.guestSignInPromptDesc || "Sign in or create a free account to save vocabulary, build custom flashcard decks, and sync your progress across devices."}</p>
+            <button class="btn-primary-action" onclick="window.LeenardoUI && window.LeenardoUI.openAuthModal('signin')">
+              ${t.signInButton || "Sign In"}
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      let words = getSavedWords();
 
       if (searchQuery.trim() !== "") {
         const q = searchQuery.toLowerCase().trim();
@@ -7731,15 +8121,33 @@
     }
 
     /* Flashcards Engine */
-    function initFlashcards(initialWordId = null, forceArticleVocab = false) {
+    async function initFlashcards(initialWordId = null, forceArticleVocab = false) {
+      const area = document.getElementById("fc-interactive-area");
+      const t = uiTranslations[supportLang] || uiTranslations.en;
+
+      const authUser = await getActiveAuthUser();
+      if (!authUser) {
+        if (area) {
+          area.innerHTML = `
+            <div style="text-align:center; padding:3rem 1.5rem; color:var(--text-muted);">
+              <div style="font-size:2.2rem; margin-bottom:0.75rem;">🔒</div>
+              <h4 style="font-family:var(--font-serif); font-size:1.25rem; font-weight:700; color:var(--ink-navy);">${t.guestSignInPromptTitle || "Sign in to study flashcards"}</h4>
+              <p style="font-size:0.88rem; margin:0.5rem auto 1.5rem; max-width:340px; line-height:1.5;">${t.guestFlashcardPromptDesc || "Sign in to study with interactive flashcards and sync your vocabulary notebook."}</p>
+              <button class="btn-primary-action" onclick="window.LeenardoUI && window.LeenardoUI.openAuthModal('signin')">
+                ${t.signInButton || "Sign In"}
+              </button>
+            </div>
+          `;
+        }
+        return;
+      }
+
       let words = getSavedWords();
       const currentPairWords = words.filter(w => {
         const f = w.fromLang || targetLang;
         const t = w.toLang || supportLang;
         return f === targetLang && t === supportLang;
       });
-      const area = document.getElementById("fc-interactive-area");
-      const t = uiTranslations[supportLang] || uiTranslations.en;
 
       if (forceArticleVocab || currentPairWords.length === 0) {
         const curArt = getCurrentArticleObject();
@@ -8040,7 +8448,9 @@
     }
 
     async function start() {
-      renderLoadingState();
+      if (!window.__INITIAL_ARTICLE__) {
+        renderLoadingState();
+      }
       await loadArticlesData();
       if (articleNotFound) {
         renderNotFoundState(currentArticleId);

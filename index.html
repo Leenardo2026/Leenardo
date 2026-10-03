@@ -2175,6 +2175,10 @@
     const SUPPORTED_LANGUAGES = ['tr', 'en', 'es', 'de', 'fr'];
     const SUPPORTED_LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1'];
 
+    function getDefaultSupportLang(target) {
+      return target === "en" ? "es" : "en";
+    }
+
     const langNames = {
       tr: "Türkçe",
       en: "English",
@@ -2460,14 +2464,31 @@
         targetLang = localStorage.getItem("leenardo_target_lang") || "tr";
       }
 
-      if (paramSupport && SUPPORTED_LANGUAGES.includes(paramSupport)) {
-        supportLang = paramSupport;
+      // Support language resolution priority:
+      // 1. valid ?support= query param
+      // 2. localStorage "leenardo_support_lang" (if valid and != targetLang)
+      // 3. default: getDefaultSupportLang(targetLang)
+      const validParamSupport = (paramSupport && SUPPORTED_LANGUAGES.includes(paramSupport) && paramSupport !== targetLang) ? paramSupport : null;
+
+      let savedSupport = null;
+      try {
+        const stored = localStorage.getItem("leenardo_support_lang");
+        if (stored && SUPPORTED_LANGUAGES.includes(stored) && stored !== targetLang) {
+          savedSupport = stored;
+        }
+      } catch (e) {}
+
+      if (validParamSupport) {
+        supportLang = validParamSupport;
+      } else if (savedSupport) {
+        supportLang = savedSupport;
       } else {
-        supportLang = localStorage.getItem("leenardo_support_lang") || (targetLang === "en" ? "tr" : "en");
+        supportLang = getDefaultSupportLang(targetLang);
       }
 
+      // Collision rule: support must never equal target; if it does, use getDefaultSupportLang(targetLang)
       if (targetLang === supportLang) {
-        supportLang = targetLang === "en" ? "tr" : "en";
+        supportLang = getDefaultSupportLang(targetLang);
       }
 
       if (paramLevel && SUPPORTED_LEVELS.includes(paramLevel)) {
@@ -2518,10 +2539,10 @@
       const learnSelect = document.getElementById("onboarding-learning-select");
       const understandSelect = document.getElementById("onboarding-understand-select");
       if (learnSelect) learnSelect.value = targetLang || "tr";
-      if (understandSelect) understandSelect.value = supportLang || (targetLang === "en" ? "tr" : "en");
+      if (understandSelect) understandSelect.value = supportLang || getDefaultSupportLang(targetLang);
 
       if (learnSelect && understandSelect && learnSelect.value === understandSelect.value) {
-        understandSelect.value = learnSelect.value === "en" ? "tr" : "en";
+        understandSelect.value = getDefaultSupportLang(learnSelect.value);
       }
 
       onboardingSelectedLevel = currentLevel || "A1";
@@ -2666,7 +2687,7 @@
       localStorage.setItem("leenardo_target_lang", targetLang);
 
       if (targetLang === supportLang) {
-        supportLang = prevTarget !== targetLang ? prevTarget : SUPPORTED_LANGUAGES.find(l => l !== targetLang);
+        supportLang = getDefaultSupportLang(targetLang);
         localStorage.setItem("leenardo_support_lang", supportLang);
         const supElem = document.getElementById("support-lang-select");
         if (supElem) supElem.value = supportLang;
@@ -2724,7 +2745,7 @@
       const pool = unreadList.length > 0 ? unreadList : articlesDatabase;
       const randomIndex = Math.floor(Math.random() * pool.length);
       const article = pool[randomIndex];
-      const targetUrl = `articles/${encodeURIComponent(article.id)}.html?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
+      const targetUrl = `/${targetLang}/articles/${encodeURIComponent(article.id)}?level=${currentLevel}&support=${supportLang}`;
       window.location.href = targetUrl;
     }
 
@@ -2771,7 +2792,7 @@
                  || (latest.titleTranslations && latest.titleTranslations[targetLang])
                  || latest.topic;
       tickerLink.textContent = title;
-      tickerLink.href = `articles/${encodeURIComponent(latest.id)}.html?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
+      tickerLink.href = `/${targetLang}/articles/${encodeURIComponent(latest.id)}?level=${currentLevel}&support=${supportLang}`;
     }
 
     function formatCategoryLabel(label) {
@@ -3002,7 +3023,7 @@
         const leadExcerpt = getArticleExcerpt(lead, leadLevelData);
         const leadExcerptHtml = leadExcerpt ? `<p class="hero-lead-excerpt">${leadExcerpt}</p>` : "";
 
-        const leadUrl = `articles/${encodeURIComponent(lead.id)}.html?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
+        const leadUrl = `/${targetLang}/articles/${encodeURIComponent(lead.id)}?level=${currentLevel}&support=${supportLang}`;
         const leadImg = (lead.visual && lead.visual.imageUrl) ? lead.visual.imageUrl : 'images/cover_01.jpg';
         const leadIsRead = isArticleRead(lead.id);
         const leadReadTag = leadIsRead ? `<span class="hero-read-tag">✓ ${t.readStatus || 'Read'}</span>` : '';
@@ -3079,7 +3100,7 @@
         const subSupportTitle = getSupportTitle(art);
         const subSupportTitleHtml = subSupportTitle ? `<span class="feed-title-support">${subSupportTitle}</span>` : "";
         const img = (art.visual && art.visual.imageUrl) ? art.visual.imageUrl : 'images/cover_01.jpg';
-        const url = `articles/${encodeURIComponent(art.id)}.html?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
+        const url = `/${targetLang}/articles/${encodeURIComponent(art.id)}?level=${currentLevel}&support=${supportLang}`;
         const isRead = isArticleRead(art.id);
         const readBadge = isRead ? `<span>✓ ${t.readStatus || 'Read'}</span>` : '';
         return `
@@ -3127,7 +3148,7 @@
         const trendSupportTitle = getSupportTitle(art);
         const trendSupportTitleHtml = trendSupportTitle ? `<span class="feed-title-support">${trendSupportTitle}</span>` : "";
         const img = (art.visual && art.visual.imageUrl) ? art.visual.imageUrl : 'images/cover_01.jpg';
-        const url = `articles/${encodeURIComponent(art.id)}.html?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
+        const url = `/${targetLang}/articles/${encodeURIComponent(art.id)}?level=${currentLevel}&support=${supportLang}`;
         const isRead = isArticleRead(art.id);
         const readBadge = isRead ? `<span class="card-read-badge">✓</span>` : '';
         const item = document.createElement("div");
@@ -3170,17 +3191,17 @@
       const excerpt = getArticleExcerpt(art, targetLevelData);
       const teaserHtml = excerpt ? `<p class="feed-desc">${excerpt}</p>` : "";
 
-      const articleBaseUrl = `articles/${encodeURIComponent(art.id)}.html?target=${targetLang}&support=${supportLang}`;
+      const articleBaseUrl = `/${targetLang}/articles/${encodeURIComponent(art.id)}`;
       const imageUrl = (art.visual && art.visual.imageUrl) ? art.visual.imageUrl : 'images/cover_01.jpg';
       const isRead = isArticleRead(art.id);
       const readBadgeHtml = isRead ? `<span class="card-read-badge">✓ ${t.readStatus || 'Read'}</span>` : '';
 
       const levelTabsHtml = SUPPORTED_LEVELS.map(lvl => `
-        <a href="${articleBaseUrl}&level=${lvl}" class="level-tab ${lvl === currentLevel ? 'active' : ''}">${lvl}</a>
+        <a href="${articleBaseUrl}?level=${lvl}&support=${supportLang}" class="level-tab ${lvl === currentLevel ? 'active' : ''}">${lvl}</a>
       `).join('');
 
       card.innerHTML = `
-        <a href="${articleBaseUrl}&level=${currentLevel}" class="feed-img-link">
+        <a href="${articleBaseUrl}?level=${currentLevel}&support=${supportLang}" class="feed-img-link">
           <img src="${imageUrl}" alt="${cardTitle}" class="feed-img" loading="lazy">
         </a>
         <div class="feed-body">
@@ -3188,7 +3209,7 @@
             <span class="feed-cat">${catLabel}</span>
             ${readBadgeHtml}
           </div>
-          <a href="${articleBaseUrl}&level=${currentLevel}">
+          <a href="${articleBaseUrl}?level=${currentLevel}&support=${supportLang}">
             <h3 class="feed-title">${cardTitle}</h3>
             ${supportTitleHtml}
           </a>
@@ -3197,7 +3218,7 @@
             <div class="level-tabs">
               ${levelTabsHtml}
             </div>
-            <a href="${articleBaseUrl}&level=${currentLevel}" class="card-read-link">
+            <a href="${articleBaseUrl}?level=${currentLevel}&support=${supportLang}" class="card-read-link">
               ${t.readStory || 'Read story →'}
             </a>
           </div>
@@ -3295,9 +3316,26 @@
       }
 
       // 2. Vocabulary Widget Counter
-      const savedWords = getSavedWords();
+      updateIndexSavedWordBadge();
+    }
+
+    async function updateIndexSavedWordBadge(userParam) {
       const countBadge = document.getElementById("widget-saved-count");
-      if (countBadge) countBadge.textContent = savedWords.length;
+      if (!countBadge) return;
+      let isAuth = false;
+      if (userParam !== undefined) {
+        isAuth = !!userParam;
+      } else if (typeof LeenardoAuth !== "undefined" && typeof LeenardoAuth.waitForSession === "function") {
+        try {
+          const user = await LeenardoAuth.waitForSession();
+          isAuth = !!user;
+        } catch (e) {
+          isAuth = false;
+        }
+      } else if (typeof window !== "undefined" && window.currentAuthUser) {
+        isAuth = true;
+      }
+      countBadge.textContent = isAuth ? getSavedWords().length : 0;
     }
 
     function toLocaleUpper(str, lang = (supportLang || 'en')) {
@@ -3386,6 +3424,11 @@
     async function start() {
       await loadArticlesData();
       initHome();
+      if (typeof onAuthStateChange === "function") {
+        onAuthStateChange((user) => {
+          updateIndexSavedWordBadge(user);
+        });
+      }
     }
 
     if (document.readyState === "loading") {
