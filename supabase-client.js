@@ -59,6 +59,9 @@ function onAuthStateChange(listener) {
 
 function notifyAuthStateListeners(user) {
   currentAuthUser = user;
+  if (!user) {
+    sessionCheckPromise = null;
+  }
   if (typeof window !== "undefined") {
     window.currentAuthUser = user;
   }
@@ -81,7 +84,10 @@ const LeenardoAuth = {
    */
   async waitForSession() {
     if (currentAuthUser) return currentAuthUser;
-    if (sessionCheckPromise) return await sessionCheckPromise;
+    if (sessionCheckPromise) {
+      const sessUser = await sessionCheckPromise;
+      if (sessUser) return sessUser;
+    }
     if (supabaseClient) return await this.getUser();
     return null;
   },
@@ -148,6 +154,7 @@ const LeenardoAuth = {
    */
   async signOut() {
     if (!supabaseClient) return;
+    sessionCheckPromise = null;
     const { error } = await supabaseClient.auth.signOut();
     if (error) console.error("Sign out error:", error);
     notifyAuthStateListeners(null);

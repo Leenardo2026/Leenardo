@@ -5265,24 +5265,32 @@
           const transObj = (item && item.translations && item.translations[supportLang]) || null;
           const transQ = transObj ? (transObj.q || transObj.question || "") : "";
           const transA = transObj ? (transObj.a || transObj.answer || "") : "";
-          const hasTranslation = Boolean(transQ || transA);
 
           qaBox.innerHTML = `
             <div class="qa-question-bar" role="button" tabindex="0" aria-expanded="false" id="qa-bar-${qIdx}" onclick="toggleQA(${qIdx})" onkeydown="handleQAKey(event, ${qIdx})">
               <span><strong>Q${qIdx + 1}:</strong> ${escapeHtml(targetQ)}</span>
               <span class="qa-chevron" id="qa-chev-${qIdx}">▼</span>
             </div>
+            ${transQ ? `
+              <div class="qa-trans-q-wrapper" style="margin-top:0.35rem; margin-bottom:0.45rem; padding-left:0.25rem;">
+                <button type="button" class="btn-qa-trans-toggle" id="qa-q-trans-btn-${qIdx}" onclick="toggleQAQuestionTranslation(${qIdx}, event)" style="background:none; border:none; color:var(--primary, #0284c7); font-size:0.8rem; font-weight:600; cursor:pointer; padding:0; display:inline-flex; align-items:center; gap:0.25rem;">
+                  <span id="qa-q-trans-btn-text-${qIdx}">${escapeHtml(t.showTranslation || "Show Translation")}</span>
+                </button>
+                <div id="qa-q-trans-box-${qIdx}" style="display:none; margin-top:0.35rem; font-size:0.85rem; color:var(--slate-600, #475569); background:rgba(0,0,0,0.03); padding:0.45rem 0.7rem; border-radius:6px; line-height:1.5;">
+                  <div>${escapeHtml(transQ)}</div>
+                </div>
+              </div>
+            ` : ''}
             <div class="qa-answer-box" id="ans-${qIdx}" style="display:none;">
               <div class="qa-answer-label">Answer:</div>
               <div>${escapeHtml(targetA)}</div>
-              ${hasTranslation ? `
-                <div class="qa-trans-wrapper" style="margin-top:0.6rem; padding-top:0.5rem; border-top:1px dashed var(--border-light, #e2e8f0);">
-                  <button type="button" class="btn-qa-trans-toggle" id="qa-trans-btn-${qIdx}" onclick="toggleQATranslation(${qIdx}, event)" style="background:none; border:none; color:var(--primary, #0284c7); font-size:0.8rem; font-weight:600; cursor:pointer; padding:0; display:inline-flex; align-items:center; gap:0.25rem;">
-                    <span id="qa-trans-btn-text-${qIdx}">${escapeHtml(t.showTranslation || "Show Translation")}</span>
+              ${transA ? `
+                <div class="qa-trans-a-wrapper" style="margin-top:0.6rem; padding-top:0.5rem; border-top:1px dashed var(--border-light, #e2e8f0);">
+                  <button type="button" class="btn-qa-trans-toggle" id="qa-a-trans-btn-${qIdx}" onclick="toggleQAAnswerTranslation(${qIdx}, event)" style="background:none; border:none; color:var(--primary, #0284c7); font-size:0.8rem; font-weight:600; cursor:pointer; padding:0; display:inline-flex; align-items:center; gap:0.25rem;">
+                    <span id="qa-a-trans-btn-text-${qIdx}">${escapeHtml(t.showTranslation || "Show Translation")}</span>
                   </button>
-                  <div id="qa-trans-box-${qIdx}" style="display:none; margin-top:0.4rem; font-size:0.85rem; color:var(--slate-600, #475569); background:rgba(0,0,0,0.03); padding:0.5rem 0.75rem; border-radius:6px; line-height:1.5;">
-                    ${transQ ? `<div style="font-weight:600; margin-bottom:0.25rem;">${escapeHtml(transQ)}</div>` : ''}
-                    ${transA ? `<div>${escapeHtml(transA)}</div>` : ''}
+                  <div id="qa-a-trans-box-${qIdx}" style="display:none; margin-top:0.4rem; font-size:0.85rem; color:var(--slate-600, #475569); background:rgba(0,0,0,0.03); padding:0.5rem 0.75rem; border-radius:6px; line-height:1.5;">
+                    <div>${escapeHtml(transA)}</div>
                   </div>
                 </div>
               ` : ''}
@@ -5296,10 +5304,10 @@
       }
     }
 
-    function toggleQATranslation(qIdx, event) {
+    function toggleQAQuestionTranslation(qIdx, event) {
       if (event) event.stopPropagation();
-      const box = document.getElementById(`qa-trans-box-${qIdx}`);
-      const btnText = document.getElementById(`qa-trans-btn-text-${qIdx}`);
+      const box = document.getElementById(`qa-q-trans-box-${qIdx}`);
+      const btnText = document.getElementById(`qa-q-trans-btn-text-${qIdx}`);
       if (!box || !btnText) return;
       const t = uiTranslations[supportLang] || uiTranslations.en;
       const isHidden = box.style.display === "none";
@@ -5310,6 +5318,26 @@
         box.style.display = "none";
         btnText.textContent = t.showTranslation || "Show Translation";
       }
+    }
+
+    function toggleQAAnswerTranslation(qIdx, event) {
+      if (event) event.stopPropagation();
+      const box = document.getElementById(`qa-a-trans-box-${qIdx}`);
+      const btnText = document.getElementById(`qa-a-trans-btn-text-${qIdx}`);
+      if (!box || !btnText) return;
+      const t = uiTranslations[supportLang] || uiTranslations.en;
+      const isHidden = box.style.display === "none";
+      if (isHidden) {
+        box.style.display = "block";
+        btnText.textContent = t.hideTranslation || "Hide Translation";
+      } else {
+        box.style.display = "none";
+        btnText.textContent = t.showTranslation || "Show Translation";
+      }
+    }
+
+    function toggleQATranslation(qIdx, event) {
+      toggleQAAnswerTranslation(qIdx, event);
     }
 
     function toggleQA(qIdx) {
@@ -7734,10 +7762,27 @@
       onAuthStateChange(async user => {
         if (!user) {
           pageAuthUser = null;
+          pendingGuestSaveAction = null;
+          updateSavedWordBadges(null);
+          const modal = document.getElementById("vocab-notebook-modal");
+          if (modal && modal.classList.contains("show")) {
+            const tabCards = document.getElementById("vn-tab-flashcards");
+            if (tabCards && tabCards.classList.contains("active")) {
+              initFlashcards();
+            } else {
+              renderSavedWordsList();
+            }
+          }
+          updatePopSaveButtonUI(false);
+          const t = (typeof uiTranslations !== "undefined" && (uiTranslations[supportLang] || uiTranslations.en)) || {};
+          document.querySelectorAll(".vocab-save-btn").forEach(btn => {
+            btn.classList.remove("saved");
+            btn.textContent = t.saveWord || "Save";
+          });
           return;
         }
         pageAuthUser = user;
-        updateSavedWordBadges();
+        updateSavedWordBadges(user);
         const curArt = getCurrentArticleObject();
         const targetData = curArt?.languages?.[targetLang]?.[currentLevel] || curArt?.[targetLang]?.[currentLevel];
         if (targetData) {
@@ -7892,8 +7937,8 @@
       return getSavedWords().some(w => w.id === id || (w.word && w.word.toLowerCase().trim() === String(id).toLowerCase().trim()));
     }
 
-    async function updateSavedWordBadges() {
-      const authUser = await getActiveAuthUser();
+    async function updateSavedWordBadges(userParam) {
+      const authUser = (userParam !== undefined) ? userParam : await getActiveAuthUser();
       const count = authUser ? getSavedWords().length : 0;
       ["saved-words-count", "saved-words-count-bar", "vn-tab-count-saved", "vn-tab-count-cards"].forEach(id => {
         const el = document.getElementById(id);

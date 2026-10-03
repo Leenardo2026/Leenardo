@@ -3319,11 +3319,13 @@
       updateIndexSavedWordBadge();
     }
 
-    async function updateIndexSavedWordBadge() {
+    async function updateIndexSavedWordBadge(userParam) {
       const countBadge = document.getElementById("widget-saved-count");
       if (!countBadge) return;
       let isAuth = false;
-      if (typeof LeenardoAuth !== "undefined" && typeof LeenardoAuth.waitForSession === "function") {
+      if (userParam !== undefined) {
+        isAuth = !!userParam;
+      } else if (typeof LeenardoAuth !== "undefined" && typeof LeenardoAuth.waitForSession === "function") {
         try {
           const user = await LeenardoAuth.waitForSession();
           isAuth = !!user;
@@ -3423,8 +3425,8 @@
       await loadArticlesData();
       initHome();
       if (typeof onAuthStateChange === "function") {
-        onAuthStateChange(() => {
-          updateIndexSavedWordBadge();
+        onAuthStateChange((user) => {
+          updateIndexSavedWordBadge(user);
         });
       }
     }
