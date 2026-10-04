@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leenardo — Yönetim Paneli</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-cream: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-card: #ffffff;
+      --bg-subtle: #f1f5f9;
+      --ink-navy: #0f172a;
+      --muted: #64748b;
+      --border-color: #e2e8f0;
+      --primary: #28195e;
+      --primary-hover: #1f134a;
+      --accent-coral: #ff6253;
+      --success-green: #15803d;
+      --success-bg: #dcfce7;
+      --warning-amber: #b45309;
+      --warning-bg: #fef3c7;
+      --danger-red: #b91c1c;
+      --danger-bg: #fee2e2;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --font-serif: "Fraunces", Georgia, serif;
+      --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-cream);
+      color: var(--ink-navy);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .admin-header {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 1.25rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .admin-header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .admin-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--ink-navy);
+    }
+
+    .admin-brand h1 {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .admin-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.2rem 0.5rem;
+      background: var(--primary);
+      color: #ffffff;
+      border-radius: 999px;
+    }
+
+    .admin-user-nav {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .user-email-display {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 500;
+      display: none;
+    }
+
+    @media (min-width: 640px) {
+      .user-email-display {
+        display: inline-block;
+      }
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.5rem 0.9rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      border: 1px solid transparent;
+      text-decoration: none;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn-secondary {
+      background: var(--bg-surface);
+      color: var(--ink-navy);
+      border-color: var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-subtle);
+    }
+
+    .btn-danger {
+      background: #ffffff;
+      color: var(--danger-red);
+      border-color: #fca5a5;
+    }
+
+    .btn-danger:hover {
+      background: var(--danger-bg);
+    }
+
+    .btn-success {
+      background: var(--success-green);
+      color: #ffffff;
+    }
+
+    .btn-success:hover {
+      background: #166534;
+    }
+
+    .btn-sm {
+      padding: 0.35rem 0.65rem;
+      font-size: 0.8rem;
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Container */
+    .admin-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 3rem;
+      width: 100%;
+      flex: 1;
+    }
+
+    /* Auth Gate Card */
+    .auth-card-wrap {
+      max-width: 420px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+    }
+
+    .auth-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2rem 1.75rem;
+      box-shadow: var(--shadow-md);
+      text-align: center;
+    }
+
+    .auth-card h2 {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+      color: var(--ink-navy);
+    }
+
+    .auth-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      text-align: left;
+      margin-bottom: 1rem;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+      color: var(--ink-navy);
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 0.6rem 0.8rem;
+      font-size: 0.9rem;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      outline: none;
+      font-family: inherit;
+      background: var(--bg-surface);
+      color: var(--ink-navy);
+      transition: border-color 0.15s ease;
+    }
+
+    .form-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(40, 25, 94, 0.1);
+    }
+
+    /* Feedback / Alerts */
+    .alert-banner {
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .alert-danger {
+      background: var(--danger-bg);
+      color: var(--danger-red);
+      border: 1px solid #fecaca;
+    }
+
+    .alert-success {
+      background: var(--success-bg);
+      color: var(--success-green);
+      border: 1px solid #bbf7d0;
+    }
+
+    .alert-warning {
+      background: var(--warning-bg);
+      color: var(--warning-amber);
+      border: 1px solid #fde68a;
+    }
+
+    /* Access Denied State */
+    .forbidden-state {
+      max-width: 480px;
+      margin: 4rem auto;
+      text-align: center;
+      background: var(--bg-surface);
+      border: 1px solid #fecaca;
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 2rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .forbidden-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .forbidden-state h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--danger-red);
+      margin-bottom: 0.5rem;
+    }
+
+    .forbidden-state p {
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Admin View Layout */
+    .admin-main-view {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 992px) {
+      .admin-main-view {
+        grid-template-columns: 420px 1fr;
+        align-items: start;
+      }
+    }
+
+    /* Section Cards */
+    .panel-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+
+    .panel-card-header {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .panel-card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ink-navy);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Tabs */
+    .tabs-nav {
+      display: flex;
+      background: var(--bg-subtle);
+      padding: 0.3rem;
+      border-radius: var(--radius-sm);
+      gap: 0.25rem;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 0.45rem 0.75rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-family: inherit;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .tab-btn.active {
+      background: var(--bg-surface);
+      color: var(--ink-navy);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* List Table / Rows */
+    .articles-list {
+      max-height: 700px;
+      overflow-y: auto;
+      divide-y: 1px solid var(--border-color);
+    }
+
+    .article-row-item {
+      padding: 0.9rem 1.1rem;
+      border-bottom: 1px solid var(--border-color);
+      cursor: pointer;
+      transition: background-color 0.12s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .article-row-item:last-child {
+      border-bottom: none;
+    }
+
+    .article-row-item:hover {
+      background-color: var(--bg-subtle);
+    }
+
+    .article-row-item.selected {
+      background-color: #ede9fe;
+      border-left: 4px solid var(--primary);
+    }
+
+    .row-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--ink-navy);
+      line-height: 1.35;
+    }
+
+    .row-meta-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .row-category {
+      background: var(--bg-subtle);
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+
+    .row-date {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .list-empty-msg {
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-style: italic;
+    }
+
+    /* Preview Panel */
+    .preview-card-body {
+      padding: 1.25rem;
+    }
+
+    .preview-empty-placeholder {
+      padding: 4rem 1.5rem;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .preview-empty-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.75rem;
+      opacity: 0.6;
+    }
+
+    .filter-bar-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-color);
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .pill-group {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+    }
+
+    .pill-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-right: 0.25rem;
+    }
+
+    .pill-btn {
+      padding: 0.3rem 0.6rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border-radius: 999px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--ink-navy);
+      cursor: pointer;
+      transition: all 0.12s ease;
+      font-family: inherit;
+    }
+
+    .pill-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    /* Badges & Warnings */
+    .badge-warning {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--warning-bg);
+      color: var(--warning-amber);
+      border: 1px solid #fde68a;
+      padding: 0.35rem 0.65rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.78rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .badge-danger {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--danger-bg);
+      color: var(--danger-red);
+      border: 1px solid #fecaca;
+      padding: 0.35rem 0.65rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.78rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    /* Article Reader Preview */
+    .preview-article-title {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--ink-navy);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .preview-article-meta {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .preview-content-box {
+      background: var(--bg-subtle);
+      border-radius: var(--radius-sm);
+      padding: 1.1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .preview-content-box p {
+      margin-bottom: 0.75rem;
+    }
+
+    .preview-content-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-subtitle {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--ink-navy);
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .plain-text-box {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.9rem;
+      font-size: 0.88rem;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: var(--font-sans);
+      color: var(--ink-navy);
+      line-height: 1.5;
+      margin-bottom: 1.25rem;
+      max-height: 250px;
+      overflow-y: auto;
+    }
+
+    /* Publish Actions Area */
+    .publish-bar-card {
+      margin-top: 1.5rem;
+      padding: 1.25rem;
+      background: #faf5ff;
+      border: 1px solid #e9d5ff;
+      border-radius: var(--radius-md);
+    }
+
+    .publish-bar-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .publish-actions-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    @media (min-width: 640px) {
+      .publish-actions-grid {
+        flex-direction: row;
+        align-items: flex-end;
+      }
+    }
+
+    .schedule-control {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .utc-preview-note {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+      font-family: monospace;
+    }
+
+    /* Modal / Dialog */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(2px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      z-index: 100;
+    }
+
+    .modal-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      max-width: 460px;
+      width: 100%;
+      padding: 1.75rem;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .modal-card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--ink-navy);
+      margin-bottom: 0.6rem;
+    }
+
+    .modal-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 1.25rem;
+    }
+
+    .modal-highlight {
+      background: var(--bg-subtle);
+      border-left: 3px solid var(--primary);
+      padding: 0.6rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.82rem;
+      font-family: monospace;
+      color: var(--ink-navy);
+      margin-bottom: 1.25rem;
+      word-break: break-all;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.6rem;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(0, 0, 0, 0.1);
+      border-top-color: currentColor;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="admin-header">
+    <div class="admin-header-inner">
+      <div class="admin-brand">
+        <h1>Leenardo</h1>
+        <span class="admin-badge">Yönetim Paneli</span>
+      </div>
+      <div class="admin-user-nav">
+        <span id="nav-user-email" class="user-email-display"></span>
+        <button id="btn-sign-out" class="btn btn-secondary btn-sm hidden">Çıkış Yap</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Notification Banner -->
+  <div style="max-width: 1200px; margin: 1rem auto 0; padding: 0 1rem; width: 100%;">
+    <div id="status-alert" class="alert-banner hidden"></div>
+  </div>
+
+  <main class="admin-container">
+    <!-- State 1: Loading -->
+    <div id="view-loading" class="auth-card-wrap">
+      <div class="auth-card">
+        <div class="spinner" style="width: 32px; height: 32px; margin-bottom: 1rem; border-width: 3px; border-top-color: var(--primary);"></div>
+        <h2>Yetki Doğrulanıyor</h2>
+        <p>Oturum bilgileri ve yönetici yetkileri kontrol ediliyor...</p>
+      </div>
+    </div>
+
+    <!-- State 2: Sign-in Form -->
+    <div id="view-login" class="auth-card-wrap hidden">
+      <div class="auth-card">
+        <h2>Yönetici Girişi</h2>
+        <p>Lütfen yetkili e-posta ve şifrenizle giriş yapınız.</p>
+        <form id="form-login">
+          <div class="form-group">
+            <label class="form-label" for="login-email">E-posta</label>
+            <input type="email" id="login-email" class="form-input" required placeholder="admin@leenardo.com" autocomplete="username">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="login-password">Şifre</label>
+            <input type="password" id="login-password" class="form-input" required placeholder="••••••••" autocomplete="current-password">
+          </div>
+          <button type="submit" id="btn-login-submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">Giriş Yap</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- State 3: Access Denied ("Yetkiniz yok") -->
+    <div id="view-forbidden" class="forbidden-state hidden">
+      <div class="forbidden-icon">🔒</div>
+      <h2>Yetkiniz yok</h2>
+      <p>Bu hesap yönetici yetkisine sahip değildir. Sayfa ve veri erişimi engellendi.</p>
+      <button id="btn-forbidden-signout" class="btn btn-secondary">Farklı Hesapla Giriş Yap</button>
+    </div>
+
+    <!-- State 4: Admin Dashboard -->
+    <div id="view-dashboard" class="admin-main-view hidden">
+      <!-- Left Column: Articles List -->
+      <section class="panel-card" aria-label="Makale Listesi">
+        <div class="panel-card-header">
+          <div class="tabs-nav" role="tablist">
+            <button id="tab-drafts" class="tab-btn active" role="tab" aria-selected="true">Taslaklar (<span id="count-drafts">0</span>)</button>
+            <button id="tab-scheduled" class="tab-btn" role="tab" aria-selected="false">Zamanlanmış (<span id="count-scheduled">0</span>)</button>
+          </div>
+          <button id="btn-refresh-list" class="btn btn-secondary btn-sm" title="Listeyi yenile">↻</button>
+        </div>
+        <div id="articles-list-container" class="articles-list">
+          <!-- Dynamic row items rendered here -->
+        </div>
+      </section>
+
+      <!-- Right Column: Detail & Preview -->
+      <section class="panel-card" aria-label="Makale Önizleme ve İşlemler">
+        <div class="panel-card-header">
+          <span class="panel-card-title">
+            <span>Makale Önizleme</span>
+            <span id="preview-active-slug" style="font-size: 0.8rem; color: var(--muted); font-weight: normal;"></span>
+          </span>
+          <span id="preview-status-pill" style="display: none;"></span>
+        </div>
+        <div class="preview-card-body">
+          <div id="preview-empty" class="preview-empty-placeholder">
+            <div class="preview-empty-icon">📄</div>
+            <p>İncelemek veya yayınlamak için soldaki listeden bir makale seçin.</p>
+          </div>
+
+          <div id="preview-content" class="hidden">
+            <!-- Selectors: Language & Level -->
+            <div class="filter-bar-group">
+              <div class="pill-group" role="group" aria-label="Dil Seçimi">
+                <span class="pill-label">Dil:</span>
+                <button type="button" class="pill-btn active" data-lang="tr">TR</button>
+                <button type="button" class="pill-btn" data-lang="en">EN</button>
+                <button type="button" class="pill-btn" data-lang="es">ES</button>
+                <button type="button" class="pill-btn" data-lang="de">DE</button>
+                <button type="button" class="pill-btn" data-lang="fr">FR</button>
+              </div>
+
+              <div class="pill-group" role="group" aria-label="Seviye Seçimi">
+                <span class="pill-label">Seviye:</span>
+                <button type="button" class="pill-btn active" data-lvl="A1">A1</button>
+                <button type="button" class="pill-btn" data-lvl="A2">A2</button>
+                <button type="button" class="pill-btn" data-lvl="B1">B1</button>
+                <button type="button" class="pill-btn" data-lvl="B2">B2</button>
+                <button type="button" class="pill-btn" data-lvl="C1">C1</button>
+              </div>
+            </div>
+
+            <!-- Content Validation Warnings -->
+            <div id="warning-empty-block" class="badge-danger hidden">
+              ⚠️ Bu dil ve seviye kombinasyonu için metin içeriği boş!
+            </div>
+            <div id="warning-turkish-chars" class="badge-warning hidden">
+              ⚠️ Uyarı: Türkçe dışı bu dilin sorularında Türkçe karakterler (ğ, ş, ı, İ) tespit edildi.
+            </div>
+
+            <!-- Reader Preview Header -->
+            <h2 id="preview-title" class="preview-article-title">-</h2>
+            <div class="preview-article-meta">
+              <span><strong>Kategori:</strong> <span id="preview-category">-</span></span>
+              <span><strong>Konu:</strong> <span id="preview-topic">-</span></span>
+              <span><strong>Mevcut Yayın Tarihi:</strong> <span id="preview-pubdate">-</span></span>
+            </div>
+
+            <!-- Article Body -->
+            <div class="section-subtitle">📖 Makale Metni</div>
+            <div id="preview-body-text" class="preview-content-box"></div>
+
+            <!-- Quiz & Comprehension Questions as Plain Text -->
+            <div class="section-subtitle">❓ Test Soruları (Quiz)</div>
+            <div id="preview-quiz-text" class="plain-text-box"></div>
+
+            <div class="section-subtitle">💬 Kavrama & Tartışma Soruları (Q&amp;A)</div>
+            <div id="preview-qa-text" class="plain-text-box"></div>
+
+            <!-- Publishing & Schedule Actions -->
+            <div class="publish-bar-card">
+              <div class="publish-bar-title">Yayınlama ve Durum Yönetimi</div>
+              <div class="publish-actions-grid">
+                <!-- Action 1: Publish Now -->
+                <button id="btn-publish-now" class="btn btn-success" type="button">Şimdi Yayınla</button>
+
+                <!-- Action 2: Schedule with Custom Datetime -->
+                <div class="schedule-control">
+                  <label class="form-label" for="schedule-datetime-input" style="font-size: 0.75rem;">İstanbul Saatiyle Yayın Planla:</label>
+                  <input type="datetime-local" id="schedule-datetime-input" class="form-input" style="padding: 0.4rem 0.6rem; font-size: 0.85rem;">
+                  <span id="utc-preview-text" class="utc-preview-note">UTC karşılığı: -</span>
+                </div>
+                <button id="btn-schedule-save" class="btn btn-primary" type="button">Tarih Belirle &amp; Planla</button>
+
+                <!-- Action 3: Revert to Draft (Visible for Scheduled items) -->
+                <button id="btn-revert-draft" class="btn btn-danger hidden" type="button">Taslağa Geri Al</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Confirmation Modal -->
+  <div id="modal-confirm" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modal-confirm-title">
+    <div class="modal-card">
+      <h3 id="modal-confirm-title">İşlemi Onaylayın</h3>
+      <p id="modal-confirm-message">Bu işlemi gerçekleştirmek istediğinize emin misiniz?</p>
+      <div id="modal-confirm-detail" class="modal-highlight hidden"></div>
+      <div class="modal-actions">
+        <button id="btn-modal-cancel" class="btn btn-secondary" type="button">Vazgeç</button>
+        <button id="btn-modal-proceed" class="btn btn-primary" type="button">Onayla ve Kaydet</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-client.js"></script>
+
+  <script>
+    (function () {
+      "use strict";
+
+      // -------------------------------------------------------------------------
+      // 1. Constants & State Management
+      // -------------------------------------------------------------------------
+      const SUPPORTED_LANGS = ["tr", "en", "es", "de", "fr"];
+      const SUPPORTED_LEVELS = ["A1", "A2", "B1", "B2", "C1"];
+
+      let activeTab = "drafts"; // "drafts" | "scheduled"
+      let currentDrafts = [];
+      let currentScheduled = [];
+      let selectedArticleId = null;
+      let fullArticleData = null; // Complete single article with languages payload
+      let previewLang = "tr";
+      let previewLevel = "A1";
+
+      let pendingAction = null; // Callback holder for modal confirmation
+
+      // DOM Elements
+      const viewLoading = document.getElementById("view-loading");
+      const viewLogin = document.getElementById("view-login");
+      const viewForbidden = document.getElementById("view-forbidden");
+      const viewDashboard = document.getElementById("view-dashboard");
+
+      const navUserEmail = document.getElementById("nav-user-email");
+      const btnSignOut = document.getElementById("btn-sign-out");
+      const btnForbiddenSignout = document.getElementById("btn-forbidden-signout");
+      const formLogin = document.getElementById("form-login");
+      const statusAlert = document.getElementById("status-alert");
+
+      const tabDrafts = document.getElementById("tab-drafts");
+      const tabScheduled = document.getElementById("tab-scheduled");
+      const countDrafts = document.getElementById("count-drafts");
+      const countScheduled = document.getElementById("count-scheduled");
+      const btnRefreshList = document.getElementById("btn-refresh-list");
+      const articlesListContainer = document.getElementById("articles-list-container");
+
+      const previewEmpty = document.getElementById("preview-empty");
+      const previewContent = document.getElementById("preview-content");
+      const previewActiveSlug = document.getElementById("preview-active-slug");
+      const previewTitle = document.getElementById("preview-title");
+      const previewCategory = document.getElementById("preview-category");
+      const previewTopic = document.getElementById("preview-topic");
+      const previewPubdate = document.getElementById("preview-pubdate");
+      const previewBodyText = document.getElementById("preview-body-text");
+      const previewQuizText = document.getElementById("preview-quiz-text");
+      const previewQaText = document.getElementById("preview-qa-text");
+      const warningEmptyBlock = document.getElementById("warning-empty-block");
+      const warningTurkishChars = document.getElementById("warning-turkish-chars");
+
+      const btnPublishNow = document.getElementById("btn-publish-now");
+      const scheduleDatetimeInput = document.getElementById("schedule-datetime-input");
+      const utcPreviewText = document.getElementById("utc-preview-text");
+      const btnScheduleSave = document.getElementById("btn-schedule-save");
+      const btnRevertDraft = document.getElementById("btn-revert-draft");
+
+      const modalConfirm = document.getElementById("modal-confirm");
+      const modalConfirmTitle = document.getElementById("modal-confirm-title");
+      const modalConfirmMessage = document.getElementById("modal-confirm-message");
+      const modalConfirmDetail = document.getElementById("modal-confirm-detail");
+      const btnModalCancel = document.getElementById("btn-modal-cancel");
+      const btnModalProceed = document.getElementById("btn-modal-proceed");
+
+      // -------------------------------------------------------------------------
+      // 2. Helper Functions (Timezone, Date, Strings)
+      // -------------------------------------------------------------------------
+      function showAlert(msg, type) {
+        if (!statusAlert) return;
+        statusAlert.className = `alert-banner alert-${type || "info"}`;
+        statusAlert.textContent = msg;
+        statusAlert.classList.remove("hidden");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function hideAlert() {
+        if (!statusAlert) return;
+        statusAlert.classList.add("hidden");
+        statusAlert.textContent = "";
+      }
+
+      /**
+       * Formats any UTC / ISO date string into Europe/Istanbul time (tr-TR format)
+       */
+      function formatIstanbulTime(isoDateStr) {
+        if (!isoDateStr) return "Belirtilmemiş";
+        try {
+          const d = new Date(isoDateStr);
+          if (isNaN(d.getTime())) return "Geçersiz Tarih";
+          return new Intl.DateTimeFormat("tr-TR", {
+            timeZone: "Europe/Istanbul",
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit"
+          }).format(d);
+        } catch (e) {
+          return isoDateStr;
+        }
+      }
+
+      /**
+       * Converts an HTML datetime-local input string ("YYYY-MM-DDTHH:mm")
+       * explicitly interpreted in Europe/Istanbul (+03:00) into a UTC ISO string.
+       * Example: "2026-10-06T09:00" -> "2026-10-06T06:00:00.000Z"
+       */
+      function convertIstanbulLocalToUtcIso(localVal) {
+        if (!localVal) return null;
+        const normalized = localVal.length === 16 ? `${localVal}:00+03:00` : `${localVal}+03:00`;
+        const date = new Date(normalized);
+        if (isNaN(date.getTime())) return null;
+        return date.toISOString();
+      }
+
+      /**
+       * Checks if text contains Turkish-specific characters: ğ, ş, ı, İ
+       */
+      function containsTurkishSpecificChars(str) {
+        if (!str || typeof str !== "string") return false;
+        return /[ğşıİ]/.test(str);
+      }
+
+      function escapeHtml(str) {
+        if (!str) return "";
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      // -------------------------------------------------------------------------
+      // 3. Supabase Client & Auth Handling
+      // -------------------------------------------------------------------------
+      function getClient() {
+        if (window.supabaseClient) return window.supabaseClient;
+        if (window.supabase && typeof window.supabase.createClient === "function" && window.SUPABASE_CONFIG) {
+          window.supabaseClient = window.supabase.createClient(
+            window.SUPABASE_CONFIG.url,
+            window.SUPABASE_CONFIG.anonKey
+          );
+          return window.supabaseClient;
+        }
+        return null;
+      }
+
+      async function checkAdminAccess() {
+        hideAlert();
+        viewLoading.classList.remove("hidden");
+        viewLogin.classList.add("hidden");
+        viewForbidden.classList.add("hidden");
+        viewDashboard.classList.add("hidden");
+
+        const client = getClient();
+        if (!client) {
+          viewLoading.classList.add("hidden");
+          showAlert("Supabase istemcisi yüklenemedi. Lütfen sayfayı yenileyiniz.", "danger");
+          return;
+        }
+
+        try {
+          const { data: sessData, error: sessErr } = await client.auth.getSession();
+          if (sessErr || !sessData || !sessData.session) {
+            viewLoading.classList.add("hidden");
+            viewLogin.classList.remove("hidden");
+            btnSignOut.classList.add("hidden");
+            navUserEmail.textContent = "";
+            return;
+          }
+
+          const user = sessData.session.user;
+          navUserEmail.textContent = user.email || "";
+          btnSignOut.classList.remove("hidden");
+
+          // Verify admin role via Supabase RPC public.is_admin()
+          const { data: isAdmin, error: rpcErr } = await client.rpc("is_admin");
+
+          viewLoading.classList.add("hidden");
+
+          if (rpcErr || isAdmin !== true) {
+            console.warn("is_admin check returned false or error:", { isAdmin, rpcErr });
+            // Strict requirement: show "Yetkiniz yok" and nothing else
+            viewForbidden.classList.remove("hidden");
+            viewDashboard.classList.add("hidden");
+            return;
+          }
+
+          // Verified Admin: Load Dashboard
+          viewDashboard.classList.remove("hidden");
+          await loadArticlesList();
+        } catch (err) {
+          console.error("Auth check failed:", err);
+          viewLoading.classList.add("hidden");
+          showAlert("Yetki kontrolü sırasında beklenmeyen bir hata oluştu: " + err.message, "danger");
+        }
+      }
+
+      // -------------------------------------------------------------------------
+      // 4. Data Loading (List & Detail)
+      // -------------------------------------------------------------------------
+      async function loadArticlesList() {
+        const client = getClient();
+        if (!client) return;
+
+        articlesListContainer.innerHTML = '<div class="list-empty-msg"><div class="spinner"></div> Makaleler yükleniyor...</div>';
+
+        try {
+          // Select only light columns for the list (never languages)
+          const nowIso = new Date().toISOString();
+
+          // 1. Fetch Drafts (status='draft')
+          const { data: draftsData, error: draftsErr } = await client
+            .from("articles")
+            .select("id, category, status, published_at, title_translations")
+            .eq("status", "draft")
+            .order("published_at", { ascending: false, nullsFirst: false });
+
+          if (draftsErr) throw draftsErr;
+
+          // 2. Fetch Scheduled (status='published' AND published_at > now())
+          const { data: schedData, error: schedErr } = await client
+            .from("articles")
+            .select("id, category, status, published_at, title_translations")
+            .eq("status", "published")
+            .gt("published_at", nowIso)
+            .order("published_at", { ascending: true });
+
+          if (schedErr) throw schedErr;
+
+          currentDrafts = draftsData || [];
+          currentScheduled = schedData || [];
+
+          countDrafts.textContent = currentDrafts.length;
+          countScheduled.textContent = currentScheduled.length;
+
+          renderArticlesList();
+        } catch (err) {
+          console.error("Failed to load articles list:", err);
+          showAlert("Makaleler yüklenirken hata oluştu: " + err.message, "danger");
+          articlesListContainer.innerHTML = '<div class="list-empty-msg">Veriler alınamadı.</div>';
+        }
+      }
+
+      function renderArticlesList() {
+        const list = (activeTab === "drafts") ? currentDrafts : currentScheduled;
+        articlesListContainer.innerHTML = "";
+
+        if (list.length === 0) {
+          const emptyText = activeTab === "drafts" ? "Hiç taslak makale bulunmuyor." : "Zamanlanmış makale bulunmuyor.";
+          articlesListContainer.innerHTML = `<div class="list-empty-msg">${emptyText}</div>`;
+          return;
+        }
+
+        list.forEach(item => {
+          const row = document.createElement("div");
+          row.className = "article-row-item" + (selectedArticleId === item.id ? " selected" : "");
+          row.setAttribute("data-id", item.id);
+
+          const titleTr = (item.title_translations && item.title_translations.tr) ? item.title_translations.tr : item.id;
+          const formattedDate = formatIstanbulTime(item.published_at);
+
+          row.innerHTML = `
+            <div class="row-title">${escapeHtml(titleTr)}</div>
+            <div class="row-meta-line">
+              <span class="row-category">${escapeHtml(item.category || "genel")}</span>
+              <span class="row-date">🕒 ${escapeHtml(formattedDate)}</span>
+            </div>
+          `;
+
+          row.addEventListener("click", () => {
+            selectArticle(item.id);
+          });
+
+          articlesListContainer.appendChild(row);
+        });
+      }
+
+      async function selectArticle(articleId) {
+        selectedArticleId = articleId;
+        renderArticlesList(); // Update selected highlighting in left pane
+
+        const client = getClient();
+        if (!client) return;
+
+        previewEmpty.classList.add("hidden");
+        previewContent.classList.remove("hidden");
+        previewActiveSlug.textContent = `(${articleId})`;
+        previewTitle.textContent = "Yükleniyor...";
+        previewBodyText.innerHTML = '<div class="spinner"></div>';
+        previewQuizText.textContent = "Yükleniyor...";
+        previewQaText.textContent = "Yükleniyor...";
+        warningEmptyBlock.classList.add("hidden");
+        warningTurkishChars.classList.add("hidden");
+
+        try {
+          // Select single article including languages
+          const { data, error } = await client
+            .from("articles")
+            .select("id, category, topic, status, published_at, title_translations, category_translations, languages")
+            .eq("id", articleId)
+            .single();
+
+          if (error) throw error;
+          fullArticleData = data;
+          renderArticlePreview();
+        } catch (err) {
+          console.error("Failed to load article detail:", err);
+          showAlert("Makale detayları yüklenemedi: " + err.message, "danger");
+          previewBodyText.textContent = "Hata oluştu.";
+        }
+      }
+
+      // -------------------------------------------------------------------------
+      // 5. Preview Rendering & Linguistic Flagging
+      // -------------------------------------------------------------------------
+      function renderArticlePreview() {
+        if (!fullArticleData) return;
+
+        const langData = fullArticleData.languages || {};
+        const targetLangBlock = langData[previewLang] || {};
+        const levelBlock = targetLangBlock[previewLevel] || null;
+
+        // Meta Header Info
+        const fallbackTitle = (fullArticleData.title_translations && fullArticleData.title_translations[previewLang])
+          || (fullArticleData.title_translations && fullArticleData.title_translations.tr)
+          || fullArticleData.id;
+
+        const displayedTitle = (levelBlock && levelBlock.title) ? levelBlock.title : fallbackTitle;
+        previewTitle.textContent = displayedTitle;
+        previewCategory.textContent = fullArticleData.category || "-";
+        previewTopic.textContent = fullArticleData.topic || "-";
+        previewPubdate.textContent = `${formatIstanbulTime(fullArticleData.published_at)} (İstanbul)`;
+
+        // Reset Warnings
+        warningEmptyBlock.classList.add("hidden");
+        warningTurkishChars.classList.add("hidden");
+
+        // 1. Text Paragraphs
+        let paragraphs = [];
+        if (levelBlock) {
+          if (Array.isArray(levelBlock.paragraphs)) {
+            paragraphs = levelBlock.paragraphs;
+          } else if (Array.isArray(levelBlock.text)) {
+            paragraphs = levelBlock.text;
+          }
+        }
+
+        const isBlockEmpty = !levelBlock || (paragraphs.length === 0 && !levelBlock.title);
+        if (isBlockEmpty) {
+          warningEmptyBlock.classList.remove("hidden");
+          previewBodyText.innerHTML = '<p style="color:var(--danger-red); font-style:italic;">Bu dil ve seviye için metin içeriği bulunamadı.</p>';
+        } else {
+          let html = "";
+          paragraphs.forEach((p, idx) => {
+            if (Array.isArray(p)) {
+              // Sentence tokens array
+              const sentenceText = p.map(tok => (typeof tok === "object" ? (tok.target || tok.token || "") : tok)).join(" ");
+              html += `<p><strong>${idx + 1}.</strong> ${escapeHtml(sentenceText)}</p>`;
+            } else if (typeof p === "object" && p.target) {
+              html += `<p>${escapeHtml(p.target)}</p>`;
+            } else if (typeof p === "string") {
+              html += `<p>${escapeHtml(p)}</p>`;
+            }
+          });
+          previewBodyText.innerHTML = html || "<p>Paragraf yok.</p>";
+        }
+
+        // 2. Quiz Questions (Plain text format)
+        const quizList = (levelBlock && Array.isArray(levelBlock.quiz)) ? levelBlock.quiz : [];
+        if (quizList.length === 0) {
+          previewQuizText.textContent = "Bu seviye için quiz sorusu tanımlanmamış.";
+        } else {
+          let qText = "";
+          quizList.forEach((qObj, qIdx) => {
+            qText += `Soru ${qIdx + 1}: ${qObj.question || ""}\n`;
+            if (Array.isArray(qObj.options)) {
+              qObj.options.forEach((opt, optIdx) => {
+                const isCorrect = (optIdx === qObj.answerIndex) ? " (DOĞRU)" : "";
+                qText += `  [${String.fromCharCode(65 + optIdx)}] ${opt}${isCorrect}\n`;
+              });
+            }
+            if (qObj.explanation) {
+              qText += `  Açıklama: ${qObj.explanation}\n`;
+            }
+            qText += "\n";
+          });
+          previewQuizText.textContent = qText.trim();
+        }
+
+        // 3. Comprehension / QA Questions (Plain text format)
+        const qaList = (levelBlock && Array.isArray(levelBlock.qa)) ? levelBlock.qa : [];
+        if (qaList.length === 0) {
+          previewQaText.textContent = "Bu seviye için kavrama/tartışma sorusu tanımlanmamış.";
+        } else {
+          let qaText = "";
+          qaList.forEach((item, idx) => {
+            const questionStr = item.q || item.question || "";
+            const answerStr = item.a || item.answer || "";
+            qaText += `Soru ${idx + 1}: ${questionStr}\n`;
+            qaText += `Cevap: ${answerStr}\n\n`;
+          });
+          previewQaText.textContent = qaText.trim();
+        }
+
+        // 4. Turkish Character Warning Badge for Non-Turkish Quizzes
+        if (previewLang !== "tr" && quizList.length > 0) {
+          const quizJsonStr = JSON.stringify(quizList);
+          if (containsTurkishSpecificChars(quizJsonStr)) {
+            warningTurkishChars.classList.remove("hidden");
+          }
+        }
+
+        // 5. Update Status Actions Area
+        if (fullArticleData.status === "published") {
+          btnRevertDraft.classList.remove("hidden");
+        } else {
+          btnRevertDraft.classList.add("hidden");
+        }
+      }
+
+      // -------------------------------------------------------------------------
+      // 6. Modal Confirmation & Publish Writes
+      // -------------------------------------------------------------------------
+      function openConfirmModal(title, msg, detailText, onConfirm) {
+        modalConfirmTitle.textContent = title;
+        modalConfirmMessage.textContent = msg;
+        if (detailText) {
+          modalConfirmDetail.textContent = detailText;
+          modalConfirmDetail.classList.remove("hidden");
+        } else {
+          modalConfirmDetail.classList.add("hidden");
+          modalConfirmDetail.textContent = "";
+        }
+        pendingAction = onConfirm;
+        modalConfirm.classList.remove("hidden");
+      }
+
+      function closeConfirmModal() {
+        modalConfirm.classList.add("hidden");
+        pendingAction = null;
+      }
+
+      async function executeArticleUpdate(patchPayload, successMsg) {
+        if (!selectedArticleId) return;
+        const client = getClient();
+        if (!client) return;
+
+        hideAlert();
+        try {
+          const { data, error } = await client
+            .from("articles")
+            .update(patchPayload)
+            .eq("id", selectedArticleId)
+            .select("id, status, published_at")
+            .single();
+
+          if (error) throw error;
+
+          showAlert(successMsg, "success");
+          closeConfirmModal();
+
+          // Refresh and reload selection
+          await loadArticlesList();
+          await selectArticle(selectedArticleId);
+        } catch (err) {
+          console.error("Update failed:", err);
+          showAlert("Yazma işlemi başarısız oldu: " + err.message, "danger");
+          closeConfirmModal();
+        }
+      }
+
+      // -------------------------------------------------------------------------
+      // 7. Event Listeners & Initializers
+      // -------------------------------------------------------------------------
+
+      // Sign In
+      if (formLogin) {
+        formLogin.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const email = document.getElementById("login-email").value.trim();
+          const password = document.getElementById("login-password").value;
+          const submitBtn = document.getElementById("btn-login-submit");
+
+          if (!email || !password) return;
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Giriş yapılıyor...";
+          hideAlert();
+
+          const client = getClient();
+          try {
+            const { error } = await client.auth.signInWithPassword({ email, password });
+            if (error) throw error;
+            await checkAdminAccess();
+          } catch (err) {
+            showAlert("Giriş başarısız: " + err.message, "danger");
+          } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Giriş Yap";
+          }
+        });
+      }
+
+      // Sign Out
+      async function handleSignOut() {
+        const client = getClient();
+        if (client) {
+          await client.auth.signOut();
+        }
+        await checkAdminAccess();
+      }
+
+      if (btnSignOut) btnSignOut.addEventListener("click", handleSignOut);
+      if (btnForbiddenSignout) btnForbiddenSignout.addEventListener("click", handleSignOut);
+
+      // Tab Switching
+      tabDrafts.addEventListener("click", () => {
+        activeTab = "drafts";
+        tabDrafts.classList.add("active");
+        tabScheduled.classList.remove("active");
+        tabDrafts.setAttribute("aria-selected", "true");
+        tabScheduled.setAttribute("aria-selected", "false");
+        renderArticlesList();
+      });
+
+      tabScheduled.addEventListener("click", () => {
+        activeTab = "scheduled";
+        tabScheduled.classList.add("active");
+        tabDrafts.classList.remove("active");
+        tabScheduled.setAttribute("aria-selected", "true");
+        tabDrafts.setAttribute("aria-selected", "false");
+        renderArticlesList();
+      });
+
+      btnRefreshList.addEventListener("click", () => {
+        loadArticlesList();
+      });
+
+      // Language & Level Pill Selectors
+      document.querySelectorAll(".pill-btn[data-lang]").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          document.querySelectorAll(".pill-btn[data-lang]").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          previewLang = btn.getAttribute("data-lang");
+          renderArticlePreview();
+        });
+      });
+
+      document.querySelectorAll(".pill-btn[data-lvl]").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          document.querySelectorAll(".pill-btn[data-lvl]").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          previewLevel = btn.getAttribute("data-lvl");
+          renderArticlePreview();
+        });
+      });
+
+      // Schedule Datetime Input Change (Live Istanbul -> UTC conversion display)
+      scheduleDatetimeInput.addEventListener("input", () => {
+        const val = scheduleDatetimeInput.value;
+        const utcIso = convertIstanbulLocalToUtcIso(val);
+        if (utcIso) {
+          utcPreviewText.textContent = `UTC karşılığı: ${utcIso}`;
+        } else {
+          utcPreviewText.textContent = "UTC karşılığı: -";
+        }
+      });
+
+      // Action 1: "Şimdi yayınla" (status='published', published_at=now)
+      btnPublishNow.addEventListener("click", () => {
+        if (!selectedArticleId) return;
+        const nowUtc = new Date().toISOString();
+        const nowIstanbul = formatIstanbulTime(nowUtc);
+
+        openConfirmModal(
+          "Makaleyi Hemen Yayınla",
+          `"${selectedArticleId}" kimlikli makale anında yayına alınacaktır.`,
+          `Durum: published\nYayın Tarihi (UTC): ${nowUtc}\nYayın Tarihi (İstanbul): ${nowIstanbul}`,
+          () => {
+            executeArticleUpdate({
+              status: "published",
+              published_at: nowUtc
+            }, `"${selectedArticleId}" başarıyla yayınlandı!`);
+          }
+        );
+      });
+
+      // Action 2: "Tarih seç & Planla" (datetime-local interpreted as Europe/Istanbul -> UTC ISO)
+      btnScheduleSave.addEventListener("click", () => {
+        if (!selectedArticleId) return;
+        const localVal = scheduleDatetimeInput.value;
+        if (!localVal) {
+          showAlert("Lütfen yayınlanmasını istediğiniz tarih ve saati seçiniz.", "warning");
+          return;
+        }
+
+        const utcIso = convertIstanbulLocalToUtcIso(localVal);
+        if (!utcIso) {
+          showAlert("Geçersiz tarih formatı.", "danger");
+          return;
+        }
+
+        const istanbulDisplay = formatIstanbulTime(utcIso);
+
+        openConfirmModal(
+          "Yayın Planlamasını Onayla",
+          `"${selectedArticleId}" makalesi belirlenen tarihte otomatik olarak yayına girecektir.`,
+          `Seçilen İstanbul Saati: ${localVal.replace("T", " ")}\nDönüştürülen UTC Zamanı: ${utcIso}\nGörüntülenecek Saat: ${istanbulDisplay}`,
+          () => {
+            executeArticleUpdate({
+              status: "published",
+              published_at: utcIso
+            }, `"${selectedArticleId}" yayını başarıyla planlandı (${istanbulDisplay}).`);
+          }
+        );
+      });
+
+      // Action 3: "Taslağa geri al" (status='draft')
+      btnRevertDraft.addEventListener("click", () => {
+        if (!selectedArticleId) return;
+        openConfirmModal(
+          "Taslağa Geri Al",
+          `"${selectedArticleId}" makalesi yayından çekilerek 'draft' durumuna getirilecektir.`,
+          "Durum: draft\nBu işlem makaleyi ana sayfadan ve harici aramalardan gizler.",
+          () => {
+            executeArticleUpdate({
+              status: "draft"
+            }, `"${selectedArticleId}" taslağa geri alındı.`);
+          }
+        );
+      });
+
+      // Modal Dialog Controls
+      btnModalCancel.addEventListener("click", closeConfirmModal);
+      btnModalProceed.addEventListener("click", () => {
+        if (typeof pendingAction === "function") {
+          pendingAction();
+        }
+      });
+
+      // Start Auth Flow
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", checkAdminAccess);
+      } else {
+        checkAdminAccess();
+      }
+
+    })();
+  </script>
+</body>
+</html>
