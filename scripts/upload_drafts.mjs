@@ -95,27 +95,151 @@ function prepareDraftRow(art) {
   };
 }
 
-/**
- * Validates basic article structure.
- */
-function validateArticle(art, index) {
-  const errors = [];
-  const prefix = `Article #${index + 1}${art?.id ? ` (${art.id})` : ""}`;
+const REQUIRED_LANGUAGES = ["tr", "en", "es", "de", "fr"];
+const REQUIRED_LEVELS = ["A1", "A2", "B1", "B2", "C1"];
+const TURKISH_CHARS_REGEX = /[ğĞşŞıİ]/;
 
-  if (!art || typeof art !== "object") {
-    return [`${prefix}: Must be an object.`];
-  }
-  if (!art.id || typeof art.id !== "string" || !art.id.trim()) {
-    errors.push(`${prefix}: Missing or invalid 'id'.`);
-  }
-  if (!art.category || typeof art.category !== "string") {
-    errors.push(`${prefix}: Missing or invalid 'category'.`);
-  }
-  if (!art.topic || typeof art.topic !== "string") {
-    errors.push(`${prefix}: Missing or invalid 'topic'.`);
-  }
-  if (!art.languages || typeof art.languages !== "object" || Object.keys(art.languages).length === 0) {
-    errors.push(`${prefix}: Missing or empty 'languages' dictionary.`);
+/**
+ * Extracts distinct Turkish-specific characters found in a string.
+ */
+function matchTurkishChars(str) {
+  if (!str || typeof str !== "string") return "";
+  const found = str.match(/[ğĞşŞıİ]/g);
+  return found ? [...new Set(found)].join("") : "";
+}
+
+/**
+ * Validates article list adhering to strict content and schema rules:
+ *   a) All 5 languages (tr, en, es, de, fr) x 5 levels (A1, A2, B1, B2, C1) present; title and paragraphs non-empty
+ *   b) IDs unique within the file
+ *   c) Turkish letters (ğ, ş, ı, İ) inside quiz of en/es/de/fr
+ *   d) Comprehension questions without translations / invalid text
+ */
+function validateArticles(articles) {
+  const errors = [];
+  const seenIds = new Map();
+
+  for (let idx = 0; idx < articles.length; idx++) {
+    const art = articles[idx];
+    const prefix = `Article #${idx + 1}${art?.id ? ` (${art.id})` : ""}`;
+
+    if (!art || typeof art !== "object") {
+      errors.push(`${prefix}: Must be an object.`);
+      continue;
+    }
+
+    // Required top-level fields
+    if (!art.id || typeof art.id !== "string" || !art.id.trim()) {
+      errors.push(`${prefix} id: Missing or invalid 'id'.`);
+    } else {
+      // b) IDs unique within the file
+      if (seenIds.has(art.id)) {
+        errors.push(`${art.id} id: Duplicate article ID found in input file (first defined at article #${seenIds.get(art.id) + 1}).`);
+      } else {
+        seenIds.set(art.id, idx);
+      }
+    }
+
+    if (!art.category || typeof art.category !== "string" || !art.category.trim()) {
+      errors.push(`${prefix} category: Missing or invalid 'category'.`);
+    }
+    if (!art.topic || typeof art.topic !== "string" || !art.topic.trim()) {
+      errors.push(`${prefix} topic: Missing or invalid 'topic'.`);
+    }
+
+    const artId = art.id || `article_${idx + 1}`;
+    const langs = art.languages;
+    if (!langs || typeof langs !== "object") {
+      errors.push(`${artId} languages: Missing or invalid 'languages' dictionary.`);
+      continue;
+    }
+
+    // a) All 5 languages x 5 levels present, title and paragraphs non-empty
+    for (const lang of REQUIRED_LANGUAGES) {
+      if (!langs[lang] || typeof langs[lang] !== "object") {
+        errors.push(`${artId} [${lang}]: missing required language.`);
+        continue;
+      }
+
+      for (const lvl of REQUIRED_LEVELS) {
+        const lvlData = langs[lang][lvl];
+        if (!lvlData || typeof lvlData !== "object") {
+          errors.push(`${artId} [${lang}][${lvl}]: missing required level.`);
+          continue;
+        }
+
+        // a) Title non-empty
+        if (!lvlData.title || typeof lvlData.title !== "string" || !lvlData.title.trim()) {
+          errors.push(`${artId} [${lang}][${lvl}].title: empty or missing title.`);
+        }
+
+        // a) Paragraphs non-empty
+        if (!Array.isArray(lvlData.paragraphs) || lvlData.paragraphs.length === 0) {
+          errors.push(`${artId} [${lang}][${lvl}].paragraphs: empty or missing paragraphs array.`);
+        } else {
+          const hasValidSentence = lvlData.paragraphs.some(
+            p => Array.isArray(p) && p.length > 0 && p.some(s => s && typeof s === "object" && s.target && s.target.trim())
+          );
+          if (!hasValidSentence) {
+            errors.push(`${artId} [${lang}][${lvl}].paragraphs: no non-empty sentence target text found.`);
+          }
+        }
+
+        // c) Turkish letters ğ ş ı İ inside quiz of en/es/de/fr
+        if (lang !== "tr" && Array.isArray(lvlData.quiz)) {
+          lvlData.quiz.forEach((q, qIdx) => {
+            if (!q || typeof q !== "object") return;
+            if (q.question && TURKISH_CHARS_REGEX.test(q.question)) {
+              errors.push(`${artId} [${lang}][${lvl}] quiz[${qIdx}].question: contains Turkish characters (${matchTurkishChars(q.question)}) in non-TR quiz.`);
+            }
+            if (q.explanation && TURKISH_CHARS_REGEX.test(q.explanation)) {
+              errors.push(`${artId} [${lang}][${lvl}] quiz[${qIdx}].explanation: contains Turkish characters (${matchTurkishChars(q.explanation)}) in non-TR quiz.`);
+            }
+            if (Array.isArray(q.options)) {
+              q.options.forEach((opt, optIdx) => {
+                if (typeof opt === "string" && TURKISH_CHARS_REGEX.test(opt)) {
+                  errors.push(`${artId} [${lang}][${lvl}] quiz[${qIdx}].options[${optIdx}]: contains Turkish characters (${matchTurkishChars(opt)}) in non-TR quiz.`);
+                }
+              });
+            }
+          });
+        }
+
+        // d) Comprehension questions without translations / invalid text
+        if (Array.isArray(lvlData.qa)) {
+          lvlData.qa.forEach((qa, qaIdx) => {
+            if (!qa || typeof qa !== "object") return;
+            const qText = qa.q || qa.question || "";
+            const aText = qa.a || qa.answer || "";
+            if (!qText.trim()) {
+              errors.push(`${artId} [${lang}][${lvl}] qa[${qaIdx}].question: empty or missing question text.`);
+            }
+            if (!aText.trim()) {
+              errors.push(`${artId} [${lang}][${lvl}] qa[${qaIdx}].answer: empty or missing answer text.`);
+            }
+
+            // Untranslated Turkish comprehension questions in non-TR:
+            if (lang !== "tr") {
+              const hasTrChars = TURKISH_CHARS_REGEX.test(qText) || TURKISH_CHARS_REGEX.test(aText);
+              if (hasTrChars) {
+                const transObj = qa.translations && typeof qa.translations === "object" ? qa.translations[lang] : null;
+                const hasTargetTrans = transObj && (transObj.q || transObj.question);
+                if (!hasTargetTrans) {
+                  errors.push(`${artId} [${lang}][${lvl}] qa[${qaIdx}]: untranslated comprehension question (contains Turkish characters in ${lang} without target translation).`);
+                }
+              }
+            }
+
+            // If translations dictionary is provided, ensure it is non-empty
+            if (qa.translations !== undefined) {
+              if (!qa.translations || typeof qa.translations !== "object" || Object.keys(qa.translations).length === 0) {
+                errors.push(`${artId} [${lang}][${lvl}] qa[${qaIdx}].translations: translations property exists but is empty.`);
+              }
+            }
+          });
+        }
+      }
+    }
   }
 
   return errors;
@@ -175,12 +299,8 @@ async function main() {
   console.log(`Mode:        ${isConfirm ? "LIVE UPLOAD (--confirm)" : "DRY RUN (preview only)"}`);
   console.log("-----------------------------------------------------------------");
 
-  // Validate all articles
-  const allErrors = [];
-  rawArticles.forEach((art, idx) => {
-    const errs = validateArticle(art, idx);
-    allErrors.push(...errs);
-  });
+  // Validate all articles against content architecture rules
+  const allErrors = validateArticles(rawArticles);
 
   if (allErrors.length > 0) {
     console.error("❌ Validation errors found in input articles:");
