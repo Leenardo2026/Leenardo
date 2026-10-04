@@ -2445,14 +2445,10 @@
         topic: art.topic || "",
         category: art.category || "",
         categoryTranslations: art.categoryTranslations || art.category_translations || {},
-        titleTr: art.titleTr || art.title_tr || "",
-        titleEn: art.titleEn || art.title_en || "",
         titleTranslations: art.titleTranslations || art.title_translations || {},
         teaser: art.teaser || {},
         teaserTranslations: art.teaserTranslations || art.teaser_translations || {},
         visual: art.visual || {},
-        readTime: art.readTime || art.read_time || "3 min read",
-        summary: art.summary || {},
         status: art.status || "published",
         hidden: Boolean(art.hidden)
       };
@@ -2464,7 +2460,7 @@
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 5000);
       try {
-        const endpoint = `${config.url}/rest/v1/articles?select=id,category,topic,visual,category_translations,title_translations,teaser_translations,teaser,read_time,summary,status,hidden&status=eq.published&hidden=eq.false&order=published_at.desc,id.asc`;
+        const endpoint = `${config.url}/rest/v1/articles?select=id,category,topic,visual,category_translations,title_translations,teaser_translations,teaser,status,hidden&status=eq.published&hidden=eq.false&order=published_at.desc,id.asc`;
         const resp = await fetch(endpoint, {
           signal: controller.signal,
           headers: {
