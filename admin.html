@@ -1044,14 +1044,8 @@
       // 3. Supabase Client & Auth Handling
       // -------------------------------------------------------------------------
       function getClient() {
+        if (typeof supabaseClient !== "undefined" && supabaseClient) return supabaseClient;
         if (window.supabaseClient) return window.supabaseClient;
-        if (window.supabase && typeof window.supabase.createClient === "function" && window.SUPABASE_CONFIG) {
-          window.supabaseClient = window.supabase.createClient(
-            window.SUPABASE_CONFIG.url,
-            window.SUPABASE_CONFIG.anonKey
-          );
-          return window.supabaseClient;
-        }
         return null;
       }
 
