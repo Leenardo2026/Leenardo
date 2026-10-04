@@ -1,3 +1,4 @@
+-- NOTE (Verified 2026-10-04): The "Allow initial seed insert" policy is NOT present live.
 -- ==============================================================================
 -- Migration: Create Articles Table & Row Level Security (RLS)
 -- Date: 2026-10-01

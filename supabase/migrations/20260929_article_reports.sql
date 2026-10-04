@@ -1,3 +1,4 @@
+-- NOTE (Verified 2026-10-04): This table was NEVER created live; the report feature currently fails.
 -- Migration: Create article_reports table for Leenardo community issue reporting
 -- Date: 2026-09-29
 

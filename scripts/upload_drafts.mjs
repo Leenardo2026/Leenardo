@@ -218,6 +218,16 @@ function validateArticles(articles) {
               errors.push(`${artId} [${lang}][${lvl}] qa[${qaIdx}].answer: empty or missing answer text.`);
             }
 
+            // Requirement 1a: Every item in every language/level must have a non-empty translations object
+            if (
+              !qa.translations ||
+              typeof qa.translations !== "object" ||
+              Array.isArray(qa.translations) ||
+              Object.keys(qa.translations).length === 0
+            ) {
+              errors.push(`${artId} [${lang}][${lvl}] qa[${qaIdx}].translations: missing or empty translations object.`);
+            }
+
             // Untranslated Turkish comprehension questions in non-TR:
             if (lang !== "tr") {
               const hasTrChars = TURKISH_CHARS_REGEX.test(qText) || TURKISH_CHARS_REGEX.test(aText);
@@ -227,13 +237,6 @@ function validateArticles(articles) {
                 if (!hasTargetTrans) {
                   errors.push(`${artId} [${lang}][${lvl}] qa[${qaIdx}]: untranslated comprehension question (contains Turkish characters in ${lang} without target translation).`);
                 }
-              }
-            }
-
-            // If translations dictionary is provided, ensure it is non-empty
-            if (qa.translations !== undefined) {
-              if (!qa.translations || typeof qa.translations !== "object" || Object.keys(qa.translations).length === 0) {
-                errors.push(`${artId} [${lang}][${lvl}] qa[${qaIdx}].translations: translations property exists but is empty.`);
               }
             }
           });
@@ -358,8 +361,20 @@ async function main() {
     });
 
     if (!authRes.ok) {
-      const errJson = await authRes.json().catch(() => ({}));
-      const msg = errJson.error_description || errJson.message || errJson.error || `HTTP ${authRes.status}`;
+      const rawText = await authRes.text().catch(() => "");
+      let msg = "";
+      try {
+        const errJson = JSON.parse(rawText);
+        if (errJson && typeof errJson === "object") {
+          msg = errJson.error_description || errJson.message || errJson.msg || (typeof errJson.error === "string" ? errJson.error : "") || (errJson.code ? `code: ${errJson.code}` : "");
+        }
+      } catch {
+        // Response body not JSON
+      }
+      if (!msg && rawText.trim()) {
+        msg = rawText.trim();
+      }
+      msg = msg || `HTTP ${authRes.status}`;
       console.error(`❌ Authentication failed: ${msg}`);
       process.exit(1);
     }
@@ -407,7 +422,25 @@ async function main() {
         successCount++;
       } else {
         const errText = await res.text().catch(() => "");
-        console.error(`  ❌ ${label} failed: HTTP ${res.status} ${errText}`);
+        let errMsg = "";
+        try {
+          const errJson = JSON.parse(errText);
+          if (errJson && typeof errJson === "object") {
+            const parts = [];
+            const mainMsg = errJson.message || errJson.msg || errJson.error_description || (typeof errJson.error === "string" ? errJson.error : "");
+            if (mainMsg) parts.push(mainMsg);
+            if (errJson.code) parts.push(`(code: ${errJson.code})`);
+            if (errJson.details) parts.push(`details: ${errJson.details}`);
+            if (errJson.hint) parts.push(`hint: ${errJson.hint}`);
+            errMsg = parts.join(" ");
+          }
+        } catch {
+          // Response body not JSON
+        }
+        if (!errMsg && errText.trim()) {
+          errMsg = errText.trim();
+        }
+        console.error(`  ❌ ${label} failed: HTTP ${res.status}${errMsg ? ` - ${errMsg}` : ""}`);
         failCount++;
       }
     } catch (err) {
