@@ -11,6 +11,8 @@
 /README.md                                /404.html  404!
 /GEMINI.md                                /404.html  404!
 /.gitignore                               /404.html  404!
+/.env                                     /404.html  404!
+/.env.example                             /404.html  404!
 /generate_article_pages.py                /404.html  404!
 /generate_sitemap.py                      /404.html  404!
 /news_pipeline.py                         /404.html  404!

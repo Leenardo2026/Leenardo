@@ -10,3 +10,10 @@
 - Do not simply agree. Before acting on an instruction or confirming a claim (from the user or from Claude), verify it against the code or official docs. If something is wrong, risky, or there is a simpler/safer way to reach the same goal, say so BEFORE acting and propose the alternative. Then wait for a decision.
 - After editing any HTML or JS file, syntax-check every changed inline <script> block and JS file with node before committing. Never commit code that fails to parse.
 - Syntax checks do not catch undefined names. For every identifier you add or reference in a change, verify it is declared and in scope (file:line) before committing.
+
+## Lessons 2026-10-05
+- Never use a command, mode, flag or file the task does not explicitly allow. If something seems necessary, stop and ask.
+- Answer every requested report section; write MISSING for anything not done. Never report success for checks not implemented.
+- The sandbox blocks network; "not allowed by policy" errors come from the sandbox, not from servers. Do not diagnose them as server/RLS problems.
+- Never open, read or print .env. Never run upload scripts with --confirm.
+- Repo SQL files may differ from the live database; never assume live state from migration files.
