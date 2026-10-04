@@ -2433,21 +2433,82 @@
       }
     }
 
+    const getSupabaseConfig = () => (typeof SUPABASE_CONFIG !== "undefined" ? SUPABASE_CONFIG : (window.SUPABASE_CONFIG || {
+      url: "https://vkddnvpqnccstcjnqfyq.supabase.co",
+      anonKey: "sb_publishable_wPeD9aYQWmnAJYf1pqDxvQ_PiPm-GC-"
+    }));
+
+    function mapSupabaseArticleToClient(art) {
+      if (!art) return null;
+      return {
+        id: art.id || "",
+        topic: art.topic || "",
+        category: art.category || "",
+        categoryTranslations: art.categoryTranslations || art.category_translations || {},
+        titleTr: art.titleTr || art.title_tr || "",
+        titleEn: art.titleEn || art.title_en || "",
+        titleTranslations: art.titleTranslations || art.title_translations || {},
+        teaser: art.teaser || {},
+        teaserTranslations: art.teaserTranslations || art.teaser_translations || {},
+        visual: art.visual || {},
+        readTime: art.readTime || art.read_time || "3 min read",
+        summary: art.summary || {},
+        status: art.status || "published",
+        hidden: Boolean(art.hidden)
+      };
+    }
+
     async function loadArticlesData() {
+      // 1. Primary source: Supabase PostgREST
+      const config = getSupabaseConfig();
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000);
+      try {
+        const endpoint = `${config.url}/rest/v1/articles?select=id,category,topic,visual,category_translations,title_translations,teaser_translations,teaser,read_time,summary,status,hidden&status=eq.published&hidden=eq.false&order=published_at.desc,id.asc`;
+        const resp = await fetch(endpoint, {
+          signal: controller.signal,
+          headers: {
+            "apikey": config.anonKey,
+            "Authorization": `Bearer ${config.anonKey}`
+          }
+        });
+        clearTimeout(timeoutId);
+        if (resp.ok) {
+          const rows = await resp.json();
+          if (Array.isArray(rows) && rows.length > 0) {
+            const mapped = rows.map(mapSupabaseArticleToClient).filter(hasValidVisual);
+            if (mapped.length > 0) {
+              articlesDatabase = mapped;
+              console.info("Articles loaded from Supabase (" + articlesDatabase.length + " stories)");
+              return;
+            }
+          }
+        }
+      } catch (err) {
+        clearTimeout(timeoutId);
+        // Timeout or network error will fall through to static fallback
+      }
+
+      // 2. Secondary fallback: articles-summary.json
       try {
         const resp = await fetch("articles-summary.json");
         if (resp.ok) {
           const freshData = await resp.json();
           if (Array.isArray(freshData) && freshData.length > 0) {
             articlesDatabase = freshData.filter(hasValidVisual).reverse();
+            console.info("Articles loaded from articles-summary.json (" + articlesDatabase.length + " stories)");
             return;
           }
         }
       } catch (e) {}
+
+      // 3. Tertiary fallback: window.ARTICLES_SUMMARY
       if (!articlesDatabase || articlesDatabase.length === 0) {
         const fallback = (typeof window !== "undefined") ? (window.ARTICLES_SUMMARY || window.ARTICLES_DATA || window.articlesDatabase) : null;
         if (Array.isArray(fallback) && fallback.length > 0) {
           articlesDatabase = fallback.filter(hasValidVisual).reverse();
+          console.info("Articles loaded from window.ARTICLES_SUMMARY (" + articlesDatabase.length + " stories)");
+          return;
         }
       }
     }
