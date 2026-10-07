@@ -13,6 +13,9 @@
 /.gitignore                               /404.html  404!
 /.env                                     /404.html  404!
 /.env.example                             /404.html  404!
+/.netlifyignore                           /404.html  404!
+/netlify.toml                             /404.html  404!
+/_redirects                               /404.html  404!
 /generate_article_pages.py                /404.html  404!
 /generate_sitemap.py                      /404.html  404!
 /news_pipeline.py                         /404.html  404!
@@ -29,6 +32,8 @@
 /.github/*                                /404.html  404!
 /worksheets/*                             /404.html  404!
 /konular/*                                /404.html  404!
+/netlify/*                                /404.html  404!
+/scratch/*                                /404.html  404!
 
 # Downstream rewrite allowing context.next() inside article-renderer to load /article.html
 /:lang/articles/*                         /article.html  200
