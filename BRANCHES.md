@@ -14,7 +14,7 @@ This file tracks active and historical development branches across the Leenardo 
 | `chore/agent-rules` | Sencan Yüksel & Antigravity | 2026-10-02 | Merged into main | Add project-level agent rules (GEMINI.md), ignore scratch/ directory, and block security-sensitive files in _redirects. |
 | `feat/phase3-edge-multilingual-urls` | Sencan Yüksel & Antigravity | 2026-10-02 | Merged into main (3 Oct 2026) | Phase 3: Edge-rendered multilingual article routes (/{lang}/articles/{slug}), Netlify Edge Function with Deno, metadata engine, client-side reader hydration, SEO tags, saved-words fixes, and account-required saving. |
 | `feat/phase4-supabase-homepage-admin` | Sencan Yüksel | 2026-10-05 | Merged into main (5 Oct 2026) | Phase 4: Homepage reads articles from Supabase REST API with 5s timeout, field mapping, and resilient fallback to static JSON / window summary. |
-| `fix/cleanup-exposed-files` | Sencan Yüksel | 2026-10-07 | In progress | Block exposed internal files, remove legacy static articles. |
+| `fix/cleanup-exposed-files` | Sencan Yüksel | 2026-10-07 | Merged into main (7 Oct 2026) | Block exposed internal files, remove legacy static articles. |
 
 ---
 
