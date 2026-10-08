@@ -6,9 +6,7 @@ This file tracks active and historical development branches across the Leenardo 
 
 ## Active Branches
 
-| Branch | Owner / Collaborators | Start Date | Status | Description |
-| :--- | :--- | :--- | :--- | :--- |
-| `fix/seo-url-params` | Sencan Yüksel & Antigravity | 2026-10-08 | In Progress | SEO fix package A: remove ?level=/?support=/?target= from generated URLs, default level C1 everywhere, fix level preference loading priority, return 503 on upstream Supabase errors/timeouts, add homepage and lastmod to sitemap, validate categories on draft upload, and update agent docs. |
+_None (no active branches remain)._
 
 ---
 
@@ -17,6 +15,7 @@ This file tracks active and historical development branches across the Leenardo 
 | Branch | Base / Merged Into | Purpose / Scope |
 | :--- | :--- | :--- |
 | `main` | Production | Live production branch hosting the static deployment. |
+| `fix/seo-url-params` | Merged into `main` (2026-10-09) | SEO fix package A: remove ?level=/?support=/?target= from generated URLs, default level C1 everywhere, fix level preference loading priority, return 503 on upstream Supabase errors/timeouts, add homepage and lastmod to sitemap, validate categories on draft upload, and update agent docs. |
 | `fix/cleanup-exposed-files` | Merged into `main` (7 Oct 2026) | Block exposed internal files, remove legacy static articles. |
 | `feat/phase4-supabase-homepage-admin` | Merged into `main` (5 Oct 2026) | Phase 4: Homepage reads articles from Supabase REST API with 5s timeout, field mapping, and resilient fallback to static JSON / window summary. |
 | `feat/phase3-edge-multilingual-urls` | Merged into `main` (3 Oct 2026) | Phase 3: Multilingual clean URLs, edge rendering, dynamic sitemap, SEO tags, saved-words fixes, and account-required saving. |
