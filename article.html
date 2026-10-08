@@ -3469,7 +3469,7 @@
     let targetLang = "tr";
     let supportLang = "en";
     let currentArticleId = "";
-    let currentLevel = "A1";
+    let currentLevel = "C1";
 
     let synth = (typeof window !== "undefined") ? window.speechSynthesis : null;
     let currentUtterance = null;
@@ -3555,7 +3555,7 @@
         : ((article && article.titleTranslations && article.titleTranslations[supportLang]) || "");
       
       const shareOrigin = (typeof window !== "undefined" && window.location.origin) ? window.location.origin : "https://leenardo.com";
-      const shareUrl = `${shareOrigin}/${targetLang}/articles/${encodeURIComponent(currentArticleId)}?level=${currentLevel}&support=${supportLang}`;
+      const shareUrl = `${shareOrigin}/${targetLang}/articles/${encodeURIComponent(currentArticleId)}`;
       const shareText = supportTitle 
         ? `${currentTitle} (${supportTitle}) — Leenardo [${currentLevel}]`
         : `${currentTitle} — Leenardo [${currentLevel}]`;
@@ -3677,7 +3677,7 @@
           topic = titleMap[supportLang] || titleMap.tr || currentArt.topic || currentArt.id;
         }
         const langPair = `${(targetLang || "en").toLocaleUpperCase('en-US')} ➔ ${(supportLang || "tr").toLocaleUpperCase('en-US')}`;
-        badge.textContent = `${topic} • ${currentLevel || "A1"} (${langPair})`;
+        badge.textContent = `${topic} • ${currentLevel || "C1"} (${langPair})`;
       }
 
       // Reset selection and textarea
@@ -4080,8 +4080,9 @@
         urlParams.delete("id");
         urlParams.delete("target");
         urlParams.delete("lang");
-        const qs = urlParams.toString() ? ("?" + urlParams.toString()) : "";
-        window.location.replace(`/${encodeURIComponent(reqTarget)}/articles/${encodeURIComponent(queryId)}${qs}`);
+        urlParams.delete("level");
+        urlParams.delete("support");
+        window.location.replace(`/${encodeURIComponent(reqTarget)}/articles/${encodeURIComponent(queryId)}`);
         return;
       }
 
@@ -4107,8 +4108,13 @@
         currentArticleId = firstWithVisual ? firstWithVisual.id : (articlesDatabase[0] ? articlesDatabase[0].id : "");
       }
 
-      if (paramTarget && SUPPORTED_LANGUAGES.includes(paramTarget)) {
+      let shouldPersistTarget = false;
+      if (pathTargetLang) {
+        targetLang = pathTargetLang;
+        shouldPersistTarget = true;
+      } else if (paramTarget && SUPPORTED_LANGUAGES.includes(paramTarget)) {
         targetLang = paramTarget;
+        shouldPersistTarget = true;
       } else if (window.__INITIAL_TARGET_LANG__ && SUPPORTED_LANGUAGES.includes(window.__INITIAL_TARGET_LANG__)) {
         targetLang = window.__INITIAL_TARGET_LANG__;
       } else {
@@ -4127,6 +4133,7 @@
       const validInitialSupport = (window.__INITIAL_SUPPORT_LANG__ && SUPPORTED_LANGUAGES.includes(window.__INITIAL_SUPPORT_LANG__) && window.__INITIAL_SUPPORT_LANG__ !== targetLang) ? window.__INITIAL_SUPPORT_LANG__ : null;
 
       let savedSupport = null;
+      let shouldPersistSupport = false;
       try {
         const stored = localStorage.getItem("leenardo_support_lang");
         if (stored && SUPPORTED_LANGUAGES.includes(stored) && stored !== targetLang) {
@@ -4136,6 +4143,7 @@
 
       if (validParamSupport) {
         supportLang = validParamSupport;
+        shouldPersistSupport = true;
       } else if (savedSupport) {
         supportLang = savedSupport;
       } else if (validInitialSupport) {
@@ -4153,25 +4161,60 @@
       window.targetLang = targetLang;
       window.supportLang = supportLang;
 
-      if (paramLevel && SUPPORTED_LEVELS.includes(paramLevel.toUpperCase())) {
-        currentLevel = paramLevel.toUpperCase();
-      } else if (window.__INITIAL_ACTIVE_LEVEL__ && SUPPORTED_LEVELS.includes(window.__INITIAL_ACTIVE_LEVEL__)) {
-        currentLevel = window.__INITIAL_ACTIVE_LEVEL__;
-      } else {
-        try {
-          currentLevel = localStorage.getItem("leenardo_preferred_level") || "C1";
-        } catch (e) {
-          currentLevel = "C1";
+      // Level preference resolution priority:
+      // (a) valid ?level= in URL ->
+      // (b) localStorage "leenardo_preferred_level" ->
+      // (c) window.__INITIAL_ACTIVE_LEVEL__ / "C1".
+      const validParamLevel = (paramLevel && SUPPORTED_LEVELS.includes(paramLevel.toUpperCase())) ? paramLevel.toUpperCase() : null;
+      let savedLevel = null;
+      let shouldPersistLevel = false;
+      try {
+        const stored = localStorage.getItem("leenardo_preferred_level");
+        if (stored && SUPPORTED_LEVELS.includes(stored.toUpperCase())) {
+          savedLevel = stored.toUpperCase();
         }
-        if (!SUPPORTED_LEVELS.includes(currentLevel)) currentLevel = "C1";
+      } catch (e) {}
+
+      const validInitialLevel = (window.__INITIAL_ACTIVE_LEVEL__ && SUPPORTED_LEVELS.includes(window.__INITIAL_ACTIVE_LEVEL__.toUpperCase())) ? window.__INITIAL_ACTIVE_LEVEL__.toUpperCase() : null;
+      const ssrRenderedLevel = validInitialLevel || "C1";
+
+      if (validParamLevel) {
+        currentLevel = validParamLevel;
+        shouldPersistLevel = true;
+      } else if (savedLevel) {
+        currentLevel = savedLevel;
+      } else if (validInitialLevel) {
+        currentLevel = validInitialLevel;
+      } else {
+        currentLevel = "C1";
       }
 
-      // Persist State
+      // Persist State ONLY when coming from URL param or explicit user change
       try {
-        localStorage.setItem("leenardo_target_lang", targetLang);
-        localStorage.setItem("leenardo_support_lang", supportLang);
-        localStorage.setItem("leenardo_preferred_level", currentLevel);
+        if (shouldPersistTarget) localStorage.setItem("leenardo_target_lang", targetLang);
+        if (shouldPersistSupport) localStorage.setItem("leenardo_support_lang", supportLang);
+        if (shouldPersistLevel) localStorage.setItem("leenardo_preferred_level", currentLevel);
       } catch (e) {}
+
+      // Strip incoming ?level=, ?support=, ?target= / ?lang= from address bar
+      if (urlParams.has("level") || urlParams.has("support") || urlParams.has("target") || urlParams.has("lang")) {
+        try {
+          if (window.history && window.history.replaceState && window.location.protocol !== "file:") {
+            const cleanUrlObj = new URL(window.location.href);
+            cleanUrlObj.searchParams.delete("level");
+            cleanUrlObj.searchParams.delete("support");
+            cleanUrlObj.searchParams.delete("target");
+            cleanUrlObj.searchParams.delete("lang");
+            const newSearch = cleanUrlObj.searchParams.toString() ? ("?" + cleanUrlObj.searchParams.toString()) : "";
+            const cleanUrl = cleanUrlObj.pathname + newSearch + cleanUrlObj.hash;
+            window.history.replaceState(
+              { id: currentArticleId, target: targetLang, support: supportLang, level: currentLevel },
+              "",
+              cleanUrl
+            );
+          }
+        } catch (e) {}
+      }
 
       // Sync Language Selectors
       const tarSelect = document.getElementById("target-lang-select");
@@ -4248,8 +4291,8 @@
             art &&
             art.languages &&
             art.languages[targetLang || 'tr'] &&
-            art.languages[targetLang || 'tr'][currentLevel || 'A1'] &&
-            Array.isArray(art.languages[targetLang || 'tr'][currentLevel || 'A1'].paragraphs)
+            art.languages[targetLang || 'tr'][currentLevel || 'C1'] &&
+            Array.isArray(art.languages[targetLang || 'tr'][currentLevel || 'C1'].paragraphs)
           );
           if (!hasFullTokens) {
             const fullArt = await fetchArticleFromSupabase(pid);
@@ -4277,6 +4320,29 @@
       updateSavedWordBadges();
       updateUrlState(false);
       applyUiTranslations();
+
+      // If resolved level differs from SSR-rendered level, ensure level tokens and re-render
+      if (ssrRenderedLevel && currentLevel !== ssrRenderedLevel) {
+        let art = articlesDatabase.find(a => a.id === currentArticleId);
+        const hasLevelData = Boolean(
+          art &&
+          art.languages &&
+          art.languages[targetLang] &&
+          art.languages[targetLang][currentLevel] &&
+          Array.isArray(art.languages[targetLang][currentLevel].paragraphs)
+        );
+        if (!hasLevelData && window.location.protocol !== "file:") {
+          fetchArticleFromSupabase(currentArticleId).then(fullArt => {
+            if (fullArt) {
+              const idx = articlesDatabase.findIndex(a => a.id === currentArticleId);
+              if (idx !== -1) articlesDatabase[idx] = fullArt;
+              else articlesDatabase.push(fullArt);
+              renderArticleContent();
+            }
+          }).catch(() => {});
+        }
+      }
+
       renderArticleContent();
     }
 
@@ -4290,10 +4356,11 @@
           url.searchParams.delete("id");
           url.searchParams.delete("target");
           url.searchParams.delete("lang");
-          url.searchParams.set("support", supportLang);
-          url.searchParams.set("level", currentLevel);
+          url.searchParams.delete("support");
+          url.searchParams.delete("level");
           const stateObj = { id: currentArticleId, target: targetLang, support: supportLang, level: currentLevel };
-          const newUrl = url.pathname + url.search + url.hash;
+          const newSearch = url.searchParams.toString() ? ("?" + url.searchParams.toString()) : "";
+          const newUrl = url.pathname + newSearch + url.hash;
           if (pushHistory && window.history.pushState) {
             window.history.pushState(stateObj, "", newUrl);
           } else if (window.history.replaceState) {
@@ -4309,7 +4376,7 @@
       if (e) e.preventDefault();
       const inArticles = window.location.pathname.includes("/articles");
       const homePath = window.location.protocol === "file:" ? (inArticles ? "../index.html" : "index.html") : "/";
-      window.location.href = `${homePath}?target=${targetLang}&support=${supportLang}&level=${currentLevel}`;
+      window.location.href = homePath;
     }
 
     async function onTargetLanguageChange(newTarget) {
@@ -4352,7 +4419,7 @@
       }
 
       stopSpeech();
-      updateUrlState(true);
+      updateUrlState(false);
       applyUiTranslations();
       renderArticleContent();
     }
@@ -4379,7 +4446,7 @@
       window.supportLang = supportLang;
 
       stopSpeech();
-      updateUrlState(true);
+      updateUrlState(false);
       applyUiTranslations();
       renderArticleContent();
     }
@@ -4413,8 +4480,7 @@
         }
       }
       
-      // Intentional browser history push so Back / Forward steps between levels
-      updateUrlState(true);
+      updateUrlState(false);
       renderArticleContent();
     }
 
@@ -4973,7 +5039,7 @@
       const recs = getRecommendedArticles(currentArticleId, 3);
 
       recs.forEach(art => {
-        const recUrl = `/${targetLang}/articles/${encodeURIComponent(art.id)}?level=${currentLevel}&support=${supportLang}`;
+        const recUrl = `/${targetLang}/articles/${encodeURIComponent(art.id)}`;
         const card = document.createElement("a");
         card.className = "rec-card";
         card.href = recUrl;

@@ -19,6 +19,18 @@ const X_DEFAULT_LANG: SupportedLanguage = "en";
 
 export interface ArticleRecord {
   id: string;
+  updated_at?: string;
+}
+
+export function formatW3CDate(dateStr?: string): string | null {
+  if (!dateStr) return null;
+  try {
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return null;
+    return d.toISOString();
+  } catch {
+    return null;
+  }
 }
 
 export function buildSitemapXml(articles: ArticleRecord[]): string {
@@ -27,9 +39,27 @@ export function buildSitemapXml(articles: ArticleRecord[]): string {
 
   const urlBlocks: string[] = [];
 
+  // Find latest updated_at among articles for homepage lastmod
+  let latestUpdated: string | null = null;
+  for (const art of articles) {
+    if (art.updated_at) {
+      const formatted = formatW3CDate(art.updated_at);
+      if (formatted && (!latestUpdated || formatted > latestUpdated)) {
+        latestUpdated = formatted;
+      }
+    }
+  }
+
+  // 1. Homepage URL
+  const homeLastmod = latestUpdated ? `\n    <lastmod>${latestUpdated}</lastmod>` : "";
+  urlBlocks.push(`  <url>\n    <loc>${BASE_URL}/</loc>${homeLastmod}\n  </url>`);
+
+  // 2. Localized article URLs with alternate hreflang tags and lastmod
   for (const art of articles) {
     if (!art.id) continue;
     const slug = encodeURIComponent(art.id.trim());
+    const lastmodTag = formatW3CDate(art.updated_at);
+    const lastmodLine = lastmodTag ? `\n    <lastmod>${lastmodTag}</lastmod>` : "";
 
     for (const lang of SUPPORTED_LANGUAGES) {
       const loc = `${BASE_URL}/${lang}/articles/${slug}`;
@@ -40,7 +70,7 @@ export function buildSitemapXml(articles: ArticleRecord[]): string {
       const xDefaultTag = `    <xhtml:link rel="alternate" hreflang="x-default" href="${BASE_URL}/${X_DEFAULT_LANG}/articles/${slug}" />`;
 
       urlBlocks.push(
-        `  <url>\n    <loc>${loc}</loc>\n${alternateTags}\n${xDefaultTag}\n  </url>`
+        `  <url>\n    <loc>${loc}</loc>${lastmodLine}\n${alternateTags}\n${xDefaultTag}\n  </url>`
       );
     }
   }
@@ -62,8 +92,8 @@ export default async function handler(request: Request, _context: Context) {
   let articles: ArticleRecord[] = [];
 
   try {
-    // PostgREST query: fetch only published, non-hidden article IDs (no heavy languages column)
-    const endpoint = `${supabaseUrl}/rest/v1/articles?status=eq.published&hidden=eq.false&select=id&order=id.asc`;
+    // PostgREST query: fetch only published, non-hidden article IDs and updated_at
+    const endpoint = `${supabaseUrl}/rest/v1/articles?status=eq.published&hidden=eq.false&select=id,updated_at&order=id.asc`;
 
     const resp = await fetch(endpoint, {
       signal: controller.signal,

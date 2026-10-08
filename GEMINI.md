@@ -17,3 +17,7 @@
 - The sandbox blocks network; "not allowed by policy" errors come from the sandbox, not from servers. Do not diagnose them as server/RLS problems.
 - Never open, read or print .env. Never run upload scripts with --confirm.
 - Repo SQL files may differ from the live database; never assume live state from migration files.
+- every grep -r must use --exclude='.env*'
+- answer every requested section
+- READ ONLY tasks: no node -e or other scripts, use only allowed commands
+- a claim that a behavior is broken must be marked UNVERIFIED unless tested live
