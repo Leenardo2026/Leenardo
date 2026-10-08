@@ -90,6 +90,8 @@ export default async function handler(request: Request, context: Context) {
   const timeoutId = setTimeout(() => controller.abort(), 3000);
 
   let article: any = null;
+  let hasUpstreamError = false;
+
   try {
     // PostgREST slim fetch projecting metadata and target language block
     const selectQuery = [
@@ -132,40 +134,67 @@ export default async function handler(request: Request, context: Context) {
         console.error(`[Edge] Supabase query returned 0 rows for slug "${slug}"`);
       }
     } else {
+      hasUpstreamError = true;
       console.error(`[Edge] Supabase REST error for slug "${slug}": status ${resp.status}`);
     }
   } catch (fetchErr) {
     clearTimeout(timeoutId);
+    hasUpstreamError = true;
     console.error(`[Edge] Supabase fetch exception for slug "${slug}":`, fetchErr);
   }
 
-  // Fallback: If slim query returned empty or structure was unexpected, try standard select
+  // Fallback: If slim query returned empty or structure was unexpected, try standard select (with same 3-second timeout)
   if (!article) {
+    const fallbackController = new AbortController();
+    const fallbackTimeoutId = setTimeout(() => fallbackController.abort(), 3000);
+
     try {
       const fallbackEndpoint = `${supabaseUrl}/rest/v1/articles?id=eq.${encodeURIComponent(
         slug
       )}&status=eq.published&hidden=eq.false&select=*`;
       const fallbackResp = await fetch(fallbackEndpoint, {
+        signal: fallbackController.signal,
         headers: {
           apikey: supabaseAnonKey,
           Accept: "application/json",
         },
       });
+      clearTimeout(fallbackTimeoutId);
+
       if (fallbackResp.ok) {
         const fullData = await fallbackResp.json();
         if (Array.isArray(fullData) && fullData.length > 0) {
           article = fullData[0];
+          hasUpstreamError = false;
+        } else {
+          // Both slim and fallback confirmed 0 rows -> genuinely not found
+          hasUpstreamError = false;
         }
       } else {
+        hasUpstreamError = true;
         console.error(`[Edge] Supabase fallback query failed: status ${fallbackResp.status}`);
       }
     } catch (fbErr) {
+      clearTimeout(fallbackTimeoutId);
+      hasUpstreamError = true;
       console.error("[Edge] Supabase fallback fetch exception:", fbErr);
     }
   }
 
-  // 5. Handle Article Not Found (404)
+  // 5. Handle Upstream Errors (503) or Article Not Found (404)
   if (!article) {
+    if (hasUpstreamError) {
+      console.error(`[Edge] Upstream Supabase error or timeout for slug "${slug}"`);
+      return new Response("Service unavailable", {
+        status: 503,
+        headers: {
+          "Content-Type": "text/plain; charset=utf-8",
+          "Cache-Control": "no-store",
+          "Retry-After": "60",
+        },
+      });
+    }
+
     console.error(`[Edge] Story not found in database: "${slug}"`);
     return new Response("Article not found", {
       status: 404,

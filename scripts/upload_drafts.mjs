@@ -80,7 +80,9 @@ function prepareDraftRow(art) {
     id: art.id,
     topic: art.topic || "",
     category: art.category || "",
-    category_translations: art.categoryTranslations || {},
+    category_translations: (art.categoryTranslations && Object.keys(art.categoryTranslations).length > 0)
+      ? art.categoryTranslations
+      : ((art.category && CANONICAL_CATEGORY_MAP[art.category]) ? { ...CANONICAL_CATEGORY_MAP[art.category] } : (art.categoryTranslations || {})),
     title_tr: titleTr,
     title_en: titleEn,
     title_translations: titleTranslations,
@@ -98,6 +100,45 @@ function prepareDraftRow(art) {
 const REQUIRED_LANGUAGES = ["tr", "en", "es", "de", "fr"];
 const REQUIRED_LEVELS = ["A1", "A2", "B1", "B2", "C1"];
 const TURKISH_CHARS_REGEX = /[ğĞşŞıİ]/;
+
+export const CANONICAL_CATEGORY_MAP = {
+  "Tarih ve Efsaneler": {
+    tr: "Tarih ve Efsaneler",
+    en: "History & Legends",
+    de: "Geschichte und Legenden",
+    es: "Historia y Leyendas",
+    fr: "Histoire et Légendes"
+  },
+  "Bilim ve Doğa": {
+    tr: "Bilim ve Doğa",
+    en: "Science & Nature",
+    de: "Wissenschaft und Natur",
+    es: "Ciencia y Naturaleza",
+    fr: "Science et Nature"
+  },
+  "Kültür ve Toplum": {
+    tr: "Kültür ve Toplum",
+    en: "Culture & Society",
+    de: "Kultur und Gesellschaft",
+    es: "Cultura y Sociedad",
+    fr: "Culture et Société"
+  },
+  "Sanat": {
+    tr: "Sanat",
+    en: "Arts",
+    de: "Kunst",
+    es: "Arte",
+    fr: "Arts"
+  },
+  "Spor": {
+    tr: "Spor",
+    en: "Sports",
+    de: "Sport",
+    es: "Deportes",
+    fr: "Sport"
+  }
+};
+export const ALLOWED_CATEGORIES = Object.keys(CANONICAL_CATEGORY_MAP);
 
 /**
  * Extracts distinct Turkish-specific characters found in a string.
@@ -142,6 +183,38 @@ function validateArticles(articles) {
 
     if (!art.category || typeof art.category !== "string" || !art.category.trim()) {
       errors.push(`${prefix} category: Missing or invalid 'category'.`);
+    } else if (!ALLOWED_CATEGORIES.includes(art.category.trim())) {
+      errors.push(`${prefix} category: Invalid category "${art.category}". Must be exactly one of: ${ALLOWED_CATEGORIES.join(", ")}.`);
+    } else {
+      const canonicalCat = art.category.trim();
+      const expectedTranslations = CANONICAL_CATEGORY_MAP[canonicalCat];
+      const currentTranslations = art.categoryTranslations || art.category_translations;
+
+      if (!currentTranslations || (typeof currentTranslations === "object" && Object.keys(currentTranslations).length === 0)) {
+        // Missing -> fill from canonical map
+        art.categoryTranslations = { ...expectedTranslations };
+      } else if (typeof currentTranslations !== "object") {
+        errors.push(`${prefix} categoryTranslations: Must be an object.`);
+      } else {
+        // Present -> check if different from the map
+        const allKeys = new Set([...Object.keys(currentTranslations), ...Object.keys(expectedTranslations)]);
+        let differs = false;
+        for (const k of allKeys) {
+          if (currentTranslations[k] !== expectedTranslations[k]) {
+            differs = true;
+            break;
+          }
+        }
+        if (differs) {
+          errors.push(
+            `${prefix} categoryTranslations: Differs from canonical map for category "${canonicalCat}". Expected: ${JSON.stringify(
+              expectedTranslations
+            )}, found: ${JSON.stringify(currentTranslations)}.`
+          );
+        } else {
+          art.categoryTranslations = { ...expectedTranslations };
+        }
+      }
     }
     if (!art.topic || typeof art.topic !== "string" || !art.topic.trim()) {
       errors.push(`${prefix} topic: Missing or invalid 'topic'.`);

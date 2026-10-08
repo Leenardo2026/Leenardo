@@ -34,9 +34,9 @@ export default async function handler(request: Request, context: Context) {
     }
     rawSlug = queryId.trim();
   } else if (pathname.startsWith("/articles/")) {
-    const pathPart = pathname.substring("/articles/".length);
-    // Strip trailing .html if present
-    rawSlug = pathPart.replace(/\.html$/i, "").trim();
+    const pathPart = pathname.substring("/articles/".length).replace(/\/+$/, "");
+    // Strip trailing .html if present and any further trailing slashes
+    rawSlug = pathPart.replace(/\.html$/i, "").replace(/\/+$/, "").trim();
   } else {
     return context.next();
   }
@@ -64,6 +64,7 @@ export default async function handler(request: Request, context: Context) {
   const timeoutId = setTimeout(() => controller.abort(), 3000);
 
   let isPublished = false;
+  let hasUpstreamError = false;
 
   try {
     const endpoint = `${supabaseUrl}/rest/v1/articles?id=eq.${encodeURIComponent(
@@ -86,15 +87,27 @@ export default async function handler(request: Request, context: Context) {
         isPublished = true;
       }
     } else {
+      hasUpstreamError = true;
       console.error(`[Legacy Redirect] Supabase check error for "${slug}": status ${resp.status}`);
     }
   } catch (err) {
     clearTimeout(timeoutId);
+    hasUpstreamError = true;
     console.error(`[Legacy Redirect] Supabase fetch exception for "${slug}":`, err);
   }
 
-  // Unknown or unpublished slug -> 404 (never redirect to an invalid URL)
+  // Unknown or unpublished slug -> 404; Upstream error / timeout -> 503 with Retry-After: 60
   if (!isPublished) {
+    if (hasUpstreamError) {
+      return new Response("Service unavailable", {
+        status: 503,
+        headers: {
+          "Content-Type": "text/plain; charset=utf-8",
+          "Cache-Control": "no-store",
+          "Retry-After": "60",
+        },
+      });
+    }
     return new Response("Article not found", {
       status: 404,
       headers: {
@@ -117,21 +130,8 @@ export default async function handler(request: Request, context: Context) {
     ? (rawTarget as SupportedLanguage)
     : "tr";
 
-  // 4. Preserve optional level and support query parameters
-  const redirectParams = new URLSearchParams();
-
-  const queryLevel = (url.searchParams.get("level") || "").toUpperCase();
-  if (SUPPORTED_LEVELS.includes(queryLevel as SupportedLevel)) {
-    redirectParams.set("level", queryLevel);
-  }
-
-  const querySupport = (url.searchParams.get("support") || "").toLowerCase();
-  if (SUPPORTED_LANGUAGES.includes(querySupport as SupportedLanguage)) {
-    redirectParams.set("support", querySupport);
-  }
-
-  const qs = redirectParams.toString() ? `?${redirectParams.toString()}` : "";
-  const destination = `/${targetLang}/articles/${encodeURIComponent(slug)}${qs}`;
+  // 4. Destination WITHOUT query parameters
+  const destination = `/${targetLang}/articles/${encodeURIComponent(slug)}`;
 
   // 5. Strict safety guard: never emit ":" placeholders or "undefined" in Location header
   if (destination.includes(":") || destination.includes("undefined")) {

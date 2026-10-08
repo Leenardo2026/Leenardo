@@ -2404,7 +2404,7 @@
     // Language & Level State
     let targetLang = "tr";
     let supportLang = "en";
-    let currentLevel = "A1";
+    let currentLevel = "C1";
     let selectedCategory = "all";
 
     const LEENARDO_READ_KEY = "leenardo_read_articles";
@@ -2515,8 +2515,10 @@
       const paramSupport = urlParams.get("support");
       const paramLevel = urlParams.get("level");
 
+      let shouldPersistTarget = false;
       if (paramTarget && SUPPORTED_LANGUAGES.includes(paramTarget)) {
         targetLang = paramTarget;
+        shouldPersistTarget = true;
       } else {
         targetLang = localStorage.getItem("leenardo_target_lang") || "tr";
       }
@@ -2528,6 +2530,7 @@
       const validParamSupport = (paramSupport && SUPPORTED_LANGUAGES.includes(paramSupport) && paramSupport !== targetLang) ? paramSupport : null;
 
       let savedSupport = null;
+      let shouldPersistSupport = false;
       try {
         const stored = localStorage.getItem("leenardo_support_lang");
         if (stored && SUPPORTED_LANGUAGES.includes(stored) && stored !== targetLang) {
@@ -2537,6 +2540,7 @@
 
       if (validParamSupport) {
         supportLang = validParamSupport;
+        shouldPersistSupport = true;
       } else if (savedSupport) {
         supportLang = savedSupport;
       } else {
@@ -2548,16 +2552,24 @@
         supportLang = getDefaultSupportLang(targetLang);
       }
 
-      if (paramLevel && SUPPORTED_LEVELS.includes(paramLevel)) {
-        currentLevel = paramLevel;
+      let shouldPersistLevel = false;
+      if (paramLevel && SUPPORTED_LEVELS.includes(paramLevel.toUpperCase())) {
+        currentLevel = paramLevel.toUpperCase();
+        shouldPersistLevel = true;
       } else {
-        currentLevel = localStorage.getItem("leenardo_preferred_level") || "A1";
-        if (!SUPPORTED_LEVELS.includes(currentLevel)) currentLevel = "A1";
+        currentLevel = localStorage.getItem("leenardo_preferred_level") || "C1";
+        if (!SUPPORTED_LEVELS.includes(currentLevel)) currentLevel = "C1";
       }
 
-      localStorage.setItem("leenardo_target_lang", targetLang);
-      localStorage.setItem("leenardo_support_lang", supportLang);
-      localStorage.setItem("leenardo_preferred_level", currentLevel);
+      if (shouldPersistTarget) {
+        try { localStorage.setItem("leenardo_target_lang", targetLang); } catch (e) {}
+      }
+      if (shouldPersistSupport) {
+        try { localStorage.setItem("leenardo_support_lang", supportLang); } catch (e) {}
+      }
+      if (shouldPersistLevel) {
+        try { localStorage.setItem("leenardo_preferred_level", currentLevel); } catch (e) {}
+      }
 
       const tarSelect = document.getElementById("target-lang-select");
       const supSelect = document.getElementById("support-lang-select");
@@ -2579,7 +2591,7 @@
     /* ==========================================================================
        FIRST-TIME USER ONBOARDING CONTROLLER
        ========================================================================== */
-    let onboardingSelectedLevel = "A1";
+    let onboardingSelectedLevel = "C1";
 
     function checkOnboarding() {
       try {
@@ -2602,7 +2614,7 @@
         understandSelect.value = getDefaultSupportLang(learnSelect.value);
       }
 
-      onboardingSelectedLevel = currentLevel || "A1";
+      onboardingSelectedLevel = currentLevel || "C1";
       renderOnboardingLevels();
 
       overlay.style.display = "flex";
@@ -2661,7 +2673,7 @@
       if (chosenTarget === chosenSupport) {
         chosenSupport = chosenTarget === "en" ? "tr" : "en";
       }
-      const chosenLevel = onboardingSelectedLevel || currentLevel || "A1";
+      const chosenLevel = onboardingSelectedLevel || currentLevel || "C1";
 
       try {
         localStorage.setItem("onboardingCompleted", "true");
@@ -2726,13 +2738,15 @@
 
     function updateUrlState() {
       try {
-        if (window.history && window.history.replaceState) {
+        if (window.history && window.history.replaceState && window.location.protocol !== "file:") {
           const url = new URL(window.location.href);
-          url.searchParams.set("target", targetLang);
-          url.searchParams.set("support", supportLang);
-          url.searchParams.set("level", currentLevel);
+          url.searchParams.delete("target");
+          url.searchParams.delete("support");
+          url.searchParams.delete("level");
           url.searchParams.delete("lang");
-          window.history.replaceState({ target: targetLang, support: supportLang, level: currentLevel }, "", url.toString());
+          const newSearch = url.searchParams.toString() ? ("?" + url.searchParams.toString()) : "";
+          const newUrl = url.pathname + newSearch + url.hash;
+          window.history.replaceState({ target: targetLang, support: supportLang, level: currentLevel }, "", newUrl);
         }
       } catch (e) {}
     }
@@ -2802,7 +2816,7 @@
       const pool = unreadList.length > 0 ? unreadList : articlesDatabase;
       const randomIndex = Math.floor(Math.random() * pool.length);
       const article = pool[randomIndex];
-      const targetUrl = `/${targetLang}/articles/${encodeURIComponent(article.id)}?level=${currentLevel}&support=${supportLang}`;
+      const targetUrl = `/${targetLang}/articles/${encodeURIComponent(article.id)}`;
       window.location.href = targetUrl;
     }
 
@@ -2849,7 +2863,7 @@
                  || (latest.titleTranslations && latest.titleTranslations[targetLang])
                  || latest.topic;
       tickerLink.textContent = title;
-      tickerLink.href = `/${targetLang}/articles/${encodeURIComponent(latest.id)}?level=${currentLevel}&support=${supportLang}`;
+      tickerLink.href = `/${targetLang}/articles/${encodeURIComponent(latest.id)}`;
     }
 
     function formatCategoryLabel(label) {
@@ -3080,7 +3094,7 @@
         const leadExcerpt = getArticleExcerpt(lead, leadLevelData);
         const leadExcerptHtml = leadExcerpt ? `<p class="hero-lead-excerpt">${leadExcerpt}</p>` : "";
 
-        const leadUrl = `/${targetLang}/articles/${encodeURIComponent(lead.id)}?level=${currentLevel}&support=${supportLang}`;
+        const leadUrl = `/${targetLang}/articles/${encodeURIComponent(lead.id)}`;
         const leadImg = (lead.visual && lead.visual.imageUrl) ? lead.visual.imageUrl : 'images/cover_01.jpg';
         const leadIsRead = isArticleRead(lead.id);
         const leadReadTag = leadIsRead ? `<span class="hero-read-tag">✓ ${t.readStatus || 'Read'}</span>` : '';
@@ -3157,7 +3171,7 @@
         const subSupportTitle = getSupportTitle(art);
         const subSupportTitleHtml = subSupportTitle ? `<span class="feed-title-support">${subSupportTitle}</span>` : "";
         const img = (art.visual && art.visual.imageUrl) ? art.visual.imageUrl : 'images/cover_01.jpg';
-        const url = `/${targetLang}/articles/${encodeURIComponent(art.id)}?level=${currentLevel}&support=${supportLang}`;
+        const url = `/${targetLang}/articles/${encodeURIComponent(art.id)}`;
         const isRead = isArticleRead(art.id);
         const readBadge = isRead ? `<span>✓ ${t.readStatus || 'Read'}</span>` : '';
         return `
@@ -3205,7 +3219,7 @@
         const trendSupportTitle = getSupportTitle(art);
         const trendSupportTitleHtml = trendSupportTitle ? `<span class="feed-title-support">${trendSupportTitle}</span>` : "";
         const img = (art.visual && art.visual.imageUrl) ? art.visual.imageUrl : 'images/cover_01.jpg';
-        const url = `/${targetLang}/articles/${encodeURIComponent(art.id)}?level=${currentLevel}&support=${supportLang}`;
+        const url = `/${targetLang}/articles/${encodeURIComponent(art.id)}`;
         const isRead = isArticleRead(art.id);
         const readBadge = isRead ? `<span class="card-read-badge">✓</span>` : '';
         const item = document.createElement("div");
@@ -3254,11 +3268,11 @@
       const readBadgeHtml = isRead ? `<span class="card-read-badge">✓ ${t.readStatus || 'Read'}</span>` : '';
 
       const levelTabsHtml = SUPPORTED_LEVELS.map(lvl => `
-        <a href="${articleBaseUrl}?level=${lvl}&support=${supportLang}" class="level-tab ${lvl === currentLevel ? 'active' : ''}">${lvl}</a>
+        <a href="${articleBaseUrl}" class="level-tab ${lvl === currentLevel ? 'active' : ''}" onclick="try{localStorage.setItem('leenardo_preferred_level','${lvl}')}catch(e){}">${lvl}</a>
       `).join('');
 
       card.innerHTML = `
-        <a href="${articleBaseUrl}?level=${currentLevel}&support=${supportLang}" class="feed-img-link">
+        <a href="${articleBaseUrl}" class="feed-img-link">
           <img src="${imageUrl}" alt="${cardTitle}" class="feed-img" loading="lazy">
         </a>
         <div class="feed-body">
@@ -3266,7 +3280,7 @@
             <span class="feed-cat">${catLabel}</span>
             ${readBadgeHtml}
           </div>
-          <a href="${articleBaseUrl}?level=${currentLevel}&support=${supportLang}">
+          <a href="${articleBaseUrl}">
             <h3 class="feed-title">${cardTitle}</h3>
             ${supportTitleHtml}
           </a>
@@ -3275,7 +3289,7 @@
             <div class="level-tabs">
               ${levelTabsHtml}
             </div>
-            <a href="${articleBaseUrl}?level=${currentLevel}&support=${supportLang}" class="card-read-link">
+            <a href="${articleBaseUrl}" class="card-read-link">
               ${t.readStory || 'Read story →'}
             </a>
           </div>
